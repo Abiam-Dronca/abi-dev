@@ -2177,7 +2177,6 @@ function bwg_ajax(form_id, current_view, id, album_gallery_id, cur_album_id, typ
             break;
         }
         bwg_mosaic_ajax(current_view, mosaic_loaded);
-        bwg_container_loaded(current_view);
       }
       else {
         var no_data = bwg_all_thumnails_loaded(".bwg-container-" + current_view);

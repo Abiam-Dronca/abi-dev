@@ -902,7 +902,7 @@ class WDWLibraryEmbed {
   public static function instagram_oembed_connect( $url = '' ) {
     // oEmbed API 2020 connect.
     $data = new stdClass();
-    $instagram_oembed_url = 'https://graph.facebook.com/v11.0/instagram_oembed/?url=' . $url . '&omitscript=true&access_token=356432828483035|0e211da32da5f501d25541fa10f4d6c0';
+    $instagram_oembed_url = 'https://graph.facebook.com/v13.0/instagram_oembed/?url=' . $url . '&omitscript=true&access_token=1265910900599076|c95304d1141e25f4e7cc7f5165180208';
     $get_embed_data = wp_remote_get($instagram_oembed_url);
     if ( is_wp_error($get_embed_data) ) {
       $data->error = array( 'error', 'Instagram API connect failed.' );

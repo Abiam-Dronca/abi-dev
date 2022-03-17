@@ -71,7 +71,7 @@ class BWGViewThumbnails extends BWGViewSite {
         }
         ?>
       <div class="bwg-item">
-        <a class="bwg-a <?php echo sanitize_html_class($class); ?>" <?php echo $data_image_id; ?><?php echo $href; ?> data-elementor-open-lightbox="no" >
+        <a class="bwg-a <?php echo sanitize_html_class($class); ?>" <?php echo $data_image_id; ?><?php echo $href; ?> data-elementor-open-lightbox="no">
         <?php if ( $params['image_title'] == 'show' && $theme_row->thumb_title_pos == 'top' ) { echo $title; } ?>
         <div class="bwg-item0 <?php if( $lazyload ) { ?> lazy_loader <?php } ?>">
           <div class="bwg-item1 <?php echo $theme_row->thumb_hover_effect == 'zoom' && $params['image_title'] == 'hover' ? 'bwg-zoom-effect' : ''; ?>">

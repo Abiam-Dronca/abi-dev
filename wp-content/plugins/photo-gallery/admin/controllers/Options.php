@@ -83,7 +83,7 @@ class OptionsController_bwg {
   public function display($params = array()) {
     $row = new WD_BWG_Options();
     // Set Instagram access token.
-    if ( isset( $_GET[ 'wdi_access_token' ] ) ) {
+    if ( isset( $_GET['bwg_access_token'] ) ) {
       ob_end_clean();
       $success = $this->model->set_instagram_access_token( false );
       if ( $success ) {
@@ -100,7 +100,7 @@ class OptionsController_bwg {
 													BWG()->nonce => wp_create_nonce(BWG()->nonce),
 												), admin_url('admin-ajax.php') );
 
-    $params['instagram_return_url'] = 'https://api.instagram.com/oauth/authorize/?app_id=734781953985462&scope=user_profile,user_media&redirect_uri=https://instagram-api.10web.io/instagram/personal/&state=' . urlencode( admin_url('admin.php?options_bwg')) . '&response_type=code';
+    $params['instagram_return_url'] = 'https://api.instagram.com/oauth/authorize/?app_id=6999276113447603&scope=user_profile,user_media&redirect_uri=https://instagram-api.10web.io/instagram/photo-gallery/&state=' . urlencode( admin_url('admin.php?options_bwg')) . '&response_type=code';
     $params['instagram_reset_href'] =  add_query_arg( array(
 														'page' => $this->page,
 														'task' => 'reset_instagram_access_token',
@@ -123,7 +123,7 @@ class OptionsController_bwg {
 													'action' => 'options_' . BWG()->prefix,
 													BWG()->nonce => wp_create_nonce(BWG()->nonce),
 												), admin_url('admin-ajax.php') );
-    $params['instagram_return_url'] = 'https://api.instagram.com/oauth/authorize/?client_id=54da896cf80343ecb0e356ac5479d9ec&scope=basic+public_content&redirect_uri=http://api.web-dorado.com/instagram/?return_url=' . urlencode( admin_url('admin.php?page=options_bwg')) . '&response_type=token';
+    $params['instagram_return_url'] = 'https://api.instagram.com/oauth/authorize/?app_id=6999276113447603&scope=user_profile,user_media&redirect_uri=https://instagram-api.10web.io/instagram/photo-gallery/&state=' . urlencode( admin_url('admin.php?options_bwg')) . '&response_type=code';
     $params['instagram_reset_href'] =  add_query_arg( array(
 			'page' => $this->page,
 			'task' => 'reset_instagram_access_token',
@@ -142,7 +142,7 @@ class OptionsController_bwg {
     ob_end_clean();
     $success = $this->model->set_instagram_access_token();
     if ( $success ) {
-      wp_redirect( add_query_arg( array( 'page' => $this->page . '&instagram_token=' . time() ), admin_url( 'admin.php' ) ) );
+      wp_redirect( add_query_arg( array( 'page' => $this->page . '&instagram_token=reset'), admin_url( 'admin.php' ) ) );
     }
   }
 

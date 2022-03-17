@@ -241,7 +241,16 @@ class WDWLibrary {
           $message = __('All items are successfully duplicated.', BWG()->prefix);
           $type = 'updated';
           break;
-
+        }
+        case 29: {
+          $message = __('Connected successfully.', BWG()->prefix);
+          $type = 'updated';
+          break;
+        }
+        case 30: {
+          $message = __('Connect successfully deleted.', BWG()->prefix);
+          $type = 'updated';
+          break;
         }
         default: {
           $message = '';

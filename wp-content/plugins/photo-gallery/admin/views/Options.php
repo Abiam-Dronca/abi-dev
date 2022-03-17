@@ -35,8 +35,18 @@ class OptionsView_bwg extends AdminView_bwg {
       echo WDWLibrary::message_id(2);
       return;
     }
-    $permissions = $params['permissions'];
+    // Show Instagram connected message.
+    if ( WDWLibrary::get('instagram_token') || WDWLibrary::get('code') ) {
+      echo '<div class="bwg-hidden">';
+        $message = WDWLibrary::message_id(29);
+        if( WDWLibrary::get('instagram_token') == 'reset' ) {
+          $message = WDWLibrary::message_id(30);
+        }
+        echo $message;
+      echo '</div>';
+    }
 
+    $permissions = $params['permissions'];
     $built_in_watermark_fonts = $params['built_in_watermark_fonts'];
     $watermark_fonts = $params['watermark_fonts'];
     $gallery_types_name = $params['gallery_types_name'];
@@ -701,23 +711,40 @@ class OptionsView_bwg extends AdminView_bwg {
                     <div class="wd-box-content wd-width-100 <?php echo BWG()->is_pro ? '' : ' bwg-disabled-option'; ?>">
                       <div class="wd-group" id="login_with_instagram">
                         <input id="instagram_access_token" name="instagram_access_token" type="hidden" size="30" value="<?php echo $row->instagram_access_token; ?>" readonly />
-						<?php if ( empty($row->instagram_access_token) ) {
-							$instagram_description = __('Press this button to sign in to your Instagram account. In this case, access token will be added automatically.', BWG()->prefix);
-						?>
-                          <a <?php echo BWG()->is_pro ? 'href="' . $instagram_return_url . '"' : 'disabled="disabled"'; ?>>
-                            <img src="<?php echo BWG()->plugin_url . '/images/logos/instagram.png'; ?>">
-                            <span class="bwg-instagram-sign-in"><?php _e('Sign in with Instagram', BWG()->prefix) ?></span>
+                        <?php if ( empty($row->instagram_access_token) ) { ?>
+                          <a <?php echo BWG()->is_pro ? 'href="' . $instagram_return_url . '"' : 'disabled="disabled"'; ?> class="bwg-connect-instagram">
+                            <?php _e('Connect an Instagram Account', BWG()->prefix) ?>
                           </a>
                           <p class="bwg-clear description"><?php _e('Press this button to sign in to your Instagram account. This lets you incorporate Instagram API to your website.', BWG()->prefix) ?></p>
                         <?php }
                         else {
-							$instagram_description = __('Press this button to sign out from your Instagram account. The access token will reset.', BWG()->prefix);
-						?>
-                          <a <?php echo BWG()->is_pro ? 'href="' . $instagram_reset_href . '" onClick="if(confirm(\'' . addslashes(__('Are you sure you want to reset access token, after resetting it you will need to log in with Instagram again for using plugin', BWG()->prefix)) . '\')){ return true; } else { return false; }"' : 'disabled="disabled"'; ?>>
-                            <img src="<?php echo BWG()->plugin_url . '/images/logos/instagram.png'; ?>">
-                            <span class="bwg-instagram-sign-out"><?php _e('Sign out from Instagram', BWG()->prefix) ?></span>
-                          </a>
-                          <p class="bwg-clear description"><?php _e('Press this button to sign out from your Instagram account.', BWG()->prefix) ?></p>
+                        ?>
+                          <ul class="bwg-accounts-list">
+                            <li class="bwg-account-list-<?php echo $row->instagram_user_id; ?>">
+                              <div class="bwg-account-block">
+                                <div>
+                                  <div class="bwg-account-user-info">
+                                    <h4 class="bwg-account-name"><?php echo $row->instagram_username; ?></h4>
+                                  </div>
+                                </div>
+                                <div>
+                                  <a <?php echo BWG()->is_pro ? 'href="' . $instagram_reset_href . '" onClick="if(confirm(\'' . addslashes(__('Are you sure you want to reset access token, after resetting it you will need to log in with Instagram again for using plugin', BWG()->prefix)) . '\')){ return true; } else { return false; }"' : 'disabled="disabled"'; ?>>
+                                  <span class="button bwg-account-remove"><?php _e('Remove', BWG()->prefix) ?></span>
+                                  </a>
+                                </div>
+                              </div>
+                              <div class="bwg-account-accesstoken" style="display: block;">
+                                <div>
+                                  <p class="bwg-input-group">
+                                    <label><?php _e('User ID:', BWG()->prefix) ?></label>
+                                    <input type="text" value="<?php echo $row->instagram_user_id; ?>" readonly="readonly"
+                                           onclick="this.focus();this.select()"
+                                           title="To copy, click the field then press Ctrl + C (PC) or Cmd + C (Mac).">
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
                         <?php } ?>
                       </div>
                     </div>
@@ -1245,6 +1272,12 @@ class OptionsView_bwg extends AdminView_bwg {
       jQuery(window).on('load',function(){
         var advanced_tab_index = 5;
         jQuery( ".bwg_tabs" ).tabs({ active: advanced_tab_index });
+        jQuery("#wpbody .wrap .updated.inline").prependTo(jQuery("#wpbody .wrap"));
+        var uri = window.location.toString();
+        if (uri.indexOf("&instagram_token") > 0) {
+          var clean_uri = uri.substring(0, uri.indexOf("&instagram_token"));
+          window.history.replaceState({}, document.title, clean_uri);
+        }
       });
 		<?php } ?>
     </script>

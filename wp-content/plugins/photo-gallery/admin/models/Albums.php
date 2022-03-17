@@ -369,7 +369,7 @@ class AlbumsModel_bwg {
       }
     }
     $albumgallery_ids = WDWLibrary::get('albumgallery_ids');
-    $modified_date = WDWLibrary::get('modified_date', time(),'intval');
+    $modified_date = WDWLibrary::get('modified_date', time(), 'intval');
     $data = array(
       'name' => $name,
       'slug' => $slug,
