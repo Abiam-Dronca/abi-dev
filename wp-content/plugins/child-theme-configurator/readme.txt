@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: child, theme, child theme, child themes, custom styles, customize styles, customize theme, css, responsive, css editor, child theme editor, child theme generator, child theme creator, style, stylesheet, customizer, childtheme, childthemes
 Requires at least: 4.0
 Requires PHP: 5.6.36
-Tested up to: 5.7
-Stable tag: 2.5.8
+Tested up to: 5.9
+Stable tag: 2.5.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ When using the Customizer is not enough - Create a child theme from your install
 
 == Description ==
 
-Child Theme Configurator is a fast and easy to use utility that allows you to analyze any theme for common problems, create a child theme and customize it beyond the options of the Customizer. Designed for WordPress users who want to be able to customize child theme stylesheets directly, Child Theme Configurator lets you easily identify and override the exact CSS attributes you want to customize. The Analyzer scans the rendered theme and automatically configures your child theme. It correctly enqueues theme and font stylesheets for optimum performance and handles vendor-specific syntax, giving you unlimited control over the Child Theme look and feel while leaving your Parent Theme untouched. [Learn more about how to create a child theme](http://www.childthemeconfigurator.com).
+Child Theme Configurator is a fast and easy to use utility that allows you to analyze any theme for common problems, create a child theme and customize it beyond the options of the Customizer. Designed for WordPress users who want to be able to customize child theme stylesheets directly, Child Theme Configurator lets you easily identify and override the exact CSS attributes you want to customize. The Analyzer scans the rendered theme and automatically configures your child theme. It correctly enqueues theme and font stylesheets for optimum performance and handles vendor-specific syntax, giving you unlimited control over the Child Theme look and feel while leaving your Parent Theme untouched. [Learn more about how to create a child theme](http://www.childthemeplugin.com).
 
 
 = Take Control of Your Child Themes =
@@ -65,7 +65,7 @@ Apply the CSS customizing power of Child Theme Configurator to any WordPress Plu
 
 https://www.youtube.com/watch?v=fktwCk43a8c
 
-Learn more at http://www.childthemeconfigurator.com/child-theme-configurator-pro
+Learn more at http://www.childthemeplugin.com/child-theme-configurator-pro
 
 = Unlimited Widget Content With a Single Plugin =
 
@@ -137,15 +137,15 @@ Learn more at https://www.lilaeamedia.com/product/hook-highlighter
 
 = How do I move changes I have already made to my theme into a Child Theme? =
 
-Follow these steps: http://www.childthemeconfigurator.com/how-to-use/#child_from_modified_parent
+Follow these steps: http://www.childthemeplugin.com/how-to-use/#child_from_modified_parent
 
 = When I run the analyzer I get "Constants Already Defined" notice in PHP Debug Output =
 
-This is a misconfiguration created by the Bluehost auto-installer. http://www.childthemeconfigurator.com/child-theme-faqs/#constants" class="scroll-to">How to fix.</a></p>
+This is a misconfiguration created by the Bluehost auto-installer. http://www.childthemeplugin.com/child-theme-faqs/#constants" class="scroll-to">How to fix.</a></p>
 
 = Is there a tutorial? =
 
-There are videos under the "Help" tab at the top right of the page. You can also view them at http://www.childthemeconfigurator.com/tutorial-videos
+There are videos under the "Help" tab at the top right of the page. You can also view them at http://www.childthemeplugin.com/tutorial-videos
 
 = If the parent theme changes (e.g., upgrade), do I have to update the child theme? = 
 
@@ -167,7 +167,7 @@ Yes. Go to "Network Admin > Themes > Child Themes." Child themes must be "Networ
 
 = Does it work with plugins? =
 
-Child Theme Configurator PRO brings the CSS editing power of Child Theme Configurator to any WordPress Plugin installed on your website by scanning your plugins and creating custom CSS in your Child Themes. Learn more at http://www.childthemeconfigurator.com/child-theme-configurator-pro
+Child Theme Configurator PRO brings the CSS editing power of Child Theme Configurator to any WordPress Plugin installed on your website by scanning your plugins and creating custom CSS in your Child Themes. Learn more at http://www.childthemeplugin.com/child-theme-configurator-pro
 
 = Why doesn't this work with my [insert vendor here] theme? = 
 
@@ -679,7 +679,7 @@ Some themes (particularly commercial themes) do not correctly load parent templa
 
 == Documentation ==
 
-Go to http://www.childthemeconfigurator.com/
+Go to http://www.childthemeplugin.com/
 
 Serbo-Croatian translation courtesy of Borisa Djuraskovic borisad@webhostinghub.com http://www.webhostinghub.com
 

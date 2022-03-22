@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 <h3 id="ctc_tutorial">Hier starten: Anleitungs-Videos</h3>
 <!-- p><iframe width="560" height="315" src="https://www.youtube.com/embed/xL0YmieF6d0?rel=0&modestbranding=1" frameborder="0" allowfullscreen></iframe></p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/vhQ5oi20rYE?rel=0&modestbranding=1" frameborder="0" allowfullscreen></iframe></p -->
-<p>Wir betten aus Leistungsgründen keine Anleitungsvideos mehr ein. <a href="http://www.childthemeconfigurator.com/tutorial-videos" target="_blank">Hier klicken, um die Videos anzuschauen.</a></p><!-- END tab --> 
+<p>Wir betten aus Leistungsgründen keine Anleitungsvideos mehr ein. <a href="http://www.childthemeplugin.com/tutorial-videos" target="_blank">Hier klicken, um die Videos anzuschauen.</a></p><!-- END tab --> 
 <!-- BEGIN tab -->
 <h3 id="ctc_getting_started">Eltern/Kind-Tab</h3>
 <ol><li><strong>Eine Aktion auswählen:</strong>
@@ -214,7 +214,7 @@ Das Plugin lädt den Hauptteil des Codes im Admin nur, wenn Sie das Tool benutze
 <h4 id="ctc_help_sidebar">Links/Verknüpfungen</h4>
 <ul>
   <li><a href="http://www.lilaeamedia.com/about/contact/">Uns kontaktieren</a></li>
-  <li><a href="http://www.childthemeconfigurator.com/">Plugin-Webseite</a></li>
+  <li><a href="http://www.childthemeplugin.com/">Plugin-Webseite</a></li>
   <li><a href="http://codex.wordpress.org/Child_Themes">WordPress Codex</a></li>
   <li><a href="http://wordpress.stackexchange.com/">WordPress Development (StackExchange)</a></li>
 </ul>

@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 /*
     Class: ChildThemeConfiguratorAnalysis
-    Plugin URI: http://www.childthemeconfigurator.com/
+    Plugin URI: http://www.childthemeplugin.com/
     Description: Theme Analyzer Class
     Version: 2.1.3
     Author: Lilaea Media

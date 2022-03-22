@@ -103,7 +103,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
       </a></p>
     <p class="howto">
       <?php _e( 'For more information, please open the Help tab at the top right or ', 'child-theme-configurator' ) ?>
-      <a href="http://www.childthemeconfigurator.com/tutorial-videos/" target="_blank">
+      <a href="http://www.childthemeplugin.com/tutorial-videos/" target="_blank">
       <?php _e( 'click here to view the latest videos.', 'child-theme-configurator' ); ?>
       </a></p>
     <?php if ( $child ): ?>

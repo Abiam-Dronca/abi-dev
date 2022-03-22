@@ -1,6 +1,6 @@
 /*!
  *  Script: chldthmcfg.js
- *  Plugin URI: http://www.childthemeconfigurator.com/
+ *  Plugin URI: http://www.childthemeplugin.com/
  *  Description: Handles jQuery, AJAX and other UI
  *  Version: 2.3.4
  *  Author: Lilaea Media

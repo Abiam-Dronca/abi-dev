@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 /*
     Class: ChildThemeConfiguratorAdmin
-    Plugin URI: http://www.childthemeconfigurator.com/
+    Plugin URI: http://www.childthemeplugin.com/
     Description: Main Controller Class
     Author: Lilaea Media
     Author URI: http://www.lilaeamedia.com/

@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 /*
     Class: ChildThemeConfiguratorUI
-    Plugin URI: http://www.childthemeconfigurator.com/
+    Plugin URI: http://www.childthemeplugin.com/
     Description: Handles the plugin User Interface
     Author: Lilaea Media
     Author URI: http://www.lilaeamedia.com/
@@ -321,7 +321,7 @@ class ChildThemeConfiguratorUI {
             'anlz5_txt'                 => sprintf( __( '<p>First, verify you can <a href="%s">preview your home page with the Customizer</a> and try analyzing again.</p><p>If that does not work, try temporarily disabling plugins that <strong>minify CSS</strong> or that <strong>force redirects between HTTP and HTTPS</strong>.</p>', 'child-theme-configurator' ), admin_url( '/customize.php' ) ), // . '?page=' . CHLD_THM_CFG_MENU ),
             'anlz6_txt'                 => __( 'Click to show/hide PHP debug output', 'child-theme-configurator' ),
             // php error description modified v2.3.0
-            'anlz7_txt'                 => __( '<p><strong>PLEASE NOTE:</strong></p><p><em>The analyzer reveals errors that may otherwise go undetected. Unless this is a fatal error, WordPress may appear to work correctly; however, PHP will continue to log the error until it is resolved. Please contact the author of any theme or plugin</em> <strong>mentioned above</strong> <em>and cut/paste the error from the text area.</em> <strong>Do not use a screen capture as it may cut off part of the error text.</strong> <em>Additional information about the error may also be available in the <a href="http://www.childthemeconfigurator.com/child-theme-faqs/" target="_blank">CTC documentation</a>.</em></p>', 'child-theme-configurator' ),
+            'anlz7_txt'                 => __( '<p><strong>PLEASE NOTE:</strong></p><p><em>The analyzer reveals errors that may otherwise go undetected. Unless this is a fatal error, WordPress may appear to work correctly; however, PHP will continue to log the error until it is resolved. Please contact the author of any theme or plugin</em> <strong>mentioned above</strong> <em>and cut/paste the error from the text area.</em> <strong>Do not use a screen capture as it may cut off part of the error text.</strong> <em>Additional information about the error may also be available in the <a href="http://www.childthemeplugin.com/child-theme-faqs/" target="_blank">CTC documentation</a>.</em></p>', 'child-theme-configurator' ),
             'anlz8_txt'                 => __( 'Do Not Activate "%s"! A PHP FATAL ERROR has been detected.', 'child-theme-configurator' ),
             'anlz9_txt'                 => __( 'This theme loads stylesheets after the wp_styles queue.', 'child-theme-configurator' ),
             'anlz10_txt'                => __( '<p>This makes it difficult for plugins to override these styles. You can try to resolve this using the  "Repair header template" option (Step 6, "Additional handling options", below).</p>', 'child-theme-configurator' ),
@@ -352,7 +352,7 @@ class ChildThemeConfiguratorUI {
             'anlzrtl2_txt'              => __( 'Use the Web Fonts tab to add a link to the parent RTL stylesheet. See the documentation for more information.</p>', 'child-theme-configurator' ), // added 2.3.0
             'anlzcache1_txt'            => __( 'Both WP Rocket and Autoptimize plugins are enabled.', 'child-theme-configurator' ),
             'anlzcache2_txt'            => __( 'The combination of these two plugins interferes with the Analysis results. Please temporarily deactivate one of them and Analyze again.', 'child-theme-configurator' ),
-            'anlzconfig_txt'            => __( '<p><strong>The WordPress configuration file has been modified incorrectly.</strong> Please see <a href="http://www.childthemeconfigurator.com/child-theme-faqs/#constants" target="_blank">this FAQ</a> for more information.</p>', 'child-theme-configurator' ),
+            'anlzconfig_txt'            => __( '<p><strong>The WordPress configuration file has been modified incorrectly.</strong> Please see <a href="http://www.childthemeplugin.com/child-theme-faqs/#constants" target="_blank">this FAQ</a> for more information.</p>', 'child-theme-configurator' ),
             'dismiss_txt'               => __( 'Dismiss this notice.', 'child-theme-configurator' ),
         ) );
         wp_localize_script(
