@@ -5,7 +5,7 @@ Tags: google maps, maps, map, map markers, google map, google maps plugin, wp go
 Requires at least: 3.5
 Tested up to: 5.9
 Requires PHP: 5.3
-Stable tag: 8.1.21
+Stable tag: 8.1.22
 License: GPLv2
 
 The easiest to use Google maps plugin! Create a custom Google map, store locator or map widget with high quality markers containing categories, descriptions, images and links.
@@ -227,6 +227,9 @@ Please update to 7.11.18 or above to ensure you are using the latest security en
 Please update your WP Google Maps version to 6.3.15 to ensure you are using the latest security enhancements.
 
 == Changelog ==
+
+= 8.1.22 - 2022-03-29 =
+* Recompiled some internal files as they were out-dated for some new installations
 
 = 8.1.21 - 2022-03-03 =
 * Fixed issue where XML source would not be updated when deleting a marker 
