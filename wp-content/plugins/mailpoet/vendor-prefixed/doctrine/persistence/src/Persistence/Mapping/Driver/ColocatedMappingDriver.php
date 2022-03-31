@@ -1,7 +1,6 @@
 <?php
 namespace MailPoetVendor\Doctrine\Persistence\Mapping\Driver;
 if (!defined('ABSPATH')) exit;
-use MailPoetVendor\Doctrine\Common\Annotations\Reader;
 use MailPoetVendor\Doctrine\Persistence\Mapping\MappingException;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
@@ -12,7 +11,6 @@ use RegexIterator;
 use function array_merge;
 use function array_unique;
 use function assert;
-use function get_class;
 use function get_declared_classes;
 use function in_array;
 use function is_dir;
@@ -21,22 +19,12 @@ use function preg_quote;
 use function realpath;
 use function str_replace;
 use function strpos;
-abstract class AnnotationDriver implements MappingDriver
+trait ColocatedMappingDriver
 {
- protected $reader;
  protected $paths = [];
  protected $excludePaths = [];
  protected $fileExtension = '.php';
  protected $classNames;
- protected $entityAnnotationClasses = [];
- public function __construct($reader, $paths = null)
- {
- $this->reader = $reader;
- if (!$paths) {
- return;
- }
- $this->addPaths((array) $paths);
- }
  public function addPaths(array $paths)
  {
  $this->paths = array_unique(array_merge($this->paths, $paths));
@@ -53,35 +41,22 @@ abstract class AnnotationDriver implements MappingDriver
  {
  return $this->excludePaths;
  }
- public function getReader()
- {
- return $this->reader;
- }
  public function getFileExtension()
  {
  return $this->fileExtension;
  }
- public function setFileExtension($fileExtension)
+ public function setFileExtension(string $fileExtension)
  {
  $this->fileExtension = $fileExtension;
  }
- public function isTransient($className)
- {
- $classAnnotations = $this->reader->getClassAnnotations(new ReflectionClass($className));
- foreach ($classAnnotations as $annot) {
- if (isset($this->entityAnnotationClasses[get_class($annot)])) {
- return \false;
- }
- }
- return \true;
- }
+ public abstract function isTransient($className);
  public function getAllClassNames()
  {
  if ($this->classNames !== null) {
  return $this->classNames;
  }
  if (!$this->paths) {
- throw MappingException::pathRequired();
+ throw MappingException::pathRequiredForDriver(static::class);
  }
  $classes = [];
  $includedFiles = [];
@@ -92,7 +67,7 @@ abstract class AnnotationDriver implements MappingDriver
  $iterator = new RegexIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::LEAVES_ONLY), '/^.+' . preg_quote($this->fileExtension) . '$/i', RecursiveRegexIterator::GET_MATCH);
  foreach ($iterator as $file) {
  $sourceFile = $file[0];
- if (!preg_match('(^phar:)i', $sourceFile)) {
+ if (preg_match('(^phar:)i', $sourceFile) === 0) {
  $sourceFile = realpath($sourceFile);
  }
  foreach ($this->excludePaths as $excludePath) {

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the MailPoet 3 (New) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MailPoet 3 (New) 3.85.0\n"
+"Project-Id-Version: MailPoet 3 (New) 3.85.1\n"
 "Report-Msgid-Bugs-To: http://support.mailpoet.com/\n"
-"POT-Creation-Date: 2022-03-21 15:26:15+00:00\n"
+"POT-Creation-Date: 2022-03-29 18:00:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -211,8 +211,8 @@ msgstr ""
 msgid "This email does not exist."
 msgstr ""
 
-#: lib/API/JSON/v1/Newsletters.php:171 lib/API/JSON/v1/SendingQueue.php:59
-#: lib/API/JSON/v1/SendingQueue.php:210
+#: lib/API/JSON/v1/Newsletters.php:171 lib/API/JSON/v1/SendingQueue.php:66
+#: lib/API/JSON/v1/SendingQueue.php:223
 msgid "Subscribers limit reached."
 msgstr ""
 
@@ -276,30 +276,30 @@ msgstr[1] ""
 msgid "Duplicating of segment failed."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:72 lib/API/JSON/v1/SendingQueue.php:78
-#: lib/API/JSON/v1/SendingQueue.php:202 lib/API/JSON/v1/SendingQueue.php:232
+#: lib/API/JSON/v1/SendingQueue.php:79 lib/API/JSON/v1/SendingQueue.php:85
+#: lib/API/JSON/v1/SendingQueue.php:215 lib/API/JSON/v1/SendingQueue.php:245
 msgid "This newsletter does not exist."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:107
+#: lib/API/JSON/v1/SendingQueue.php:114
 msgid "This newsletter is already being sent."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:135
+#: lib/API/JSON/v1/SendingQueue.php:148
 msgid "There are no subscribers in that list!"
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:166 lib/API/JSON/v1/SendingQueue.php:177
+#: lib/API/JSON/v1/SendingQueue.php:179 lib/API/JSON/v1/SendingQueue.php:190
 #: views/newsletter/editor.html:381 views/newsletters.html:449
 msgid "Poet, please add prose to your masterpiece before you send it to your followers."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:174 views/newsletter/editor.html:379
+#: lib/API/JSON/v1/SendingQueue.php:187 views/newsletter/editor.html:379
 #: views/newsletters.html:447
 msgid "All emails must include an \"Unsubscribe\" link. Add a footer widget to your email to continue."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:194 lib/API/JSON/v1/SendingQueue.php:224
+#: lib/API/JSON/v1/SendingQueue.php:207 lib/API/JSON/v1/SendingQueue.php:237
 msgid "This newsletter has not been sent yet."
 msgstr ""
 
@@ -660,7 +660,7 @@ msgid "Subscriber status"
 msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:47
-#: lib/Subscribers/SubscriberListingRepository.php:197
+#: lib/Subscribers/SubscriberListingRepository.php:202
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:182
 #: views/segments.html:67 views/subscribers/importExport/import.html:130
 #: views/subscribers/subscribers.html:83
@@ -668,13 +668,13 @@ msgid "Subscribed"
 msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:48
-#: lib/Subscribers/SubscriberListingRepository.php:202 views/segments.html:68
+#: lib/Subscribers/SubscriberListingRepository.php:207 views/segments.html:68
 #: views/subscribers/subscribers.html:82
 msgid "Unconfirmed"
 msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:49
-#: lib/Subscribers/SubscriberListingRepository.php:207
+#: lib/Subscribers/SubscriberListingRepository.php:212
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:190
 #: views/segments.html:69 views/subscribers/importExport/import.html:131
 #: views/subscribers/subscribers.html:84
@@ -682,7 +682,7 @@ msgid "Unsubscribed"
 msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:50
-#: lib/Subscribers/SubscriberListingRepository.php:212
+#: lib/Subscribers/SubscriberListingRepository.php:217
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:210
 #: views/segments.html:70 views/subscribers/importExport/import.html:132
 #: views/subscribers/subscribers.html:85
@@ -690,7 +690,7 @@ msgid "Inactive"
 msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:51
-#: lib/Subscribers/SubscriberListingRepository.php:217
+#: lib/Subscribers/SubscriberListingRepository.php:222
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:198
 #: views/segments.html:71 views/subscribers/subscribers.html:86
 msgid "Bounced"
@@ -2503,17 +2503,17 @@ msgid "Copy of %s"
 msgstr ""
 
 #: lib/Form/Listing/FormListingRepository.php:31
-#: lib/Models/ScheduledTaskSubscriber.php:110
+#: lib/Models/ScheduledTaskSubscriber.php:111
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:107
 #: lib/Segments/SegmentListingRepository.php:94
-#: lib/Subscribers/SubscriberListingRepository.php:192
+#: lib/Subscribers/SubscriberListingRepository.php:197
 msgid "All"
 msgstr ""
 
 #: lib/Form/Listing/FormListingRepository.php:36
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:175
 #: lib/Segments/SegmentListingRepository.php:99
-#: lib/Subscribers/SubscriberListingRepository.php:222 views/forms.html:95
+#: lib/Subscribers/SubscriberListingRepository.php:227 views/forms.html:95
 #: views/newsletters.html:167 views/segments.html:90
 #: views/subscribers/subscribers.html:58
 msgid "Trash"
@@ -3343,17 +3343,17 @@ msgstr ""
 msgid "Please specify a newsletter type."
 msgstr ""
 
-#: lib/Models/ScheduledTaskSubscriber.php:115 views/newsletters.html:406
+#: lib/Models/ScheduledTaskSubscriber.php:116 views/newsletters.html:406
 msgctxt "status when a newsletter has been sent"
 msgid "Sent"
 msgstr ""
 
-#: lib/Models/ScheduledTaskSubscriber.php:120 views/newsletters.html:407
+#: lib/Models/ScheduledTaskSubscriber.php:121 views/newsletters.html:407
 msgctxt "status when the sending of a newsletter has failed"
 msgid "Failed"
 msgstr ""
 
-#: lib/Models/ScheduledTaskSubscriber.php:125 views/newsletters.html:405
+#: lib/Models/ScheduledTaskSubscriber.php:126 views/newsletters.html:405
 msgctxt "status when the sending of a newsletter has not been processed"
 msgid "Unprocessed"
 msgstr ""
@@ -3384,12 +3384,12 @@ msgstr ""
 
 #: lib/Models/Subscriber.php:163
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:63
-#: lib/Subscribers/SubscriberListingRepository.php:252
+#: lib/Subscribers/SubscriberListingRepository.php:257
 msgid "All Lists"
 msgstr ""
 
 #: lib/Models/Subscriber.php:171
-#: lib/Subscribers/SubscriberListingRepository.php:236
+#: lib/Subscribers/SubscriberListingRepository.php:241
 msgid "Subscribers without a list (%s)"
 msgstr ""
 

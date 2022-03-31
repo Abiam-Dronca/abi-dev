@@ -93,7 +93,7 @@ class API {
   }
 
   public function logCurlInformation($headers, $info) {
-    $this->loggerFactory->getLogger(LoggerFactory::TOPIC_MSS)->addInfo(
+    $this->loggerFactory->getLogger(LoggerFactory::TOPIC_MSS)->info(
       'requests-curl.after_request',
       ['headers' => $headers, 'curl_info' => $info]
     );
@@ -159,7 +159,7 @@ class API {
         'code' => $code,
         'error' => is_wp_error($result) ? $result->get_error_message() : null,
       ];
-      $this->loggerFactory->getLogger(LoggerFactory::TOPIC_BRIDGE)->addError('Stats API call failed.', $logData);
+      $this->loggerFactory->getLogger(LoggerFactory::TOPIC_BRIDGE)->error('Stats API call failed.', $logData);
     }
     return $isSuccess;
   }
@@ -208,6 +208,6 @@ class API {
       'curl_error' => $this->curlHandle ? curl_error($this->curlHandle) : $error->get_error_message(),
       'curl_info' => $this->curlHandle ? curl_getinfo($this->curlHandle) : 'n/a',
     ];
-    $this->loggerFactory->getLogger(LoggerFactory::TOPIC_MSS)->addError('requests-curl.failed', $logData);
+    $this->loggerFactory->getLogger(LoggerFactory::TOPIC_MSS)->error('requests-curl.failed', $logData);
   }
 }

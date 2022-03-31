@@ -14,6 +14,10 @@ class MappingException extends Exception
  {
  return new self('Specifying the paths to your entities is required ' . 'in the AnnotationDriver to retrieve all class names.');
  }
+ public static function pathRequiredForDriver(string $driverClassName) : self
+ {
+ return new self(sprintf('Specifying the paths to your entities is required when using %s to retrieve all class names.', $driverClassName));
+ }
  public static function fileMappingDriversRequireConfiguredDirectoryPath($path = null)
  {
  if (!empty($path)) {

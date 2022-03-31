@@ -87,6 +87,7 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
  }
  // Check for namespace alias
  if (strpos($className, ':') !== \false) {
+ Deprecation::trigger('doctrine/persistence', 'https://github.com/doctrine/persistence/issues/204', 'Short namespace aliases such as "%s" are deprecated, use ::class constant instead.', $className);
  [$namespaceAlias, $simpleClassName] = explode(':', $className, 2);
  $realClassName = $this->getFqcnFromAlias($namespaceAlias, $simpleClassName);
  } else {
@@ -194,17 +195,18 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
  }
  protected abstract function doLoadMetadata($class, $parent, $rootEntityFound, array $nonSuperclassParents);
  protected abstract function newClassMetadataInstance($className);
- public function isTransient($class)
+ public function isTransient($className)
  {
  if (!$this->initialized) {
  $this->initialize();
  }
  // Check for namespace alias
- if (strpos($class, ':') !== \false) {
- [$namespaceAlias, $simpleClassName] = explode(':', $class, 2);
- $class = $this->getFqcnFromAlias($namespaceAlias, $simpleClassName);
+ if (strpos($className, ':') !== \false) {
+ Deprecation::trigger('doctrine/persistence', 'https://github.com/doctrine/persistence/issues/204', 'Short namespace aliases such as "%s" are deprecated, use ::class constant instead.', $className);
+ [$namespaceAlias, $simpleClassName] = explode(':', $className, 2);
+ $className = $this->getFqcnFromAlias($namespaceAlias, $simpleClassName);
  }
- return $this->getDriver()->isTransient($class);
+ return $this->getDriver()->isTransient($className);
  }
  public function setReflectionService(ReflectionService $reflectionService)
  {

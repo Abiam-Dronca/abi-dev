@@ -1,6 +1,7 @@
 <?php
 namespace MailPoetVendor\Doctrine\Persistence;
 if (!defined('ABSPATH')) exit;
+use MailPoetVendor\Doctrine\Deprecations\Deprecation;
 use InvalidArgumentException;
 use ReflectionClass;
 use function explode;
@@ -128,6 +129,7 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
  {
  // Check for namespace alias
  if (strpos($classNameOrAlias, ':') !== \false) {
+ Deprecation::trigger('doctrine/persistence', 'https://github.com/doctrine/persistence/issues/204', 'Short namespace aliases such as "%s" are deprecated, use ::class constant instead.', $classNameOrAlias);
  [$namespaceAlias, $simpleClassName] = explode(':', $classNameOrAlias, 2);
  return $this->getAliasNamespace($namespaceAlias) . '\\' . $simpleClassName;
  }

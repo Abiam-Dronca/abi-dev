@@ -1530,7 +1530,7 @@ trait Date
  public static function getWeekStartsAt()
  {
  if (static::$weekStartsAt === static::WEEK_DAY_AUTO) {
- return static::getFirstDayOfWeek();
+ return self::getFirstDayOfWeek();
  }
  return static::$weekStartsAt;
  }
@@ -1558,7 +1558,7 @@ trait Date
  public static function getWeekEndsAt()
  {
  if (static::$weekStartsAt === static::WEEK_DAY_AUTO) {
- return (int) (static::DAYS_PER_WEEK - 1 + static::getFirstDayOfWeek()) % static::DAYS_PER_WEEK;
+ return (int) (static::DAYS_PER_WEEK - 1 + self::getFirstDayOfWeek()) % static::DAYS_PER_WEEK;
  }
  return static::$weekEndsAt;
  }

@@ -35,7 +35,7 @@ class StaticPHPDriver implements MappingDriver
  return $this->classNames;
  }
  if (!$this->paths) {
- throw MappingException::pathRequired();
+ throw MappingException::pathRequiredForDriver(static::class);
  }
  $classes = [];
  $includedFiles = [];

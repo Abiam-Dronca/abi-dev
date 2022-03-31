@@ -45,7 +45,7 @@ trait Creator
  if (isset($locale)) {
  \setlocale(\LC_NUMERIC, $locale);
  }
- static::setLastErrors(parent::getLastErrors());
+ self::setLastErrors(parent::getLastErrors());
  }
  private function constructTimezoneFromDateTime(DateTimeInterface $date, &$tz)
  {

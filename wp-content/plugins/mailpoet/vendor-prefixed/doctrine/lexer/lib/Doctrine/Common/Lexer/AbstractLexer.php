@@ -3,14 +3,14 @@ declare (strict_types=1);
 namespace MailPoetVendor\Doctrine\Common\Lexer;
 if (!defined('ABSPATH')) exit;
 use ReflectionClass;
-use const PREG_SPLIT_DELIM_CAPTURE;
-use const PREG_SPLIT_NO_EMPTY;
-use const PREG_SPLIT_OFFSET_CAPTURE;
 use function implode;
 use function in_array;
 use function preg_split;
 use function sprintf;
 use function substr;
+use const PREG_SPLIT_DELIM_CAPTURE;
+use const PREG_SPLIT_NO_EMPTY;
+use const PREG_SPLIT_OFFSET_CAPTURE;
 abstract class AbstractLexer
 {
  private $input;
@@ -46,13 +46,13 @@ abstract class AbstractLexer
  {
  return substr($this->input, 0, $position);
  }
- public function isNextToken($token)
+ public function isNextToken($type)
  {
- return $this->lookahead !== null && $this->lookahead['type'] === $token;
+ return $this->lookahead !== null && $this->lookahead['type'] === $type;
  }
- public function isNextTokenAny(array $tokens)
+ public function isNextTokenAny(array $types)
  {
- return $this->lookahead !== null && in_array($this->lookahead['type'], $tokens, \true);
+ return $this->lookahead !== null && in_array($this->lookahead['type'], $types, \true);
  }
  public function moveNext()
  {
