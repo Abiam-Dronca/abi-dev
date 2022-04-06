@@ -4,7 +4,7 @@ Tags: translation-ready, two-columns, right-sidebar, left-sidebar, footer-widget
 Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 7.0
-Stable tag: 1.1.16
+Stable tag: 1.1.17
 License: GNU General Public License v3.0 (or later)
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,6 +18,12 @@ Kadence is released under GNU General Public License v3.0 (or later)
 
 
 = Changelog =
+
+== 1.1.17 | 5th April 2022 ==
+* Fix: Deprecation notice for elementor.
+* Fix: Issue with anchor scroll when id requires scrolling up.
+* Fix: Styling issue with woocommerce product grid blocks.
+* Fix: Styling issue with woocommerce archive output.
 
 == 1.1.16 | 25th March 2022 ==
 * Add: Option to show update date only if different from publish date.

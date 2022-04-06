@@ -1,3 +1,9 @@
+== 1.1.17 | 5th April 2022 ==
+* Fix: Deprecation notice for elementor.
+* Fix: Issue with anchor scroll when id requires scrolling up.
+* Fix: Styling issue with woocommerce product grid blocks.
+* Fix: Styling issue with woocommerce archive output.
+
 == 1.1.16 | 25th March 2022 ==
 * Add: Option to show update date only if different from publish date.
 * Add: Support for Tutor 2.0
