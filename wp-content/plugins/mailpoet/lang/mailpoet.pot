@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the MailPoet 3 (New) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MailPoet 3 (New) 3.85.1\n"
+"Project-Id-Version: MailPoet 3 (New) 3.86.0\n"
 "Report-Msgid-Bugs-To: http://support.mailpoet.com/\n"
-"POT-Creation-Date: 2022-03-29 18:00:09+00:00\n"
+"POT-Creation-Date: 2022-04-05 06:30:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -303,16 +303,17 @@ msgstr ""
 msgid "This newsletter has not been sent yet."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingTaskSubscribers.php:53
+#: lib/API/JSON/v1/SendingTaskSubscribers.php:71
+#: lib/API/JSON/v1/SendingTaskSubscribers.php:124
+msgid "Newsletter not found!"
+msgstr ""
+
+#: lib/API/JSON/v1/SendingTaskSubscribers.php:78
 msgid "This email has not been sent yet."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingTaskSubscribers.php:90
+#: lib/API/JSON/v1/SendingTaskSubscribers.php:117
 msgid "Failed sending task not found!"
-msgstr ""
-
-#: lib/API/JSON/v1/SendingTaskSubscribers.php:96
-msgid "Newsletter not found!"
 msgstr ""
 
 #: lib/API/JSON/v1/Services.php:79 lib/API/JSON/v1/Services.php:151
@@ -478,14 +479,14 @@ msgstr ""
 
 #: lib/API/MP/v1/CustomFields.php:35
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:51
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:159
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:175
 #: views/form/editor.html:156 views/subscribers/subscribers.html:79
 msgid "First name"
 msgstr ""
 
 #: lib/API/MP/v1/CustomFields.php:43
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:52
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:168
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:184
 #: views/form/editor.html:158 views/subscribers/subscribers.html:80
 msgid "Last name"
 msgstr ""
@@ -661,7 +662,7 @@ msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:47
 #: lib/Subscribers/SubscriberListingRepository.php:202
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:182
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:198
 #: views/segments.html:67 views/subscribers/importExport/import.html:130
 #: views/subscribers/subscribers.html:83
 msgid "Subscribed"
@@ -675,7 +676,7 @@ msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:49
 #: lib/Subscribers/SubscriberListingRepository.php:212
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:190
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:206
 #: views/segments.html:69 views/subscribers/importExport/import.html:131
 #: views/subscribers/subscribers.html:84
 msgid "Unsubscribed"
@@ -683,7 +684,7 @@ msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:50
 #: lib/Subscribers/SubscriberListingRepository.php:217
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:210
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:226
 #: views/segments.html:70 views/subscribers/importExport/import.html:132
 #: views/subscribers/subscribers.html:85
 msgid "Inactive"
@@ -691,7 +692,7 @@ msgstr ""
 
 #: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:51
 #: lib/Subscribers/SubscriberListingRepository.php:222
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:198
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:214
 #: views/segments.html:71 views/subscribers/subscribers.html:86
 msgid "Bounced"
 msgstr ""
@@ -736,7 +737,7 @@ msgstr ""
 msgid "MailPoet version update is in progress, please refresh the page in a minute."
 msgstr ""
 
-#: lib/Config/Capabilities.php:80 lib/Config/Menu.php:494
+#: lib/Config/Capabilities.php:80 lib/Config/Menu.php:498
 #: lib/Config/PrivacyPolicy.php:12
 msgid "MailPoet"
 msgstr ""
@@ -835,101 +836,101 @@ msgstr[1] ""
 msgid "Settings imported"
 msgstr ""
 
-#: lib/Config/Menu.php:125 lib/Config/Menu.php:126 views/newsletters.html:88
+#: lib/Config/Menu.php:129 lib/Config/Menu.php:130 views/newsletters.html:88
 msgid "Emails"
 msgstr ""
 
-#: lib/Config/Menu.php:138
+#: lib/Config/Menu.php:142
 msgctxt "newsletters per page (screen options)"
 msgid "Number of newsletters per page"
 msgstr ""
 
-#: lib/Config/Menu.php:150 lib/Newsletter/Shortcodes/ShortcodesHelper.php:42
+#: lib/Config/Menu.php:154 lib/Newsletter/Shortcodes/ShortcodesHelper.php:42
 #: views/newsletter/editor.html:364 views/newsletters.html:90
 #: views/newsletters.html:230
 msgid "Newsletter"
 msgstr ""
 
-#: lib/Config/Menu.php:151 views/newsletter/editor.html:328
+#: lib/Config/Menu.php:155 views/newsletter/editor.html:328
 msgid "Newsletter Editor"
 msgstr ""
 
-#: lib/Config/Menu.php:163 lib/Config/Menu.php:164 views/forms.html:47
+#: lib/Config/Menu.php:167 lib/Config/Menu.php:168 views/forms.html:47
 #: views/mp2migration.html:13
 msgid "Forms"
 msgstr ""
 
-#: lib/Config/Menu.php:176
+#: lib/Config/Menu.php:180
 msgctxt "forms per page (screen options)"
 msgid "Number of forms per page"
 msgstr ""
 
-#: lib/Config/Menu.php:188 lib/Config/Menu.php:189
+#: lib/Config/Menu.php:192 lib/Config/Menu.php:193
 msgid "Form Editor"
 msgstr ""
 
-#: lib/Config/Menu.php:208 lib/Config/Menu.php:209
+#: lib/Config/Menu.php:212 lib/Config/Menu.php:213
 msgid "Select Form Template"
 msgstr ""
 
-#: lib/Config/Menu.php:229 lib/Config/Menu.php:230
+#: lib/Config/Menu.php:233 lib/Config/Menu.php:234
 #: views/subscribers/subscribers.html:39
 msgid "Subscribers"
 msgstr ""
 
-#: lib/Config/Menu.php:242
+#: lib/Config/Menu.php:246
 msgctxt "subscribers per page (screen options)"
 msgid "Number of subscribers per page"
 msgstr ""
 
-#: lib/Config/Menu.php:254 lib/Config/Menu.php:255
+#: lib/Config/Menu.php:258 lib/Config/Menu.php:259
 #: views/subscribers/importExport/import.html:6
 #: views/subscribers/importExport/import.html:101
 #: views/subscribers/subscribers.html:140
 msgid "Import"
 msgstr ""
 
-#: lib/Config/Menu.php:267 lib/Config/Menu.php:268
+#: lib/Config/Menu.php:271 lib/Config/Menu.php:272
 #: views/subscribers/importExport/export.html:6
 #: views/subscribers/importExport/export.html:80
 #: views/subscribers/subscribers.html:141
 msgid "Export"
 msgstr ""
 
-#: lib/Config/Menu.php:280 lib/Config/Menu.php:281 views/forms.html:81
+#: lib/Config/Menu.php:284 lib/Config/Menu.php:285 views/forms.html:81
 #: views/newsletters.html:154 views/newsletters.html:295 views/segments.html:50
 #: views/subscribers/subscribers.html:100
 msgid "Lists"
 msgstr ""
 
-#: lib/Config/Menu.php:293
+#: lib/Config/Menu.php:297
 msgctxt "segments per page (screen options)"
 msgid "Number of segments per page"
 msgstr ""
 
-#: lib/Config/Menu.php:305 lib/Config/Menu.php:306 views/mp2migration.html:14
+#: lib/Config/Menu.php:309 lib/Config/Menu.php:310 views/mp2migration.html:14
 #: views/newsletters.html:155 views/settings.html:35
 msgid "Settings"
 msgstr ""
 
-#: lib/Config/Menu.php:318 lib/Config/Menu.php:319
+#: lib/Config/Menu.php:322 lib/Config/Menu.php:323
 msgid "Help"
 msgstr ""
 
-#: lib/Config/Menu.php:332 lib/Config/Menu.php:333 views/newsletters.html:430
+#: lib/Config/Menu.php:336 lib/Config/Menu.php:337 views/newsletters.html:430
 #: views/segments.html:258 views/subscribers/subscribers.html:149
 msgid "Upgrade"
 msgstr ""
 
-#: lib/Config/Menu.php:345 lib/Config/Menu.php:346
+#: lib/Config/Menu.php:349 lib/Config/Menu.php:350
 msgid "Welcome Wizard"
 msgstr ""
 
-#: lib/Config/Menu.php:358 lib/Config/Menu.php:359
+#: lib/Config/Menu.php:362 lib/Config/Menu.php:363
 msgid "WooCommerce Setup"
 msgstr ""
 
-#: lib/Config/Menu.php:371
+#: lib/Config/Menu.php:375
 msgid "Migration"
 msgstr ""
 
@@ -1244,7 +1245,7 @@ msgstr ""
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1266
 #: lib/Config/PopulatorData/Templates/WorldCup.php:724
 #: lib/Config/PopulatorData/Templates/YogaStudio.php:698
-#: lib/Subscription/Pages.php:369 lib/Subscription/Pages.php:466
+#: lib/Subscription/Pages.php:382 lib/Subscription/Pages.php:474
 msgid "Manage your subscription"
 msgstr ""
 
@@ -2250,15 +2251,15 @@ msgstr ""
 msgid "Maximum execution time has been reached."
 msgstr ""
 
-#: lib/Cron/DaemonHttpRunner.php:62
+#: lib/Cron/DaemonHttpRunner.php:64
 msgid "Invalid or missing request data."
 msgstr ""
 
-#: lib/Cron/DaemonHttpRunner.php:65
+#: lib/Cron/DaemonHttpRunner.php:67
 msgid "Daemon does not exist."
 msgstr ""
 
-#: lib/Cron/DaemonHttpRunner.php:79
+#: lib/Cron/DaemonHttpRunner.php:81
 msgid "Daemon does not set correctly."
 msgstr ""
 
@@ -2503,8 +2504,8 @@ msgid "Copy of %s"
 msgstr ""
 
 #: lib/Form/Listing/FormListingRepository.php:31
-#: lib/Models/ScheduledTaskSubscriber.php:111
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:107
+#: lib/Newsletter/Sending/ScheduledTaskSubscribersListingRepository.php:48
 #: lib/Segments/SegmentListingRepository.php:94
 #: lib/Subscribers/SubscriberListingRepository.php:197
 msgid "All"
@@ -3220,24 +3221,24 @@ msgstr ""
 msgid "Add a newsletter subscription form"
 msgstr ""
 
-#: lib/Form/Widget.php:121
+#: lib/Form/Widget.php:123
 msgid "Subscribe to Our Newsletter"
 msgstr ""
 
-#: lib/Form/Widget.php:136
+#: lib/Form/Widget.php:138
 msgid "Title:"
 msgstr ""
 
-#: lib/Form/Widget.php:152 views/form/editor.html:214 views/forms.html:80
+#: lib/Form/Widget.php:153 views/form/editor.html:214 views/forms.html:80
 msgctxt "fallback for forms without a name in a form list"
 msgid "no name"
 msgstr ""
 
-#: lib/Form/Widget.php:153 lib/PostEditorBlocks/SubscriptionFormBlock.php:61
+#: lib/Form/Widget.php:154 lib/PostEditorBlocks/SubscriptionFormBlock.php:62
 msgid "inactive"
 msgstr ""
 
-#: lib/Form/Widget.php:160 lib/PostEditorBlocks/SubscriptionFormBlock.php:59
+#: lib/Form/Widget.php:161 lib/PostEditorBlocks/SubscriptionFormBlock.php:60
 msgid "Create a new form"
 msgstr ""
 
@@ -3343,21 +3344,6 @@ msgstr ""
 msgid "Please specify a newsletter type."
 msgstr ""
 
-#: lib/Models/ScheduledTaskSubscriber.php:116 views/newsletters.html:406
-msgctxt "status when a newsletter has been sent"
-msgid "Sent"
-msgstr ""
-
-#: lib/Models/ScheduledTaskSubscriber.php:121 views/newsletters.html:407
-msgctxt "status when the sending of a newsletter has failed"
-msgid "Failed"
-msgstr ""
-
-#: lib/Models/ScheduledTaskSubscriber.php:126 views/newsletters.html:405
-msgctxt "status when the sending of a newsletter has not been processed"
-msgid "Unprocessed"
-msgstr ""
-
 #: lib/Models/Segment.php:141 views/subscribers/subscribers.html:123
 msgid "WordPress Users"
 msgstr ""
@@ -3415,6 +3401,7 @@ msgstr ""
 
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:133
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:148
+#: lib/Newsletter/Sending/ScheduledTaskSubscribersListingRepository.php:53
 #: views/layout.html:122
 msgid "Sent"
 msgstr ""
@@ -3426,6 +3413,14 @@ msgstr ""
 
 #: lib/Newsletter/Listing/NewsletterListingRepository.php:166
 msgid "Not active"
+msgstr ""
+
+#: lib/Newsletter/Sending/ScheduledTaskSubscribersListingRepository.php:58
+msgid "Failed"
+msgstr ""
+
+#: lib/Newsletter/Sending/ScheduledTaskSubscribersListingRepository.php:63
+msgid "Unprocessed"
 msgstr ""
 
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:20
@@ -3527,11 +3522,11 @@ msgstr ""
 msgid "Enable opt-in for Checkout"
 msgstr ""
 
-#: lib/PostEditorBlocks/SubscriptionFormBlock.php:58
+#: lib/PostEditorBlocks/SubscriptionFormBlock.php:59
 msgid "Select a MailPoet form"
 msgstr ""
 
-#: lib/PostEditorBlocks/SubscriptionFormBlock.php:60 views/form/iframe.html:15
+#: lib/PostEditorBlocks/SubscriptionFormBlock.php:61 views/form/iframe.html:15
 msgid "MailPoet Subscription Form"
 msgstr ""
 
@@ -3557,7 +3552,7 @@ msgid "Sending with MailPoet works!"
 msgstr ""
 
 #: lib/Settings/Pages.php:15 lib/Settings/Pages.php:16
-#: lib/Settings/Pages.php:40 lib/Subscription/Pages.php:252
+#: lib/Settings/Pages.php:40 lib/Subscription/Pages.php:265
 msgid "MailPoet Page"
 msgstr ""
 
@@ -3803,7 +3798,7 @@ msgid "MailPoet Mailing Lists"
 msgstr ""
 
 #: lib/Subscribers/ImportExport/PersonalDataExporters/SubscriberExporter.php:44
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:178 views/forms.html:65
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:194 views/forms.html:65
 #: views/help.html:50 views/newsletters.html:151
 #: views/subscribers/subscribers.html:81 views/subscribers/subscribers.html:99
 msgid "Status"
@@ -3845,7 +3840,7 @@ msgstr ""
 msgid "Imported by the administrator"
 msgstr ""
 
-#: lib/Subscribers/NewSubscriberNotificationMailer.php:95
+#: lib/Subscribers/NewSubscriberNotificationMailer.php:118
 msgid "New subscriber to %s"
 msgstr ""
 
@@ -3882,98 +3877,98 @@ msgstr ""
 msgid "Please specify a valid form ID."
 msgstr ""
 
-#: lib/Subscription/CaptchaRenderer.php:47
+#: lib/Subscription/CaptchaRenderer.php:53
 msgid "Confirm you’re not a robot"
 msgstr ""
 
-#: lib/Subscription/CaptchaRenderer.php:57
+#: lib/Subscription/CaptchaRenderer.php:63
 msgid "Type in the characters you see in the picture above:"
 msgstr ""
 
-#: lib/Subscription/CaptchaRenderer.php:71
+#: lib/Subscription/CaptchaRenderer.php:77
 msgid "Subscribe"
 msgstr ""
 
-#: lib/Subscription/CaptchaRenderer.php:119
+#: lib/Subscription/CaptchaRenderer.php:126
 msgid "Click to refresh the CAPTCHA"
 msgstr ""
 
-#: lib/Subscription/CaptchaRenderer.php:138
+#: lib/Subscription/CaptchaRenderer.php:149
 msgid "The characters you entered did not match the CAPTCHA image. Please try again with this new image."
 msgstr ""
 
-#: lib/Subscription/Comment.php:40 lib/Subscription/Registration.php:39
+#: lib/Subscription/Comment.php:47 lib/Subscription/Registration.php:39
 msgid "Yes, please add me to your mailing list."
 msgstr ""
 
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:82 views/layout.html:110
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:98 views/layout.html:110
 #: views/newsletter/templates/components/save.hbs:4
 #: views/newsletter/templates/components/save.hbs:24 views/segments.html:96
 #: views/subscribers/subscribers.html:142
 msgid "Save"
 msgstr ""
 
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:108
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:124
 msgid "Need to change your email address? Unsubscribe using the form below, then simply sign up again."
 msgstr ""
 
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:117
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:133
 msgid "[link]Edit your profile[/link] to update your email."
 msgstr ""
 
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:123
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:139
 msgid "[link]Log in to your account[/link] to update your email."
 msgstr ""
 
-#: lib/Subscription/ManageSubscriptionFormRenderer.php:256
+#: lib/Subscription/ManageSubscriptionFormRenderer.php:272
 msgid "Your lists"
 msgstr ""
 
-#: lib/Subscription/Pages.php:259
+#: lib/Subscription/Pages.php:272
 msgid "Hmmm... we don't have a record of you."
 msgstr ""
 
-#: lib/Subscription/Pages.php:287
+#: lib/Subscription/Pages.php:300
 msgid "Your email address doesn't appear in our lists anymore. Sign up again or contact us if this appears to be a mistake."
 msgstr ""
 
-#: lib/Subscription/Pages.php:347 lib/Subscription/Pages.php:359
+#: lib/Subscription/Pages.php:360 lib/Subscription/Pages.php:372
 msgid "You have subscribed to: %s"
 msgstr ""
 
-#: lib/Subscription/Pages.php:356
+#: lib/Subscription/Pages.php:369
 msgid "You are now subscribed!"
 msgstr ""
 
-#: lib/Subscription/Pages.php:375
+#: lib/Subscription/Pages.php:388
 msgid "You are now unsubscribed."
 msgstr ""
 
-#: lib/Subscription/Pages.php:381
+#: lib/Subscription/Pages.php:394
 msgid "Thank you for letting us know!"
 msgstr ""
 
-#: lib/Subscription/Pages.php:387
+#: lib/Subscription/Pages.php:400
 msgid "Confirm you want to unsubscribe"
 msgstr ""
 
-#: lib/Subscription/Pages.php:393
+#: lib/Subscription/Pages.php:406
 msgid "Yup, we've added you to our email list. You'll hear from us shortly."
 msgstr ""
 
-#: lib/Subscription/Pages.php:411
+#: lib/Subscription/Pages.php:420
 msgid "Subscription management form is only available to mailing lists subscribers."
 msgstr ""
 
-#: lib/Subscription/Pages.php:427
+#: lib/Subscription/Pages.php:436
 msgid "Accidentally unsubscribed?"
 msgstr ""
 
-#: lib/Subscription/Pages.php:437
+#: lib/Subscription/Pages.php:446
 msgid "We appreciate your continued interest in our updates. Expect to hear from us again soon!"
 msgstr ""
 
-#: lib/Subscription/Pages.php:460
+#: lib/Subscription/Pages.php:468
 msgid "Link to subscription management page is only available to mailing lists subscribers."
 msgstr ""
 
@@ -4101,6 +4096,10 @@ msgstr ""
 msgid "Resume sending"
 msgstr ""
 
+#: lib/Validator/Validator.php:192
+msgid "%1$s is not of type %2$s."
+msgstr ""
+
 #: lib/WP/Notice.php:42
 msgid "MailPoet Error:"
 msgstr ""
@@ -4118,23 +4117,23 @@ msgstr ""
 msgid "MailPoet plugin requires WordPress version 4.6 or newer. Please read our [link]instructions[/link] on how to resolve this issue."
 msgstr ""
 
-#: mailpoet.php:63
+#: mailpoet.php:74
 msgid "MailPoet requires PHP version 7.2 or newer (8.0 recommended). You are running version [version]."
 msgstr ""
 
-#: mailpoet.php:66
+#: mailpoet.php:77
 msgid "Please read our [link]instructions[/link] on how to upgrade your site."
 msgstr ""
 
-#: mailpoet.php:74
+#: mailpoet.php:85
 msgid "If you can’t upgrade the PHP version, [link]install this version[/link] of MailPoet. Remember to not update MailPoet ever again!"
 msgstr ""
 
-#: mailpoet.php:94
+#: mailpoet.php:122
 msgid "MailPoet plugin cannot run under Microsoft's Internet Information Services (IIS) web server. We recommend that you use a web server powered by Apache or NGINX."
 msgstr ""
 
-#: mailpoet.php:108
+#: mailpoet.php:136
 msgid "MailPoet cannot start because it is missing core files. Please reinstall the plugin."
 msgstr ""
 
@@ -8233,6 +8232,21 @@ msgstr ""
 #: views/newsletters.html:402
 msgctxt "an email sending status: unprocessed, sent or failed."
 msgid "Sending status"
+msgstr ""
+
+#: views/newsletters.html:405
+msgctxt "status when the sending of a newsletter has not been processed"
+msgid "Unprocessed"
+msgstr ""
+
+#: views/newsletters.html:406
+msgctxt "status when a newsletter has been sent"
+msgid "Sent"
+msgstr ""
+
+#: views/newsletters.html:407
+msgctxt "status when the sending of a newsletter has failed"
+msgid "Failed"
 msgstr ""
 
 #: views/newsletters.html:418

@@ -4,6 +4,7 @@ namespace MailPoetVendor\Doctrine\ORM\Mapping;
 if (!defined('ABSPATH')) exit;
 use Attribute;
 use MailPoetVendor\Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
+use MailPoetVendor\Doctrine\ORM\EntityRepository;
 #[\Attribute(Attribute::TARGET_CLASS)]
 final class MappedSuperclass implements Annotation
 {

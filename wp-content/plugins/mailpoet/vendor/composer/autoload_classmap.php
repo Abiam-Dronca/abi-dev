@@ -458,6 +458,8 @@ return array(
  'MailPoetVendor\\Doctrine\\ORM\\Mapping\\PreUpdate' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/PreUpdate.php',
  'MailPoetVendor\\Doctrine\\ORM\\Mapping\\QuoteStrategy' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/QuoteStrategy.php',
  'MailPoetVendor\\Doctrine\\ORM\\Mapping\\ReflectionEmbeddedProperty' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/ReflectionEmbeddedProperty.php',
+ 'MailPoetVendor\\Doctrine\\ORM\\Mapping\\ReflectionEnumProperty' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/ReflectionEnumProperty.php',
+ 'MailPoetVendor\\Doctrine\\ORM\\Mapping\\ReflectionReadonlyProperty' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/ReflectionReadonlyProperty.php',
  'MailPoetVendor\\Doctrine\\ORM\\Mapping\\Reflection\\ReflectionPropertiesGetter' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/Reflection/ReflectionPropertiesGetter.php',
  'MailPoetVendor\\Doctrine\\ORM\\Mapping\\SequenceGenerator' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/SequenceGenerator.php',
  'MailPoetVendor\\Doctrine\\ORM\\Mapping\\SqlResultSetMapping' => $baseDir . '/vendor-prefixed/doctrine/orm/lib/Doctrine/ORM/Mapping/SqlResultSetMapping.php',

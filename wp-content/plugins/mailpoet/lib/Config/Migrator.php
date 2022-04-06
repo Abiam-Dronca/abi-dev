@@ -103,7 +103,7 @@ class Migrator {
 
     $_this = $this;
     $dropTable = function($model) use($wpdb, $_this) {
-      $table = $_this->prefix . $model;
+      $table = esc_sql($_this->prefix . $model);
       $wpdb->query("DROP TABLE {$table}");
     };
 
@@ -645,8 +645,9 @@ class Migrator {
     if (version_compare((string)$this->settings->get('db_version', '3.47.6'), '3.47.6', '>')) {
       return false;
     }
+    $table = esc_sql("{$this->prefix}statistics_unsubscribes");
     $query = "
-    ALTER TABLE `{$this->prefix}statistics_unsubscribes`
+    ALTER TABLE `{$table}`
       CHANGE `newsletter_id` `newsletter_id` int(11) unsigned NULL,
       CHANGE `queue_id` `queue_id` int(11) unsigned NULL;
     ";
@@ -668,7 +669,7 @@ class Migrator {
     }
 
     global $wpdb;
-    $scheduledTasksSubscribersTable = "{$this->prefix}scheduled_task_subscribers";
+    $scheduledTasksSubscribersTable = esc_sql("{$this->prefix}scheduled_task_subscribers");
     // Remove default CURRENT_TIMESTAMP from created_at
     $updateCreatedAtQuery = "
       ALTER TABLE `$scheduledTasksSubscribersTable`
@@ -677,11 +678,11 @@ class Migrator {
     $wpdb->query($updateCreatedAtQuery);
 
     // Add updated_at column in case it doesn't exist
-    $updatedAtColumnExists = $wpdb->get_results("
+    $updatedAtColumnExists = $wpdb->get_results($wpdb->prepare("
       SELECT COLUMN_NAME
       FROM INFORMATION_SCHEMA.COLUMNS
-      WHERE table_name = '$scheduledTasksSubscribersTable' AND column_name = 'updated_at';
-     ");
+      WHERE table_name = %s AND column_name = 'updated_at';
+     ", $scheduledTasksSubscribersTable));
     if (empty($updatedAtColumnExists)) {
       $addUpdatedAtQuery = "
         ALTER TABLE `$scheduledTasksSubscribersTable`
@@ -701,17 +702,17 @@ class Migrator {
 
     $dbName = Env::$dbName;
     $statisticsTables = [
-      "{$this->prefix}statistics_clicks",
-      "{$this->prefix}statistics_opens",
+      esc_sql("{$this->prefix}statistics_clicks"),
+      esc_sql("{$this->prefix}statistics_opens"),
     ];
     foreach ($statisticsTables as $statisticsTable) {
-      $oldStatisticsIndexExists = $wpdb->get_results("
+      $oldStatisticsIndexExists = $wpdb->get_results($wpdb->prepare("
       SELECT DISTINCT INDEX_NAME
       FROM INFORMATION_SCHEMA.STATISTICS
-      WHERE TABLE_SCHEMA = '{$dbName}'
-        AND TABLE_NAME = '$statisticsTable'
+      WHERE TABLE_SCHEMA = %s
+        AND TABLE_NAME = %s
         AND INDEX_NAME='newsletter_id_subscriber_id'
-     ");
+     ", $dbName, $statisticsTable));
       if (!empty($oldStatisticsIndexExists)) {
         $dropIndexQuery = "
         ALTER TABLE `{$statisticsTable}`
@@ -731,7 +732,7 @@ class Migrator {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
     $dynamicSegmentFilters = $wpdb->get_results("
       SELECT id, filter_data, filter_type, `action`
       FROM {$dynamicSegmentFiltersTable}
@@ -761,7 +762,7 @@ class Migrator {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
     $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE;
     $action = WooCommerceProduct::ACTION_PRODUCT;
     $dynamicSegmentFilters = $wpdb->get_results("
@@ -801,15 +802,15 @@ class Migrator {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
     $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE;
     $action = WooCommerceCategory::ACTION_CATEGORY;
-    $dynamicSegmentFilters = $wpdb->get_results("
+    $dynamicSegmentFilters = $wpdb->get_results($wpdb->prepare("
       SELECT `id`, `filter_data`, `filter_type`, `action`
       FROM {$dynamicSegmentFiltersTable}
-      WHERE `filter_type` = '{$filterType}'
-        AND `action` = '{$action}'
-    ", ARRAY_A);
+      WHERE `filter_type` = %s
+        AND `action` = %s
+    ", $filterType, $action), ARRAY_A);
 
     foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
       $filterData = unserialize($dynamicSegmentFilter['filter_data']);
@@ -841,15 +842,15 @@ class Migrator {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
     $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE_SUBSCRIPTION;
     $action = WooCommerceSubscription::ACTION_HAS_ACTIVE;
-    $dynamicSegmentFilters = $wpdb->get_results("
+    $dynamicSegmentFilters = $wpdb->get_results($wpdb->prepare("
       SELECT `id`, `filter_data`, `filter_type`, `action`
       FROM {$dynamicSegmentFiltersTable}
-      WHERE `filter_type` = '{$filterType}'
-        AND `action` = '{$action}'
-    ", ARRAY_A);
+      WHERE `filter_type` = %s
+        AND `action` = %s
+    ", $filterType, $action), ARRAY_A);
 
     foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
       $filterData = unserialize($dynamicSegmentFilter['filter_data']);
@@ -880,7 +881,7 @@ class Migrator {
       return false;
     }
 
-    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $dynamicSegmentFiltersTable = esc_sql("{$this->prefix}dynamic_segment_filters");
     $filterType = DynamicSegmentFilterData::TYPE_EMAIL;
     $dynamicSegmentFilters = $wpdb->get_results("
       SELECT `id`, `filter_data`, `filter_type`, `action`

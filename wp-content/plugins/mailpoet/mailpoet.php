@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 
 /*
  * Plugin Name: MailPoet 3 (New)
- * Version: 3.85.1
+ * Version: 3.86.0
  * Plugin URI: http://www.mailpoet.com
  * Description: Create and send newsletters, post notifications and welcome emails from your WordPress.
  * Author: MailPoet
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) exit;
  */
 
 $mailpoetPlugin = [
-  'version' => '3.85.1',
+  'version' => '3.86.0',
   'filename' => __FILE__,
   'path' => dirname(__FILE__),
   'autoloader' => dirname(__FILE__) . '/vendor/autoload.php',
@@ -58,7 +58,18 @@ function mailpoet_wp_version_notice() {
     __('MailPoet plugin requires WordPress version 4.6 or newer. Please read our [link]instructions[/link] on how to resolve this issue.', 'mailpoet')
   );
   $notice = str_replace('[/link]', '</a>', $notice);
-  printf('<div class="error"><p>%1$s</p></div>', $notice);
+  printf(
+    '<div class="error"><p>%1$s</p></div>',
+    wp_kses(
+      $notice,
+      [
+        'a' => [
+          'href' => true,
+          'target' => true,
+        ],
+      ]
+    )
+  );
 }
 
 // Display PHP version error notice
@@ -82,10 +93,27 @@ function mailpoet_php_version_notice() {
   );
   $noticeP3 = str_replace('[/link]', '</a>', $noticeP3);
 
-  printf('<div class="error"><p><strong>%s</strong></p><p>%s</p><p>%s</p></div>', $noticeP1, $noticeP2, $noticeP3);
+  $allowedTags = [
+    'a' => [
+      'href' => true,
+      'target' => true,
+    ],
+  ];
+  printf(
+    '<div class="error"><p><strong>%s</strong></p><p>%s</p><p>%s</p></div>',
+    esc_html($noticeP1),
+    wp_kses(
+      $noticeP2,
+      $allowedTags
+    ),
+    wp_kses(
+      $noticeP3,
+      $allowedTags
+    )
+  );
 }
 
-if (isset($_SERVER['SERVER_SOFTWARE']) && strpos(strtolower($_SERVER['SERVER_SOFTWARE']), 'microsoft-iis') !== false) {
+if (isset($_SERVER['SERVER_SOFTWARE']) && strpos(strtolower(sanitize_text_field(wp_unslash($_SERVER['SERVER_SOFTWARE']))), 'microsoft-iis') !== false) {
   add_action('admin_notices', 'mailpoet_microsoft_iis_notice');
   // deactivate the plugin
   add_action('admin_init', 'mailpoet_deactivate_plugin');
@@ -95,7 +123,7 @@ if (isset($_SERVER['SERVER_SOFTWARE']) && strpos(strtolower($_SERVER['SERVER_SOF
 // Display IIS server error notice
 function mailpoet_microsoft_iis_notice() {
   $notice = __("MailPoet plugin cannot run under Microsoft's Internet Information Services (IIS) web server. We recommend that you use a web server powered by Apache or NGINX.", 'mailpoet');
-  printf('<div class="error"><p>%1$s</p></div>', $notice);
+  printf('<div class="error"><p>%1$s</p></div>', esc_html($notice));
 }
 
 // Check for presence of core dependencies
@@ -109,7 +137,7 @@ if (!file_exists($mailpoetPlugin['autoloader']) || !file_exists($mailpoetPlugin[
 // Display missing core dependencies error notice
 function mailpoet_core_dependency_notice() {
   $notice = __('MailPoet cannot start because it is missing core files. Please reinstall the plugin.', 'mailpoet');
-  printf('<div class="error"><p>%1$s</p></div>', $notice);
+  printf('<div class="error"><p>%1$s</p></div>', esc_html($notice));
 }
 
 // Initialize plugin
