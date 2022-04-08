@@ -544,7 +544,7 @@ class BWGViewSite {
       $bwg_search_tags = WDWLibrary::get('bwg_tag_id_' . $cur_gal_id, array());
       $get_filter_teg = WDWLibrary::get('filter_tag_' . $bwg);
       if ( BWG()->options->front_ajax == "1" && isset($get_filter_teg) && !empty($get_filter_teg) ) {
-        $filter_teg_arr = explode(',', $get_filter_teg);
+        $filter_teg_arr = array_map('intval', explode(",", trim($get_filter_teg)));
         $bwg_search_tags = $filter_teg_arr;
       } ob_start();
       $album_gallery_id = WDWLibrary::get('album_gallery_id_' . $current_view, 0, 'intval');
@@ -634,7 +634,7 @@ class BWGViewSite {
              }
              ?>
           </div>
-          <div class="bwg_tag_button_see_all"><div class="see_all_tags show"><span>&#43;</span><?php echo __('see all tags', BWG()->prefix);?></div></div>
+          <div class="bwg_tag_button_see_all"><div class="see_all_tags bwg_show"><span>&#43;</span><?php echo __('see all tags', BWG()->prefix);?></div></div>
         <?php
         } ?>
         <input type="hidden" id="bwg_tag_id_<?php echo sanitize_html_class($cur_gal_id); ?>" value="<?php echo esc_attr($get_filter_teg) ?>" />
@@ -906,6 +906,9 @@ class BWGViewSite {
       ?>
       <input type="hidden" id="page_number_<?php echo sanitize_html_class($current_view); ?>" name="page_number_<?php echo esc_attr($current_view); ?>" value="<?php echo esc_attr($page_number); ?>" />
       <script type="text/javascript">
+        if( jQuery('.bwg_nav_cont_<?php echo $current_view; ?>').length > 1 ) {
+          jQuery('.bwg_nav_cont_<?php echo $current_view; ?>').first().remove()
+        }
         function spider_page_<?php echo $current_view; ?>(cur, x, y, load_more) {
           if (typeof load_more == "undefined") {
             var load_more = false;

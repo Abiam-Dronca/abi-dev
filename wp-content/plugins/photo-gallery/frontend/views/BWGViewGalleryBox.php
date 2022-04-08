@@ -1067,8 +1067,8 @@ class BWGViewGalleryBox {
 								</p>
 								<p class="bwg_comment_waiting_message"><?php _e('Your comment is awaiting moderation', BWG()->prefix); ?></p>
 								<input id="ajax_task" name="ajax_task" type="hidden" value="" />
-								<input id="image_id"id="image_id" name="image_id" type="hidden" value="<?php echo esc_attr($image_id); ?>" />
-											<input id="comment_id" name="comment_id" type="hidden" value="" />
+								<input id="image_id" name="image_id" type="hidden" value="<?php echo esc_attr($image_id); ?>" />
+								<input id="comment_id" name="comment_id" type="hidden" value="" />
 								<input type="hidden" value="<?php echo esc_attr($params['comment_moderation']) ?>" id="bwg_comment_moderation">
 								<input type="hidden" value="<?php echo ($params['gdpr_compliance']) ? 0 : esc_attr($params['popup_enable_captcha']); ?>" id="bwg_popup_enable_captcha">
             	</form>

@@ -98,6 +98,14 @@ class GalleriesController_bwg {
     $params['actions'] = $this->actions;
     $params['order'] = WDWLibrary::get('order', 'asc');
     $params['orderby'] = WDWLibrary::get('orderby', 'order');
+    if ( $params['orderby'] != 'order' ) {
+        WDWLibrary::set_sorting( array('list_type'=>'galleries', 'order_by' => $params['orderby'].'_'.$params['order']) );
+    } else {
+        $sorting = WDWLibrary::get_sorting( array('list_type'=>'galleries') );
+        $sorting = explode("_", $sorting);
+        $params['orderby'] = isset($sorting[0]) ? $sorting[0] : 'order';
+        $params['order'] = isset($sorting[1]) ? $sorting[1] : 'asc';
+    }
     // To prevent SQL injections.
     $params['order'] = ($params['order'] == 'desc') ? 'desc' : 'asc';
     if ( !in_array($params['orderby'], array( 'name', 'author' )) ) {
@@ -353,10 +361,11 @@ class GalleriesController_bwg {
     // Image display params.
     $params['actions'] = WDWLibrary::image_actions( $params['gallery_type'] );
     $params['page_url'] = $params['form_action'];
-    $order_by = WDWLibrary::get('order_by', 'order_asc');
-    if ( !array_key_exists($order_by, WDWLibrary::admin_images_ordering_choices())) {
-      $order_by = 'order_asc';
+    $order_by = WDWLibrary::get('order_by', '');
+    if ( $order_by != '' && array_key_exists($order_by, WDWLibrary::admin_images_ordering_choices()) ) {
+      WDWLibrary::set_sorting( array('gallery_id' => $id, 'list_type' => 'edit', 'order_by' => $order_by) );
     }
+    $order_by = WDWLibrary::get_sorting( array('gallery_id' => $id, 'list_type' => 'edit') );
     $order_by = explode('_', $order_by);
     $params['order'] = $order_by[1];
     $params['orderby'] = $order_by[0];

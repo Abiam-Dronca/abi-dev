@@ -47,7 +47,7 @@ class AddTagsView_bwg extends AdminView_bwg {
         //for newly added images, id starts with pr_
         //if Select all checked, id equal to 0
         //for other cases id must be positive number
-        if ( str_contains(WDWLibrary::get('image_id', 0), 'pr_') ) {
+        if ( strpos(WDWLibrary::get('image_id', 0), 'pr_') > -1 ) {
           $image_id = WDWLibrary::get('image_id', 0);
         } else {
           $image_id = WDWLibrary::get('image_id', 0, 'intval');
@@ -113,7 +113,7 @@ class AddTagsView_bwg extends AdminView_bwg {
       </table>
     </div>
     </div>
-	<input id="image_id" name="image_id" type="hidden" value="<?php echo $image_id; ?>" />
+	<input id="image_id" name="image_id" type="hidden" value="<?php echo esc_attr($image_id); ?>" />
 	<div class="media-frame-toolbar">
 		<div class="media-toolbar">
 		  <div class="media-toolbar-primary search-form">

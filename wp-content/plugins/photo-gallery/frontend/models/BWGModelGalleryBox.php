@@ -42,11 +42,11 @@ class BWGModelGalleryBox {
       $filter_tags = array();
       $bwg_filter_tag_temp = WDWLibrary::get('filter_tag_' . $bwg, 0);
       if ( !empty($bwg_filter_tag_temp) ) {
-        $filter_tags = explode(",", $bwg_filter_tag_temp);
+        $filter_tags = array_map('intval', explode(",", $bwg_filter_tag_temp));
       }
     }
     else {
-      $filter_tags = explode(",", $bwg_filter_tag_temp);
+      $filter_tags = array_map('intval', explode(",", $bwg_filter_tag_temp));
     }
 
     $filter_search_name_temp = WDWLibrary::get('filter_search_name', '');
@@ -110,7 +110,8 @@ class BWGModelGalleryBox {
       } else {
           $join .= ' LEFT JOIN (SELECT GROUP_CONCAT(tag_id order by tag_id SEPARATOR ",") AS tags_combined, image_id FROM  ' . $wpdb->prefix . 'bwg_image_tag GROUP BY image_id) AS tags ON image.id=tags.image_id';
       }
-      $where .= ' AND CONCAT(",", tags.tags_combined, ",") REGEXP ",(' . implode($compare_sign, $filter_tags) . ')," ';
+      $where .= ' AND CONCAT(",", tags.tags_combined, ",") REGEXP ",( %s )," ';
+      $prepareArgs[] = implode($compare_sign, $filter_tags);
     }
 
     $rate_join = '';

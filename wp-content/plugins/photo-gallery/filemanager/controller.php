@@ -49,24 +49,37 @@ class FilemanagerController {
     $valid_types = explode( ',', strtolower('jpg,jpeg,png,gif,svg') );
 
 	// set session data.
-	  $session_data = array();
-    $session_data['sort_by'] = $this->model->get_from_session('sort_by', 'date_modified');
-    $session_data['sort_order'] = $this->model->get_from_session('sort_order', 'desc');
+    $session_data = array();
     $session_data['items_view'] = $this->model->get_from_session('items_view', 'thumbs');
     $session_data['clipboard_task'] = $this->model->get_from_session('clipboard_task', '');
     $session_data['clipboard_files'] = $this->model->get_from_session('clipboard_files', '');
     $session_data['clipboard_src'] = $this->model->get_from_session('clipboard_src', '');
     $session_data['clipboard_dest'] = $this->model->get_from_session('clipboard_dest', '');
+    $bwg_filemanager_sorting_array = get_option('bwg_filemanager_sorting', 0);
+    if ($bwg_filemanager_sorting_array !== 0) {
+      if (array_key_exists(get_current_user_id(), $bwg_filemanager_sorting_array)) {
+        $session_data['sort_by'] = $bwg_filemanager_sorting_array[get_current_user_id()]['sort_by'];
+        $session_data['sort_order'] = $bwg_filemanager_sorting_array[get_current_user_id()]['sort_order'];
+      } else {
+        $session_data['sort_by'] = 'date_modified';
+        $session_data['sort_order'] = 'asc';
+      }
+    } else {
+      $session_data['sort_by'] = 'date_modified';
+      $session_data['sort_order'] = 'asc';
+    }
+    $params['orderby'] = $session_data['sort_by'];
     $params['session_data'] = $session_data;
-
     $params['dir'] = ($dir == '' || $dir == '/') ? '/' : $dir .'/';
     $params['path_components'] = $this->model->get_path_components( $dir );
     $params['search'] = $search;
     $params['page_num'] = $page_num;
     $params['valid_types'] = $valid_types;
-    $params['orderby'] = $session_data['sort_by'];
+
+
     $params['order'] = $session_data['sort_order'];
     $params['page_per'] = $this->page_per;
+
     // get file lists.
     $items = $this->model->get_file_lists( $params );
     $params['items'] = $items;

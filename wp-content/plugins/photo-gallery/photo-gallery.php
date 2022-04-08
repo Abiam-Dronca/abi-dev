@@ -3,7 +3,7 @@
  * Plugin Name: Photo Gallery
  * Plugin URI: https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin
  * Description: This plugin is a fully responsive gallery plugin with advanced functionality.  It allows having different image galleries for your posts and pages. You can create unlimited number of galleries, combine them into albums, and provide descriptions and tags.
- * Version: 1.6.2
+ * Version: 1.6.3
  * Author: Photo Gallery Team
  * Author URI: https://10web.io/plugins/?utm_source=photo_gallery&utm_medium=free_plugin
  * License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
@@ -105,8 +105,8 @@ final class BWG {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_url = $this->plugin_url;
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.6.2';
-    $this->db_version = '1.6.2';
+    $this->plugin_version = '1.6.3';
+    $this->db_version = '1.6.3';
     $this->prefix = 'bwg';
     $this->nicename = __('Photo Gallery', $this->prefix);
     require_once($this->plugin_dir . '/framework/WDWLibrary.php');
@@ -989,6 +989,11 @@ final class BWG {
     }
     require_once(BWG()->plugin_dir . '/framework/WDWLibrary.php');
     $page = WDWLibrary::get('action');
+    $filemanager_sort_by = WDWLibrary::get('sort_by', 0);
+    if ($filemanager_sort_by) {
+      $filemanager_sort_order = WDWLibrary::get('sort_order', 'asc');
+      update_option('bwg_filemanager_sorting', [get_current_user_id() => ['sort_by' => $filemanager_sort_by, 'sort_order' => $filemanager_sort_order]]);
+    }
     if (($page != '') && (($page == 'addImages') || ($page == 'addMusic'))) {
       if (!WDWLibrary::verify_nonce($page)) {
         die('Sorry, your nonce did not verify.');

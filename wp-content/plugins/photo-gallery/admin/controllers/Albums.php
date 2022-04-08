@@ -95,7 +95,15 @@ class AlbumsController_bwg {
     $params['page_title'] = __('Gallery Groups', BWG()->prefix);
     $params['actions'] = $this->actions;
     $params['order'] = WDWLibrary::get('order', 'asc');
-    $params['orderby'] = WDWLibrary::get('orderby', 'name');
+    $params['orderby'] = WDWLibrary::get('orderby', '');
+    if ( $params['orderby'] != '' ) {
+        WDWLibrary::set_sorting( array('list_type'=>'albums', 'order_by' => $params['orderby'].'_'.$params['order']) );
+    } else {
+        $sorting = WDWLibrary::get_sorting( array('list_type'=>'albums') );
+        $sorting = explode("_", $sorting);
+        $params['orderby'] = isset($sorting[0]) ? $sorting[0] : 'name';
+        $params['order'] = isset($sorting[1]) ? $sorting[1] : 'asc';
+    }
     // To prevent SQL injections.
     $params['order'] = ($params['order'] == 'desc') ? 'desc' : 'asc';
     if (!in_array($params['orderby'], array('name', 'author'))) {

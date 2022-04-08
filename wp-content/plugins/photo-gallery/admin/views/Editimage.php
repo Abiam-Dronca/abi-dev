@@ -26,33 +26,12 @@ class EditimageView_bwg {
       }
     }
     $image_id =  WDWLibrary::get('image_id', '0');
-    $image_url =  WDWLibrary::get('image_url', '');
-    $facebook_post = WDWLibrary::get('FACEBOOK_POST', '0');
-    $fb_post_url =  WDWLibrary::get('fb_post_url', '');
-    $app_id = BWG()->options->facebook_app_id;
+    $image_url =  WDWLibrary::get('image_url', '', 'esc_url');
 	?>
 	<div id="loading_div"></div>
     <div id="wd-content" style="width:100%; height:100%;">
       <div id="bwg_container_for_media_1" style="width:100%; height:100%; margin:0 auto; text-align:center; vertical-align:middle;">
-        <?php if ( !$facebook_post ) { ?>
 			<img id="image_display" src="<?php echo BWG()->upload_url . WDWLibrary::image_url_version($image_url, $modified_date); ?>" style="max-width:100%; max-height:100%; position: relative; transform: translateY(-50%); top: 50%;" />
-        <?php }
-		else { ?>
-          <div id="fb-root"></div>
-          <script>
-            (function (d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) {
-                return;
-              }
-              js = d.createElement(s);
-              js.id = id;
-              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&version=v2.3&appId=<?php echo $app_id; ?>";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-          </script>
-          <div class="fb-post" data-width="300" data-href="https://www.facebook.com/{user_name_or_id}/<?php echo $fb_post_url; ?>"></div>
-        <?php } ?>
       </div>
     </div>
     <script language="javascript" type="text/javascript" src="<?php echo BWG()->plugin_url . '/js/bwg_embed.js?ver=' . BWG()->plugin_version; ?>"></script>
@@ -60,57 +39,33 @@ class EditimageView_bwg {
       var file_type = window.parent.document.getElementById("input_filetype_<?php echo $image_id; ?>").value;
       var file_url = window.parent.document.getElementById("image_url_<?php echo $image_id; ?>").value;
       var is_embed = file_type.indexOf("EMBED_") > -1 ? true : false;
-      //for facebook
-      var is_facebook_post = file_type.indexOf("_FACEBOOK_POST") > -1 ? true : false;
+
       var is_instagram_post = file_type.indexOf("INSTAGRAM_POST") > -1 ? true : false;
       if (is_embed) {
         var embed_id = window.parent.document.getElementById("input_filename_<?php echo $image_id; ?>").value;
-        if (!is_facebook_post) {
-          window.document.getElementById("image_display").setAttribute('style', 'display: none;');
-          if (!is_instagram_post) {
-            window.document.getElementById("bwg_container_for_media_1").innerHTML = spider_display_embed(file_type, file_url, embed_id, {
-              class: "embed_display",
-              frameborder: "0",
-              allowfullscreen: "allowfullscreen",
-              style: "width:100%; height:100%; vertical-align:middle; text-align: center; margin: 0 auto;"
-            });
-          }
-          else {
-            window.document.getElementById("bwg_container_for_media_1").innerHTML = spider_display_embed(file_type, file_url, embed_id, {
-              class: "embed_display",
-              width: "<?php echo $instagram_post_width; ?>",
-              height: "<?php echo $instagram_post_height; ?>",
-              frameborder: "0",
-              allowfullscreen: "allowfullscreen",
-              style: "width:<?php echo $instagram_post_width; ?>px; height:<?php echo $instagram_post_height; ?>px; vertical-align:middle; text-align: center; margin: 0 auto;"
-            });
-          }
+        window.document.getElementById("image_display").setAttribute('style', 'display: none;');
+        if (!is_instagram_post) {
+          window.document.getElementById("bwg_container_for_media_1").innerHTML = spider_display_embed(file_type, file_url, embed_id, {
+            class: "embed_display",
+            frameborder: "0",
+            allowfullscreen: "allowfullscreen",
+            style: "width:100%; height:100%; vertical-align:middle; text-align: center; margin: 0 auto;"
+          });
+        }
+        else {
+          window.document.getElementById("bwg_container_for_media_1").innerHTML = spider_display_embed(file_type, file_url, embed_id, {
+            class: "embed_display",
+            width: "<?php echo $instagram_post_width; ?>",
+            height: "<?php echo $instagram_post_height; ?>",
+            frameborder: "0",
+            allowfullscreen: "allowfullscreen",
+            style: "width:<?php echo $instagram_post_width; ?>px; height:<?php echo $instagram_post_height; ?>px; vertical-align:middle; text-align: center; margin: 0 auto;"
+          });
         }
       }
       jQuery(window).on('load',function(){
       jQuery('#loading_div', window.parent.document).hide();
 	  });
-    </script>
-    <?php
-    die();
-  }
-
-  public function thumb_display() {
-    $popup_width = WDWLibrary::get('width', 1000, 'intval') - 30;
-    $image_width = $popup_width - 40;
-    $popup_height = WDWLibrary::get('width', 600, 'intval') - 50;
-    $image_height = $popup_height - 40;
-    $image_id = WDWLibrary::get('image_id', 0, 'intval');
-    $modified_date = WDWLibrary::get('modified_date', '');
-    ?>
-    <div style="display:table; width:100%; height:<?php echo $popup_height; ?>px;">
-      <div style="display:table-cell; text-align:center; vertical-align:middle;">
-        <img id="thumb_view" src="" style="max-width:<?php echo $image_width; ?>px; max-height:<?php echo $image_height; ?>px;" />
-      </div>
-    </div>
-    <script>
-      var image_url = "<?php echo BWG()->upload_url; ?>" + window.parent.document.getElementById("thumb_url_<?php echo $image_id; ?>").value;
-      window.document.getElementById("thumb_view").src = image_url + "<?php echo $modified_date ? '?bwg=' . $modified_date : ''; ?>";
     </script>
     <?php
     die();
@@ -898,9 +853,9 @@ class EditimageView_bwg {
         </div>
       </div>
       <input type="hidden" name="edit_type" id="edit_type" />
-      <input type="hidden" name="image_id" id="image_id" value="<?php echo $image_id; ?>" />
-      <input type="hidden" name="brightness_val" id="brightness_val" value="<?php echo $brightness_val; ?>" />
-      <input type="hidden" name="contrast_val" id="contrast_val" value="<?php echo $contrast_val; ?>" />
+      <input type="hidden" name="image_id" id="image_id" value="<?php echo esc_attr($image_id); ?>" />
+      <input type="hidden" name="brightness_val" id="brightness_val" value="<?php echo esc_attr($brightness_val); ?>" />
+      <input type="hidden" name="contrast_val" id="contrast_val" value="<?php echo esc_attr($contrast_val); ?>" />
     </form>
     <script>
       jQuery(function () {

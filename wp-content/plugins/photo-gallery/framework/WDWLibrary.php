@@ -498,7 +498,7 @@ class WDWLibrary {
     </div>
     <?php if (!$pager) { ?>
     <input type="hidden" id="page_number"  name="page_number" value="<?php echo self::get('page_number', 1, 'intval'); ?>" />
-    <input type="hidden" id="search_or_not" name="search_or_not" value="<?php echo self::get('search_or_not'); ?>"/>
+    <input type="hidden" id="search_or_not" name="search_or_not" value="<?php echo self::get('search_or_not', '', 'esc_attr'); ?>"/>
     <?php
     }
   }
@@ -1247,7 +1247,7 @@ class WDWLibrary {
       $filter_teg = trim( WDWLibrary::get('filter_tag_' . $bwg) );
 
       if ( !empty($filter_teg) ) {
-        $filter_teg_arr = explode(',', trim($filter_teg));
+        $filter_teg_arr = array_map('intval', explode(",", trim($filter_teg)));
         $_REQUEST[$tag_input_name] = $filter_teg_arr;
       }
     }
@@ -3311,6 +3311,61 @@ class WDWLibrary {
     );
 
     return $data;
+  }
+
+  /**
+   * Saving admin galleries, gallery edit, albums list page sorted value to wp_options.
+   *
+   * @param $params array list_type => edit/galleries/albums, gallery_id for edit case only, order_by for all cases
+  */
+  public static function set_sorting( $params = array() ) {
+
+    $gallery_id = isset( $params['gallery_id'] ) ? $params['gallery_id'] : 0;
+    $order_by   = isset( $params['order_by'] ) ? $params['order_by'] : 'order_asc';
+    $list_type  = isset( $params['list_type'] ) ? $params['list_type'] : '';
+
+    if ( $list_type == '' )  {
+      return;
+    }
+
+    $data = get_option('bwg_gallery_sorting');
+    $user_id = get_current_user_id();
+
+    if( $list_type == 'edit' && ((!empty($data[$user_id][$gallery_id]) && $data[$user_id][$gallery_id]['order_by'] == $order_by) || $gallery_id == 0 || $user_id == 0) ) {
+      return;
+    }
+    if ( $list_type == 'edit') {
+        $data[$user_id][$gallery_id]['order_by'] = $order_by;
+    } elseif ( $list_type == 'galleries' ) {
+        $data[$user_id]['galleries']['order_by'] = $order_by;
+    } elseif ( $list_type == 'albums' ) {
+        $data[$user_id]['albums']['order_by'] = $order_by;
+    }
+
+    update_option( 'bwg_gallery_sorting', $data, 1 );
+  }
+
+  /**
+   * Getting admin gallery list page sorted value from wp_options.
+   *
+   * @param $params array list_type => edit/galleries/albums, gallery_id for edit case only
+   *
+   * @return string
+  */
+  public static function get_sorting( $params = array() ) {
+    $gallery_id = isset($params['gallery_id']) ? $params['gallery_id'] : 0;
+    $list_type = isset($params['list_type']) ? $params['list_type'] : '';
+    $user_id = get_current_user_id();
+    $data = get_option('bwg_gallery_sorting');
+
+    if ( $list_type == 'edit' && !empty($data[$user_id][$gallery_id]['order_by']) ) {
+        return $data[$user_id][$gallery_id]['order_by'];
+    } elseif ($list_type == 'galleries' && !empty($data[$user_id]['galleries']['order_by']) ) {
+        return $data[$user_id]['galleries']['order_by'];
+    } elseif ($list_type == 'albums' && !empty($data[$user_id]['albums']['order_by']) ) {
+        return $data[$user_id]['albums']['order_by'];
+    }
+    return 'order_asc';
   }
 }
 

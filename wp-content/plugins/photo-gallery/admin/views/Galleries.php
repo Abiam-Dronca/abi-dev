@@ -232,7 +232,7 @@ class GalleriesView_bwg extends AdminView_bwg {
       ?>
     </div>
     <div id="message_div" class="wd_updated" style="display: none;"></div>
-    <div class="bwg-page-header wd-list-view-header">
+    <div class="bwg-page-header wd-list-view-header<?php echo !BWG()->is_pro ? ' bwg-page-header-free' : ''?>">
       <div class="wd-page-title wd-header wd-list-view-header-left">
         <div>
           <h1 class="wp-heading-inline bwg-heading"><?php _e('Gallery title', BWG()->prefix); ?></h1>

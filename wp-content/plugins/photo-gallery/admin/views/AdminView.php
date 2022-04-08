@@ -85,7 +85,7 @@ class AdminView_bwg {
     }
     ob_start();
     ?>
-    <div class="wd-list-view-header">
+    <div class="wd-list-view-header<?php echo !BWG()->is_pro ? ' bwg-page-header-free' : ''?>">
       <div class="wd-list-view-header-left">
         <div class="wd-page-title <?php echo $title_class; ?>">
           <h1 class="wd-heading-inline"><?php echo $title; ?>
@@ -184,13 +184,15 @@ class AdminView_bwg {
    */
   protected function sorting() {
     $options = WDWLibrary::admin_images_ordering_choices();
+    $id = WDWLibrary::get('current_id', 0);
+    $order_by = WDWLibrary::get_sorting( array('gallery_id' => $id, 'list_type' => 'edit') );
     ob_start();
     ?>
     <select name="order_by" onchange="bwg_sort_images(this.value);">
       <?php
       foreach ( $options as $key => $option ) {
         ?>
-        <option value="<?php echo $key; ?>"><?php echo $option; ?></option>
+        <option value="<?php echo $key; ?>" <?php if ($order_by == $key) { echo 'selected'; } ?>><?php echo $option; ?></option>
         <?php
       }
       ?>
