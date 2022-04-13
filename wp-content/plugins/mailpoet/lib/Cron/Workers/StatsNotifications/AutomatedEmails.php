@@ -9,7 +9,7 @@ use MailPoet\Config\Renderer;
 use MailPoet\Cron\Workers\SimpleWorker;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\ScheduledTaskEntity;
-use MailPoet\Mailer\Mailer;
+use MailPoet\Mailer\MailerFactory;
 use MailPoet\Mailer\MetaInfo;
 use MailPoet\Models\Newsletter;
 use MailPoet\Newsletter\NewslettersRepository;
@@ -23,8 +23,8 @@ use MailPoetVendor\Carbon\Carbon;
 class AutomatedEmails extends SimpleWorker {
   const TASK_TYPE = 'stats_notification_automated_emails';
 
-  /** @var \MailPoet\Mailer\Mailer */
-  private $mailer;
+  /** @var MailerFactory */
+  private $mailerFactory;
 
   /** @var SettingsController */
   private $settings;
@@ -45,7 +45,7 @@ class AutomatedEmails extends SimpleWorker {
   private $trackingConfig;
 
   public function __construct(
-    Mailer $mailer,
+    MailerFactory $mailerFactory,
     Renderer $renderer,
     SettingsController $settings,
     NewslettersRepository $repository,
@@ -54,7 +54,7 @@ class AutomatedEmails extends SimpleWorker {
     TrackingConfig $trackingConfig
   ) {
     parent::__construct();
-    $this->mailer = $mailer;
+    $this->mailerFactory = $mailerFactory;
     $this->settings = $settings;
     $this->renderer = $renderer;
     $this->mailerMetaInfo = $mailerMetaInfo;
@@ -91,7 +91,7 @@ class AutomatedEmails extends SimpleWorker {
         $extraParams = [
           'meta' => $this->mailerMetaInfo->getStatsNotificationMetaInfo(),
         ];
-        $this->mailer->send($this->constructNewsletter($newsletters), $settings['address'], $extraParams);
+        $this->mailerFactory->getDefaultMailer()->send($this->constructNewsletter($newsletters), $settings['address'], $extraParams);
       }
     } catch (\Exception $e) {
       if (WP_DEBUG) {

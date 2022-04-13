@@ -12,7 +12,6 @@ use MailPoet\Entities\FormEntity;
 use MailPoet\Form\Renderer as FormRenderer;
 use MailPoet\Form\Util\CustomFonts;
 use MailPoet\Settings\SettingsController;
-use MailPoet\Util\Security;
 use MailPoet\WP\Functions as WPFunctions;
 
 // phpcs:disable Generic.Files.InlineHTML
@@ -252,7 +251,7 @@ class Widget extends \WP_Widget {
       );
 
       // generate security token
-      $data['token'] = Security::generateToken();
+      $data['token'] = $this->wp->wpCreateNonce('mailpoet_token');
 
       // add API version
       $data['api_version'] = API::CURRENT_VERSION;

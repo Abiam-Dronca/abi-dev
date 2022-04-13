@@ -18,6 +18,7 @@ use MailPoetVendor\Doctrine\ORM\EntityManager;
 class InactiveSubscribersController {
 
   const UNOPENED_EMAILS_THRESHOLD = 3;
+  const LIFETIME_EMAILS_THRESHOLD = 10;
 
   private $processedTaskIdsTableCreated = false;
 
@@ -103,6 +104,7 @@ class InactiveSubscribersController {
     // Select subscribers who received at least a number of emails after threshold date and subscribed before that
     $startId = (int)$startId;
     $endId = $startId + $batchSize;
+    $lifetimeEmailsThreshold = self::LIFETIME_EMAILS_THRESHOLD;
     $inactiveSubscriberIdsTmpTable = 'inactive_subscriber_ids';
     $connection->executeQuery("
       CREATE TEMPORARY TABLE IF NOT EXISTS {$inactiveSubscriberIdsTmpTable}
@@ -114,6 +116,7 @@ class InactiveSubscribersController {
         AND s.status = :status
         AND s.id >= :startId
         AND s.id < :endId
+        AND s.email_count >= {$lifetimeEmailsThreshold}
       GROUP BY s.id
       HAVING count(s.id) >= :unopenedEmailsThreshold
     ",

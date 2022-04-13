@@ -11,7 +11,7 @@ use MailPoet\Mailer\Methods\ErrorMappers\AmazonSESMapper;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Swift_Message;
 
-class AmazonSES {
+class AmazonSES implements MailerMethod {
   public $awsAccessKey;
   public $awsSecretKey;
   public $awsRegion;
@@ -86,9 +86,7 @@ class AmazonSES {
     $this->url = 'https://' . $this->awsEndpoint;
     $this->sender = $sender;
     $this->replyTo = $replyTo;
-    $this->returnPath = ($returnPath) ?
-      $returnPath :
-      $this->sender['from_email'];
+    $this->returnPath = $returnPath;
     $this->date = gmdate('Ymd\THis\Z');
     $this->dateWithoutTime = gmdate('Ymd');
     $this->errorMapper = $errorMapper;
@@ -96,7 +94,7 @@ class AmazonSES {
     $this->blacklist = new BlacklistCheck();
   }
 
-  public function send($newsletter, $subscriber, $extraParams = []) {
+  public function send($newsletter, $subscriber, $extraParams = []): array {
     if ($this->blacklist->isBlacklisted($subscriber)) {
       $error = $this->errorMapper->getBlacklistError($subscriber);
       return Mailer::formatMailerErrorResult($error);

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the MailPoet 3 (New) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MailPoet 3 (New) 3.86.0\n"
+"Project-Id-Version: MailPoet 3 (New) 3.87.0\n"
 "Report-Msgid-Bugs-To: http://support.mailpoet.com/\n"
-"POT-Creation-Date: 2022-04-05 06:30:22+00:00\n"
+"POT-Creation-Date: 2022-04-11 20:19:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,27 +25,27 @@ msgstr ""
 msgid "Invalid API version."
 msgstr ""
 
-#: lib/API/JSON/API.php:110
+#: lib/API/JSON/API.php:109
 msgid "Sorry, but we couldn't connect to the MailPoet server. Please refresh the web page and try again."
 msgstr ""
 
-#: lib/API/JSON/API.php:138
+#: lib/API/JSON/API.php:137
 msgid "Invalid API request."
 msgstr ""
 
-#: lib/API/JSON/API.php:182
+#: lib/API/JSON/API.php:181
 msgid "Invalid API endpoint."
 msgstr ""
 
-#: lib/API/JSON/API.php:187
+#: lib/API/JSON/API.php:186
 msgid "Invalid API endpoint method."
 msgstr ""
 
-#: lib/API/JSON/API.php:191
+#: lib/API/JSON/API.php:190
 msgid "HTTP request method not allowed."
 msgstr ""
 
-#: lib/API/JSON/API.php:206 lib/Router/Router.php:57
+#: lib/API/JSON/API.php:205 lib/Router/Router.php:57
 msgid "You do not have the required permissions."
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Duplicating form failed."
 msgstr ""
 
-#: lib/API/JSON/v1/Mailer.php:66
+#: lib/API/JSON/v1/Mailer.php:71
 #: lib/Newsletter/Preview/SendPreviewController.php:81
 msgid "The email could not be sent: %s"
 msgstr ""
@@ -211,8 +211,8 @@ msgstr ""
 msgid "This email does not exist."
 msgstr ""
 
-#: lib/API/JSON/v1/Newsletters.php:171 lib/API/JSON/v1/SendingQueue.php:66
-#: lib/API/JSON/v1/SendingQueue.php:223
+#: lib/API/JSON/v1/Newsletters.php:171 lib/API/JSON/v1/SendingQueue.php:72
+#: lib/API/JSON/v1/SendingQueue.php:228
 msgid "Subscribers limit reached."
 msgstr ""
 
@@ -276,30 +276,30 @@ msgstr[1] ""
 msgid "Duplicating of segment failed."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:79 lib/API/JSON/v1/SendingQueue.php:85
-#: lib/API/JSON/v1/SendingQueue.php:215 lib/API/JSON/v1/SendingQueue.php:245
+#: lib/API/JSON/v1/SendingQueue.php:85 lib/API/JSON/v1/SendingQueue.php:91
+#: lib/API/JSON/v1/SendingQueue.php:220 lib/API/JSON/v1/SendingQueue.php:250
 msgid "This newsletter does not exist."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:114
+#: lib/API/JSON/v1/SendingQueue.php:119
 msgid "This newsletter is already being sent."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:148
+#: lib/API/JSON/v1/SendingQueue.php:153
 msgid "There are no subscribers in that list!"
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:179 lib/API/JSON/v1/SendingQueue.php:190
+#: lib/API/JSON/v1/SendingQueue.php:184 lib/API/JSON/v1/SendingQueue.php:195
 #: views/newsletter/editor.html:381 views/newsletters.html:449
 msgid "Poet, please add prose to your masterpiece before you send it to your followers."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:187 views/newsletter/editor.html:379
+#: lib/API/JSON/v1/SendingQueue.php:192 views/newsletter/editor.html:379
 #: views/newsletters.html:447
 msgid "All emails must include an \"Unsubscribe\" link. Add a footer widget to your email to continue."
 msgstr ""
 
-#: lib/API/JSON/v1/SendingQueue.php:207 lib/API/JSON/v1/SendingQueue.php:237
+#: lib/API/JSON/v1/SendingQueue.php:212 lib/API/JSON/v1/SendingQueue.php:242
 msgid "This newsletter has not been sent yet."
 msgstr ""
 
@@ -2280,26 +2280,26 @@ msgstr ""
 msgid "Your monthly stats are in!"
 msgstr ""
 
-#: lib/Cron/Workers/StatsNotifications/Worker.php:127
+#: lib/Cron/Workers/StatsNotifications/Worker.php:133
 msgctxt "title of an automatic email containing statistics (newsletter open rate, click rate, etc)"
 msgid "Stats for email %s"
 msgstr ""
 
-#: lib/Cron/Workers/StatsNotifications/Worker.php:147
+#: lib/Cron/Workers/StatsNotifications/Worker.php:153
 msgctxt "newsletter open rate, click rate and unsubscribe rate"
 msgid "%1$s%% clicks, %2$s%% opens, %3$s%% unsubscribes in a nutshell."
 msgstr ""
 
-#: lib/Cron/Workers/StatsNotifications/Worker.php:183
+#: lib/Cron/Workers/StatsNotifications/Worker.php:191
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:90
 msgid "Unsubscribe link"
 msgstr ""
 
-#: lib/Cron/Workers/StatsNotifications/Worker.php:184
+#: lib/Cron/Workers/StatsNotifications/Worker.php:192
 msgid "Manage subscription link"
 msgstr ""
 
-#: lib/Cron/Workers/StatsNotifications/Worker.php:185
+#: lib/Cron/Workers/StatsNotifications/Worker.php:193
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:106
 msgid "View in browser link"
 msgstr ""
@@ -2364,20 +2364,20 @@ msgstr ""
 msgid "Addresses in names are not permitted, please add your name instead."
 msgstr ""
 
-#: lib/Form/Block/BlockRendererHelper.php:55
+#: lib/Form/Block/BlockRendererHelper.php:56
 #: lib/Subscribers/SubscriberSubscribeController.php:264
 msgid "Please select a list."
 msgstr ""
 
-#: lib/Form/Block/BlockRendererHelper.php:60
+#: lib/Form/Block/BlockRendererHelper.php:61
 msgid "This field is required."
 msgstr ""
 
-#: lib/Form/Block/BlockRendererHelper.php:66
+#: lib/Form/Block/BlockRendererHelper.php:67
 msgid "Please specify a valid phone number."
 msgstr ""
 
-#: lib/Form/Block/BlockRendererHelper.php:75
+#: lib/Form/Block/BlockRendererHelper.php:76
 msgid "Please select at least one option."
 msgstr ""
 
@@ -3213,53 +3213,53 @@ msgstr ""
 msgid "END Scripts"
 msgstr ""
 
-#: lib/Form/Widget.php:35
+#: lib/Form/Widget.php:34
 msgid "MailPoet 3 Form"
 msgstr ""
 
-#: lib/Form/Widget.php:36
+#: lib/Form/Widget.php:35
 msgid "Add a newsletter subscription form"
 msgstr ""
 
-#: lib/Form/Widget.php:123
+#: lib/Form/Widget.php:122
 msgid "Subscribe to Our Newsletter"
 msgstr ""
 
-#: lib/Form/Widget.php:138
+#: lib/Form/Widget.php:137
 msgid "Title:"
 msgstr ""
 
-#: lib/Form/Widget.php:153 views/form/editor.html:214 views/forms.html:80
+#: lib/Form/Widget.php:152 views/form/editor.html:214 views/forms.html:80
 msgctxt "fallback for forms without a name in a form list"
 msgid "no name"
 msgstr ""
 
-#: lib/Form/Widget.php:154 lib/PostEditorBlocks/SubscriptionFormBlock.php:62
+#: lib/Form/Widget.php:153 lib/PostEditorBlocks/SubscriptionFormBlock.php:62
 msgid "inactive"
 msgstr ""
 
-#: lib/Form/Widget.php:161 lib/PostEditorBlocks/SubscriptionFormBlock.php:60
+#: lib/Form/Widget.php:160 lib/PostEditorBlocks/SubscriptionFormBlock.php:60
 msgid "Create a new form"
 msgstr ""
 
-#: lib/Mailer/Mailer.php:130
-msgid "Mailing method does not exist."
-msgstr ""
-
-#: lib/Mailer/Mailer.php:138
-msgid "Mailer is not configured."
-msgstr ""
-
-#: lib/Mailer/Mailer.php:146
-msgid "Sender name and email are not configured."
-msgstr ""
-
-#: lib/Mailer/MailerError.php:102
+#: lib/Mailer/MailerError.php:104
 msgid "Unprocessed subscriber:"
 msgstr ""
 
-#: lib/Mailer/MailerError.php:104
+#: lib/Mailer/MailerError.php:106
 msgid "Unprocessed subscribers:"
+msgstr ""
+
+#: lib/Mailer/MailerFactory.php:103
+msgid "Mailing method does not exist."
+msgstr ""
+
+#: lib/Mailer/MailerFactory.php:110
+msgid "Mailer is not configured."
+msgstr ""
+
+#: lib/Mailer/MailerFactory.php:117
+msgid "Sender name and email are not configured."
 msgstr ""
 
 #: lib/Mailer/MailerLog.php:94
@@ -3302,24 +3302,28 @@ msgstr ""
 msgid "Email service is temporarily not available, please try again in a few minutes."
 msgstr ""
 
-#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:124
+#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:108
 msgid "Invalid MSS response format."
 msgstr ""
 
-#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:139
+#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:123
 msgid "Unknown address"
 msgstr ""
 
-#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:147
+#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:131
 msgid "You have reached the subscriber limit of your plan. Please [link1]upgrade your plan[/link1], or [link2]contact our support team[/link2] if you have any questions."
 msgstr ""
 
-#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:171
+#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:155
 msgid "MailPoet Sending Service has been temporarily suspended for your site due to [link1]degraded email deliverability[/link1]. Please [link2]contact our support team[/link2] to resolve the issue."
 msgstr ""
 
-#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:199
+#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:183
 msgid "You have sent more emails this month than your MailPoet plan includes (%s), and sending has been temporarily paused. To continue sending with MailPoet Sending Service please [link]upgrade your plan[/link], or wait until sending is automatically resumed on <b>%s</b>."
+msgstr ""
+
+#: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:200
+msgid "Your subscription is currently [link]pending approval[/link].You’ll soon be able to send once our team reviews your account. In the meantime, you can send previews to your authorized emails."
 msgstr ""
 
 #: lib/Models/CustomField.php:30 lib/Models/Newsletter.php:63
@@ -3840,7 +3844,7 @@ msgstr ""
 msgid "Imported by the administrator"
 msgstr ""
 
-#: lib/Subscribers/NewSubscriberNotificationMailer.php:118
+#: lib/Subscribers/NewSubscriberNotificationMailer.php:117
 msgid "New subscriber to %s"
 msgstr ""
 
@@ -4114,7 +4118,7 @@ msgid "Footer text"
 msgstr ""
 
 #: mailpoet.php:55
-msgid "MailPoet plugin requires WordPress version 4.6 or newer. Please read our [link]instructions[/link] on how to resolve this issue."
+msgid "MailPoet plugin requires WordPress version 5.6 or newer. Please read our [link]instructions[/link] on how to resolve this issue."
 msgstr ""
 
 #: mailpoet.php:74
