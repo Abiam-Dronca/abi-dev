@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.6
 Tested up to: 5.9
-Stable tag: 3.87.0
+Stable tag: 3.87.2
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -217,6 +217,14 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.87.2 - 2022-04-19 =
+* Added: description of 3rd party libraries usage;
+* Fixed: "none of" condition for "MailPoet custom field" segment doesn't work;
+* Fixed: block toolbar in form editor is not visible for top block.
+
+= 3.87.1 - 2022-04-14 =
+* Improved: minor changes and fixes.
 
 = 3.87.0 - 2022-04-11 =
 * Added: new condition (at least 10 emails in lifetime) before marking subscriber as inactive;

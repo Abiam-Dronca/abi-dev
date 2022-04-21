@@ -114,6 +114,7 @@ class FreeCachedContainer extends Container
             'MailPoet\\Automation\\Engine\\WordPress' => 'getWordPressService',
             'MailPoet\\Automation\\Integrations\\Core\\Actions\\WaitAction' => 'getWaitActionService',
             'MailPoet\\Automation\\Integrations\\Core\\CoreIntegration' => 'getCoreIntegrationService',
+            'MailPoet\\Automation\\Integrations\\MailPoet\\Actions\\SendWelcomeEmailAction' => 'getSendWelcomeEmailActionService',
             'MailPoet\\Automation\\Integrations\\MailPoet\\MailPoetIntegration' => 'getMailPoetIntegrationService',
             'MailPoet\\Automation\\Integrations\\MailPoet\\Subjects\\SegmentSubject' => 'getSegmentSubjectService',
             'MailPoet\\Automation\\Integrations\\MailPoet\\Subjects\\SubscriberSubject' => 'getSubscriberSubjectService',
@@ -322,6 +323,7 @@ class FreeCachedContainer extends Container
             'MailPoet\\Subscription\\Registration' => 'getRegistrationService',
             'MailPoet\\Subscription\\SubscriptionUrlFactory' => 'getSubscriptionUrlFactoryService',
             'MailPoet\\Subscription\\Throttling' => 'getThrottlingService',
+            'MailPoet\\Util\\APIPermissionHelper' => 'getAPIPermissionHelperService',
             'MailPoet\\Util\\CdnAssetUrl' => 'getCdnAssetUrlService',
             'MailPoet\\Util\\License\\Features\\Subscribers' => 'getSubscribers4Service',
             'MailPoet\\Util\\License\\License' => 'getLicenseService',
@@ -557,7 +559,7 @@ class FreeCachedContainer extends Container
      */
     protected function getAutomatedLatestContentService()
     {
-        return $this->services['MailPoet\\API\\JSON\\v1\\AutomatedLatestContent'] = new \MailPoet\API\JSON\v1\AutomatedLatestContent(($this->services['MailPoet\\Newsletter\\AutomatedLatestContent'] ?? $this->getAutomatedLatestContent2Service()), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
+        return $this->services['MailPoet\\API\\JSON\\v1\\AutomatedLatestContent'] = new \MailPoet\API\JSON\v1\AutomatedLatestContent(($this->services['MailPoet\\Newsletter\\AutomatedLatestContent'] ?? $this->getAutomatedLatestContent2Service()), ($this->services['MailPoet\\Util\\APIPermissionHelper'] ?? ($this->services['MailPoet\\Util\\APIPermissionHelper'] = new \MailPoet\Util\APIPermissionHelper())), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
     }
 
     /**
@@ -1261,43 +1263,53 @@ class FreeCachedContainer extends Container
     }
 
     /**
+     * Gets the public 'MailPoet\Automation\Integrations\MailPoet\Actions\SendWelcomeEmailAction' shared autowired service.
+     *
+     * @return \MailPoet\Automation\Integrations\MailPoet\Actions\SendWelcomeEmailAction
+     */
+    protected function getSendWelcomeEmailActionService()
+    {
+        return $this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Actions\\SendWelcomeEmailAction'] = new \MailPoet\Automation\Integrations\MailPoet\Actions\SendWelcomeEmailAction(($this->services['MailPoet\\Newsletter\\NewslettersRepository'] ?? $this->getNewslettersRepositoryService()), ($this->services['MailPoet\\Newsletter\\Sending\\ScheduledTasksRepository'] ?? $this->getScheduledTasksRepositoryService()), ($this->services['MailPoet\\Subscribers\\SubscriberSegmentRepository'] ?? $this->getSubscriberSegmentRepositoryService()), ($this->services['MailPoet\\Subscribers\\SubscribersRepository'] ?? $this->getSubscribersRepositoryService()), ($this->services['MailPoet\\Newsletter\\Scheduler\\WelcomeScheduler'] ?? $this->getWelcomeSchedulerService()));
+    }
+
+    /**
      * Gets the public 'MailPoet\Automation\Integrations\MailPoet\MailPoetIntegration' shared autowired service.
      *
      * @return \MailPoet\Automation\Integrations\MailPoet\MailPoetIntegration
      */
     protected function getMailPoetIntegrationService()
     {
-        return $this->services['MailPoet\\Automation\\Integrations\\MailPoet\\MailPoetIntegration'] = new \MailPoet\Automation\Integrations\MailPoet\MailPoetIntegration(($this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Triggers\\SegmentSubscribedTrigger'] ?? $this->getSegmentSubscribedTriggerService()));
+        return $this->services['MailPoet\\Automation\\Integrations\\MailPoet\\MailPoetIntegration'] = new \MailPoet\Automation\Integrations\MailPoet\MailPoetIntegration(new \MailPoet\Automation\Integrations\MailPoet\Triggers\SegmentSubscribedTrigger(new \MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject(($this->services['MailPoet\\Segments\\SegmentsRepository'] ?? $this->getSegmentsRepositoryService())), new \MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject(($this->services['MailPoet\\Subscribers\\SubscribersRepository'] ?? $this->getSubscribersRepositoryService())), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions()))), ($this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Actions\\SendWelcomeEmailAction'] ?? $this->getSendWelcomeEmailActionService()));
     }
 
     /**
-     * Gets the public 'MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject' shared autowired service.
+     * Gets the public 'MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject' autowired service.
      *
      * @return \MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject
      */
     protected function getSegmentSubjectService()
     {
-        return $this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Subjects\\SegmentSubject'] = new \MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject(($this->services['MailPoet\\Segments\\SegmentsRepository'] ?? $this->getSegmentsRepositoryService()));
+        return new \MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject(($this->services['MailPoet\\Segments\\SegmentsRepository'] ?? $this->getSegmentsRepositoryService()));
     }
 
     /**
-     * Gets the public 'MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject' shared autowired service.
+     * Gets the public 'MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject' autowired service.
      *
      * @return \MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject
      */
     protected function getSubscriberSubjectService()
     {
-        return $this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Subjects\\SubscriberSubject'] = new \MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject(($this->services['MailPoet\\Subscribers\\SubscribersRepository'] ?? $this->getSubscribersRepositoryService()));
+        return new \MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject(($this->services['MailPoet\\Subscribers\\SubscribersRepository'] ?? $this->getSubscribersRepositoryService()));
     }
 
     /**
-     * Gets the public 'MailPoet\Automation\Integrations\MailPoet\Triggers\SegmentSubscribedTrigger' shared autowired service.
+     * Gets the public 'MailPoet\Automation\Integrations\MailPoet\Triggers\SegmentSubscribedTrigger' autowired service.
      *
      * @return \MailPoet\Automation\Integrations\MailPoet\Triggers\SegmentSubscribedTrigger
      */
     protected function getSegmentSubscribedTriggerService()
     {
-        return $this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Triggers\\SegmentSubscribedTrigger'] = new \MailPoet\Automation\Integrations\MailPoet\Triggers\SegmentSubscribedTrigger(($this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Subjects\\SegmentSubject'] ?? $this->getSegmentSubjectService()), ($this->services['MailPoet\\Automation\\Integrations\\MailPoet\\Subjects\\SubscriberSubject'] ?? $this->getSubscriberSubjectService()), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
+        return new \MailPoet\Automation\Integrations\MailPoet\Triggers\SegmentSubscribedTrigger(new \MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject(($this->services['MailPoet\\Segments\\SegmentsRepository'] ?? $this->getSegmentsRepositoryService())), new \MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject(($this->services['MailPoet\\Subscribers\\SubscribersRepository'] ?? $this->getSubscribersRepositoryService())), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
     }
 
     /**
@@ -3374,6 +3386,16 @@ class FreeCachedContainer extends Container
     protected function getThrottlingService()
     {
         return $this->services['MailPoet\\Subscription\\Throttling'] = new \MailPoet\Subscription\Throttling(($this->services['MailPoet\\Subscribers\\SubscriberIPsRepository'] ?? $this->getSubscriberIPsRepositoryService()), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
+    }
+
+    /**
+     * Gets the public 'MailPoet\Util\APIPermissionHelper' shared autowired service.
+     *
+     * @return \MailPoet\Util\APIPermissionHelper
+     */
+    protected function getAPIPermissionHelperService()
+    {
+        return $this->services['MailPoet\\Util\\APIPermissionHelper'] = new \MailPoet\Util\APIPermissionHelper();
     }
 
     /**

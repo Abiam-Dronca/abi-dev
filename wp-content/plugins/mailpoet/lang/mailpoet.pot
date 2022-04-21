@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the MailPoet 3 (New) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MailPoet 3 (New) 3.87.0\n"
+"Project-Id-Version: MailPoet 3 (New) 3.87.2\n"
 "Report-Msgid-Bugs-To: http://support.mailpoet.com/\n"
-"POT-Creation-Date: 2022-04-11 20:19:34+00:00\n"
+"POT-Creation-Date: 2022-04-19 06:30:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -472,7 +472,7 @@ msgstr ""
 #: lib/Subscribers/ImportExport/ImportExportFactory.php:50
 #: lib/Subscribers/ImportExport/PersonalDataExporters/SubscriberExporter.php:40
 #: views/form/editor.html:165 views/help.html:70
-#: views/newsletter/editor.html:1123 views/newsletter/editor.html:1124
+#: views/newsletter/editor.html:1122 views/newsletter/editor.html:1123
 #: views/segments.html:129 views/subscription/manage_subscription.html:9
 msgid "Email"
 msgstr ""
@@ -644,23 +644,35 @@ msgstr ""
 msgid "Wait"
 msgstr ""
 
+#: lib/Automation/Integrations/MailPoet/Actions/SendWelcomeEmailAction.php:55
+msgid "Send Welcome Email"
+msgstr ""
+
 #: lib/Automation/Integrations/MailPoet/Subjects/SegmentSubject.php:32
 msgid "Segment name"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SegmentSubject.php:63
+#: lib/Automation/Integrations/MailPoet/Subjects/SegmentSubject.php:41
+msgid "Segment ID"
+msgstr ""
+
+#: lib/Automation/Integrations/MailPoet/Subjects/SegmentSubject.php:72
 msgid "Segment was not loaded."
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:32
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:31
+msgid "Subscriber ID"
+msgstr ""
+
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:40
 msgid "Subscriber email"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:42
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:49
 msgid "Subscriber status"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:47
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:54
 #: lib/Subscribers/SubscriberListingRepository.php:202
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:198
 #: views/segments.html:67 views/subscribers/importExport/import.html:130
@@ -668,13 +680,13 @@ msgstr ""
 msgid "Subscribed"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:48
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:55
 #: lib/Subscribers/SubscriberListingRepository.php:207 views/segments.html:68
 #: views/subscribers/subscribers.html:82
 msgid "Unconfirmed"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:49
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:56
 #: lib/Subscribers/SubscriberListingRepository.php:212
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:206
 #: views/segments.html:69 views/subscribers/importExport/import.html:131
@@ -682,7 +694,7 @@ msgstr ""
 msgid "Unsubscribed"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:50
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:57
 #: lib/Subscribers/SubscriberListingRepository.php:217
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:226
 #: views/segments.html:70 views/subscribers/importExport/import.html:132
@@ -690,14 +702,14 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:51
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:58
 #: lib/Subscribers/SubscriberListingRepository.php:222
 #: lib/Subscription/ManageSubscriptionFormRenderer.php:214
 #: views/segments.html:71 views/subscribers/subscribers.html:86
 msgid "Bounced"
 msgstr ""
 
-#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:80
+#: lib/Automation/Integrations/MailPoet/Subjects/SubscriberSubject.php:87
 msgid "Subscriber was not loaded."
 msgstr ""
 
@@ -1115,7 +1127,7 @@ msgstr ""
 #: lib/Config/PopulatorData/Templates/WorldCup.php:724
 #: lib/Config/PopulatorData/Templates/YogaStudio.php:698
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:94
-#: views/newsletter/editor.html:1335
+#: views/newsletter/editor.html:1334
 msgid "Unsubscribe"
 msgstr ""
 
@@ -1370,7 +1382,7 @@ msgstr ""
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1032
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1266
 #: lib/Config/PopulatorData/Templates/WorldCup.php:724
-#: views/newsletter/editor.html:1335
+#: views/newsletter/editor.html:1334
 msgid "Add your postal address here!"
 msgstr ""
 
@@ -1466,7 +1478,7 @@ msgstr ""
 #: lib/Config/PopulatorData/Templates/WineCity.php:937
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:105
 #: lib/Config/PopulatorData/Templates/WordPressTheme.php:1413
-#: views/newsletter/editor.html:1518
+#: views/newsletter/editor.html:1517
 msgid "View this in your browser."
 msgstr ""
 
@@ -1548,7 +1560,7 @@ msgstr ""
 
 #: lib/Config/PopulatorData/Templates/ConfirmInterestBeforeDeactivation.php:163
 #: lib/Newsletter/Shortcodes/ShortcodesHelper.php:102
-#: views/newsletter/editor.html:1335
+#: views/newsletter/editor.html:1334
 msgid "Manage subscription"
 msgstr ""
 
@@ -1716,15 +1728,15 @@ msgstr ""
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1352
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1473
 #: lib/Config/PopulatorData/Templates/PostNotificationsBlank1Column.php:167
-#: views/newsletter/editor.html:1194 views/newsletter/editor.html:1249
-#: views/newsletter/editor.html:1378
+#: views/newsletter/editor.html:1193 views/newsletter/editor.html:1248
+#: views/newsletter/editor.html:1377
 msgid "Author:"
 msgstr ""
 
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1295
 #: lib/Config/PopulatorData/Templates/PostNotificationsBlank1Column.php:169
-#: views/newsletter/editor.html:1196 views/newsletter/editor.html:1251
-#: views/newsletter/editor.html:1380
+#: views/newsletter/editor.html:1195 views/newsletter/editor.html:1250
+#: views/newsletter/editor.html:1379
 msgid "Categories:"
 msgstr ""
 
@@ -1734,9 +1746,9 @@ msgstr ""
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1400
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1519
 #: lib/Config/PopulatorData/Templates/KidsClothing.php:1522
-#: views/newsletter/editor.html:1198 views/newsletter/editor.html:1200
-#: views/newsletter/editor.html:1253 views/newsletter/editor.html:1255
-#: views/newsletter/editor.html:1382 views/newsletter/editor.html:1384
+#: views/newsletter/editor.html:1197 views/newsletter/editor.html:1199
+#: views/newsletter/editor.html:1252 views/newsletter/editor.html:1254
+#: views/newsletter/editor.html:1381 views/newsletter/editor.html:1383
 msgid "Read more"
 msgstr ""
 
@@ -6025,7 +6037,7 @@ msgstr ""
 msgid "Re-engagement"
 msgstr ""
 
-#: views/newsletter/editor.html:369 views/newsletter/editor.html:415
+#: views/newsletter/editor.html:369 views/newsletter/editor.html:414
 #: views/newsletters.html:95 views/newsletters.html:146
 msgid "Template"
 msgstr ""
@@ -6034,7 +6046,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: views/newsletter/editor.html:371 views/newsletter/editor.html:417
+#: views/newsletter/editor.html:371 views/newsletter/editor.html:416
 #: views/newsletters.html:97 views/newsletters.html:148
 msgid "Send"
 msgstr ""
@@ -6092,91 +6104,91 @@ msgstr ""
 msgid "Please add a template name"
 msgstr ""
 
-#: views/newsletter/editor.html:393
+#: views/newsletter/editor.html:392
 msgid "You can add MailPoet shortcodes here. For example, you can add your subscribers' first names by using this shortcode: [subscriber:firstname | default:reader]. Simply copy and paste the shortcode into the field."
 msgstr ""
 
-#: views/newsletter/editor.html:394 views/newsletters.html:292
+#: views/newsletter/editor.html:393 views/newsletters.html:292
 msgid "This optional text will appear in your subscribers' inboxes, beside the subject line. Write something enticing!"
 msgstr ""
 
-#: views/newsletter/editor.html:395
+#: views/newsletter/editor.html:394
 msgid "Max length is 250 characters, however, we recommend 80 characters."
 msgstr ""
 
-#: views/newsletter/editor.html:396
+#: views/newsletter/editor.html:395
 msgid "This option eliminates padding around the image."
 msgstr ""
 
-#: views/newsletter/editor.html:397
+#: views/newsletter/editor.html:396
 msgid "Use images with widths of at least 1,000 pixels to ensure sharp display on high density screens, like mobile devices."
 msgstr ""
 
-#: views/newsletter/editor.html:398
+#: views/newsletter/editor.html:397
 msgid "Template has been saved."
 msgstr ""
 
-#: views/newsletter/editor.html:399
+#: views/newsletter/editor.html:398
 msgid "Template has not been saved, please try again"
 msgstr ""
 
-#: views/newsletter/editor.html:400
+#: views/newsletter/editor.html:399
 msgid "Categories & tags"
 msgstr ""
 
-#: views/newsletter/editor.html:401
+#: views/newsletter/editor.html:400
 msgid "There is no content to display."
 msgstr ""
 
-#: views/newsletter/editor.html:402
+#: views/newsletter/editor.html:401
 msgid "Your preview should open in a new tab. Please ensure your browser is not blocking popups from this page."
 msgstr ""
 
-#: views/newsletter/editor.html:403
+#: views/newsletter/editor.html:402
 msgid "Newsletter Preview"
 msgstr ""
 
-#: views/newsletter/editor.html:404
+#: views/newsletter/editor.html:403
 msgid "Contents of this newsletter are corrupted and may be lost, you may need to add new content to this newsletter, or create a new one. If possible, please contact us and report this issue."
 msgstr ""
 
-#: views/newsletter/editor.html:405
+#: views/newsletter/editor.html:404
 msgid "Saving..."
 msgstr ""
 
-#: views/newsletter/editor.html:406
+#: views/newsletter/editor.html:405
 msgid "There are unsaved changes which will be lost if you leave this page."
 msgstr ""
 
-#: views/newsletter/editor.html:409
+#: views/newsletter/editor.html:408
 msgid "Email sending has been paused."
 msgstr ""
 
-#: views/newsletter/editor.html:410
+#: views/newsletter/editor.html:409
 msgid "This email was deactivated."
 msgstr ""
 
-#: views/newsletter/editor.html:411
+#: views/newsletter/editor.html:410
 msgid "Before you start, this is how you drag and drop in MailPoet"
 msgstr ""
 
-#: views/newsletter/editor.html:412 views/newsletters.html:143
+#: views/newsletter/editor.html:411 views/newsletters.html:143
 msgid "Select type"
 msgstr ""
 
-#: views/newsletter/editor.html:413 views/newsletters.html:144
+#: views/newsletter/editor.html:412 views/newsletters.html:144
 msgid "Events"
 msgstr ""
 
-#: views/newsletter/editor.html:416 views/newsletters.html:147
+#: views/newsletter/editor.html:415 views/newsletters.html:147
 msgid "Designer"
 msgstr ""
 
-#: views/newsletter/editor.html:1099 views/newsletter/editor.html:1104
-#: views/newsletter/editor.html:1109 views/newsletter/editor.html:1114
-#: views/newsletter/editor.html:1119 views/newsletter/editor.html:1129
-#: views/newsletter/editor.html:1134 views/newsletter/editor.html:1139
-#: views/newsletter/editor.html:1144
+#: views/newsletter/editor.html:1098 views/newsletter/editor.html:1103
+#: views/newsletter/editor.html:1108 views/newsletter/editor.html:1113
+#: views/newsletter/editor.html:1118 views/newsletter/editor.html:1128
+#: views/newsletter/editor.html:1133 views/newsletter/editor.html:1138
+#: views/newsletter/editor.html:1143
 #: views/newsletter/templates/blocks/automatedLatestContent/settings.hbs:237
 #: views/newsletter/templates/blocks/automatedLatestContentLayout/settings.hbs:269
 #: views/newsletter/templates/blocks/button/settings.hbs:14
@@ -6186,15 +6198,15 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: views/newsletter/editor.html:1118
+#: views/newsletter/editor.html:1117
 msgid "Website"
 msgstr ""
 
-#: views/newsletter/editor.html:1143
+#: views/newsletter/editor.html:1142
 msgid "Custom"
 msgstr ""
 
-#: views/newsletter/editor.html:1293
+#: views/newsletter/editor.html:1292
 #: views/newsletter/templates/blocks/automatedLatestContent/settings.hbs:243
 #: views/newsletter/templates/blocks/automatedLatestContentLayout/settings.hbs:275
 #: views/newsletter/templates/blocks/button/settings.hbs:1
@@ -6204,19 +6216,19 @@ msgstr ""
 msgid "Button"
 msgstr ""
 
-#: views/newsletter/editor.html:1355
+#: views/newsletter/editor.html:1354
 msgid "An image of..."
 msgstr ""
 
-#: views/newsletter/editor.html:1491
+#: views/newsletter/editor.html:1490
 msgid "Facebook"
 msgstr ""
 
-#: views/newsletter/editor.html:1502
+#: views/newsletter/editor.html:1501
 msgid "Twitter"
 msgstr ""
 
-#: views/newsletter/editor.html:1515
+#: views/newsletter/editor.html:1514
 msgid "Edit this to insert text."
 msgstr ""
 
@@ -6225,42 +6237,42 @@ msgctxt "(Please reuse the current translation used for the string “Automatic 
 msgid "Please add an “Automatic Latest Content” widget to the email from the right sidebar."
 msgstr ""
 
-#: views/newsletter/editor.html:407
+#: views/newsletter/editor.html:406
 msgctxt "select color"
 msgid "Select"
 msgstr ""
 
-#: views/newsletter/editor.html:408
+#: views/newsletter/editor.html:407
 msgctxt "cancel color selection"
 msgid "Cancel"
 msgstr ""
 
-#: views/newsletter/editor.html:414 views/newsletters.html:145
+#: views/newsletter/editor.html:413 views/newsletters.html:145
 msgctxt "Configuration options for automatic email events"
 msgid "Conditions"
 msgstr ""
 
-#: views/newsletter/editor.html:418
+#: views/newsletter/editor.html:417
 msgctxt "A button title when user can undo the change in editor"
 msgid "Undo"
 msgstr ""
 
-#: views/newsletter/editor.html:419
+#: views/newsletter/editor.html:418
 msgctxt "A button title when user can't undo the change in editor"
 msgid "No actions available to undo."
 msgstr ""
 
-#: views/newsletter/editor.html:420
+#: views/newsletter/editor.html:419
 msgctxt "A button title when user can redo the change in editor"
 msgid "Redo"
 msgstr ""
 
-#: views/newsletter/editor.html:421
+#: views/newsletter/editor.html:420
 msgctxt "A button title when user can't redo the change in editor"
 msgid "No actions available to redo."
 msgstr ""
 
-#: views/newsletter/editor.html:1435 views/newsletter/editor.html:1437
+#: views/newsletter/editor.html:1434 views/newsletter/editor.html:1436
 msgctxt "Text of a button which links to an ecommerce product page"
 msgid "Buy now"
 msgstr ""
