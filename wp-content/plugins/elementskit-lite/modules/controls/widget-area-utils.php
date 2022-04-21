@@ -39,20 +39,20 @@ class Widget_Area_Utils{
 			echo \ElementsKit_Lite\Utils::render($output);
 	}
 
-	public static function parse($content, $widget_key, $index = 1, $isAjax = ''){
+	public static function parse($content, $widget_key, $tab_id, $isAjax = ''){
 		$key = ($content == '') ? $widget_key : $content;
 		$extract_key = explode('***', $key);
 		$extract_key = $extract_key[0];
 		ob_start(); ?>
 
-		<div class="widgetarea_warper widgetarea_warper_editable" data-elementskit-widgetarea-key="<?php echo esc_attr($extract_key); ?>"  data-elementskit-widgetarea-index="<?php echo esc_attr($index); ?>">
-			<div class="widgetarea_warper_edit" data-elementskit-widgetarea-key="<?php echo esc_attr($extract_key); ?>" data-elementskit-widgetarea-index="<?php echo esc_attr($index); ?>">
+		<div class="widgetarea_warper widgetarea_warper_editable" data-elementskit-widgetarea-key="<?php echo esc_attr($extract_key); ?>"  data-elementskit-widgetarea-index="<?php echo esc_attr($tab_id); ?>">
+			<div class="widgetarea_warper_edit" data-elementskit-widgetarea-key="<?php echo esc_attr($extract_key); ?>" data-elementskit-widgetarea-index="<?php echo esc_attr($tab_id); ?>">
 				<i class="eicon-edit" aria-hidden="true"></i>
 				<span class="elementor-screen-only"><?php esc_html_e('Edit', 'elementskit-lite'); ?></span>
 			</div>
 
 			<?php
- 				$builder_post_title = 'dynamic-content-widget-' . $extract_key . '-' . $index;
+ 				$builder_post_title = 'dynamic-content-widget-' . $extract_key . '-' . $tab_id;
 				$builder_post = get_page_by_title($builder_post_title, OBJECT, 'elementskit_content');
 				$elementor = \Elementor\Plugin::instance();
 
