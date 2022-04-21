@@ -6616,16 +6616,41 @@ class Kadence_Blocks_Frontend {
 				$css .= 'margin:' . $attr['listMargin'][0] . 'px ' . $attr['listMargin'][1] . 'px ' . $attr['listMargin'][2] . 'px ' . $attr['listMargin'][3] . 'px;';
 			$css .= '}';
 		}
-		if ( isset( $attr['listGap'] ) && ! empty( $attr['listGap'] ) ) {
+		if ( isset( $attr['listGap'] ) && is_numeric( $attr['listGap'] ) ) {
 			$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ' ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap:not(:last-child) {';
 				$css .= 'margin-bottom:' . $attr['listGap'] . 'px;';
 			$css .= '}';
-			$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-columns-2.kt-svg-icon-list-items' . $unique_id . ' ul.kt-svg-icon-list {';
+			$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ':not(.kt-svg-icon-list-columns-1) ul.kt-svg-icon-list {';
 				$css .= 'grid-row-gap:' . $attr['listGap'] . 'px;';
 			$css .= '}';
-			$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-columns-2.kt-svg-icon-list-items' . $unique_id . ' ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap {';
+			$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ':not(.kt-svg-icon-list-columns-1) ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap {';
 				$css .= 'margin:0px;';
 			$css .= '}';
+			$tablet_gap = ( isset( $attr['listGapTablet'] ) && is_numeric( $attr['listGapTablet'] ) ? $attr['listGapTablet'] : $attr['listGap'] );
+			$css .= '@media (max-width: 1024px) {';
+				$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . '.kt-tablet-svg-icon-list-columns-1 ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap:not(:last-child) {';
+					$css .= 'margin-bottom:' . $tablet_gap . 'px;';
+				$css .= '}';
+				$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ':not(.kt-tablet-svg-icon-list-columns-1) ul.kt-svg-icon-list {';
+					$css .= 'grid-row-gap:' . $tablet_gap . 'px;';
+				$css .= '}';
+				$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ':not(.kt-tablet-svg-icon-list-columns-1) ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap {';
+					$css .= 'margin:0px;';
+				$css .= '}';
+			$css .= '}';
+			$mobile_gap = ( isset( $attr['listGapMobile'] ) && is_numeric( $attr['listGapMobile'] ) ? $attr['listGapMobile'] : $tablet_gap );
+			$css .= '@media (max-width: 767px) {';
+				$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . '.kt-mobile-svg-icon-list-columns-1 ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap:not(:last-child) {';
+					$css .= 'margin-bottom:' . $mobile_gap . 'px;';
+				$css .= '}';
+				$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ':not(.kt-tablet-svg-icon-list-columns-1):not(.kt-mobile-svg-icon-list-columns-1) ul.kt-svg-icon-list {';
+					$css .= 'grid-row-gap:' . $mobile_gap . 'px;';
+				$css .= '}';
+				$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ':not(.kt-tablet-svg-icon-list-columns-1):not(.kt-mobile-svg-icon-list-columns-1) ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap {';
+					$css .= 'margin:0px;';
+				$css .= '}';
+			$css .= '}';
+
 		}
 		if ( isset( $attr['listLabelGap'] ) && ! empty( $attr['listLabelGap'] ) ) {
 			$css .= '.wp-block-kadence-iconlist.kt-svg-icon-list-items' . $unique_id . ' ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap .kt-svg-icon-list-single {';
@@ -6662,7 +6687,7 @@ class Kadence_Blocks_Frontend {
 			$css .= '}';
 		}
 		if ( isset( $attr['listStyles'] ) && is_array( $attr['listStyles'] ) && isset( $attr['listStyles'][0] ) && is_array( $attr['listStyles'][0] ) && ( ( isset( $attr['listStyles'][0]['size'] ) && is_array( $attr['listStyles'][0]['size'] ) && isset( $attr['listStyles'][0]['size'][1] ) && ! empty( $attr['listStyles'][0]['size'][1] ) ) || ( isset( $attr['listStyles'][0]['lineHeight'] ) && is_array( $attr['listStyles'][0]['lineHeight'] ) && isset( $attr['listStyles'][0]['lineHeight'][1] ) && ! empty( $attr['listStyles'][0]['lineHeight'][1] ) ) ) ) {
-			$css .= '@media (min-width: 767px) and (max-width: 1024px) {';
+			$css .= '@media (max-width: 1024px) {';
 				$css .= '.kt-svg-icon-list-items' . $unique_id . ' ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap, .kt-svg-icon-list-items' . $unique_id . ' ul.kt-svg-icon-list .kt-svg-icon-list-item-wrap a {';
 			if ( isset( $attr['listStyles'][0]['size'][1] ) && ! empty( $attr['listStyles'][0]['size'][1] ) ) {
 				$css .= 'font-size:' . $attr['listStyles'][0]['size'][1] . ( ! isset( $attr['listStyles'][0]['sizeType'] ) ? 'px' : $attr['listStyles'][0]['sizeType'] ) . ';';
@@ -8888,7 +8913,7 @@ class Kadence_Blocks_Frontend {
 		if ( isset( $attr['topPadding'] ) || isset( $attr['bottomPadding'] ) || isset( $attr['leftPadding'] ) || isset( $attr['rightPadding'] ) || isset( $attr['topMargin'] ) || isset( $attr['bottomMargin'] ) || isset( $attr['rightMargin'] ) || isset( $attr['leftMargin'] ) || ! empty( $attr['height'][0] ) || isset( $attr['border'] ) || isset( $attr['borderRadius'] ) || isset( $attr['borderWidth'] ) || ( isset( $attr['displayShadow'] ) && true == $attr['displayShadow'] ) ) {
 			$css->set_selector( '.kadence-column' . $unique_id . ' > .kt-inside-inner-col' );
 			if ( ! empty( $attr['height'][0] ) ) {
-				$css->add_property( 'min-height', $attr['height'][0] . ( isset( $attr['heightType'] ) ? $attr['heightType'] : 'px' ) );
+				$css->add_property( 'min-height', $attr['height'][0] . ( isset( $attr['heightUnit'] ) ? $attr['heightUnit'] : 'px' ) );
 			}
 			if ( isset( $attr['topPadding'] ) ) {
 				$css->add_property( 'padding-top', $attr['topPadding'] . ( isset( $attr['paddingType'] ) ? $attr['paddingType'] : 'px' ) );
@@ -9241,7 +9266,7 @@ class Kadence_Blocks_Frontend {
 		if ( isset( $attr['topPaddingT'] ) || isset( $attr['bottomPaddingT'] ) || isset( $attr['leftPaddingT'] ) || isset( $attr['rightPaddingT'] ) || isset( $attr['topMarginT'] ) || isset( $attr['bottomMarginT'] ) || isset( $attr['rightMarginT'] ) || ! empty( $attr['height'][1] ) || isset( $attr['leftMarginT'] ) || isset( $attr['tabletBorderWidth'] ) ) {
 			$css->set_selector( '.kadence-column' . $unique_id . ' > .kt-inside-inner-col' );
 			if ( ! empty( $attr['height'][1] ) ) {
-				$css->add_property( 'min-height', $attr['height'][1] . ( isset( $attr['heightType'] ) ? $attr['heightType'] : 'px' ) );
+				$css->add_property( 'min-height', $attr['height'][1] . ( isset( $attr['heightUnit'] ) ? $attr['heightUnit'] : 'px' ) );
 			}
 			if ( isset( $attr['topPaddingT'] ) ) {
 				$css->add_property( 'padding-top', $attr['topPaddingT'] . ( isset( $attr['paddingType'] ) ? $attr['paddingType'] : 'px' ) );
@@ -9374,7 +9399,7 @@ class Kadence_Blocks_Frontend {
 		if ( isset( $attr['topPaddingM'] ) || isset( $attr['bottomPaddingM'] ) || isset( $attr['leftPaddingM'] ) || isset( $attr['rightPaddingM'] ) || isset( $attr['topMarginM'] ) || isset( $attr['bottomMarginM'] ) || isset( $attr['rightMarginM'] ) || isset( $attr['leftMarginM'] ) || ! empty( $attr['height'][2] ) || isset( $attr['mobileBorderWidth'] ) ) {
 			$css->set_selector( '.kadence-column' . $unique_id . ' > .kt-inside-inner-col' );
 			if ( ! empty( $attr['height'][2] ) ) {
-				$css->add_property( 'min-height', $attr['height'][2] . ( isset( $attr['heightType'] ) ? $attr['heightType'] : 'px' ) );
+				$css->add_property( 'min-height', $attr['height'][2] . ( isset( $attr['heightUnit'] ) ? $attr['heightUnit'] : 'px' ) );
 			}
 			if ( isset( $attr['topPaddingM'] ) ) {
 				$css->add_property( 'padding-top', $attr['topPaddingM'] . ( isset( $attr['paddingType'] ) ? $attr['paddingType'] : 'px' ) );
