@@ -844,6 +844,12 @@ if ( window.NodeList && ! NodeList.prototype.forEach ) {
 			if ( document.body.classList.contains( 'no-anchor-scroll' ) ) {
 				return;
 			}
+			window.onhashchange = function() {
+				if ( window.location.hash === '' ) {
+					window.scrollTo({top: 0, behavior: 'smooth'});
+					document.activeElement.blur();
+				}
+			};
 			if ( window.location.hash != '' ) {
 				var id = location.hash.substring( 1 ),
 					element;

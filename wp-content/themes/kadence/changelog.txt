@@ -1,3 +1,15 @@
+== 1.1.18 | 27th April 2022 ==
+* Add: Option to turn off body shift when menu toggles.
+* Update: Related posts carousel to use splide.
+* Update: CSS in cases where sidebar overflows.
+* Update: Scroll to ID back support to move to top of page.
+* Fix: Issue with GeoDirectory pages and page settings.
+* Fix: Issue with background positioning not outputting 0.
+* Fix: Issue with columns overflowing when using four.
+* Fix: Issue with transparent header mobile settings not following header mobile breakpoint.
+* Fix: Issue with header row content width settings not following header mobile breakpoint.
+* Fix: Issue with menu flash and IOS 15.4.1
+
 == 1.1.17 | 5th April 2022 ==
 * Fix: Deprecation notice for elementor.
 * Fix: Issue with anchor scroll when id requires scrolling up.

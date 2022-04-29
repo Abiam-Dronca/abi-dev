@@ -647,6 +647,19 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			} elseif ( class_exists( 'woocommerce' ) && ( is_product_category() || is_product_tag() || is_tax( 'product_brands' ) || ( is_shop() && is_search() ) ) ) {
 				$archive_type = 'product_archive';
 				$trans_type   = 'archive';
+			} elseif ( function_exists( 'geodir_is_page' ) && ( geodir_is_page( 'post_type' ) || geodir_is_page( 'archive' ) || geodir_is_page( 'search' ) ) ) {
+				$post_type       = geodir_get_current_posttype();
+				$post_id         = (int) \GeoDir_Compatibility::gd_page_id();
+				$archivelayout   = get_post_meta( $post_id, '_kad_post_layout', true );
+				$archiveboxed    = get_post_meta( $post_id, '_kad_post_content_style', true );
+				$archivesidebar  = get_post_meta( $post_id, '_kad_post_sidebar_id', true );
+				$archivefeature  = get_post_meta( $post_id, '_kad_post_feature', true );
+				$archivetitle    = get_post_meta( $post_id, '_kad_post_title', true );
+				$archivetrans    = get_post_meta( $post_id, '_kad_post_transparent', true );
+				$archivevpadding = get_post_meta( $post_id, '_kad_post_vertical_padding', true );
+				$postf_position  = get_post_meta( $post_id, '_kad_post_feature_position', true );
+				$archive_type    = $post_type . '_archive';
+				$trans_type      = 'archive';
 			} elseif ( is_post_type_archive( 'llms_membership' ) && function_exists( 'llms_get_page_id' ) ) {
 				$post_id         = llms_get_page_id( 'memberships' );
 				$archivelayout   = get_post_meta( $post_id, '_kad_post_layout', true );

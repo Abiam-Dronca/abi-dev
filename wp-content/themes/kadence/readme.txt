@@ -4,7 +4,7 @@ Tags: translation-ready, two-columns, right-sidebar, left-sidebar, footer-widget
 Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 7.0
-Stable tag: 1.1.17
+Stable tag: 1.1.18
 License: GNU General Public License v3.0 (or later)
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,6 +18,18 @@ Kadence is released under GNU General Public License v3.0 (or later)
 
 
 = Changelog =
+
+== 1.1.18 | 27th April 2022 ==
+* Add: Option to turn off body shift when menu toggles.
+* Update: Related posts carousel to use splide.
+* Update: CSS in cases where sidebar overflows.
+* Update: Scroll to ID back support to move to top of page.
+* Fix: Issue with GeoDirectory pages and page settings.
+* Fix: Issue with background positioning not outputting 0.
+* Fix: Issue with columns overflowing when using four.
+* Fix: Issue with transparent header mobile settings not following header mobile breakpoint.
+* Fix: Issue with header row content width settings not following header mobile breakpoint.
+* Fix: Issue with menu flash and IOS 15.4.1
 
 == 1.1.17 | 5th April 2022 ==
 * Fix: Deprecation notice for elementor.

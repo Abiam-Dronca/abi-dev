@@ -255,7 +255,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$media_query            = array();
 		$media_query['mobile']  = apply_filters( 'kadence_mobile_media_query', '(max-width: 767px)' );
 		$media_query['tablet']  = apply_filters( 'kadence_tablet_media_query', '(max-width: 1024px)' );
-		$media_query['desktop'] = apply_filters( 'kadence_tablet_media_query', '(min-width: 1025px)' );
+		$media_query['desktop'] = apply_filters( 'kadence_desktop_media_query', '(min-width: 1025px)' );
 		// Above Page Title Featured Image.
 		if ( is_singular() && kadence()->show_hero_title() && has_post_thumbnail() ) {
 			$post_type = get_post_type();
@@ -342,7 +342,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$media_query            = array();
 		$media_query['mobile']  = apply_filters( 'kadence_mobile_media_query', '(max-width: 767px)' );
 		$media_query['tablet']  = apply_filters( 'kadence_tablet_media_query', '(max-width: 1024px)' );
-		$media_query['desktop'] = apply_filters( 'kadence_tablet_media_query', '(min-width: 1025px)' );
+		$media_query['desktop'] = apply_filters( 'kadence_desktop_media_query', '(min-width: 1025px)' );
 		$wide_width_add         = apply_filters(
 			'kadence_align_wide_array',
 			array(
@@ -378,6 +378,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->add_property( 'display', 'block' );
 			$css->set_selector( '.wp-site-blocks #main-header' );
 			$css->add_property( 'display', 'none' );
+			// Desktop Header.
 			$css->start_media_query( '(min-width: ' . kadence()->sub_option( 'header_mobile_switch', 'size' ) . 'px)' );
 			$css->set_selector( '.wp-site-blocks #mobile-header' );
 			$css->add_property( 'display', 'none' );
@@ -385,6 +386,34 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->add_property( 'display', 'block' );
 			$css->stop_media_query();
 		}
+		$tablet_down_media = kadence()->sub_option( 'header_mobile_switch', 'size' ) ? ( kadence()->sub_option( 'header_mobile_switch', 'size' ) - 1 ) : 1024;
+		$desktop_up_media = kadence()->sub_option( 'header_mobile_switch', 'size' ) ? ( kadence()->sub_option( 'header_mobile_switch', 'size' ) ) : 1025;
+		$css->start_media_query( '(max-width: ' . $tablet_down_media . 'px)' );
+		// Mobile Transparent Header.
+		$css->set_selector( '.mobile-transparent-header #masthead' );
+		$css->add_property( 'position', 'absolute' );
+		$css->add_property( 'left', '0px' );
+		$css->add_property( 'right', '0px' );
+		$css->add_property( 'z-index', '100' );
+		$css->set_selector( '.mobile-transparent-header #masthead, .mobile-transparent-header .site-top-header-wrap .site-header-row-container-inner, .mobile-transparent-header .site-main-header-wrap .site-header-row-container-inner, .mobile-transparent-header .site-bottom-header-wrap .site-header-row-container-inner' );
+		$css->add_property( 'background', 'transparent' );
+		// Mobile Header row layouts.
+		$css->set_selector( '.site-header-row-tablet-layout-fullwidth, .site-header-row-tablet-layout-standard' );
+		$css->add_property( 'padding', '0px' );
+		$css->stop_media_query();
+		// Desktop Header.
+		$css->start_media_query( '(min-width: ' . $desktop_up_media . 'px)' );
+		// Desktop Transparent Header.
+		$css->set_selector( 'body.elementor-editor-active.transparent-header #masthead, body.fl-builder-edit.transparent-header #masthead, body.vc_editor.transparent-header #masthead, body.brz-ed.transparent-header #masthead' );
+		$css->add_property( 'z-index', '0' );
+		$css->set_selector( '.transparent-header #masthead' );
+		$css->add_property( 'position', 'absolute' );
+		$css->add_property( 'left', '0px' );
+		$css->add_property( 'right', '0px' );
+		$css->add_property( 'z-index', '100' );
+		$css->set_selector( '.transparent-header #masthead, .transparent-header .site-top-header-wrap .site-header-row-container-inner, .transparent-header .site-main-header-wrap .site-header-row-container-inner, .transparent-header .site-bottom-header-wrap .site-header-row-container-inner' );
+		$css->add_property( 'background', 'transparent' );
+		$css->stop_media_query();
 		// Logo area.
 		if ( kadence()->option( 'custom_logo' ) || is_customize_preview() ) {
 			$logo_width = kadence()->option( 'logo_width' );
@@ -1199,7 +1228,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$media_query            = array();
 		$media_query['mobile']  = apply_filters( 'kadence_mobile_media_query', '(max-width: 767px)' );
 		$media_query['tablet']  = apply_filters( 'kadence_tablet_media_query', '(max-width: 1024px)' );
-		$media_query['desktop'] = apply_filters( 'kadence_tablet_media_query', '(min-width: 1025px)' );
+		$media_query['desktop'] = apply_filters( 'kadence_desktop_media_query', '(min-width: 1025px)' );
 		$wide_width_add         = apply_filters(
 			'kadence_align_wide_array',
 			array(
@@ -3875,7 +3904,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$media_query            = array();
 		$media_query['mobile']  = apply_filters( 'kadence_mobile_media_query', '(max-width: 767px)' );
 		$media_query['tablet']  = apply_filters( 'kadence_tablet_media_query', '(max-width: 1024px)' );
-		$media_query['desktop'] = apply_filters( 'kadence_tablet_media_query', '(min-width: 1025px)' );
+		$media_query['desktop'] = apply_filters( 'kadence_desktop_media_query', '(min-width: 1025px)' );
 		// Globals.
 		$css->set_selector( ':root' );
 		$css->add_property( '--global-palette1', kadence()->palette_option( 'palette1' ) );
@@ -4900,8 +4929,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					return is_single() && kadence()->option( 'post_related' );
 				},
 			),
-			'kadence-slide'   => array(
-				'file'             => 'slider.min.css',
+			'kadence-splide'   => array(
+				'file'             => 'kadence-splide.min.css',
 				'preload_callback' => function() {
 					return is_single() && kadence()->option( 'post_related' );
 				},
