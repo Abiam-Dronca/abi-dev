@@ -319,4 +319,21 @@ trait ValidatesAttributes
     {
         return Arr::has($this->data, $attribute);
     }
+
+    /**
+     * Validate that an attribute has a given number of digits.
+     *
+     * @param string $attribute
+     * @param mixed $value
+     * @param array $parameters
+     * 
+     * @return bool
+     */
+    public function validateDigits($attribute, $value, $parameters)
+    {
+        $this->requireParameterCount(1, $parameters, 'digits');
+
+        return $this->validateNumeric($attribute, $value) 
+                    && strlen((string) $value) == $parameters[0];
+    }
 }

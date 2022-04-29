@@ -8,7 +8,7 @@
             <div class="ff_doc_top_blocks">
                 <div class="ff_block block_1_3">
                     <div class="ff_block_box text-center">
-                        <img src="<?php echo $icon_path_url; ?>img/support.png"/>
+                        <img src="<?php echo esc_url($icon_path_url); ?>img/support.png"/>
                         <h3>Need Expert Support?</h3>
                         <p>Our EXPERTS would like to assist you for your query and any customization.</p>
                         <p><a target="_blank" class="button button-primary"
@@ -18,7 +18,7 @@
                 </div>
                 <div class="ff_block block_1_3">
                     <div class="ff_block_box text-center">
-                        <img src="<?php echo $icon_path_url; ?>img/fb_group.png"/>
+                        <img src="<?php echo esc_url($icon_path_url); ?>img/fb_group.png"/>
                         <h3>Join our facebook community</h3>
                         <p>We have a strong community where we discuss ideas and help each other.</p>
                         <p><a target="_blank" class="button button-primary"
@@ -28,7 +28,7 @@
                 </div>
                 <div class="ff_block block_1_3">
                     <div class="ff_block_box text-center">
-                        <img src="<?php echo $icon_path_url; ?>img/bug.png"/>
+                        <img src="<?php echo esc_url($icon_path_url); ?>img/bug.png"/>
                         <h3>Found a Bug?</h3>
                         <p>Please report us and we promise we will fix that as soon as humanly possible</p>
                         <p><a target="_blank" class="button button-primary"
@@ -48,7 +48,7 @@
 
                 <div class="ff_block block_1_3">
                     <div class="ff_block_box text-center">
-                        <img src="<?php echo $icon_path_url; ?>img/love.png"/>
+                        <img src="<?php echo esc_url($icon_path_url); ?>img/love.png"/>
                         <h3>Love this Plugin?</h3>
                         <p>Please write a review in wp.org plugin repository. We appreciate it!</p>
                         <p><a target="_blank" class="button button-primary"
@@ -62,7 +62,7 @@
                         <ul>
                             <?php foreach ($user_guides as $user_guide): ?>
                                 <li><a target="_blank"
-                                       href="<?php echo $user_guide['link']; ?>"><?php echo $user_guide['title']; ?></a>
+                                       href="<?php echo esc_url($user_guide['link']); ?>"><?php echo esc_html($user_guide['title']); ?></a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>

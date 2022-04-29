@@ -75,16 +75,6 @@ class EditorShortcodeParser
                 return static::parseQueryParam($handler);
             } elseif (strpos($handler, 'random_string.') !== false) {
                 return static::parseRandomString($handler);
-            } else if (strpos($handler, 'user.meta.') !== false) {
-                $key = substr(str_replace(['{', '}'], '', $value), 10);
-                $user = wp_get_current_user();
-                if ($user) {
-                    $value = get_post_meta($user->ID, $key, true);
-                    if (!is_array($value) && !is_object($value)) {
-                        return $value;
-                    }
-                }
-                return '';
             } else if (strpos($handler, 'user.') !== false) {
                 $value = self::parseUserProperties($handler);
                 if (is_array($value) || is_object($value)) {

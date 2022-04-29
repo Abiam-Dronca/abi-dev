@@ -591,20 +591,20 @@ class Component
         ob_start();
         ?>
         <script type="text/javascript">
-            window.fluent_form_<?php echo $instanceCssClass; ?> = <?php echo json_encode($form_vars);?>;
+            window.fluent_form_<?php echo esc_attr($instanceCssClass); ?> = <?php echo wp_json_encode($form_vars);?>;
             <?php if(wp_doing_ajax()): ?>
-            function initFFInstance_<?php echo $form_vars['id']; ?>() {
+            function initFFInstance_<?php echo esc_attr($form_vars['id']); ?>() {
                 if (!window.fluentFormApp) {
                     console.log('No fluentFormApp found');
                     return;
                 }
-                var ajax_formInstance = window.fluentFormApp(jQuery('form.<?php echo $form_vars['form_instance']; ?>'));
+                var ajax_formInstance = window.fluentFormApp(jQuery('form.<?php echo esc_attr($form_vars['form_instance']); ?>'));
                 if (ajax_formInstance) {
                     ajax_formInstance.initFormHandlers();
                 }
             }
 
-            initFFInstance_<?php echo $form_vars['id']; ?>();
+            initFFInstance_<?php echo esc_attr($form_vars['id']); ?>();
             <?php endif; ?>
         </script>
         <?php

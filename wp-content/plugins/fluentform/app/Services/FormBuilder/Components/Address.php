@@ -98,6 +98,6 @@ class Address extends BaseComponent
         echo "</div>";
 
         $html = ob_get_clean();
-        echo apply_filters('fluentform_rendering_field_html_' . $elementName, $html, $data, $form);
+        fluentFormPrintUnescapedInternalString(apply_filters('fluentform_rendering_field_html_' . $elementName, $html, $data, $form));
     }
 }

@@ -21,18 +21,18 @@ class SidebarWidgets extends \WP_Widget
             return;
         }
 
-        echo $args['before_widget'];
+        echo $args['before_widget']; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 
         if ( ! empty( $instance['title'] ) ) {
-            echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+            echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title']; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
         }
 
         if ($selectedForm != '') {
             $shortcode = "[fluentform id='$selectedForm']";
-            echo do_shortcode($shortcode);
+            echo do_shortcode($shortcode); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
         }
 
-        echo $args['after_widget'];
+        echo $args['after_widget']; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 
     }
 
@@ -48,9 +48,9 @@ class SidebarWidgets extends \WP_Widget
         // Widget admin form
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (optional):'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>"
-                   name="<?php echo $this->get_field_name('title'); ?>" type="text"
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Title (optional):', 'fluentform'); ?></label>
+            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
+                   name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
                    value="<?php echo esc_attr($title); ?>"/>
         </p>
         <?php
@@ -60,17 +60,17 @@ class SidebarWidgets extends \WP_Widget
             ->get();
         ?>
         
-        <label for="<?php echo $this->get_field_id('allforms'); ?>">Select a form:
-            <select style="margin-bottom: 12px;" class='widefat' id="<?php echo $this->get_field_id('allforms'); ?>"
-                    name="<?php echo $this->get_field_name('allforms'); ?>" type="text"
+        <label for="<?php echo esc_attr($this->get_field_id('allforms')); ?>">Select a form:
+            <select style="margin-bottom: 12px;" class='widefat' id="<?php echo esc_attr($this->get_field_id('allforms')); ?>"
+                    name="<?php echo esc_attr($this->get_field_name('allforms')); ?>" type="text"
             >
                 <?php
                 foreach ($forms as $item) {
                     ?>
                     <option <?php if ($item->id == $selectedForm) {
                         echo 'selected';
-                    } ?> value='<?php echo $item->id; ?>'>
-                        <?php echo $item->title; ?> (<?php echo $item->id; ?>)
+                    } ?> value='<?php echo esc_attr($item->id); ?>'>
+                        <?php echo esc_html($item->title); ?> (<?php echo esc_attr($item->id); ?>)
                     </option>
                     <?php
                 }

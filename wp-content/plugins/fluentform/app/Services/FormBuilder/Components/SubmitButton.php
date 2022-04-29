@@ -107,13 +107,13 @@ class SubmitButton extends BaseComponent
                 $html .= '<style>' . $styles . '</style>';
             } else {
                 add_action('wp_footer', function () use ($styles) {
-                    echo '<style>' . $styles . '</style>';
+                    fluentFormPrintUnescapedInternalString('<style>' . $styles . '</style>');
                 });
             }
         }
 
         $html .= '</div>';
 
-        echo apply_filters('fluentform_rendering_field_html_' . $elementName, $html, $data, $form);
+        fluentFormPrintUnescapedInternalString( apply_filters('fluentform_rendering_field_html_' . $elementName, $html, $data, $form) );
     }
 }

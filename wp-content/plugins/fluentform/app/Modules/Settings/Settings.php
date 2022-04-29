@@ -61,6 +61,7 @@ class Settings
             'storeMailChimpSettings',
             'storeEmailSummarySettings'
         ];
+        do_action('fluentform_saving_global_settings_with_key_method',$this->request);
 
         if (in_array($method, $allowedMethods)) {
             $this->{$method}();

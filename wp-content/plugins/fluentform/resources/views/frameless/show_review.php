@@ -22,21 +22,21 @@
         <div class="ff_preview_title">
             <ul>
                 <li class="ff_form_name">
-                    <?php echo $form->id .' - '. $form->title;  ?>
+                    <?php echo intval($form->id) .' - '. esc_attr($form->title);  ?>
                 </li>
                 <li>
-                    <a href="<?php echo admin_url('admin.php?page=fluent_forms&form_id=' . $form_id . '&route=editor') ?>">Edit Fields</a>
+                    <a href="<?php echo admin_url('admin.php?page=fluent_forms&form_id=' . intval($form_id) . '&route=editor') ?>">Edit Fields</a>
                 </li>
             </ul>
         </div>
         <label for="ff_preview_only"><input id="ff_preview_only" type="checkbox" /> Preview Only</label>
         <div class="ff_preview_action">
-           [fluentform id="<?php echo $form_id; ?>"]
+           [fluentform id="<?php echo intval($form_id); ?>"]
         </div>
     </div>
     <div class="ff_preview_body">
         <div class="ff_form_preview_wrapper">
-            <?php echo do_shortcode('[fluentform id="' . $form_id . '"]'); ?>
+            <?php echo do_shortcode('[fluentform id="' . intval($form_id) . '"]'); ?>
         </div>
         <div class="ff_form_styler_wrapper">
             <?php if(defined('FLUENTFORMPRO')): ?>
@@ -75,7 +75,7 @@
                         <h4>Integrations available in Fluent Forms Pro</h4>
                         <ul class="ff_addons">
                             <?php foreach ($addOns as $addOn): ?>
-                                <li><img title="<?php echo $addOn['title']; ?>" src="<?php echo $addOn['logo']; ?>" /></li>
+                                <li><img title="<?php echo esc_attr($addOn['title']); ?>" src="<?php echo esc_attr($addOn['logo']); ?>" /></li>
                             <?php endforeach; ?>
                         </ul>
 
@@ -90,7 +90,7 @@
     <div class="ff_preview_footer">
         <p>You are seeing preview version of Fluent Forms. This form is only accessible for Admin users. Other users
             may not access this page. To use this for in a page please use the following shortcode: [fluentform
-            id='<?php echo $form_id ?>']</p>
+            id='<?php echo intval($form_id) ?>']</p>
     </div>
 </div>
 <?php

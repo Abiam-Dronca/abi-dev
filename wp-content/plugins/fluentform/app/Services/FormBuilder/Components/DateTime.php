@@ -123,9 +123,9 @@ class DateTime extends BaseComponent
                             return;
                         }
                         flatpickr.localize(window.fluentFormVars.date_i18n);
-                        var config = <?php echo $config; ?>;
+                        var config = <?php fluentFormPrintUnescapedInternalString($config); ?>;
                         try {
-                            var customConfig = <?php echo $customConfigObject; ?>;
+                            var customConfig = <?php fluentFormPrintUnescapedInternalString($customConfigObject); ?>;
                         } catch (e) {
                             var customConfig = {};
                         }
@@ -135,12 +135,12 @@ class DateTime extends BaseComponent
                             config.locale = 'default';
                         }
 
-                        if(jQuery('#<?php echo $id; ?>').length) {
-                            flatpickr('#<?php echo $id; ?>', config);
+                        if(jQuery('#<?php echo esc_attr($id); ?>').length) {
+                            flatpickr('#<?php echo esc_attr($id); ?>', config);
                         }
                     }
                     initPicker();
-                    $(document).on('reInitExtras', '.<?php echo $form->instance_css_class; ?>', function () {
+                    $(document).on('reInitExtras', '.<?php echo esc_attr($form->instance_css_class); ?>', function () {
                         initPicker();
                     });
                 });

@@ -34,6 +34,6 @@ class SectionBreak extends BaseComponent
         $html .= "<div class='ff-section_break_desk'>{$data['settings']['description']}</div>";
         $html .= "<hr />";
         $html .= "</div>";
-        echo apply_filters('fluentform_rendering_field_html_'.$elementName, $html, $data, $form);
+        fluentFormPrintUnescapedInternalString( apply_filters('fluentform_rendering_field_html_'.$elementName, $html, $data, $form) );
     }
 }

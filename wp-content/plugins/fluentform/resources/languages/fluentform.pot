@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fluent Forms\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 13:05+0000\n"
+"POT-Creation-Date: 2022-04-22 09:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid " List is required"
 msgstr ""
 
-#: app/Modules/Component/Component.php:983
+#: app/Modules/Component/Component.php:1005
 msgid " to "
 msgstr ""
 
@@ -46,13 +46,13 @@ msgstr ""
 msgid "...."
 msgstr ""
 
-#: app/Modules/Component/Component.php:545
+#: app/Modules/Component/Component.php:548
 msgid "0% Completed"
 msgstr ""
 
-#: app/Modules/Component/Component.php:544
-#: app/Services/FluentConversational/Classes/Form.php:534
-#: app/Services/FluentConversational/Classes/Form.php:651
+#: app/Modules/Component/Component.php:547
+#: app/Services/FluentConversational/Classes/Form.php:535
+#: app/Services/FluentConversational/Classes/Form.php:653
 msgid "100% Completed"
 msgstr ""
 
@@ -68,33 +68,19 @@ msgstr ""
 msgid "23:59:59"
 msgstr ""
 
-#: app/Modules/Form/LoginHandler.php:83
-#, php-format
-msgid ""
-"<b>Error:</b> The password you entered for the username <b>%s</b> is "
-"incorrect. <a href=\"%s\">Lost your password?</a>"
-msgstr ""
-
-#: app/Modules/Form/LoginHandler.php:69
-#, php-format
-msgid ""
-"<b>Error:</b> The username <b>%s</b> is not registered on this site. If you "
-"are unsure of your username, try your email address instead."
-msgstr ""
-
-#: app/Modules/Registerer/Menu.php:458
+#: app/Modules/Registerer/Menu.php:483
 msgid "<h2>No form found</h2>"
 msgstr ""
 
-#: app/Hooks/Common.php:118
+#: app/Hooks/Common.php:115
 msgid "Accepted"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1241
+#: app/Services/FormBuilder/DefaultElements.php:1245
 msgid "Action Hook"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:951
+#: app/Modules/Registerer/Menu.php:976
 msgid "Actions"
 msgstr ""
 
@@ -106,7 +92,7 @@ msgstr ""
 msgid "Activity Logs"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:891
+#: app/Modules/Registerer/Menu.php:916
 msgid "Add a New Form"
 msgstr ""
 
@@ -114,7 +100,7 @@ msgstr ""
 msgid "Add Form"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:958
+#: app/Modules/Registerer/Menu.php:983
 msgid "Add Note"
 msgstr ""
 
@@ -136,7 +122,7 @@ msgstr ""
 msgid "Address Fields"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1508
+#: app/Modules/Widgets/FluentFormWidget.php:1509
 msgid "Address Line"
 msgstr ""
 
@@ -170,7 +156,7 @@ msgstr ""
 msgid "Advanced Date Configuration"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:947
+#: app/Modules/Registerer/Menu.php:972
 msgid "Advanced Filter"
 msgstr ""
 
@@ -178,7 +164,7 @@ msgstr ""
 msgid "Afghanistan"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:923
+#: app/Modules/Registerer/Menu.php:948
 msgid "ago"
 msgstr ""
 
@@ -194,16 +180,16 @@ msgstr ""
 msgid "Algeria"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:198
-#: app/Modules/Widgets/FluentFormWidget.php:436
-#: app/Modules/Widgets/FluentFormWidget.php:565
-#: app/Modules/Widgets/FluentFormWidget.php:857
-#: app/Modules/Widgets/FluentFormWidget.php:1289
-#: app/Modules/Widgets/FluentFormWidget.php:2059
+#: app/Modules/Widgets/FluentFormWidget.php:199
+#: app/Modules/Widgets/FluentFormWidget.php:437
+#: app/Modules/Widgets/FluentFormWidget.php:566
+#: app/Modules/Widgets/FluentFormWidget.php:858
+#: app/Modules/Widgets/FluentFormWidget.php:1290
+#: app/Modules/Widgets/FluentFormWidget.php:2060
 msgid "Alignment"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:915
+#: app/Modules/Registerer/Menu.php:940
 msgid "All"
 msgstr ""
 
@@ -211,38 +197,43 @@ msgstr ""
 msgid "All Entries"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:910
+#: app/Modules/Registerer/Menu.php:935
 msgid "All Form Entries"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:303 app/Modules/Registerer/Menu.php:304
-#: app/Modules/Registerer/Menu.php:890 resources/views/admin/global_menu.php:12
+#: app/Modules/Registerer/Menu.php:328 app/Modules/Registerer/Menu.php:329
+#: app/Modules/Registerer/Menu.php:915 app/Modules/CLI/Commands.php:12
+#: resources/views/admin/global_menu.php:12
 msgid "All Forms"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:944
+#: app/Modules/CLI/Commands.php:16
+msgid "All Submissions"
+msgstr ""
+
+#: app/Modules/Registerer/Menu.php:969
 msgid "All Types"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:154
-#: app/Services/FormBuilder/ValidationRuleSettings.php:155
+#: app/Services/FormBuilder/ValidationRuleSettings.php:161
+#: app/Services/FormBuilder/ValidationRuleSettings.php:162
 msgid "Allowed Files"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:846
+#: app/Services/FormBuilder/DefaultElements.php:850
 msgid "Allowed image types does not match"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:227
-#: app/Services/FormBuilder/ValidationRuleSettings.php:228
+#: app/Services/FormBuilder/ValidationRuleSettings.php:234
+#: app/Services/FormBuilder/ValidationRuleSettings.php:235
 msgid "Allowed Images"
 msgstr ""
 
-#: app/Modules/Component/Component.php:988
+#: app/Modules/Component/Component.php:1010
 msgid "AM"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:986
+#: app/Services/FormBuilder/DefaultElements.php:990
 msgid "Amazing"
 msgstr ""
 
@@ -250,7 +241,7 @@ msgstr ""
 msgid "American Samoa"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:950
+#: app/Modules/Registerer/Menu.php:975
 msgid "Amount"
 msgstr ""
 
@@ -274,7 +265,7 @@ msgstr ""
 msgid "Antigua and Barbuda"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:955
+#: app/Modules/Registerer/Menu.php:980
 msgid "API Calls"
 msgstr ""
 
@@ -290,11 +281,11 @@ msgstr ""
 msgid "Apply styles provided here"
 msgstr ""
 
-#: app/Modules/Component/Component.php:924
+#: app/Modules/Component/Component.php:946
 msgid "Apr"
 msgstr ""
 
-#: app/Modules/Component/Component.php:938
+#: app/Modules/Component/Component.php:960
 msgid "April"
 msgstr ""
 
@@ -310,7 +301,11 @@ msgstr ""
 msgid "Aruba"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:162
+#: app/Modules/Widgets/OxyFluentFormWidget.php:133
+msgid "Asterisk Color"
+msgstr ""
+
+#: app/Services/FormBuilder/ValidationRuleSettings.php:169
 msgid "Audio"
 msgstr ""
 
@@ -318,11 +313,11 @@ msgstr ""
 msgid "Audio (mp3, wav, ogg, oga, wma, mka, m4a, ra, mid, midi)"
 msgstr ""
 
-#: app/Modules/Component/Component.php:928
+#: app/Modules/Component/Component.php:950
 msgid "Aug"
 msgstr ""
 
-#: app/Modules/Component/Component.php:942
+#: app/Modules/Component/Component.php:964
 msgid "August"
 msgstr ""
 
@@ -334,7 +329,7 @@ msgstr ""
 msgid "Austria"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:985
+#: app/Services/FormBuilder/DefaultElements.php:989
 msgid "Awesome"
 msgstr ""
 
@@ -342,31 +337,43 @@ msgstr ""
 msgid "Azerbaijan"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:925
+#: app/Modules/Registerer/Menu.php:950
 msgid "Back to Entries"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:392
-#: app/Modules/Widgets/FluentFormWidget.php:1785
-#: app/Modules/Widgets/FluentFormWidget.php:1880
-#: app/Modules/Widgets/FluentFormWidget.php:1946
-#: app/Modules/Widgets/FluentFormWidget.php:2009
+#: app/Modules/Widgets/FluentFormWidget.php:393
+#: app/Modules/Widgets/FluentFormWidget.php:1786
+#: app/Modules/Widgets/FluentFormWidget.php:1881
+#: app/Modules/Widgets/FluentFormWidget.php:1947
+#: app/Modules/Widgets/FluentFormWidget.php:2010
 msgid "Background"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:397
-#: app/Modules/Widgets/FluentFormWidget.php:600
-#: app/Modules/Widgets/FluentFormWidget.php:808
-#: app/Modules/Widgets/FluentFormWidget.php:1018
-#: app/Modules/Widgets/FluentFormWidget.php:1134
-#: app/Modules/Widgets/FluentFormWidget.php:1346
-#: app/Modules/Widgets/FluentFormWidget.php:1430
-#: app/Modules/Widgets/FluentFormWidget.php:1558
-#: app/Modules/Widgets/FluentFormWidget.php:1630
-#: app/Modules/Widgets/FluentFormWidget.php:2130
-#: app/Modules/Widgets/FluentFormWidget.php:2236
-#: app/Modules/Widgets/FluentFormWidget.php:2289
+#: app/Modules/Widgets/OxyFluentFormWidget.php:68
+#: app/Modules/Widgets/OxyFluentFormWidget.php:752
+#: app/Modules/Widgets/OxyFluentFormWidget.php:835
+#: app/Modules/Widgets/FluentFormWidget.php:601
+#: app/Modules/Widgets/FluentFormWidget.php:809
+#: app/Modules/Widgets/FluentFormWidget.php:1019
+#: app/Modules/Widgets/FluentFormWidget.php:1135
+#: app/Modules/Widgets/FluentFormWidget.php:1347
+#: app/Modules/Widgets/FluentFormWidget.php:1431
+#: app/Modules/Widgets/FluentFormWidget.php:1559
+#: app/Modules/Widgets/FluentFormWidget.php:1631
+#: app/Modules/Widgets/FluentFormWidget.php:2131
+#: app/Modules/Widgets/FluentFormWidget.php:2237
+#: app/Modules/Widgets/FluentFormWidget.php:2290
 msgid "Background Color"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:614
+msgid "Background Color - Selected State"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:692
+#: app/Modules/Widgets/OxyFluentFormWidget.php:841
+msgid "Background Hover Color"
 msgstr ""
 
 #: app/Services/FormBuilder/CountryNames.php:34
@@ -379,6 +386,10 @@ msgstr ""
 
 #: app/Services/FormBuilder/CountryNames.php:36
 msgid "Bangladesh"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:724
+msgid "Bar Color"
 msgstr ""
 
 #: app/Services/FormBuilder/CountryNames.php:37
@@ -421,39 +432,58 @@ msgstr ""
 msgid "Bonaire, Saint Eustatius and Saba"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:625
-#: app/Modules/Widgets/FluentFormWidget.php:821
-#: app/Modules/Widgets/FluentFormWidget.php:1388
-#: app/Modules/Widgets/FluentFormWidget.php:1483
-#: app/Modules/Widgets/FluentFormWidget.php:1571
-#: app/Modules/Widgets/FluentFormWidget.php:1841
-#: app/Modules/Widgets/FluentFormWidget.php:1956
-#: app/Modules/Widgets/FluentFormWidget.php:2155
-#: app/Modules/Widgets/FluentFormWidget.php:2312
+#: app/Modules/Widgets/OxyFluentFormWidget.php:98
+#: app/Modules/Widgets/OxyFluentFormWidget.php:260
+#: app/Modules/Widgets/OxyFluentFormWidget.php:794
+#: app/Modules/Widgets/OxyFluentFormWidget.php:850
+#: app/Modules/Widgets/OxyFluentFormWidget.php:878
+#: app/Modules/Widgets/FluentFormWidget.php:626
+#: app/Modules/Widgets/FluentFormWidget.php:822
+#: app/Modules/Widgets/FluentFormWidget.php:1389
+#: app/Modules/Widgets/FluentFormWidget.php:1484
+#: app/Modules/Widgets/FluentFormWidget.php:1572
+#: app/Modules/Widgets/FluentFormWidget.php:1842
+#: app/Modules/Widgets/FluentFormWidget.php:1957
+#: app/Modules/Widgets/FluentFormWidget.php:2156
+#: app/Modules/Widgets/FluentFormWidget.php:2313
 msgid "Border"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1055
-#: app/Modules/Widgets/FluentFormWidget.php:1149
-#: app/Modules/Widgets/FluentFormWidget.php:1654
-#: app/Modules/Widgets/FluentFormWidget.php:2018
-#: app/Modules/Widgets/FluentFormWidget.php:2260
+#: app/Modules/Widgets/FluentFormWidget.php:1056
+#: app/Modules/Widgets/FluentFormWidget.php:1150
+#: app/Modules/Widgets/FluentFormWidget.php:1655
+#: app/Modules/Widgets/FluentFormWidget.php:2019
+#: app/Modules/Widgets/FluentFormWidget.php:2261
 msgid "Border Color"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:497
-#: app/Modules/Widgets/FluentFormWidget.php:636
-#: app/Modules/Widgets/FluentFormWidget.php:1081
-#: app/Modules/Widgets/FluentFormWidget.php:1107
-#: app/Modules/Widgets/FluentFormWidget.php:1580
-#: app/Modules/Widgets/FluentFormWidget.php:1852
-#: app/Modules/Widgets/FluentFormWidget.php:1964
-#: app/Modules/Widgets/FluentFormWidget.php:2029
-#: app/Modules/Widgets/FluentFormWidget.php:2165
+#: app/Modules/Widgets/OxyFluentFormWidget.php:629
+msgid "Border Color - Selected State"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:105
+#: app/Modules/Widgets/OxyFluentFormWidget.php:267
+#: app/Modules/Widgets/FluentFormWidget.php:498
+#: app/Modules/Widgets/FluentFormWidget.php:637
+#: app/Modules/Widgets/FluentFormWidget.php:1082
+#: app/Modules/Widgets/FluentFormWidget.php:1108
+#: app/Modules/Widgets/FluentFormWidget.php:1581
+#: app/Modules/Widgets/FluentFormWidget.php:1853
+#: app/Modules/Widgets/FluentFormWidget.php:1965
+#: app/Modules/Widgets/FluentFormWidget.php:2030
+#: app/Modules/Widgets/FluentFormWidget.php:2166
 msgid "Border Radius"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1033
+#: app/Modules/Widgets/OxyFluentFormWidget.php:603
+msgid "Border Radius for Checkbox"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:621
+msgid "Border Size - Selected State"
+msgstr ""
+
+#: app/Modules/Widgets/FluentFormWidget.php:1034
 msgid "Border Width"
 msgstr ""
 
@@ -473,6 +503,14 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
+#: app/Modules/Widgets/OxyFluentFormWidget.php:110
+#: app/Modules/Widgets/OxyFluentFormWidget.php:248
+#: app/Modules/Widgets/OxyFluentFormWidget.php:796
+#: app/Modules/Widgets/OxyFluentFormWidget.php:852
+#: app/Modules/Widgets/OxyFluentFormWidget.php:879
+msgid "Box Shadow"
+msgstr ""
+
 #: app/Services/FormBuilder/CountryNames.php:50
 msgid "Brazil"
 msgstr ""
@@ -485,7 +523,7 @@ msgstr ""
 msgid "British Virgin Islands"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:911
+#: app/Modules/Registerer/Menu.php:936
 msgid "Browser"
 msgstr ""
 
@@ -505,8 +543,24 @@ msgstr ""
 msgid "Burundi"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1902
+#: app/Modules/Widgets/FluentFormWidget.php:1903
 msgid "Button"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:664
+msgid "Button Border"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:665
+msgid "Button Box Shadow"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:667
+msgid "Button Hover Border"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:666
+msgid "Button Hover Box Shadow"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:86
@@ -514,12 +568,17 @@ msgid "Button Size"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:81
+#: app/Modules/Widgets/OxyFluentFormWidget.php:671
 msgid "Button Style"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:200
 #: app/Services/FormBuilder/ElementSettingsPlacement.php:410
 msgid "Button Text"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:663
+msgid "Button Typography"
 msgstr ""
 
 #: app/Services/FormBuilder/CountryNames.php:57
@@ -542,13 +601,17 @@ msgstr ""
 msgid "Cayman Islands"
 msgstr ""
 
+#: app/Modules/Widgets/OxyFluentFormWidget.php:344
+msgid "Cell Typography"
+msgstr ""
+
 #: app/Services/FormBuilder/ElementCustomization.php:219
-#: app/Modules/Widgets/FluentFormWidget.php:206
-#: app/Modules/Widgets/FluentFormWidget.php:449
-#: app/Modules/Widgets/FluentFormWidget.php:573
-#: app/Modules/Widgets/FluentFormWidget.php:865
-#: app/Modules/Widgets/FluentFormWidget.php:1297
-#: app/Modules/Widgets/FluentFormWidget.php:2067
+#: app/Modules/Widgets/FluentFormWidget.php:207
+#: app/Modules/Widgets/FluentFormWidget.php:450
+#: app/Modules/Widgets/FluentFormWidget.php:574
+#: app/Modules/Widgets/FluentFormWidget.php:866
+#: app/Modules/Widgets/FluentFormWidget.php:1298
+#: app/Modules/Widgets/FluentFormWidget.php:2068
 msgid "Center"
 msgstr ""
 
@@ -560,38 +623,50 @@ msgstr ""
 msgid "Chad"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:939
+#: app/Modules/Registerer/Menu.php:964
 msgid "Change status to"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:690
+#: app/Services/FormBuilder/DefaultElements.php:694
 #: app/Services/Migrator/Classes/BaseMigrator.php:586
 msgid "Check Box"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:909
+#: app/Modules/Registerer/Menu.php:934
 msgid "Check the video intro"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1042
+#: app/Services/FormBuilder/DefaultElements.php:1046
 msgid "Checkable Grid"
 msgstr ""
 
+#: app/Modules/Widgets/OxyFluentFormWidget.php:275
+msgid "Checkable Grid Field"
+msgstr ""
+
 #: app/Services/FormBuilder/ElementCustomization.php:492
-#: app/Modules/Widgets/FluentFormWidget.php:1070
+#: app/Modules/Widgets/FluentFormWidget.php:1071
 msgid "Checkbox"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:651
+#: app/Modules/Widgets/OxyFluentFormWidget.php:514
+msgid "Checkbox & Radio"
+msgstr ""
+
+#: app/Services/FormBuilder/DefaultElements.php:655
 msgid "Checkbox Field"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1021
-#: app/Modules/Widgets/FluentFormWidget.php:1317
+#: app/Services/FormBuilder/DefaultElements.php:1025
+#: app/Modules/Widgets/FluentFormWidget.php:1318
 msgid "Checkbox Grid"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1124
+#: app/Modules/Widgets/OxyFluentFormWidget.php:550
+msgid "Checkbox/Radio Smart UI"
+msgstr ""
+
+#: app/Modules/Widgets/FluentFormWidget.php:1125
 msgid "Checked"
 msgstr ""
 
@@ -629,15 +704,15 @@ msgstr ""
 msgid "Clear value if not match the mask"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:908
+#: app/Modules/Registerer/Menu.php:933
 msgid "Click Here to Create Your First Form"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:924
+#: app/Modules/Registerer/Menu.php:949
 msgid "Click to copy shortcode"
 msgstr ""
 
-#: app/Modules/Component/Component.php:986
+#: app/Modules/Component/Component.php:1008
 msgid "Click to toggle"
 msgstr ""
 
@@ -649,16 +724,19 @@ msgstr ""
 msgid "Colombia"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:240
-#: app/Modules/Widgets/FluentFormWidget.php:314
-#: app/Modules/Widgets/FluentFormWidget.php:890
-#: app/Modules/Widgets/FluentFormWidget.php:1188
-#: app/Modules/Widgets/FluentFormWidget.php:1243
-#: app/Modules/Widgets/FluentFormWidget.php:1334
-#: app/Modules/Widgets/FluentFormWidget.php:1418
-#: app/Modules/Widgets/FluentFormWidget.php:1924
-#: app/Modules/Widgets/FluentFormWidget.php:1997
-#: app/Modules/Widgets/FluentFormWidget.php:2343
+#: app/Modules/Widgets/OxyFluentFormWidget.php:307
+#: app/Modules/Widgets/OxyFluentFormWidget.php:747
+#: app/Modules/Widgets/OxyFluentFormWidget.php:819
+#: app/Modules/Widgets/FluentFormWidget.php:241
+#: app/Modules/Widgets/FluentFormWidget.php:315
+#: app/Modules/Widgets/FluentFormWidget.php:891
+#: app/Modules/Widgets/FluentFormWidget.php:1189
+#: app/Modules/Widgets/FluentFormWidget.php:1244
+#: app/Modules/Widgets/FluentFormWidget.php:1335
+#: app/Modules/Widgets/FluentFormWidget.php:1419
+#: app/Modules/Widgets/FluentFormWidget.php:1925
+#: app/Modules/Widgets/FluentFormWidget.php:1998
+#: app/Modules/Widgets/FluentFormWidget.php:2344
 msgid "Color"
 msgstr ""
 
@@ -708,15 +786,15 @@ msgstr ""
 msgid "Content Alignment"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:892
+#: app/Modules/Registerer/Menu.php:917
 msgid "Conversational Form"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:899
+#: app/Modules/Registerer/Menu.php:924
 msgid "Conversational Preview"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:904
+#: app/Modules/Registerer/Menu.php:929
 msgid "Conversion"
 msgstr ""
 
@@ -733,21 +811,21 @@ msgid "Could not find form ,please import again"
 msgstr ""
 
 #: app/Services/FormBuilder/DefaultElements.php:453
-#: app/Services/FormBuilder/DefaultElements.php:913
+#: app/Services/FormBuilder/DefaultElements.php:917
 msgid "Country"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:378
-#: app/Services/FormBuilder/DefaultElements.php:935
+#: app/Services/FormBuilder/DefaultElements.php:939
 #: app/Services/Migrator/Classes/BaseMigrator.php:1068
 msgid "Country List"
 msgstr ""
 
-#: app/Modules/Widgets/ElementorWidget.php:52
+#: app/Helpers/Helper.php:581
 msgid "Create a Form First"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:893
+#: app/Modules/Registerer/Menu.php:918
 msgid "Create Conversational Form"
 msgstr ""
 
@@ -770,7 +848,7 @@ msgstr ""
 msgid "Croatia"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:218
+#: app/Services/FormBuilder/ValidationRuleSettings.php:225
 msgid "CSV"
 msgstr ""
 
@@ -786,12 +864,12 @@ msgstr ""
 msgid "Cura&ccedil;ao"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:75
+#: app/Services/FormBuilder/EditorShortCode.php:76
 msgid "Currency"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:471
-#: app/Modules/Widgets/FluentFormWidget.php:2091
+#: app/Modules/Widgets/FluentFormWidget.php:2092
 msgid "Custom"
 msgstr ""
 
@@ -799,11 +877,11 @@ msgstr ""
 msgid "Custom CSS and JS successfully updated"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:550
+#: app/Modules/Registerer/Menu.php:575
 msgid "Custom CSS/JS"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:951
+#: app/Services/FormBuilder/DefaultElements.php:955
 #: app/Services/Migrator/Classes/BaseMigrator.php:886
 msgid "Custom HTML"
 msgstr ""
@@ -812,15 +890,15 @@ msgstr ""
 msgid "Custom Mask"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1448
+#: app/Services/FormBuilder/DefaultElements.php:1452
 msgid "Custom Payment Amount"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:942
+#: app/Modules/Widgets/FluentFormWidget.php:943
 msgid "Custom Styles"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:100
+#: app/Modules/Widgets/FluentFormWidget.php:101
 msgid "Custom Title & Description"
 msgstr ""
 
@@ -832,7 +910,7 @@ msgstr ""
 msgid "Czech Republic"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:912
+#: app/Modules/Registerer/Menu.php:937
 msgid "Date"
 msgstr ""
 
@@ -844,7 +922,7 @@ msgstr ""
 msgid "Date (mm/dd/yyyy)"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:791
+#: app/Services/FormBuilder/DefaultElements.php:795
 msgid "Date / Time"
 msgstr ""
 
@@ -852,17 +930,17 @@ msgstr ""
 msgid "Date Format"
 msgstr ""
 
-#: app/Modules/Component/Component.php:932
+#: app/Modules/Component/Component.php:954
 msgid "Dec"
 msgstr ""
 
-#: app/Modules/Component/Component.php:946
+#: app/Modules/Component/Component.php:968
 msgid "December"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:55
-#: app/Services/FormBuilder/ElementCustomization.php:582
-#: app/Modules/Widgets/FluentFormWidget.php:441
+#: app/Services/FormBuilder/ElementCustomization.php:587
+#: app/Modules/Widgets/FluentFormWidget.php:442
 msgid "Default"
 msgstr ""
 
@@ -878,7 +956,7 @@ msgstr ""
 msgid "Define Max selections items that a user can select ."
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:902
+#: app/Modules/Registerer/Menu.php:927
 msgid "Delete"
 msgstr ""
 
@@ -888,9 +966,9 @@ msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:195
 #: app/Services/FormBuilder/ElementSettingsPlacement.php:479
-#: app/Modules/Widgets/FluentFormWidget.php:124
-#: app/Modules/Widgets/FluentFormWidget.php:302
-#: app/Modules/Widgets/FluentFormWidget.php:1234
+#: app/Modules/Widgets/FluentFormWidget.php:125
+#: app/Modules/Widgets/FluentFormWidget.php:303
+#: app/Modules/Widgets/FluentFormWidget.php:1235
 msgid "Description"
 msgstr ""
 
@@ -908,8 +986,16 @@ msgid ""
 "choosing \"Default\", global label placement setting will be applied."
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:935
+#: app/Modules/Registerer/Menu.php:960
 msgid "Device"
+msgstr ""
+
+#: app/Services/FormBuilder/ValidationRuleSettings.php:135
+msgid "Digits"
+msgstr ""
+
+#: app/Services/FormBuilder/ElementCustomization.php:526
+msgid "Digits Count"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:254
@@ -920,7 +1006,7 @@ msgstr ""
 msgid "Djibouti"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:187
+#: app/Services/FormBuilder/ValidationRuleSettings.php:194
 msgid "Docs"
 msgstr ""
 
@@ -942,12 +1028,12 @@ msgstr ""
 msgid "Double Optin Settings"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:552
-#: app/Services/FormBuilder/DefaultElements.php:584
+#: app/Services/FormBuilder/DefaultElements.php:556
+#: app/Services/FormBuilder/DefaultElements.php:588
 msgid "Dropdown"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:901
+#: app/Modules/Registerer/Menu.php:926
 msgid "Duplicate"
 msgstr ""
 
@@ -959,11 +1045,11 @@ msgstr ""
 msgid "Ecuador"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:896
+#: app/Modules/Registerer/Menu.php:921
 msgid "Edit"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:468
+#: app/Modules/Registerer/Menu.php:493
 msgid "Editor"
 msgstr ""
 
@@ -995,8 +1081,13 @@ msgstr ""
 msgid "Email address need to be unique."
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:512
+#: app/Modules/Registerer/Menu.php:537
 msgid "Email Notifications"
+msgstr ""
+
+#: app/Services/Scheduler/Scheduler.php:141
+#, php-format
+msgid "Email Summary of Your Forms (Last %d Days)"
 msgstr ""
 
 #: app/Services/FormBuilder/EditorShortCode.php:20
@@ -1027,18 +1118,22 @@ msgstr ""
 msgid "Enable Searchable Smart Options"
 msgstr ""
 
+#: app/Modules/Widgets/OxyFluentFormWidget.php:554
+msgid "Enable Smart UI"
+msgstr ""
+
 #: app/Services/Integrations/MailChimp/MailChimpIntegration.php:50
 msgid ""
 "Enter your Mailchimp API Key, if you do not have <br>Please login to your "
 "Mailchimp account and go to<br>Profile -> Extras -> Api Keys"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:933
+#: app/Modules/Registerer/Menu.php:958
 msgid "Entity ID"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:320 app/Modules/Registerer/Menu.php:485
-#: app/Modules/Registerer/Menu.php:898
+#: app/Modules/Registerer/Menu.php:345 app/Modules/Registerer/Menu.php:510
+#: app/Modules/Registerer/Menu.php:923
 #: resources/views/email/report/body.php:148
 msgid "Entries"
 msgstr ""
@@ -1047,7 +1142,7 @@ msgstr ""
 msgid "Entries Imported Successfully"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:928
+#: app/Modules/Registerer/Menu.php:953
 msgid "Entry Details"
 msgstr ""
 
@@ -1059,15 +1154,15 @@ msgstr ""
 msgid "Eritrea"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:2335
+#: app/Modules/Widgets/FluentFormWidget.php:2336
 msgid "Error Message"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:171
+#: app/Modules/Widgets/FluentFormWidget.php:172
 msgid "Error Messages"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:164
+#: app/Modules/Widgets/FluentFormWidget.php:165
 msgid "Errors"
 msgstr ""
 
@@ -1091,11 +1186,11 @@ msgstr ""
 msgid "Every 5 Minutes (FluentForm)"
 msgstr ""
 
-#: app/Hooks/Common.php:329
+#: app/Hooks/Common.php:326
 msgid "Every 5 minutes (FluentForm)"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:213
+#: app/Services/FormBuilder/ValidationRuleSettings.php:220
 msgid "Executable Files"
 msgstr ""
 
@@ -1103,11 +1198,11 @@ msgstr ""
 msgid "Executable Files (exe)"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:945
+#: app/Modules/Registerer/Menu.php:970
 msgid "Export"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:946
+#: app/Modules/Registerer/Menu.php:971
 msgid "Export as"
 msgstr ""
 
@@ -1127,15 +1222,15 @@ msgstr ""
 msgid "Faroe Islands"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:949
+#: app/Modules/Registerer/Menu.php:974
 msgid "Favorites Entries only"
 msgstr ""
 
-#: app/Modules/Component/Component.php:922
+#: app/Modules/Component/Component.php:944
 msgid "Feb"
 msgstr ""
 
-#: app/Modules/Component/Component.php:936
+#: app/Modules/Component/Component.php:958
 msgid "February"
 msgstr ""
 
@@ -1152,17 +1247,21 @@ msgstr ""
 msgid "Fiji"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:869
-#: app/Services/FormBuilder/DefaultElements.php:896
+#: app/Services/FormBuilder/DefaultElements.php:873
+#: app/Services/FormBuilder/DefaultElements.php:900
 #: app/Services/Migrator/Classes/BaseMigrator.php:870
 msgid "File Upload"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1869
+#: app/Modules/Widgets/OxyFluentFormWidget.php:659
+msgid "File Upload Field"
+msgstr ""
+
+#: app/Modules/Widgets/FluentFormWidget.php:1870
 msgid "Filled"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:948
+#: app/Modules/Registerer/Menu.php:973
 msgid "Filter By Date Range"
 msgstr ""
 
@@ -1176,20 +1275,24 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1336
+#: app/Services/FormBuilder/DefaultElements.php:1340
 msgid "Five Column Container"
 msgstr ""
 
+#: app/Modules/Widgets/OxyFluentFormWidget.php:13
+msgid "Fluent Form"
+msgstr ""
+
 #. Name of the plugin
-#: app/Modules/Registerer/Menu.php:281
-#: app/Modules/Widgets/FluentFormWidget.php:22
-#: app/Modules/Widgets/FluentFormWidget.php:81
-#: app/Modules/Widgets/FluentFormWidget.php:89
+#: app/Modules/Registerer/Menu.php:306 app/Modules/Widgets/OxygenWidget.php:36
+#: app/Modules/Widgets/FluentFormWidget.php:23
+#: app/Modules/Widgets/FluentFormWidget.php:82
+#: app/Modules/Widgets/FluentFormWidget.php:90
 #: resources/views/admin/global_menu.php:9
 msgid "Fluent Forms"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:444
+#: app/Modules/Entries/Entries.php:445
 msgid "Fluent Forms Bot"
 msgstr ""
 
@@ -1205,7 +1308,7 @@ msgstr ""
 msgid "Fluent Forms PDF"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:279
+#: app/Modules/Registerer/Menu.php:304
 msgid "Fluent Forms Pro"
 msgstr ""
 
@@ -1213,7 +1316,7 @@ msgstr ""
 msgid "Fluent Forms Widget"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:801
+#: app/Modules/Widgets/FluentFormWidget.php:802
 msgid "Focus"
 msgstr ""
 
@@ -1225,21 +1328,22 @@ msgstr ""
 msgid "Font color of the element"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:919
+#: app/Modules/Registerer/Menu.php:944
 #: resources/views/email/report/body.php:147
 #: resources/views/email/report/body.php:172
 msgid "Form"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:382
+#: app/Modules/Widgets/OxyFluentFormWidget.php:62
+#: app/Modules/Widgets/FluentFormWidget.php:383
 msgid "Form Container"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:929
+#: app/Modules/Registerer/Menu.php:954
 msgid "Form Entry Data"
 msgstr ""
 
-#: app/Modules/Form/Form.php:558
+#: app/Modules/Form/Form.php:557
 msgid "Form has been successfully converted to conversational form."
 msgstr ""
 
@@ -1251,7 +1355,7 @@ msgstr ""
 msgid "Form layout settings"
 msgstr ""
 
-#: app/Modules/Form/Form.php:548
+#: app/Modules/Form/Form.php:547
 msgid "Form Not Found! Try Again."
 msgstr ""
 
@@ -1259,11 +1363,11 @@ msgstr ""
 msgid "Form restrictions and scheduling"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:506
+#: app/Modules/Registerer/Menu.php:531
 msgid "Form Settings"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1117
+#: app/Services/FormBuilder/DefaultElements.php:1121
 msgid "Form Step"
 msgstr ""
 
@@ -1284,7 +1388,7 @@ msgstr ""
 msgid "Form submission is now closed."
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1316
+#: app/Services/FormBuilder/DefaultElements.php:1320
 msgid "Four Column Container"
 msgstr ""
 
@@ -1304,15 +1408,15 @@ msgstr ""
 msgid "French Southern Territories"
 msgstr ""
 
-#: app/Modules/Component/Component.php:965
+#: app/Modules/Component/Component.php:987
 msgid "Fri"
 msgstr ""
 
-#: app/Modules/Component/Component.php:956
+#: app/Modules/Component/Component.php:978
 msgid "Friday"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:2090
+#: app/Modules/Widgets/FluentFormWidget.php:2091
 msgid "Full Width"
 msgstr ""
 
@@ -1324,19 +1428,23 @@ msgstr ""
 msgid "Gambia"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:849
+#: app/Modules/Widgets/FluentFormWidget.php:850
 msgid "GDPR , Terms & Condition "
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1160
-#: app/Services/FormBuilder/DefaultElements.php:1162
-#: app/Services/FormBuilder/DefaultElements.php:1175
+#: app/Services/FormBuilder/DefaultElements.php:1164
+#: app/Services/FormBuilder/DefaultElements.php:1166
+#: app/Services/FormBuilder/DefaultElements.php:1179
 #: app/Services/Migrator/Classes/BaseMigrator.php:989
 #: app/Services/Migrator/Classes/BaseMigrator.php:1002
 msgid "GDPR Agreement"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:954
+#: app/Modules/Widgets/OxyFluentFormWidget.php:352
+msgid "GDPR, Terms & Condition"
+msgstr ""
+
+#: app/Modules/Registerer/Menu.php:979
 msgid "General"
 msgstr ""
 
@@ -1348,7 +1456,7 @@ msgstr ""
 msgid "Germany"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:397 app/Modules/Registerer/Menu.php:398
+#: app/Modules/Registerer/Menu.php:422 app/Modules/Registerer/Menu.php:423
 msgid "Get Help"
 msgstr ""
 
@@ -1360,17 +1468,17 @@ msgstr ""
 msgid "Gibraltar"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:240
-#: app/Services/FormBuilder/ValidationRuleSettings.php:254
+#: app/Services/FormBuilder/ValidationRuleSettings.php:247
+#: app/Services/FormBuilder/ValidationRuleSettings.php:261
 msgid "GIF"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:356 app/Modules/Registerer/Menu.php:357
+#: app/Modules/Registerer/Menu.php:381 app/Modules/Registerer/Menu.php:382
 #: resources/views/admin/global_menu.php:28
 msgid "Global Settings"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:983
+#: app/Services/FormBuilder/DefaultElements.php:987
 msgid "Good"
 msgstr ""
 
@@ -1394,11 +1502,11 @@ msgstr ""
 msgid "Grid Rows"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1325
+#: app/Modules/Widgets/FluentFormWidget.php:1326
 msgid "Grid Table Head"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1409
+#: app/Modules/Widgets/FluentFormWidget.php:1410
 msgid "Grid Table Item"
 msgstr ""
 
@@ -1418,7 +1526,7 @@ msgstr ""
 msgid "Guernsey"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:937
+#: app/Modules/Registerer/Menu.php:962
 msgid "Guest"
 msgstr ""
 
@@ -1438,21 +1546,25 @@ msgstr ""
 msgid "Haiti"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1206
+#: app/Services/FormBuilder/DefaultElements.php:1210
 msgid "hCaptcha"
 msgstr ""
 
-#: app/Modules/Form/FormHandler.php:465
+#: app/Modules/Form/FormHandler.php:464
 msgid "hCaptcha verification failed, please try again."
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:342
+msgid "Heading Typography"
 msgstr ""
 
 #: app/Services/FormBuilder/CountryNames.php:115
 msgid "Heard Island and McDonald Islands"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1368
-#: app/Modules/Widgets/FluentFormWidget.php:1463
-#: app/Modules/Widgets/FluentFormWidget.php:1818
+#: app/Modules/Widgets/FluentFormWidget.php:1369
+#: app/Modules/Widgets/FluentFormWidget.php:1464
+#: app/Modules/Widgets/FluentFormWidget.php:1819
 msgid "Height"
 msgstr ""
 
@@ -1473,20 +1585,20 @@ msgid ""
 "Help message will be shown as tooltip next to sidebar or below the field."
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1006
+#: app/Services/FormBuilder/DefaultElements.php:1010
 #: app/Services/Migrator/Classes/BaseMigrator.php:334
 msgid "Hidden Field"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:140
-#: app/Modules/Widgets/FluentFormWidget.php:152
-#: app/Modules/Widgets/FluentFormWidget.php:175
-#: app/Modules/Widgets/FluentFormWidget.php:1694
-#: app/Modules/Widgets/FluentFormWidget.php:1762
+#: app/Modules/Widgets/FluentFormWidget.php:141
+#: app/Modules/Widgets/FluentFormWidget.php:153
+#: app/Modules/Widgets/FluentFormWidget.php:176
+#: app/Modules/Widgets/FluentFormWidget.php:1695
+#: app/Modules/Widgets/FluentFormWidget.php:1763
 msgid "Hide"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:913
+#: app/Modules/Registerer/Menu.php:938
 msgid "Hide Chart"
 msgstr ""
 
@@ -1506,10 +1618,25 @@ msgstr ""
 msgid "Hook Name"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1623
-#: app/Modules/Widgets/FluentFormWidget.php:1990
-#: app/Modules/Widgets/FluentFormWidget.php:2229
+#: app/Modules/Widgets/OxyFluentFormWidget.php:216
+#: app/Modules/Widgets/FluentFormWidget.php:1624
+#: app/Modules/Widgets/FluentFormWidget.php:1991
+#: app/Modules/Widgets/FluentFormWidget.php:2230
 msgid "Hover"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:795
+#: app/Modules/Widgets/OxyFluentFormWidget.php:851
+msgid "Hover Border"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:797
+#: app/Modules/Widgets/OxyFluentFormWidget.php:853
+msgid "Hover Box Shadow"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:757
+msgid "Hover Color"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:126
@@ -1548,17 +1675,17 @@ msgstr ""
 msgid "Hungary"
 msgstr ""
 
-#: app/Services/FluentConversational/Classes/Form.php:366
+#: app/Services/FluentConversational/Classes/Form.php:367
 msgid "I accept"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1161
+#: app/Services/FormBuilder/DefaultElements.php:1165
 msgid ""
 "I consent to have this website store my submitted information so they can "
 "respond to my inquiry"
 msgstr ""
 
-#: app/Services/FluentConversational/Classes/Form.php:367
+#: app/Services/FluentConversational/Classes/Form.php:368
 msgid "I don't accept"
 msgstr ""
 
@@ -1566,11 +1693,11 @@ msgstr ""
 msgid "Iceland"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:894
+#: app/Modules/Registerer/Menu.php:919
 msgid "ID"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:568
+#: app/Services/FormBuilder/ElementCustomization.php:573
 msgid "If validation failed then it will show this message"
 msgstr ""
 
@@ -1612,7 +1739,7 @@ msgid ""
 "been left"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:542
+#: app/Services/FormBuilder/ElementCustomization.php:547
 msgid ""
 "If you make it unique then it will validate as unique from previous "
 "submissions of this form"
@@ -1623,13 +1750,13 @@ msgstr ""
 msgid "If you would like to pre-populate the value of a field, enter it here."
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:825
-#: app/Services/FormBuilder/DefaultElements.php:852
-#: app/Modules/Widgets/FluentFormWidget.php:1541
+#: app/Services/FormBuilder/DefaultElements.php:829
+#: app/Services/FormBuilder/DefaultElements.php:856
+#: app/Modules/Widgets/FluentFormWidget.php:1542
 msgid "Image Upload"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:158
+#: app/Services/FormBuilder/ValidationRuleSettings.php:165
 msgid "Images"
 msgstr ""
 
@@ -1649,19 +1776,25 @@ msgstr ""
 msgid "Indonesia"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:557
+#: app/Modules/Widgets/OxyFluentFormWidget.php:143
+msgid "Input & Textara"
+msgstr ""
+
+#: app/Modules/Widgets/FluentFormWidget.php:558
 msgid "Input & Textarea"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:692
+#: app/Modules/Widgets/OxyFluentFormWidget.php:168
+#: app/Modules/Widgets/FluentFormWidget.php:693
 msgid "Input Height"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:673
+#: app/Modules/Widgets/OxyFluentFormWidget.php:161
+#: app/Modules/Widgets/FluentFormWidget.php:674
 msgid "Input Width"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:386 app/Modules/Registerer/Menu.php:387
+#: app/Modules/Registerer/Menu.php:411 app/Modules/Registerer/Menu.php:412
 msgid "Integration Modules"
 msgstr ""
 
@@ -1677,7 +1810,7 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:890
+#: app/Services/FormBuilder/DefaultElements.php:894
 #: app/Services/Migrator/Classes/BaseMigrator.php:864
 msgid "Invalid file type"
 msgstr ""
@@ -1714,19 +1847,19 @@ msgstr ""
 msgid "Italy"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:632
+#: app/Modules/Entries/Entries.php:633
 msgid "Item has been added to favorites"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:634
+#: app/Modules/Entries/Entries.php:635
 msgid "Item has been removed from favorites"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1459
+#: app/Services/FormBuilder/DefaultElements.php:1463
 msgid "Item Quantity"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:520
+#: app/Modules/Entries/Entries.php:521
 msgid "Item Successfully deleted"
 msgstr ""
 
@@ -1738,11 +1871,11 @@ msgstr ""
 msgid "Jamaica"
 msgstr ""
 
-#: app/Modules/Component/Component.php:921
+#: app/Modules/Component/Component.php:943
 msgid "Jan"
 msgstr ""
 
-#: app/Modules/Component/Component.php:935
+#: app/Modules/Component/Component.php:957
 msgid "January"
 msgstr ""
 
@@ -1758,24 +1891,24 @@ msgstr ""
 msgid "Jordan"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:232
-#: app/Services/FormBuilder/ValidationRuleSettings.php:246
+#: app/Services/FormBuilder/ValidationRuleSettings.php:239
+#: app/Services/FormBuilder/ValidationRuleSettings.php:253
 msgid "JPG"
 msgstr ""
 
-#: app/Modules/Component/Component.php:927
+#: app/Modules/Component/Component.php:949
 msgid "Jul"
 msgstr ""
 
-#: app/Modules/Component/Component.php:941
+#: app/Modules/Component/Component.php:963
 msgid "July"
 msgstr ""
 
-#: app/Modules/Component/Component.php:926
+#: app/Modules/Component/Component.php:948
 msgid "Jun"
 msgstr ""
 
-#: app/Modules/Component/Component.php:940
+#: app/Modules/Component/Component.php:962
 msgid "June"
 msgstr ""
 
@@ -1803,12 +1936,12 @@ msgstr ""
 msgid "Kyrgyzstan"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1180
+#: app/Modules/Widgets/FluentFormWidget.php:1181
 msgid "Label"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1516
-#: app/Modules/Widgets/FluentFormWidget.php:1704
+#: app/Modules/Widgets/FluentFormWidget.php:1517
+#: app/Modules/Widgets/FluentFormWidget.php:1705
 msgid "Label Color"
 msgstr ""
 
@@ -1816,8 +1949,13 @@ msgstr ""
 msgid "Label Placement"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:136
-#: app/Modules/Widgets/FluentFormWidget.php:524
+#: app/Modules/Widgets/OxyFluentFormWidget.php:733
+msgid "Label Spacing"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:117
+#: app/Modules/Widgets/FluentFormWidget.php:137
+#: app/Modules/Widgets/FluentFormWidget.php:525
 msgid "Labels"
 msgstr ""
 
@@ -1839,7 +1977,7 @@ msgstr ""
 msgid "Latvia"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:577
+#: app/Services/FormBuilder/ElementCustomization.php:582
 msgid "Layout"
 msgstr ""
 
@@ -1849,12 +1987,12 @@ msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:71
 #: app/Services/FormBuilder/ElementCustomization.php:215
-#: app/Modules/Widgets/FluentFormWidget.php:202
-#: app/Modules/Widgets/FluentFormWidget.php:445
-#: app/Modules/Widgets/FluentFormWidget.php:569
-#: app/Modules/Widgets/FluentFormWidget.php:861
-#: app/Modules/Widgets/FluentFormWidget.php:1293
-#: app/Modules/Widgets/FluentFormWidget.php:2063
+#: app/Modules/Widgets/FluentFormWidget.php:203
+#: app/Modules/Widgets/FluentFormWidget.php:446
+#: app/Modules/Widgets/FluentFormWidget.php:570
+#: app/Modules/Widgets/FluentFormWidget.php:862
+#: app/Modules/Widgets/FluentFormWidget.php:1294
+#: app/Modules/Widgets/FluentFormWidget.php:2064
 msgid "Left"
 msgstr ""
 
@@ -1879,15 +2017,21 @@ msgstr ""
 msgid "Liechtenstein"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:402
+#: app/Modules/Widgets/OxyFluentFormWidget.php:364
+#: app/Modules/Widgets/OxyFluentFormWidget.php:532
+#: app/Modules/Widgets/FluentFormWidget.php:403
 msgid "Link Color"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:537
+msgid "Link Hover Color"
 msgstr ""
 
 #: app/Services/FormBuilder/CountryNames.php:146
 msgid "Lithuania"
 msgstr ""
 
-#: app/Modules/Component/Component.php:549
+#: app/Modules/Component/Component.php:552
 #: resources/views/public/conversational-form.php:118
 msgid "Loading..."
 msgstr ""
@@ -1987,32 +2131,36 @@ msgstr ""
 msgid "Managing form submissions"
 msgstr ""
 
-#: app/Modules/Component/Component.php:923
+#: app/Modules/Component/Component.php:945
 msgid "Mar"
 msgstr ""
 
-#: app/Modules/Component/Component.php:937
+#: app/Modules/Component/Component.php:959
 msgid "March"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:267
-#: app/Modules/Widgets/FluentFormWidget.php:343
-#: app/Modules/Widgets/FluentFormWidget.php:464
-#: app/Modules/Widgets/FluentFormWidget.php:1222
-#: app/Modules/Widgets/FluentFormWidget.php:1277
-#: app/Modules/Widgets/FluentFormWidget.php:2376
+#: app/Modules/Widgets/OxyFluentFormWidget.php:91
+#: app/Modules/Widgets/OxyFluentFormWidget.php:404
+#: app/Modules/Widgets/OxyFluentFormWidget.php:788
+#: app/Modules/Widgets/FluentFormWidget.php:268
+#: app/Modules/Widgets/FluentFormWidget.php:344
+#: app/Modules/Widgets/FluentFormWidget.php:465
+#: app/Modules/Widgets/FluentFormWidget.php:1223
+#: app/Modules/Widgets/FluentFormWidget.php:1278
+#: app/Modules/Widgets/FluentFormWidget.php:2377
 msgid "Margin"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:2189
+#: app/Modules/Widgets/OxyFluentFormWidget.php:769
+#: app/Modules/Widgets/FluentFormWidget.php:2190
 msgid "Margin Top"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:931
+#: app/Modules/Registerer/Menu.php:956
 msgid "Mark as Favorite"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:524
+#: app/Modules/Registerer/Menu.php:549
 msgid "Marketing & CRM Integrations"
 msgstr ""
 
@@ -2039,11 +2187,11 @@ msgstr ""
 msgid "Mauritius"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:141
+#: app/Services/FormBuilder/ValidationRuleSettings.php:148
 msgid "Max File Size"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:148
+#: app/Services/FormBuilder/ValidationRuleSettings.php:155
 msgid "Max Files Count"
 msgstr ""
 
@@ -2060,16 +2208,17 @@ msgid "Max text length"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:521
-#: app/Services/FormBuilder/ValidationRuleSettings.php:135
+#: app/Services/FormBuilder/ValidationRuleSettings.php:142
 msgid "Max Value"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:414
+#: app/Modules/Widgets/OxyFluentFormWidget.php:73
+#: app/Modules/Widgets/FluentFormWidget.php:415
 msgid "Max Width"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:838
-#: app/Services/FormBuilder/DefaultElements.php:882
+#: app/Services/FormBuilder/DefaultElements.php:842
+#: app/Services/FormBuilder/DefaultElements.php:886
 msgid "Maximum file size limit is 1MB"
 msgstr ""
 
@@ -2081,11 +2230,11 @@ msgstr ""
 msgid "Maximum upload limit reached"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:149
+#: app/Services/FormBuilder/ValidationRuleSettings.php:156
 msgid "Maximum user file upload number."
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:136
+#: app/Services/FormBuilder/ValidationRuleSettings.php:143
 msgid "Maximum value for the input field."
 msgstr ""
 
@@ -2093,8 +2242,8 @@ msgstr ""
 msgid "Maximum value is "
 msgstr ""
 
-#: app/Modules/Component/Component.php:925
-#: app/Modules/Component/Component.php:939
+#: app/Modules/Component/Component.php:947
+#: app/Modules/Component/Component.php:961
 msgid "May"
 msgstr ""
 
@@ -2141,7 +2290,7 @@ msgstr ""
 msgid "Moldova"
 msgstr ""
 
-#: app/Modules/Component/Component.php:961
+#: app/Modules/Component/Component.php:983
 msgid "Mon"
 msgstr ""
 
@@ -2149,7 +2298,7 @@ msgstr ""
 msgid "Monaco"
 msgstr ""
 
-#: app/Modules/Component/Component.php:952
+#: app/Modules/Component/Component.php:974
 msgid "Monday"
 msgstr ""
 
@@ -2181,12 +2330,12 @@ msgstr ""
 msgid "Multi-step form's previous button"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:738
+#: app/Services/FormBuilder/DefaultElements.php:742
 #: app/Services/Migrator/Classes/BaseMigrator.php:551
 msgid "Multiple Choice"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:710
+#: app/Services/FormBuilder/DefaultElements.php:714
 msgid "Multiselect"
 msgstr ""
 
@@ -2227,7 +2376,7 @@ msgstr ""
 msgid "New Caledonia"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:313 app/Modules/Registerer/Menu.php:314
+#: app/Modules/Registerer/Menu.php:338 app/Modules/Registerer/Menu.php:339
 msgid "New Form"
 msgstr ""
 
@@ -2235,8 +2384,8 @@ msgstr ""
 msgid "New Zealand"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1112
-#: app/Modules/Registerer/Menu.php:927
+#: app/Services/FormBuilder/DefaultElements.php:1116
+#: app/Modules/Registerer/Menu.php:952
 msgid "Next"
 msgstr ""
 
@@ -2244,7 +2393,7 @@ msgstr ""
 msgid "Next Button"
 msgstr ""
 
-#: app/Modules/Component/Component.php:918
+#: app/Modules/Component/Component.php:940
 msgid "Next Month"
 msgstr ""
 
@@ -2252,7 +2401,7 @@ msgstr ""
 msgid "Nicaragua"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:982
+#: app/Services/FormBuilder/DefaultElements.php:986
 msgid "Nice"
 msgstr ""
 
@@ -2269,17 +2418,17 @@ msgid "Niue"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:243
-#: app/Services/FormBuilder/ElementCustomization.php:555
+#: app/Services/FormBuilder/ElementCustomization.php:560
 #: app/Services/FormBuilder/ValidationRuleSettings.php:69
 #: app/Services/FormBuilder/ValidationRuleSettings.php:86
 #: app/Services/FormBuilder/ValidationRuleSettings.php:103
 #: app/Services/FormBuilder/ValidationRuleSettings.php:120
-#: app/Modules/Widgets/FluentFormWidget.php:103
-#: app/Modules/Widgets/FluentFormWidget.php:945
+#: app/Modules/Widgets/FluentFormWidget.php:104
+#: app/Modules/Widgets/FluentFormWidget.php:946
 msgid "No"
 msgstr ""
 
-#: app/Modules/Component/Component.php:550
+#: app/Modules/Component/Component.php:553
 msgid "No choices to choose from"
 msgstr ""
 
@@ -2287,19 +2436,19 @@ msgstr ""
 msgid "No forms found!"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:956
+#: app/Modules/Registerer/Menu.php:981
 msgid "No Logs found"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:943 app/Modules/Registerer/Menu.php:959
+#: app/Modules/Registerer/Menu.php:968 app/Modules/Registerer/Menu.php:984
 msgid "No Notes found"
 msgstr ""
 
-#: app/Modules/Component/Component.php:548
+#: app/Modules/Component/Component.php:551
 msgid "No results found"
 msgstr ""
 
-#: app/Modules/Form/FormHandler.php:386 app/Modules/Acl/Acl.php:185
+#: app/Modules/Form/FormHandler.php:385 app/Modules/Acl/Acl.php:185
 msgid "Nonce verification failed, please try again."
 msgstr ""
 
@@ -2312,12 +2461,13 @@ msgstr ""
 msgid "Norfolk Island"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:593
-#: app/Modules/Widgets/FluentFormWidget.php:1008
-#: app/Modules/Widgets/FluentFormWidget.php:1551
-#: app/Modules/Widgets/FluentFormWidget.php:1774
-#: app/Modules/Widgets/FluentFormWidget.php:1916
-#: app/Modules/Widgets/FluentFormWidget.php:2123
+#: app/Modules/Widgets/OxyFluentFormWidget.php:192
+#: app/Modules/Widgets/FluentFormWidget.php:594
+#: app/Modules/Widgets/FluentFormWidget.php:1009
+#: app/Modules/Widgets/FluentFormWidget.php:1552
+#: app/Modules/Widgets/FluentFormWidget.php:1775
+#: app/Modules/Widgets/FluentFormWidget.php:1917
+#: app/Modules/Widgets/FluentFormWidget.php:2124
 msgid "Normal"
 msgstr ""
 
@@ -2333,37 +2483,41 @@ msgstr ""
 msgid "Norway"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:488
+#: app/Modules/Entries/Entries.php:489
 msgid "Note has been successfully added"
 msgstr ""
 
-#: app/Modules/Component/Component.php:931
+#: app/Modules/Component/Component.php:953
 msgid "Nov"
 msgstr ""
 
-#: app/Modules/Component/Component.php:945
+#: app/Modules/Component/Component.php:967
 msgid "November"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:561
+#: app/Services/FormBuilder/ElementCustomization.php:566
 msgid "Number Format"
 msgstr ""
 
+#: app/Services/FormBuilder/ValidationRuleSettings.php:136
+msgid "Number of digits for the input field."
+msgstr ""
+
 #: app/Services/FormBuilder/DefaultElements.php:503
-#: app/Services/FormBuilder/DefaultElements.php:536
+#: app/Services/FormBuilder/DefaultElements.php:540
 #: app/Services/Migrator/Classes/BaseMigrator.php:779
 msgid "Numeric Field"
 msgstr ""
 
-#: app/Modules/Component/Component.php:930
+#: app/Modules/Component/Component.php:952
 msgid "Oct"
 msgstr ""
 
-#: app/Modules/Component/Component.php:944
+#: app/Modules/Component/Component.php:966
 msgid "October"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1442
+#: app/Modules/Widgets/FluentFormWidget.php:1443
 msgid "Odd Item Background Color"
 msgstr ""
 
@@ -2375,13 +2529,13 @@ msgstr ""
 msgid "Oman"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1261
+#: app/Services/FormBuilder/DefaultElements.php:1265
 msgid "One Column Container"
 msgstr ""
 
-#: app/Modules/Component/Component.php:552
+#: app/Modules/Component/Component.php:555
 #, php-format
-msgid "Only %%maxItemCount%% values can be added"
+msgid "Only %%maxItemCount%% options can be added"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:130
@@ -2390,34 +2544,41 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:96
+#: app/Services/FormBuilder/EditorShortCode.php:97
 msgid "Order Items Table"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:518
+#: app/Modules/Registerer/Menu.php:543
 msgid "Other Confirmations"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:289
-#: app/Modules/Widgets/FluentFormWidget.php:365
-#: app/Modules/Widgets/FluentFormWidget.php:476
-#: app/Modules/Widgets/FluentFormWidget.php:749
-#: app/Modules/Widgets/FluentFormWidget.php:1210
-#: app/Modules/Widgets/FluentFormWidget.php:1265
-#: app/Modules/Widgets/FluentFormWidget.php:1397
-#: app/Modules/Widgets/FluentFormWidget.php:1492
-#: app/Modules/Widgets/FluentFormWidget.php:1592
-#: app/Modules/Widgets/FluentFormWidget.php:1976
-#: app/Modules/Widgets/FluentFormWidget.php:2177
-#: app/Modules/Widgets/FluentFormWidget.php:2364
+#: app/Modules/Widgets/OxyFluentFormWidget.php:84
+#: app/Modules/Widgets/OxyFluentFormWidget.php:243
+#: app/Modules/Widgets/OxyFluentFormWidget.php:397
+#: app/Modules/Widgets/OxyFluentFormWidget.php:676
+#: app/Modules/Widgets/OxyFluentFormWidget.php:781
+#: app/Modules/Widgets/OxyFluentFormWidget.php:808
+#: app/Modules/Widgets/OxyFluentFormWidget.php:884
+#: app/Modules/Widgets/FluentFormWidget.php:290
+#: app/Modules/Widgets/FluentFormWidget.php:366
+#: app/Modules/Widgets/FluentFormWidget.php:477
+#: app/Modules/Widgets/FluentFormWidget.php:750
+#: app/Modules/Widgets/FluentFormWidget.php:1211
+#: app/Modules/Widgets/FluentFormWidget.php:1266
+#: app/Modules/Widgets/FluentFormWidget.php:1398
+#: app/Modules/Widgets/FluentFormWidget.php:1493
+#: app/Modules/Widgets/FluentFormWidget.php:1593
+#: app/Modules/Widgets/FluentFormWidget.php:1977
+#: app/Modules/Widgets/FluentFormWidget.php:2178
+#: app/Modules/Widgets/FluentFormWidget.php:2365
 msgid "Padding"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1675
+#: app/Modules/Widgets/FluentFormWidget.php:1676
 msgid "Pagination"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:78
+#: app/Services/FormBuilder/EditorShortCode.php:79
 msgid "Paid Total Amount"
 msgstr ""
 
@@ -2441,20 +2602,20 @@ msgstr ""
 msgid "Paraguay"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1079
+#: app/Services/FormBuilder/DefaultElements.php:1083
 msgid "Password"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1092
+#: app/Services/FormBuilder/DefaultElements.php:1096
 #: app/Services/Migrator/Classes/BaseMigrator.php:727
 msgid "Password Field"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:79
+#: app/Services/FormBuilder/EditorShortCode.php:80
 msgid "Payment Amount"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1436
+#: app/Services/FormBuilder/DefaultElements.php:1440
 msgid "Payment Field"
 msgstr ""
 
@@ -2462,37 +2623,37 @@ msgstr ""
 msgid "Payment Items"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:76
-#: app/Services/FormBuilder/EditorShortCode.php:99
+#: app/Services/FormBuilder/EditorShortCode.php:77
+#: app/Services/FormBuilder/EditorShortCode.php:100
 msgid "Payment Method"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:94
+#: app/Services/FormBuilder/EditorShortCode.php:95
 msgid "Payment Receipt"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:77
-#: app/Services/FormBuilder/EditorShortCode.php:97
+#: app/Services/FormBuilder/EditorShortCode.php:78
+#: app/Services/FormBuilder/EditorShortCode.php:98
 msgid "Payment Status"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:95
+#: app/Services/FormBuilder/EditorShortCode.php:96
 msgid "Payment Summary"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:98
+#: app/Services/FormBuilder/EditorShortCode.php:99
 #: resources/views/email/report/body.php:173
 msgid "Payment Total"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:345 app/Modules/Registerer/Menu.php:346
+#: app/Modules/Registerer/Menu.php:370 app/Modules/Registerer/Menu.php:371
 #: resources/views/admin/global_menu.php:22
 #: resources/views/admin/global_menu.php:37
 #: resources/views/email/report/body.php:168
 msgid "Payments"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:183
+#: app/Services/FormBuilder/ValidationRuleSettings.php:190
 msgid "PDF"
 msgstr ""
 
@@ -2517,8 +2678,8 @@ msgid "Pitcairn"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:105
-#: app/Modules/Widgets/FluentFormWidget.php:148
-#: app/Modules/Widgets/FluentFormWidget.php:904
+#: app/Modules/Widgets/FluentFormWidget.php:149
+#: app/Modules/Widgets/FluentFormWidget.php:905
 msgid "Placeholder"
 msgstr ""
 
@@ -2530,6 +2691,10 @@ msgstr ""
 
 #: app/Services/Integrations/BaseIntegration.php:110
 msgid "Please fix the errors"
+msgstr ""
+
+#: app/Services/FormBuilder/ElementCustomization.php:527
+msgid "Please provide digits count value"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:503
@@ -2546,34 +2711,34 @@ msgstr ""
 msgid "Please provide minimum value"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:942
+#: app/Modules/Registerer/Menu.php:967
 msgid "Please Provide Note Content"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:527
+#: app/Services/FormBuilder/ElementCustomization.php:532
 msgid ""
 "Please provide step attribute for this field. Give value \"any\" for "
 "floating value"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:659
+#: app/Modules/Entries/Entries.php:660
 msgid "Please select entries first"
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:183
+#: app/Modules/Settings/Settings.php:184
 msgid "Please validate your hCaptcha first and then hit save."
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:120
+#: app/Modules/Settings/Settings.php:121
 msgid "Please validate your reCAPTCHA first and then hit save."
 msgstr ""
 
-#: app/Modules/Component/Component.php:989
+#: app/Modules/Component/Component.php:1011
 msgid "PM"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:236
-#: app/Services/FormBuilder/ValidationRuleSettings.php:250
+#: app/Services/FormBuilder/ValidationRuleSettings.php:243
+#: app/Services/FormBuilder/ValidationRuleSettings.php:257
 msgid "PNG"
 msgstr ""
 
@@ -2589,15 +2754,15 @@ msgstr ""
 msgid "Predefined form fields"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:531
+#: app/Services/FormBuilder/ElementCustomization.php:536
 msgid "Prefix Label"
 msgstr ""
 
-#: app/Modules/Component/Component.php:551
+#: app/Modules/Component/Component.php:554
 msgid "Press to select"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:900
+#: app/Modules/Registerer/Menu.php:925
 msgid "Preview"
 msgstr ""
 
@@ -2606,8 +2771,8 @@ msgstr ""
 msgid "Preview Form"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1107
-#: app/Modules/Registerer/Menu.php:926
+#: app/Services/FormBuilder/DefaultElements.php:1111
+#: app/Modules/Registerer/Menu.php:951
 msgid "Previous"
 msgstr ""
 
@@ -2615,11 +2780,12 @@ msgstr ""
 msgid "Previous Button"
 msgstr ""
 
-#: app/Modules/Component/Component.php:917
+#: app/Modules/Component/Component.php:939
 msgid "Previous Month"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:284
+#: app/Modules/Widgets/OxyFluentFormWidget.php:708
 msgid "Progress Bar"
 msgstr ""
 
@@ -2627,20 +2793,20 @@ msgstr ""
 msgid "Progress Indicator"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1751
+#: app/Modules/Widgets/FluentFormWidget.php:1752
 msgid "Progressbar"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1683
+#: app/Modules/Widgets/FluentFormWidget.php:1684
 msgid "Progressbar Label"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:532
+#: app/Services/FormBuilder/ElementCustomization.php:537
 msgid ""
 "Provide Input Prefix Label. It will show in the input field as prefix label"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:537
+#: app/Services/FormBuilder/ElementCustomization.php:542
 msgid ""
 "Provide Input Suffix Label. It will show in the input field as suffix label"
 msgstr ""
@@ -2657,16 +2823,16 @@ msgstr ""
 msgid "Radio"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:934
+#: app/Modules/Widgets/FluentFormWidget.php:935
 msgid "Radio & Checkbox"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1096
+#: app/Modules/Widgets/FluentFormWidget.php:1097
 msgid "Radio Buttons"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:601
-#: app/Services/FormBuilder/DefaultElements.php:634
+#: app/Services/FormBuilder/DefaultElements.php:605
+#: app/Services/FormBuilder/DefaultElements.php:638
 #: app/Services/Migrator/Classes/BaseMigrator.php:623
 msgid "Radio Field"
 msgstr ""
@@ -2675,30 +2841,30 @@ msgstr ""
 msgid "Random String with Prefix"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:967
-#: app/Services/FormBuilder/DefaultElements.php:989
+#: app/Services/FormBuilder/DefaultElements.php:971
+#: app/Services/FormBuilder/DefaultElements.php:993
 #: app/Services/Migrator/Classes/BaseMigrator.php:971
 msgid "Ratings"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:921
+#: app/Modules/Registerer/Menu.php:946
 msgid "Read"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:917
+#: app/Modules/Registerer/Menu.php:942
 msgid "Read Only"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1190
+#: app/Services/FormBuilder/DefaultElements.php:1194
 #: app/Services/Migrator/Classes/BaseMigrator.php:1109
 msgid "reCaptcha"
 msgstr ""
 
-#: app/Modules/Form/FormHandler.php:442
+#: app/Modules/Form/FormHandler.php:441
 msgid "reCaptcha verification failed, please try again."
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:930
+#: app/Modules/Registerer/Menu.php:955
 msgid "Remove from Favorites"
 msgstr ""
 
@@ -2724,12 +2890,12 @@ msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:63
 #: app/Services/FormBuilder/ElementCustomization.php:223
-#: app/Modules/Widgets/FluentFormWidget.php:210
-#: app/Modules/Widgets/FluentFormWidget.php:453
-#: app/Modules/Widgets/FluentFormWidget.php:577
-#: app/Modules/Widgets/FluentFormWidget.php:869
-#: app/Modules/Widgets/FluentFormWidget.php:1301
-#: app/Modules/Widgets/FluentFormWidget.php:2071
+#: app/Modules/Widgets/FluentFormWidget.php:211
+#: app/Modules/Widgets/FluentFormWidget.php:454
+#: app/Modules/Widgets/FluentFormWidget.php:578
+#: app/Modules/Widgets/FluentFormWidget.php:870
+#: app/Modules/Widgets/FluentFormWidget.php:1302
+#: app/Modules/Widgets/FluentFormWidget.php:2072
 msgid "Right"
 msgstr ""
 
@@ -2793,11 +2959,11 @@ msgstr ""
 msgid "San Marino"
 msgstr ""
 
-#: app/Modules/Component/Component.php:966
+#: app/Modules/Component/Component.php:988
 msgid "Sat"
 msgstr ""
 
-#: app/Modules/Component/Component.php:957
+#: app/Modules/Component/Component.php:979
 msgid "Saturday"
 msgstr ""
 
@@ -2810,21 +2976,22 @@ msgstr ""
 msgid "Save Settings"
 msgstr ""
 
-#: app/Modules/Component/Component.php:985
+#: app/Modules/Component/Component.php:1007
 msgid "Scroll to increment"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:907
+#: app/Modules/Registerer/Menu.php:932
 msgid "Search"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:906
+#: app/Modules/Registerer/Menu.php:931
 msgid "Search Forms"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1055
-#: app/Services/FormBuilder/DefaultElements.php:1061
-#: app/Modules/Widgets/FluentFormWidget.php:1172
+#: app/Services/FormBuilder/DefaultElements.php:1059
+#: app/Services/FormBuilder/DefaultElements.php:1065
+#: app/Modules/Widgets/OxyFluentFormWidget.php:375
+#: app/Modules/Widgets/FluentFormWidget.php:1173
 #: app/Services/Migrator/Classes/BaseMigrator.php:906
 msgid "Section Break"
 msgstr ""
@@ -2833,8 +3000,13 @@ msgstr ""
 msgid "Select a button style from the dropdown"
 msgstr ""
 
-#: app/Modules/Widgets/ElementorWidget.php:47
+#: app/Helpers/Helper.php:576
 msgid "Select a Fluent Forms"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:36
+#: app/Modules/Widgets/OxyFluentFormWidget.php:429
+msgid "Select a Form"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:443
@@ -2854,7 +3026,7 @@ msgid ""
 msgstr ""
 
 #: app/Services/FormBuilder/DefaultElements.php:448
-#: app/Services/FormBuilder/DefaultElements.php:909
+#: app/Services/FormBuilder/DefaultElements.php:913
 #: app/Services/Migrator/Classes/BaseMigrator.php:1310
 msgid "Select Country"
 msgstr ""
@@ -2863,13 +3035,13 @@ msgstr ""
 msgid "Select Date Format"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:562
+#: app/Services/FormBuilder/ElementCustomization.php:567
 msgid ""
 "Select the format of numbers that are allowed in this field. You have the "
 "option to use a comma or a dot as the decimal separator."
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:578
+#: app/Services/FormBuilder/ElementCustomization.php:583
 msgid "Select the Layout for checkable items"
 msgstr ""
 
@@ -2889,15 +3061,15 @@ msgstr ""
 msgid "Select whether to validate this field as URL or not"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:685
+#: app/Modules/Entries/Entries.php:686
 msgid "Selected entries successfully deleted"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:691
+#: app/Modules/Entries/Entries.php:692
 msgid "Selected entries successfully marked as favorites"
 msgstr ""
 
-#: app/Modules/Entries/Entries.php:696
+#: app/Modules/Entries/Entries.php:697
 msgid "Selected entries successfully removed from favorites"
 msgstr ""
 
@@ -2905,7 +3077,7 @@ msgstr ""
 msgid "Selected integration feed successfully deleted"
 msgstr ""
 
-#: app/Modules/Logger/DataLogger.php:249 app/Modules/Logger/DataLogger.php:270
+#: app/Modules/Logger/DataLogger.php:253 app/Modules/Logger/DataLogger.php:274
 msgid "Selected log(s) successfully deleted"
 msgstr ""
 
@@ -2913,11 +3085,11 @@ msgstr ""
 msgid "Senegal"
 msgstr ""
 
-#: app/Modules/Component/Component.php:929
+#: app/Modules/Component/Component.php:951
 msgid "Sep"
 msgstr ""
 
-#: app/Modules/Component/Component.php:943
+#: app/Modules/Component/Component.php:965
 msgid "September"
 msgstr ""
 
@@ -2945,11 +3117,11 @@ msgstr ""
 msgid "Setting up form submission confirmation"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:897
+#: app/Modules/Registerer/Menu.php:922
 msgid "Settings"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:474
+#: app/Modules/Registerer/Menu.php:499
 msgid "Settings & Integrations"
 msgstr ""
 
@@ -2966,24 +3138,24 @@ msgstr ""
 msgid "Seychelles"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:903
+#: app/Modules/Registerer/Menu.php:928
 msgid "Short Code"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:229
-#: app/Services/FormBuilder/DefaultElements.php:1224
+#: app/Services/FormBuilder/DefaultElements.php:1228
 msgid "Shortcode"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:139
-#: app/Modules/Widgets/FluentFormWidget.php:151
-#: app/Modules/Widgets/FluentFormWidget.php:174
-#: app/Modules/Widgets/FluentFormWidget.php:1693
-#: app/Modules/Widgets/FluentFormWidget.php:1761
+#: app/Modules/Widgets/FluentFormWidget.php:140
+#: app/Modules/Widgets/FluentFormWidget.php:152
+#: app/Modules/Widgets/FluentFormWidget.php:175
+#: app/Modules/Widgets/FluentFormWidget.php:1694
+#: app/Modules/Widgets/FluentFormWidget.php:1762
 msgid "Show"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:914
+#: app/Modules/Registerer/Menu.php:939
 msgid "Show Chart"
 msgstr ""
 
@@ -2991,23 +3163,23 @@ msgstr ""
 msgid "Show Checkbox"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:940
+#: app/Modules/Registerer/Menu.php:965
 msgid "Show empty fields"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1691
+#: app/Modules/Widgets/FluentFormWidget.php:1692
 msgid "Show Label"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:1759
+#: app/Modules/Widgets/FluentFormWidget.php:1760
 msgid "Show Progressbar"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:546
+#: app/Services/FormBuilder/ElementCustomization.php:551
 msgid "Show Text"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:547
+#: app/Services/FormBuilder/ElementCustomization.php:552
 msgid "Show Text value on selection"
 msgstr ""
 
@@ -3035,15 +3207,15 @@ msgstr ""
 msgid "Site URL"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1357
+#: app/Services/FormBuilder/DefaultElements.php:1361
 msgid "Six Column Container"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:953
+#: app/Modules/Widgets/FluentFormWidget.php:954
 msgid "Size"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:532
+#: app/Modules/Registerer/Menu.php:557
 msgid "Slack"
 msgstr ""
 
@@ -3063,7 +3235,7 @@ msgstr ""
 msgid "Small"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:376 app/Modules/Registerer/Menu.php:377
+#: app/Modules/Registerer/Menu.php:401 app/Modules/Registerer/Menu.php:402
 msgid "SMTP"
 msgstr ""
 
@@ -3075,7 +3247,7 @@ msgstr ""
 msgid "Somalia"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1056
+#: app/Services/FormBuilder/DefaultElements.php:1060
 msgid "Some description about this section"
 msgstr ""
 
@@ -3111,19 +3283,19 @@ msgstr ""
 msgid "Sorry, you cannot submit an empty form. Let's hear what you wanna say."
 msgstr ""
 
-#: app/Modules/Component/Component.php:292
+#: app/Global/Common.php:244 app/Modules/Component/Component.php:292
 msgid "Sorry, You do not have permission to view this form"
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:180
+#: app/Modules/Settings/Settings.php:181
 msgid "Sorry, Your hCaptcha is not valid, Please try again"
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:117
+#: app/Modules/Settings/Settings.php:118
 msgid "Sorry, Your reCAPTCHA is not valid. Please try again"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:63
+#: app/Services/FormBuilder/EditorShortCode.php:64
 msgid "Source URL"
 msgstr ""
 
@@ -3143,8 +3315,10 @@ msgstr ""
 msgid "South Sudan"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:761
-#: app/Modules/Widgets/FluentFormWidget.php:1735
+#: app/Modules/Widgets/OxyFluentFormWidget.php:279
+#: app/Modules/Widgets/OxyFluentFormWidget.php:640
+#: app/Modules/Widgets/FluentFormWidget.php:762
+#: app/Modules/Widgets/FluentFormWidget.php:1736
 msgid "Spacing"
 msgstr ""
 
@@ -3162,16 +3336,20 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:920
+#: app/Modules/Registerer/Menu.php:945
 msgid "Status"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:526
+#: app/Services/FormBuilder/ElementCustomization.php:531
 msgid "Step"
 msgstr ""
 
-#: app/Modules/Component/Component.php:532
+#: app/Modules/Component/Component.php:535
 msgid "Step %activeStep% of %totalStep% - %stepTitle%"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:802
+msgid "Step Button"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:249
@@ -3190,16 +3368,16 @@ msgstr ""
 msgid "Sub Heading"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:69
+#: app/Services/FormBuilder/EditorShortCode.php:70
 msgid "Submission Admin View URL"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:68
+#: app/Services/FormBuilder/EditorShortCode.php:69
 msgid "Submission Create Date"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:61
-#: app/Modules/Registerer/Menu.php:918
+#: app/Services/FormBuilder/EditorShortCode.php:62
+#: app/Modules/Registerer/Menu.php:943
 msgid "Submission ID"
 msgstr ""
 
@@ -3207,48 +3385,49 @@ msgstr ""
 msgid "Submission ID and User ID is required"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:932
+#: app/Modules/Registerer/Menu.php:957
 msgid "Submission Info"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:953
+#: app/Modules/Registerer/Menu.php:978
 msgid "Submission Logs"
 msgstr ""
 
-#: app/Modules/Form/FormHandler.php:402
+#: app/Modules/Form/FormHandler.php:401
 msgid "Submission marked as spammed. Please try again"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:941 app/Modules/Registerer/Menu.php:957
+#: app/Modules/Registerer/Menu.php:966 app/Modules/Registerer/Menu.php:982
 msgid "Submission Notes"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:62
+#: app/Services/FormBuilder/EditorShortCode.php:63
 msgid "Submission Serial Number"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:67
+#: app/Services/FormBuilder/EditorShortCode.php:68
 msgid "Submission Status"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:205
-#: app/Modules/Widgets/FluentFormWidget.php:2051
+#: app/Modules/Widgets/OxyFluentFormWidget.php:740
+#: app/Modules/Widgets/FluentFormWidget.php:2052
 msgid "Submit Button"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:952
+#: app/Modules/Registerer/Menu.php:977
 msgid "Submitted at"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:938
+#: app/Modules/Registerer/Menu.php:963
 msgid "Submitted On"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:65
+#: app/Services/FormBuilder/EditorShortCode.php:66
 msgid "Submitter Browser"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:66
+#: app/Services/FormBuilder/EditorShortCode.php:67
 msgid "Submitter Device"
 msgstr ""
 
@@ -3256,7 +3435,8 @@ msgstr ""
 msgid "Subscription Items"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:2281
+#: app/Modules/Widgets/OxyFluentFormWidget.php:859
+#: app/Modules/Widgets/FluentFormWidget.php:2282
 msgid "Success Message"
 msgstr ""
 
@@ -3276,15 +3456,15 @@ msgstr ""
 msgid "Sudan"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:536
+#: app/Services/FormBuilder/ElementCustomization.php:541
 msgid "Suffix Label"
 msgstr ""
 
-#: app/Modules/Component/Component.php:960
+#: app/Modules/Component/Component.php:982
 msgid "Sun"
 msgstr ""
 
-#: app/Modules/Component/Component.php:951
+#: app/Modules/Component/Component.php:973
 msgid "Sunday"
 msgstr ""
 
@@ -3316,6 +3496,30 @@ msgstr ""
 msgid "Syria"
 msgstr ""
 
+#: app/Modules/Widgets/OxyFluentFormWidget.php:331
+msgid "Table Body Alt Background"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:336
+msgid "Table Body Alt Text Color"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:326
+msgid "Table Body Background"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:321
+msgid "Table Head Background"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:316
+msgid "Table Outer Border Color"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:311
+msgid "Table Outer Border Width"
+msgstr ""
+
 #: app/Services/FormBuilder/CountryNames.php:235
 msgid "Taiwan"
 msgstr ""
@@ -3329,12 +3533,12 @@ msgid "Tanzania"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:165
-#: app/Services/FormBuilder/DefaultElements.php:1145
+#: app/Services/FormBuilder/DefaultElements.php:1149
 #: app/Services/Migrator/Classes/BaseMigrator.php:1139
 msgid "Terms & Conditions"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1134
+#: app/Services/FormBuilder/DefaultElements.php:1138
 #: app/Services/Migrator/Classes/BaseMigrator.php:1128
 msgid "Terms and Conditions"
 msgstr ""
@@ -3343,19 +3547,36 @@ msgstr ""
 msgid "Text Area"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:532
-#: app/Modules/Widgets/FluentFormWidget.php:612
-#: app/Modules/Widgets/FluentFormWidget.php:915
-#: app/Modules/Widgets/FluentFormWidget.php:1642
-#: app/Modules/Widgets/FluentFormWidget.php:1800
-#: app/Modules/Widgets/FluentFormWidget.php:2142
-#: app/Modules/Widgets/FluentFormWidget.php:2248
-#: app/Modules/Widgets/FluentFormWidget.php:2300
+#: app/Modules/Widgets/OxyFluentFormWidget.php:125
+#: app/Modules/Widgets/OxyFluentFormWidget.php:359
+#: app/Modules/Widgets/OxyFluentFormWidget.php:383
+#: app/Modules/Widgets/OxyFluentFormWidget.php:527
+#: app/Modules/Widgets/OxyFluentFormWidget.php:715
+#: app/Modules/Widgets/OxyFluentFormWidget.php:825
+#: app/Modules/Widgets/OxyFluentFormWidget.php:896
+#: app/Modules/Widgets/FluentFormWidget.php:533
+#: app/Modules/Widgets/FluentFormWidget.php:613
+#: app/Modules/Widgets/FluentFormWidget.php:916
+#: app/Modules/Widgets/FluentFormWidget.php:1643
+#: app/Modules/Widgets/FluentFormWidget.php:1801
+#: app/Modules/Widgets/FluentFormWidget.php:2143
+#: app/Modules/Widgets/FluentFormWidget.php:2249
+#: app/Modules/Widgets/FluentFormWidget.php:2301
 msgid "Text Color"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:648
-#: app/Modules/Widgets/FluentFormWidget.php:979
+#: app/Modules/Widgets/OxyFluentFormWidget.php:543
+msgid "Text Font Size"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:683
+#: app/Modules/Widgets/OxyFluentFormWidget.php:830
+msgid "Text Hover Color"
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:149
+#: app/Modules/Widgets/FluentFormWidget.php:649
+#: app/Modules/Widgets/FluentFormWidget.php:980
 msgid "Text Indent"
 msgstr ""
 
@@ -3363,15 +3584,21 @@ msgstr ""
 msgid "Text Input"
 msgstr ""
 
+#: app/Modules/Widgets/OxyFluentFormWidget.php:520
+msgid "Text Style"
+msgstr ""
+
 #: app/Services/FormBuilder/DefaultElements.php:255
 msgid "Textarea"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:730
+#: app/Modules/Widgets/OxyFluentFormWidget.php:182
+#: app/Modules/Widgets/FluentFormWidget.php:731
 msgid "Textarea Height"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:711
+#: app/Modules/Widgets/OxyFluentFormWidget.php:175
+#: app/Modules/Widgets/FluentFormWidget.php:712
 msgid "Textarea Width"
 msgstr ""
 
@@ -3391,11 +3618,11 @@ msgstr ""
 msgid "The Confirmation Type field is required."
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:142
+#: app/Services/FormBuilder/ValidationRuleSettings.php:149
 msgid "The file size limit uploaded by the user."
 msgstr ""
 
-#: app/Modules/Component/Component.php:465
+#: app/Modules/Component/Component.php:468
 #, php-format
 msgid "The form can be filled in the actual <a href=\"%s\">website url</a>."
 msgstr ""
@@ -3406,6 +3633,10 @@ msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:342
 msgid "The maximum number of characters the input should accept"
+msgstr ""
+
+#: app/Services/FormBuilder/DefaultElements.php:530
+msgid "The number of digits has to be "
 msgstr ""
 
 #: app/Modules/Form/Settings/Validator/Confirmations.php:52
@@ -3446,20 +3677,20 @@ msgstr ""
 #: app/Services/FormBuilder/DefaultElements.php:432
 #: app/Services/FormBuilder/DefaultElements.php:461
 #: app/Services/FormBuilder/DefaultElements.php:514
-#: app/Services/FormBuilder/DefaultElements.php:577
-#: app/Services/FormBuilder/DefaultElements.php:627
-#: app/Services/FormBuilder/DefaultElements.php:683
-#: app/Services/FormBuilder/DefaultElements.php:732
-#: app/Services/FormBuilder/DefaultElements.php:763
-#: app/Services/FormBuilder/DefaultElements.php:801
-#: app/Services/FormBuilder/DefaultElements.php:833
-#: app/Services/FormBuilder/DefaultElements.php:877
-#: app/Services/FormBuilder/DefaultElements.php:921
-#: app/Services/FormBuilder/DefaultElements.php:977
-#: app/Services/FormBuilder/DefaultElements.php:1028
-#: app/Services/FormBuilder/DefaultElements.php:1086
-#: app/Services/FormBuilder/DefaultElements.php:1139
-#: app/Services/FormBuilder/DefaultElements.php:1168
+#: app/Services/FormBuilder/DefaultElements.php:581
+#: app/Services/FormBuilder/DefaultElements.php:631
+#: app/Services/FormBuilder/DefaultElements.php:687
+#: app/Services/FormBuilder/DefaultElements.php:736
+#: app/Services/FormBuilder/DefaultElements.php:767
+#: app/Services/FormBuilder/DefaultElements.php:805
+#: app/Services/FormBuilder/DefaultElements.php:837
+#: app/Services/FormBuilder/DefaultElements.php:881
+#: app/Services/FormBuilder/DefaultElements.php:925
+#: app/Services/FormBuilder/DefaultElements.php:981
+#: app/Services/FormBuilder/DefaultElements.php:1032
+#: app/Services/FormBuilder/DefaultElements.php:1090
+#: app/Services/FormBuilder/DefaultElements.php:1143
+#: app/Services/FormBuilder/DefaultElements.php:1172
 #: app/Services/Migrator/Classes/GravityFormsMigrator.php:321
 #: app/Services/Migrator/Classes/GravityFormsMigrator.php:341
 #: app/Services/Migrator/Classes/BaseMigrator.php:209
@@ -3489,7 +3720,7 @@ msgstr ""
 msgid "This field must contain a valid email"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:767
+#: app/Services/FormBuilder/DefaultElements.php:771
 #: app/Services/Migrator/Classes/BaseMigrator.php:396
 msgid "This field must contain a valid url"
 msgstr ""
@@ -3501,6 +3732,12 @@ msgstr ""
 
 #: app/Hooks/Backend.php:312
 msgid "This field value need to be unique."
+msgstr ""
+
+#: app/Modules/Widgets/OxyFluentFormWidget.php:438
+msgid ""
+"This is a Conversational Form. You must use the default Design tab for this "
+"type of forms."
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:332
@@ -3535,19 +3772,19 @@ msgstr ""
 msgid "This will be visible as button text for upload file."
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1297
+#: app/Services/FormBuilder/DefaultElements.php:1301
 msgid "Three Column Container"
 msgstr ""
 
-#: app/Modules/Component/Component.php:964
+#: app/Modules/Component/Component.php:986
 msgid "Thu"
 msgstr ""
 
-#: app/Modules/Component/Component.php:955
+#: app/Modules/Component/Component.php:977
 msgid "Thursday"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:807
+#: app/Services/FormBuilder/DefaultElements.php:811
 msgid "Time & Date"
 msgstr ""
 
@@ -3555,14 +3792,18 @@ msgstr ""
 msgid "Timor-Leste"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:895
-#: app/Modules/Widgets/FluentFormWidget.php:111
-#: app/Modules/Widgets/FluentFormWidget.php:228
+#: app/Modules/Registerer/Menu.php:920
+#: app/Modules/Widgets/FluentFormWidget.php:112
+#: app/Modules/Widgets/FluentFormWidget.php:229
 msgid "Title"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:187
+#: app/Modules/Widgets/FluentFormWidget.php:188
 msgid "Title & Description"
+msgstr ""
+
+#: app/Modules/Widgets/SidebarWidgets.php:51
+msgid "Title (optional):"
 msgstr ""
 
 #: app/Services/FormBuilder/CountryNames.php:240
@@ -3577,7 +3818,7 @@ msgstr ""
 msgid "Tonga"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:366 app/Modules/Registerer/Menu.php:367
+#: app/Modules/Registerer/Menu.php:391 app/Modules/Registerer/Menu.php:392
 #: resources/views/admin/transfer/index.php:6
 msgid "Tools"
 msgstr ""
@@ -3594,11 +3835,11 @@ msgstr ""
 msgid "Trinidad and Tobago"
 msgstr ""
 
-#: app/Modules/Component/Component.php:962
+#: app/Modules/Component/Component.php:984
 msgid "Tue"
 msgstr ""
 
-#: app/Modules/Component/Component.php:953
+#: app/Modules/Component/Component.php:975
 msgid "Tuesday"
 msgstr ""
 
@@ -3622,26 +3863,31 @@ msgstr ""
 msgid "Tuvalu"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:1279
+#: app/Services/FormBuilder/DefaultElements.php:1283
 msgid "Two Column Container"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:256
-#: app/Modules/Widgets/FluentFormWidget.php:330
-#: app/Modules/Widgets/FluentFormWidget.php:544
-#: app/Modules/Widgets/FluentFormWidget.php:781
-#: app/Modules/Widgets/FluentFormWidget.php:882
-#: app/Modules/Widgets/FluentFormWidget.php:1201
-#: app/Modules/Widgets/FluentFormWidget.php:1256
-#: app/Modules/Widgets/FluentFormWidget.php:1359
-#: app/Modules/Widgets/FluentFormWidget.php:1455
-#: app/Modules/Widgets/FluentFormWidget.php:1529
-#: app/Modules/Widgets/FluentFormWidget.php:1605
-#: app/Modules/Widgets/FluentFormWidget.php:1723
-#: app/Modules/Widgets/FluentFormWidget.php:1936
-#: app/Modules/Widgets/FluentFormWidget.php:2209
-#: app/Modules/Widgets/FluentFormWidget.php:2323
-#: app/Modules/Widgets/FluentFormWidget.php:2356
+#: app/Modules/Widgets/OxyFluentFormWidget.php:379
+#: app/Modules/Widgets/OxyFluentFormWidget.php:711
+#: app/Modules/Widgets/OxyFluentFormWidget.php:793
+#: app/Modules/Widgets/OxyFluentFormWidget.php:849
+#: app/Modules/Widgets/OxyFluentFormWidget.php:876
+#: app/Modules/Widgets/FluentFormWidget.php:257
+#: app/Modules/Widgets/FluentFormWidget.php:331
+#: app/Modules/Widgets/FluentFormWidget.php:545
+#: app/Modules/Widgets/FluentFormWidget.php:782
+#: app/Modules/Widgets/FluentFormWidget.php:883
+#: app/Modules/Widgets/FluentFormWidget.php:1202
+#: app/Modules/Widgets/FluentFormWidget.php:1257
+#: app/Modules/Widgets/FluentFormWidget.php:1360
+#: app/Modules/Widgets/FluentFormWidget.php:1456
+#: app/Modules/Widgets/FluentFormWidget.php:1530
+#: app/Modules/Widgets/FluentFormWidget.php:1606
+#: app/Modules/Widgets/FluentFormWidget.php:1724
+#: app/Modules/Widgets/FluentFormWidget.php:1937
+#: app/Modules/Widgets/FluentFormWidget.php:2210
+#: app/Modules/Widgets/FluentFormWidget.php:2324
+#: app/Modules/Widgets/FluentFormWidget.php:2357
 msgid "Typography"
 msgstr ""
 
@@ -3673,25 +3919,29 @@ msgstr ""
 msgid "United States (US) Virgin Islands"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:922
+#: app/Modules/Registerer/Menu.php:947
 msgid "Unread"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:916
+#: app/Modules/Registerer/Menu.php:941
 msgid "Unread Only"
+msgstr ""
+
+#: app/Modules/CLI/Commands.php:20
+msgid "Unread Submissions"
 msgstr ""
 
 #: resources/views/admin/global_menu.php:52
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: app/Modules/Component/Component.php:546
-#: app/Services/FluentConversational/Classes/Form.php:533
-#: app/Services/FluentConversational/Classes/Form.php:650
+#: app/Modules/Component/Component.php:549
+#: app/Services/FluentConversational/Classes/Form.php:534
+#: app/Services/FluentConversational/Classes/Form.php:652
 msgid "Uploading"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:756
+#: app/Services/FormBuilder/DefaultElements.php:760
 msgid "URL"
 msgstr ""
 
@@ -3707,7 +3957,7 @@ msgstr ""
 msgid "US Style without Decimal (Ex: 123,456,789)"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:936
+#: app/Modules/Registerer/Menu.php:961
 msgid "User"
 msgstr ""
 
@@ -3731,11 +3981,11 @@ msgstr ""
 msgid "User ID"
 msgstr ""
 
-#: app/Services/FormBuilder/EditorShortCode.php:64
+#: app/Services/FormBuilder/EditorShortCode.php:65
 msgid "User Id"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:934
+#: app/Modules/Registerer/Menu.php:959
 msgid "User IP"
 msgstr ""
 
@@ -3755,7 +4005,7 @@ msgstr ""
 msgid "Uzbekistan"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:541
+#: app/Services/FormBuilder/ElementCustomization.php:546
 msgid "Validate as Unique"
 msgstr ""
 
@@ -3771,7 +4021,11 @@ msgstr ""
 msgid "Validate URL"
 msgstr ""
 
-#: app/Services/FormBuilder/ElementCustomization.php:567
+#: app/Modules/Widgets/OxyFluentFormWidget.php:892
+msgid "Validation Error"
+msgstr ""
+
+#: app/Services/FormBuilder/ElementCustomization.php:572
 msgid "Validation Message for Duplicate"
 msgstr ""
 
@@ -3791,11 +4045,11 @@ msgstr ""
 msgid "Venezuela"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:984
+#: app/Services/FormBuilder/DefaultElements.php:988
 msgid "Very Good"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:166
+#: app/Services/FormBuilder/ValidationRuleSettings.php:173
 msgid "Video"
 msgstr ""
 
@@ -3819,7 +4073,7 @@ msgstr ""
 msgid "View Payments"
 msgstr ""
 
-#: app/Modules/Registerer/Menu.php:905
+#: app/Modules/Registerer/Menu.php:930
 msgid "Views"
 msgstr ""
 
@@ -3835,16 +4089,16 @@ msgstr ""
 msgid "Web Hooks"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:773
+#: app/Services/FormBuilder/DefaultElements.php:777
 #: app/Services/Migrator/Classes/BaseMigrator.php:403
 msgid "Website URL"
 msgstr ""
 
-#: app/Modules/Component/Component.php:963
+#: app/Modules/Component/Component.php:985
 msgid "Wed"
 msgstr ""
 
-#: app/Modules/Component/Component.php:954
+#: app/Modules/Component/Component.php:976
 msgid "Wednesday"
 msgstr ""
 
@@ -3864,12 +4118,14 @@ msgstr ""
 msgid "Western Sahara"
 msgstr ""
 
-#: app/Modules/Widgets/FluentFormWidget.php:2086
-#: app/Modules/Widgets/FluentFormWidget.php:2100
+#: app/Modules/Widgets/OxyFluentFormWidget.php:698
+#: app/Modules/Widgets/OxyFluentFormWidget.php:762
+#: app/Modules/Widgets/FluentFormWidget.php:2087
+#: app/Modules/Widgets/FluentFormWidget.php:2101
 msgid "Width"
 msgstr ""
 
-#: app/Modules/Component/Component.php:984
+#: app/Modules/Component/Component.php:1006
 msgid "Wk"
 msgstr ""
 
@@ -3891,7 +4147,7 @@ msgstr ""
 msgid "Write your own mask for this input"
 msgstr ""
 
-#: app/Modules/Component/Component.php:991
+#: app/Modules/Component/Component.php:1013
 msgid "Year"
 msgstr ""
 
@@ -3900,21 +4156,21 @@ msgid "Yemen"
 msgstr ""
 
 #: app/Services/FormBuilder/ElementCustomization.php:239
-#: app/Services/FormBuilder/ElementCustomization.php:551
+#: app/Services/FormBuilder/ElementCustomization.php:556
 #: app/Services/FormBuilder/ValidationRuleSettings.php:65
 #: app/Services/FormBuilder/ValidationRuleSettings.php:82
 #: app/Services/FormBuilder/ValidationRuleSettings.php:99
 #: app/Services/FormBuilder/ValidationRuleSettings.php:116
-#: app/Modules/Widgets/FluentFormWidget.php:102
-#: app/Modules/Widgets/FluentFormWidget.php:944
+#: app/Modules/Widgets/FluentFormWidget.php:103
+#: app/Modules/Widgets/FluentFormWidget.php:945
 msgid "Yes"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:886
+#: app/Services/FormBuilder/DefaultElements.php:890
 msgid "You can upload maximum 1 file"
 msgstr ""
 
-#: app/Services/FormBuilder/DefaultElements.php:842
+#: app/Services/FormBuilder/DefaultElements.php:846
 msgid "You can upload maximum 1 image"
 msgstr ""
 
@@ -3940,19 +4196,19 @@ msgstr ""
 msgid "Your API Key is valid"
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:189
+#: app/Modules/Settings/Settings.php:190
 msgid "Your hCaptcha details are already valid, So no need to save again."
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:176
+#: app/Modules/Settings/Settings.php:177
 msgid "Your hCaptcha is valid and saved."
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:146
+#: app/Modules/Settings/Settings.php:147
 msgid "Your hCaptcha settings are deleted."
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:259
+#: app/Modules/Settings/Settings.php:260
 #: app/Services/Integrations/MailChimp/MailChimpIntegration.php:119
 msgid "Your mailchimp api key has been verfied and successfully set"
 msgstr ""
@@ -3965,19 +4221,19 @@ msgstr ""
 msgid "Your Mailchimp API Key is valid"
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:126
+#: app/Modules/Settings/Settings.php:127
 msgid "Your reCAPTCHA details are already valid. So no need to save again."
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:113
+#: app/Modules/Settings/Settings.php:114
 msgid "Your reCAPTCHA is valid and saved."
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:80
+#: app/Modules/Settings/Settings.php:81
 msgid "Your reCAPTCHA settings are deleted."
 msgstr ""
 
-#: app/Modules/Settings/Settings.php:230
+#: app/Modules/Settings/Settings.php:231
 msgid "Your settings has been updated"
 msgstr ""
 
@@ -4006,7 +4262,7 @@ msgstr ""
 msgid "Zip"
 msgstr ""
 
-#: app/Services/FormBuilder/ValidationRuleSettings.php:209
+#: app/Services/FormBuilder/ValidationRuleSettings.php:216
 msgid "Zip Archives"
 msgstr ""
 

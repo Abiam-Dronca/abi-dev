@@ -337,7 +337,8 @@ class Form
             'payment_method',
             'payment_summary_component',
             'payment_coupon',
-            'recaptcha'
+            'recaptcha',
+            'quiz_score'
         ];
 
         $elements = [];

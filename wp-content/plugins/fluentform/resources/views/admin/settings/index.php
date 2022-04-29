@@ -38,13 +38,13 @@ use FluentForm\Framework\Helpers\ArrayHelper;
                         </a>
                     </li>
                     <?php foreach ($components as $componentName => $component): ?>
-                        <li class="<?php echo Helper::getHtmlElementClass($component['hash'], $currentComponent); ?> ff_item_<?php echo  $componentName; ?>">
+                        <li class="<?php echo Helper::getHtmlElementClass($component['hash'], $currentComponent); ?> ff_item_<?php echo esc_attr($componentName); ?>">
                             <a data-settings_key="<?php echo ArrayHelper::get($component, 'settings_key'); ?>"
                                data-component="<?php echo ArrayHelper::get($component, 'component', ''); ?>"
                                data-hash="<?php echo ArrayHelper::get($component, 'hash', ''); ?>"
                                href="<?php echo Helper::makeMenuUrl('fluent_forms_settings', $component); ?>"
                             >
-                                <?php echo $component['title']; ?>
+                                <?php echo esc_attr($component['title']); ?>
                             </a>
                         </li>
                     <?php endforeach; ?>

@@ -48,6 +48,7 @@ class EditorShortcode
         ];
 
         $formShortCodes['shortcodes']['{all_data}'] = 'All Submitted Data';
+        $formShortCodes['shortcodes']['{all_data_without_hidden_fields}'] = 'All Data Without Hidden Fields';
         foreach ($formFields as $key => $value) {
             $formShortCodes['shortcodes']['{inputs.' . $key . '}'] = $value['admin_label'];
         }

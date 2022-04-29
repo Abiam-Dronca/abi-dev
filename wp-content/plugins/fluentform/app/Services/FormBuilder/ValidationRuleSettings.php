@@ -128,6 +128,13 @@ $validation_rule_settings = array(
             'label' => __('Min Value', 'fluentform'),
             'help_text' => __('Minimum value for the input field.', 'fluentform'),
         ),
+    'digits' =>
+        array(
+            'template' => 'inputText',
+            'type' => 'number',
+            'label' => __('Digits', 'fluentform'),
+            'help_text' => __('Number of digits for the input field.', 'fluentform'),
+        ),
     'max' =>
         array(
             'template' => 'inputText',

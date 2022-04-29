@@ -370,6 +370,17 @@ add_action('fluentform_global_notify_completed', function ($insertId, $form) use
 if (defined('ELEMENTOR_VERSION')) {
     new \FluentForm\App\Modules\Widgets\ElementorWidget($app);
 }
+/*
+ * Oxygen Widget Init
+ */
+
+add_action('init', function (){
+    if (class_exists('OxyEl')) {
+        if ( file_exists( FLUENTFORM_DIR_PATH.'app/Modules/Widgets/OxygenWidget.php' ) ) {
+            new FluentForm\App\Modules\Widgets\OxygenWidget();
+        }
+    }
+});
 
 (new FluentForm\App\Services\Integrations\Slack\SlackNotificationActions($app))->register();
 
@@ -444,3 +455,8 @@ if (function_exists('register_block_type')) {
     ));
 }
 
+
+// require the CLI
+if (defined('WP_CLI') && WP_CLI) {
+    \WP_CLI::add_command('fluentform', '\FluentForm\App\Modules\CLI\Commands');
+}

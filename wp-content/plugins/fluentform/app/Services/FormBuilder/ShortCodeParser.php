@@ -302,7 +302,7 @@ class ShortCodeParser
             return static::getUserAgent()->getPlatform();
         } elseif ($key == 'browser.name') {
             return static::getUserAgent()->getBrowser();
-        } elseif ($key == 'all_data') {
+        } elseif (in_array($key, ['all_data', 'all_data_without_hidden_fields'])) {
             $formFields = FormFieldsParser::getEntryInputs(static::getForm());
             if (apply_filters('fluentform_all_data_skip_password_field', __return_true())) {
                 $passwords = FormFieldsParser::getInputsByElementTypes(static::getForm(), ['input_password']);
@@ -310,6 +310,17 @@ class ShortCodeParser
                     ArrayHelper::forget($formFields, array_keys($passwords));
                 }
             }
+
+            $skipHiddenFields = ($key == 'all_data_without_hidden_fields') &&
+                                apply_filters('fluentform_all_data_without_hidden_fields', __return_true());
+
+            if ($skipHiddenFields) {
+                $hiddenFields = FormFieldsParser::getInputsByElementTypes(static::getForm(), ['input_hidden']);
+                if (is_array($hiddenFields) && !empty($hiddenFields)) {
+                    ArrayHelper::forget($formFields, array_keys($hiddenFields));
+                }
+            }
+
             $inputLabels = FormFieldsParser::getAdminLabels(static::getForm(), $formFields);
             $response = FormDataParser::parseFormSubmission(static::getEntry(), static::getForm(), $formFields, true);
 

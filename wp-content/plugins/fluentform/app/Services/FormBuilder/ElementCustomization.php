@@ -521,6 +521,11 @@ $element_customization_settings = array(
         'label' => __('Max Value', 'fluentform'),
         'help_text' => __('Please provide Maximum value', 'fluentform')
     ),
+    'digits' => array(
+        'template' => 'inputNumber',
+        'label' => __('Digits Count', 'fluentform'),
+        'help_text' => __('Please provide digits count value', 'fluentform')
+    ),
     'number_step' => array(
         'template' => 'inputText',
         'label' => __('Step', 'fluentform'),

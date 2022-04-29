@@ -50,6 +50,6 @@ class Hcaptcha extends BaseComponent
 			\FluentForm\Framework\Helpers\ArrayHelper::except($data['attributes'], 'name')
 		);
 		$html = "<div class='ff-el-group' {$atts}>{$label}{$el}</div>";
-        echo apply_filters('fluentform_rendering_field_html_'.$elementName, $html, $data, $form);
+        fluentFormPrintUnescapedInternalString(apply_filters('fluentform_rendering_field_html_'.$elementName, $html, $data, $form));
     }
 }

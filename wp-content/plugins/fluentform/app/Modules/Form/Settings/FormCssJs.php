@@ -100,12 +100,12 @@ class FormCssJs
             add_action('wp_footer', function () use ($formId, $customJS) {
                 ?>
                 <script type="text/javascript">
-                    jQuery(document.body).on('fluentform_init_<?php echo $formId; ?>', function (event, data) {
+                    jQuery(document.body).on('fluentform_init_<?php echo esc_attr($formId); ?>', function (event, data) {
                         var $form = jQuery(data[0]);
-                        var formId = "<?php echo $formId; ?>";
+                        var formId = "<?php echo esc_attr($formId); ?>";
                         var $ = jQuery;
                         try {
-                            <?php echo $customJS; ?>
+                            <?php fluentFormPrintUnescapedInternalString($customJS); ?>
                         } catch (e) {
                             console.warn('Error in custom JS of Fluentform ID: ' + $form.data('form_id'));
                             console.error(e);

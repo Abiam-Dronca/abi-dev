@@ -111,11 +111,11 @@ class FormBuilder
             true
         );
         
-        echo $formBody;
+        fluentFormPrintUnescapedInternalString($formBody);
         
         echo "</form><div id='fluentform_" . $form->id . "_errors' class='ff-errors-in-stack ";
 
-        echo $extraCssClass . "_errors " . $instanceCssClass . "_errors'></div></div>";
+        echo esc_attr($extraCssClass) . "_errors " . $instanceCssClass . "_errors'></div></div>";
         
         do_action('fluentform_after_form_render', $form);
         

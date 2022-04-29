@@ -173,7 +173,7 @@ class FormDataParser
                             <tr>
                                 <?php for ($j = 0; $j < $columns; $j++) : ?>
                                     <td>
-                                        <?php echo $value[$j][$i] ?>
+                                        <?php fluentFormPrintUnescapedInternalString($value[$j][$i]); ?>
                                     </td>
                                 <?php endfor; ?>
                             </tr>

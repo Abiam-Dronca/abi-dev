@@ -340,7 +340,7 @@ add_action('fluentform_addons_page_render_fluentform_pdf', function () {
         );
     }
 
-    echo \FluentForm\View::make('admin.addons.pdf_promo', [
+    \FluentForm\View::render('admin.addons.pdf_promo', [
         'install_url'  => $url,
         'is_installed' => defined('FLUENTFORM_PDF_VERSION')
     ]);

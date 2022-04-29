@@ -36,6 +36,7 @@ trait MessageBag
             'array'   => 'The :attribute must contain :size items.',
         ],
         'url'         => 'The :attribute format is invalid.',
+        'digits'      => 'The :attribute must be :digits characters.'
     ];
 
     /**
@@ -237,5 +238,20 @@ trait MessageBag
         $text = $this->getReplacementText($attribute.'.mimes', 'mimes');
 
         return str_replace([':attribute', ':values'], [$attribute, implode(', ', $parameters)], $text);
+    }
+
+    /**
+     * Replace all place-holders for the digits rule.
+     *
+     * @param $attribute
+     * @param $parameters
+     *
+     * @return string
+     */
+    protected function replaceDigits($attribute, $parameters)
+    {
+        $text = $this->getReplacementText($attribute.'.digits', 'digits');
+
+        return str_replace([':attribute', ':digits'], [$attribute, $parameters[0]], $text);
     }
 }

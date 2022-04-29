@@ -525,6 +525,10 @@ $defaultElements = array(
                         'value' => '',
                         'message' => __('Maximum value is ', 'fluentform'),
                     ),
+                    'digits' => [
+                        'value' => '',
+                        'message' => __('The number of digits has to be ', 'fluentform'),
+                    ]
                 ),
                 'conditional_logics' => array(),
                 'calculation_settings' => array(

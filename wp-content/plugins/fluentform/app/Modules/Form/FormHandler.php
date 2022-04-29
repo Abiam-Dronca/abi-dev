@@ -298,7 +298,6 @@ class FormHandler
 
         $this->validateReCaptcha();
         $this->validateHCaptcha();
-//        dd('ok');
 
         foreach ($fields as $fieldName => $field) {
             if(isset($this->formData[$fieldName])) {

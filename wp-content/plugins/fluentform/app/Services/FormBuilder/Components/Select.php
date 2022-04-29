@@ -58,7 +58,7 @@ class Select extends BaseComponent
         $elMarkup = "<select " . $this->buildAttributes($data['attributes']) . ">" . $this->buildOptions($data, $defaultValues) . "</select>";
 
         $html = $this->buildElementMarkup($elMarkup, $data, $form);
-        echo apply_filters('fluentform_rendering_field_html_' . $elementName, $html, $data, $form);
+        fluentFormPrintUnescapedInternalString( apply_filters('fluentform_rendering_field_html_' . $elementName, $html, $data, $form) );
     }
 
     /**

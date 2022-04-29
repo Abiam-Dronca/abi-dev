@@ -561,4 +561,26 @@ class Helper
             ->where('form_id', $formId)
             ->count();
     }
+
+    public static function getForms()
+    {
+        $ff_list = wpFluent()->table('fluentform_forms')
+            ->select(['id', 'title'])
+            ->orderBy('id', 'DESC')
+            ->get();
+
+
+        $forms = array();
+
+        if ($ff_list) {
+            $forms[0] = esc_html__('Select a Fluent Forms', 'fluentform');
+            foreach ($ff_list as $form) {
+                $forms[$form->id] = $form->title .' ('.$form->id.')';
+            }
+        } else {
+            $forms[0] = esc_html__('Create a Form First', 'fluentform');
+        }
+
+        return $forms;
+    }
 }

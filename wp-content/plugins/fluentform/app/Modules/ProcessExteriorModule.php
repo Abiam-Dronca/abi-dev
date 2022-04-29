@@ -26,7 +26,7 @@ class ProcessExteriorModule
 
             $form = wpFluent()->table('fluentform_forms')->find($form_id);
             if ($form) {
-                echo \FluentForm\View::make('frameless.show_review', [
+                \FluentForm\View::render('frameless.show_review', [
                     'form_id' => $form_id,
                     'form' => $form
                 ]);

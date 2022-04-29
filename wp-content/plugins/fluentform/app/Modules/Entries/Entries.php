@@ -394,6 +394,7 @@ class Entries extends EntryQuery
         $entryData = $this->_getEntry();
 
         $entryData['widgets'] = apply_filters('fluentform_single_entry_widgets', [], $entryData);
+        $entryData['extraCards'] = apply_filters('fluentform_single_entry_cards', [], $entryData);
 
         wp_send_json_success($entryData, 200);
     }

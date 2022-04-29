@@ -65,7 +65,8 @@ class Inputs
             'gdpr_agreement',
             'input_hidden',
             'input_file',
-            'input_image'
+            'input_image',
+            'subscription_payment_component'
         ];
 
         return apply_filters('fluentform_supported_conditional_fields', $supportedConditionalFields);

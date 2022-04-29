@@ -838,7 +838,7 @@ class Menu
             $previewText = __('Preview', 'fluent-form');
         }
 
-        echo '<a target="_blank" class="el-button el-button--small" href="' . $previewUrl . '">'.$previewText.'</a>';
+        echo '<a target="_blank" class="el-button el-button--small" href="' . esc_url($previewUrl) . '">'.esc_attr($previewText).'</a>';
     }
 
     public function addCopyShortcodeButton($formId)
