@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ElementsKit Lite package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ElementsKit Lite 2.5.6\n"
+"Project-Id-Version: ElementsKit Lite 2.5.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/elementskit-lite\n"
-"POT-Creation-Date: 2022-04-20 10:14:19+00:00\n"
+"POT-Creation-Date: 2022-04-28 05:50:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Install Now"
 msgstr ""
 
-#: libs/framework/controls/settings/switch.php:50
+#: libs/framework/controls/settings/switch.php:49
 msgid "View Demo"
 msgstr ""
 
@@ -577,15 +577,15 @@ msgstr ""
 
 #: libs/framework/views/settings-sections/usersettings.php:102
 #: libs/framework/views/settings-sections/usersettings.php:179
-#: libs/framework/views/settings-sections/usersettings.php:400
-#: libs/framework/views/settings-sections/usersettings.php:540
+#: libs/framework/views/settings-sections/usersettings.php:361
+#: libs/framework/views/settings-sections/usersettings.php:501
 msgid "Clear Cache"
 msgstr ""
 
 #: libs/framework/views/settings-sections/usersettings.php:108
 #: libs/framework/views/settings-sections/usersettings.php:152
-#: libs/framework/views/settings-sections/usersettings.php:393
-#: libs/framework/views/settings-sections/usersettings.php:546
+#: libs/framework/views/settings-sections/usersettings.php:354
+#: libs/framework/views/settings-sections/usersettings.php:507
 msgid "Get access token"
 msgstr ""
 
@@ -594,7 +594,7 @@ msgid "Facebook page review"
 msgstr ""
 
 #: libs/framework/views/settings-sections/usersettings.php:144
-#: libs/framework/views/settings-sections/usersettings.php:294
+#: libs/framework/views/settings-sections/usersettings.php:255
 msgid "Page ID"
 msgstr ""
 
@@ -606,19 +606,19 @@ msgstr ""
 msgid "Page Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:246
+#: libs/framework/views/settings-sections/usersettings.php:207
 msgid "Yelp Settings"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:260
+#: libs/framework/views/settings-sections/usersettings.php:221
 msgid "Yelp Page"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:282
+#: libs/framework/views/settings-sections/usersettings.php:243
 msgid "Facebook Messenger"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:304
+#: libs/framework/views/settings-sections/usersettings.php:265
 #: widgets/accordion/accordion.php:249 widgets/accordion/accordion.php:341
 #: widgets/accordion/accordion.php:478 widgets/accordion/accordion.php:630
 #: widgets/accordion/accordion.php:692 widgets/back-to-top/back-to-top.php:374
@@ -731,84 +731,84 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:314
+#: libs/framework/views/settings-sections/usersettings.php:275
 msgid "Logged-in user greeting"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:324
+#: libs/framework/views/settings-sections/usersettings.php:285
 msgid "Logged out user greeting"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:334
+#: libs/framework/views/settings-sections/usersettings.php:295
 msgid "Show Dialog Box"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:363
+#: libs/framework/views/settings-sections/usersettings.php:324
 msgid "Dribbble User Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:380
+#: libs/framework/views/settings-sections/usersettings.php:341
 msgid "Access token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:422
+#: libs/framework/views/settings-sections/usersettings.php:383
 msgid "Twitter User Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:434
+#: libs/framework/views/settings-sections/usersettings.php:395
 msgid "Twitter Username"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:444
-#: libs/framework/views/settings-sections/usersettings.php:505
+#: libs/framework/views/settings-sections/usersettings.php:405
+#: libs/framework/views/settings-sections/usersettings.php:466
 msgid "Access Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:454
+#: libs/framework/views/settings-sections/usersettings.php:415
 msgid "Get Access Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:474
+#: libs/framework/views/settings-sections/usersettings.php:435
 msgid "Instragram User Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:495
+#: libs/framework/views/settings-sections/usersettings.php:456
 msgid "User ID"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:515
+#: libs/framework/views/settings-sections/usersettings.php:476
 msgid "Token expires time"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:525
+#: libs/framework/views/settings-sections/usersettings.php:486
 msgid "Token generation date"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:528
+#: libs/framework/views/settings-sections/usersettings.php:489
 msgid "This is need to calculate the remaining time for token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:567
+#: libs/framework/views/settings-sections/usersettings.php:528
 msgid "Zoom Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:579
+#: libs/framework/views/settings-sections/usersettings.php:540
 msgid "Api key"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:588
+#: libs/framework/views/settings-sections/usersettings.php:549
 msgid "Secret Key"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:597
+#: libs/framework/views/settings-sections/usersettings.php:558
 msgid "Check connection"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:619
+#: libs/framework/views/settings-sections/usersettings.php:580
 msgid "Google Map"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:631
+#: libs/framework/views/settings-sections/usersettings.php:592
 msgid "Api Key"
 msgstr ""
 
@@ -854,11 +854,11 @@ msgid "Loading"
 msgstr ""
 
 #: modules/controls/widget-area-utils.php:24
-#: modules/controls/widget-area-utils.php:69
+#: modules/controls/widget-area-utils.php:81
 msgid "Click here to add content."
 msgstr ""
 
-#: modules/controls/widget-area-utils.php:51
+#: modules/controls/widget-area-utils.php:54
 msgid "Edit"
 msgstr ""
 
