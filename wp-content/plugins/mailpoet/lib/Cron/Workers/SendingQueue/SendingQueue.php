@@ -390,9 +390,7 @@ class SendingQueue {
       $error = $sendResult['error'];
       assert($error instanceof MailerError);
       $this->errorHandler->processError($error, $sendingTask, $preparedSubscribersIds, $preparedSubscribers);
-    }
-    // update processed/to process list
-    if (!$sendingTask->updateProcessedSubscribers($preparedSubscribersIds)) {
+    } elseif (!$sendingTask->updateProcessedSubscribers($preparedSubscribersIds)) { // update processed/to process list
       MailerLog::processError(
         'processed_list_update',
         sprintf('QUEUE-%d-PROCESSED-LIST-UPDATE', $sendingTask->id),

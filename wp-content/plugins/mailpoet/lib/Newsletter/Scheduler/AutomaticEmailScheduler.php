@@ -10,20 +10,20 @@ use MailPoet\Models\ScheduledTask;
 use MailPoet\Models\ScheduledTaskSubscriber;
 use MailPoet\Models\SendingQueue;
 use MailPoet\Tasks\Sending as SendingTask;
-use MailPoet\WP\Functions as WPFunctions;
 
 class AutomaticEmailScheduler {
-  /** @var WPFunctions|null */
-  private $wp;
+
+  /** @var Scheduler */
+  private $scheduler;
 
   public function __construct(
-    ?WPFunctions $wp = null
+    Scheduler $scheduler
   ) {
-    $this->wp = $wp;
+    $this->scheduler = $scheduler;
   }
 
   public function scheduleAutomaticEmail($group, $event, $schedulingCondition = false, $subscriberId = false, $meta = false, $metaModifier = null) {
-    $newsletters = Scheduler::getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
+    $newsletters = $this->scheduler->getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
     if (empty($newsletters)) return false;
     foreach ($newsletters as $newsletter) {
       if ($newsletter->event !== $event) continue;
@@ -45,7 +45,7 @@ class AutomaticEmailScheduler {
   }
 
   public function scheduleOrRescheduleAutomaticEmail($group, $event, $subscriberId, $meta = false) {
-    $newsletters = Scheduler::getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
+    $newsletters = $this->scheduler->getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
     if (empty($newsletters)) {
       return false;
     }
@@ -66,7 +66,7 @@ class AutomaticEmailScheduler {
   }
 
   public function rescheduleAutomaticEmail($group, $event, $subscriberId) {
-    $newsletters = Scheduler::getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
+    $newsletters = $this->scheduler->getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
     if (empty($newsletters)) {
       return false;
     }
@@ -85,7 +85,7 @@ class AutomaticEmailScheduler {
   }
 
   public function cancelAutomaticEmail($group, $event, $subscriberId) {
-    $newsletters = Scheduler::getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
+    $newsletters = $this->scheduler->getNewsletters(Newsletter::TYPE_AUTOMATIC, $group);
     if (empty($newsletters)) {
       return false;
     }
@@ -117,7 +117,7 @@ class AutomaticEmailScheduler {
     $sendingTask->status = SendingQueue::STATUS_SCHEDULED;
     $sendingTask->priority = SendingQueue::PRIORITY_MEDIUM;
 
-    $sendingTask->scheduledAt = Scheduler::getScheduledTimeWithDelay($newsletter->afterTimeType, $newsletter->afterTimeNumber, $this->wp);
+    $sendingTask->scheduledAt = $this->scheduler->getScheduledTimeWithDelay($newsletter->afterTimeType, $newsletter->afterTimeNumber);
     return $sendingTask->save();
   }
 
@@ -127,7 +127,7 @@ class AutomaticEmailScheduler {
       $sendingTask->__set('meta', $meta);
     }
     // compute new 'scheduled_at' from now
-    $sendingTask->scheduledAt = Scheduler::getScheduledTimeWithDelay($newsletter->afterTimeType, $newsletter->afterTimeNumber, $this->wp);
+    $sendingTask->scheduledAt = $this->scheduler->getScheduledTimeWithDelay($newsletter->afterTimeType, $newsletter->afterTimeNumber);
     $sendingTask->save();
   }
 }

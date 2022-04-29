@@ -51,6 +51,9 @@ class SendingQueue extends APIEndpoint {
   /** @var MailerFactory */
   private $mailerFactory;
 
+  /** @var Scheduler */
+  private $scheduler;
+
   public function __construct(
     SubscribersFeature $subscribersFeature,
     NewslettersRepository $newsletterRepository,
@@ -58,7 +61,8 @@ class SendingQueue extends APIEndpoint {
     Bridge $bridge,
     SubscribersFinder $subscribersFinder,
     ScheduledTasksRepository $scheduledTasksRepository,
-    MailerFactory $mailerFactory
+    MailerFactory $mailerFactory,
+    Scheduler $scheduler
   ) {
     $this->subscribersFeature = $subscribersFeature;
     $this->subscribersFinder = $subscribersFinder;
@@ -67,6 +71,7 @@ class SendingQueue extends APIEndpoint {
     $this->sendingQueuesRepository = $sendingQueuesRepository;
     $this->scheduledTasksRepository = $scheduledTasksRepository;
     $this->mailerFactory = $mailerFactory;
+    $this->scheduler = $scheduler;
   }
 
   public function add($data = []) {
@@ -141,7 +146,7 @@ class SendingQueue extends APIEndpoint {
 
       // set queue status
       $queue->status = SendingQueueModel::STATUS_SCHEDULED;
-      $queue->scheduledAt = Scheduler::formatDatetimeString($newsletterEntity->getOptionValue('scheduledAt'));
+      $queue->scheduledAt = $this->scheduler->formatDatetimeString($newsletterEntity->getOptionValue('scheduledAt'));
     } else {
       $segments = $newsletterEntity->getSegmentIds();
       $taskModel = $queue->task();
