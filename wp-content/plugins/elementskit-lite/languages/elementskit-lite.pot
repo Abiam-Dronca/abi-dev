@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ElementsKit Lite package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ElementsKit Lite 2.5.7\n"
+"Project-Id-Version: ElementsKit Lite 2.5.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/elementskit-lite\n"
-"POT-Creation-Date: 2022-04-28 05:50:45+00:00\n"
+"POT-Creation-Date: 2022-05-10 10:53:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -87,7 +87,7 @@ msgstr ""
 msgid "Create a Form First"
 msgstr ""
 
-#: helpers/utils.php:223 widgets/tablepress/tablepress.php:45
+#: helpers/utils.php:223 widgets/tablepress/tablepress.php:50
 msgid "Select Table"
 msgstr ""
 
@@ -712,7 +712,7 @@ msgstr ""
 #: widgets/progressbar/progressbar.php:407 widgets/social/social.php:211
 #: widgets/social/social.php:273 widgets/social-share/social-share.php:248
 #: widgets/social-share/social-share.php:310
-#: widgets/tablepress/tablepress.php:201 widgets/tablepress/tablepress.php:613
+#: widgets/tablepress/tablepress.php:206 widgets/tablepress/tablepress.php:618
 #: widgets/team/team.php:245 widgets/team/team.php:308
 #: widgets/team/team.php:1158 widgets/team/team.php:1197
 #: widgets/team/team.php:1260 widgets/team/team.php:1279
@@ -1048,7 +1048,7 @@ msgstr ""
 
 #: modules/header-footer/views/modal-editor.php:22
 #: widgets/pricing/pricing.php:39 widgets/pricing/pricing.php:2369
-#: widgets/tablepress/tablepress.php:295
+#: widgets/tablepress/tablepress.php:300
 msgid "Header"
 msgstr ""
 
@@ -1326,9 +1326,9 @@ msgstr ""
 #: widgets/pricing/pricing.php:831 widgets/pricing/pricing.php:1618
 #: widgets/pricing/pricing.php:1771 widgets/pricing/pricing.php:2202
 #: widgets/social/social.php:431 widgets/social-share/social-share.php:468
-#: widgets/tab/tab.php:372 widgets/tablepress/tablepress.php:63
-#: widgets/tablepress/tablepress.php:79 widgets/tablepress/tablepress.php:216
-#: widgets/tablepress/tablepress.php:343 widgets/tablepress/tablepress.php:426
+#: widgets/tab/tab.php:372 widgets/tablepress/tablepress.php:68
+#: widgets/tablepress/tablepress.php:84 widgets/tablepress/tablepress.php:221
+#: widgets/tablepress/tablepress.php:348 widgets/tablepress/tablepress.php:431
 #: widgets/team/team.php:1548 widgets/video/video.php:617
 msgid "None"
 msgstr ""
@@ -1479,7 +1479,7 @@ msgstr ""
 #: widgets/social-share/social-share.php:423 widgets/tab/tab.php:158
 #: widgets/tab/tab.php:272 widgets/tab/tab.php:302 widgets/tab/tab.php:1054
 #: widgets/tab/tab.php:1175 widgets/tab/tab.php:1545
-#: widgets/tablepress/tablepress.php:143 widgets/tablepress/tablepress.php:169
+#: widgets/tablepress/tablepress.php:148 widgets/tablepress/tablepress.php:174
 #: widgets/team/team.php:484 widgets/team/team.php:656
 #: widgets/team/team.php:971 widgets/team/team.php:1503
 #: widgets/testimonial/testimonial.php:196
@@ -1526,7 +1526,7 @@ msgstr ""
 #: widgets/social/social.php:394 widgets/social-share/social-share.php:149
 #: widgets/social-share/social-share.php:431 widgets/tab/tab.php:157
 #: widgets/tab/tab.php:280 widgets/tab/tab.php:310
-#: widgets/tablepress/tablepress.php:151 widgets/tablepress/tablepress.php:177
+#: widgets/tablepress/tablepress.php:156 widgets/tablepress/tablepress.php:182
 #: widgets/team/team.php:488 widgets/team/team.php:664
 #: widgets/team/team.php:975 widgets/team/team.php:979
 #: widgets/team/team.php:1511 widgets/testimonial/testimonial.php:803
@@ -2004,8 +2004,8 @@ msgstr ""
 #: widgets/tab/tab.php:765 widgets/tab/tab.php:837 widgets/tab/tab.php:1012
 #: widgets/tab/tab.php:1133 widgets/tab/tab.php:1293 widgets/tab/tab.php:1577
 #: widgets/tab/tab.php:1601 widgets/tab/tab.php:1817 widgets/tab/tab.php:1841
-#: widgets/tablepress/tablepress.php:303 widgets/tablepress/tablepress.php:490
-#: widgets/tablepress/tablepress.php:537 widgets/tablepress/tablepress.php:624
+#: widgets/tablepress/tablepress.php:308 widgets/tablepress/tablepress.php:495
+#: widgets/tablepress/tablepress.php:542 widgets/tablepress/tablepress.php:629
 #: widgets/team/team.php:531 widgets/team/team.php:556
 #: widgets/team/team.php:741 widgets/team/team.php:918
 #: widgets/team/team.php:1760 widgets/team/team.php:1794
@@ -2075,8 +2075,8 @@ msgstr ""
 #: widgets/header-offcanvas/header-offcanvas.php:453
 #: widgets/heading/heading.php:1235 widgets/image-box/image-box.php:793
 #: widgets/image-box/image-box.php:811 widgets/ninja-forms/ninja-forms.php:794
-#: widgets/tablepress/tablepress.php:254 widgets/tablepress/tablepress.php:378
-#: widgets/tablepress/tablepress.php:513 widgets/tablepress/tablepress.php:560
+#: widgets/tablepress/tablepress.php:259 widgets/tablepress/tablepress.php:383
+#: widgets/tablepress/tablepress.php:518 widgets/tablepress/tablepress.php:565
 #: widgets/testimonial/testimonial.php:718 widgets/we-forms/we-forms.php:561
 #: widgets/wp-forms/wp-forms.php:612
 msgid "Border Color"
@@ -2159,7 +2159,7 @@ msgstr ""
 #: widgets/social-share/social-share.php:353 widgets/tab/tab.php:500
 #: widgets/tab/tab.php:598 widgets/tab/tab.php:774 widgets/tab/tab.php:846
 #: widgets/tab/tab.php:1330 widgets/tab/tab.php:1615 widgets/tab/tab.php:2014
-#: widgets/tablepress/tablepress.php:648 widgets/team/team.php:272
+#: widgets/tablepress/tablepress.php:653 widgets/team/team.php:272
 #: widgets/team/team.php:334 widgets/team/team.php:701
 #: widgets/team/team.php:875 widgets/team/team.php:1182
 #: widgets/team/team.php:1221 widgets/team/team.php:2044
@@ -2377,8 +2377,8 @@ msgstr ""
 #: widgets/pricing/pricing.php:2179 widgets/progressbar/progressbar.php:196
 #: widgets/social/social.php:466 widgets/social-share/social-share.php:649
 #: widgets/tab/tab.php:480 widgets/tab/tab.php:559 widgets/tab/tab.php:711
-#: widgets/tab/tab.php:1986 widgets/tablepress/tablepress.php:393
-#: widgets/tablepress/tablepress.php:635 widgets/team/team.php:676
+#: widgets/tab/tab.php:1986 widgets/tablepress/tablepress.php:398
+#: widgets/tablepress/tablepress.php:640 widgets/team/team.php:676
 #: widgets/team/team.php:1002 widgets/team/team.php:1584
 #: widgets/team/team.php:2155 widgets/testimonial/testimonial.php:467
 #: widgets/testimonial/testimonial.php:629
@@ -2628,8 +2628,8 @@ msgstr ""
 #: widgets/pricing/pricing.php:2095 widgets/social/social.php:139
 #: widgets/social/social.php:390 widgets/social-share/social-share.php:145
 #: widgets/social-share/social-share.php:427 widgets/tab/tab.php:276
-#: widgets/tab/tab.php:306 widgets/tablepress/tablepress.php:147
-#: widgets/tablepress/tablepress.php:173 widgets/team/team.php:660
+#: widgets/tab/tab.php:306 widgets/tablepress/tablepress.php:152
+#: widgets/tablepress/tablepress.php:178 widgets/team/team.php:660
 #: widgets/team/team.php:1507 widgets/testimonial/testimonial.php:773
 #: widgets/testimonial/testimonial.php:799
 #: widgets/testimonial/testimonial.php:1590 widgets/video/video.php:300
@@ -2792,7 +2792,7 @@ msgstr ""
 #: widgets/pricing/pricing.php:1798 widgets/pricing/pricing.php:2121
 #: widgets/pricing/pricing.php:2231 widgets/pricing/pricing.php:2313
 #: widgets/social/social.php:203 widgets/social-share/social-share.php:240
-#: widgets/tab/tab.php:734 widgets/tablepress/tablepress.php:483
+#: widgets/tab/tab.php:734 widgets/tablepress/tablepress.php:488
 #: widgets/team/team.php:237 widgets/team/team.php:523
 #: widgets/team/team.php:1152 widgets/team/team.php:1253
 #: widgets/team/team.php:1330 widgets/team/team.php:1427
@@ -3447,7 +3447,7 @@ msgstr ""
 msgid "Image Height"
 msgstr ""
 
-#: widgets/blog-posts/blog-posts.php:2542 widgets/tablepress/tablepress.php:658
+#: widgets/blog-posts/blog-posts.php:2542 widgets/tablepress/tablepress.php:663
 msgid "Radius"
 msgstr ""
 
@@ -3505,8 +3505,8 @@ msgstr ""
 #: widgets/ninja-forms/ninja-forms.php:860 widgets/page-list/page-list.php:769
 #: widgets/post-list/post-list.php:914 widgets/pricing/pricing.php:1405
 #: widgets/pricing/pricing.php:2128 widgets/pricing/pricing.php:2156
-#: widgets/tablepress/tablepress.php:327 widgets/tablepress/tablepress.php:502
-#: widgets/tablepress/tablepress.php:549 widgets/video/video.php:547
+#: widgets/tablepress/tablepress.php:332 widgets/tablepress/tablepress.php:507
+#: widgets/tablepress/tablepress.php:554 widgets/video/video.php:547
 #: widgets/video/video.php:577 widgets/we-forms/we-forms.php:507
 #: widgets/we-forms/we-forms.php:539 widgets/wp-forms/wp-forms.php:71
 #: widgets/wp-forms/wp-forms.php:149 widgets/wp-forms/wp-forms.php:336
@@ -3759,8 +3759,8 @@ msgstr ""
 #: widgets/category-list/category-list.php:198 widgets/heading/heading.php:329
 #: widgets/image-box/image-box.php:769 widgets/page-list/page-list.php:458
 #: widgets/post-list/post-list.php:632 widgets/pricing/pricing.php:1868
-#: widgets/tablepress/tablepress.php:217 widgets/tablepress/tablepress.php:344
-#: widgets/tablepress/tablepress.php:427
+#: widgets/tablepress/tablepress.php:222 widgets/tablepress/tablepress.php:349
+#: widgets/tablepress/tablepress.php:432
 msgid "Solid"
 msgstr ""
 
@@ -3768,16 +3768,16 @@ msgstr ""
 #: widgets/client-logo/client-logo.php:1071 widgets/heading/heading.php:328
 #: widgets/image-box/image-box.php:771 widgets/page-list/page-list.php:459
 #: widgets/post-list/post-list.php:633 widgets/pricing/pricing.php:1870
-#: widgets/tablepress/tablepress.php:219 widgets/tablepress/tablepress.php:346
-#: widgets/tablepress/tablepress.php:429
+#: widgets/tablepress/tablepress.php:224 widgets/tablepress/tablepress.php:351
+#: widgets/tablepress/tablepress.php:434
 msgid "Dotted"
 msgstr ""
 
 #: widgets/category-list/category-list.php:200
 #: widgets/client-logo/client-logo.php:1070 widgets/image-box/image-box.php:772
 #: widgets/page-list/page-list.php:460 widgets/post-list/post-list.php:634
-#: widgets/pricing/pricing.php:1871 widgets/tablepress/tablepress.php:220
-#: widgets/tablepress/tablepress.php:347 widgets/tablepress/tablepress.php:430
+#: widgets/pricing/pricing.php:1871 widgets/tablepress/tablepress.php:225
+#: widgets/tablepress/tablepress.php:352 widgets/tablepress/tablepress.php:435
 msgid "Dashed"
 msgstr ""
 
@@ -3987,7 +3987,7 @@ msgid "From Bottom"
 msgstr ""
 
 #: widgets/client-logo/client-logo.php:640
-#: widgets/tablepress/tablepress.php:579
+#: widgets/tablepress/tablepress.php:584
 msgid "Hover Background"
 msgstr ""
 
@@ -4448,8 +4448,8 @@ msgstr ""
 #: widgets/fluent-forms/fluent-forms.php:979 widgets/heading/heading.php:477
 #: widgets/heading/heading.php:1217
 #: widgets/image-accordion/image-accordion.php:823
-#: widgets/image-box/image-box.php:741 widgets/tablepress/tablepress.php:235
-#: widgets/tablepress/tablepress.php:359 widgets/tablepress/tablepress.php:442
+#: widgets/image-box/image-box.php:741 widgets/tablepress/tablepress.php:240
+#: widgets/tablepress/tablepress.php:364 widgets/tablepress/tablepress.php:447
 msgid "Border Width"
 msgstr ""
 
@@ -5376,7 +5376,7 @@ msgid "Shadow line"
 msgstr ""
 
 #: widgets/image-box/image-box.php:144 widgets/image-box/image-box.php:1084
-#: widgets/tab/tab.php:1968 widgets/tablepress/tablepress.php:414
+#: widgets/tab/tab.php:1968 widgets/tablepress/tablepress.php:419
 msgid "Body"
 msgstr ""
 
@@ -5412,8 +5412,8 @@ msgid "Border Type"
 msgstr ""
 
 #: widgets/image-box/image-box.php:770 widgets/pricing/pricing.php:1869
-#: widgets/tablepress/tablepress.php:218 widgets/tablepress/tablepress.php:345
-#: widgets/tablepress/tablepress.php:428
+#: widgets/tablepress/tablepress.php:223 widgets/tablepress/tablepress.php:350
+#: widgets/tablepress/tablepress.php:433
 msgid "Double"
 msgstr ""
 
@@ -5681,7 +5681,7 @@ msgstr ""
 msgid "Phone:"
 msgstr ""
 
-#: widgets/mail-chimp/mail-chimp.php:329 widgets/tablepress/tablepress.php:80
+#: widgets/mail-chimp/mail-chimp.php:329 widgets/tablepress/tablepress.php:85
 #: widgets/team/team.php:434 widgets/team/team.php:2471
 msgid "Phone"
 msgstr ""
@@ -5779,11 +5779,11 @@ msgstr ""
 msgid "This works in the current page."
 msgstr ""
 
-#: widgets/nav-menu/nav-menu.php:112 widgets/tablepress/tablepress.php:74
+#: widgets/nav-menu/nav-menu.php:112 widgets/tablepress/tablepress.php:79
 msgid "Responsive Breakpoint"
 msgstr ""
 
-#: widgets/nav-menu/nav-menu.php:116 widgets/tablepress/tablepress.php:81
+#: widgets/nav-menu/nav-menu.php:116 widgets/tablepress/tablepress.php:86
 msgid "Tablet"
 msgstr ""
 
@@ -6510,7 +6510,7 @@ msgstr ""
 msgid "Ribbon"
 msgstr ""
 
-#: widgets/progressbar/progressbar.php:62 widgets/tablepress/tablepress.php:530
+#: widgets/progressbar/progressbar.php:62 widgets/tablepress/tablepress.php:535
 msgid "Stripe"
 msgstr ""
 
@@ -6846,93 +6846,93 @@ msgstr ""
 msgid "TablePress"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:38 widgets/tablepress/tablepress.php:193
+#: widgets/tablepress/tablepress.php:43 widgets/tablepress/tablepress.php:198
 msgid "Table"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:58
+#: widgets/tablepress/tablepress.php:63
 msgid "Responsive"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:64
+#: widgets/tablepress/tablepress.php:69
 msgid "Flip"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:65
+#: widgets/tablepress/tablepress.php:70
 msgid "Scroll"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:66
+#: widgets/tablepress/tablepress.php:71
 msgid "Collapse"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:67
+#: widgets/tablepress/tablepress.php:72
 msgid "Stack"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:82
+#: widgets/tablepress/tablepress.php:87
 msgid "Desktop"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:83
+#: widgets/tablepress/tablepress.php:88
 msgid "All"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:95
+#: widgets/tablepress/tablepress.php:100
 msgid "Nav Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:106
+#: widgets/tablepress/tablepress.php:111
 msgid "Search Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:117
+#: widgets/tablepress/tablepress.php:122
 msgid "Footer Info Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:128
+#: widgets/tablepress/tablepress.php:133
 msgid "Pagination Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:139
+#: widgets/tablepress/tablepress.php:144
 msgid "Header Alignment"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:165
+#: widgets/tablepress/tablepress.php:170
 msgid "Body Alignment"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:212 widgets/tablepress/tablepress.php:339
-#: widgets/tablepress/tablepress.php:422 widgets/video/video.php:606
+#: widgets/tablepress/tablepress.php:217 widgets/tablepress/tablepress.php:344
+#: widgets/tablepress/tablepress.php:427 widgets/video/video.php:606
 msgid "Border Style"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:221 widgets/tablepress/tablepress.php:348
-#: widgets/tablepress/tablepress.php:431
+#: widgets/tablepress/tablepress.php:226 widgets/tablepress/tablepress.php:353
+#: widgets/tablepress/tablepress.php:436
 msgid "Groove"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:269
+#: widgets/tablepress/tablepress.php:274
 msgid "Pagination And Serach Gap"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:281
+#: widgets/tablepress/tablepress.php:286
 msgid "Footer Text And Navigation gap"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:315
+#: widgets/tablepress/tablepress.php:320
 msgid "Hover And Active Background"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:461
+#: widgets/tablepress/tablepress.php:466
 msgid "Cell Padding"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:592
+#: widgets/tablepress/tablepress.php:597
 msgid "Filter And Search"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:687
+#: widgets/tablepress/tablepress.php:692
 msgid "Please Select A Table From Setting!"
 msgstr ""
 

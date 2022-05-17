@@ -28,7 +28,7 @@ class Ajax {
 
 		if ( isset( $_POST['widget_list'] ) ) {
 			$widget_list          = Widget_List::instance()->get_list();
-			$widget_list_input    = ( ! is_array( $_POST['widget_list'] ) ? [] : $_POST['widget_list'] );
+			$widget_list_input    = ! is_array( $_POST['widget_list'] ) ? [] : $_POST['widget_list']; // phpcs:ignore // bellow we checked this value for sanitization.
 			$widget_prepared_list = [];
 
 			foreach ( $widget_list as $widget_slug => $widget ) {
@@ -46,7 +46,7 @@ class Ajax {
 
 		if ( isset( $_POST['module_list'] ) ) {
 			$module_list          = Module_List::instance()->get_list( 'optional' );
-			$module_list_input    = ( ! is_array( $_POST['module_list'] ) ? [] : $_POST['module_list'] );
+			$module_list_input    = ! is_array( $_POST['module_list'] ) ? [] : $_POST['module_list']; // phpcs:ignore // bellow we checked this value for sanitization.
 			$module_prepared_list = [];
 
 			foreach ( $module_list as $module_slug => $module ) {

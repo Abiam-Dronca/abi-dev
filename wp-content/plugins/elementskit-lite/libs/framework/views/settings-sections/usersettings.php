@@ -149,7 +149,7 @@ $pro_active = (in_array('elementskit/elementskit.php', apply_filters('active_plu
 
 
 						$val = (empty($user_data['fbp_review']['pg_token'])) ? '' : ($user_data['fbp_review']['pg_token']);
-						$btn = (empty($user_data['fbp_review']['pg_token'])) ? __('Get access token', 'elementskit-lite') : __('Refresh access token', 'elementskit-lite');
+						$btn = (empty($user_data['fbp_review']['pg_token'])) ? __('Get access token', 'elementskit-lite') : __('Refresh access token', 'elementskit-lite'); // escaped at line: 186
 
 						$this->utils->input(
 							[
@@ -183,7 +183,7 @@ $pro_active = (in_array('elementskit/elementskit.php', apply_filters('active_plu
                             <a class="ekit-admin-access-token ekit-admin-accordion-btn"
                                href="https://token.wpmet.com/social_token.php?provider=facebook&_for=page<?php echo $dbg ?>"
                                target="_blank">
-								<?php echo $btn ?>
+								<?php echo esc_html($btn) ?>
                             </a>
                         </div>
                     </div>

@@ -286,7 +286,7 @@ if (!class_exists('Wpmet\Libs\Rating')) {
          */
         public static function never_show_message()
         {
-            $plugin_name = $_POST['plugin_name'];
+            $plugin_name = sanitize_key($_POST['plugin_name']);
             add_option($plugin_name . '_never_show', 'yes');
         }
 
@@ -378,7 +378,7 @@ if (!class_exists('Wpmet\Libs\Rating')) {
 
         public static function ask_me_later_message()
         {
-            $plugin_name = $_POST['plugin_name'];
+            $plugin_name = sanitize_key($_POST['plugin_name']);
             if (get_option($plugin_name . '_ask_me_later') == false) {
                 add_option($plugin_name . '_ask_me_later', 'yes');
             } else {

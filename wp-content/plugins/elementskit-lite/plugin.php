@@ -200,6 +200,7 @@ class Plugin{
      */
     public function enqueue_frontend(){
         wp_enqueue_script( 'elementskit-framework-js-frontend', \ElementsKit_Lite::lib_url() . 'framework/assets/js/frontend-script.js', ['jquery'], \ElementsKit_Lite::version(), true );
+        wp_enqueue_script( 'datatables', plugins_url() . '/tablepress/js/jquery.datatables.min.js', ['jquery'], \ElementsKit_Lite::version(), true );
     }
 
     /**

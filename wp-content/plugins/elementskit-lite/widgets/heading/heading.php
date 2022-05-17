@@ -1343,9 +1343,9 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 
 			echo ($ekit_heading_seperator_position == 'before') ? $seperator : '';
 			if(!empty($ekit_heading_title)):
-				echo '<'.$title_tag.' class="ekit-heading--title elementskit-section-title '.$title_text_fill.''.$title_border.'">
-						'.$ekit_title.'
-				</'.$title_tag.'>';
+				echo ('<'.$title_tag.' class="ekit-heading--title elementskit-section-title '.esc_attr($title_text_fill.''.$title_border).'">
+						'.\ElementsKit_Lite\Utils::kses($ekit_title).'
+				</'.$title_tag.'>');
 			endif;
 
 			echo (

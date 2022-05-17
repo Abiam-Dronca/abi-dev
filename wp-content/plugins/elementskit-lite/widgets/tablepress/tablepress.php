@@ -10,6 +10,11 @@ class ElementsKit_Widget_TablePress extends Widget_Base {
 	use \ElementsKit_Lite\Widgets\Widget_Notice;
 
     public $base;
+    
+    public function __construct( $data = [], $args = null ) {
+		parent::__construct( $data, $args );
+		$this->add_script_depends('datatables');
+    }
 
     public function get_name() {
         return Handler::get_name();
@@ -719,7 +724,6 @@ class ElementsKit_Widget_TablePress extends Widget_Base {
         
         
 		if ( \Elementor\Plugin::instance()->editor->is_edit_mode() ) { ?>
-			<script src="<?php echo plugins_url(); ?>/tablepress/js/jquery.datatables.min.js"></script>
 			<script>
 				jQuery(document).ready(function($){
 					jQuery('#ekit_tablepress_<?php echo esc_attr($this->get_id()); ?>').find('.tablepress').dataTable();
