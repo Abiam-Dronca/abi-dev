@@ -88,14 +88,16 @@ class GalleriesModel_bwg {
    *
    * @param      $id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function delete( $id, $all = FALSE ) {
+  public function delete( $id, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     $where = '';
     $image_where = '';
     $alb_gal_where = '';
+    $image_tag_where = '';
     $prepareArgs = array();
     if ( !$all ) {
       $where = ' WHERE id=%d';
@@ -105,7 +107,29 @@ class GalleriesModel_bwg {
     }
     // Remove custom post.
     if ( $all ) {
-      $wpdb->query($wpdb->prepare('DELETE FROM `' . $wpdb->prefix . 'posts` WHERE `post_type`="%s"', "bwg_gallery"));
+      $posts_where = '';
+      if ( !empty($excludeIds) ) {
+        // get the galleries that should not be deleted.
+        $gSlugs_tmp = $wpdb->get_results('SELECT `slug` FROM `' . $wpdb->prefix . 'bwg_gallery` WHERE `id` IN (' . WDWLibrary::escape_array($excludeIds) . ')');
+        if ( !empty($gSlugs_tmp) ) {
+          foreach ( $gSlugs_tmp as $val ) {
+            $gSlugs[] = $val->slug;
+          }
+          $posts_where = ' AND `post_name` NOT IN (' . WDWLibrary::escape_array($gSlugs) . ')';
+        }
+        $tagIds_tmp = $wpdb->get_results('SELECT `tag_id` FROM `' . $wpdb->prefix . 'bwg_image_tag` WHERE `gallery_id` IN (' . WDWLibrary::escape_array($excludeIds) . ')');
+        if ( !empty($tagIds_tmp) ) {
+          foreach ( $tagIds_tmp as $val ) {
+            $tagIds[] = $val->tag_id;
+          }
+        }
+        $where = ' WHERE `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+        $image_where = ' WHERE `gallery_id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+        $alb_gal_where = ' AND `alb_gal_id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+        $image_tag_where = ' WHERE `gallery_id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+      }
+      $query = $wpdb->prepare('DELETE FROM `' . $wpdb->prefix . 'posts` WHERE `post_type`="%s"' . $posts_where, 'bwg_gallery');
+      $wpdb->query( $query );
     }
     else {
       $row = $wpdb->get_row($wpdb->prepare('SELECT `slug` FROM `' . $wpdb->prefix . 'bwg_gallery` WHERE id="%d"', $id));
@@ -125,11 +149,26 @@ class GalleriesModel_bwg {
       }
     }
     else {
-      $delete = $wpdb->query('DELETE FROM `' . $wpdb->prefix . 'bwg_gallery`' . $where);
-      $wpdb->query('DELETE FROM `' . $wpdb->prefix . 'bwg_image`' . $image_where);
-      $wpdb->query('DELETE FROM `' . $wpdb->prefix . 'bwg_album_gallery` WHERE is_album="0"' . $alb_gal_where);
-      $wpdb->query('DELETE FROM `' . $wpdb->prefix . 'bwg_image_tag`');
+      $gallery_delete = 'DELETE FROM `' . $wpdb->prefix . 'bwg_gallery`' . $where;
+      $delete = $wpdb->query( $gallery_delete );
+
+      $image_delete = 'DELETE FROM `' . $wpdb->prefix . 'bwg_image`' . $image_where;
+      $wpdb->query( $image_delete );
+
+      $album_gallery_delete = 'DELETE FROM `' . $wpdb->prefix . 'bwg_album_gallery` WHERE is_album="0"' . $alb_gal_where;
+      $wpdb->query( $album_gallery_delete );
+
+      $image_tag_delete = 'DELETE FROM `' . $wpdb->prefix . 'bwg_image_tag`' . $image_tag_where;
+      $wpdb->query( $image_tag_delete );
+
       $wpdb->update($wpdb->prefix . 'term_taxonomy', array('count' => '0'), array('taxonomy' => 'bwg_tag'));
+      if ( !empty($tagIds) ) {
+        foreach ( $tagIds as $tag_id ) {
+          // update tag count in term_taxonomy table.
+          $count = $wpdb->get_var($wpdb->prepare('SELECT COUNT(image_id) FROM ' . $wpdb->prefix . 'bwg_image_tag WHERE tag_id="%d"', $tag_id));
+          $wpdb->query($wpdb->prepare('UPDATE ' . $wpdb->prefix . 'term_taxonomy SET count="%d" WHERE term_id="%d"', $count, $tag_id));
+        }
+      }
     }
     if ( $delete ) {
       if ( $all ) {
@@ -151,13 +190,18 @@ class GalleriesModel_bwg {
    *
    * @param      $idtoget
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function duplicate( $idtoget, $all = FALSE ) {
+  public function duplicate( $idtoget, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     if ( !$idtoget ) {
-      $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'bwg_gallery');
+      $query = 'SELECT id FROM ' . $wpdb->prefix . 'bwg_gallery';
+      if ( $all && !empty($excludeIds) ) {
+        $query .= ' WHERE `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+      }
+      $ids = $wpdb->get_col($query);
     }
     else {
       $ids = array( $idtoget );
@@ -825,7 +869,17 @@ class GalleriesModel_bwg {
       $image_message = sprintf(_n('%s item successfully %s.', '%s items successfully %s.', $checked_items_count, BWG()->prefix), $checked_items_count, $actions[$image_action]['bulk_action']);
     }
     if ( $all && $image_action && method_exists($this, $image_action) ) {
-      $image_message = $this->$image_action(0, $gallery_id, TRUE);
+      $get_excludeIds = WDWLibrary::get('ids_exclude', FALSE);
+      $excludeIds = array();
+      if ( !empty($get_excludeIds) ) {
+        $arr_excludeIds = explode(',', $get_excludeIds);
+        if ( !empty($arr_excludeIds) ) {
+          foreach( $arr_excludeIds as $eid ) {
+            $excludeIds[] = (!empty($action_image_id[$eid]) ? $action_image_id[$eid] : $eid);
+          }
+        }
+      }
+      $image_message = $this->$image_action(0, $gallery_id, TRUE, $excludeIds);
     }
     $images_saved = ($save !== FALSE) ? TRUE : FALSE;
 
@@ -858,10 +912,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_delete( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_delete( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     $prepareArgs = array();
     if ( $gallery_id == 0 ) {
@@ -872,6 +927,9 @@ class GalleriesModel_bwg {
     if ( !$all ) {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
+    }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
     }
     $search = WDWLibrary::get('s');
     if ( $search ) {
@@ -884,7 +942,8 @@ class GalleriesModel_bwg {
     }
     $image_ids = $wpdb->get_col($wpdb->prepare('SELECT `id` FROM `' . $wpdb->prefix . 'bwg_image`' . $where, $prepareArgs));
     $thumb_urls = $wpdb->get_col($wpdb->prepare('SELECT `thumb_url` FROM `' . $wpdb->prefix . 'bwg_image`' . $where, $prepareArgs));
-    $delete = $wpdb->query($wpdb->prepare('DELETE FROM `' . $wpdb->prefix . 'bwg_image`' . $where, $prepareArgs));
+    $query = $wpdb->prepare('DELETE FROM `' . $wpdb->prefix . 'bwg_image`' . $where, $prepareArgs);
+    $delete = $wpdb->query( $query );
     $message = 2;
     if ( $delete ) {
       $prepareArgs = array();
@@ -930,10 +989,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_publish( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_publish( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     $prepareArgs = array();
     if ( $gallery_id == 0 ) {
@@ -945,6 +1005,9 @@ class GalleriesModel_bwg {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
     }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+    }
     $search = WDWLibrary::get('s');
     if ( $search ) {
       $where .= ' AND (`alt` LIKE %s';
@@ -954,7 +1017,8 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
       $prepareArgs[] = "%" . trim($search) . "%";
     }
-    $updated = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET published=1' . $where, $prepareArgs));
+    $query = $wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET published=1' . $where, $prepareArgs);
+    $updated = $wpdb->query( $query );
     $message = 2;
     if ( $updated !== FALSE ) {
       $message = 9;
@@ -969,10 +1033,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_unpublish( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_unpublish( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     $prepareArgs = array();
     if ( $gallery_id == 0 ) {
@@ -984,6 +1049,9 @@ class GalleriesModel_bwg {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
     }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+    }
     $search = WDWLibrary::get('s');
     if ( $search ) {
       $where .= ' AND (`alt` LIKE %s';
@@ -993,7 +1061,8 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
       $prepareArgs[] = "%" . trim($search) . "%";
     }
-    $updated = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET published=0' . $where, $prepareArgs));
+    $query = $wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET published=0' . $where, $prepareArgs);
+    $updated = $wpdb->query( $query );
     $message = 2;
     if ( $updated !== FALSE ) {
       $message = 10;
@@ -1008,16 +1077,17 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_reset( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_reset( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     if ( $all ) {
       if ( $gallery_id == 0 ) {
         $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
       }
       $limit = WDWLibrary::get('limit', 0, 'intval');
-      WDWLibrary::bwg_image_recover_all($gallery_id, $limit);
+      WDWLibrary::bwg_image_recover_all($gallery_id, $limit, $excludeIds);
     }
     else {
       global $wpdb;
@@ -1038,10 +1108,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_set_watermark( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_set_watermark( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     if ( ini_get('allow_url_fopen') == 0 ) {
       $message_id = 27;
     }
@@ -1058,7 +1129,7 @@ class GalleriesModel_bwg {
           $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
         }
         $limit = WDWLibrary::get('limit', 0, 'intval');
-        $message_id = WDWLibrary::bwg_image_set_watermark($gallery_id, ($all ? 0 : $id), $limit);
+        $message_id = WDWLibrary::bwg_image_set_watermark($gallery_id, ($all ? 0 : $id), $limit, $excludeIds);
       }
     }
 
@@ -1071,11 +1142,12 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_rotate_left( $id, $gallery_id = 0, $all = FALSE ) {
-    return $this->rotate(90, $id, $gallery_id, $all);
+  public function image_rotate_left( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
+    return $this->rotate(90, $id, $gallery_id, $all, $excludeIds);
   }
 
   /**
@@ -1084,11 +1156,12 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_rotate_right( $id, $gallery_id = 0, $all = FALSE ) {
-    return $this->rotate(270, $id, $gallery_id, $all);
+  public function image_rotate_right( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
+    return $this->rotate(270, $id, $gallery_id, $all, $excludeIds);
   }
 
   /**
@@ -1098,10 +1171,11 @@ class GalleriesModel_bwg {
    * @param int  $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function rotate( $edit_type, $id = 0, $gallery_id = 0, $all = FALSE ) {
+  public function rotate( $edit_type, $id = 0, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     $prepareArgs = array();
     $image_id = ($all ? 0 : $id);
@@ -1116,8 +1190,10 @@ class GalleriesModel_bwg {
         $where .= ' AND `id` = %d';
         $prepareArgs[] = $image_id;
       }
+      if ( $all && !empty($excludeIds) ) {
+        $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+      }
     }
-    //$where = ( ($gallery_id) ? ' `gallery_id` = ' . $gallery_id . ($image_id ? ' AND `id` = ' . $image_id : '' ) : 1 );
     $search = WDWLibrary::get('s');
     if ( $search ) {
       $where .= ' AND (`alt` LIKE %s';
@@ -1128,10 +1204,12 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
     }
     if ( !empty($prepareArgs) ) {
-      $images_data = $wpdb->get_results($wpdb->prepare('SELECT id, image_url, thumb_url, resolution_thumb FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where, $prepareArgs));
+      $query = $wpdb->prepare('SELECT id, image_url, thumb_url, resolution_thumb FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where, $prepareArgs);
+      $images_data = $wpdb->get_results( $query );
     }
     else {
-      $images_data = $wpdb->get_results('SELECT id, image_url, thumb_url, resolution_thumb FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where);
+      $query = 'SELECT id, image_url, thumb_url, resolution_thumb FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where;
+      $images_data = $wpdb->get_results($query);
     }
     @ini_set('memory_limit', '-1');
     foreach ( $images_data as $image_data ) {
@@ -1192,6 +1270,18 @@ class GalleriesModel_bwg {
           imagedestroy($thumb_source);
           imagedestroy($thumb_rotate);
         }
+        elseif ( $type_rotate == 18 ) {
+          $source = imagecreatefromwebp($filename);
+          $thumb_source = imagecreatefromwebp($thumb_filename);
+          $rotate = imagerotate($source, $edit_type, 0);
+          $thumb_rotate = imagerotate($thumb_source, $edit_type, 0);
+          imagewebp($thumb_rotate, $thumb_filename, BWG()->options->jpeg_quality);
+          imagewebp($rotate, $filename, BWG()->options->jpeg_quality);
+          imagedestroy($source);
+          imagedestroy($rotate);
+          imagedestroy($thumb_source);
+          imagedestroy($thumb_rotate);
+        }
       }
       $resolution_thumb = WDWLibrary::get_thumb_size($image_data->thumb_url);
 
@@ -1210,10 +1300,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_recreate_thumbnail( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_recreate_thumbnail( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     $image_id = ($all ? 0 : $id);
     global $wpdb;
     if ( $gallery_id == 0 ) {
@@ -1229,12 +1320,17 @@ class GalleriesModel_bwg {
         $where .= ' AND `id` = %d';
         $prepareArgs[] = $image_id;
       }
+      if ( $all && !empty($excludeIds) ) {
+        $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+      }
     }
     if ( !empty($prepareArgs) ) {
-      $img_ids = $wpdb->get_results($wpdb->prepare('SELECT id, thumb_url FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where, $prepareArgs));
+      $query = $wpdb->prepare('SELECT id, thumb_url FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where, $prepareArgs);
+      $img_ids = $wpdb->get_results( $query );
     }
     else {
-      $img_ids = $wpdb->get_results('SELECT id, thumb_url FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where);
+      $query = 'SELECT id, thumb_url FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where;
+      $img_ids = $wpdb->get_results( $query );
     }
     $search = WDWLibrary::get('s');
     if ( $search ) {
@@ -1267,10 +1363,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_resize( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_resize( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     $image_id = ($all ? 0 : $id);
     global $wpdb;
     if ( $gallery_id == 0 ) {
@@ -1284,6 +1381,9 @@ class GalleriesModel_bwg {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
     }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+    }
     $search = WDWLibrary::get('s');
     if ( $search ) {
       $where .= ' AND (`alt` LIKE %s';
@@ -1293,7 +1393,8 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
       $prepareArgs[] = "%" . trim($search) . "%";
     }
-    $images = $wpdb->get_results($wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where, $prepareArgs));
+    $query = $wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where, $prepareArgs);
+    $images = $wpdb->get_results( $query );
     if ( !empty($images) ) {
       foreach ( $images as $image ) {
         $file_path = BWG()->upload_dir . $image->image_url;
@@ -1358,10 +1459,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_edit_alt( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_edit_alt( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     $title = WDWLibrary::get('title');
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
@@ -1371,6 +1473,9 @@ class GalleriesModel_bwg {
     if ( !$all ) {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
+    }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
     }
     $search = WDWLibrary::get('s');
     if ( $search ) {
@@ -1382,7 +1487,8 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
     }
     global $wpdb;
-    $updated = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `alt`="%s"' . $where, $prepareArgs));
+    $query = $wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `alt`="%s"' . $where, $prepareArgs);
+    $updated = $wpdb->query( $query );
     $message = 2;
     if ( $updated !== FALSE ) {
       $message = 25;
@@ -1397,10 +1503,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_edit_description( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_edit_description( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
     }
@@ -1410,6 +1517,9 @@ class GalleriesModel_bwg {
     if ( !$all ) {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
+    }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
     }
     $search = WDWLibrary::get('s');
     if ( $search ) {
@@ -1421,7 +1531,8 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
     }
     global $wpdb;
-    $updated = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `description`="%s"' . $where, $prepareArgs));
+    $query = $wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `description`="%s"' . $where, $prepareArgs);
+    $updated = $wpdb->query( $query );
     $message = 2;
     if ( $updated !== FALSE ) {
       $message = 25;
@@ -1436,10 +1547,11 @@ class GalleriesModel_bwg {
    * @param      $id
    * @param      $gallery_id
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function image_edit_redirect( $id, $gallery_id = 0, $all = FALSE ) {
+  public function image_edit_redirect( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
     }
@@ -1449,6 +1561,9 @@ class GalleriesModel_bwg {
     if ( !$all ) {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
+    }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
     }
     $search = WDWLibrary::get('s');
     if ( $search ) {
@@ -1460,7 +1575,8 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
     }
     global $wpdb;
-    $updated = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `redirect_url`="%s"' . $where, $prepareArgs));
+    $query = $wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `redirect_url`="%s"' . $where, $prepareArgs);
+    $updated = $wpdb->query( $query );
     $message = 2;
     if ( $updated !== FALSE ) {
       $message = 25;
@@ -1469,7 +1585,17 @@ class GalleriesModel_bwg {
     return $message;
   }
 
-  public function image_add_tag( $id, $gallery_id = 0, $all = FALSE ) {
+  /**
+   * Add image tag.
+   *
+   * @param       $id
+   * @param int   $gallery_id
+   * @param bool  $all
+   * @param array $excludeIds
+   *
+   * @return int
+   */
+  public function image_add_tag( $id, $gallery_id = 0, $all = FALSE, $excludeIds = array() ) {
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
     }
@@ -1483,6 +1609,9 @@ class GalleriesModel_bwg {
       $where .= ' AND id=%d';
       $prepareArgs[] = $id;
     }
+    if ( $all && !empty($excludeIds) ) {
+      $where .= ' AND `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+    }
     $search = WDWLibrary::get('s');
     if ( $search ) {
       $where .= ' AND (`alt` LIKE %s';
@@ -1492,7 +1621,8 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
       $prepareArgs[] = "%" . trim($search) . "%";
     }
-    $images = $wpdb->get_results($wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image`' . $where, $prepareArgs));
+    $query = $wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image`' . $where, $prepareArgs);
+    $images = $wpdb->get_results( $query );
     foreach ( $images as $image ) {
       foreach ( $tag_ids_array as $tag_id ) {
         if ( $tag_id ) {

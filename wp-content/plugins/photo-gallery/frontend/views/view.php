@@ -92,6 +92,7 @@ class BWGViewSite {
          class="bwg_container bwg_thumbnail bwg_<?php echo sanitize_html_class($params['gallery_type']); ?>"
          data-right-click-protection="<?php echo esc_attr(BWG()->options->image_right_click); ?>"
          data-bwg="<?php echo esc_attr($bwg); ?>"
+         data-scroll="<?php echo esc_attr($params['need_scroll']); ?>"
          data-gallery-type="<?php echo esc_attr($params['gallery_type']); ?>"
          data-current-url="<?php echo esc_url(addslashes(urldecode($params_array['current_url']))); ?>"
          data-lightbox-url="<?php echo esc_url(addslashes(add_query_arg($params_array, admin_url('admin-ajax.php')))); ?>"

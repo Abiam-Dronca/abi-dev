@@ -23,7 +23,7 @@ $controller = new FilemanagerController();
 $upload_handler = new bwg_upl(array(
 			   'upload_dir' => $controller->uploads_dir . (isset($_GET['dir']) ? str_replace(array('\\', '../'), '', WDWLibrary::get('dir', '', 'sanitize_text_field', 'GET')) : '/'),
 			   'upload_url' => $controller->uploads_url,
-			   'accept_file_types' => '/\.(gif|jpe?g|png|svg|aac|m4a|f4a|oga|ogg|mp3|zip)$/i',
+			   'accept_file_types' => '/\.(gif|jpe?g|png|svg|webp|aac|m4a|f4a|oga|ogg|mp3|zip)$/i',
 			 ));
 
 class bwg_upl {
@@ -500,7 +500,6 @@ class bwg_upl {
 
   protected function handle_image_file( $file_path, $file ) {
     $failed_versions = array();
-
     foreach ( $this->options['image_versions'] as $version => $options ) {
       if ( $this->create_scaled_image($file->name, $version, $options) ) {
         if ( $version === '' && $this->options['orient_image'] ) {
@@ -541,16 +540,14 @@ class bwg_upl {
       $image_info = @getimagesize(htmlspecialchars_decode($file->url, ENT_COMPAT | ENT_QUOTES));
       if ( $file->type == 'svg' ) {
         $size = WDWLibrary::get_svg_size($file->url);
+        $file->resolution = '';
         if ( !empty($size) ) {
-          $file->resolution = $size['width'] . " x " . $size['height'] . " px ";
-        }
-        else {
-          $file->resolution = "";
+          $file->resolution = WDWLibrary::format_number($size['width']) . ' x ' . WDWLibrary::format_number($size['height']) . ' px';
         }
       }
       else {
         if ( !empty($image_info) ) {
-          $file->resolution = $image_info[0] . ' x ' . $image_info[1] . ' px';
+          $file->resolution = WDWLibrary::format_number($image_info[0]) . ' x ' . WDWLibrary::format_number($image_info[1]) . ' px';
         }
       }
       if ( BWG()->options->read_metadata ) {
@@ -647,12 +644,12 @@ class bwg_upl {
               $this->create_scaled_image($file->name, 'main', $this->options);
             }
             // Zip Upload.
-		  if ( is_int($img_width) || $extension == 'svg') {
+            if ( is_int($img_width) || $extension == 'svg' ) {
               $file->error = FALSE;
               if ( $extension == 'svg' ) {
-			 $file_content = file_get_contents($ex_file);
-			 file_put_contents($ex_file, preg_replace('#<script(.*?)>(.*?)</script>#is', '', $file_content));
-		    }
+                $file_content = file_get_contents($ex_file);
+                file_put_contents($ex_file, preg_replace('#<script(.*?)>(.*?)</script>#is', '', $file_content));
+              }
               $this->handle_image_file($ex_file, $file);
             }
           }
@@ -720,18 +717,17 @@ class bwg_upl {
       $file->size = $file_size_kb . ' KB';
       $file->date_modified = date('Y-m-d H:i:s', filemtime($file_path));
       $image_info = @getimagesize(htmlspecialchars_decode($file_path, ENT_COMPAT | ENT_QUOTES));
-
       if ( $type == 'svg' ) {
+        $file->resolution = "";
+        $file->resolution_thumb = "";
         $size = WDWLibrary::get_svg_size($file->dir.$file->name);
-        if( !empty($size) ) {
-          $file->resolution = $size['width'] . " x " . $size['height'] . " px ";
-          $file->resolution_thumb = $size['width'] . "x" . $size['height'];
-        } else {
-          $file->resolution = "";
-          $file->resolution_thumb = "";
+        if ( !empty($size) ) {
+          $file->resolution = WDWLibrary::format_number($size['width']) . ' x ' . WDWLibrary::format_number($size['height']) . ' px';
+          $file->resolution_thumb = WDWLibrary::format_number($size['width'], 2) . 'x' . WDWLibrary::format_number($size['height'], 2);
         }
-      } else {
-        $file->resolution = $image_info[0] . ' x ' . $image_info[1] . ' px';
+      }
+      else {
+        $file->resolution = WDWLibrary::format_number($image_info[0]) . ' x ' . WDWLibrary::format_number($image_info[1]) . ' px';
         $file->resolution_thumb = WDWLibrary::get_thumb_size($file->thumb_url);
       }
       if ( BWG()->options->read_metadata ) {
@@ -750,7 +746,6 @@ class bwg_upl {
     else {
       $file->error = TRUE;
     }
-
     return $file;
   }
 
@@ -787,7 +782,6 @@ class bwg_upl {
         // Non-multipart uploads (PUT method support)
         file_put_contents($file_path, fopen('php://input', 'r'), $append_file ? FILE_APPEND : 0);
       }
-
       $file_size = $this->get_file_size($file_path, $append_file);
       if ( strpos($type, 'svg') || $file_size === $file->size ) {
         // Do not compare size if the file is svg (for the reason when script is deleted from file).
@@ -814,7 +808,6 @@ class bwg_upl {
       }
       $this->set_file_delete_properties($file);
     }
-
     return $file;
   }
 

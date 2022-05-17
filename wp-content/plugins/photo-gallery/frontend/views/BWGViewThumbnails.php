@@ -165,7 +165,7 @@ class BWGViewThumbnails extends BWGViewSite {
     }
     ?>
     #bwg_container1_<?php echo $bwg; ?> #bwg_container2_<?php echo $bwg; ?> .bwg-container-<?php echo $bwg; ?>.bwg-standard-thumbnails .bwg-item {
-      justify-content: <?php echo ($theme_row->thumb_title_pos == 'bottom' || $params['show_thumb_description']) ? 'flex-start' : 'flex-end'; ?>;
+    justify-content: <?php echo ($theme_row->thumb_title_pos == 'bottom' || (isset($params['show_thumb_description']) && $params['show_thumb_description'])) ? 'flex-start' : 'flex-end'; ?>;
       max-width: <?php echo $params['thumb_width']; ?>px;
       <?php if ( !BWG()->options->resizable_thumbnails ) { ?>
       width: <?php echo $params['thumb_width']; ?>px !important;

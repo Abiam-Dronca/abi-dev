@@ -380,8 +380,8 @@ class WD_BWG_Options {
       $this->permissions = 'manage_options';
     }
 
-    $this->jpeg_quality = $this->image_quality;
-    $this->png_quality = 9 - round(9 * $this->image_quality / 100);
+    $this->jpeg_quality = intval($this->image_quality);
+    $this->png_quality = 9 - round(9 * intval($this->image_quality) / 100);
 
     // Will access_token refresh in the last 30 dey.
     if ( !empty( $this->instagram_access_token ) && !empty( $this->instagram_access_token_start_in ) && !empty( $this->instagram_access_token_expires_in ) ) {

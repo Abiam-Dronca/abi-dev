@@ -146,8 +146,8 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="images_directory"><?php _e('Images directory', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input id="images_directory" name="images_directory" type="text" style="display:inline-block; width:100%;" value="<?php echo $row->images_directory; ?>" />
-                    <input type="hidden" id="old_images_directory" name="old_images_directory" value="<?php echo $row->old_images_directory; ?>" />
+                    <input id="images_directory" name="images_directory" type="text" style="display:inline-block; width:100%;" value="<?php echo esc_url($row->images_directory); ?>" />
+                    <input type="hidden" id="old_images_directory" name="old_images_directory" value="<?php echo esc_url($row->old_images_directory); ?>" />
                   </div>
                   <p class="description"><?php _e('Provide the path of an existing folder inside the WordPress directory of your website to store uploaded images.<br />The content of the previous directory will be moved to the new one.', BWG()->prefix); ?></p>
                 </div>
@@ -179,8 +179,8 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="upload_img_width"><?php _e('Image dimensions', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="number" name="upload_img_width" id="upload_img_width" value="<?php echo $row->upload_img_width; ?>" min="0" /><span>x</span>
-                    <input type="number" name="upload_img_height" id="upload_img_height" value="<?php echo $row->upload_img_height; ?>" min="0" /><span>px</span>
+                    <input type="number" name="upload_img_width" id="upload_img_width" value="<?php echo intval($row->upload_img_width); ?>" min="0" /><span>x</span>
+                    <input type="number" name="upload_img_height" id="upload_img_height" value="<?php echo intval($row->upload_img_height); ?>" min="0" /><span>px</span>
                   </div>
                   <p class="description"><?php _e('Specify the maximum dimensions of uploaded images (set 0 for original size).', BWG()->prefix); ?></p>
                 </div>
@@ -189,9 +189,9 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="upload_thumb_width"><?php _e('Generated thumbnail dimensions', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="number" name="upload_thumb_width" id="upload_thumb_width" value="<?php echo $row->upload_thumb_width; ?>" min="0" /><span>x</span>
-                    <input type="number" name="upload_thumb_height" id="upload_thumb_height" value="<?php echo $row->upload_thumb_height; ?>" min="0" /><span>px</span>
-                    <input type="hidden" name="imgcount" id="bwg_imgcount" value="<?php echo $imgcount; ?>">
+                    <input type="number" name="upload_thumb_width" id="upload_thumb_width" value="<?php echo intval($row->upload_thumb_width); ?>" min="0" /><span>x</span>
+                    <input type="number" name="upload_thumb_height" id="upload_thumb_height" value="<?php echo intval($row->upload_thumb_height); ?>" min="0" /><span>px</span>
+                    <input type="hidden" name="imgcount" id="bwg_imgcount" value="<?php echo intval($imgcount); ?>">
                     <input type="submit" class="button-primary" onclick="<?php echo (BWG()->is_demo ? 'alert(\'' . addslashes(__('This option is disabled in demo.', BWG()->prefix)) . '\'); return false;' : (BWG()->wp_editor_exists ? 'return bwg_recreate_thumb(0);' : 'alert(\'' . addslashes(__('Image edit functionality is not supported by your web host.', BWG()->prefix)) . '\'); return false;')); ?>" value="<?php _e('Recreate', BWG()->prefix); ?>" />
                   </div>
                   <p class="description"><?php _e('Specify the maximum dimensions of generated thumbnails. They must be larger than frontend thumbnail dimensions.', BWG()->prefix); ?></p>
@@ -201,7 +201,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="image_quality"><?php _e('Image quality', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="number" name="image_quality" id="image_quality" value="<?php echo $row->image_quality; ?>" min="0" max="100" /><span>%</span>
+                    <input type="number" name="image_quality" id="image_quality" value="<?php echo intval($row->image_quality); ?>" min="0" max="100" /><span>%</span>
                   </div>
                   <p class="description"><?php _e('Set the quality of gallery images. Provide a value from 0 to 100%.', BWG()->prefix); ?></p>
                 </div>
@@ -240,7 +240,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="preload_images_count"><?php _e('Number of preloaded images', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="number" name="preload_images_count" id="preload_images_count" value="<?php echo $row->preload_images_count; ?>" min="0" />
+                    <input type="number" name="preload_images_count" id="preload_images_count" value="<?php echo intval($row->preload_images_count); ?>" min="0" />
                   </div>
                   <p class="description"><?php _e('Specify the number of images to preload, e.g. 5 (set 0 for all).', BWG()->prefix); ?></p>
                 </div>
@@ -521,7 +521,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <?php
                 foreach ($gallery_types_name as $key=>$gallery_type_name) {
                   ?>
-                  <option <?php echo selected($gallery_type_name,true); ?> value="<?php echo $key; ?>"><?php echo $gallery_type_name; ?></option>
+                  <option <?php echo selected($gallery_type_name,true); ?> value="<?php echo esc_attr($key); ?>"><?php echo esc_html($gallery_type_name); ?></option>
                   <?php
                 }
                 ?>
@@ -533,9 +533,9 @@ class OptionsView_bwg extends AdminView_bwg {
                     <?php
                     foreach ($gallery_types_name as $key=>$gallery_type_name) {
                       ?>
-                      <li class="gallery-type-li" data-value="<?php echo $key; ?>">
-                        <img src="<?php echo BWG()->plugin_url . '/images/' . $key . '.svg'; ?>">
-                        <span><?php echo $gallery_type_name; ?> </span>
+                      <li class="gallery-type-li" data-value="<?php echo esc_attr($key); ?>">
+                        <img src="<?php echo esc_url(BWG()->plugin_url . '/images/' . $key . '.svg'); ?>">
+                        <span><?php echo esc_html($gallery_type_name); ?> </span>
                         <?php if ( !BWG()->is_pro && ( $key == 'thumbnails_masonry' || $key == 'thumbnails_mosaic' || $key == 'blog_style' || $key == 'carousel' )) { ?>
                           <span class="pro_btn">Premium</span>
                         <?php } ?>
@@ -619,7 +619,7 @@ class OptionsView_bwg extends AdminView_bwg {
                   <?php
                   foreach ($album_types_name as $key=>$album_type_name) {
                     ?>
-                    <option <?php echo selected($album_type_name,true); ?> value="<?php echo $key; ?>"><?php echo $album_type_name; ?></option>
+                    <option <?php echo esc_html(selected($album_type_name,true)); ?> value="<?php echo esc_attr($key); ?>"><?php echo esc_html($album_type_name); ?></option>
                     <?php
                   }
                   ?>
@@ -631,8 +631,8 @@ class OptionsView_bwg extends AdminView_bwg {
                       <?php
                       foreach ($album_types_name as $key=>$album_type_name) {
                         ?>
-                        <li class="gallery-type-li" data-value="<?php echo $key; ?>">
-                          <img src="<?php echo BWG()->plugin_url . '/images/' . $key . '.svg'; ?>">
+                        <li class="gallery-type-li" data-value="<?php echo esc_attr($key); ?>">
+                          <img src="<?php echo esc_url(BWG()->plugin_url . '/images/' . $key . '.svg'); ?>">
                           <span><?php echo $album_type_name; ?> </span>
                           <?php if ( !BWG()->is_pro && ( $key == 'album_masonry_preview' ) ) { ?>
                             <span class="pro_btn">Premium</span>
@@ -710,7 +710,7 @@ class OptionsView_bwg extends AdminView_bwg {
                     </div>
                     <div class="wd-box-content wd-width-100 <?php echo BWG()->is_pro ? '' : ' bwg-disabled-option'; ?>">
                       <div class="wd-group" id="login_with_instagram">
-                        <input id="instagram_access_token" name="instagram_access_token" type="hidden" size="30" value="<?php echo $row->instagram_access_token; ?>" readonly />
+                        <input id="instagram_access_token" name="instagram_access_token" type="hidden" size="30" value="<?php echo esc_attr($row->instagram_access_token); ?>" readonly />
                         <?php if ( empty($row->instagram_access_token) ) { ?>
                           <a <?php echo BWG()->is_pro ? 'href="' . $instagram_return_url . '"' : 'disabled="disabled"'; ?> class="bwg-connect-instagram">
                             <?php _e('Connect an Instagram Account', BWG()->prefix) ?>
@@ -720,11 +720,11 @@ class OptionsView_bwg extends AdminView_bwg {
                         else {
                         ?>
                           <ul class="bwg-accounts-list">
-                            <li class="bwg-account-list-<?php echo $row->instagram_user_id; ?>">
+                            <li class="bwg-account-list-<?php echo sanitize_html_class($row->instagram_user_id); ?>">
                               <div class="bwg-account-block">
                                 <div>
                                   <div class="bwg-account-user-info">
-                                    <h4 class="bwg-account-name"><?php echo $row->instagram_username; ?></h4>
+                                    <h4 class="bwg-account-name"><?php echo esc_html($row->instagram_username); ?></h4>
                                   </div>
                                 </div>
                                 <div>
@@ -737,7 +737,7 @@ class OptionsView_bwg extends AdminView_bwg {
                                 <div>
                                   <p class="bwg-input-group">
                                     <label><?php _e('User ID:', BWG()->prefix) ?></label>
-                                    <input type="text" value="<?php echo $row->instagram_user_id; ?>" readonly="readonly"
+                                    <input type="text" value="<?php echo esc_attr($row->instagram_user_id); ?>" readonly="readonly"
                                            onclick="this.focus();this.select()"
                                            title="To copy, click the field then press Ctrl + C (PC) or Cmd + C (Mac).">
                                   </p>
@@ -784,7 +784,7 @@ class OptionsView_bwg extends AdminView_bwg {
                           <?php
                           foreach ($permissions as $key => $permission) {
                             ?>
-                            <option value="<?php echo $key; ?>" <?php if ($row->permissions == $key) echo 'selected="selected"'; ?>><?php echo $permission; ?></option>
+                            <option value="<?php echo esc_attr($key); ?>" <?php if ($row->permissions == $key) echo 'selected="selected"'; ?>><?php echo esc_html($permission); ?></option>
                             <?php
                           }
                           ?>
@@ -902,13 +902,13 @@ class OptionsView_bwg extends AdminView_bwg {
                         $query_url = wp_nonce_url( $query_url, 'addImages', 'bwg_nonce' );
                         $query_url = add_query_arg(array('TB_iframe' => '1'), $query_url );
                         ?>
-                        <a href="<?php echo $query_url; ?>" id="button_add_watermark_image" class="button-primary thickbox thickbox-preview"
+                        <a href="<?php echo esc_url($query_url); ?>" id="button_add_watermark_image" class="button-primary thickbox thickbox-preview"
                            title="<?php _e('Select Image', BWG()->prefix); ?>"
                            onclick="return false;">
                           <?php _e('Select Image', BWG()->prefix); ?>
                         </a>
                         <br /><?php _e('or', BWG()->prefix); ?><br />
-                        <input type="text" id="watermark_url" name="watermark_url" value="<?php echo $row->watermark_url; ?>" onchange="preview_watermark()" placeholder="e.g. https://example.com/uploads/watermark.png" />
+                        <input type="text" id="watermark_url" name="watermark_url" value="<?php echo esc_url($row->watermark_url); ?>" onchange="preview_watermark()" placeholder="e.g. https://example.com/uploads/watermark.png" />
                       </div>
                       <p class="description"><?php _e('Provide the absolute URL of the image you would like to use as advertisement.', BWG()->prefix) ?></p>
                     </div>
@@ -917,7 +917,7 @@ class OptionsView_bwg extends AdminView_bwg {
                     <div class="wd-group">
                       <label class="wd-label" for="watermark_text"><?php _e('Advertisement text', BWG()->prefix); ?></label>
                       <div class="bwg-flex">
-                        <input type="text" name="watermark_text" id="watermark_text" style="width: 100%;" value="<?php echo $row->watermark_text; ?>" onchange="preview_watermark()" onkeypress="preview_watermark()" />
+                        <input type="text" name="watermark_text" id="watermark_text" style="width: 100%;" value="<?php echo esc_attr($row->watermark_text); ?>" onchange="preview_watermark()" onkeypress="preview_watermark()" />
                       </div>
                       <p class="description"><?php _e('Write the text to add to images as advertisement.', BWG()->prefix) ?></p>
                     </div>
@@ -926,7 +926,7 @@ class OptionsView_bwg extends AdminView_bwg {
                     <div class="wd-group">
                       <label class="wd-label" for="watermark_link"><?php _e('Advertisement link', BWG()->prefix); ?></label>
                       <div class="bwg-flex">
-                        <input type="text" name="watermark_link" id="watermark_link" style="width: 100%;" value="<?php echo $row->watermark_link; ?>" onchange="preview_watermark()" onkeypress="preview_watermark()" />
+                        <input type="text" name="watermark_link" id="watermark_link" style="width: 100%;" value="<?php echo esc_url($row->watermark_link); ?>" onchange="preview_watermark()" onkeypress="preview_watermark()" />
                       </div>
                       <p class="description"><?php _e('Provide the link to be added to advertisement on images.', BWG()->prefix) ?></p>
                     </div>
@@ -935,8 +935,8 @@ class OptionsView_bwg extends AdminView_bwg {
                     <div class="wd-group">
                       <label class="wd-label" for="watermark_width"><?php _e('Advertisement dimensions', BWG()->prefix); ?></label>
                       <div class="bwg-flex">
-                        <input type="number" name="watermark_width" id="watermark_width" value="<?php echo $row->watermark_width; ?>" min="0" onchange="preview_watermark()" /><span>x</span>
-                        <input type="number" name="watermark_height" id="watermark_height" value="<?php echo $row->watermark_height; ?>" min="0" onchange="preview_watermark()" /><span>px</span>
+                        <input type="number" name="watermark_width" id="watermark_width" value="<?php echo intval($row->watermark_width); ?>" min="0" onchange="preview_watermark()" /><span>x</span>
+                        <input type="number" name="watermark_height" id="watermark_height" value="<?php echo intval($row->watermark_height); ?>" min="0" onchange="preview_watermark()" /><span>px</span>
                       </div>
                       <p class="description"><?php _e('Select the dimensions of the advertisement image.', BWG()->prefix) ?></p>
                     </div>
@@ -945,7 +945,7 @@ class OptionsView_bwg extends AdminView_bwg {
                     <div class="wd-group">
                       <label class="wd-label" for="watermark_font_size"><?php _e('Advertisement font size', BWG()->prefix); ?></label>
                       <div class="bwg-flex">
-                        <input type="number" name="watermark_font_size" id="watermark_font_size" value="<?php echo $row->watermark_font_size; ?>" min="0" onchange="preview_watermark()" /><span>px</span>
+                        <input type="number" name="watermark_font_size" id="watermark_font_size" value="<?php echo intval($row->watermark_font_size); ?>" min="0" onchange="preview_watermark()" /><span>px</span>
                       </div>
                       <p class="description"><?php _e('Specify the font size of the advertisement text.', BWG()->prefix) ?></p>
                     </div>
@@ -961,7 +961,7 @@ class OptionsView_bwg extends AdminView_bwg {
                           $watermark_font_families = ($is_google_fonts == true) ? $google_fonts : $watermark_fonts;
                           foreach ($watermark_font_families as $watermark_font) {
                             ?>
-                            <option value="<?php echo $watermark_font; ?>" <?php if ($row->watermark_font == $watermark_font) echo 'selected="selected"'; ?>><?php echo $watermark_font; ?></option>
+                            <option value="<?php echo esc_attr($watermark_font); ?>" <?php if ($row->watermark_font == $watermark_font) echo 'selected="selected"'; ?>><?php echo esc_html($watermark_font); ?></option>
                             <?php
                           }
                           ?>
@@ -980,7 +980,7 @@ class OptionsView_bwg extends AdminView_bwg {
                     <div class="wd-group">
                       <label class="wd-label" for="watermark_color"><?php _e('Advertisement color', BWG()->prefix); ?></label>
                       <div class="bwg-flex">
-                        <input type="text" name="watermark_color" id="watermark_color" value="<?php echo $row->watermark_color; ?>" class="jscolor" onchange="preview_watermark()" />
+                        <input type="text" name="watermark_color" id="watermark_color" value="<?php echo esc_attr($row->watermark_color); ?>" class="jscolor" onchange="preview_watermark()" />
                       </div>
                       <p class="description"><?php _e('Choose the color for the advertisement text on images.', BWG()->prefix) ?></p>
                     </div>
@@ -989,7 +989,7 @@ class OptionsView_bwg extends AdminView_bwg {
                     <div class="wd-group">
                       <label class="wd-label" for="watermark_opacity"><?php _e('Advertisement opacity', BWG()->prefix); ?></label>
                       <div class="bwg-flex">
-                        <input type="number" name="watermark_opacity" id="watermark_opacity" value="<?php echo $row->watermark_opacity; ?>" min="0" max="100" onchange="preview_watermark()" /><span>%</span>
+                        <input type="number" name="watermark_opacity" id="watermark_opacity" value="<?php echo intval($row->watermark_opacity); ?>" min="0" max="100" onchange="preview_watermark()" /><span>%</span>
                       </div>
                       <p class="description"><?php _e('Specify the opacity of the advertisement. The value must be between 0 to 100.', BWG()->prefix) ?></p>
                     </div>
@@ -1057,13 +1057,13 @@ class OptionsView_bwg extends AdminView_bwg {
                     $query_url = wp_nonce_url( $query_url, 'addImages', 'bwg_nonce' );
                     $query_url =  add_query_arg(array('TB_iframe' => '1'), $query_url );
                     ?>
-                    <a href="<?php echo $query_url; ?>" id="button_add_built_in_watermark_image" class="button-primary thickbox thickbox-preview"
+                    <a href="<?php echo esc_url($query_url); ?>" id="button_add_built_in_watermark_image" class="button-primary thickbox thickbox-preview"
                        title="<?php _e('Select Image', BWG()->prefix); ?>"
                        onclick="return false;">
                       <?php _e('Select Image', BWG()->prefix); ?>
                     </a>
                     <br /><?php _e('or', BWG()->prefix); ?><br />
-                    <input type="text" id="built_in_watermark_url" name="built_in_watermark_url" value="<?php echo $row->built_in_watermark_url; ?>" onchange="preview_built_in_watermark()" placeholder="e.g. https://example.com/uploads/watermark.png" />
+                    <input type="text" id="built_in_watermark_url" name="built_in_watermark_url" value="<?php echo esc_url($row->built_in_watermark_url); ?>" onchange="preview_built_in_watermark()" placeholder="e.g. https://example.com/uploads/watermark.png" />
                   </div>
                   <p class="description"><?php _e('Provide the absolute URL of the image you would like to use as watermark.', BWG()->prefix); ?><br><?php _e('Only .png format is supported.', BWG()->prefix) ?></p>
                 </div>
@@ -1081,7 +1081,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="built_in_watermark_size"><?php _e('Watermark size', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="number" name="built_in_watermark_size" id="built_in_watermark_size" value="<?php echo $row->built_in_watermark_size; ?>" min="0" max="100" onchange="preview_built_in_watermark()" /><span>%</span>
+                    <input type="number" name="built_in_watermark_size" id="built_in_watermark_size" value="<?php echo intval($row->built_in_watermark_size); ?>" min="0" max="100" onchange="preview_built_in_watermark()" /><span>%</span>
                   </div>
                   <p class="description"><?php _e('Specify the size of watermark on images in percent.', BWG()->prefix) ?></p>
                 </div>
@@ -1090,7 +1090,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="built_in_watermark_font_size"><?php _e('Watermark font size', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="number" name="built_in_watermark_font_size" id="built_in_watermark_font_size" value="<?php echo $row->built_in_watermark_font_size; ?>" min="0" onchange="preview_built_in_watermark()" />
+                    <input type="number" name="built_in_watermark_font_size" id="built_in_watermark_font_size" value="<?php echo intval($row->built_in_watermark_font_size); ?>" min="0" onchange="preview_built_in_watermark()" />
                   </div>
                   <p class="description"><?php _e('Specify the font size of the watermark text.', BWG()->prefix) ?></p>
                 </div>
@@ -1103,7 +1103,7 @@ class OptionsView_bwg extends AdminView_bwg {
                       <?php
                       foreach ($built_in_watermark_fonts as $watermark_font) {
                         ?>
-                        <option value="<?php echo $watermark_font; ?>" <?php if ($row->built_in_watermark_font == $watermark_font) echo 'selected="selected"'; ?>><?php echo $watermark_font; ?></option>
+                        <option value="<?php echo esc_attr($watermark_font); ?>" <?php if ($row->built_in_watermark_font == $watermark_font) echo 'selected="selected"'; ?>><?php echo esc_html($watermark_font); ?></option>
                         <?php
                       }
                       ?>
@@ -1128,7 +1128,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="built_in_watermark_color"><?php _e('Watermark color', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="text" name="built_in_watermark_color" id="built_in_watermark_color" value="<?php echo $row->built_in_watermark_color; ?>" class="jscolor" onchange="preview_built_in_watermark()" />
+                    <input type="text" name="built_in_watermark_color" id="built_in_watermark_color" value="<?php echo esc_attr($row->built_in_watermark_color); ?>" class="jscolor" onchange="preview_built_in_watermark()" />
                   </div>
                   <p class="description"><?php _e('Choose the color for the watermark text on images.', BWG()->prefix) ?></p>
                 </div>
@@ -1137,7 +1137,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="built_in_watermark_opacity"><?php _e('Watermark opacity', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="number" name="built_in_watermark_opacity" id="built_in_watermark_opacity" value="<?php echo $row->built_in_watermark_opacity; ?>" min="0" max="100" onchange="preview_built_in_watermark()" /><span>%</span>
+                    <input type="number" name="built_in_watermark_opacity" id="built_in_watermark_opacity" value="<?php echo intval($row->built_in_watermark_opacity); ?>" min="0" max="100" onchange="preview_built_in_watermark()" /><span>%</span>
                   </div>
                   <p class="description"><?php _e('Specify the opacity of the watermark. The value must be between 0 to 100.', BWG()->prefix) ?></p>
                 </div>
@@ -1186,9 +1186,9 @@ class OptionsView_bwg extends AdminView_bwg {
 	  <div id="loading_div" class="bwg_show"></div>
     <input id="recreate" name="recreate" type="hidden" value="" />
     <input id="watermark" name="watermark" type="hidden" value="" />
-    <input id="active_tab" name="active_tab" type="hidden" value="<?php echo $params['active_tab']; ?>" />
-    <input id="gallery_type" name="gallery_type" type="hidden" value="<?php echo $params['gallery_type']; ?>" />
-    <input id="album_type" name="album_type" type="hidden" value="<?php echo $params['album_type']; ?>" />
+    <input id="active_tab" name="active_tab" type="hidden" value="<?php echo esc_attr($params['active_tab']); ?>" />
+    <input id="gallery_type" name="gallery_type" type="hidden" value="<?php echo esc_attr($params['gallery_type']); ?>" />
+    <input id="album_type" name="album_type" type="hidden" value="<?php echo esc_attr($params['album_type']); ?>" />
     <script>
       var bwg_options_url_ajax = '<?php echo $options_url_ajax; ?>';
       function bwg_add_built_in_watermark_image(files) {
@@ -1315,8 +1315,8 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="thumb_width"><?php _e('Thumbnail dimensions', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="thumb_width" id="thumb_width" value="<?php echo $row->thumb_width; ?>" min="0" /><span>x</span>
-                <input type="number" name="thumb_height" id="thumb_height" value="<?php echo $row->thumb_height; ?>" min="0" /><span>px</span>
+                <input type="number" name="thumb_width" id="thumb_width" value="<?php echo intval($row->thumb_width); ?>" min="0" /><span>x</span>
+                <input type="number" name="thumb_height" id="thumb_height" value="<?php echo intval($row->thumb_height); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('The default dimensions of thumbnails which will display on published galleries.', BWG()->prefix); ?></p>
             </div>
@@ -1325,7 +1325,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="image_column_number"><?php _e('Number of image columns', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="image_column_number" id="image_column_number" value="<?php echo $row->image_column_number; ?>" min="0" />
+                <input type="number" name="image_column_number" id="image_column_number" value="<?php echo intval($row->image_column_number); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Set the maximum number of image columns in galleries. Note, that the parent container needs to be large enough to display all columns.', BWG()->prefix); ?></p>
             </div>
@@ -1349,7 +1349,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="images_per_page"><?php _e('Images per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="images_per_page" id="images_per_page" value="<?php echo $row->images_per_page; ?>" min="0" />
+                <input type="number" name="images_per_page" id="images_per_page" value="<?php echo intval($row->images_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per page on galleries. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
             </div>
@@ -1358,7 +1358,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="load_more_image_count"><?php _e('Images per load', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="load_more_image_count" id="load_more_image_count" value="<?php echo $row->load_more_image_count; ?>" min="0" />
+                <input type="number" name="load_more_image_count" id="load_more_image_count" value="<?php echo intval($row->load_more_image_count); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per load on galleries.', BWG()->prefix); ?></p>
             </div>
@@ -1401,7 +1401,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" name="placeholder" id="placeholder" value="<?php echo $row->placeholder; ?>"  />
+                <input type="text" name="placeholder" id="placeholder" value="<?php echo esc_attr($row->placeholder); ?>"  />
               </div>
             </div>
           </div>
@@ -1409,7 +1409,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="search_box_width" id="search_box_width" value="<?php echo $row->search_box_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="search_box_width" id="search_box_width" value="<?php echo intval($row->search_box_width); ?>" min="0" /><span>px</span>
               </div>
             </div>
           </div>
@@ -1541,7 +1541,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="masonry_thumb_size"><?php _e('Thumbnail size', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="masonry_thumb_size" id="masonry_thumb_size" value="<?php echo $row->masonry_thumb_size; ?>" min="0" /><span>px</span>
+                <input type="number" name="masonry_thumb_size" id="masonry_thumb_size" value="<?php echo intval($row->masonry_thumb_size); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('The default size of thumbnails which will display on published galleries.', BWG()->prefix); ?></p>
             </div>
@@ -1551,7 +1551,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <label class="wd-label masonry_col_num" style="<?php echo ($row->masonry == "vertical") ? '' : 'display:none'; ?>" for="masonry_image_column_number"><?php _e('Number of image columns', BWG()->prefix); ?></label>
               <label class="wd-label masonry_row_num" style="<?php echo ($row->masonry == "vertical") ? 'display:none' : ''; ?>" for="masonry_image_column_number"><?php _e('Number of image rows', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="masonry_image_column_number" id="masonry_image_column_number" value="<?php echo $row->masonry_image_column_number; ?>" min="0" />
+                <input type="number" name="masonry_image_column_number" id="masonry_image_column_number" value="<?php echo intval($row->masonry_image_column_number); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Set the maximum number of image columns (or rows) in galleries. Note, that the parent container needs to be large enough to display all columns.', BWG()->prefix); ?></p>
             </div>
@@ -1575,7 +1575,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="masonry_images_per_page"><?php _e('Images per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="masonry_images_per_page" id="masonry_images_per_page" value="<?php echo $row->masonry_images_per_page; ?>" min="0" />
+                <input type="number" name="masonry_images_per_page" id="masonry_images_per_page" value="<?php echo intval($row->masonry_images_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per page on galleries. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
             </div>
@@ -1584,7 +1584,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="masonry_load_more_image_count"><?php _e('Images per load', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="masonry_load_more_image_count" id="masonry_load_more_image_count" value="<?php echo $row->masonry_load_more_image_count; ?>" min="0" />
+                <input type="number" name="masonry_load_more_image_count" id="masonry_load_more_image_count" value="<?php echo intval($row->masonry_load_more_image_count); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per load on galleries.', BWG()->prefix); ?></p>
             </div>
@@ -1627,7 +1627,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" name="masonry_placeholder" id="masonry_placeholder" value="<?php echo $row->masonry_placeholder; ?>"  />
+                <input type="text" name="masonry_placeholder" id="masonry_placeholder" value="<?php echo esc_attr($row->masonry_placeholder); ?>"  />
               </div>
             </div>
           </div>
@@ -1635,7 +1635,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="masonry_search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="masonry_search_box_width" id="masonry_search_box_width" value="<?php echo $row->masonry_search_box_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="masonry_search_box_width" id="masonry_search_box_width" value="<?php echo intval($row->masonry_search_box_width); ?>" min="0" /><span>px</span>
               </div>
             </div>
           </div>
@@ -1775,7 +1775,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="mosaic_total_width"><?php _e('Width of mosaic galleries', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="mosaic_total_width" id="mosaic_total_width" value="<?php echo $row->mosaic_total_width; ?>" min="0" /><span>%</span>
+                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="mosaic_total_width" id="mosaic_total_width" value="<?php echo intval($row->mosaic_total_width); ?>" min="0" /><span>%</span>
               </div>
               <p class="description"><?php _e('The total width of mosaic galleries as a percentage of container\'s width.', BWG()->prefix); ?></p>
               <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -1785,7 +1785,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="mosaic_thumb_size"><?php _e('Thumbnail size', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="mosaic_thumb_size" id="mosaic_thumb_size" value="<?php echo $row->mosaic_thumb_size; ?>" min="0" /><span>px</span>
+                <input type="number" name="mosaic_thumb_size" id="mosaic_thumb_size" value="<?php echo intval($row->mosaic_thumb_size); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('The default size of thumbnails which will display on published galleries.', BWG()->prefix); ?></p>
             </div>
@@ -1809,7 +1809,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="mosaic_images_per_page"><?php _e('Images per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="mosaic_images_per_page" id="mosaic_images_per_page" value="<?php echo $row->mosaic_images_per_page; ?>" min="0" />
+                <input type="number" name="mosaic_images_per_page" id="mosaic_images_per_page" value="<?php echo intval($row->mosaic_images_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per page on galleries. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
             </div>
@@ -1818,7 +1818,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="mosaic_load_more_image_count"><?php _e('Images per load', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="mosaic_load_more_image_count" id="mosaic_load_more_image_count" value="<?php echo $row->mosaic_load_more_image_count; ?>" min="0" />
+                <input type="number" name="mosaic_load_more_image_count" id="mosaic_load_more_image_count" value="<?php echo intval($row->mosaic_load_more_image_count); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per load on galleries.', BWG()->prefix); ?></p>
             </div>
@@ -1861,7 +1861,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="mosaic_placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" name="mosaic_placeholder" id="mosaic_placeholder" value="<?php echo $row->mosaic_placeholder; ?>"  />
+                <input type="text" name="mosaic_placeholder" id="mosaic_placeholder" value="<?php echo esc_attr($row->mosaic_placeholder); ?>"  />
               </div>
             </div>
           </div>
@@ -1869,7 +1869,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="mosaic_search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="mosaic_search_box_width" id="mosaic_search_box_width" value="<?php echo $row->mosaic_search_box_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="mosaic_search_box_width" id="mosaic_search_box_width" value="<?php echo intval($row->mosaic_search_box_width); ?>" min="0" /><span>px</span>
               </div>
             </div>
           </div>
@@ -1979,7 +1979,7 @@ class OptionsView_bwg extends AdminView_bwg {
                   <?php
                   foreach ($effects as $key => $effect) {
                     ?>
-                    <option value="<?php echo $key; ?>"
+                    <option value="<?php echo esc_attr($key); ?>"
                       <?php echo (!BWG()->is_pro && $key != 'none' && $key != 'fade') ? 'disabled="disabled" title="' . __('This effect is disabled in free version.', BWG()->prefix) . '"' : ''; ?>
                       <?php if ($row->slideshow_type == $key) echo 'selected="selected"'; ?>><?php echo __($effect, BWG()->prefix); ?></option>
                     <?php
@@ -1994,7 +1994,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="slideshow_effect_duration"><?php _e('Effect duration', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="slideshow_effect_duration" id="slideshow_effect_duration" value="<?php echo $row->slideshow_effect_duration; ?>" min="0" step="0.1" /><span>sec.</span>
+                <input type="number" name="slideshow_effect_duration" id="slideshow_effect_duration" value="<?php echo floatval($row->slideshow_effect_duration); ?>" min="0" step="0.1" /><span>sec.</span>
               </div>
               <p class="description"><?php _e('Set the duration of your slideshow animation effect.', BWG()->prefix); ?></p>
             </div>
@@ -2003,7 +2003,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="slideshow_interval"><?php _e('Time interval', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="slideshow_interval" id="slideshow_interval" value="<?php echo $row->slideshow_interval; ?>" min="0" /><span>sec.</span>
+                <input type="number" name="slideshow_interval" id="slideshow_interval" value="<?php echo intval($row->slideshow_interval); ?>" min="0" /><span>sec.</span>
               </div>
               <p class="description"><?php _e('Specify the time interval between slides in Photo Gallery\'s Slideshow view.', BWG()->prefix); ?></p>
             </div>
@@ -2012,8 +2012,8 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="slideshow_width"><?php _e('Slideshow dimensions', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="slideshow_width" id="slideshow_width" value="<?php echo $row->slideshow_width; ?>" min="0" /><span>px</span>
-                <input type="number" name="slideshow_height" id="slideshow_height" value="<?php echo $row->slideshow_height; ?>" min="0" /><span>px</span>
+                <input type="number" name="slideshow_width" id="slideshow_width" value="<?php echo intval($row->slideshow_width); ?>" min="0" /><span>px</span>
+                <input type="number" name="slideshow_height" id="slideshow_height" value="<?php echo intval($row->slideshow_height); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('Set the default dimensions of your slideshow galleries.', BWG()->prefix); ?></p>
             </div>
@@ -2100,7 +2100,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="slideshow_thumbnails_count"><?php _e('Slideshow thumbnails count', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="slideshow_thumbnails_count" id="slideshow_thumbnails_count" value="<?php echo $row->slideshow_thumbnails_count; ?>" min="1" />
+                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="slideshow_thumbnails_count" id="slideshow_thumbnails_count" value="<?php echo intval($row->slideshow_thumbnails_count); ?>" min="1" />
               </div>
               <p class="description"><?php _e('Set the number of items that will be displayed in the filmstrip. This will also construct the width of the filmstrip.', BWG()->prefix); ?></p>
               <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2110,7 +2110,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="slideshow_filmstrip_height"><?php _e('Slideshow filmstrip size', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="slideshow_filmstrip_height" id="slideshow_filmstrip_height" value="<?php echo $row->slideshow_filmstrip_height; ?>" min="0" /><span>px</span>
+                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="slideshow_filmstrip_height" id="slideshow_filmstrip_height" value="<?php echo intval($row->slideshow_filmstrip_height); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('Set the size of your filmstrip. If the filmstrip is horizontal, this indicates its height, whereas for vertical filmstrips it sets the width.', BWG()->prefix); ?></p>
               <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2214,7 +2214,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="slideshow_audio_url"><?php _e('Audio URL', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" id="slideshow_audio_url" name="slideshow_audio_url" value="<?php echo $row->slideshow_audio_url; ?>" />
+                <input type="text" id="slideshow_audio_url" name="slideshow_audio_url" value="<?php echo esc_url($row->slideshow_audio_url); ?>" />
               </div>
               <p class="description"><?php _e('Provide the absolute URL of the audio file you would like to play with your slideshow.', BWG()->prefix); ?></p>
             </div>
@@ -2243,7 +2243,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="image_browser_width"><?php _e('Image width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="image_browser_width" id="image_browser_width" value="<?php echo $row->image_browser_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="image_browser_width" id="image_browser_width" value="<?php echo intval($row->image_browser_width); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('Specify the default width of images in Image Browser view.', BWG()->prefix); ?></p>
             </div>
@@ -2305,7 +2305,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="image_browser_placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" name="image_browser_placeholder" id="image_browser_placeholder" value="<?php echo $row->image_browser_placeholder; ?>"  />
+                <input type="text" name="image_browser_placeholder" id="image_browser_placeholder" value="<?php echo esc_attr($row->image_browser_placeholder); ?>"  />
               </div>
             </div>
           </div>
@@ -2313,7 +2313,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="image_browser_search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="image_browser_search_box_width" id="image_browser_search_box_width" value="<?php echo $row->image_browser_search_box_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="image_browser_search_box_width" id="image_browser_search_box_width" value="<?php echo intval($row->image_browser_search_box_width); ?>" min="0" /><span>px</span>
               </div>
             </div>
           </div>
@@ -2383,7 +2383,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="blog_style_width"><?php _e('Image width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="blog_style_width" id="blog_style_width" value="<?php echo $row->blog_style_width; ?>" min="0" /><span>px</span>
+                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="blog_style_width" id="blog_style_width" value="<?php echo intval($row->blog_style_width); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('Specify the default width of images in Blog Style view.', BWG()->prefix); ?></p>
             </div>
@@ -2409,7 +2409,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="blog_style_images_per_page"><?php _e('Images per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="blog_style_images_per_page" id="blog_style_images_per_page" value="<?php echo $row->blog_style_images_per_page; ?>" min="0" />
+                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="blog_style_images_per_page" id="blog_style_images_per_page" value="<?php echo intval($row->blog_style_images_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Select the number of images displayed per page in Blog Style view.', BWG()->prefix); ?></p>
               <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2419,7 +2419,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="blog_style_load_more_image_count"><?php _e('Images per load', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="blog_style_load_more_image_count" id="blog_style_load_more_image_count" value="<?php echo $row->blog_style_load_more_image_count; ?>" min="0" />
+                <input type="number" name="blog_style_load_more_image_count" id="blog_style_load_more_image_count" value="<?php echo intval($row->blog_style_load_more_image_count); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per load on galleries.', BWG()->prefix); ?></p>
             </div>
@@ -2462,7 +2462,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="blog_style_placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" name="blog_style_placeholder" id="blog_style_placeholder" value="<?php echo $row->blog_style_placeholder; ?>"  />
+                <input type="text" name="blog_style_placeholder" id="blog_style_placeholder" value="<?php echo esc_attr($row->blog_style_placeholder); ?>"  />
               </div>
             </div>
           </div>
@@ -2470,7 +2470,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="blog_style_search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="blog_style_search_box_width" id="blog_style_search_box_width" value="<?php echo $row->blog_style_search_box_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="blog_style_search_box_width" id="blog_style_search_box_width" value="<?php echo intval($row->blog_style_search_box_width); ?>" min="0" /><span>px</span>
               </div>
             </div>
           </div>
@@ -2562,7 +2562,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="carousel_image_column_number"><?php _e('Max. number of images', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_image_column_number" id="carousel_image_column_number" value="<?php echo $row->carousel_image_column_number; ?>" min="0" />
+                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_image_column_number" id="carousel_image_column_number" value="<?php echo intval($row->carousel_image_column_number); ?>" min="0" />
                   </div>
                   <p class="description"><?php _e('Set the maximum number of images that are shown with Carousel display.', BWG()->prefix); ?></p>
                   <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2572,8 +2572,8 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="carousel_width"><?php _e('Image dimensions', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_width" id="carousel_width" value="<?php echo $row->carousel_width; ?>" min="0" /><span>x</span>
-                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_height" id="carousel_height" value="<?php echo $row->carousel_height; ?>" min="0" /><span>px</span>
+                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_width" id="carousel_width" value="<?php echo intval($row->carousel_width); ?>" min="0" /><span>x</span>
+                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_height" id="carousel_height" value="<?php echo intval($row->carousel_height); ?>" min="0" /><span>px</span>
                   </div>
                   <p class="description"><?php _e('Specify the dimensions of carousel images in pixels.', BWG()->prefix); ?></p>
                   <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2583,7 +2583,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="carousel_image_par"><?php _e('Carousel ratio', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_image_par" id="carousel_image_par" value="<?php echo $row->carousel_image_par; ?>" min="0" max="1" step="0.01" />
+                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_image_par" id="carousel_image_par" value="<?php echo intval($row->carousel_image_par); ?>" min="0" max="1" step="0.01" />
                   </div>
                   <p class="description"><?php _e('This option defines the proportion of dimensions between neighboring images in the carousel.', BWG()->prefix); ?></p>
                   <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2593,7 +2593,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="carousel_r_width"><?php _e('Fixed width', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_r_width" id="carousel_r_width" value="<?php echo $row->carousel_r_width; ?>" min="0" /><span>px</span>
+                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_r_width" id="carousel_r_width" value="<?php echo intval($row->carousel_r_width); ?>" min="0" /><span>px</span>
                   </div>
                   <p class="description"><?php _e('Specify the fixed width of Carousel gallery container.', BWG()->prefix); ?></p>
                   <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2638,7 +2638,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="carousel_interval"><?php _e('Time interval', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_interval" id="carousel_interval" value="<?php echo $row->carousel_interval; ?>" min="0" step="0.1" /><span>sec.</span>
+                    <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="carousel_interval" id="carousel_interval" value="<?php echo floatval($row->carousel_interval); ?>" min="0" step="0.1" /><span>sec.</span>
                   </div>
                   <p class="description"><?php _e('Specify the time interval between rotations in Photo Gallery\'s Carousel view.', BWG()->prefix); ?></p>
                   <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -2741,7 +2741,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_column_number"><?php _e('Number of gallery group columns', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_column_number" id="album_column_number" value="<?php echo $row->album_column_number; ?>" min="0" />
+                <input type="number" name="album_column_number" id="album_column_number" value="<?php echo intval($row->album_column_number); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Set the maximum number of columns in gallery groups. Note, that the parent container needs to be large enough to display all columns.', BWG()->prefix); ?></p>
             </div>
@@ -2750,8 +2750,8 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_thumb_width"><?php _e('Gallery group thumbnail dimensions', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_thumb_width" id="album_thumb_width" value="<?php echo $row->album_thumb_width; ?>" min="0" /><span>x</span>
-                <input type="number" name="album_thumb_height" id="album_thumb_height" value="<?php echo $row->album_thumb_height; ?>" min="0" /><span>px</span>
+                <input type="number" name="album_thumb_width" id="album_thumb_width" value="<?php echo intval($row->album_thumb_width); ?>" min="0" /><span>x</span>
+                <input type="number" name="album_thumb_height" id="album_thumb_height" value="<?php echo intval($row->album_thumb_height); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('Specify the dimensions of thumbnails in gallery groups.', BWG()->prefix); ?></p>
             </div>
@@ -2760,7 +2760,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_image_column_number"><?php _e('Number of image columns', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_image_column_number" id="album_image_column_number" value="<?php echo $row->album_image_column_number; ?>" min="0" />
+                <input type="number" name="album_image_column_number" id="album_image_column_number" value="<?php echo intval($row->album_image_column_number); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Set the maximum number of image columns in galleries. Note, that the parent container needs to be large enough to display all columns.', BWG()->prefix); ?></p>
             </div>
@@ -2769,8 +2769,8 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_image_thumb_width"><?php _e('Thumbnail dimensions', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_image_thumb_width" id="album_image_thumb_width" value="<?php echo $row->album_image_thumb_width; ?>" min="0" /><span>x</span>
-                <input type="number" name="album_image_thumb_height" id="album_image_thumb_height" value="<?php echo $row->album_image_thumb_height; ?>" min="0" /><span>px</span>
+                <input type="number" name="album_image_thumb_width" id="album_image_thumb_width" value="<?php echo intval($row->album_image_thumb_width); ?>" min="0" /><span>x</span>
+                <input type="number" name="album_image_thumb_height" id="album_image_thumb_height" value="<?php echo intval($row->album_image_thumb_height); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('The default dimensions of thumbnails which will display on published galleries.', BWG()->prefix); ?></p>
             </div>
@@ -2794,7 +2794,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="albums_per_page"><?php _e('Gallery groups per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="albums_per_page" id="albums_per_page" value="<?php echo $row->albums_per_page; ?>" min="0" />
+                <input type="number" name="albums_per_page" id="albums_per_page" value="<?php echo intval($row->albums_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of galleries/gallery groups to display per page. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
             </div>
@@ -2803,7 +2803,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_images_per_page"><?php _e('Images per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_images_per_page" id="album_images_per_page" value="<?php echo $row->album_images_per_page; ?>" min="0" />
+                <input type="number" name="album_images_per_page" id="album_images_per_page" value="<?php echo intval($row->album_images_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per page on galleries. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
             </div>
@@ -2864,7 +2864,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" name="album_placeholder" id="album_placeholder" value="<?php echo $row->album_placeholder; ?>"  />
+                <input type="text" name="album_placeholder" id="album_placeholder" value="<?php echo esc_attr($row->album_placeholder); ?>"  />
               </div>
             </div>
           </div>
@@ -2872,7 +2872,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_search_box_width" id="album_search_box_width" value="<?php echo $row->album_search_box_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="album_search_box_width" id="album_search_box_width" value="<?php echo intval($row->album_search_box_width); ?>" min="0" /><span>px</span>
               </div>
             </div>
           </div>
@@ -2971,7 +2971,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_mosaic_total_width"><?php _e('Width of mosaic galleries', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="album_mosaic_total_width" id="album_mosaic_total_width" value="<?php echo $row->album_mosaic_total_width; ?>" min="0" /><span>%</span>
+                <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="album_mosaic_total_width" id="album_mosaic_total_width" value="<?php echo intval($row->album_mosaic_total_width); ?>" min="0" /><span>%</span>
               </div>
               <p class="description"><?php _e('The total width of mosaic galleries as a percentage of container\'s width.', BWG()->prefix); ?></p>
               <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -3039,7 +3039,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_masonry_column_number"><?php _e('Number of gallery group columns', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_masonry_column_number" id="album_masonry_column_number" value="<?php echo $row->album_masonry_column_number; ?>" min="0" />
+                <input type="number" name="album_masonry_column_number" id="album_masonry_column_number" value="<?php echo intval($row->album_masonry_column_number); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Set the maximum number of columns in gallery groups. Note, that the parent container needs to be large enough to display all columns.', BWG()->prefix); ?></p>
             </div>
@@ -3048,7 +3048,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_masonry_thumb_width"><?php _e('Gallery group thumbnail width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_masonry_thumb_width" id="album_masonry_thumb_width" value="<?php echo $row->album_masonry_thumb_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="album_masonry_thumb_width" id="album_masonry_thumb_width" value="<?php echo intval($row->album_masonry_thumb_width); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('Specify the dimensions of thumbnails in gallery groups.', BWG()->prefix); ?></p>
             </div>
@@ -3057,7 +3057,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_masonry_image_column_number"><?php _e('Number of image columns', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_masonry_image_column_number" id="album_masonry_image_column_number" value="<?php echo $row->album_masonry_image_column_number; ?>" min="0" />
+                <input type="number" name="album_masonry_image_column_number" id="album_masonry_image_column_number" value="<?php echo intval($row->album_masonry_image_column_number); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Set the maximum number of image columns in galleries. Note, that the parent container needs to be large enough to display all columns.', BWG()->prefix); ?></p>
             </div>
@@ -3066,7 +3066,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_masonry_image_thumb_width"><?php _e('Thumbnail width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_masonry_image_thumb_width" id="album_masonry_image_thumb_width" value="<?php echo $row->album_masonry_image_thumb_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="album_masonry_image_thumb_width" id="album_masonry_image_thumb_width" value="<?php echo intval($row->album_masonry_image_thumb_width); ?>" min="0" /><span>px</span>
               </div>
               <p class="description"><?php _e('The default dimensions of thumbnails which will display on published galleries.', BWG()->prefix); ?></p>
             </div>
@@ -3090,7 +3090,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="albums_masonry_per_page"><?php _e('Gallery groups per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="albums_masonry_per_page" id="albums_masonry_per_page" value="<?php echo $row->albums_masonry_per_page; ?>" min="0" />
+                <input type="number" name="albums_masonry_per_page" id="albums_masonry_per_page" value="<?php echo intval($row->albums_masonry_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of galleries/gallery groups to display per page. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
             </div>
@@ -3099,7 +3099,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_masonry_images_per_page"><?php _e('Images per page', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_masonry_images_per_page" id="album_masonry_images_per_page" value="<?php echo $row->album_masonry_images_per_page; ?>" min="0" />
+                <input type="number" name="album_masonry_images_per_page" id="album_masonry_images_per_page" value="<?php echo intval($row->album_masonry_images_per_page); ?>" min="0" />
               </div>
               <p class="description"><?php _e('Specify the number of images to display per page on galleries. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
             </div>
@@ -3160,7 +3160,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_masonry_placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="text" name="album_masonry_placeholder" id="album_masonry_placeholder" value="<?php echo $row->album_masonry_placeholder; ?>"  />
+                <input type="text" name="album_masonry_placeholder" id="album_masonry_placeholder" value="<?php echo esc_attr($row->album_masonry_placeholder); ?>"  />
               </div>
             </div>
           </div>
@@ -3168,7 +3168,7 @@ class OptionsView_bwg extends AdminView_bwg {
             <div class="wd-group">
               <label class="wd-label" for="album_masonry_search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
               <div class="bwg-flex">
-                <input type="number" name="album_masonry_search_box_width" id="album_masonry_search_box_width" value="<?php echo $row->album_masonry_search_box_width; ?>" min="0" /><span>px</span>
+                <input type="number" name="album_masonry_search_box_width" id="album_masonry_search_box_width" value="<?php echo intval($row->album_masonry_search_box_width); ?>" min="0" /><span>px</span>
               </div>
             </div>
           </div>
@@ -3265,7 +3265,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="extended_album_height"><?php _e('Extended gallery group height', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="number" name="extended_album_height" id="extended_album_height" value="<?php echo $row->extended_album_height; ?>" min="0" /><span>px</span>
+                  <input type="number" name="extended_album_height" id="extended_album_height" value="<?php echo intval($row->extended_album_height); ?>" min="0" /><span>px</span>
                 </div>
                 <p class="description"><?php _e('Set the height of blocks in Extended gallery groups.', BWG()->prefix); ?></p>
               </div>
@@ -3285,8 +3285,8 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="album_extended_thumb_width"><?php _e('Gallery group thumbnail dimensions', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="number" name="album_extended_thumb_width" id="album_extended_thumb_width" value="<?php echo $row->album_extended_thumb_width; ?>" min="0" /><span>x</span>
-                  <input type="number" name="album_extended_thumb_height" id="album_extended_thumb_height" value="<?php echo $row->album_extended_thumb_height; ?>" min="0" /><span>px</span>
+                  <input type="number" name="album_extended_thumb_width" id="album_extended_thumb_width" value="<?php echo intval($row->album_extended_thumb_width); ?>" min="0" /><span>x</span>
+                  <input type="number" name="album_extended_thumb_height" id="album_extended_thumb_height" value="<?php echo intval($row->album_extended_thumb_height); ?>" min="0" /><span>px</span>
                 </div>
                 <p class="description"><?php _e('Specify the dimensions of thumbnails in gallery groups.', BWG()->prefix); ?></p>
               </div>
@@ -3295,7 +3295,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="album_extended_image_column_number"><?php _e('Number of image columns', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="number" name="album_extended_image_column_number" id="album_extended_image_column_number" value="<?php echo $row->album_extended_image_column_number; ?>" min="0" />
+                  <input type="number" name="album_extended_image_column_number" id="album_extended_image_column_number" value="<?php echo intval($row->album_extended_image_column_number); ?>" min="0" />
                 </div>
                 <p class="description"><?php _e('Set the maximum number of image columns in galleries. Note, that the parent container needs to be large enough to display all columns.', BWG()->prefix); ?></p>
               </div>
@@ -3304,8 +3304,8 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="album_extended_image_thumb_width"><?php _e('Thumbnail dimensions', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="number" name="album_extended_image_thumb_width" id="album_extended_image_thumb_width" value="<?php echo $row->album_extended_image_thumb_width; ?>" min="0" /><span>x</span>
-                  <input type="number" name="album_extended_image_thumb_height" id="album_extended_image_thumb_height" value="<?php echo $row->album_extended_image_thumb_height; ?>" min="0" /><span>px</span>
+                  <input type="number" name="album_extended_image_thumb_width" id="album_extended_image_thumb_width" value="<?php echo intval($row->album_extended_image_thumb_width); ?>" min="0" /><span>x</span>
+                  <input type="number" name="album_extended_image_thumb_height" id="album_extended_image_thumb_height" value="<?php echo intval($row->album_extended_image_thumb_height); ?>" min="0" /><span>px</span>
                 </div>
                 <p class="description"><?php _e('The default dimensions of thumbnails which will display on published galleries.', BWG()->prefix); ?></p>
               </div>
@@ -3329,7 +3329,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="albums_extended_per_page"><?php _e('Gallery groups per page', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="number" name="albums_extended_per_page" id="albums_extended_per_page" value="<?php echo $row->albums_extended_per_page; ?>" min="0" />
+                  <input type="number" name="albums_extended_per_page" id="albums_extended_per_page" value="<?php echo intval($row->albums_extended_per_page); ?>" min="0" />
                 </div>
                 <p class="description"><?php _e('Specify the number of galleries/gallery groups to display per page. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
               </div>
@@ -3338,7 +3338,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="album_extended_images_per_page"><?php _e('Images per page', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="number" name="album_extended_images_per_page" id="album_extended_images_per_page" value="<?php echo $row->album_extended_images_per_page; ?>" min="0" />
+                  <input type="number" name="album_extended_images_per_page" id="album_extended_images_per_page" value="<?php echo intval($row->album_extended_images_per_page); ?>" min="0" />
                 </div>
                 <p class="description"><?php _e('Specify the number of images to display per page on galleries. Setting this option to 0 shows all items.', BWG()->prefix); ?></p>
               </div>
@@ -3399,7 +3399,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="album_extended_placeholder"><?php _e('Add placeholder to search', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="text" name="album_extended_placeholder" id="album_extended_placeholder" value="<?php echo $row->album_extended_placeholder; ?>"  />
+                  <input type="text" name="album_extended_placeholder" id="album_extended_placeholder" value="<?php echo esc_attr($row->album_extended_placeholder); ?>"  />
                 </div>
               </div>
             </div>
@@ -3407,7 +3407,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="album_extended_search_box_width"><?php _e('Search box maximum width', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input type="number" name="album_extended_search_box_width" id="album_extended_search_box_width" value="<?php echo $row->album_extended_search_box_width; ?>" min="0" /><span>px</span>
+                  <input type="number" name="album_extended_search_box_width" id="album_extended_search_box_width" value="<?php echo intval($row->album_extended_search_box_width); ?>" min="0" /><span>px</span>
                 </div>
               </div>
             </div>
@@ -3505,7 +3505,7 @@ class OptionsView_bwg extends AdminView_bwg {
               <div class="wd-group">
                 <label class="wd-label" for="album_extended_mosaic_total_width"><?php _e('Width of mosaic galleries', BWG()->prefix); ?></label>
                 <div class="bwg-flex">
-                  <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="album_extended_mosaic_total_width" id="album_extended_mosaic_total_width" value="<?php echo $row->album_extended_mosaic_total_width; ?>" min="0" /><span>%</span>
+                  <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="album_extended_mosaic_total_width" id="album_extended_mosaic_total_width" value="<?php echo intval($row->album_extended_mosaic_total_width); ?>" min="0" /><span>%</span>
                 </div>
                 <p class="description"><?php _e('The total width of mosaic galleries as a percentage of container\'s width.', BWG()->prefix); ?></p>
                 <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -3611,8 +3611,8 @@ class OptionsView_bwg extends AdminView_bwg {
           <div class="wd-group">
             <label class="wd-label" for="popup_width"><?php _e('Lightbox dimensions', BWG()->prefix); ?></label>
             <div class="bwg-flex">
-              <input type="number" name="popup_width" id="popup_width" value="<?php echo $row->popup_width; ?>" min="0" /><span>x</span>
-              <input type="number" name="popup_height" id="popup_height" value="<?php echo $row->popup_height; ?>" min="0" /><span>px</span>
+              <input type="number" name="popup_width" id="popup_width" value="<?php echo intval($row->popup_width); ?>" min="0" /><span>x</span>
+              <input type="number" name="popup_height" id="popup_height" value="<?php echo intval($row->popup_height); ?>" min="0" /><span>px</span>
             </div>
             <p class="description"><?php _e('Set the dimensions of image lightbox.', BWG()->prefix) ?></p>
           </div>
@@ -3625,7 +3625,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <?php
                 foreach ($effects as $key => $effect) {
                   ?>
-                  <option value="<?php echo $key; ?>"
+                  <option value="<?php echo esc_attr($key); ?>"
                     <?php echo (!BWG()->is_pro && $key != 'none' && $key != 'fade') ? 'disabled="disabled" title="' . __('This effect is disabled in free version.', BWG()->prefix) . '"' : ''; ?>
                     <?php if ($row->popup_type == $key) echo 'selected="selected"'; ?>><?php echo __($effect, BWG()->prefix); ?></option>
                   <?php
@@ -3640,7 +3640,7 @@ class OptionsView_bwg extends AdminView_bwg {
           <div class="wd-group">
             <label class="wd-label" for="popup_effect_duration"><?php _e('Effect duration', BWG()->prefix); ?></label>
             <div class="bwg-flex">
-              <input type="number" name="popup_effect_duration" id="popup_effect_duration" value="<?php echo $row->popup_effect_duration; ?>" min="0" step="0.1" /><span>sec.</span>
+              <input type="number" name="popup_effect_duration" id="popup_effect_duration" value="<?php echo floatval($row->popup_effect_duration); ?>" min="0" step="0.1" /><span>sec.</span>
             </div>
             <p class="description"><?php _e('Set the duration of lightbox animation effect.', BWG()->prefix) ?></p>
             <p class="description"><?php _e('Note, that the value of Effect Duration can not be greater than 1/4 of Time Interval.', BWG()->prefix) ?></p>
@@ -3660,7 +3660,7 @@ class OptionsView_bwg extends AdminView_bwg {
           <div class="wd-group">
             <label class="wd-label" for="popup_interval"><?php _e('Time interval', BWG()->prefix); ?></label>
             <div class="bwg-flex">
-              <input type="number" name="popup_interval" id="popup_interval" value="<?php echo $row->popup_interval; ?>" min="0" step="0.1" /><span>sec.</span>
+              <input type="number" name="popup_interval" id="popup_interval" value="<?php echo floatval($row->popup_interval); ?>" min="0" step="0.1" /><span>sec.</span>
             </div>
             <p class="description"><?php _e('Specify the time interval of autoplay in Photo Gallery lightbox.', BWG()->prefix) ?></p>
           </div>
@@ -3680,7 +3680,7 @@ class OptionsView_bwg extends AdminView_bwg {
           <div class="wd-group">
             <label class="wd-label" for="popup_filmstrip_height"><?php _e('Filmstrip size', BWG()->prefix); ?></label>
             <div class="bwg-flex">
-              <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="popup_filmstrip_height" id="popup_filmstrip_height" value="<?php echo $row->popup_filmstrip_height; ?>" min="0" /><span>px</span>
+              <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="number" name="popup_filmstrip_height" id="popup_filmstrip_height" value="<?php echo intval($row->popup_filmstrip_height); ?>" min="0" /><span>px</span>
             </div>
             <p class="description"><?php _e('Set the size of your filmstrip. If the filmstrip is horizontal, this indicates its height, whereas for vertical filmstrips it sets the width.', BWG()->prefix) ?></p>
             <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>
@@ -3913,7 +3913,7 @@ class OptionsView_bwg extends AdminView_bwg {
           <div class="wd-group">
             <label class="wd-label" for="addthis_profile_id">AddThis <?php _e('profile ID', BWG()->prefix); ?></label>
             <div class="bwg-flex">
-              <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="text" name="addthis_profile_id" id="addthis_profile_id" value="<?php echo $row->addthis_profile_id; ?>" />
+              <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="text" name="addthis_profile_id" id="addthis_profile_id" value="<?php echo esc_attr($row->addthis_profile_id); ?>" />
             </div>
             <p class="description"><?php _e('Provide the ID of your profile to connect to AddThis.', BWG()->prefix); ?><br><?php echo sprintf(__('Create an account %s.', BWG()->prefix), '<a href="https://www.addthis.com/register" target="_blank">' . __('here', BWG()->prefix) . '</a>'); ?></p>
             <?php if ( !BWG()->is_pro ) { ?><p class="description spider_free_version"><?php echo BWG()->free_msg; ?></p><?php } ?>

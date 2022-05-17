@@ -139,7 +139,7 @@ class WDWLibraryEmbed {
     */
     if ( !$host ) {
       $parse = parse_url($url);
-      $host = ($parse['host'] == "www.instagram.com") ? 'INSTAGRAM' : FALSE;
+      $host = ( !empty($parse['host']) && $parse['host'] == "www.instagram.com") ? 'INSTAGRAM' : FALSE;
     }
 
     /*return json_encode($host); for test*/

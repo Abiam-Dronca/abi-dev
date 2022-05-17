@@ -62,11 +62,11 @@ class FilemanagerController {
         $session_data['sort_order'] = $bwg_filemanager_sorting_array[get_current_user_id()]['sort_order'];
       } else {
         $session_data['sort_by'] = 'date_modified';
-        $session_data['sort_order'] = 'asc';
+        $session_data['sort_order'] = 'desc';
       }
     } else {
       $session_data['sort_by'] = 'date_modified';
-      $session_data['sort_order'] = 'asc';
+      $session_data['sort_order'] = 'desc';
     }
     $params['orderby'] = $session_data['sort_by'];
     $params['session_data'] = $session_data;
@@ -165,7 +165,6 @@ class FilemanagerController {
 	}
 
   public function make_dir() {
-
     global $wpdb;
     $input_dir = (isset($_REQUEST['dir']) ? str_replace(array('\\', '../'), '', WDWLibrary::get('dir','','sanitize_text_field','REQUEST')) : '');
     $input_dir = htmlspecialchars_decode($input_dir, ENT_COMPAT | ENT_QUOTES);
@@ -474,7 +473,6 @@ class FilemanagerController {
 	$input_dir = (isset($_REQUEST['dir']) ? str_replace(array('\\', '../'), '', WDWLibrary::get('dir', '', 'sanitize_text_field', 'REQUEST')) : '');
 	$input_dir = htmlspecialchars_decode($input_dir, ENT_COMPAT | ENT_QUOTES);
 	$input_dir = $this->esc_dir($input_dir);
-
 
 	$msg = '';
 	$flag = TRUE;

@@ -388,7 +388,7 @@ class FilemanagerView {
 		  fail: function (e, data) {
 			  if ( data.textStatus == 'error' ) {
 				var filename = data.files[0].name;
-				var regex = /\.(jpe?g|png|gif|svg)$/i;
+				var regex = /\.(jpe?g|png|gif|svg|webp)$/i;
 				if ( ! regex.test(filename) ) {
 					allowed_files.push(filename);
 					errorFiles['allowed'] = allowed_files;

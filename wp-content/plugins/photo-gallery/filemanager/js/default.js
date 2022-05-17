@@ -8,6 +8,8 @@ var all_files_selected = false;
 var params = [];
 var no_selected_files = [];
 var wdb_all_files_filtered = [];
+/* keeping last page of image add action to avoid duplication during the scroll */
+var ajax_request_count = 0;
 
 jQuery(function() {
 	var page = 1;
@@ -40,7 +42,7 @@ jQuery(function() {
       params['page'] = page;
       params['orderby'] = orderby;
       params['order'] = order;
-      if ( (page_per * page) < files_count ) {
+      if ( (page_per * page) < files_count && ajax_request_count !== params['page'] ) {
         ajax_print_images( params ).then(function() {
           page++;
           items_count = jQuery("#explorer_body .explorer_item").length;
@@ -59,7 +61,7 @@ jQuery(function() {
       }
     }
   }
-  checking_the_need_of_images(jQuery("#explorer_body_container"))
+  checking_the_need_of_images(jQuery("#explorer_body_container"));
 	jQuery("#explorer_body_container").scroll(function () {
     checking_the_need_of_images(jQuery(this));
 	});
@@ -643,6 +645,7 @@ function ajax_print_images( params ) {
   var element = params['element'];
   var is_search = params['is_search'];
   var paged = params['page'];
+  ajax_request_count = paged;
   var search = params['search'];
   var orderby = params['orderby'];
   var order = params['order'];

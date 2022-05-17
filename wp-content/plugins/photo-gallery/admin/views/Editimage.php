@@ -165,6 +165,19 @@ class EditimageView_bwg {
         imagedestroy($img_r);
         imagedestroy($dst_r);
       }
+      elseif ( $type_orig == 18 ) {
+        $img_r = imagecreatefromwebp($exp_filename[0]);
+        $dst_r = ImageCreateTrueColor($thumb_width, $thumb_height);
+        imageColorAllocateAlpha($dst_r, 0, 0, 0, 127);
+        imagealphablending($dst_r, FALSE);
+        imagesavealpha($dst_r, TRUE);
+        imagecopyresampled($dst_r, $img_r, 0, 0, $x, $y, $thumb_width, $thumb_height, $w, $h);
+        imagealphablending($dst_r, FALSE);
+        imagesavealpha($dst_r, TRUE);
+        imagewebp($dst_r, $thumb_filename);
+        imagedestroy($img_r);
+        imagedestroy($dst_r);
+      }
       else {
         ?>
         <div class="message"><strong><?php echo __("You can't crop this type of image.", BWG()->prefix); ?></strong></div>
@@ -507,6 +520,20 @@ class EditimageView_bwg {
         imagedestroy($thumb_source);
         imagedestroy($thumb_rotate);
       }
+      elseif ( $type_rotate == 18 ) {
+        $source = imagecreatefromwebp($filename);
+        $thumb_source = imagecreatefromwebp($thumb_filename);
+        imagealphablending($source, FALSE);
+        imagealphablending($thumb_source, FALSE);
+        $rotate = imagerotate($source, $edit_type, 0);
+        $thumb_rotate = imagerotate($thumb_source, $edit_type, 0);
+        imagewebp($rotate, $filename);
+        imagewebp($thumb_rotate, $thumb_filename);
+        imagedestroy($source);
+        imagedestroy($rotate);
+        imagedestroy($thumb_source);
+        imagedestroy($thumb_rotate);
+      }
     }
     elseif ( $edit_type == 'vertical' || $edit_type == 'horizontal' || $edit_type == 'both' ) {
       function bwg_image_flip( $imgsrc, $mode ) {
@@ -595,6 +622,26 @@ class EditimageView_bwg {
         imagedestroy($thumb_source);
         imagedestroy($thumb_flip);
       }
+      elseif ( $type_rotate == 18 ) {
+        $source = imagecreatefromwebp($filename);
+        $thumb_source = imagecreatefromwebp($thumb_filename);
+        imagealphablending($source, FALSE);
+        imagealphablending($thumb_source, FALSE);
+        imagesavealpha($source, TRUE);
+        imagesavealpha($thumb_source, TRUE);
+        $flip = bwg_image_flip($source, $edit_type);
+        $thumb_flip = bwg_image_flip($thumb_source, $edit_type);
+        imagealphablending($flip, FALSE);
+        imagealphablending($thumb_flip, FALSE);
+        imagesavealpha($flip, TRUE);
+        imagesavealpha($thumb_flip, TRUE);
+        imagewebp($flip, $filename);
+        imagewebp($thumb_flip, $thumb_filename);
+        imagedestroy($source);
+        imagedestroy($flip);
+        imagedestroy($thumb_source);
+        imagedestroy($thumb_flip);
+      }
     }
     elseif ( $edit_type == 'brightness' || $edit_type == 'contrast' || $edit_type == 'grayscale' || $edit_type == 'negative' || $edit_type == 'remove' || $edit_type == 'emboss' || $edit_type == 'smooth' ) {
       switch ( $edit_type ) {
@@ -668,6 +715,20 @@ class EditimageView_bwg {
         imagedestroy($source);
         imagedestroy($thumb_source);
       }
+      elseif ( $img_type == 18 ) {
+        $source = imagecreatefromwebp($filename);
+        $thumb_source = imagecreatefromwebp($thumb_filename);
+        imagealphablending($source, FALSE);
+        imagealphablending($thumb_source, FALSE);
+        imagesavealpha($source, TRUE);
+        imagesavealpha($thumb_source, TRUE);
+        imagefilter($source, $img_filter_type, $ratio);
+        imagefilter($thumb_source, $img_filter_type, $ratio);
+        imagewebp($source, $filename);
+        imagewebp($thumb_source, $thumb_filename);
+        imagedestroy($source);
+        imagedestroy($thumb_source);
+      }
     }
     elseif ( $edit_type == 'sepia' || $edit_type == 'dark_slate_grey' || $edit_type == 'saturate' ) {
       switch ( $edit_type ) {
@@ -728,6 +789,20 @@ class EditimageView_bwg {
         imagefilter($thumb_source, $img_filter_type, $red, $green, $blue);
         imagegif($source, $filename);
         imagegif($thumb_source, $thumb_filename);
+        imagedestroy($source);
+        imagedestroy($thumb_source);
+      }
+      elseif ( $img_type == 18 ) {
+        $source = imagecreatefromwebp($filename);
+        $thumb_source = imagecreatefromwebp($thumb_filename);
+        imagealphablending($source, FALSE);
+        imagealphablending($thumb_source, FALSE);
+        imagesavealpha($source, TRUE);
+        imagesavealpha($thumb_source, TRUE);
+        imagefilter($source, $img_filter_type, $red, $green, $blue);
+        imagefilter($thumb_source, $img_filter_type, $red, $green, $blue);
+        imagewebp($source, $filename);
+        imagewebp($thumb_source, $thumb_filename);
         imagedestroy($source);
         imagedestroy($thumb_source);
       }

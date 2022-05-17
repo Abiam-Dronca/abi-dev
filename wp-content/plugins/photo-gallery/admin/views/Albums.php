@@ -62,7 +62,7 @@ class AlbumsView_bwg extends AdminView_bwg {
 				<?php echo WDWLibrary::ordering('name', $params['orderby'], $params['order'], __('Title', BWG()->prefix), $params['page_url'], 'column-primary'); ?>
 				<?php echo WDWLibrary::ordering('author', $params['orderby'], $params['order'], __('Author', BWG()->prefix), $params['page_url']); ?>
 			</thead>
-			<tbody>
+			<tbody class="bwg-ordering">
 			<?php
       if ( $params['rows'] ) {
         $alternate = 'alternate';
@@ -133,6 +133,7 @@ class AlbumsView_bwg extends AdminView_bwg {
 		<div class="tablenav bottom">
 			<?php echo $this->pagination($params['page_url'], $params['total'], $params['items_per_page']); ?>
 		</div>
+    <input type="hidden" id="ids_exclude" name="ids_exclude" value="" />
   	<?php
   }
 

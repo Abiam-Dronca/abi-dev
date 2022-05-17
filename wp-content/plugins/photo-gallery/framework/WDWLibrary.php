@@ -1392,7 +1392,7 @@ class WDWLibrary {
    *
    * @return int
    */
-  public static function bwg_image_set_watermark( $gallery_id, $image_id = 0, $limit = '' ) {
+  public static function bwg_image_set_watermark( $gallery_id, $image_id = 0, $limit = '', $excludeIds = array() ) {
     global $wpdb;
     $message_id = 21;
     $options = new WD_BWG_Options();
@@ -1408,7 +1408,11 @@ class WDWLibrary {
             $prepareArgs[] = $image_id;
             $modified_date_prepare_args[] = $image_id;
           }
-      } else {
+        if ( !empty($excludeIds) ) {
+          $where .= ' AND `id` NOT IN (' . self::escape_array($excludeIds) . ')';
+        }
+      }
+      else {
           $where = 1;
       }
       //$where = (($gallery_id) ? ' `gallery_id`=' . $gallery_id . ($image_id ? ' AND `id`=' . $image_id : '') : 1);
@@ -1430,9 +1434,12 @@ class WDWLibrary {
         $prepareArgs[] = $limit;
       }
       if ( empty($prepareArgs) ) {
-          $images = $wpdb->get_results('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where . $limitstart);
-      } else {
-          $images = $wpdb->get_results($wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where . $limitstart, $prepareArgs));
+        $query = 'SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where . $limitstart;
+        $images = $wpdb->get_results( $query );
+      }
+      else {
+        $query = $wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where . $limitstart, $prepareArgs);
+        $images = $wpdb->get_results( $query );
       }
       if ( !empty( $images ) ) {
         switch ( $options->built_in_watermark_type ) {
@@ -1470,14 +1477,12 @@ class WDWLibrary {
   public static function set_text_watermark($original_filename, $dest_filename, $watermark_text, $watermark_font, $watermark_font_size, $watermark_color, $watermark_transparency, $watermark_position) {
     $original_filename = htmlspecialchars_decode($original_filename, ENT_COMPAT | ENT_QUOTES);
     $dest_filename = htmlspecialchars_decode($dest_filename, ENT_COMPAT | ENT_QUOTES);
-
     $watermark_transparency = 127 - ($watermark_transparency * 1.27);
     list($width, $height, $type) = getimagesize($original_filename);
     if( $width == 0 || $height == 0 ) {
       return FALSE;
     }
     $watermark_image = imagecreatetruecolor($width, $height);
-
     $watermark_color = self::bwg_hex2rgb($watermark_color);
     $watermark_color = imagecolorallocatealpha($watermark_image, $watermark_color[0], $watermark_color[1], $watermark_color[2], $watermark_transparency);
     $watermark_font = BWG()->plugin_dir . '/fonts/' . $watermark_font;
@@ -1504,22 +1509,20 @@ class WDWLibrary {
         break;
     }
     @ini_set('memory_limit', '-1');
-    if ($type == 2) {
+    if ( $type == 2 ) {
       $image = imagecreatefromjpeg($original_filename);
       imagettftext($image, $watermark_font_size, 0, $left, $top, $watermark_color, $watermark_font, $watermark_text);
       imagejpeg ($image, $dest_filename, BWG()->options->jpeg_quality);
-      imagedestroy($image);
     }
-    elseif ($type == 3) {
+    elseif ( $type == 3 ) {
       $image = imagecreatefrompng($original_filename);
       imagettftext($image, $watermark_font_size, 0, $left, $top, $watermark_color, $watermark_font, $watermark_text);
       imageColorAllocateAlpha($image, 0, 0, 0, 127);
       imagealphablending($image, FALSE);
       imagesavealpha($image, TRUE);
       imagepng($image, $dest_filename, BWG()->options->png_quality);
-      imagedestroy($image);
     }
-    elseif ($type == 1) {
+    elseif ( $type == 1 ) {
       $image = imagecreatefromgif($original_filename);
       imageColorAllocateAlpha($watermark_image, 0, 0, 0, 127);
       imagecopy($watermark_image, $image, 0, 0, 0, 0, $width, $height);
@@ -1527,8 +1530,16 @@ class WDWLibrary {
       imagealphablending($watermark_image, FALSE);
       imagesavealpha($watermark_image, TRUE);
       imagegif($watermark_image, $dest_filename);
-      imagedestroy($image);
     }
+    elseif ( $type == 18 ) {
+      $image = imagecreatefromwebp($original_filename);
+      imageColorAllocateAlpha($image, 0, 0, 0, 127);
+      imagettftext($image, $watermark_font_size, 0, $left, $top, $watermark_color, $watermark_font, $watermark_text);
+      imagealphablending($image, FALSE);
+      imagesavealpha($image, TRUE);
+      imagewebp($image, $dest_filename, BWG()->options->png_quality);
+    }
+    imagedestroy($image);
     imagedestroy($watermark_image);
     @ini_restore('memory_limit');
     return TRUE;
@@ -1572,14 +1583,17 @@ class WDWLibrary {
           $left = ($width - $watermark_width) / 2;
           break;
       }
-      if ($type_watermark == 2) {
+      if ( $type_watermark == 2 ) {
         $watermark_image = imagecreatefromjpeg($watermark_url);
       }
-      elseif ($type_watermark == 3) {
+      elseif ( $type_watermark == 3 ) {
         $watermark_image = imagecreatefrompng($watermark_url);
       }
-      elseif ($type_watermark == 1) {
+      elseif ( $type_watermark == 1 ) {
         $watermark_image = imagecreatefromgif($watermark_url);
+      }
+      elseif ( $type_watermark == 18 ) {
+        $watermark_image = imagecreatefromwebp($watermark_url);
       }
       else {
         return false;
@@ -1591,42 +1605,46 @@ class WDWLibrary {
       imagealphablending($watermark_image_resized, FALSE);
       imagesavealpha($watermark_image_resized, TRUE);
       imagecopyresampled ($watermark_image_resized, $watermark_image, 0, 0, 0, 0, $watermark_width, $watermark_height, $width_watermark, $height_watermark);
-
-      if ($type == 2) {
+      if ( $type == 2) {
         $image = imagecreatefromjpeg($original_filename);
         imagecopy($image, $watermark_image_resized, $left, $top, 0, 0, $watermark_width, $watermark_height);
         if ($dest_filename <> '') {
-        imagejpeg ($image, $dest_filename, BWG()->options->jpeg_quality);
+          imagejpeg ($image, $dest_filename, BWG()->options->jpeg_quality);
         } else {
-        header('Content-Type: image/jpeg');
-        imagejpeg($image, null, BWG()->options->jpeg_quality);
+          header('Content-Type: image/jpeg');
+          imagejpeg($image, null, BWG()->options->jpeg_quality);
         };
-        imagedestroy($image);
       }
-      elseif ($type == 3) {
+      elseif ( $type == 3 ) {
         $image = imagecreatefrompng($original_filename);
         imagepalettetotruecolor($image);
         imagecopy($image, $watermark_image_resized, $left, $top, 0, 0, $watermark_width, $watermark_height);
         imagealphablending($image, FALSE);
         imagesavealpha($image, TRUE);
         imagepng($image, $dest_filename, BWG()->options->png_quality);
-        imagedestroy($image);
       }
-      elseif ($type == 1) {
+      elseif ( $type == 1 ) {
         $image = imagecreatefromgif($original_filename);
         $tempimage = imagecreatetruecolor($width, $height);
         imagecopy($tempimage, $image, 0, 0, 0, 0, $width, $height);
         imagecopy($tempimage, $watermark_image_resized, $left, $top, 0, 0, $watermark_width, $watermark_height);
         imagegif($tempimage, $dest_filename);
-        imagedestroy($image);
         imagedestroy($tempimage);
       }
+      elseif ( $type == 18 ) {
+        $image = imagecreatefromwebp($original_filename);
+        imagecopy($image, $watermark_image_resized, $left, $top, 0, 0, $watermark_width, $watermark_height);
+        imagealphablending($image, FALSE);
+        imagesavealpha($image, TRUE);
+        imagewebp($image, $dest_filename, BWG()->options->png_quality);
+      }
+      imagedestroy($image);
       imagedestroy($watermark_image);
       @ini_restore('memory_limit');
     }
   }
 
-  public static function bwg_image_recover_all($gallery_id, $limit = '') {
+  public static function bwg_image_recover_all( $gallery_id, $limit = '', $excludeIds = array() ) {
     $thumb_width = BWG()->options->upload_thumb_width;
     $width = BWG()->options->upload_img_width;
     global $wpdb;
@@ -1637,7 +1655,11 @@ class WDWLibrary {
       $where = ' `gallery_id` = %d';
       $prepareArgs[] = $gallery_id;
       $modified_date_prepare_args[] = $gallery_id;
-    } else {
+      if ( !empty($excludeIds) ) {
+        $where .= ' AND `id` NOT IN (' . self::escape_array($excludeIds) . ')';
+      }
+    }
+    else {
       $where = 1;
     }
     $search = WDWLibrary::get('s', '');
@@ -1657,7 +1679,8 @@ class WDWLibrary {
       $limitstart = ' LIMIT 50 OFFSET %d';
       $prepareArgs[] = $limit;
     }
-    $images = $wpdb->get_results($wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where . $limitstart, $prepareArgs));
+    $query = $wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where . $limitstart, $prepareArgs);
+    $images = $wpdb->get_results( $query );
     if ( !empty( $images ) ) {
       foreach ( $images as $image ) {
         if ( preg_match( '/EMBED/', $image->filetype ) == 1 ) {
@@ -2616,9 +2639,9 @@ class WDWLibrary {
         $img_width = $get_thumb_size["width"];
         $img_height = $get_thumb_size["height"];
         $scale = min( $max_width / $img_width, $max_height / $img_height );
-        $new_width = $img_width * $scale;
+        $new_width  = $img_width * $scale;
         $new_height = $img_height * $scale;
-        $resolution_thumb = $new_width . "x" . $new_height;
+        $resolution_thumb = WDWLibrary::format_number($new_width, 2) . 'x' . WDWLibrary::format_number($new_height, 2);
       }
     }
     return $resolution_thumb;
@@ -2736,6 +2759,7 @@ class WDWLibrary {
         case 'gif':
         case 'png':
         case 'svg':
+        case 'webp':
           return TRUE;
           break;
       }
@@ -3366,6 +3390,45 @@ class WDWLibrary {
         return $data[$user_id]['albums']['order_by'];
     }
     return 'order_asc';
+  }
+  /**
+   * Escape array.
+   *
+   * @param array $args
+   *
+   * @return string
+   */
+  public static function escape_array( $args = array() ) {
+    global $wpdb;
+    $escaped = array();
+    foreach ( $args as $k => $v ) {
+      if ( is_numeric($v) ) {
+        $escaped[] = $wpdb->prepare('%d', $v);
+      }
+      else {
+        $escaped[] = $wpdb->prepare('%s', $v);
+      }
+    }
+
+    return implode(',', $escaped);
+  }
+
+  /**
+   * Format number.
+   *
+   * @param        $number
+   * @param int    $decimals
+   * @param string $decPoint
+   * @param string $thousandsSep
+   *
+   * @return string
+   */
+  public static function format_number( $number, $decimals = 0, $decPoint = '.' , $thousandsSep = '' ) {
+    $negation = ($number < 0) ? (-1) : 1;
+    $coefficient = 10 ** $decimals;
+    $number = $negation * floor((string)(abs($number) * $coefficient)) / $coefficient;
+
+    return number_format($number, $decimals, $decPoint, $thousandsSep);
   }
 }
 

@@ -150,7 +150,9 @@ class AlbumsController_bwg {
 
     if (method_exists($this, $task)) {
       if ($all) {
-        $message = $this->$task(0, TRUE, TRUE);
+        $get_excludeIds = WDWLibrary::get('ids_exclude', FALSE);
+        $excludeIds = ( !empty($get_excludeIds) ) ? explode(',', $get_excludeIds) : array();
+        $message = $this->$task( 0, TRUE, TRUE, $excludeIds );
         $url_arg['message'] = $message;
       }
       else {
@@ -245,11 +247,12 @@ class AlbumsController_bwg {
    * @param      $id
    * @param bool $bulk
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function delete( $id, $bulk = FALSE, $all = FALSE ) {
-    $message = $this->model->delete($id, $all);
+  public function delete( $id, $bulk = FALSE, $all = FALSE, $excludeIds = array() ) {
+    $message = $this->model->delete( $id, $all, $excludeIds );
     if ($bulk) {
       return $message;
     }
@@ -266,15 +269,20 @@ class AlbumsController_bwg {
    * @param      $id
    * @param bool $bulk
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function publish( $id, $bulk = FALSE, $all = FALSE ) {
+  public function publish( $id, $bulk = FALSE, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     $where = ($all ? '' : ' WHERE id=%d');
     if ( $where != '' ) {
       $updated = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_album` SET published=1' . $where, $id));
-    } else {
+    }
+    else {
+      if ( !empty($excludeIds) ) {
+        $where = ' WHERE `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+      }
       $updated = $wpdb->query('UPDATE `' . $wpdb->prefix . 'bwg_album` SET published=1' . $where);
     }
     $message = 2;
@@ -299,17 +307,21 @@ class AlbumsController_bwg {
    * @param      $id
    * @param bool $bulk
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function unpublish( $id, $bulk = FALSE, $all = FALSE ) {
+  public function unpublish( $id, $bulk = FALSE, $all = FALSE, $excludeIds = array() ) {
     global $wpdb;
     $where = ($all ? '' : ' WHERE id=%d');
     if ( $where != '' ) {
       $updated = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_album` SET published=0' . $where, $id));
-    } else {
+    }
+    else {
+      if ( !empty($excludeIds) ) {
+        $where = ' WHERE `id` NOT IN (' . WDWLibrary::escape_array($excludeIds) . ')';
+      }
       $updated = $wpdb->query('UPDATE `' . $wpdb->prefix . 'bwg_album` SET published=0' . $where);
-
     }
     $message = 2;
     if ($updated) {
@@ -333,11 +345,12 @@ class AlbumsController_bwg {
    * @param      $id
    * @param bool $bulk
    * @param bool $all
+   * @param array $excludeIds
    *
    * @return int
    */
-  public function duplicate( $id, $bulk = FALSE, $all = FALSE ) {
-    $message_id = $this->model->duplicate($id, $all);
+  public function duplicate( $id, $bulk = FALSE, $all = FALSE, $excludeIds = array() ) {
+    $message_id = $this->model->duplicate( $id, $all, $excludeIds );
     if ($bulk) {
       return $message_id;
     }

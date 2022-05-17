@@ -142,6 +142,7 @@ class GalleriesView_bwg extends AdminView_bwg {
     <div class="tablenav bottom">
       <?php echo $this->pagination($params['page_url'], $params['total'], $params['items_per_page']); ?>
     </div>
+    <input type="hidden" id="ids_exclude" name="ids_exclude" value="" />
     <?php
   }
 
@@ -892,6 +893,7 @@ class GalleriesView_bwg extends AdminView_bwg {
     <?php $paged = WDWLibrary::get('paged', 1, 'intval'); ?>
     <div class="wd-hidden-values">
 	  <input type="hidden" value="<?php echo !empty($params['row']->modified_date) ? $params['row']->modified_date : time() ?>" id="modified_date" name="modified_date" />
+      <input type="hidden" id="ids_exclude" name="ids_exclude" value="" />
       <input type="hidden" id="ids_string" name="ids_string" value="<?php echo $ids_string; ?>" />
       <input type="hidden" id="paged" name="paged" value="<?php echo $paged; ?>" />
       <input type="hidden" id="ajax_task" name="ajax_task" value="" />

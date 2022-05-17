@@ -358,7 +358,7 @@ function bwg_add_instagram_gallery(instagram_access_token, from_popup){
               filesValid.push(item);
             }
           }
-          bwg_add_image(filesValid);
+          bwg_add_image( filesValid, 'instagram' );
           if ( !from_popup ) {
             bwg_gallery_update_flag();
             jQuery('#tr_instagram_gallery_add_button').hide();
