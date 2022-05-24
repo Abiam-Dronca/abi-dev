@@ -10,6 +10,9 @@ class OxygenWidget
 {
     public function __construct()
     {
+        if (version_compare(CT_VERSION, "3.2", "<")) {
+            return; //minimum version requirement
+        }
         add_action('plugins_loaded', array($this, 'initOxygenEl'));
         add_action('oxygen_add_plus_sections', array($this, 'addAccordionSection'));
         add_action('oxygen_add_plus_fluentform_section_content', array($this, 'registerAddPlusSubsections'));

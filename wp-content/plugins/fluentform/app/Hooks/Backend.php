@@ -228,6 +228,22 @@ add_action('fluentform_loading_editor_assets', function ($form) {
             return $element;
         });
     }
+    
+    $upgradableFileInputs = [
+        'input_file',
+        'input_image',
+    ];
+    foreach ($upgradableFileInputs as $upgradeElement) {
+        add_filter('fluentform_editor_init_element_' . $upgradeElement, function ($element) {
+            if (!isset($element['settings']['upload_file_location'])) {
+                $element['settings']['upload_file_location'] = 'default';
+            };
+            if (!isset($element['settings']['file_location_type'])) {
+                $element['settings']['file_location_type'] = 'follow_global_settings';
+            };
+            return $element;
+        });
+    }
 
     add_filter('fluentform_editor_init_element_gdpr_agreement', function ($element) {
         if (!isset($element['settings']['required_field_message'])) {
@@ -346,4 +362,9 @@ add_action('fluentform_addons_page_render_fluentform_pdf', function () {
     ]);
 });
 
+//Add file upload location in global settings
+add_filter('fluentform_get_global_settings_values', function ($value) {
+    $value['file_upload_optoins'] = FluentForm\App\Helpers\Helper::fileUploadLocations();
+    return $value;
+}, 10, 1);
 

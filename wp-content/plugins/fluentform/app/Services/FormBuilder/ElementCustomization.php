@@ -612,6 +612,33 @@ $element_customization_settings = array(
             )
         ),
     ),
+    'upload_file_location' => array(
+        'template' => 'radio',
+        'label' => __('Save Uploads in', 'fluentform'),
+        'help_text' => __('Uploaded files can be stored in media library or your server or both.', 'fluentform'),
+        'options' => \FluentForm\App\Helpers\Helper::fileUploadLocations(),
+        'dependency' => array(
+            'depends_on' => 'settings/file_location_type',
+            'value' => 'custom',
+            'operator' => '=='
+        )
+    ),
+    'file_location_type' => array(
+        'template' => 'radioButton',
+        'label' => __('File Location Type', 'fluentform'),
+        'help_text' => __('Set default or custom location for files', 'fluentform'),
+        'options' => array(
+            array(
+                'value' => 'follow_global_settings',
+                'label' => __('As Per Global Settings', 'fluentform'),
+            ),
+            array(
+                'value' => 'custom',
+                'label' => __('Custom', 'fluentform'),
+            ),
+        ),
+        
+    ),
 );
 
 

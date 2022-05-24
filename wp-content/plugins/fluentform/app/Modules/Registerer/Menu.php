@@ -474,7 +474,7 @@ class Menu
         View::render('admin.all_entries', array());
     }
 
-    private function renderFormInnerPages()
+    public function renderFormInnerPages()
     {
         $form_id = intval($_GET['form_id']);
         $form = wpFluent()->table('fluentform_forms')->find($form_id);

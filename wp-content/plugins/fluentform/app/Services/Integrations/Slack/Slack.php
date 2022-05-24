@@ -47,8 +47,8 @@ class Slack
 
         $fields = [];
 
-        foreach ($formData as $attribute => $value) {
-
+        foreach ($formData as $attribute => $value) {    
+            $value = str_replace('<br />', "\n", $value);
             $value = str_replace('&', '&amp;', $value);
             $value = str_replace('<', '&lt;', $value);
             $value = str_replace('>', "&gt;", $value);
@@ -61,7 +61,6 @@ class Slack
                 'short' => false
             ];
         }
-
         $slackHook = ArrayHelper::get($settings, 'webhook');
 
         $titleLink = admin_url('admin.php?page=fluent_forms&form_id='

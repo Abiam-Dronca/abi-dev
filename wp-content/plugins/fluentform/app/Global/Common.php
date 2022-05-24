@@ -100,7 +100,8 @@ if (!function_exists('fluentFormGetAllEditorShortCodes')) {
     {
         return apply_filters(
             'fluentform_all_editor_shortcodes',
-            EditorShortCode::getShortCodes($form)
+            EditorShortCode::getShortCodes($form),
+            $form
         );
     }
 }

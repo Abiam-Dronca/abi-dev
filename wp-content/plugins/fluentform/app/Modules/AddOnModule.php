@@ -352,6 +352,14 @@ class AddOnModule
                 'purchase_url' => $purchaseUrl,
                 'category'     => 'crm'
             ),
+            'airtable'      => array(
+                'title'        => 'Airtable',
+                'description'  => 'Airtable is a low-code platform for building collaborative apps. Customize your workflow, collaborate, and achieve ambitious outcomes.',
+                'logo'         => App::publicUrl('img/integrations/airtable.png'),
+                'enabled'      => 'no',
+                'purchase_url' => $purchaseUrl,
+                'category'     => 'crm'
+            ),
         );
     }
 }

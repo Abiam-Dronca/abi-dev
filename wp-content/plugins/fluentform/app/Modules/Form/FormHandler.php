@@ -198,7 +198,9 @@ class FormHandler
                 $confirmation['messageToShow'],
                 $insertId,
                 $formData,
-                $form
+                $form,
+                false,
+                true
             );
 
 
@@ -265,7 +267,9 @@ class FormHandler
                 ArrayHelper::get($confirmation, 'redirectMessage', ''),
                 $insertId,
                 $formData,
-                $form
+                $form,
+                false,
+                true
             );
 
             $returnData = [

@@ -264,6 +264,8 @@ return array(
             'label_placement',
             'admin_field_label',
             'validation_rules',
+            'file_location_type',
+            'upload_file_location'
         ),
         'advanced' => array(
             'container_class',
@@ -280,6 +282,8 @@ return array(
             'label_placement',
             'admin_field_label',
             'validation_rules',
+            'file_location_type',
+            'upload_file_location'
         ),
         'advanced' => array(
             'container_class',

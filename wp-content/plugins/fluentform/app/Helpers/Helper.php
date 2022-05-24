@@ -553,7 +553,24 @@ class Helper
         }
         return site_url('?'.$paramKey.'=' . $formId);
     }
-
+    
+    public static function fileUploadLocations()
+    {
+        $locations = array(
+            array(
+                'value' => 'default',
+                'label' => __('Fluentforms Default', 'fluentform'),
+            ),
+            array(
+                'value' => 'wp_media',
+                'label' => __('Media Library', 'fluentform'),
+            ),
+        );
+        
+        return apply_filters('fluentform_file_upload_options', $locations);
+        
+    }
+    
     private function unreadCount($formId)
     {
         return wpFluent()->table('fluentform_submissions')

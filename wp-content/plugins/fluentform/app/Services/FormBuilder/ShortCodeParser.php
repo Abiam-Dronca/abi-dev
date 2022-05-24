@@ -27,16 +27,16 @@ class ShortCodeParser
         'submission'      => null
     ];
 
-    public static function parse($parsable, $entryId, $data = [], $form = null, $isUrl = false, $provider = false)
+    public static function parse($parsable, $entryId, $data = [], $form = null, $isUrl = false, $providerOrIsHTML = false)
     {
         try {
             static::setDependencies($entryId, $data, $form);
 
             if (is_array($parsable)) {
-                return static::parseShortCodeFromArray($parsable, $isUrl, $provider);
+                return static::parseShortCodeFromArray($parsable, $isUrl, $providerOrIsHTML);
             }
 
-            return static::parseShortCodeFromString($parsable, $isUrl, false);
+            return static::parseShortCodeFromString($parsable, $isUrl, $providerOrIsHTML);
 
         } catch (\Exception $e) {
             if (defined('WP_DEBUG') && WP_DEBUG) {
@@ -336,6 +336,8 @@ class ShortCodeParser
             }
             $html .= '</tbody></table>';
             return apply_filters('fluentform_all_data_shortcode_html', $html, $formFields, $inputLabels, $response);
+        } elseif (strpos($key, 'pdf.download_link.') === 0) {
+            return apply_filters('fluentform_shortcode_parser_callback_pdf.download_link.public', $key, self::getInstance());
         }
 
         $groups = explode('.', $key);
