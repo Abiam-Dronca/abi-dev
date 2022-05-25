@@ -20,34 +20,34 @@ class Init {
 	private static $instance;
 
 
-    /**
-     * Instance.
-     *
-     * Ensures only one instance of the plugin class is loaded or can be loaded.
-     *
-     * @since 1.2.6
-     * @access public
-     * @static
-     *
-     * @return Init An instance of the class.
-     */
+	/**
+	 * Instance.
+	 *
+	 * Ensures only one instance of the plugin class is loaded or can be loaded.
+	 *
+	 * @since 1.2.6
+	 * @access public
+	 * @static
+	 *
+	 * @return Init An instance of the class.
+	 */
 	public static function instance() {
-        if ( is_null( self::$instance ) ) {
+		if ( is_null( self::$instance ) ) {
 
-            // Fire when ElementsKit_Lite instance.
-            self::$instance = new self();
-        }
+			// Fire when ElementsKit_Lite instance.
+			self::$instance = new self();
+		}
 
-        return self::$instance;
+		return self::$instance;
 	}
 
 
-    /**
-     * Construct the plugin object.
-     *
-     * @since 1.2.6
-     * @access public
-     */
+	/**
+	 * Construct the plugin object.
+	 *
+	 * @since 1.2.6
+	 * @access public
+	 */
 	public function __construct() {
 		Scripts::instance();
 	}

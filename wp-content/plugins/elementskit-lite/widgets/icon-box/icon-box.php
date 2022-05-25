@@ -1752,10 +1752,10 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
         <?php endif; ?>
         <!-- end link opening -->
 
-        <div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'infobox_wrapper' )); ?>>
+        <div <?php echo $this->get_render_attribute_string( 'infobox_wrapper' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
         <?php if(! empty($settings['ekit_icon_box_header_icons']) && $settings['ekit_icon_box_enable_header_icon'] == 'icon' ) : ?>
             <div class="elementskit-box-header <?php echo 'elementor-animation-'.esc_attr($settings['ekit_icon_icons_hover_animation']); ?>">
-                <div class="elementskit-info-box-icon  <?php echo \ElementsKit_Lite\Utils::render($settings['ekit_icon_box_icon_position'] != 'top' ? 'text-center' : ''); ?>">
+                <div class="elementskit-info-box-icon  <?php echo ($settings['ekit_icon_box_icon_position'] != 'top' ? 'text-center' : ''); ?>">
                     <?php
 
                         $migrated = isset( $settings['__fa4_migrated']['ekit_icon_box_header_icons'] );
@@ -1777,19 +1777,24 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
         <?php endif;?>
         <?php if(! empty($settings['ekit_icon_box_header_image']) && $settings['ekit_icon_box_enable_header_icon'] == 'image' ) : ?>
             <div class="elementskit-box-header">
-                <div class="elementskit-info-box-icon <?php echo \ElementsKit_Lite\Utils::render($settings['ekit_icon_box_icon_position'] != 'top' ? 'text-center' : ''); ?>">
-                    <?php echo \Elementskit_Lite\Utils::get_attachment_image_html($settings, 'ekit_icon_box_header_image'); ?>
+                <div class="elementskit-info-box-icon <?php echo ($settings['ekit_icon_box_icon_position'] != 'top' ? 'text-center' : ''); ?>">
+                    <?php
+				echo wp_kses(
+					\Elementskit_Lite\Utils::get_attachment_image_html($settings, 'ekit_icon_box_header_image'),
+					\ElementsKit_Lite\Utils::get_kses_array()
+				);
+				?>
                 </div>
           </div>
         <?php endif;?>
         <div class="box-body">
             <?php if ($settings['ekit_icon_box_title_text'] != '') { ?>
-                <<?php echo \ElementsKit_Lite\Utils::render($ekit_icon_box_title_size_esc); ?> class="elementskit-info-box-title">
+                <<?php esc_attr_e ($ekit_icon_box_title_size_esc, 'elementskit-lite'); ?> class="elementskit-info-box-title">
                     <?php echo esc_html($settings['ekit_icon_box_title_text']); ?>
-                </<?php echo \ElementsKit_Lite\Utils::render($ekit_icon_box_title_size_esc); ?>>
+                </<?php echo esc_attr ($ekit_icon_box_title_size_esc); ?>>
             <?php } ?>
             <?php if($settings['ekit_icon_box_description_text'] != ''): ?>
-            <p><?php echo \ElementsKit_Lite\Utils::kses($settings['ekit_icon_box_description_text'] ); ?> </p>
+		  <?php echo wp_kses($settings['ekit_icon_box_description_text'], \ElementsKit_Lite\Utils::get_kses_array()) ?>
             <?php endif; ?>
             <?php if($settings['ekit_icon_box_enable_btn'] == 'yes') :  ?>
                 <div class="box-footer <?php if($settings['ekit_icon_box_enable_hover_btn']== 'yes'){echo esc_attr("enable_hover_btn");} else {echo esc_attr("disable_hover_button");}?>">
@@ -1871,7 +1876,7 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
         <?php endif; ?>
 
         <?php if(!empty($settings['ekit_icon_box_show_image_overlay']) && $settings['ekit_icon_box_show_image_overlay'] == 'yes') :  ?>
-            <?php echo \ElementsKit_Lite\Utils::render($image); ?>
+            <?php echo wp_kses($image, \ElementsKit_Lite\Utils::get_kses_array()); ?>
         <?php endif; ?>
 
         <?php if($settings['ekit_icon_box_badge_control'] == 'yes' && $settings['ekit_icon_box_badge_title'] != '') : ?>

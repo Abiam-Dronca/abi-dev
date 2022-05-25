@@ -869,7 +869,6 @@ class ElementsKit_Widget_Caldera_Forms extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->insert_pro_message();
-
     }
 
     protected function render( ) {

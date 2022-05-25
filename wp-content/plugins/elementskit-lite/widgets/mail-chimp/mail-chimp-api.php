@@ -8,7 +8,6 @@ class ElementsKit_Widget_Mail_Chimp_Api extends Core\Handler_Api {
 
 	public function config(){
         $this->prefix = 'widget/mailchimp';
-
     }
 
     public function get_sendmail(){

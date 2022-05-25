@@ -11,43 +11,43 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @access public
  */
-class Build_Inline_Scripts{
+class Build_Inline_Scripts {
 
-    use \ElementsKit_Lite\Traits\Singleton;
+	use \ElementsKit_Lite\Traits\Singleton;
 
-    function __construct(){
-        add_action('wp_enqueue_scripts', [$this, 'frontend_js']);
-        add_action('admin_print_scripts', [$this, 'admin_js']);
-    }
+	function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_js' ) );
+		add_action( 'admin_print_scripts', array( $this, 'admin_js' ) );
+	}
 
 
-    // scripts for common end, admin & frontend
-    public function common_js(){
+	// scripts for common end, admin & frontend
+	public function common_js() {
 		ob_start(); ?>
 
 		var elementskit = {
-            resturl: '<?php echo get_rest_url() . 'elementskit/v1/'; ?>',
-        }
+			resturl: '<?php echo esc_url(get_rest_url() . 'elementskit/v1/'); ?>',
+		}
 
 		<?php
-        $output = ob_get_contents();
-        ob_end_clean();
-        return $output;
-    }
+		$output = ob_get_contents();
+		ob_end_clean();
+		return $output;
+	}
 
 
 
-    // scripts for frontend
-    public function frontend_js(){
-        $js = $this->common_js();
-        wp_add_inline_script('elementskit-framework-js-frontend', $js);
-    }
+	// scripts for frontend
+	public function frontend_js() {
+		$js = $this->common_js();
+		wp_add_inline_script( 'elementskit-framework-js-frontend', $js );
+	}
 
 
-    // scripts for admin
-    public function admin_js(){
-        echo "<script type='text/javascript'>\n";
-        echo \ElementsKit_Lite\Utils::render($this->common_js());
-        echo "\n</script>";
-    }
+	// scripts for admin
+	public function admin_js() {
+		echo "<script type='text/javascript'>\n";
+		echo \ElementsKit_Lite\Utils::render( $this->common_js() );  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Content already escaped in common_js() method
+		echo "\n</script>";
+	}
 }

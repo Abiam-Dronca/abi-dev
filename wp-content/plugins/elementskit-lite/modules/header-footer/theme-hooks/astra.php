@@ -21,7 +21,7 @@ class Astra {
 	/**
 	 * Run all the Actions / Filters.
 	 */
-	function __construct($template_ids) {
+	function __construct( $template_ids ) {
 		$this->header = $template_ids[0];
 		$this->footer = $template_ids[1];
 		
@@ -29,44 +29,43 @@ class Astra {
 			$this->elementor = \Elementor\Plugin::instance();
 		}
 
-		if($this->header != null){
+		if ( $this->header != null ) {
 			add_action( 'template_redirect', array( $this, 'remove_theme_header_markup' ), 10 );
-			add_action( 'astra_header', [$this, 'add_plugin_header_markup'] );
+			add_action( 'astra_header', array( $this, 'add_plugin_header_markup' ) );
 		}
 
-		if($this->footer != null){
+		if ( $this->footer != null ) {
 			add_action( 'template_redirect', array( $this, 'remove_theme_footer_markup' ), 10 );
-			add_action( 'astra_footer', [$this, 'add_plugin_footer_markup'] );
+			add_action( 'astra_footer', array( $this, 'add_plugin_footer_markup' ) );
 		}
-
 	}
 
 	// header actions
 	public function remove_theme_header_markup() {
 		remove_action( 'astra_header', 'astra_header_markup' );
-    }
-    
-    public function add_plugin_header_markup(){
-			do_action('elementskit/template/before_header');
+	}
+	
+	public function add_plugin_header_markup() {
+			do_action( 'elementskit/template/before_header' );
 			echo '<div class="ekit-template-content-markup ekit-template-content-header">';
-				echo \ElementsKit_Lite\Utils::render_elementor_content($this->header);
+				echo \ElementsKit_Lite\Utils::render_elementor_content( $this->header ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --  Displaying with Elementor content rendering
 			echo '</div>';
-			do_action('elementskit/template/after_header');
-    }
+			do_action( 'elementskit/template/after_header' );
+	}
  
 
 	// footer actions
 	public function remove_theme_footer_markup() {
 		remove_action( 'astra_footer', 'astra_footer_markup' );
-    }
-    
-    public function add_plugin_footer_markup(){
-			do_action('elementskit/template/before_footer');
+	}
+	
+	public function add_plugin_footer_markup() {
+			do_action( 'elementskit/template/before_footer' );
 			echo '<div class="ekit-template-content-markup ekit-template-content-footer">';
-			echo \ElementsKit_Lite\Utils::render_elementor_content($this->footer); ;
+			echo \ElementsKit_Lite\Utils::render_elementor_content( $this->footer ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --  Displaying with Elementor content rendering
 			echo '</div>';
-			do_action('elementskit/template/after_footer');
-    }
+			do_action( 'elementskit/template/after_footer' );
+	}
  
 
 }

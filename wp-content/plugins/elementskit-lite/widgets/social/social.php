@@ -657,7 +657,7 @@ class ElementsKit_Widget_Social extends Widget_Base {
 					?>
 					<li class="elementor-repeater-item-<?php echo esc_attr( $icon[ '_id' ] ); ?>">
 					    <a
-						<?php echo $this->get_render_attribute_string(  'button-' . $key );
+						<?php echo $this->get_render_attribute_string(  'button-' . $key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor
 
 						// new icon
 						$migrated = isset( $icon['__fa4_migrated']['ekit_socialmedia_icons'] );

@@ -1,3 +1,5 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
+
 <div class="attr-modal attr-fade ekit-wid-con" id="elementskit_go_pro_modal" tabindex="-1" role="dialog" aria-labelledby="elementskit_go_pro_modalLabel" style="display: none;">
 	<div class="attr-modal-dialog attr-modal-dialog-centered ekit-go-pro-con" role="document">
         <div class="attr-modal-content">

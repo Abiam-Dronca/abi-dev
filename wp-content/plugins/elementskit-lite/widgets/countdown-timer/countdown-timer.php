@@ -1758,24 +1758,24 @@ class ElementsKit_Widget_Countdown_Timer extends Widget_Base {
 
         switch ( $ekit_countdown_timer_style ) {
             case 'style1':
-                ?><div class="elementskit-countdown-timer ekit-countdown text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-countdown-timer ekit-countdown text-center" <?php echo wp_kses($data, \ElementsKit_Lite\Utils::get_kses_array()); ?>></div><?php
                 break;
             case 'style2':
-                ?><div class="elementskit-countdown-timer-2 ekit-countdown text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-countdown-timer-2 ekit-countdown text-center" <?php echo wp_kses($data, \ElementsKit_Lite\Utils::get_kses_array()); ?>></div><?php
                 break;
             case 'style3':
-                ?><div class="elementskit-flip-clock text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-flip-clock text-center" <?php echo wp_kses($data, \ElementsKit_Lite\Utils::get_kses_array()); ?>></div><?php
                 break;
             case 'style4':
-                ?><div class="elementskit-countdown-timer-3 ekit-countdown text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-countdown-timer-3 ekit-countdown text-center" <?php echo wp_kses($data, \ElementsKit_Lite\Utils::get_kses_array()); ?>></div><?php
                 break;
             case 'style5':
-                ?><div class="elementskit-countdown-timer-3 ekit-countdown elementskit-version-box text-center align-items-end" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div>
+                ?><div class="elementskit-countdown-timer-3 ekit-countdown elementskit-version-box text-center align-items-end" <?php echo wp_kses($data, \ElementsKit_Lite\Utils::get_kses_array()); ?>></div>
                 <?php
                 break;
             case 'style6':
                 ?><div class="elementskit-countdown-container text-center">
-                    <div class="elementskit-countdown-timer-4 ekit-countdown" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div>
+                    <div class="elementskit-countdown-timer-4 ekit-countdown" <?php echo wp_kses($data, \ElementsKit_Lite\Utils::get_kses_array()); ?>></div>
                 </div><?php
                 break;
 

@@ -6,8 +6,8 @@ defined( 'ABSPATH' ) || exit;
 
 class Plugin_Status {
 	private static $instance;
-	private $installedPlugins = [];
-	private $activatedPlugins = [];
+	private $installedPlugins = array();
+	private $activatedPlugins = array();
 
 	public function __construct() {
 		$this->collect_installed_plugins();
@@ -43,18 +43,18 @@ class Plugin_Status {
 	}
 
 	public function get_status( $name ) {
-		$data = [
-			"url"              => "",
-			"activation_url"   => "",
-			"installation_url" => "",
-			"title"            => "",
-			"status"           => "",
-		];
+		$data = array(
+			'url'              => '',
+			'activation_url'   => '',
+			'installation_url' => '',
+			'title'            => '',
+			'status'           => '',
+		);
 
 		if ( $this->check_installed_plugin( $name ) ) {
 			if ( $this->check_activated_plugin( $name ) ) {
 				$data['title']  = __( 'Activated', 'elementskit-lite' );
-				$data['status'] = "activated";
+				$data['status'] = 'activated';
 			} else {
 				$data['title']          = __( 'Activate Now', 'elementskit-lite' );
 				$data['status']         = 'installed';
@@ -80,15 +80,18 @@ class Plugin_Status {
 
 	public function activation_url( $pluginName ) {
 
-		return wp_nonce_url( add_query_arg(
-			array(
-				'action'        => 'activate',
-				'plugin'        => $pluginName,
-				'plugin_status' => 'all',
-				'paged'         => '1&s',
+		return wp_nonce_url(
+			add_query_arg(
+				array(
+					'action'        => 'activate',
+					'plugin'        => $pluginName,
+					'plugin_status' => 'all',
+					'paged'         => '1&s',
+				),
+				admin_url( 'plugins.php' )
 			),
-			admin_url( 'plugins.php' )
-		), 'activate-plugin_' . $pluginName );
+			'activate-plugin_' . $pluginName 
+		);
 	}
 
 	public function installation_url( $pluginName ) {
@@ -99,7 +102,7 @@ class Plugin_Status {
 			add_query_arg(
 				array(
 					'action' => $action,
-					'plugin' => $pluginSlug
+					'plugin' => $pluginSlug,
 				),
 				admin_url( 'update.php' )
 			),
@@ -118,6 +121,7 @@ class Plugin_Status {
 			array(
 				'page' => $this->get_plugin_slug( $pluginName ),
 			),
-			admin_url( 'admin.php' ) );
+			admin_url( 'admin.php' ) 
+		);
 	}
 }

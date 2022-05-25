@@ -232,7 +232,6 @@ class ElementsKit_Widget_Header_Info extends Widget_Base
         $this->end_controls_section();
 
         $this->insert_pro_message();
-
     }
 
 
@@ -254,7 +253,7 @@ class ElementsKit_Widget_Header_Info extends Widget_Base
                     }
                     ?>
                         <li>
-                            <a <?php echo $this->get_render_attribute_string( 'button-' . $key ); ?>>
+                            <a <?php echo $this->get_render_attribute_string( 'button-' . $key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>> 
                                 <?php Icons_Manager::render_icon( $item['ekit_headerinfo_icons'], [ 'aria-hidden' => 'true' ] ); ?>
                                 <?php echo esc_html($item['ekit_headerinfo_text']);?>
                             </a>

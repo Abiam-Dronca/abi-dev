@@ -240,7 +240,7 @@ class ElementsKit_Widget_Post_Grid extends Widget_Base {
                 <?php while ($xs_query->have_posts()) : ?>
                     <?php $xs_query->the_post(); ?>
                     <?php if(has_post_thumbnail()): ?>
-                        <div <?php echo $this->get_render_attribute_string('ekit-single-item'); ?>>
+                        <div <?php echo $this->get_render_attribute_string('ekit-single-item'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
                             <a href="<?php echo esc_url(get_the_permalink()); ?>" class="tab__post--header">
                                 <?php $img_url = get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>
                                 <div class="post_grid_img_thumb" style="background-image: url('<?php echo esc_url($img_url); ?>')"></div>

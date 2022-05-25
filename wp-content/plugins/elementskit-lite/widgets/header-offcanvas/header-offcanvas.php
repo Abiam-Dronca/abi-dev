@@ -687,7 +687,7 @@ class ElementsKit_Widget_Header_Offcanvas extends Widget_Base
                         </a>
                     </div>
                     <div class="ekit_sidebar-textwidget">
-                        <?php echo Widget_Area_Utils::parse( $settings['ekit_offcanvas_content'], $this->get_id(), 99 ); ?>
+                        <?php echo Widget_Area_Utils::parse( $settings['ekit_offcanvas_content'], $this->get_id(), 99 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Displaying with Elementor content rendering ?> 
                     </div>
                 </div>
             </div>

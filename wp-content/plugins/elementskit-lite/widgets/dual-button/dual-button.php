@@ -1016,7 +1016,7 @@ class ElementsKit_Widget_Dual_Button extends Widget_Base {
             }
 
             ?>
-                <a class="ekit-double-btn ekit-double-btn-one" <?php echo $this->get_render_attribute_string( 'button-1' ); ?>>
+                <a class="ekit-double-btn ekit-double-btn-one" <?php echo $this->get_render_attribute_string( 'button-1' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
                     <?php 
                         if ($settings['ekit_double_button_one_icon_position'] == 'before') {
                             if ($is_new || $migrated) {
@@ -1056,7 +1056,7 @@ class ElementsKit_Widget_Dual_Button extends Widget_Base {
             }
             ?>
 
-            <a class="ekit-double-btn ekit-double-btn-two" <?php echo $this->get_render_attribute_string( 'button-2' ); ?>>
+            <a class="ekit-double-btn ekit-double-btn-two" <?php echo $this->get_render_attribute_string( 'button-2' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
                     <?php 
                         if ($settings['ekit_double_button_two_icon_position'] == 'before') {
                             if ($is_new || $migrated) {

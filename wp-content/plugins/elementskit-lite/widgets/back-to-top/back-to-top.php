@@ -430,7 +430,6 @@ class ElementsKit_Widget_Back_To_Top extends Widget_Base {
 		$this->end_controls_tabs();
 
         $this->end_controls_section(); // end of back to style tab
-      
    }
 
    protected function render( ) {

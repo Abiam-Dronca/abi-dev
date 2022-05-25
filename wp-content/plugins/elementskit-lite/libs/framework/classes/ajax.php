@@ -11,25 +11,26 @@ class Ajax {
 	private $utils;
 
 	public function __construct() {
-		add_action( 'wp_ajax_ekit_admin_action', [ $this, 'elementskit_admin_action' ] );
+		add_action( 'wp_ajax_ekit_admin_action', array( $this, 'elementskit_admin_action' ) );
 		$this->utils = Utils::instance();
 	}
 
 	public function elementskit_admin_action() {
 		// Check for nonce security
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'ajax-nonce' ) ) {
+
+		if (!isset($_POST['nonce']) || ! wp_verify_nonce( sanitize_key(wp_unslash($_POST['nonce'])), 'ajax-nonce' ) ) {
 			return;
 		}
+		
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-
 		if ( isset( $_POST['widget_list'] ) ) {
 			$widget_list          = Widget_List::instance()->get_list();
-			$widget_list_input    = ! is_array( $_POST['widget_list'] ) ? [] : $_POST['widget_list']; // phpcs:ignore // bellow we checked this value for sanitization.
-			$widget_prepared_list = [];
+			$widget_list_input    = ! is_array( $_POST['widget_list'] ) ? array() : map_deep( wp_unslash( $_POST['widget_list'] ) , 'sanitize_text_field' );
+			$widget_prepared_list = array();
 
 			foreach ( $widget_list as $widget_slug => $widget ) {
 				if ( isset( $widget['package'] ) && $widget['package'] == 'pro-disabled' ) {
@@ -46,8 +47,8 @@ class Ajax {
 
 		if ( isset( $_POST['module_list'] ) ) {
 			$module_list          = Module_List::instance()->get_list( 'optional' );
-			$module_list_input    = ! is_array( $_POST['module_list'] ) ? [] : $_POST['module_list']; // phpcs:ignore // bellow we checked this value for sanitization.
-			$module_prepared_list = [];
+			$module_list_input    = ! is_array( $_POST['module_list'] ) ? array() : map_deep( wp_unslash( $_POST['module_list'] ) , 'sanitize_text_field' );
+			$module_prepared_list = array();
 
 			foreach ( $module_list as $module_slug => $module ) {
 				if ( isset( $module['package'] ) && $module['package'] == 'pro-disabled' ) {
@@ -63,13 +64,12 @@ class Ajax {
 		}
 
 		if ( isset( $_POST['user_data'] ) ) {
-			$this->utils->save_option( 'user_data', empty( $_POST['user_data'] ) ? [] : $_POST['user_data'] );
+			$this->utils->save_option( 'user_data', empty( $_POST['user_data'] ) ? array() : map_deep( wp_unslash( $_POST['user_data'] ) , 'sanitize_text_field' ) ); 
 		}
 
 		if ( isset( $_POST['settings'] ) ) {
-			$this->utils->save_settings( empty( $_POST['settings'] ) ? [] : $_POST['settings'] );
+			$this->utils->save_settings( empty( $_POST['settings'] ) ? array() : map_deep( wp_unslash( $_POST['settings'] ) , 'sanitize_text_field' )  ); 
 		}
-
 
 		do_action( 'elementskit/admin/after_save' );
 

@@ -12,7 +12,7 @@ class MyListing {
 	/**
 	 * Run all the Actions / Filters.
 	 */
-	function __construct($template_ids) {
+	function __construct( $template_ids ) {
 		global $elementskit_template_ids;
 		
 		$elementskit_template_ids = $template_ids;

@@ -1398,7 +1398,7 @@ class ElementsKit_Widget_Post_List extends Widget_Base {
 
 		
 		?>
-		<ul <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'icon_list' )); ?>>
+		<ul <?php echo $this->get_render_attribute_string( 'icon_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 			<?php
 			$post_args = array(
 				'post_type'			=> 'post',
@@ -1414,15 +1414,15 @@ class ElementsKit_Widget_Post_List extends Widget_Base {
 			if($settings['section_layout_options'] === 'recent' || $settings['section_layout_options'] === 'popular'){
 				if( is_countable($posts) && count($posts) > 0){
 					foreach($posts as $post){
-						echo $this->post_list($post);
+						echo $this->post_list($post); // phpcs:ignore WordPress.Security.EscapeOutput -- Buffering output line number 1383 
 					}
 				} else {
-					_e('Opps, No posts were found.', 'elementskit-lite');
+					esc_html_e('Opps, No posts were found.', 'elementskit-lite');
 				}
 			} else {
 				foreach ( $settings['icon_list'] as $index => $item ) {
 					$post = !empty( $item['link'] ) ? get_post($item['link']) : 0;
-					if($post != null){ echo $this->post_list($post, $item); };
+					if($post != null){ echo $this->post_list($post, $item);  }; // phpcs:ignore WordPress.Security.EscapeOutput -- Buffering output line number 1383
 				};
 			}
 			

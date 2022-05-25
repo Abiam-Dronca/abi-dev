@@ -1243,7 +1243,7 @@ class ElementsKit_Widget_Funfact extends Widget_Base {
 
 		?>
 
-		<div <?php echo \ElementsKit_Lite\Utils::kses($this->get_render_attribute_string('funfact_wrapper')); ?>>
+		<div <?php echo \ElementsKit_Lite\Utils::kses($this->get_render_attribute_string('funfact_wrapper')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 			<?php if($settings['ekit_funfact_enable_vertical_border'] == 'yes') : ?>
 				<div class="vertical-bar <?php echo esc_attr($settings['ekit_funfact_enable_vertical_border_position']); ?>"></div>
 			<?php endif; ?>
@@ -1253,12 +1253,12 @@ class ElementsKit_Widget_Funfact extends Widget_Base {
 					<div class="funfact-icon"> <?php
 
 						if($settings['ekit_funfact_icon_type'] == 'image_icon') :
-							echo \ElementsKit_Lite\Utils::render($image_html);
+							echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array());
 						endif;
 
 
 						if($settings['ekit_funfact_icon_type'] == 'icon') : ?>
-							<i <?php echo \ElementsKit_Lite\Utils::kses($this->get_render_attribute_string('icon')); ?>></i>
+							<i <?php echo $this->get_render_attribute_string('icon'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>></i>
 
 							<?php
 							// new icon
@@ -1291,7 +1291,7 @@ class ElementsKit_Widget_Funfact extends Widget_Base {
 						      data-animation-duration="3500">0</span>
 						<?php echo esc_html( $settings['ekit_funfact_number_suffix'] ); ?>
 						<?php if($settings['ekit_funfact_super'] == 'yes') : ?>
-							<span class="super"><?php echo \ElementsKit_Lite\Utils::kses($settings['ekit_funfact_super_text']); ?></span>
+							<span class="super"><?php echo wp_kses($settings['ekit_funfact_super_text'], \ElementsKit_Lite\Utils::get_kses_array()); ?></span>
 						<?php endif; ?>
 					</div>
 
@@ -1299,17 +1299,16 @@ class ElementsKit_Widget_Funfact extends Widget_Base {
 						// Validate Title Tag
 						$title_tag = \ElementsKit_Lite\Utils::esc_options($settings['ekit_funfact_title_size'], $options_ekit_funfact_title_size, 'h3');
 
-						echo '<'. $title_tag .' class="funfact-title">';
+						echo '<'. esc_attr($title_tag) .' class="funfact-title">';
 						echo 	esc_html( $settings['ekit_funfact_title_text'] );
-						echo '</'. $title_tag .'>';
+						echo '</'. esc_attr($title_tag) .'>';
 					?>
-				<?php echo $enable_ovelry_color; ?>
+					<?php echo wp_kses($enable_ovelry_color, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 			</div>
 		</div>
 		</div>
 
 
 		<?php
-
 	}
 }

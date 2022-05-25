@@ -3,17 +3,17 @@ namespace ElementsKit_Lite\Modules\HeaderFooterBuilder;
 
 defined( 'ABSPATH' ) || exit;
 
-class Cpt{
+class Cpt {
 
-    public function __construct() {
-        $this->post_type(); 
+	public function __construct() {
+		$this->post_type(); 
 
-        add_action('admin_menu', [$this, 'cpt_menu']);
-        add_filter( 'single_template', [ $this, 'load_canvas_template' ] );
-    }
+		add_action( 'admin_menu', array( $this, 'cpt_menu' ) );
+		add_filter( 'single_template', array( $this, 'load_canvas_template' ) );
+	}
 
-    public function post_type() {
-        
+	public function post_type() {
+		
 		$labels = array(
 			'name'               => esc_html__( 'Templates', 'elementskit-lite' ),
 			'singular_name'      => esc_html__( 'Template', 'elementskit-lite' ),
@@ -45,14 +45,14 @@ class Cpt{
 		);
 
 		register_post_type( 'elementskit_template', $args );
-    }
+	}
 
-    public function cpt_menu(){
-        $link_our_new_cpt = 'edit.php?post_type=elementskit_template';
-        add_submenu_page('elementskit', esc_html__('Header Footer', 'elementskit-lite'), esc_html__('Header Footer', 'elementskit-lite'), 'manage_options', $link_our_new_cpt);
-    }
+	public function cpt_menu() {
+		$link_our_new_cpt = 'edit.php?post_type=elementskit_template';
+		add_submenu_page( 'elementskit', esc_html__( 'Header Footer', 'elementskit-lite' ), esc_html__( 'Header Footer', 'elementskit-lite' ), 'manage_options', $link_our_new_cpt );
+	}
 
-    function load_canvas_template( $single_template ) {
+	function load_canvas_template( $single_template ) {
 
 		global $post;
 

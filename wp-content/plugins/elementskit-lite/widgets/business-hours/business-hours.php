@@ -65,7 +65,7 @@ class ElementsKit_Widget_Business_Hours extends Widget_Base {
 		$repeater->add_control(
 			'ekit_highlight_this_day',
 			[
-				'label'        => esc_html__( 'Hight Light this day', 'elementskit-lite' ),
+				'label'        => esc_html__( 'Highlight this day', 'elementskit-lite' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'no',
@@ -124,7 +124,7 @@ class ElementsKit_Widget_Business_Hours extends Widget_Base {
 			'ekit_business_openday_list',
 			[
 				'type'    => Controls_Manager::REPEATER,
-				'fields'  => array_values( $repeater->get_controls() ),
+				'fields'  => $repeater->get_controls(),
 				'default' => [
 					[
 						'ekit_business_day' => esc_html__( 'Sunday', 'elementskit-lite' ),

@@ -10,7 +10,6 @@ class ElementsKit_Widget_Client_Logo_Handler extends \ElementsKit_Lite\Core\Hand
     static function get_title() {
 
         return esc_html__( 'Client Logo', 'elementskit-lite' );
-
     }
 
     static function get_icon() {

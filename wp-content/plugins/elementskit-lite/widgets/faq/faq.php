@@ -305,7 +305,7 @@ class ElementsKit_Widget_FAQ extends Widget_Base {
             </div>
             <div class="elementskit-faq-body">
                 <?php if(!empty($ekit_faq_content_item['ekit_faq_content'])) {
-                    echo \ElementsKit_Lite\Utils::kses($ekit_faq_content_item['ekit_faq_content']);
+					echo wp_kses($ekit_faq_content_item['ekit_faq_content'], \ElementsKit_Lite\Utils::get_kses_array());
                 } ?>
             </div>
         </div>

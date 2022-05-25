@@ -577,12 +577,8 @@ class ElementsKit_Widget_We_Forms extends Widget_Base {
     protected function render( ) {
         $settings = $this->get_settings();
 			
-
 		if ( ! empty( $settings['ekit_weform_form_id'] ) ) {
-            echo \ElementsKit_Lite\Utils::ekit_do_shortcode( 'weforms', [
-                'id' => $settings['ekit_weform_form_id'],
-            ] );
+            echo do_shortcode('[weforms id="'.intval($settings['ekit_weform_form_id']).'"]' );
 		}
-
 	}
 }

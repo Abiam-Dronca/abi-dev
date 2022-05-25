@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ElementsKit Lite package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ElementsKit Lite 2.5.9\n"
+"Project-Id-Version: ElementsKit Lite 2.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/elementskit-lite\n"
-"POT-Creation-Date: 2022-05-10 10:53:25+00:00\n"
+"POT-Creation-Date: 2022-05-24 11:24:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,8 +61,8 @@ msgid ""
 "this server."
 msgstr ""
 
-#: elementskit-lite.php:425 libs/framework/attr.php:63
-#: libs/framework/views/onboard-steps/step-05.php:5
+#: elementskit-lite.php:425 libs/framework/attr.php:61
+#: libs/framework/views/onboard-steps/step-05.php:8
 msgid "ElementsKit"
 msgstr ""
 
@@ -70,36 +70,36 @@ msgstr ""
 msgid "ElementsKit Header Footer"
 msgstr ""
 
-#: helpers/utils.php:186 widgets/caldera-forms/caldera-forms.php:37
+#: helpers/utils.php:209 widgets/caldera-forms/caldera-forms.php:37
 #: widgets/caldera-forms/caldera-forms.php:62
 msgid "Select Form"
 msgstr ""
 
-#: helpers/utils.php:191
+#: helpers/utils.php:214
 msgid "Create a form first"
 msgstr ""
 
-#: helpers/utils.php:205
+#: helpers/utils.php:228
 msgid "Select Ninja Form"
 msgstr ""
 
-#: helpers/utils.php:212 widgets/fluent-forms/fluent-forms.php:54
+#: helpers/utils.php:235 widgets/fluent-forms/fluent-forms.php:54
 msgid "Create a Form First"
 msgstr ""
 
-#: helpers/utils.php:223 widgets/tablepress/tablepress.php:50
+#: helpers/utils.php:246 widgets/tablepress/tablepress.php:49
 msgid "Select Table"
 msgstr ""
 
-#: helpers/utils.php:230
+#: helpers/utils.php:253
 msgid "(no name)"
 msgstr ""
 
-#: helpers/utils.php:236
+#: helpers/utils.php:259
 msgid "Create a Table First"
 msgstr ""
 
-#: libs/framework/attr.php:62 modules/onepage-scroll/extend-controls.php:67
+#: libs/framework/attr.php:60 modules/onepage-scroll/extend-controls.php:65
 msgid "ElementsKit Settings"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Install Now"
 msgstr ""
 
-#: libs/framework/controls/settings/switch.php:49
+#: libs/framework/controls/settings/switch.php:53
 msgid "View Demo"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgid "Enable disable widgets"
 msgstr ""
 
 #: libs/framework/views/init.php:16
-#: libs/framework/views/onboard-steps/step-01.php:40
+#: libs/framework/views/onboard-steps/step-01.php:46
 msgid "Modules"
 msgstr ""
 
@@ -201,15 +201,15 @@ msgstr ""
 msgid "Finalizing info"
 msgstr ""
 
-#: libs/framework/views/layout-settings.php:31
+#: libs/framework/views/layout-settings.php:38
 msgid "Go Premium"
 msgstr ""
 
-#: libs/framework/views/layout-settings.php:32
+#: libs/framework/views/layout-settings.php:39
 msgid "Get premium features"
 msgstr ""
 
-#: libs/framework/views/layout-settings.php:68
+#: libs/framework/views/layout-settings.php:78
 #: libs/framework/views/onboard-steps/step-06.php:5
 msgid "Save Changes"
 msgstr ""
@@ -220,50 +220,50 @@ msgid ""
 "promotional images on WP Dashboard"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:9
+#: libs/framework/views/onboard-steps/step-01.php:10
 msgid ""
 "General widgets will be activated to build your website. Best suited for "
 "lightweight-fast starter websites."
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:10
+#: libs/framework/views/onboard-steps/step-01.php:11
 msgid "Basic (Recommended)"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:19
+#: libs/framework/views/onboard-steps/step-01.php:22
 msgid ""
 "All the free dynamic widgets will be activated to increase flexibility & "
 "functionality to build your complex website in no-time."
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:20
+#: libs/framework/views/onboard-steps/step-01.php:23
 msgid "Advanced"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:30
+#: libs/framework/views/onboard-steps/step-01.php:35
 msgid "You choose your website as per your need."
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:31
-#: widgets/fluent-forms/fluent-forms.php:2312 widgets/heading/heading.php:332
+#: libs/framework/views/onboard-steps/step-01.php:36
+#: widgets/fluent-forms/fluent-forms.php:2311 widgets/heading/heading.php:332
 #: widgets/icon-box/icon-box.php:470 widgets/ninja-forms/ninja-forms.php:597
 #: widgets/wp-forms/wp-forms.php:419
 msgid "Custom"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:49
+#: libs/framework/views/onboard-steps/step-01.php:55
 #: libs/framework/views/onboard-steps/step-02.php:16
 #: libs/framework/views/onboard-steps/step-03.php:65
-#: libs/framework/views/onboard-steps/step-04.php:28
-#: libs/framework/views/onboard-steps/step-05.php:25
+#: libs/framework/views/onboard-steps/step-04.php:36
+#: libs/framework/views/onboard-steps/step-05.php:28
 msgid "Back"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-01.php:50
+#: libs/framework/views/onboard-steps/step-01.php:56
 #: libs/framework/views/onboard-steps/step-02.php:17
 #: libs/framework/views/onboard-steps/step-03.php:66
-#: libs/framework/views/onboard-steps/step-04.php:29
-#: libs/framework/views/onboard-steps/step-05.php:26
+#: libs/framework/views/onboard-steps/step-04.php:37
+#: libs/framework/views/onboard-steps/step-05.php:29
 msgid "Next Step"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgid "Take your website to the next level"
 msgstr ""
 
 #: libs/framework/views/onboard-steps/step-03.php:3
-msgid "We have some plugins you can install to get most from Wordpress."
+msgid "We have some plugins you can install to get most from WordPress."
 msgstr ""
 
 #: libs/framework/views/onboard-steps/step-03.php:4
@@ -320,11 +320,11 @@ msgid ""
 "Save 1 hour of your learning time."
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-04.php:21
+#: libs/framework/views/onboard-steps/step-04.php:29
 msgid "Share non-sensitive diagnostic data and details about plugin usage."
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-04.php:24
+#: libs/framework/views/onboard-steps/step-04.php:32
 msgid ""
 "We gather non-sensitive diagnostic data as well as information about plugin "
 "use. Your site's URL, WordPress and PHP versions, plugins and themes, as "
@@ -334,57 +334,57 @@ msgid ""
 "you any spam, for sure."
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-04.php:25
+#: libs/framework/views/onboard-steps/step-04.php:33
 msgid "What types of information do we gather?"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:2
+#: libs/framework/views/onboard-steps/step-05.php:3
 msgid ""
 "Upgrade within the next </br> <strong>2 hours</strong> and get a "
 "<strong>40% Discount.</strong>"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:5
+#: libs/framework/views/onboard-steps/step-05.php:8
 msgid "PRO"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:8
+#: libs/framework/views/onboard-steps/step-05.php:11
 msgid "Header & Footer Builder"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:9
+#: libs/framework/views/onboard-steps/step-05.php:12
 msgid "Megamenu Builder"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:10
+#: libs/framework/views/onboard-steps/step-05.php:13
 msgid "Advanced Tab"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:11
+#: libs/framework/views/onboard-steps/step-05.php:14
 msgid "Parallax Effect"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:12
+#: libs/framework/views/onboard-steps/step-05.php:15
 msgid "Social Feeds"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:13
+#: libs/framework/views/onboard-steps/step-05.php:16
 msgid "More Addons & Modules"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:16
+#: libs/framework/views/onboard-steps/step-05.php:19
 msgid "45+ Pre-designed Header & Footer Templates"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:17
+#: libs/framework/views/onboard-steps/step-05.php:20
 msgid "35+ Ready Pages"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:18
+#: libs/framework/views/onboard-steps/step-05.php:21
 msgid "500+ Ready Sections"
 msgstr ""
 
-#: libs/framework/views/onboard-steps/step-05.php:21
+#: libs/framework/views/onboard-steps/step-05.php:24
 msgid "Explore PRO"
 msgstr ""
 
@@ -533,20 +533,20 @@ msgstr ""
 msgid "Rate Now Thumb"
 msgstr ""
 
-#: libs/framework/views/settings-sections/modules.php:13
+#: libs/framework/views/settings-sections/modules.php:15
 msgid ""
 "You can disable the modules you are not using on your site. That will "
 "disable all associated assets of those modules to improve your site loading "
 "speed."
 msgstr ""
 
-#: libs/framework/views/settings-sections/modules.php:17
+#: libs/framework/views/settings-sections/modules.php:19
 #: modules/header-footer/cpt.php:20 modules/header-footer/cpt.php:21
 #: modules/header-footer/cpt.php:52
 msgid "Header Footer"
 msgstr ""
 
-#: libs/framework/views/settings-sections/modules.php:20
+#: libs/framework/views/settings-sections/modules.php:22
 #: modules/widget-builder/cpt.php:19 modules/widget-builder/cpt.php:51
 msgid "Widget Builder"
 msgstr ""
@@ -555,70 +555,70 @@ msgstr ""
 msgid "MailChimp Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:33
+#: libs/framework/views/settings-sections/usersettings.php:34
 msgid "Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:60
+#: libs/framework/views/settings-sections/usersettings.php:62
 msgid "Facebook Page Feed"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:74
+#: libs/framework/views/settings-sections/usersettings.php:77
 msgid "Facebook Page ID"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:75
+#: libs/framework/views/settings-sections/usersettings.php:78
 msgid "Facebook app id"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:88
+#: libs/framework/views/settings-sections/usersettings.php:92
 msgid "Page Access Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:102
-#: libs/framework/views/settings-sections/usersettings.php:179
-#: libs/framework/views/settings-sections/usersettings.php:361
-#: libs/framework/views/settings-sections/usersettings.php:501
+#: libs/framework/views/settings-sections/usersettings.php:107
+#: libs/framework/views/settings-sections/usersettings.php:184
+#: libs/framework/views/settings-sections/usersettings.php:378
+#: libs/framework/views/settings-sections/usersettings.php:522
 msgid "Clear Cache"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:108
-#: libs/framework/views/settings-sections/usersettings.php:152
-#: libs/framework/views/settings-sections/usersettings.php:354
-#: libs/framework/views/settings-sections/usersettings.php:507
+#: libs/framework/views/settings-sections/usersettings.php:113
+#: libs/framework/views/settings-sections/usersettings.php:157
+#: libs/framework/views/settings-sections/usersettings.php:371
+#: libs/framework/views/settings-sections/usersettings.php:528
 msgid "Get access token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:130
+#: libs/framework/views/settings-sections/usersettings.php:135
 msgid "Facebook page review"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:144
-#: libs/framework/views/settings-sections/usersettings.php:255
+#: libs/framework/views/settings-sections/usersettings.php:149
+#: libs/framework/views/settings-sections/usersettings.php:263
 msgid "Page ID"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:152
+#: libs/framework/views/settings-sections/usersettings.php:157
 msgid "Refresh access token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:158
+#: libs/framework/views/settings-sections/usersettings.php:163
 msgid "Page Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:207
+#: libs/framework/views/settings-sections/usersettings.php:212
 msgid "Yelp Settings"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:221
+#: libs/framework/views/settings-sections/usersettings.php:227
 msgid "Yelp Page"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:243
+#: libs/framework/views/settings-sections/usersettings.php:250
 msgid "Facebook Messenger"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:265
+#: libs/framework/views/settings-sections/usersettings.php:275
 #: widgets/accordion/accordion.php:249 widgets/accordion/accordion.php:341
 #: widgets/accordion/accordion.php:478 widgets/accordion/accordion.php:630
 #: widgets/accordion/accordion.php:692 widgets/back-to-top/back-to-top.php:374
@@ -661,21 +661,21 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:650
 #: widgets/dual-button/dual-button.php:789
 #: widgets/dual-button/dual-button.php:861 widgets/faq/faq.php:195
-#: widgets/fluent-forms/fluent-forms.php:224
-#: widgets/fluent-forms/fluent-forms.php:298
-#: widgets/fluent-forms/fluent-forms.php:1133
-#: widgets/fluent-forms/fluent-forms.php:1188
-#: widgets/fluent-forms/fluent-forms.php:1288
-#: widgets/fluent-forms/fluent-forms.php:1372
-#: widgets/fluent-forms/fluent-forms.php:1671
-#: widgets/fluent-forms/fluent-forms.php:1689
-#: widgets/fluent-forms/fluent-forms.php:1724
-#: widgets/fluent-forms/fluent-forms.php:1755
-#: widgets/fluent-forms/fluent-forms.php:1870
-#: widgets/fluent-forms/fluent-forms.php:1888
-#: widgets/fluent-forms/fluent-forms.php:2147
-#: widgets/fluent-forms/fluent-forms.php:2219
-#: widgets/fluent-forms/fluent-forms.php:2562 widgets/funfact/funfact.php:555
+#: widgets/fluent-forms/fluent-forms.php:223
+#: widgets/fluent-forms/fluent-forms.php:297
+#: widgets/fluent-forms/fluent-forms.php:1132
+#: widgets/fluent-forms/fluent-forms.php:1187
+#: widgets/fluent-forms/fluent-forms.php:1287
+#: widgets/fluent-forms/fluent-forms.php:1371
+#: widgets/fluent-forms/fluent-forms.php:1670
+#: widgets/fluent-forms/fluent-forms.php:1688
+#: widgets/fluent-forms/fluent-forms.php:1723
+#: widgets/fluent-forms/fluent-forms.php:1754
+#: widgets/fluent-forms/fluent-forms.php:1869
+#: widgets/fluent-forms/fluent-forms.php:1887
+#: widgets/fluent-forms/fluent-forms.php:2146
+#: widgets/fluent-forms/fluent-forms.php:2218
+#: widgets/fluent-forms/fluent-forms.php:2561 widgets/funfact/funfact.php:555
 #: widgets/funfact/funfact.php:852
 #: widgets/header-offcanvas/header-offcanvas.php:169
 #: widgets/header-offcanvas/header-offcanvas.php:202
@@ -712,7 +712,7 @@ msgstr ""
 #: widgets/progressbar/progressbar.php:407 widgets/social/social.php:211
 #: widgets/social/social.php:273 widgets/social-share/social-share.php:248
 #: widgets/social-share/social-share.php:310
-#: widgets/tablepress/tablepress.php:206 widgets/tablepress/tablepress.php:618
+#: widgets/tablepress/tablepress.php:205 widgets/tablepress/tablepress.php:617
 #: widgets/team/team.php:245 widgets/team/team.php:308
 #: widgets/team/team.php:1158 widgets/team/team.php:1197
 #: widgets/team/team.php:1260 widgets/team/team.php:1279
@@ -731,88 +731,142 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:275
+#: libs/framework/views/settings-sections/usersettings.php:287
 msgid "Logged-in user greeting"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:285
+#: libs/framework/views/settings-sections/usersettings.php:299
 msgid "Logged out user greeting"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:295
+#: libs/framework/views/settings-sections/usersettings.php:311
 msgid "Show Dialog Box"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:324
-msgid "Dribbble User Data"
+#: libs/framework/views/settings-sections/usersettings.php:320
+msgid "Please add below domain as white listed in page advance messaging option"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:321
+msgid "how?"
 msgstr ""
 
 #: libs/framework/views/settings-sections/usersettings.php:341
+msgid "Dribbble User Data"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:358
 msgid "Access token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:383
+#: libs/framework/views/settings-sections/usersettings.php:400
 msgid "Twitter User Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:395
+#: libs/framework/views/settings-sections/usersettings.php:413
 msgid "Twitter Username"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:405
-#: libs/framework/views/settings-sections/usersettings.php:466
+#: libs/framework/views/settings-sections/usersettings.php:425
+#: libs/framework/views/settings-sections/usersettings.php:487
 msgid "Access Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:415
+#: libs/framework/views/settings-sections/usersettings.php:436
 msgid "Get Access Token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:435
+#: libs/framework/views/settings-sections/usersettings.php:456
 msgid "Instragram User Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:456
+#: libs/framework/views/settings-sections/usersettings.php:477
 msgid "User ID"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:476
+#: libs/framework/views/settings-sections/usersettings.php:497
 msgid "Token expires time"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:486
+#: libs/framework/views/settings-sections/usersettings.php:507
 msgid "Token generation date"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:489
+#: libs/framework/views/settings-sections/usersettings.php:510
 msgid "This is need to calculate the remaining time for token"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:528
+#: libs/framework/views/settings-sections/usersettings.php:549
 msgid "Zoom Data"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:540
+#: libs/framework/views/settings-sections/usersettings.php:562
 msgid "Api key"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:549
+#: libs/framework/views/settings-sections/usersettings.php:573
 msgid "Secret Key"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:558
+#: libs/framework/views/settings-sections/usersettings.php:583
 msgid "Check connection"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:580
+#: libs/framework/views/settings-sections/usersettings.php:605
 msgid "Google Map"
 msgstr ""
 
-#: libs/framework/views/settings-sections/usersettings.php:592
+#: libs/framework/views/settings-sections/usersettings.php:618
 msgid "Api Key"
 msgstr ""
 
-#: libs/framework/views/settings-sections/widgets.php:14
+#: libs/framework/views/settings-sections/usersettings.php:639
+msgid "Google Sheet For Elementor Pro Form"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:653
+msgid "Google Client Id"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:660
+msgid "Google Client Secret"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:667
+msgid "Click %s and create App/Project On Google developer account"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:668
+msgid "Must add the following URL to the \"Valid OAuth redirect URIs\" field:"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:669
+msgid "After getting the App ID & App Secret, put those information"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:670
+msgid "Click on \"Save Changes\""
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:671
+msgid "Click on \"Generate Access Token\""
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:678
+msgid ""
+"Note:- After 200 days your token will be expired, before the expiration of "
+"your token,"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:678
+msgid "Generate a new access Token"
+msgstr ""
+
+#: libs/framework/views/settings-sections/usersettings.php:681
+msgid "Generate Access Token"
+msgstr ""
+
+#: libs/framework/views/settings-sections/widgets.php:16
 msgid ""
 "You can disable the elements you are not using on your site. That will "
 "disable all associated assets of those widgets to improve your site loading "
@@ -823,7 +877,7 @@ msgstr ""
 msgid "Default Title"
 msgstr ""
 
-#: libs/stories/stories.php:255
+#: libs/stories/stories.php:252
 msgid "Wpmet Stories"
 msgstr ""
 
@@ -853,12 +907,12 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: modules/controls/widget-area-utils.php:24
-#: modules/controls/widget-area-utils.php:81
+#: modules/controls/widget-area-utils.php:28
+#: modules/controls/widget-area-utils.php:87
 msgid "Click here to add content."
 msgstr ""
 
-#: modules/controls/widget-area-utils.php:54
+#: modules/controls/widget-area-utils.php:59
 msgid "Edit"
 msgstr ""
 
@@ -969,16 +1023,16 @@ msgstr ""
 msgid "ElementsKit Icon Pack"
 msgstr ""
 
-#: modules/header-footer/cpt-api.php:78 modules/header-footer/cpt-hooks.php:56
+#: modules/header-footer/cpt-api.php:82 modules/header-footer/cpt-hooks.php:55
 #: widgets/client-logo/client-logo.php:1222
-#: widgets/fluent-forms/fluent-forms.php:1683
-#: widgets/fluent-forms/fluent-forms.php:1882 widgets/nav-menu/nav-menu.php:465
+#: widgets/fluent-forms/fluent-forms.php:1682
+#: widgets/fluent-forms/fluent-forms.php:1881 widgets/nav-menu/nav-menu.php:465
 #: widgets/nav-menu/nav-menu.php:690 widgets/post-tab/post-tab.php:283
 #: widgets/tab/tab.php:808 widgets/testimonial/testimonial.php:1821
 msgid "Active"
 msgstr ""
 
-#: modules/header-footer/cpt-api.php:79 modules/header-footer/cpt-hooks.php:57
+#: modules/header-footer/cpt-api.php:83 modules/header-footer/cpt-hooks.php:56
 msgid "Inactive"
 msgstr ""
 
@@ -1048,7 +1102,7 @@ msgstr ""
 
 #: modules/header-footer/views/modal-editor.php:22
 #: widgets/pricing/pricing.php:39 widgets/pricing/pricing.php:2369
-#: widgets/tablepress/tablepress.php:300
+#: widgets/tablepress/tablepress.php:299
 msgid "Header"
 msgstr ""
 
@@ -1108,23 +1162,23 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: modules/layout-manager/layout-import-api.php:22
+#: modules/layout-manager/layout-import-api.php:25
 msgid "Post not found"
 msgstr ""
 
-#: modules/layout-manager/layout-import-api.php:29
+#: modules/layout-manager/layout-import-api.php:32
 msgid "Template id missing"
 msgstr ""
 
-#: modules/layout-manager/library-source.php:15
+#: modules/layout-manager/library-source.php:16
 msgid "ElementsKit Layout Manager"
 msgstr ""
 
-#: modules/layout-manager/library-source.php:77
+#: modules/layout-manager/library-source.php:82
 msgid "Template does not have any content"
 msgstr ""
 
-#: modules/megamenu/api.php:24
+#: modules/megamenu/api.php:25
 msgid "Saved"
 msgstr ""
 
@@ -1265,7 +1319,7 @@ msgid "Default Width"
 msgstr ""
 
 #: modules/megamenu/views/options-menu-item.php:117
-#: widgets/fluent-forms/fluent-forms.php:2311
+#: widgets/fluent-forms/fluent-forms.php:2310
 #: widgets/mail-chimp/mail-chimp.php:543
 #: widgets/ninja-forms/ninja-forms.php:596 widgets/wp-forms/wp-forms.php:418
 msgid "Full Width"
@@ -1290,7 +1344,7 @@ msgstr ""
 #: modules/megamenu/views/options-menu-item.php:132
 #: widgets/category-list/category-list.php:54
 #: widgets/client-logo/client-logo.php:1069
-#: widgets/fluent-forms/fluent-forms.php:422 widgets/funfact/funfact.php:118
+#: widgets/fluent-forms/fluent-forms.php:421 widgets/funfact/funfact.php:118
 #: widgets/image-accordion/image-accordion.php:277
 #: widgets/page-list/page-list.php:252 widgets/progressbar/progressbar.php:53
 #: widgets/team/team.php:56 widgets/testimonial/testimonial.php:59
@@ -1305,19 +1359,19 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: modules/megamenu/walker-nav-menu.php:314
+#: modules/megamenu/walker-nav-menu.php:307
 msgid "No content found"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:29
+#: modules/onepage-scroll/extend-controls-pro.php:28
 msgid "Onepage Scroll Settings"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:41
+#: modules/onepage-scroll/extend-controls-pro.php:40
 msgid "Navigation Style"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:45
+#: modules/onepage-scroll/extend-controls-pro.php:44
 #: widgets/blog-posts/blog-posts.php:851 widgets/blog-posts/blog-posts.php:2679
 #: widgets/button/button.php:299 widgets/funfact/funfact.php:72
 #: widgets/icon-box/icon-box.php:68 widgets/image-box/image-box.php:768
@@ -1326,88 +1380,88 @@ msgstr ""
 #: widgets/pricing/pricing.php:831 widgets/pricing/pricing.php:1618
 #: widgets/pricing/pricing.php:1771 widgets/pricing/pricing.php:2202
 #: widgets/social/social.php:431 widgets/social-share/social-share.php:468
-#: widgets/tab/tab.php:372 widgets/tablepress/tablepress.php:68
-#: widgets/tablepress/tablepress.php:84 widgets/tablepress/tablepress.php:221
-#: widgets/tablepress/tablepress.php:348 widgets/tablepress/tablepress.php:431
+#: widgets/tab/tab.php:372 widgets/tablepress/tablepress.php:67
+#: widgets/tablepress/tablepress.php:83 widgets/tablepress/tablepress.php:220
+#: widgets/tablepress/tablepress.php:347 widgets/tablepress/tablepress.php:430
 #: widgets/team/team.php:1548 widgets/video/video.php:617
 msgid "None"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:47
+#: modules/onepage-scroll/extend-controls-pro.php:46
 msgid "Circle"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:49
-#: modules/onepage-scroll/extend-controls-pro.php:62
+#: modules/onepage-scroll/extend-controls-pro.php:48
+#: modules/onepage-scroll/extend-controls-pro.php:61
 msgid "Scale Up"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:50
+#: modules/onepage-scroll/extend-controls-pro.php:49
 msgid "Fill In"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:51
+#: modules/onepage-scroll/extend-controls-pro.php:50
 msgid "Fill Out"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:52
+#: modules/onepage-scroll/extend-controls-pro.php:51
 msgid "Stroke"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:53
+#: modules/onepage-scroll/extend-controls-pro.php:52
 msgid "Stroke Dot"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:54
+#: modules/onepage-scroll/extend-controls-pro.php:53
 msgid "Stroke Simple"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:55
+#: modules/onepage-scroll/extend-controls-pro.php:54
 msgid "Dot Move"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:56
+#: modules/onepage-scroll/extend-controls-pro.php:55
 msgid "Timeline"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:60
+#: modules/onepage-scroll/extend-controls-pro.php:59
 msgid "Square"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:66
+#: modules/onepage-scroll/extend-controls-pro.php:65
 #: widgets/social-share/social-share.php:217
 msgid "Line"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:68
+#: modules/onepage-scroll/extend-controls-pro.php:67
 msgid "Line Grow"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:69
+#: modules/onepage-scroll/extend-controls-pro.php:68
 msgid "Line Shrink"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:70
+#: modules/onepage-scroll/extend-controls-pro.php:69
 msgid "Line Fill"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:71
+#: modules/onepage-scroll/extend-controls-pro.php:70
 msgid "Line Move"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:74
+#: modules/onepage-scroll/extend-controls-pro.php:73
 msgid "Custom Icon"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:86
+#: modules/onepage-scroll/extend-controls-pro.php:85
 msgid "Navigation Icon"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:103
+#: modules/onepage-scroll/extend-controls-pro.php:102
 msgid "Navigation Position"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:108
+#: modules/onepage-scroll/extend-controls-pro.php:107
 #: widgets/back-to-top/back-to-top.php:87 widgets/blog-posts/blog-posts.php:81
 #: widgets/blog-posts/blog-posts.php:706 widgets/blog-posts/blog-posts.php:1396
 #: widgets/blog-posts/blog-posts.php:1751 widgets/funfact/funfact.php:923
@@ -1424,7 +1478,7 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:112
+#: modules/onepage-scroll/extend-controls-pro.php:111
 #: widgets/blog-posts/blog-posts.php:714 widgets/blog-posts/blog-posts.php:1424
 #: widgets/funfact/funfact.php:982 widgets/heading/heading.php:350
 #: widgets/icon-box/icon-box.php:700
@@ -1440,7 +1494,7 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:116
+#: modules/onepage-scroll/extend-controls-pro.php:115
 #: widgets/accordion/accordion.php:142 widgets/back-to-top/back-to-top.php:104
 #: widgets/blog-posts/blog-posts.php:82 widgets/blog-posts/blog-posts.php:123
 #: widgets/blog-posts/blog-posts.php:583 widgets/blog-posts/blog-posts.php:1045
@@ -1455,11 +1509,11 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:74
 #: widgets/dual-button/dual-button.php:535
 #: widgets/dual-button/dual-button.php:755
-#: widgets/fluent-forms/fluent-forms.php:186
-#: widgets/fluent-forms/fluent-forms.php:426
-#: widgets/fluent-forms/fluent-forms.php:545
-#: widgets/fluent-forms/fluent-forms.php:1238
-#: widgets/fluent-forms/fluent-forms.php:2284 widgets/funfact/funfact.php:249
+#: widgets/fluent-forms/fluent-forms.php:185
+#: widgets/fluent-forms/fluent-forms.php:425
+#: widgets/fluent-forms/fluent-forms.php:544
+#: widgets/fluent-forms/fluent-forms.php:1237
+#: widgets/fluent-forms/fluent-forms.php:2283 widgets/funfact/funfact.php:249
 #: widgets/header-offcanvas/header-offcanvas.php:302
 #: widgets/header-offcanvas/header-offcanvas.php:610
 #: widgets/header-search/header-search.php:305 widgets/heading/heading.php:404
@@ -1479,7 +1533,7 @@ msgstr ""
 #: widgets/social-share/social-share.php:423 widgets/tab/tab.php:158
 #: widgets/tab/tab.php:272 widgets/tab/tab.php:302 widgets/tab/tab.php:1054
 #: widgets/tab/tab.php:1175 widgets/tab/tab.php:1545
-#: widgets/tablepress/tablepress.php:148 widgets/tablepress/tablepress.php:174
+#: widgets/tablepress/tablepress.php:147 widgets/tablepress/tablepress.php:173
 #: widgets/team/team.php:484 widgets/team/team.php:656
 #: widgets/team/team.php:971 widgets/team/team.php:1503
 #: widgets/testimonial/testimonial.php:196
@@ -1491,7 +1545,7 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:120
+#: modules/onepage-scroll/extend-controls-pro.php:119
 #: widgets/accordion/accordion.php:141 widgets/back-to-top/back-to-top.php:112
 #: widgets/blog-posts/blog-posts.php:127 widgets/blog-posts/blog-posts.php:591
 #: widgets/blog-posts/blog-posts.php:1053
@@ -1503,11 +1557,11 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:82
 #: widgets/dual-button/dual-button.php:543
 #: widgets/dual-button/dual-button.php:763
-#: widgets/fluent-forms/fluent-forms.php:194
-#: widgets/fluent-forms/fluent-forms.php:434
-#: widgets/fluent-forms/fluent-forms.php:553
-#: widgets/fluent-forms/fluent-forms.php:1246
-#: widgets/fluent-forms/fluent-forms.php:2292 widgets/funfact/funfact.php:257
+#: widgets/fluent-forms/fluent-forms.php:193
+#: widgets/fluent-forms/fluent-forms.php:433
+#: widgets/fluent-forms/fluent-forms.php:552
+#: widgets/fluent-forms/fluent-forms.php:1245
+#: widgets/fluent-forms/fluent-forms.php:2291 widgets/funfact/funfact.php:257
 #: widgets/header-offcanvas/header-offcanvas.php:310
 #: widgets/header-offcanvas/header-offcanvas.php:614
 #: widgets/header-search/header-search.php:313 widgets/heading/heading.php:412
@@ -1526,7 +1580,7 @@ msgstr ""
 #: widgets/social/social.php:394 widgets/social-share/social-share.php:149
 #: widgets/social-share/social-share.php:431 widgets/tab/tab.php:157
 #: widgets/tab/tab.php:280 widgets/tab/tab.php:310
-#: widgets/tablepress/tablepress.php:156 widgets/tablepress/tablepress.php:182
+#: widgets/tablepress/tablepress.php:155 widgets/tablepress/tablepress.php:181
 #: widgets/team/team.php:488 widgets/team/team.php:664
 #: widgets/team/team.php:975 widgets/team/team.php:979
 #: widgets/team/team.php:1511 widgets/testimonial/testimonial.php:803
@@ -1537,62 +1591,62 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:136
+#: modules/onepage-scroll/extend-controls-pro.php:135
 msgid "Navigation Position Offset"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:168
+#: modules/onepage-scroll/extend-controls-pro.php:167
 msgid "Navigation Spacing"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:192
+#: modules/onepage-scroll/extend-controls-pro.php:191
 msgid "Navigation Color"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:224
+#: modules/onepage-scroll/extend-controls-pro.php:223
 msgid "Tooltip Typography"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:242
+#: modules/onepage-scroll/extend-controls-pro.php:241
 msgid "Enable Dot"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls-pro.php:252
+#: modules/onepage-scroll/extend-controls-pro.php:251
 msgid "Tooltip Text"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls.php:44 widgets/widget-notice.php:24
+#: modules/onepage-scroll/extend-controls.php:42 widgets/widget-notice.php:24
 msgid "Unlock more possibilities"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls.php:54
+#: modules/onepage-scroll/extend-controls.php:52
 msgid ""
-"%s Get the %s Pro version %s for more awesome elements and powerful "
-"modules. %s"
+"%1$s Get the %2$s Pro version %3$s for more awesome elements and powerful "
+"modules. %4$s"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls.php:74
+#: modules/onepage-scroll/extend-controls.php:72
 msgid "Enable Onepage Scroll"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls.php:94
+#: modules/onepage-scroll/extend-controls.php:92
 msgid "ElementsKit Onepage Scroll"
 msgstr ""
 
-#: modules/onepage-scroll/extend-controls.php:102
+#: modules/onepage-scroll/extend-controls.php:100
 msgid "Enable Section"
 msgstr ""
 
 #: modules/widget-builder/api/common.php:25
-#: modules/widget-builder/api/common.php:86
+#: modules/widget-builder/api/common.php:84
 msgid "Not enough permission."
 msgstr ""
 
-#: modules/widget-builder/api/common.php:39
+#: modules/widget-builder/api/common.php:38
 msgid "Invalid data."
 msgstr ""
 
-#: modules/widget-builder/api/common.php:72
+#: modules/widget-builder/api/common.php:71
 msgid "Widget data saved!"
 msgstr ""
 
@@ -1636,11 +1690,11 @@ msgstr ""
 msgid "No Widgets found in Trash."
 msgstr ""
 
-#: modules/widget-builder/init.php:70
+#: modules/widget-builder/init.php:71
 msgid "ElementsKit Custom"
 msgstr ""
 
-#: modules/widget-builder/init.php:111
+#: modules/widget-builder/init.php:112
 msgid "Builder"
 msgstr ""
 
@@ -1652,8 +1706,8 @@ msgstr ""
 #: widgets/accordion/accordion.php:47 widgets/accordion/accordion.php:228
 #: widgets/blog-posts/blog-posts.php:300 widgets/blog-posts/blog-posts.php:1895
 #: widgets/faq/faq.php:48 widgets/faq/faq.php:97
-#: widgets/fluent-forms/fluent-forms.php:97
-#: widgets/fluent-forms/fluent-forms.php:212 widgets/funfact/funfact.php:826
+#: widgets/fluent-forms/fluent-forms.php:96
+#: widgets/fluent-forms/fluent-forms.php:211 widgets/funfact/funfact.php:826
 #: widgets/heading/heading.php:41 widgets/heading/heading.php:426
 #: widgets/icon-box/icon-box.php:445 widgets/icon-box/icon-box.php:723
 #: widgets/image-accordion/image-accordion.php:72
@@ -1685,8 +1739,8 @@ msgstr ""
 #: widgets/client-logo/client-logo.php:413
 #: widgets/dual-button/dual-button.php:192
 #: widgets/dual-button/dual-button.php:321
-#: widgets/fluent-forms/fluent-forms.php:88
-#: widgets/fluent-forms/fluent-forms.php:917 widgets/funfact/funfact.php:87
+#: widgets/fluent-forms/fluent-forms.php:87
+#: widgets/fluent-forms/fluent-forms.php:916 widgets/funfact/funfact.php:87
 #: widgets/funfact/funfact.php:1066 widgets/heading/heading.php:317
 #: widgets/heading/heading.php:651 widgets/heading/heading.php:691
 #: widgets/heading/heading.php:781 widgets/icon-box/icon-box.php:90
@@ -1743,8 +1797,8 @@ msgstr ""
 #: widgets/client-logo/client-logo.php:414
 #: widgets/dual-button/dual-button.php:193
 #: widgets/dual-button/dual-button.php:322
-#: widgets/fluent-forms/fluent-forms.php:89
-#: widgets/fluent-forms/fluent-forms.php:918 widgets/funfact/funfact.php:88
+#: widgets/fluent-forms/fluent-forms.php:88
+#: widgets/fluent-forms/fluent-forms.php:917 widgets/funfact/funfact.php:88
 #: widgets/funfact/funfact.php:1067 widgets/heading/heading.php:318
 #: widgets/heading/heading.php:652 widgets/heading/heading.php:692
 #: widgets/heading/heading.php:782 widgets/icon-box/icon-box.php:91
@@ -1785,9 +1839,9 @@ msgid "No"
 msgstr ""
 
 #: widgets/accordion/accordion.php:67 widgets/accordion/accordion.php:471
-#: widgets/fluent-forms/fluent-forms.php:110
-#: widgets/fluent-forms/fluent-forms.php:286
-#: widgets/fluent-forms/fluent-forms.php:1179 widgets/icon-box/icon-box.php:798
+#: widgets/fluent-forms/fluent-forms.php:109
+#: widgets/fluent-forms/fluent-forms.php:285
+#: widgets/fluent-forms/fluent-forms.php:1178 widgets/icon-box/icon-box.php:798
 #: widgets/image-box/image-box.php:235 widgets/image-box/image-box.php:1238
 #: widgets/piechart/piechart.php:169 widgets/team/team.php:1408
 #: widgets/team/team.php:1904 widgets/testimonial/testimonial.php:876
@@ -1854,11 +1908,11 @@ msgstr ""
 #: widgets/client-logo/client-logo.php:449
 #: widgets/contact-form7/contact-form7.php:647
 #: widgets/dual-button/dual-button.php:924
-#: widgets/fluent-forms/fluent-forms.php:125
-#: widgets/fluent-forms/fluent-forms.php:137
-#: widgets/fluent-forms/fluent-forms.php:159
-#: widgets/fluent-forms/fluent-forms.php:1924
-#: widgets/fluent-forms/fluent-forms.php:1988
+#: widgets/fluent-forms/fluent-forms.php:124
+#: widgets/fluent-forms/fluent-forms.php:136
+#: widgets/fluent-forms/fluent-forms.php:158
+#: widgets/fluent-forms/fluent-forms.php:1923
+#: widgets/fluent-forms/fluent-forms.php:1987
 #: widgets/header-search/header-search.php:237
 #: widgets/icon-box/icon-box.php:436 widgets/mail-chimp/mail-chimp.php:167
 #: widgets/mail-chimp/mail-chimp.php:261 widgets/mail-chimp/mail-chimp.php:353
@@ -1884,11 +1938,11 @@ msgstr ""
 #: widgets/client-logo/client-logo.php:450
 #: widgets/contact-form7/contact-form7.php:648
 #: widgets/dual-button/dual-button.php:925
-#: widgets/fluent-forms/fluent-forms.php:126
-#: widgets/fluent-forms/fluent-forms.php:138
-#: widgets/fluent-forms/fluent-forms.php:160
-#: widgets/fluent-forms/fluent-forms.php:1925
-#: widgets/fluent-forms/fluent-forms.php:1989
+#: widgets/fluent-forms/fluent-forms.php:125
+#: widgets/fluent-forms/fluent-forms.php:137
+#: widgets/fluent-forms/fluent-forms.php:159
+#: widgets/fluent-forms/fluent-forms.php:1924
+#: widgets/fluent-forms/fluent-forms.php:1988
 #: widgets/header-search/header-search.php:238
 #: widgets/icon-box/icon-box.php:437 widgets/mail-chimp/mail-chimp.php:168
 #: widgets/mail-chimp/mail-chimp.php:262 widgets/mail-chimp/mail-chimp.php:354
@@ -1972,12 +2026,12 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:707
 #: widgets/dual-button/dual-button.php:824
 #: widgets/dual-button/dual-button.php:904 widgets/faq/faq.php:124
-#: widgets/fluent-forms/fluent-forms.php:373
-#: widgets/fluent-forms/fluent-forms.php:1778
-#: widgets/fluent-forms/fluent-forms.php:2012
-#: widgets/fluent-forms/fluent-forms.php:2103
-#: widgets/fluent-forms/fluent-forms.php:2168
-#: widgets/fluent-forms/fluent-forms.php:2231 widgets/funfact/funfact.php:1004
+#: widgets/fluent-forms/fluent-forms.php:372
+#: widgets/fluent-forms/fluent-forms.php:1777
+#: widgets/fluent-forms/fluent-forms.php:2011
+#: widgets/fluent-forms/fluent-forms.php:2102
+#: widgets/fluent-forms/fluent-forms.php:2167
+#: widgets/fluent-forms/fluent-forms.php:2230 widgets/funfact/funfact.php:1004
 #: widgets/funfact/funfact.php:1013 widgets/funfact/funfact.php:1149
 #: widgets/header-offcanvas/header-offcanvas.php:596
 #: widgets/header-search/header-search.php:338 widgets/heading/heading.php:582
@@ -2004,8 +2058,8 @@ msgstr ""
 #: widgets/tab/tab.php:765 widgets/tab/tab.php:837 widgets/tab/tab.php:1012
 #: widgets/tab/tab.php:1133 widgets/tab/tab.php:1293 widgets/tab/tab.php:1577
 #: widgets/tab/tab.php:1601 widgets/tab/tab.php:1817 widgets/tab/tab.php:1841
-#: widgets/tablepress/tablepress.php:308 widgets/tablepress/tablepress.php:495
-#: widgets/tablepress/tablepress.php:542 widgets/tablepress/tablepress.php:629
+#: widgets/tablepress/tablepress.php:307 widgets/tablepress/tablepress.php:494
+#: widgets/tablepress/tablepress.php:541 widgets/tablepress/tablepress.php:628
 #: widgets/team/team.php:531 widgets/team/team.php:556
 #: widgets/team/team.php:741 widgets/team/team.php:918
 #: widgets/team/team.php:1760 widgets/team/team.php:1794
@@ -2025,17 +2079,17 @@ msgstr ""
 #: widgets/accordion/accordion.php:272 widgets/blog-posts/blog-posts.php:1822
 #: widgets/business-hours/business-hours.php:111
 #: widgets/category-list/category-list.php:97
-#: widgets/fluent-forms/fluent-forms.php:576
-#: widgets/fluent-forms/fluent-forms.php:784
-#: widgets/fluent-forms/fluent-forms.php:964
-#: widgets/fluent-forms/fluent-forms.php:1080
-#: widgets/fluent-forms/fluent-forms.php:1300
-#: widgets/fluent-forms/fluent-forms.php:1384
-#: widgets/fluent-forms/fluent-forms.php:1510
-#: widgets/fluent-forms/fluent-forms.php:1582
-#: widgets/fluent-forms/fluent-forms.php:2352
-#: widgets/fluent-forms/fluent-forms.php:2458
-#: widgets/fluent-forms/fluent-forms.php:2509
+#: widgets/fluent-forms/fluent-forms.php:575
+#: widgets/fluent-forms/fluent-forms.php:783
+#: widgets/fluent-forms/fluent-forms.php:963
+#: widgets/fluent-forms/fluent-forms.php:1079
+#: widgets/fluent-forms/fluent-forms.php:1299
+#: widgets/fluent-forms/fluent-forms.php:1383
+#: widgets/fluent-forms/fluent-forms.php:1509
+#: widgets/fluent-forms/fluent-forms.php:1581
+#: widgets/fluent-forms/fluent-forms.php:2351
+#: widgets/fluent-forms/fluent-forms.php:2457
+#: widgets/fluent-forms/fluent-forms.php:2508
 #: widgets/header-info/header-info.php:154
 #: widgets/header-offcanvas/header-offcanvas.php:182
 #: widgets/header-offcanvas/header-offcanvas.php:214
@@ -2065,18 +2119,18 @@ msgid "Background Color"
 msgstr ""
 
 #: widgets/accordion/accordion.php:284 widgets/accordion/accordion.php:374
-#: widgets/fluent-forms/fluent-forms.php:1001
-#: widgets/fluent-forms/fluent-forms.php:1095
-#: widgets/fluent-forms/fluent-forms.php:1606
-#: widgets/fluent-forms/fluent-forms.php:1787
-#: widgets/fluent-forms/fluent-forms.php:2240
-#: widgets/fluent-forms/fluent-forms.php:2482
+#: widgets/fluent-forms/fluent-forms.php:1000
+#: widgets/fluent-forms/fluent-forms.php:1094
+#: widgets/fluent-forms/fluent-forms.php:1605
+#: widgets/fluent-forms/fluent-forms.php:1786
+#: widgets/fluent-forms/fluent-forms.php:2239
+#: widgets/fluent-forms/fluent-forms.php:2481
 #: widgets/header-offcanvas/header-offcanvas.php:225
 #: widgets/header-offcanvas/header-offcanvas.php:453
 #: widgets/heading/heading.php:1235 widgets/image-box/image-box.php:793
 #: widgets/image-box/image-box.php:811 widgets/ninja-forms/ninja-forms.php:794
-#: widgets/tablepress/tablepress.php:259 widgets/tablepress/tablepress.php:383
-#: widgets/tablepress/tablepress.php:518 widgets/tablepress/tablepress.php:565
+#: widgets/tablepress/tablepress.php:258 widgets/tablepress/tablepress.php:382
+#: widgets/tablepress/tablepress.php:517 widgets/tablepress/tablepress.php:564
 #: widgets/testimonial/testimonial.php:718 widgets/we-forms/we-forms.php:561
 #: widgets/wp-forms/wp-forms.php:612
 msgid "Border Color"
@@ -2118,15 +2172,15 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:686
 #: widgets/dual-button/dual-button.php:803
 #: widgets/dual-button/dual-button.php:883 widgets/faq/faq.php:134
-#: widgets/fluent-forms/fluent-forms.php:601
-#: widgets/fluent-forms/fluent-forms.php:797
-#: widgets/fluent-forms/fluent-forms.php:1342
-#: widgets/fluent-forms/fluent-forms.php:1437
-#: widgets/fluent-forms/fluent-forms.php:1523
-#: widgets/fluent-forms/fluent-forms.php:2064
-#: widgets/fluent-forms/fluent-forms.php:2178
-#: widgets/fluent-forms/fluent-forms.php:2377
-#: widgets/fluent-forms/fluent-forms.php:2532 widgets/funfact/funfact.php:450
+#: widgets/fluent-forms/fluent-forms.php:600
+#: widgets/fluent-forms/fluent-forms.php:796
+#: widgets/fluent-forms/fluent-forms.php:1341
+#: widgets/fluent-forms/fluent-forms.php:1436
+#: widgets/fluent-forms/fluent-forms.php:1522
+#: widgets/fluent-forms/fluent-forms.php:2063
+#: widgets/fluent-forms/fluent-forms.php:2177
+#: widgets/fluent-forms/fluent-forms.php:2376
+#: widgets/fluent-forms/fluent-forms.php:2531 widgets/funfact/funfact.php:450
 #: widgets/funfact/funfact.php:487 widgets/funfact/funfact.php:581
 #: widgets/funfact/funfact.php:636 widgets/funfact/funfact.php:1043
 #: widgets/heading/heading.php:468 widgets/heading/heading.php:1212
@@ -2159,7 +2213,7 @@ msgstr ""
 #: widgets/social-share/social-share.php:353 widgets/tab/tab.php:500
 #: widgets/tab/tab.php:598 widgets/tab/tab.php:774 widgets/tab/tab.php:846
 #: widgets/tab/tab.php:1330 widgets/tab/tab.php:1615 widgets/tab/tab.php:2014
-#: widgets/tablepress/tablepress.php:653 widgets/team/team.php:272
+#: widgets/tablepress/tablepress.php:652 widgets/team/team.php:272
 #: widgets/team/team.php:334 widgets/team/team.php:701
 #: widgets/team/team.php:875 widgets/team/team.php:1182
 #: widgets/team/team.php:1221 widgets/team/team.php:2044
@@ -2209,15 +2263,15 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:694
 #: widgets/dual-button/dual-button.php:811
 #: widgets/dual-button/dual-button.php:891 widgets/faq/faq.php:233
-#: widgets/fluent-forms/fluent-forms.php:478
-#: widgets/fluent-forms/fluent-forms.php:612
-#: widgets/fluent-forms/fluent-forms.php:1027
-#: widgets/fluent-forms/fluent-forms.php:1053
-#: widgets/fluent-forms/fluent-forms.php:1532
-#: widgets/fluent-forms/fluent-forms.php:2075
-#: widgets/fluent-forms/fluent-forms.php:2186
-#: widgets/fluent-forms/fluent-forms.php:2251
-#: widgets/fluent-forms/fluent-forms.php:2387 widgets/funfact/funfact.php:457
+#: widgets/fluent-forms/fluent-forms.php:477
+#: widgets/fluent-forms/fluent-forms.php:611
+#: widgets/fluent-forms/fluent-forms.php:1026
+#: widgets/fluent-forms/fluent-forms.php:1052
+#: widgets/fluent-forms/fluent-forms.php:1531
+#: widgets/fluent-forms/fluent-forms.php:2074
+#: widgets/fluent-forms/fluent-forms.php:2185
+#: widgets/fluent-forms/fluent-forms.php:2250
+#: widgets/fluent-forms/fluent-forms.php:2386 widgets/funfact/funfact.php:457
 #: widgets/funfact/funfact.php:494 widgets/funfact/funfact.php:589
 #: widgets/funfact/funfact.php:646 widgets/funfact/funfact.php:1051
 #: widgets/heading/heading.php:674 widgets/icon-box/icon-box.php:601
@@ -2332,18 +2386,18 @@ msgstr ""
 #: widgets/contact-form7/contact-form7.php:620
 #: widgets/drop-caps/drop-caps.php:132 widgets/dual-button/dual-button.php:506
 #: widgets/dual-button/dual-button.php:726
-#: widgets/fluent-forms/fluent-forms.php:273
-#: widgets/fluent-forms/fluent-forms.php:348
-#: widgets/fluent-forms/fluent-forms.php:457
-#: widgets/fluent-forms/fluent-forms.php:725
-#: widgets/fluent-forms/fluent-forms.php:1155
-#: widgets/fluent-forms/fluent-forms.php:1210
-#: widgets/fluent-forms/fluent-forms.php:1351
-#: widgets/fluent-forms/fluent-forms.php:1446
-#: widgets/fluent-forms/fluent-forms.php:1544
-#: widgets/fluent-forms/fluent-forms.php:2198
-#: widgets/fluent-forms/fluent-forms.php:2399
-#: widgets/fluent-forms/fluent-forms.php:2583 widgets/funfact/funfact.php:704
+#: widgets/fluent-forms/fluent-forms.php:272
+#: widgets/fluent-forms/fluent-forms.php:347
+#: widgets/fluent-forms/fluent-forms.php:456
+#: widgets/fluent-forms/fluent-forms.php:724
+#: widgets/fluent-forms/fluent-forms.php:1154
+#: widgets/fluent-forms/fluent-forms.php:1209
+#: widgets/fluent-forms/fluent-forms.php:1350
+#: widgets/fluent-forms/fluent-forms.php:1445
+#: widgets/fluent-forms/fluent-forms.php:1543
+#: widgets/fluent-forms/fluent-forms.php:2197
+#: widgets/fluent-forms/fluent-forms.php:2398
+#: widgets/fluent-forms/fluent-forms.php:2582 widgets/funfact/funfact.php:704
 #: widgets/funfact/funfact.php:872 widgets/funfact/funfact.php:1022
 #: widgets/header-info/header-info.php:130
 #: widgets/header-offcanvas/header-offcanvas.php:352
@@ -2377,8 +2431,8 @@ msgstr ""
 #: widgets/pricing/pricing.php:2179 widgets/progressbar/progressbar.php:196
 #: widgets/social/social.php:466 widgets/social-share/social-share.php:649
 #: widgets/tab/tab.php:480 widgets/tab/tab.php:559 widgets/tab/tab.php:711
-#: widgets/tab/tab.php:1986 widgets/tablepress/tablepress.php:398
-#: widgets/tablepress/tablepress.php:640 widgets/team/team.php:676
+#: widgets/tab/tab.php:1986 widgets/tablepress/tablepress.php:397
+#: widgets/tablepress/tablepress.php:639 widgets/team/team.php:676
 #: widgets/team/team.php:1002 widgets/team/team.php:1584
 #: widgets/team/team.php:2155 widgets/testimonial/testimonial.php:467
 #: widgets/testimonial/testimonial.php:629
@@ -2425,8 +2479,8 @@ msgstr ""
 #: widgets/contact-form7/contact-form7.php:657
 #: widgets/countdown-timer/countdown-timer.php:213
 #: widgets/dual-button/dual-button.php:935
-#: widgets/fluent-forms/fluent-forms.php:2307
-#: widgets/fluent-forms/fluent-forms.php:2321 widgets/funfact/funfact.php:1102
+#: widgets/fluent-forms/fluent-forms.php:2306
+#: widgets/fluent-forms/fluent-forms.php:2320 widgets/funfact/funfact.php:1102
 #: widgets/header-offcanvas/header-offcanvas.php:583
 #: widgets/header-search/header-search.php:247 widgets/heading/heading.php:837
 #: widgets/heading/heading.php:901 widgets/heading/heading.php:1090
@@ -2474,12 +2528,12 @@ msgstr ""
 #: widgets/countdown-timer/countdown-timer.php:1529
 #: widgets/drop-caps/drop-caps.php:145 widgets/dual-button/dual-button.php:519
 #: widgets/dual-button/dual-button.php:739
-#: widgets/fluent-forms/fluent-forms.php:251
-#: widgets/fluent-forms/fluent-forms.php:326
-#: widgets/fluent-forms/fluent-forms.php:445
-#: widgets/fluent-forms/fluent-forms.php:1167
-#: widgets/fluent-forms/fluent-forms.php:1222
-#: widgets/fluent-forms/fluent-forms.php:2595
+#: widgets/fluent-forms/fluent-forms.php:250
+#: widgets/fluent-forms/fluent-forms.php:325
+#: widgets/fluent-forms/fluent-forms.php:444
+#: widgets/fluent-forms/fluent-forms.php:1166
+#: widgets/fluent-forms/fluent-forms.php:1221
+#: widgets/fluent-forms/fluent-forms.php:2594
 #: widgets/header-info/header-info.php:118
 #: widgets/header-offcanvas/header-offcanvas.php:370
 #: widgets/header-offcanvas/header-offcanvas.php:550
@@ -2522,7 +2576,7 @@ msgstr ""
 #: widgets/accordion/accordion.php:643 widgets/accordion/accordion.php:704
 #: widgets/category-list/category-list.php:374
 #: widgets/client-logo/client-logo.php:858
-#: widgets/fluent-forms/fluent-forms.php:926 widgets/funfact/funfact.php:661
+#: widgets/fluent-forms/fluent-forms.php:925 widgets/funfact/funfact.php:661
 #: widgets/icon-box/icon-box.php:1065 widgets/page-list/page-list.php:738
 #: widgets/post-list/post-list.php:883 widgets/pricing/pricing.php:1205
 msgid "Size"
@@ -2574,11 +2628,11 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:70
 #: widgets/dual-button/dual-button.php:531
 #: widgets/dual-button/dual-button.php:751
-#: widgets/fluent-forms/fluent-forms.php:182
-#: widgets/fluent-forms/fluent-forms.php:417
-#: widgets/fluent-forms/fluent-forms.php:541
-#: widgets/fluent-forms/fluent-forms.php:1234
-#: widgets/fluent-forms/fluent-forms.php:2280 widgets/funfact/funfact.php:245
+#: widgets/fluent-forms/fluent-forms.php:181
+#: widgets/fluent-forms/fluent-forms.php:416
+#: widgets/fluent-forms/fluent-forms.php:540
+#: widgets/fluent-forms/fluent-forms.php:1233
+#: widgets/fluent-forms/fluent-forms.php:2279 widgets/funfact/funfact.php:245
 #: widgets/header-offcanvas/header-offcanvas.php:298
 #: widgets/header-search/header-search.php:301 widgets/heading/heading.php:400
 #: widgets/image-accordion/image-accordion.php:523
@@ -2606,11 +2660,11 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:78
 #: widgets/dual-button/dual-button.php:539
 #: widgets/dual-button/dual-button.php:759
-#: widgets/fluent-forms/fluent-forms.php:190
-#: widgets/fluent-forms/fluent-forms.php:430
-#: widgets/fluent-forms/fluent-forms.php:549
-#: widgets/fluent-forms/fluent-forms.php:1242
-#: widgets/fluent-forms/fluent-forms.php:2288 widgets/funfact/funfact.php:253
+#: widgets/fluent-forms/fluent-forms.php:189
+#: widgets/fluent-forms/fluent-forms.php:429
+#: widgets/fluent-forms/fluent-forms.php:548
+#: widgets/fluent-forms/fluent-forms.php:1241
+#: widgets/fluent-forms/fluent-forms.php:2287 widgets/funfact/funfact.php:253
 #: widgets/header-offcanvas/header-offcanvas.php:306
 #: widgets/header-search/header-search.php:309 widgets/heading/heading.php:408
 #: widgets/icon-box/icon-box.php:389
@@ -2628,8 +2682,8 @@ msgstr ""
 #: widgets/pricing/pricing.php:2095 widgets/social/social.php:139
 #: widgets/social/social.php:390 widgets/social-share/social-share.php:145
 #: widgets/social-share/social-share.php:427 widgets/tab/tab.php:276
-#: widgets/tab/tab.php:306 widgets/tablepress/tablepress.php:152
-#: widgets/tablepress/tablepress.php:178 widgets/team/team.php:660
+#: widgets/tab/tab.php:306 widgets/tablepress/tablepress.php:151
+#: widgets/tablepress/tablepress.php:177 widgets/team/team.php:660
 #: widgets/team/team.php:1507 widgets/testimonial/testimonial.php:773
 #: widgets/testimonial/testimonial.php:799
 #: widgets/testimonial/testimonial.php:1590 widgets/video/video.php:300
@@ -2675,24 +2729,24 @@ msgstr ""
 #: widgets/dual-button/dual-button.php:444
 #: widgets/dual-button/dual-button.php:664
 #: widgets/dual-button/dual-button.php:874
-#: widgets/fluent-forms/fluent-forms.php:240
-#: widgets/fluent-forms/fluent-forms.php:314
-#: widgets/fluent-forms/fluent-forms.php:522
-#: widgets/fluent-forms/fluent-forms.php:757
-#: widgets/fluent-forms/fluent-forms.php:1146
-#: widgets/fluent-forms/fluent-forms.php:1201
-#: widgets/fluent-forms/fluent-forms.php:1313
-#: widgets/fluent-forms/fluent-forms.php:1409
-#: widgets/fluent-forms/fluent-forms.php:1482
-#: widgets/fluent-forms/fluent-forms.php:1557
-#: widgets/fluent-forms/fluent-forms.php:1649
-#: widgets/fluent-forms/fluent-forms.php:1737
-#: widgets/fluent-forms/fluent-forms.php:1768
-#: widgets/fluent-forms/fluent-forms.php:1951
-#: widgets/fluent-forms/fluent-forms.php:2159
-#: widgets/fluent-forms/fluent-forms.php:2431
-#: widgets/fluent-forms/fluent-forms.php:2543
-#: widgets/fluent-forms/fluent-forms.php:2575 widgets/funfact/funfact.php:782
+#: widgets/fluent-forms/fluent-forms.php:239
+#: widgets/fluent-forms/fluent-forms.php:313
+#: widgets/fluent-forms/fluent-forms.php:521
+#: widgets/fluent-forms/fluent-forms.php:756
+#: widgets/fluent-forms/fluent-forms.php:1145
+#: widgets/fluent-forms/fluent-forms.php:1200
+#: widgets/fluent-forms/fluent-forms.php:1312
+#: widgets/fluent-forms/fluent-forms.php:1408
+#: widgets/fluent-forms/fluent-forms.php:1481
+#: widgets/fluent-forms/fluent-forms.php:1556
+#: widgets/fluent-forms/fluent-forms.php:1648
+#: widgets/fluent-forms/fluent-forms.php:1736
+#: widgets/fluent-forms/fluent-forms.php:1767
+#: widgets/fluent-forms/fluent-forms.php:1950
+#: widgets/fluent-forms/fluent-forms.php:2158
+#: widgets/fluent-forms/fluent-forms.php:2430
+#: widgets/fluent-forms/fluent-forms.php:2542
+#: widgets/fluent-forms/fluent-forms.php:2574 widgets/funfact/funfact.php:782
 #: widgets/funfact/funfact.php:915 widgets/header-info/header-info.php:166
 #: widgets/header-offcanvas/header-offcanvas.php:264
 #: widgets/icon-box/icon-box.php:1271 widgets/icon-box/icon-box.php:1667
@@ -2760,14 +2814,14 @@ msgstr ""
 #: widgets/contact-form7/contact-form7.php:750
 #: widgets/dual-button/dual-button.php:423
 #: widgets/dual-button/dual-button.php:643
-#: widgets/fluent-forms/fluent-forms.php:569
-#: widgets/fluent-forms/fluent-forms.php:954
-#: widgets/fluent-forms/fluent-forms.php:1503
-#: widgets/fluent-forms/fluent-forms.php:1665
-#: widgets/fluent-forms/fluent-forms.php:1864
-#: widgets/fluent-forms/fluent-forms.php:2001
-#: widgets/fluent-forms/fluent-forms.php:2139
-#: widgets/fluent-forms/fluent-forms.php:2345 widgets/funfact/funfact.php:443
+#: widgets/fluent-forms/fluent-forms.php:568
+#: widgets/fluent-forms/fluent-forms.php:953
+#: widgets/fluent-forms/fluent-forms.php:1502
+#: widgets/fluent-forms/fluent-forms.php:1664
+#: widgets/fluent-forms/fluent-forms.php:1863
+#: widgets/fluent-forms/fluent-forms.php:2000
+#: widgets/fluent-forms/fluent-forms.php:2138
+#: widgets/fluent-forms/fluent-forms.php:2344 widgets/funfact/funfact.php:443
 #: widgets/funfact/funfact.php:548 widgets/header-search/header-search.php:108
 #: widgets/icon-box/icon-box.php:552 widgets/icon-box/icon-box.php:927
 #: widgets/icon-box/icon-box.php:1303 widgets/icon-box/icon-box.php:1516
@@ -2792,7 +2846,7 @@ msgstr ""
 #: widgets/pricing/pricing.php:1798 widgets/pricing/pricing.php:2121
 #: widgets/pricing/pricing.php:2231 widgets/pricing/pricing.php:2313
 #: widgets/social/social.php:203 widgets/social-share/social-share.php:240
-#: widgets/tab/tab.php:734 widgets/tablepress/tablepress.php:488
+#: widgets/tab/tab.php:734 widgets/tablepress/tablepress.php:487
 #: widgets/team/team.php:237 widgets/team/team.php:523
 #: widgets/team/team.php:1152 widgets/team/team.php:1253
 #: widgets/team/team.php:1330 widgets/team/team.php:1427
@@ -2826,9 +2880,9 @@ msgstr ""
 #: widgets/contact-form7/contact-form7.php:809
 #: widgets/dual-button/dual-button.php:564
 #: widgets/dual-button/dual-button.php:783
-#: widgets/fluent-forms/fluent-forms.php:1575
-#: widgets/fluent-forms/fluent-forms.php:2212
-#: widgets/fluent-forms/fluent-forms.php:2451 widgets/funfact/funfact.php:479
+#: widgets/fluent-forms/fluent-forms.php:1574
+#: widgets/fluent-forms/fluent-forms.php:2211
+#: widgets/fluent-forms/fluent-forms.php:2450 widgets/funfact/funfact.php:479
 #: widgets/funfact/funfact.php:603
 #: widgets/header-offcanvas/header-offcanvas.php:193
 #: widgets/header-offcanvas/header-offcanvas.php:421
@@ -3104,7 +3158,7 @@ msgstr ""
 #: widgets/countdown-timer/countdown-timer.php:868
 #: widgets/countdown-timer/countdown-timer.php:1143
 #: widgets/countdown-timer/countdown-timer.php:1419
-#: widgets/fluent-forms/fluent-forms.php:1125 widgets/icon-box/icon-box.php:206
+#: widgets/fluent-forms/fluent-forms.php:1124 widgets/icon-box/icon-box.php:206
 #: widgets/image-box/image-box.php:298
 #: widgets/image-comparison/image-comparison.php:87
 #: widgets/image-comparison/image-comparison.php:114
@@ -3310,9 +3364,9 @@ msgstr ""
 #: widgets/countdown-timer/countdown-timer.php:236
 #: widgets/countdown-timer/countdown-timer.php:1630
 #: widgets/dual-button/dual-button.php:961
-#: widgets/fluent-forms/fluent-forms.php:1322
-#: widgets/fluent-forms/fluent-forms.php:1417
-#: widgets/fluent-forms/fluent-forms.php:2041 widgets/funfact/funfact.php:1125
+#: widgets/fluent-forms/fluent-forms.php:1321
+#: widgets/fluent-forms/fluent-forms.php:1416
+#: widgets/fluent-forms/fluent-forms.php:2040 widgets/funfact/funfact.php:1125
 #: widgets/header-search/header-search.php:265 widgets/heading/heading.php:942
 #: widgets/heading/heading.php:1116 widgets/icon-box/icon-box.php:1158
 #: widgets/image-box/image-box.php:406
@@ -3403,7 +3457,7 @@ msgstr ""
 #: widgets/blog-posts/blog-posts.php:2399
 #: widgets/client-logo/client-logo.php:1412
 #: widgets/client-logo/client-logo.php:1431
-#: widgets/fluent-forms/fluent-forms.php:1257
+#: widgets/fluent-forms/fluent-forms.php:1256
 #: widgets/testimonial/testimonial.php:1252
 #: widgets/testimonial/testimonial.php:1272
 msgid "Separator Color"
@@ -3447,7 +3501,7 @@ msgstr ""
 msgid "Image Height"
 msgstr ""
 
-#: widgets/blog-posts/blog-posts.php:2542 widgets/tablepress/tablepress.php:663
+#: widgets/blog-posts/blog-posts.php:2542 widgets/tablepress/tablepress.php:662
 msgid "Radius"
 msgstr ""
 
@@ -3456,7 +3510,7 @@ msgstr ""
 #: widgets/contact-form7/contact-form7.php:565
 #: widgets/dual-button/dual-button.php:161
 #: widgets/dual-button/dual-button.php:290
-#: widgets/fluent-forms/fluent-forms.php:2125
+#: widgets/fluent-forms/fluent-forms.php:2124
 #: widgets/icon-box/icon-box.php:1237
 #: widgets/image-accordion/image-accordion.php:591
 #: widgets/image-box/image-box.php:283 widgets/image-box/image-box.php:1325
@@ -3469,7 +3523,7 @@ msgstr ""
 #: widgets/blog-posts/blog-posts.php:2582 widgets/button/button.php:426
 #: widgets/caldera-forms/caldera-forms.php:511
 #: widgets/contact-form7/contact-form7.php:510
-#: widgets/fluent-forms/fluent-forms.php:1824
+#: widgets/fluent-forms/fluent-forms.php:1823
 #: widgets/header-search/header-search.php:78
 #: widgets/mail-chimp/mail-chimp.php:821 widgets/mail-chimp/mail-chimp.php:1179
 #: widgets/team/team.php:1041 widgets/team/team.php:2136
@@ -3481,14 +3535,14 @@ msgstr ""
 #: widgets/blog-posts/blog-posts.php:2621
 #: widgets/blog-posts/blog-posts.php:2651 widgets/button/button.php:231
 #: widgets/button/button.php:262 widgets/category-list/category-list.php:404
-#: widgets/fluent-forms/fluent-forms.php:510
-#: widgets/fluent-forms/fluent-forms.php:588
-#: widgets/fluent-forms/fluent-forms.php:834
-#: widgets/fluent-forms/fluent-forms.php:1594
-#: widgets/fluent-forms/fluent-forms.php:2027
-#: widgets/fluent-forms/fluent-forms.php:2364
-#: widgets/fluent-forms/fluent-forms.php:2470
-#: widgets/fluent-forms/fluent-forms.php:2520
+#: widgets/fluent-forms/fluent-forms.php:509
+#: widgets/fluent-forms/fluent-forms.php:587
+#: widgets/fluent-forms/fluent-forms.php:833
+#: widgets/fluent-forms/fluent-forms.php:1593
+#: widgets/fluent-forms/fluent-forms.php:2026
+#: widgets/fluent-forms/fluent-forms.php:2363
+#: widgets/fluent-forms/fluent-forms.php:2469
+#: widgets/fluent-forms/fluent-forms.php:2519
 #: widgets/header-info/header-info.php:142 widgets/icon-box/icon-box.php:1310
 #: widgets/icon-box/icon-box.php:1375
 #: widgets/image-accordion/image-accordion.php:637
@@ -3505,8 +3559,8 @@ msgstr ""
 #: widgets/ninja-forms/ninja-forms.php:860 widgets/page-list/page-list.php:769
 #: widgets/post-list/post-list.php:914 widgets/pricing/pricing.php:1405
 #: widgets/pricing/pricing.php:2128 widgets/pricing/pricing.php:2156
-#: widgets/tablepress/tablepress.php:332 widgets/tablepress/tablepress.php:507
-#: widgets/tablepress/tablepress.php:554 widgets/video/video.php:547
+#: widgets/tablepress/tablepress.php:331 widgets/tablepress/tablepress.php:506
+#: widgets/tablepress/tablepress.php:553 widgets/video/video.php:547
 #: widgets/video/video.php:577 widgets/we-forms/we-forms.php:507
 #: widgets/we-forms/we-forms.php:539 widgets/wp-forms/wp-forms.php:71
 #: widgets/wp-forms/wp-forms.php:149 widgets/wp-forms/wp-forms.php:336
@@ -3539,7 +3593,7 @@ msgid "9:00 AM - 6:00 PM"
 msgstr ""
 
 #: widgets/business-hours/business-hours.php:68
-msgid "Hight Light this day"
+msgid "Highlight this day"
 msgstr ""
 
 #: widgets/business-hours/business-hours.php:79
@@ -3645,7 +3699,7 @@ msgstr ""
 
 #: widgets/caldera-forms/caldera-forms.php:412
 #: widgets/contact-form7/contact-form7.php:411
-#: widgets/fluent-forms/fluent-forms.php:777
+#: widgets/fluent-forms/fluent-forms.php:776
 #: widgets/ninja-forms/ninja-forms.php:462 widgets/we-forms/we-forms.php:210
 #: widgets/wp-forms/wp-forms.php:294
 msgid "Focus"
@@ -3653,8 +3707,8 @@ msgstr ""
 
 #: widgets/caldera-forms/caldera-forms.php:502
 #: widgets/contact-form7/contact-form7.php:501
-#: widgets/fluent-forms/fluent-forms.php:134
-#: widgets/fluent-forms/fluent-forms.php:823
+#: widgets/fluent-forms/fluent-forms.php:133
+#: widgets/fluent-forms/fluent-forms.php:822
 #: widgets/mail-chimp/mail-chimp.php:153 widgets/mail-chimp/mail-chimp.php:246
 #: widgets/mail-chimp/mail-chimp.php:339 widgets/mail-chimp/mail-chimp.php:418
 #: widgets/mail-chimp/mail-chimp.php:797
@@ -3689,7 +3743,7 @@ msgstr ""
 msgid "Line Height"
 msgstr ""
 
-#: widgets/caldera-forms/caldera-forms.php:892
+#: widgets/caldera-forms/caldera-forms.php:891
 msgid "Please select a Contact Form From Setting!"
 msgstr ""
 
@@ -3759,8 +3813,8 @@ msgstr ""
 #: widgets/category-list/category-list.php:198 widgets/heading/heading.php:329
 #: widgets/image-box/image-box.php:769 widgets/page-list/page-list.php:458
 #: widgets/post-list/post-list.php:632 widgets/pricing/pricing.php:1868
-#: widgets/tablepress/tablepress.php:222 widgets/tablepress/tablepress.php:349
-#: widgets/tablepress/tablepress.php:432
+#: widgets/tablepress/tablepress.php:221 widgets/tablepress/tablepress.php:348
+#: widgets/tablepress/tablepress.php:431
 msgid "Solid"
 msgstr ""
 
@@ -3768,16 +3822,16 @@ msgstr ""
 #: widgets/client-logo/client-logo.php:1071 widgets/heading/heading.php:328
 #: widgets/image-box/image-box.php:771 widgets/page-list/page-list.php:459
 #: widgets/post-list/post-list.php:633 widgets/pricing/pricing.php:1870
-#: widgets/tablepress/tablepress.php:224 widgets/tablepress/tablepress.php:351
-#: widgets/tablepress/tablepress.php:434
+#: widgets/tablepress/tablepress.php:223 widgets/tablepress/tablepress.php:350
+#: widgets/tablepress/tablepress.php:433
 msgid "Dotted"
 msgstr ""
 
 #: widgets/category-list/category-list.php:200
 #: widgets/client-logo/client-logo.php:1070 widgets/image-box/image-box.php:772
 #: widgets/page-list/page-list.php:460 widgets/post-list/post-list.php:634
-#: widgets/pricing/pricing.php:1871 widgets/tablepress/tablepress.php:225
-#: widgets/tablepress/tablepress.php:352 widgets/tablepress/tablepress.php:435
+#: widgets/pricing/pricing.php:1871 widgets/tablepress/tablepress.php:224
+#: widgets/tablepress/tablepress.php:351 widgets/tablepress/tablepress.php:434
 msgid "Dashed"
 msgstr ""
 
@@ -3987,7 +4041,7 @@ msgid "From Bottom"
 msgstr ""
 
 #: widgets/client-logo/client-logo.php:640
-#: widgets/tablepress/tablepress.php:584
+#: widgets/tablepress/tablepress.php:583
 msgid "Hover Background"
 msgstr ""
 
@@ -4343,81 +4397,81 @@ msgstr ""
 msgid "Select a Fluent Form"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:67
-#: widgets/fluent-forms/fluent-forms.php:75
+#: widgets/fluent-forms/fluent-forms.php:66
+#: widgets/fluent-forms/fluent-forms.php:74
 msgid "Fluent Form"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:86
+#: widgets/fluent-forms/fluent-forms.php:85
 msgid "Custom Title & Description"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:122
-#: widgets/fluent-forms/fluent-forms.php:502
+#: widgets/fluent-forms/fluent-forms.php:121
+#: widgets/fluent-forms/fluent-forms.php:501
 #: widgets/ninja-forms/ninja-forms.php:153 widgets/wp-forms/wp-forms.php:63
 msgid "Labels"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:149
+#: widgets/fluent-forms/fluent-forms.php:148
 #: widgets/ninja-forms/ninja-forms.php:844 widgets/wp-forms/wp-forms.php:631
 msgid "Errors"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:156
+#: widgets/fluent-forms/fluent-forms.php:155
 #: widgets/ninja-forms/ninja-forms.php:852
 msgid "Error Messages"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:171
+#: widgets/fluent-forms/fluent-forms.php:170
 #: widgets/ninja-forms/ninja-forms.php:67
 msgid "Title & Description"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:363
+#: widgets/fluent-forms/fluent-forms.php:362
 msgid "Form Container"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:383
+#: widgets/fluent-forms/fluent-forms.php:382
 msgid "Link Color"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:395
+#: widgets/fluent-forms/fluent-forms.php:394
 msgid "Max Width"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:533
+#: widgets/fluent-forms/fluent-forms.php:532
 #: widgets/ninja-forms/ninja-forms.php:235 widgets/wp-forms/wp-forms.php:94
 msgid "Input & Textarea"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:624
-#: widgets/fluent-forms/fluent-forms.php:887
+#: widgets/fluent-forms/fluent-forms.php:623
+#: widgets/fluent-forms/fluent-forms.php:886
 #: widgets/ninja-forms/ninja-forms.php:312
 msgid "Text Indent"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:649
+#: widgets/fluent-forms/fluent-forms.php:648
 #: widgets/ninja-forms/ninja-forms.php:370 widgets/we-forms/we-forms.php:70
 #: widgets/wp-forms/wp-forms.php:192
 msgid "Input Width"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:668
+#: widgets/fluent-forms/fluent-forms.php:667
 msgid "Input Height"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:687
+#: widgets/fluent-forms/fluent-forms.php:686
 #: widgets/ninja-forms/ninja-forms.php:390 widgets/wp-forms/wp-forms.php:219
 msgid "Textarea Width"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:706
+#: widgets/fluent-forms/fluent-forms.php:705
 #: widgets/ninja-forms/ninja-forms.php:409 widgets/wp-forms/wp-forms.php:238
 msgid "Textarea Height"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:737
-#: widgets/fluent-forms/fluent-forms.php:1962 widgets/funfact/funfact.php:791
+#: widgets/fluent-forms/fluent-forms.php:736
+#: widgets/fluent-forms/fluent-forms.php:1961 widgets/funfact/funfact.php:791
 #: widgets/funfact/funfact.php:835 widgets/icon-box/icon-box.php:1091
 #: widgets/image-box/image-box.php:1160 widgets/image-box/image-box.php:1247
 #: widgets/nav-menu/nav-menu.php:590 widgets/ninja-forms/ninja-forms.php:204
@@ -4426,152 +4480,152 @@ msgstr ""
 msgid "Spacing"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:852
+#: widgets/fluent-forms/fluent-forms.php:851
 msgid "Radio & Checkbox"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:860
-#: widgets/fluent-forms/fluent-forms.php:1469
-#: widgets/fluent-forms/fluent-forms.php:1936
+#: widgets/fluent-forms/fluent-forms.php:859
+#: widgets/fluent-forms/fluent-forms.php:1468
+#: widgets/fluent-forms/fluent-forms.php:1935
 msgid "Label Color"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:873
-#: widgets/fluent-forms/fluent-forms.php:878 widgets/we-forms/we-forms.php:291
+#: widgets/fluent-forms/fluent-forms.php:872
+#: widgets/fluent-forms/fluent-forms.php:877 widgets/we-forms/we-forms.php:291
 msgid "Label Typography"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:915
+#: widgets/fluent-forms/fluent-forms.php:914
 msgid "Custom Styles"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:979 widgets/heading/heading.php:477
+#: widgets/fluent-forms/fluent-forms.php:978 widgets/heading/heading.php:477
 #: widgets/heading/heading.php:1217
 #: widgets/image-accordion/image-accordion.php:823
-#: widgets/image-box/image-box.php:741 widgets/tablepress/tablepress.php:240
-#: widgets/tablepress/tablepress.php:364 widgets/tablepress/tablepress.php:447
+#: widgets/image-box/image-box.php:741 widgets/tablepress/tablepress.php:239
+#: widgets/tablepress/tablepress.php:363 widgets/tablepress/tablepress.php:446
 msgid "Border Width"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1016
+#: widgets/fluent-forms/fluent-forms.php:1015
 msgid "Checkbox"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1042
+#: widgets/fluent-forms/fluent-forms.php:1041
 msgid "Radio Buttons"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1070
+#: widgets/fluent-forms/fluent-forms.php:1069
 msgid "Checked"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1117
+#: widgets/fluent-forms/fluent-forms.php:1116
 msgid "Section Break"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1271
+#: widgets/fluent-forms/fluent-forms.php:1270
 msgid "Checkbox Grid"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1279
+#: widgets/fluent-forms/fluent-forms.php:1278
 msgid "Grid Table Head"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1363
+#: widgets/fluent-forms/fluent-forms.php:1362
 msgid "Grid Table Item"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1396
+#: widgets/fluent-forms/fluent-forms.php:1395
 msgid "Odd Item Background Color"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1461
+#: widgets/fluent-forms/fluent-forms.php:1460
 msgid "Address Line"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1493
+#: widgets/fluent-forms/fluent-forms.php:1492
 msgid "Image Upload"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1629
+#: widgets/fluent-forms/fluent-forms.php:1628
 msgid "Range Slider"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1637
+#: widgets/fluent-forms/fluent-forms.php:1636
 msgid "Counter Color"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1654
+#: widgets/fluent-forms/fluent-forms.php:1653
 msgid "Counter Typography"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1708
+#: widgets/fluent-forms/fluent-forms.php:1707
 msgid "Net Promoter Score"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1716
+#: widgets/fluent-forms/fluent-forms.php:1715
 msgid "Label:"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1746
+#: widgets/fluent-forms/fluent-forms.php:1745
 msgid "Input:"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1799
+#: widgets/fluent-forms/fluent-forms.php:1798
 msgid "Hover Border Color"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1816
+#: widgets/fluent-forms/fluent-forms.php:1815
 #: widgets/testimonial/testimonial.php:932
 msgid "Rating"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1843
+#: widgets/fluent-forms/fluent-forms.php:1842
 msgid "Gap"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1906
+#: widgets/fluent-forms/fluent-forms.php:1905
 msgid "Pagination"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1914
+#: widgets/fluent-forms/fluent-forms.php:1913
 msgid "Progressbar Label"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1922
+#: widgets/fluent-forms/fluent-forms.php:1921
 #: widgets/page-list/page-list.php:173
 msgid "Show Label"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1978
+#: widgets/fluent-forms/fluent-forms.php:1977
 msgid "Progressbar"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:1986
+#: widgets/fluent-forms/fluent-forms.php:1985
 msgid "Show Progressbar"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:2092
+#: widgets/fluent-forms/fluent-forms.php:2091
 msgid "Filled"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:2272
+#: widgets/fluent-forms/fluent-forms.php:2271
 #: widgets/ninja-forms/ninja-forms.php:584 widgets/wp-forms/wp-forms.php:406
 msgid "Submit Button"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:2411
+#: widgets/fluent-forms/fluent-forms.php:2410
 #: widgets/image-box/image-box.php:522
 msgid "Margin Top"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:2501
+#: widgets/fluent-forms/fluent-forms.php:2500
 #: widgets/mail-chimp/mail-chimp.php:551
 #: widgets/ninja-forms/ninja-forms.php:813
 msgid "Success Message"
 msgstr ""
 
-#: widgets/fluent-forms/fluent-forms.php:2554
+#: widgets/fluent-forms/fluent-forms.php:2553
 msgid "Error Message"
 msgstr ""
 
@@ -5376,7 +5430,7 @@ msgid "Shadow line"
 msgstr ""
 
 #: widgets/image-box/image-box.php:144 widgets/image-box/image-box.php:1084
-#: widgets/tab/tab.php:1968 widgets/tablepress/tablepress.php:419
+#: widgets/tab/tab.php:1968 widgets/tablepress/tablepress.php:418
 msgid "Body"
 msgstr ""
 
@@ -5412,8 +5466,8 @@ msgid "Border Type"
 msgstr ""
 
 #: widgets/image-box/image-box.php:770 widgets/pricing/pricing.php:1869
-#: widgets/tablepress/tablepress.php:223 widgets/tablepress/tablepress.php:350
-#: widgets/tablepress/tablepress.php:433
+#: widgets/tablepress/tablepress.php:222 widgets/tablepress/tablepress.php:349
+#: widgets/tablepress/tablepress.php:432
 msgid "Double"
 msgstr ""
 
@@ -5584,7 +5638,7 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
-#: widgets/mail-chimp/mail-chimp-api.php:45
+#: widgets/mail-chimp/mail-chimp-api.php:44
 msgid "Please set API Key into Dashboard User Data. "
 msgstr ""
 
@@ -5681,7 +5735,7 @@ msgstr ""
 msgid "Phone:"
 msgstr ""
 
-#: widgets/mail-chimp/mail-chimp.php:329 widgets/tablepress/tablepress.php:85
+#: widgets/mail-chimp/mail-chimp.php:329 widgets/tablepress/tablepress.php:84
 #: widgets/team/team.php:434 widgets/team/team.php:2471
 msgid "Phone"
 msgstr ""
@@ -5779,11 +5833,11 @@ msgstr ""
 msgid "This works in the current page."
 msgstr ""
 
-#: widgets/nav-menu/nav-menu.php:112 widgets/tablepress/tablepress.php:79
+#: widgets/nav-menu/nav-menu.php:112 widgets/tablepress/tablepress.php:78
 msgid "Responsive Breakpoint"
 msgstr ""
 
-#: widgets/nav-menu/nav-menu.php:116 widgets/tablepress/tablepress.php:86
+#: widgets/nav-menu/nav-menu.php:116 widgets/tablepress/tablepress.php:85
 msgid "Tablet"
 msgstr ""
 
@@ -6510,7 +6564,7 @@ msgstr ""
 msgid "Ribbon"
 msgstr ""
 
-#: widgets/progressbar/progressbar.php:62 widgets/tablepress/tablepress.php:535
+#: widgets/progressbar/progressbar.php:62 widgets/tablepress/tablepress.php:534
 msgid "Stripe"
 msgstr ""
 
@@ -6846,94 +6900,98 @@ msgstr ""
 msgid "TablePress"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:43 widgets/tablepress/tablepress.php:198
+#: widgets/tablepress/tablepress.php:42 widgets/tablepress/tablepress.php:197
 msgid "Table"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:63
+#: widgets/tablepress/tablepress.php:62
 msgid "Responsive"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:69
+#: widgets/tablepress/tablepress.php:68
 msgid "Flip"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:70
+#: widgets/tablepress/tablepress.php:69
 msgid "Scroll"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:71
+#: widgets/tablepress/tablepress.php:70
 msgid "Collapse"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:72
+#: widgets/tablepress/tablepress.php:71
 msgid "Stack"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:87
+#: widgets/tablepress/tablepress.php:86
 msgid "Desktop"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:88
+#: widgets/tablepress/tablepress.php:87
 msgid "All"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:100
+#: widgets/tablepress/tablepress.php:99
 msgid "Nav Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:111
+#: widgets/tablepress/tablepress.php:110
 msgid "Search Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:122
+#: widgets/tablepress/tablepress.php:121
 msgid "Footer Info Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:133
+#: widgets/tablepress/tablepress.php:132
 msgid "Pagination Hide"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:144
+#: widgets/tablepress/tablepress.php:143
 msgid "Header Alignment"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:170
+#: widgets/tablepress/tablepress.php:169
 msgid "Body Alignment"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:217 widgets/tablepress/tablepress.php:344
-#: widgets/tablepress/tablepress.php:427 widgets/video/video.php:606
+#: widgets/tablepress/tablepress.php:216 widgets/tablepress/tablepress.php:343
+#: widgets/tablepress/tablepress.php:426 widgets/video/video.php:606
 msgid "Border Style"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:226 widgets/tablepress/tablepress.php:353
-#: widgets/tablepress/tablepress.php:436
+#: widgets/tablepress/tablepress.php:225 widgets/tablepress/tablepress.php:352
+#: widgets/tablepress/tablepress.php:435
 msgid "Groove"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:274
+#: widgets/tablepress/tablepress.php:273
 msgid "Pagination And Serach Gap"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:286
+#: widgets/tablepress/tablepress.php:285
 msgid "Footer Text And Navigation gap"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:320
+#: widgets/tablepress/tablepress.php:319
 msgid "Hover And Active Background"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:466
+#: widgets/tablepress/tablepress.php:465
 msgid "Cell Padding"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:597
+#: widgets/tablepress/tablepress.php:596
 msgid "Filter And Search"
 msgstr ""
 
-#: widgets/tablepress/tablepress.php:692
+#: widgets/tablepress/tablepress.php:691
 msgid "Please Select A Table From Setting!"
+msgstr ""
+
+#: widgets/tablepress/tablepress.php:723
+msgid "Please install and activate TablePress plugin to work this widget."
 msgstr ""
 
 #: widgets/team/team-handler.php:12

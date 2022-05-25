@@ -1,5 +1,6 @@
 <?php
 namespace ElementsKit_Lite\Modules\Layout_Manager;
+
 defined( 'ABSPATH' ) || exit;
 
 
@@ -33,8 +34,8 @@ class Library_Source extends Source_Base {
 		return new \WP_Error( 'invalid_request', 'Cannot export template from a elementskit layout manager' );
 	}
 
-	public function get_items( $args = [] ) {
-		return [];
+	public function get_items( $args = array() ) {
+		return array();
 	}
 
 	public function get_item( $template_id ) {
@@ -48,21 +49,25 @@ class Library_Source extends Source_Base {
 			return;
 		}
 
-		$body = [
-			'home_url' => trailingslashit( home_url() ),
+		$body = array(
+			'home_url'       => trailingslashit( home_url() ),
 			'plugin_version' => \ElementsKit_Lite::version(),
-		];
+		);
 
-        $query = array_merge([
-            'action' => 'get_layout_data',
-            'layout_id' => $template_id,
-		], \ElementsKit_Lite::license_data());
+		$query = array_merge(
+			array(
+				'action'    => 'get_layout_data',
+				'layout_id' => $template_id,
+			),
+			\ElementsKit_Lite::license_data()
+		);
 
-		$request_url = \ElementsKit_Lite::api_url() . 'layout-manager-api/' . '?' . http_build_query($query);
-		$response = wp_remote_get( $request_url,
-			[
-				'timeout'     => 30,
-			]
+		$request_url = \ElementsKit_Lite::api_url() . 'layout-manager-api/' . '?' . http_build_query( $query );
+		$response    = wp_remote_get(
+			$request_url,
+			array(
+				'timeout' => 30,
+			)
 		);
 		
 		return wp_remote_retrieve_body( $response );
@@ -80,7 +85,7 @@ class Library_Source extends Source_Base {
 		$data['content'] = $this->replace_elements_ids( $data['content'] );
 		$data['content'] = $this->process_export_import_content( $data['content'], 'on_import' );
 
-		$post_id = $args['editor_post_id'];
+		$post_id  = $args['editor_post_id'];
 		$document = \Elementor\Plugin::instance()->documents->get( $post_id );
 
 		if ( $document ) {

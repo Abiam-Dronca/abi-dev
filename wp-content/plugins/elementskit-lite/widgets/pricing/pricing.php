@@ -2484,7 +2484,7 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
         <div class="elementskit-single-pricing <?php echo esc_attr($settings['ekit_pricing_order_enable'] == 'yes' ? 'd-flex flex-column' : ''); ?>" >
             <div class="elementskit-pricing-header <?php echo esc_attr($header_order ? 'order-'. $header_order : ''); ?>">
 				<?php if($settings['ekit_pricing_icon_type'] == 'image') : ?>
-                    <?php echo \ElementsKit_Lite\Utils::render($image); ?>
+                    <?php echo wp_kses($image, \ElementsKit_Lite\Utils::get_kses_array());?>
                 <?php endif; ?>
 				<?php if($settings['ekit_pricing_icon_type'] == 'icon') : ?>					
 					<?php
@@ -2508,9 +2508,9 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
 				<?php endif; ?>
 
 				<?php if($table_title != ''): ?>
-                	<<?php echo \ElementsKit_Lite\Utils::render($ekit_pricing_title_size_validate); ?>
+                	<<?php echo wp_kses($ekit_pricing_title_size_validate, \ElementsKit_Lite\Utils::get_kses_array());?>
 					class=" elementskit-pricing-title"><?php echo esc_html($table_title); ?>
-					</<?php echo \ElementsKit_Lite\Utils::render($ekit_pricing_title_size_validate); ?>>
+					</<?php echo wp_kses($ekit_pricing_title_size_validate, \ElementsKit_Lite\Utils::get_kses_array()); ?>>
 				<?php endif; ?>
 				<?php if($table_subtitle != ''): ?>
                 	<p class=" elementskit-pricing-subtitle"><?php echo esc_html($table_subtitle); ?></p>
@@ -2537,7 +2537,7 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
             <div class="elementskit-pricing-content <?php echo esc_attr($features_order ? 'order-'. $features_order : ''); ?>">
 
                 <?php if($content_style == 'paragraph'){ ?>
-                    <p> <?php echo \ElementsKit_Lite\Utils::kses($table_content); ?></p>
+                    <p> <?php echo wp_kses($table_content, \ElementsKit_Lite\Utils::get_kses_array()); ?></p>
                 <?php } ?>
                 <?php if($content_style == 'list'){ ?>
                     <ul class="elementskit-pricing-lists">
@@ -2560,7 +2560,7 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
                 <?php } ?>
             </div>
             <div class="elementskit-pricing-btn-wraper <?php echo esc_attr($button_order ? 'order-'. $button_order : ''); ?>">
-				<a <?php echo $this->get_render_attribute_string( 'button' ); ?> class="elementskit-pricing-btn <?php echo esc_attr( $btn_class ); ?> ekit-pricing-btn-icon-pos-<?php echo esc_attr($icon_align); ?>" <?php if($settings['ekit_pricing_button_id'] != '') { ?> id="<?php echo esc_attr( $btn_id ); ?>" <?php } ?>>
+				<a <?php echo $this->get_render_attribute_string( 'button' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> class="elementskit-pricing-btn <?php echo esc_attr( $btn_class ); ?> ekit-pricing-btn-icon-pos-<?php echo esc_attr($icon_align); ?>" <?php if($settings['ekit_pricing_button_id'] != '') { ?> id="<?php echo esc_attr( $btn_id ); ?>" <?php } ?>>
 					<?php
 					if ( $settings['ekit_pricing_btn_icons'] != '' && $icon_align == 'left' ):
 						// new icon

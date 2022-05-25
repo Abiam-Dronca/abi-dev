@@ -650,8 +650,9 @@ class ElementsKit_Widget_Image_Comparison extends Widget_Base {
         data-click_to_move="'.esc_attr($settings['ekit_img_comparison_click_to_move']).'"';
         ?>
 
-        <div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'image_comparison_wrapper' )); ?> <?php echo \ElementsKit_Lite\Utils::render($data); ?>>
-            <?php echo  \ElementsKit_Lite\Utils::kses($image_html); ?>
+        <div <?php echo ($this->get_render_attribute_string( 'image_comparison_wrapper' )); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> 
+	   <?php echo esc_attr($data); ?>>
+            <?php echo  wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
         </div>
 
     <?php }

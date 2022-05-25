@@ -8,14 +8,14 @@
 						<span class="elementor-templates-modal__header__logo__icon-wrapper">
 						<i class="eicon-elementor"></i>
 						</span>
-						<span class="elementor-templates-modal__header__logo__title"><?php esc_html_e('Widget Area', 'elementskit-lite'); ?></span>
+						<span class="elementor-templates-modal__header__logo__title"><?php esc_html_e( 'Widget Area', 'elementskit-lite' ); ?></span>
 					</div>
 				</div>
 
 				<div class="elementor-templates-modal__header__items-area">
 					<div class="elementor-templates-modal__header__close elementor-templates-modal__header__close--normal elementor-templates-modal__header__item">
-						<i class="eicon-close" aria-hidden="true" title="<?php echo esc_attr__('Close', 'elementskit-lite'); ?>"></i>
-						<span class="elementor-screen-only"><?php esc_html_e('Close', 'elementskit-lite'); ?></span>
+						<i class="eicon-close" aria-hidden="true" title="<?php echo esc_attr__( 'Close', 'elementskit-lite' ); ?>"></i>
+						<span class="elementor-screen-only"><?php esc_html_e( 'Close', 'elementskit-lite' ); ?></span>
 					</div>
 				</div>
 			</div>
@@ -25,7 +25,7 @@
 				<div id="elementor-template-library-templates" data-template-source="remote">
 
 					<div id="elementor-template-library-templates-container">
-                        <iframe id="widgetarea-control-iframe"></iframe>
+						<iframe id="widgetarea-control-iframe"></iframe>
 					</div>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 								<div class="elementor-loader-box"></div>
 							</div>
 						</div>
-						<div class="elementor-loading-title"><?php esc_html_e('Loading', 'elementskit-lite'); ?></div>
+						<div class="elementor-loading-title"><?php esc_html_e( 'Loading', 'elementskit-lite' ); ?></div>
 					</div>
 				</div>
 			</div>

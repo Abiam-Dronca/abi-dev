@@ -914,7 +914,7 @@ class ElementsKit_Widget_Ninja_Forms extends Widget_Base {
         $settings = $this->get_settings();
         if ( ! empty( $settings['ekit_ninja_form_id'] ) ) {
         ?>
-        <div <?php echo $this->get_render_attribute_string( 'contact-form' ); ?>>
+        <div <?php echo $this->get_render_attribute_string( 'contact-form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
             <?php  echo do_shortcode( '[ninja_form id="' . intval($settings['ekit_ninja_form_id']) . '" ]' ); ?>
         </div>
        <?php 

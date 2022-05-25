@@ -1507,7 +1507,7 @@ class ElementsKit_Widget_Client_Logo extends Widget_Base {
 
         $seperotor_enable = $settings['ekit_client_logo_separator'] == 'yes' ? 'log-separator' : '';
         ?>
-        <div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'wrapper' )); ?>>
+        <div <?php echo $this->get_render_attribute_string( 'wrapper' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
             <div class="swiper-container">
                 <div class="slick-list swiper-wrapper">
                     <?php
@@ -1525,18 +1525,25 @@ class ElementsKit_Widget_Client_Logo extends Widget_Base {
                                     <?php if($logo['ekit_client_logo_enable_link'] == 'yes') :  ?>
 
 
-                                        <a <?php echo $this->get_render_attribute_string( 'button-' . $count ); ?> <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'link_'.$count )); ?>>
+                                        <a <?php echo $this->get_render_attribute_string( 'button-' . esc_attr($count) ); ?> <?php echo $this->get_render_attribute_string( 'link_' . esc_attr($count) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
                                             <span class="content-image">
+												<?php
+												echo wp_kses(
+													\Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_normal', null, [
+														'class' => $logo['ekit_client_logo_enable_hover_logo'] == 'yes' ? 'main-image' :  ''
+													]),
+													\ElementsKit_Lite\Utils::get_kses_array()
+												);
 
-                                                <?php echo \Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_normal', null, [
-                                                    'class' => $logo['ekit_client_logo_enable_hover_logo'] == 'yes' ? 'main-image' :  ''
-                                                ]); ?>
-
-                                                <?php if($logo['ekit_client_logo_enable_hover_logo']) : ?>
-                                                    <?php echo \Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_hover', 'full', [
-                                                        'class' => 'hover-image'
-                                                    ]); ?>
-                                                <?php endif; ?>
+												if(!empty($logo['ekit_client_logo_enable_hover_logo'])) {
+													echo wp_kses(
+														\Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_hover', 'full', [
+															'class' => 'hover-image'
+														]),
+														\ElementsKit_Lite\Utils::get_kses_array()
+													);
+												}
+												?>
                                             </span>
                                         </a>
 
@@ -1544,16 +1551,23 @@ class ElementsKit_Widget_Client_Logo extends Widget_Base {
 
                                         <div class="content-image">
 
-                                            <?php echo \Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_normal', 'full', [
-                                                'class' => $logo['ekit_client_logo_enable_hover_logo'] == 'yes' ? 'main-image' :  ''
-                                            ]); 
-                                            ?>
+											<?php
+											echo wp_kses(
+												\Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_normal', 'full', [
+													'class' => $logo['ekit_client_logo_enable_hover_logo'] == 'yes' ? 'main-image' :  ''
+												]),
+												\ElementsKit_Lite\Utils::get_kses_array()
+											);
 
-                                            <?php if($logo['ekit_client_logo_enable_hover_logo']) : ?>
-                                                <?php echo \Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_hover', 'full', [
-                                                    'class' => 'hover-image'
-                                                ]); ?>
-                                            <?php endif; ?>
+											if($logo['ekit_client_logo_enable_hover_logo']) {
+												echo wp_kses(
+													\Elementskit_Lite\Utils::get_attachment_image_html($logo, 'ekit_client_logo_image_hover', 'full', [
+														'class' => 'hover-image'
+													]),
+													\ElementsKit_Lite\Utils::get_kses_array()
+												);
+											}
+                                            ?>
                                         </div>
 
                                     <?php endif; ?>

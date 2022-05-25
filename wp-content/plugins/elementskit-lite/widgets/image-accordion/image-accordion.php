@@ -923,7 +923,6 @@ class ElementsKit_Widget_Image_Accordion extends Widget_Base {
       $this->end_controls_section();
 
       $this->insert_pro_message();
-
     }
 
     protected function render( ) {
@@ -945,8 +944,8 @@ class ElementsKit_Widget_Image_Accordion extends Widget_Base {
                     $this->add_render_attribute( 'wrap-link-' . $key, 'data-active', $item['ekit_img_accordion_active'] );
                 }
                 ?>
-                <input type="radio" name="ekit_ia_<?php echo esc_attr($this->get_id()); ?>" id="ekit_ia_<?php echo esc_attr($this->get_id()) .'_'. $key; ?>" class="elementskit-single-image-accordion--input" <?php echo \ElementsKit_Lite\Utils::render(($item['ekit_img_accordion_active'] == 'yes') ? 'checked' : '') ; ?> hidden>
-                <label for="ekit_ia_<?php echo esc_attr($this->get_id()) .'_'. $key; ?>" class="elementskit-single-image-accordion ekit-image-accordion-item" style="background-image: url(<?php echo esc_url($item['ekit_img_accordion_bg']['url']); ?>)" <?php $this->print_render_attribute_string( 'wrap-link-' . $key ); ?>>
+                <input type="radio" name="ekit_ia_<?php echo esc_attr($this->get_id()); ?>" id="ekit_ia_<?php echo esc_attr($this->get_id()) .'_'. esc_attr($key); ?>" class="elementskit-single-image-accordion--input" <?php echo (($item['ekit_img_accordion_active'] == 'yes') ? 'checked' : '') ; ?> hidden>
+                <label for="ekit_ia_<?php echo esc_attr($this->get_id()) .'_'. esc_attr($key); ?>" class="elementskit-single-image-accordion ekit-image-accordion-item" style="background-image: url(<?php echo esc_url($item['ekit_img_accordion_bg']['url']); ?>)" <?php $this->print_render_attribute_string( 'wrap-link-' . $key ); ?>>
                     <span class="elementskit-accordion-content">
                     <?php if($item['ekit_img_accordion_enable_pupup'] == 'yes' || $item['ekit_img_accordion_enable_project_link'] == 'yes') {
 
@@ -990,7 +989,7 @@ class ElementsKit_Widget_Image_Accordion extends Widget_Base {
                                     $this->add_link_attributes( 'button-2' . $key, $item['ekit_img_accordion_project_link'] );
                                 }
                             ?>
-                                <a <?php echo $this->get_render_attribute_string( 'button-2' . $key ); ?> class="icon-outline circle">
+                                <a <?php echo $this->get_render_attribute_string( 'button-2' . esc_attr($key) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> class="icon-outline circle">
                                 <?php
                                     $migrated = isset( $item['__fa4_migrated']['ekit_img_accordion_project_link_icons'] );
                                     // Check if its a new widget without previously selected icon using the old Icon control
@@ -1063,8 +1062,8 @@ class ElementsKit_Widget_Image_Accordion extends Widget_Base {
                             }    
                         ?>
                             <span class="elementskit-btn-wraper">
-                                <a class="ekit-image-accordion--btn elementskit-btn whitespace--normal" <?php echo $this->get_render_attribute_string( 'button-' . $key ); ?>>
-                                    <?php echo esc_html($item['ekit_img_accordion_button_label']);?>
+                                <a class="ekit-image-accordion--btn elementskit-btn whitespace--normal" <?php echo $this->get_render_attribute_string( 'button-' . esc_attr($key) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
+                                    <?php echo esc_html($item['ekit_img_accordion_button_label']); ?>
                                 </a>
                             </span>
                         <?php endif; ?>

@@ -11,7 +11,6 @@ class ElementsKit_Widget_Header_Info_Handler extends \ElementsKit_Lite\Core\Hand
     static function get_title()
     {
         return esc_html__('Header Info', 'elementskit-lite');
-
     }
 
     static function get_icon()

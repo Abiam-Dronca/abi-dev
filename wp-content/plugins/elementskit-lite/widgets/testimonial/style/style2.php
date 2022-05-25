@@ -1,4 +1,4 @@
-<div class="elementskit-testimonial-slider slick-slider arrow_inside <?php echo !empty($settings['ekit_testimonial_show_dot']) ? 'slick-dotted' : '' ?>" <?php echo $this->get_render_attribute_string('wrapper'); ?>>
+<div class="elementskit-testimonial-slider slick-slider arrow_inside <?php echo !empty($settings['ekit_testimonial_show_dot']) ? 'slick-dotted' : '' ?>" <?php echo $this->get_render_attribute_string('wrapper'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 	<div class="swiper-container">
         <div class="slick-list swiper-wrapper">
 			<?php
@@ -12,32 +12,32 @@
 			?>
 				<div class="swiper-slide">
 					<div class="slick-slide">
-						<<?php echo esc_attr( $wrapTag ); ?> class="elementskit-testimonial-inner" <?php echo $this->get_render_attribute_string( 'link-' . $testimonial['_id'] ); ?>>
+						<<?php echo esc_attr( $wrapTag ); ?> class="elementskit-testimonial-inner" <?php echo $this->get_render_attribute_string( 'link-' . esc_attr($testimonial['_id'] )); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 							<div class="elementskit-single-testimonial-slider ekit_testimonial_style_2">
 								<div class="elementskit-commentor-content">
 									<?php
 										if (isset($testimonial['client_logo']) && !empty($testimonial['client_logo']['url']) && sizeof($testimonial['client_logo']) > 0) {	?>
 										<div class="elementskit-client_logo">
 											<?php if (isset($testimonial['client_logo_active']) && sizeof($testimonial['client_logo_active']) > 0 && $testimonial['use_hover_logo'] == 'yes') : ?>
-												<?php echo \Elementskit_Lite\Utils::get_attachment_image_html($testimonial, 'client_logo_active', 'full', [
+												<?php echo wp_kses( \Elementskit_Lite\Utils::get_attachment_image_html($testimonial, 'client_logo_active', 'full', [
 													'class'	=> 'elementskit-testimonial-client-active-logo'
-												]); ?>
+												]), \ElementsKit_Lite\Utils::get_kses_array()); ?>	
 											<?php endif; ?>
-											<?php echo \Elementskit_Lite\Utils::get_attachment_image_html($testimonial, 'client_logo', 'full', [
+											<?php echo wp_kses( \Elementskit_Lite\Utils::get_attachment_image_html($testimonial, 'client_logo', 'full', [
 												'class'	=> 'elementskit-testimonial-client-logo'
-											]); ?>
+											]), \ElementsKit_Lite\Utils::get_kses_array());?>
 										</div>
 									<?php
 										}
 										if ( isset($testimonial['review']) && !empty($testimonial['review'])) : ?>
-										<p><?php echo isset($testimonial['review']) ? \ElementsKit_Lite\Utils::kses($testimonial['review']) : ''; ?></p>
+										<p><?php echo isset($testimonial['review']) ? wp_kses($testimonial['review'], \ElementsKit_Lite\Utils::get_kses_array()) : ''; ?></p>
 									<?php endif;  ?>
 									<?php if ( 'yes' == $ekit_testimonial_title_separetor ): ?>
 										<span class="elementskit-border-hr"></span>
 									<?php endif; ?>
 									<span class="elementskit-profile-info">
 										<strong class="elementskit-author-name"><?php echo isset($testimonial['client_name']) ? esc_html($testimonial['client_name']) : ''; ?></strong>
-										<span class="elementskit-author-des"><?php echo isset($testimonial['designation']) ? \ElementsKit_Lite\Utils::kspan($testimonial['designation']) : ''; ?></span>
+										<span class="elementskit-author-des"><?php echo isset($testimonial['designation']) ? wp_kses(\ElementsKit_Lite\Utils::kspan($testimonial['designation']), \ElementsKit_Lite\Utils::get_kses_array()) : ''; // phpcs:ignore WordPress.Security.EscapeOutput -- Already escaped by kspan method by elementskit ?></span>
 									</span>
 								</div>
 								<?php if(isset($ekit_testimonial_wartermark_enable) && $ekit_testimonial_wartermark_enable == 'yes'):?>

@@ -380,9 +380,9 @@ class ElementsKit_Widget_Lottie extends Widget_Base {
             $this->add_render_attribute( 'wrapper', 'class', 'met_d--block' );
             $this->add_link_attributes( 'link', $settings['ekit_lottie_link'] );
         
-            echo '<a '. $this->get_render_attribute_string( 'link' ) .' '. $this->get_render_attribute_string( 'wrapper' ) .'>&nbsp;</a>';
+            echo '<a '. $this->get_render_attribute_string( 'link' ) .' '. $this->get_render_attribute_string( 'wrapper' ) .'>&nbsp;</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_render_attribute_string Already escaped by elementor 
         else:
-            echo '<div '. $this->get_render_attribute_string( 'wrapper' ) .'>&nbsp;</div>';
+            echo '<div '. $this->get_render_attribute_string( 'wrapper' ) .'>&nbsp;</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_render_attribute_string Already escaped by elementor
         endif;
     }
 }

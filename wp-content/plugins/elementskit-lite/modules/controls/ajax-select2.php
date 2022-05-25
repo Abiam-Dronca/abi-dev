@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 class Ajax_Select2 extends \Elementor\Base_Data_Control {
 
-	public function get_api_url(){
+	public function get_api_url() {
 		return get_rest_url() . 'elementskit/v1';
 	}
 
@@ -31,7 +31,7 @@ class Ajax_Select2 extends \Elementor\Base_Data_Control {
 	 */
 	public function enqueue() {
 		// script
-		wp_register_script( 'elementskit-js-ajaxchoose-control',  Init::get_url() . 'assets/js/ajaxchoose.js' );
+		wp_register_script( 'elementskit-js-ajaxchoose-control', Init::get_url() . 'assets/js/ajaxchoose.js' );
 		wp_enqueue_script( 'elementskit-js-ajaxchoose-control' );
 	}
 
@@ -47,11 +47,11 @@ class Ajax_Select2 extends \Elementor\Base_Data_Control {
 	 * @return array Control default settings.
 	 */
 	protected function get_default_settings() {
-		return [
-			'options' => [],
-			'multiple' => false,
-			'select2options' => [],
-		];
+		return array(
+			'options'        => array(),
+			'multiple'       => false,
+			'select2options' => array(),
+		);
 	}
 
 
@@ -69,15 +69,15 @@ class Ajax_Select2 extends \Elementor\Base_Data_Control {
 		$control_uid = $this->get_control_uid();
 		?>
 		<div class="elementor-control-field">
-			<label for="<?php echo esc_attr($control_uid); ?>" class="elementor-control-title">{{{ data.label }}}</label>
+			<label for="<?php echo esc_attr( $control_uid ); ?>" class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-input-wrapper">
 				<# var multiple = ( data.multiple ) ? 'multiple' : ''; #>
 				<select 
-					id="<?php echo esc_attr($control_uid); ?>" 
+					id="<?php echo esc_attr( $control_uid ); ?>" 
 					class="elementor-megamenuajaxselect2" 
 					type="megamenuajaxselect2" {{ multiple }} 
 					data-setting="{{ data.name }}"
-					data-ajax-url="<?php echo esc_attr($this->get_api_url() . '/{{data.options}}/'); ?>"
+					data-ajax-url="<?php echo esc_attr( $this->get_api_url() . '/{{data.options}}/' ); ?>"
 				>
 				</select>
 			</div>

@@ -18,7 +18,7 @@ class Image_Choose extends \Elementor\Base_Data_Control {
 	public function get_type() {
 		return 'imagechoose';
 	}
-    
+	
 	/**
 	 * Enqueue ontrol scripts and styles.
 	 *
@@ -27,11 +27,11 @@ class Image_Choose extends \Elementor\Base_Data_Control {
 	 */
 	public function enqueue() {
 		// styles
-		wp_register_style( 'elementskit-css-image-choose-control',  Init::get_url() . 'assets/css/imagechoose.css', [], '1.0.0' );
+		wp_register_style( 'elementskit-css-image-choose-control', Init::get_url() . 'assets/css/imagechoose.css', array(), '1.0.0' );
 		wp_enqueue_style( 'elementskit-css-image-choose-control' );
 
 		// script
-		wp_register_script( 'elementskit-js-image-choose-control',  Init::get_url() . 'assets/js/imagechoose.js' );
+		wp_register_script( 'elementskit-js-image-choose-control', Init::get_url() . 'assets/js/imagechoose.js' );
 		wp_enqueue_script( 'elementskit-js-image-choose-control' );
 	}
 
@@ -55,8 +55,8 @@ class Image_Choose extends \Elementor\Base_Data_Control {
 					<# _.each( data.options, function( options, value ) { #>
 					<div class="image-choose-label-block" 
 					style="width:{{ options.width }}">
-						<input id="<?php echo esc_attr($control_uid); ?>" type="radio" name="elementor-choose-{{ data.name }}-{{ data._cid }}" value="{{ value }}">
-						<label class="elementor-image-choices-label" for="<?php echo esc_attr($control_uid); ?>" title="{{ options.title }}">
+						<input id="<?php echo esc_attr( $control_uid ); ?>" type="radio" name="elementor-choose-{{ data.name }}-{{ data._cid }}" value="{{ value }}">
+						<label class="elementor-image-choices-label" for="<?php echo esc_attr( $control_uid ); ?>" title="{{ options.title }}">
 							<img class="imagesmall" src="{{ options.imagesmall }}" alt="{{ options.title }}" />
 							<span class="imagelarge">
 								<img src="{{ options.imagelarge }}" alt="{{ options.title }}" />
@@ -87,9 +87,9 @@ class Image_Choose extends \Elementor\Base_Data_Control {
 	 * @return array Control default settings.
 	 */
 	protected function get_default_settings() {
-		return [
+		return array(
 			'label_block' => true,
-			'options' => []
-		];
+			'options'     => array(),
+		);
 	}
 }

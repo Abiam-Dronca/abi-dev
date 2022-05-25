@@ -53,7 +53,6 @@ if(!function_exists('ekit_mail_chimp_rest')){
 		}
 		
 		return $return;
-		
 	}
 }
 

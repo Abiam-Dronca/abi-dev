@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
 
 class Activation_Actions {
 
-	private $key = 'elementskit-lite__plugin_activated';
+	private $key     = 'elementskit-lite__plugin_activated';
 	private $has_key = false;
 
 	public function init() {

@@ -1,4 +1,4 @@
-<div class="elementskit-testimonial-slider slick-slider arrow_inside <?php echo !empty($settings['ekit_testimonial_show_dot']) ? 'slick-dotted' : '' ?>" <?php echo $this->get_render_attribute_string('wrapper'); ?>>
+<div class="elementskit-testimonial-slider slick-slider arrow_inside <?php echo !empty($settings['ekit_testimonial_show_dot']) ? 'slick-dotted' : '' ?>" <?php echo $this->get_render_attribute_string('wrapper'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 	<div class="swiper-container">
 		<div class="slick-list swiper-wrapper">
 		<?php
@@ -18,7 +18,7 @@
 					$clientPhoto = isset($testimonial['client_photo']['url']) ? $testimonial['client_photo']['url'] : '';  } ?>
 					<div class="swiper-slide">
 						<div class="slick-slide">
-							<<?php echo esc_attr( $wrapTag ); ?> class="elementskit-testimonial_card" style="background-image: url(<?php esc_attr_e($clientPhoto, 'elementskit-lite' );?>);" <?php echo $this->get_render_attribute_string( 'link-' . $testimonial['_id'] ); ?>>
+							<<?php echo esc_attr( $wrapTag ); ?> class="elementskit-testimonial_card" style="background-image: url(<?php esc_attr_e($clientPhoto, 'elementskit-lite' );?>);" <?php echo $this->get_render_attribute_string( 'link-' . esc_attr($testimonial['_id'] )); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 								<?php if ($ekit_testimonial_rating_enable == 'yes') : ?>
 								<ul class="elementskit-stars">
 									<?php
@@ -36,7 +36,7 @@
 								<?php endif; ?>
 
 								<?php if ( isset($testimonial['review']) && !empty($testimonial['review'])) : ?>
-									<p class="elementskit-commentor-coment"><?php echo isset($testimonial['review']) ? \ElementsKit_Lite\Utils::kses($testimonial['review']) : ''; ?></p>
+									<p class="elementskit-commentor-coment"><?php echo isset($testimonial['review']) ? wp_kses($testimonial['review'], \ElementsKit_Lite\Utils::get_kses_array()): ''; ?></p>
 								<?php endif;  ?>
 
 								<?php if ( isset($testimonial['review_youtube_link']) && !empty($testimonial['review_youtube_link'])) : ?>
@@ -47,7 +47,7 @@
 
 								<span class="elementskit-profile-info">
 									<strong class="elementskit-author-name"><?php echo isset($testimonial['client_name']) ? esc_html($testimonial['client_name']) : ''; ?></strong>
-									<span class="elementskit-author-des"><?php echo isset($testimonial['designation']) ? \ElementsKit_Lite\Utils::kspan($testimonial['designation']) : ''; ?></span>
+									<span class="elementskit-author-des"><?php echo isset($testimonial['designation']) ? wp_kses($testimonial['designation'], \ElementsKit_Lite\Utils::get_kses_array()) : ''; // phpcs:ignore WordPress.Security.EscapeOutput -- Already escaped by kspan method by elementskit ?></span>
 								</span>
 								<div class="xs-overlay elementor-repeater-item-<?php echo esc_attr( $testimonial[ '_id' ] ); ?>"></div>
 							</<?php echo esc_attr( $wrapTag ); ?>><!-- .testimonial_card END -->

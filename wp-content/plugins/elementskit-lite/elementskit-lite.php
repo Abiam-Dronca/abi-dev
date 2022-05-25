@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * Description: The most advanced addons for Elementor with tons of widgets, Header builder, Footer builder, Mega menu builder, layout pack and powerful custom controls.
  * Plugin URI: https://products.wpmet.com/elementskit
  * Author: Wpmet
- * Version: 2.5.9
+ * Version: 2.6.1
  * Author URI: https://wpmet.com/
  *
  * Text Domain: elementskit-lite
@@ -23,15 +23,16 @@ defined( 'ABSPATH' ) || exit;
  *
  */
 
-final class ElementsKit_Lite{
+
+final class ElementsKit_Lite {
 	/**
 	 * Plugin Version
 	 *
 	 * @since 1.0.0
 	 * @var string The plugin version.
 	 */
-	static function version(){
-		return '2.5.9';
+	static function version() {
+		return '2.6.1';
 	}
 
 	/**
@@ -40,7 +41,7 @@ final class ElementsKit_Lite{
 	 * @since 1.1.0
 	 * @var string The plugin purchase type [pro/ free].
 	 */
-	static function package_type(){
+	static function package_type() {
 		return apply_filters( 'elementskit/core/package_type', 'free' );
 	}
 
@@ -51,31 +52,31 @@ final class ElementsKit_Lite{
 	 * @since 1.1.0
 	 * @var string The plugin purchase type [pro/ free].
 	 */
-	static function license_status(){
-		if(!class_exists('ElementsKit\Libs\Framework\Classes\License')){
+	static function license_status() {
+		if ( ! class_exists( 'ElementsKit\Libs\Framework\Classes\License' ) ) {
 			return 'invalid';
 		}
-		if(ElementsKit\Libs\Framework\Classes\License::instance()->status() != 'valid'){
+		if ( ElementsKit\Libs\Framework\Classes\License::instance()->status() != 'valid' ) {
 			return 'invalid';
 		}
 
 		return 'valid';
 	}
 
-	public static function license_data(){
-		if(!class_exists('\ElementsKit_Lite\Libs\Framework\Classes\Utils')){
-			return [
-				'key' => '',
-				'checksum' => '',
-				'plugin_package' => \ElementsKit_Lite::package_type()
-			];
+	public static function license_data() {
+		if ( ! class_exists( '\ElementsKit_Lite\Libs\Framework\Classes\Utils' ) ) {
+			return array(
+				'key'            => '',
+				'checksum'       => '',
+				'plugin_package' => self::package_type(),
+			);
 		}
 
-		return [
-			'key' => \ElementsKit_Lite\Libs\Framework\Classes\Utils::instance()->get_option('license_key'),
-			'checksum' => get_option('__validate_oppai__'),
-			'plugin_package' => \ElementsKit_Lite::package_type()
-		];
+		return array(
+			'key'            => \ElementsKit_Lite\Libs\Framework\Classes\Utils::instance()->get_option( 'license_key' ),
+			'checksum'       => get_option( '__validate_oppai__' ),
+			'plugin_package' => self::package_type(),
+		);
 	}
 
 
@@ -85,7 +86,7 @@ final class ElementsKit_Lite{
 	 * @since 1.2.6
 	 * @var string The plugin ID in our server.
 	 */
-	static function product_id(){
+	static function product_id() {
 		return '9';
 	}
 
@@ -95,7 +96,7 @@ final class ElementsKit_Lite{
 	 * @since 1.3.1
 	 * @var string The plugin author.
 	 */
-	static function author_name(){
+	static function author_name() {
 		return 'Wpmet';
 	}
 
@@ -105,7 +106,7 @@ final class ElementsKit_Lite{
 	 * @since 1.3.1
 	 * @var string The store name: self site, envato.
 	 */
-	static function store_name(){
+	static function store_name() {
 		return 'wordpressorg';
 	}
 
@@ -115,7 +116,7 @@ final class ElementsKit_Lite{
 	 * @since 1.0.0
 	 * @var string Minimum Elementor version required to run the plugin.
 	 */
-	static function min_el_version(){
+	static function min_el_version() {
 		return '3.0.0';
 	}
 
@@ -125,7 +126,7 @@ final class ElementsKit_Lite{
 	 * @since 1.0.0
 	 * @var string Minimum PHP version required to run the plugin.
 	 */
-	static function min_php_version(){
+	static function min_php_version() {
 		return '7.0';
 	}
 
@@ -135,7 +136,7 @@ final class ElementsKit_Lite{
 	 * @since 1.0.0
 	 * @var string plugins's root file.
 	 */
-	static function plugin_file(){
+	static function plugin_file() {
 		return __FILE__;
 	}
 
@@ -145,8 +146,8 @@ final class ElementsKit_Lite{
 	 * @since 1.0.0
 	 * @var string plugins's root url.
 	 */
-	static function plugin_url(){
-		return trailingslashit(plugin_dir_url( __FILE__ ));
+	static function plugin_url() {
+		return trailingslashit( plugin_dir_url( __FILE__ ) );
 	}
 
 	/**
@@ -155,106 +156,106 @@ final class ElementsKit_Lite{
 	 * @since 1.0.0
 	 * @var string plugins's root directory.
 	 */
-	static function plugin_dir(){
-		return trailingslashit(plugin_dir_path( __FILE__ ));
+	static function plugin_dir() {
+		return trailingslashit( plugin_dir_path( __FILE__ ) );
 	}
 
-    /**
-     * Plugin's widget directory.
-     *
-     * @since 1.0.0
-     * @var string widget's root directory.
-     */
-	static function widget_dir(){
+	/**
+	 * Plugin's widget directory.
+	 *
+	 * @since 1.0.0
+	 * @var string widget's root directory.
+	 */
+	static function widget_dir() {
 		return self::plugin_dir() . 'widgets/';
 	}
 
-    /**
-     * Plugin's widget url.
-     *
-     * @since 1.0.0
-     * @var string widget's root url.
-     */
-	static function widget_url(){
+	/**
+	 * Plugin's widget url.
+	 *
+	 * @since 1.0.0
+	 * @var string widget's root url.
+	 */
+	static function widget_url() {
 		return self::plugin_url() . 'widgets/';
 	}
 
 
-    /**
-     * API url
-     *
-     * @since 1.0.0
-     * @var string for license, layout notification related functions.
-     */
-	static function api_url(){
+	/**
+	 * API url
+	 *
+	 * @since 1.0.0
+	 * @var string for license, layout notification related functions.
+	 */
+	static function api_url() {
 		return 'https://api.wpmet.com/public/';
 	}
 
-    /**
-     * Account url
-     *
-     * @since 1.2.6
-     * @var string for plugin update notification, user account page.
-     */
-	static function account_url(){
+	/**
+	 * Account url
+	 *
+	 * @since 1.2.6
+	 * @var string for plugin update notification, user account page.
+	 */
+	static function account_url() {
 		return 'https://account.wpmet.com';
 	}
 
-    /**
-     * Plugin's module directory.
-     *
-     * @since 1.0.0
-     * @var string module's root directory.
-     */
-	static function module_dir(){
+	/**
+	 * Plugin's module directory.
+	 *
+	 * @since 1.0.0
+	 * @var string module's root directory.
+	 */
+	static function module_dir() {
 		return self::plugin_dir() . 'modules/';
 	}
 
-    /**
-     * Plugin's module url.
-     *
-     * @since 1.0.0
-     * @var string module's root url.
-     */
-	static function module_url(){
+	/**
+	 * Plugin's module url.
+	 *
+	 * @since 1.0.0
+	 * @var string module's root url.
+	 */
+	static function module_url() {
 		return self::plugin_url() . 'modules/';
 	}
 
 
-    /**
-     * Plugin's lib directory.
-     *
-     * @since 1.0.0
-     * @var string lib's root directory.
-     */
-	static function lib_dir(){
+	/**
+	 * Plugin's lib directory.
+	 *
+	 * @since 1.0.0
+	 * @var string lib's root directory.
+	 */
+	static function lib_dir() {
 		return self::plugin_dir() . 'libs/';
 	}
 
-    /**
-     * Plugin's lib url.
-     *
-     * @since 1.0.0
-     * @var string lib's root url.
-     */
-	static function lib_url(){
+	/**
+	 * Plugin's lib url.
+	 *
+	 * @since 1.0.0
+	 * @var string lib's root url.
+	 */
+	static function lib_url() {
 		return self::plugin_url() . 'libs/';
 	}
 
-    /**
-     * Active plugin's textdomain list
-     */
-	static function active_plugins(){
-		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-        $apl = get_option('active_plugins');
-        $plugins = get_plugins();
-        $filter_string = '';
-        foreach ($apl as $p){
-            if(isset($plugins[$p]) && isset($plugins[$p]['TextDomain'])){
-                $filter_string .= ',' . $plugins[$p]['TextDomain'];
-            }
-        }
-        return ltrim($filter_string, ',');
+	/**
+	 * Active plugin's textdomain list
+	 */
+	static function active_plugins() {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		$apl           = get_option( 'active_plugins' );
+		$plugins       = get_plugins();
+		$filter_string = '';
+		foreach ( $apl as $p ) {
+			if ( isset( $plugins[ $p ] ) && isset( $plugins[ $p ]['TextDomain'] ) ) {
+				$filter_string .= ',' . $plugins[ $p ]['TextDomain'];
+			}
+		}
+		return ltrim( $filter_string, ',' );
 	}
 
 	/**
@@ -303,10 +304,10 @@ final class ElementsKit_Lite{
 	 * @access public
 	 */
 	public function init() {
-        // Load the Plugin class, it's the core class of ElementsKit_Lite.
-        require_once self::plugin_dir() . 'plugin.php';
+		// Load the Plugin class, it's the core class of ElementsKit_Lite.
+		require_once self::plugin_dir() . 'plugin.php';
 
-        \ElementsKit_Lite\Plugin::registrar_autoloader();
+		\ElementsKit_Lite\Plugin::registrar_autoloader();
 
 		// init notice class
 		\Oxaim\Libs\Notice::init();
@@ -327,28 +328,30 @@ final class ElementsKit_Lite{
 		}
 
 		// Register ElementsKit_Lite widget category
-		add_action('elementor/elements/categories_registered', [$this, 'elementor_widget_category']);
+		add_action( 'elementor/elements/categories_registered', array( $this, 'elementor_widget_category' ) );
 
-        // initiate elementor custom controls
-        new \ElementsKit_Lite\Modules\Controls\Init();
+		// initiate elementor custom controls
+		new \ElementsKit_Lite\Modules\Controls\Init();
 
-		add_action( 'elementor/init', function(){
-			if(class_exists('ElementsKit') && !class_exists('ElementsKit_Comp')){
-				return;
+		add_action(
+			'elementor/init',
+			function() {
+				if ( class_exists( 'ElementsKit' ) && ! class_exists( 'ElementsKit_Comp' ) ) {
+					return;
+				}
+
+				// adding backward classes and methods for older 14 number themes.
+				require_once self::plugin_dir() . 'compatibility/backward/plugin-class-backward-compatibility.php';
+				require_once self::plugin_dir() . 'compatibility/backward/utils-backward-compablity.php';
+
+				// Run the instance.
+				Plugin::instance();
+
+				// adding backward classes and methods for older 14 number themes.
+				require_once self::plugin_dir() . 'compatibility/backward/module-list.php';
+				require_once self::plugin_dir() . 'compatibility/backward/widget-list.php';
 			}
-
-			// adding backward classes and methods for older 14 number themes.
-		 	require_once self::plugin_dir() . 'compatibility/backward/plugin-class-backward-compatibility.php';
-		 	require_once self::plugin_dir() . 'compatibility/backward/utils-backward-compablity.php';
-
-            // Run the instance.
-            Plugin::instance();
-
-            // adding backward classes and methods for older 14 number themes.
-			require_once self::plugin_dir() . 'compatibility/backward/module-list.php';
-			require_once self::plugin_dir() . 'compatibility/backward/widget-list.php';
-		});
-
+		);
 	}
 
 
@@ -362,26 +365,23 @@ final class ElementsKit_Lite{
 	 * @access public
 	 */
 	public function missing_elementor() {
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
-		$btn = [
-            'default_class' => 'button',
-            'class' => 'button-primary ', // button-primary button-secondary button-small button-large button-link
-        ];
+		$btn = array(
+			'default_class' => 'button',
+			'class'         => 'button-primary ', // button-primary button-secondary button-small button-large button-link
+		);
 
 		if ( file_exists( WP_PLUGIN_DIR . '/elementor/elementor.php' ) ) {
-			$btn['text'] = esc_html__('Activate Elementor', 'elementskit-lite');
-			$btn['url'] = wp_nonce_url( 'plugins.php?action=activate&plugin=elementor/elementor.php&plugin_status=all&paged=1', 'activate-plugin_elementor/elementor.php' );
+			$btn['text'] = esc_html__( 'Activate Elementor', 'elementskit-lite' );
+			$btn['url']  = wp_nonce_url( 'plugins.php?action=activate&plugin=elementor/elementor.php&plugin_status=all&paged=1', 'activate-plugin_elementor/elementor.php' );
 		} else {
-			$btn['text'] = esc_html__('Install Elementor', 'elementskit-lite');
-			$btn['url'] = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
+			$btn['text'] = esc_html__( 'Install Elementor', 'elementskit-lite' );
+			$btn['url']  = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
 		}
 
-		\Oxaim\Libs\Notice::instance('elementskit-lite', 'unsupported-elementor-version')
-		->set_type('error')
-		->set_message(sprintf( esc_html__( 'ElementsKit requires Elementor version %1$s+, which is currently NOT RUNNING.', 'elementskit-lite' ), self::min_el_version() ))
-		->set_button($btn)
+		\Oxaim\Libs\Notice::instance( 'elementskit-lite', 'unsupported-elementor-version' )
+		->set_type( 'error' )
+		->set_message( sprintf( esc_html__( 'ElementsKit requires Elementor version %1$s+, which is currently NOT RUNNING.', 'elementskit-lite' ), self::min_el_version() ) )
+		->set_button( $btn )
 		->call();
 	}
 
@@ -395,44 +395,44 @@ final class ElementsKit_Lite{
 	 * @access public
 	 */
 	public function failed_php_version() {
-		\Oxaim\Libs\Notice::instance('elementskit-lite', 'unsupported-php-version')
-		->set_type('error')
-		->set_message(sprintf( esc_html__( 'ElementsKit requires PHP version %1$s+, which is currently NOT RUNNING on this server.', 'elementskit-lite' ), self::min_php_version() ))
+		\Oxaim\Libs\Notice::instance( 'elementskit-lite', 'unsupported-php-version' )
+		->set_type( 'error' )
+		->set_message( sprintf( esc_html__( 'ElementsKit requires PHP version %1$s+, which is currently NOT RUNNING on this server.', 'elementskit-lite' ), self::min_php_version() ) )
 		->call();
 	}
 
-    /**
-     * Rewrite flush.
-     *
-     * @since 1.0.7
-     * @access public
-     */
-	public static function install_activation_key(){
-		add_option('elementskit-lite__plugin_activated', self::plugin_file());
+	/**
+	 * Rewrite flush.
+	 *
+	 * @since 1.0.7
+	 * @access public
+	 */
+	public static function install_activation_key() {
+		add_option( 'elementskit-lite__plugin_activated', self::plugin_file() );
 	}
-    /**
-     * Add category.
-     *
-     * Register custom widget category in Elementor's editor
-     *
-     * @since 1.0.0
-     * @access public
-     */
-    public function elementor_widget_category($widgets_manager){
+	/**
+	 * Add category.
+	 *
+	 * Register custom widget category in Elementor's editor
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public function elementor_widget_category( $widgets_manager ) {
 		$widgets_manager->add_category(
 			'elementskit',
-			[
-				'title' =>esc_html__( 'ElementsKit', 'elementskit-lite' ),
-				'icon' => 'fa fa-plug',
-			],
+			array(
+				'title' => esc_html__( 'ElementsKit', 'elementskit-lite' ),
+				'icon'  => 'fa fa-plug',
+			),
 			1
 		);
 		$widgets_manager->add_category(
 			'elementskit_headerfooter',
-			[
-				'title' =>esc_html__( 'ElementsKit Header Footer', 'elementskit-lite' ),
-				'icon' => 'fa fa-plug',
-			],
+			array(
+				'title' => esc_html__( 'ElementsKit Header Footer', 'elementskit-lite' ),
+				'icon'  => 'fa fa-plug',
+			),
 			1
 		);
 	}

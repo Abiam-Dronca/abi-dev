@@ -694,11 +694,11 @@ class ElementsKit_Widget_Piechart extends Widget_Base {
         }
 
         ?>
-        <div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'pieechart' )); ?>>
+        <div <?php echo $this->get_render_attribute_string( 'pieechart' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 
-            <?php echo \ElementsKit_Lite\Utils::kses($flip_front_start); ?>
+            <?php echo wp_kses($flip_front_start, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 
-            <div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'pieechartscreen' )); ?>>
+            <div <?php echo $this->get_render_attribute_string( 'pieechartscreen' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 
                 <?php if($settings['ekit_piechart_percentage'] != '' && $settings['ekit_piechart_content'] == 'ekit_piechart_percentage') { ?>
 
@@ -709,7 +709,7 @@ class ElementsKit_Widget_Piechart extends Widget_Base {
                 <?php if($settings['ekit_piechart_content'] == 'icon' && $settings['ekit_piechart_icon_type'] == 'image') { ?>
 
                     <span class="ekit-chart-content">
-                        <?php echo \ElementsKit_Lite\Utils::kses($image_html); ?>
+                        <?php echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
                     </span>
 
                 <?php } ?>
@@ -740,7 +740,8 @@ class ElementsKit_Widget_Piechart extends Widget_Base {
             </div>
             <?php
 
-             echo \ElementsKit_Lite\Utils::kses($flip_front_end.$flip_back_start);
+		   echo wp_kses($flip_front_end.$flip_back_start, \ElementsKit_Lite\Utils::get_kses_array());
+
 
              if($settings['ekit_piechart_style'] == 'withcontent' && $settings['ekit_piechart_title'] != '') {  ?>
              <h2 class="ekit-piechart-title"><?php echo esc_html($settings['ekit_piechart_title']); ?></h2>
@@ -748,11 +749,11 @@ class ElementsKit_Widget_Piechart extends Widget_Base {
 
             if($settings['ekit_piechart_style'] == 'withcontent' && $settings['ekit_piechart_item_description'] != '') { ?>
 
-            <p><?php echo \ElementsKit_Lite\Utils::kses($settings['ekit_piechart_item_description']); ?></p>
+            <p><?php echo wp_kses($settings['ekit_piechart_item_description'], \ElementsKit_Lite\Utils::get_kses_array()); ?></p>
 
             <?php }
 
-            echo \ElementsKit_Lite\Utils::kses($flip_back_end);
+            echo wp_kses($flip_back_end, \ElementsKit_Lite\Utils::get_kses_array());
 
             ?>
         </div>

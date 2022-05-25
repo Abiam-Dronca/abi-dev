@@ -12,24 +12,27 @@ class TwentyNineteen {
 	/**
 	 * Run all the Actions / Filters.
 	 */
-	function __construct($template_ids) {
-		if($template_ids[0] != null){
-			add_action( 'get_header', [ $this, 'get_header' ] );
+	function __construct( $template_ids ) {
+		if ( $template_ids[0] != null ) {
+			add_action( 'get_header', array( $this, 'get_header' ) );
 		}
-		if($template_ids[1] != null){
-			add_action( 'get_footer', [ $this, 'get_footer' ] );
+		if ( $template_ids[1] != null ) {
+			add_action( 'get_footer', array( $this, 'get_footer' ) );
 		}
 	}
 
 	public function get_header( $name ) {
-		add_action('elementskit/template/after_header', function(){
-			echo '<div id="page" class="site">';
-			echo '<div id="content" class="site-content">';
-		});
+		add_action(
+			'elementskit/template/after_header',
+			function() {
+				echo '<div id="page" class="site">';
+				echo '<div id="content" class="site-content">';
+			}
+		);
 		require __DIR__ . '/../views/theme-support-header.php';
 
-		$templates = [];
-		$name = (string) $name;
+		$templates = array();
+		$name      = (string) $name;
 		if ( '' !== $name ) {
 			$templates[] = "header-{$name}.php";
 		}
@@ -45,14 +48,17 @@ class TwentyNineteen {
 	}
 
 	public function get_footer( $name ) {
-		add_action('elementskit/template/after_footer', function(){
-			echo '</div></div>';
-		});
+		add_action(
+			'elementskit/template/after_footer',
+			function() {
+				echo '</div></div>';
+			}
+		);
 
 		require __DIR__ . '/../views/theme-support-footer.php';
 
-		$templates = [];
-		$name = (string) $name;
+		$templates = array();
+		$name      = (string) $name;
 		if ( '' !== $name ) {
 			$templates[] = "footer-{$name}.php";
 		}

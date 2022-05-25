@@ -4,7 +4,7 @@ namespace ElementsKit_Lite\Modules\Widget_Builder;
 
 use ElementsKit_Lite\Modules\Widget_Builder\Controls\Widget_Writer;
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
 
 class Widget_File {
@@ -18,8 +18,8 @@ class Widget_File {
 		$upload_dir = $uploads['basedir'];
 		$upload_dir = $upload_dir . '/elementskit/custom_widgets';
 
-		if(!is_dir($upload_dir)) {
-			wp_mkdir_p($upload_dir);
+		if ( ! is_dir( $upload_dir ) ) {
+			wp_mkdir_p( $upload_dir );
 		}
 
 		return $upload_dir;
@@ -34,16 +34,16 @@ class Widget_File {
 	}
 
 
-	public function create($wObj, $id) {
+	public function create( $wObj, $id ) {
 
 		self::load_filesystem();
 
 		global $wp_filesystem;
 
-		$writer = new Widget_Writer($wObj, $id, 'elementskit-lite');
+		$writer = new Widget_Writer( $wObj, $id, 'elementskit-lite' );
 
-		$writer->start_backing($wp_filesystem);
-		$writer->finish_backing($wp_filesystem);
+		$writer->start_backing( $wp_filesystem );
+		$writer->finish_backing( $wp_filesystem );
 
 		return true;
 	}
@@ -55,12 +55,11 @@ class Widget_File {
 
 		global $wp_filesystem;
 
-
 		return $wp_filesystem;
 	}
 
 	public static function instance() {
-		if(self::$instance == null) {
+		if ( self::$instance == null ) {
 			self::$instance = new self();
 		}
 

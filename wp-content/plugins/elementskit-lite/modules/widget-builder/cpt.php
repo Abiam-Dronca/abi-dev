@@ -3,16 +3,16 @@ namespace ElementsKit_Lite\Modules\Widget_Builder;
 
 defined( 'ABSPATH' ) || exit;
 
-class Cpt{
+class Cpt {
 
-    public function __construct() {
-        $this->post_type(); 
+	public function __construct() {
+		$this->post_type(); 
 
-        add_action('admin_menu', [$this, 'cpt_menu']);
-    }
+		add_action( 'admin_menu', array( $this, 'cpt_menu' ) );
+	}
 
-    public function post_type() {
-        
+	public function post_type() {
+		
 		$labels = array(
 			'name'               => esc_html__( 'Widgets', 'elementskit-lite' ),
 			'singular_name'      => esc_html__( 'Widget', 'elementskit-lite' ),
@@ -44,10 +44,10 @@ class Cpt{
 		);
 
 		register_post_type( 'elementskit_widget', $args );
-    }
+	}
 
-    public function cpt_menu(){
-        $link_our_new_cpt = 'edit.php?post_type=elementskit_widget';
-        add_submenu_page('elementskit', esc_html__('Widget Builder', 'elementskit-lite'), esc_html__('Widget Builder', 'elementskit-lite'), 'manage_options', $link_our_new_cpt);
-    }
+	public function cpt_menu() {
+		$link_our_new_cpt = 'edit.php?post_type=elementskit_widget';
+		add_submenu_page( 'elementskit', esc_html__( 'Widget Builder', 'elementskit-lite' ), esc_html__( 'Widget Builder', 'elementskit-lite' ), 'manage_options', $link_our_new_cpt );
+	}
 }

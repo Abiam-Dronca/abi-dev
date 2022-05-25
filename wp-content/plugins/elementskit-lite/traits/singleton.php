@@ -9,13 +9,13 @@ namespace ElementsKit_Lite\Traits;
  * @package ElementsKit_Lite\Traits
  */
 trait Singleton {
-    private static $instances = [];
+	private static $instances = array();
 
-    public static function instance() {
-        $class = get_called_class();
-        if (!isset(self::$instances[$class])) {
-            self::$instances[$class] = new $class();
-        }
-        return self::$instances[$class];
-    }
+	public static function instance() {
+		$class = get_called_class();
+		if ( ! isset( self::$instances[ $class ] ) ) {
+			self::$instances[ $class ] = new $class();
+		}
+		return self::$instances[ $class ];
+	}
 }

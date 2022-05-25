@@ -1385,7 +1385,7 @@ class ElementsKit_Widget_Mail_Chimp extends Widget_Base {
 			<div class="ekit-mail-message"></div>
 			<input type="hidden" name="double_opt_in" value="<?php echo esc_attr($ekit_mail_chimp_double_opt_in)?>">
 
-				<div <?php echo $this->get_render_attribute_string('content_wrapper'); ?>>
+				<div <?php echo $this->get_render_attribute_string('content_wrapper'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 				<?php if(isset($ekit_mail_chimp_section_form_name_show) && $ekit_mail_chimp_section_form_name_show == 'yes'):?>
 					<div class="ekit-mail-chimp-name elementskit_input_wraper elementskit_input_container">
 						<div class="elementskit_form_group">

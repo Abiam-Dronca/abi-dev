@@ -468,11 +468,11 @@ class ElementsKit_Widget_Category_List extends Widget_Base {
 			$this->add_render_attribute( 'list_item', 'class', 'elementor-inline-item' );
 		}
 		?>
-		<ul <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'icon_list' )); ?>>
+		<ul <?php echo $this->get_render_attribute_string( 'icon_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 			<?php
 			foreach ( $settings['icon_list'] as $index => $item ) :
                 $post = !empty( $item['link'] ) ? get_category($item['link']) : 0;
-                $text = empty($item['text']) ? !empty($post) ? $post->name : '' : $item['text'];
+                $text = empty($item['text']) ? (!empty($post) ? $post->name : '') : $item['text'];
 				if(!empty($item['list_bg_color'])) {
 					$this->add_render_attribute('list_bg_' . $index, 'style', 'background: ' . esc_attr($item['list_bg_color']) . ';');
 				}
@@ -480,7 +480,7 @@ class ElementsKit_Widget_Category_List extends Widget_Base {
                 if($post != null):
 				?>
 				<li class="elementor-icon-list-item">
-					<a href="<?php echo esc_url(get_category_link($post->term_id)); ?>" <?php echo $this->get_render_attribute_string('list_bg_' . $index); ?>>
+					<a href="<?php echo esc_url(get_category_link($post->term_id)); ?>" <?php echo $this->get_render_attribute_string('list_bg_' . $index); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
                         <?php if (!empty($item['icons']['value'])) : ?>
                             <span class="elementor-icon-list-icon">
 								<?php Icons_Manager::render_icon( $item['icons'], [ 'aria-hidden' => 'true' ] ); ?>

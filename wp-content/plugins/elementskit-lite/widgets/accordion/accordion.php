@@ -747,8 +747,7 @@ class ElementsKit_Widget_Accordion extends Widget_Base {
         $this->end_controls_section();
         
         $this->insert_pro_message();
-
-    }
+	}
 
     protected function render( ) {
         echo '<div class="ekit-wid-con" >';

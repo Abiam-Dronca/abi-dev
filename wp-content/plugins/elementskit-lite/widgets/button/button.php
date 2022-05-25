@@ -555,7 +555,7 @@ class ElementsKit_Widget_Button extends Widget_Base {
 		?>
 		<div class="ekit-btn-wraper">
 			<?php if($icon_align == 'right'): ?>
-				<a <?php echo $this->get_render_attribute_string( 'button' ); ?> class="elementskit-btn <?php echo esc_attr( $btn_class ); ?>" <?php echo esc_attr($btn_id); ?>>
+				<a <?php echo $this->get_render_attribute_string( 'button' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> class="elementskit-btn <?php echo esc_attr( $btn_class ); ?>" <?php echo esc_attr($btn_id); ?>>
 					<?php echo esc_html( $btn_text ); ?>
 
 					<?php
@@ -575,7 +575,7 @@ class ElementsKit_Widget_Button extends Widget_Base {
 
 				</a>
 				<?php elseif ($icon_align == 'left') : ?>
-				<a <?php echo $this->get_render_attribute_string( 'button' ); ?> class="elementskit-btn <?php echo esc_attr( $btn_class); ?>" <?php echo esc_attr($btn_id); ?>>
+				<a <?php echo $this->get_render_attribute_string( 'button' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> class="elementskit-btn <?php echo esc_attr( $btn_class); ?>" <?php echo esc_attr($btn_id); ?>>
 					
 					<?php
 						// new icon
@@ -595,7 +595,7 @@ class ElementsKit_Widget_Button extends Widget_Base {
 					<?php echo esc_html( $btn_text ); ?>
 				</a>
 				<?php else : ?>
-				<a <?php echo $this->get_render_attribute_string( 'button' ); ?> class="elementskit-btn <?php echo esc_attr( $btn_class); ?>" <?php echo esc_attr($btn_id); ?>>
+				<a <?php echo $this->get_render_attribute_string( 'button' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> class="elementskit-btn <?php echo esc_attr( $btn_class); ?>" <?php echo esc_attr($btn_id); ?>>
 					<?php echo esc_html( $btn_text ); ?>
 				</a>
 			<?php endif; ?>

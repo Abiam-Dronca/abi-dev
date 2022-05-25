@@ -2,7 +2,6 @@
 
 namespace ElementsKit_Lite\Libs\Xs_Migration;
 
-
 class Migration extends Data_Migration {
 
 
@@ -13,28 +12,28 @@ class Migration extends Data_Migration {
 	 *
 	 * @return array
 	 */
-	public function convert_from_1_4_7_to_1_4_8($wpOptionKey, $existingOption) {
+	public function convert_from_1_4_7_to_1_4_8( $wpOptionKey, $existingOption ) {
 
 		$log = $existingOption['_log'];
 
 		$log[] = '- This is a blank method for testing.';
 		$log[] = '- All functionality is checked and updated.';
 		$log[] = '- Updating method execution status to executed.';
-		$log[] = '- Method execution is finished at ' . date('Y-m-d H:i:s');
+		$log[] = '- Method execution is finished at ' . date( 'Y-m-d H:i:s' );
 
 		$fn = $existingOption['_func'];
 
-		$fn[__FUNCTION__] = self::STATUS_METHOD_EXECUTED;
+		$fn[ __FUNCTION__ ] = self::STATUS_METHOD_EXECUTED;
 
 		$existingOption['_func'] = $fn;
 		$existingOption['_log']  = $log;
 
-		update_option($wpOptionKey, $existingOption);
+		update_option( $wpOptionKey, $existingOption );
 
-		return [
+		return array(
 			'status' => 'success',
 			'log'    => $log,
-		];
+		);
 	}
 
 
@@ -49,23 +48,23 @@ class Migration extends Data_Migration {
 	 *
 	 * @return array
 	 */
-	public function skip__convert_from_1_5_7_to_1_5_8($wpOptionKey, $existingOption) {
+	public function skip__convert_from_1_5_7_to_1_5_8( $wpOptionKey, $existingOption ) {
 
 		$log = $existingOption['_log'];
 
-		$checkList = [];
+		$checkList = array();
 
-		if(empty($existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'])) {
+		if ( empty( $existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] ) ) {
 
-			$checkList['retrieve_all_post_ids']                                  = false;
-			$checkList['post_meta_data_processed']                               = false;
-			$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+			$checkList['retrieve_all_post_ids']                                    = false;
+			$checkList['post_meta_data_processed']                                 = false;
+			$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
 		} else {
-			$checkList = $existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'];
+			$checkList = $existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'];
 		}
 
-		if($checkList['retrieve_all_post_ids'] != self::SUB_ROUTINE_STATUS_DONE) {
+		if ( $checkList['retrieve_all_post_ids'] != self::SUB_ROUTINE_STATUS_DONE ) {
 
 			$ids = $this->get_all_post_ids_by_meta_key();
 
@@ -76,17 +75,17 @@ class Migration extends Data_Migration {
 
 			$log[] = '- All meta ids of _elementor_data key is retrieved.';
 
-			$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+			$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
-			$this->update_subroutine_status(__FUNCTION__, $log, $existingOption, $wpOptionKey);
+			$this->update_subroutine_status( __FUNCTION__, $log, $existingOption, $wpOptionKey );
 
-			return [
+			return array(
 				'status' => 'success',
 				'log'    => $log,
-			];
+			);
 		}
 
-		if($checkList['post_meta_data_processed'] != self::SUB_ROUTINE_STATUS_DONE) {
+		if ( $checkList['post_meta_data_processed'] != self::SUB_ROUTINE_STATUS_DONE ) {
 
 			/**
 			 * We have retrieved ids of all metas
@@ -95,7 +94,7 @@ class Migration extends Data_Migration {
 			 *
 			 */
 
-			if(!empty($checkList['_retrieve_log']['ids'])) {
+			if ( ! empty( $checkList['_retrieve_log']['ids'] ) ) {
 
 				$ids             = $checkList['_retrieve_log']['ids'];
 				$max_iteration   = $this->getMaxIteration();
@@ -105,19 +104,18 @@ class Migration extends Data_Migration {
 
 				$log[] = '- Processing retrieved ids';
 
-
-				while(!empty($ids)) {
+				while ( ! empty( $ids ) ) {
 					$count_iteration++;
-					$post_id = array_pop($ids);
+					$post_id = array_pop( $ids );
 
 					$log[] = '-- Fetching and correcting the entry of post - ' . $post_id;
 
-					$no_need = $this->fetch_and_correct_meta_value($post_id);
+					$no_need = $this->fetch_and_correct_meta_value( $post_id );
 
-					$tmp               .= $post_id . ', ';
-					$tmp_arr[$post_id] = $no_need;
+					$tmp                .= $post_id . ', ';
+					$tmp_arr[ $post_id ] = $no_need;
 
-					if($count_iteration >= $max_iteration) {
+					if ( $count_iteration >= $max_iteration ) {
 						break;
 					}
 				}
@@ -128,17 +126,16 @@ class Migration extends Data_Migration {
 				$checkList['_retrieve_log']['processed_log'] = $tmp_arr;
 				$checkList['_retrieve_log']['ids']           = $ids;
 
-				$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+				$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
-				$this->update_subroutine_status(__FUNCTION__, $log, $existingOption, $wpOptionKey);
+				$this->update_subroutine_status( __FUNCTION__, $log, $existingOption, $wpOptionKey );
 
-				return [
+				return array(
 					'status' => 'success',
 					'log'    => $log,
-				];
+				);
 
 			}
-
 
 			/**
 			 * the retrieved list is either empty or it is already processed
@@ -148,36 +145,35 @@ class Migration extends Data_Migration {
 
 			$checkList['post_meta_data_processed'] = self::SUB_ROUTINE_STATUS_DONE;
 
-			$log[] = '-- Subroutine is finished at ' . date('Y-m-d H:i:s');
+			$log[] = '-- Subroutine is finished at ' . date( 'Y-m-d H:i:s' );
 
-			$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+			$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
-			$this->update_subroutine_status(__FUNCTION__, $log, $existingOption, $wpOptionKey);
+			$this->update_subroutine_status( __FUNCTION__, $log, $existingOption, $wpOptionKey );
 
-			return [
+			return array(
 				'status' => 'success',
 				'log'    => $log,
-			];
+			);
 		}
 
 		$log[] = '- All subroutine is processed.';
 		$log[] = '- Updating method execution status to executed.';
-		$log[] = '- Method execution is finished at ' . date('Y-m-d H:i:s');
+		$log[] = '- Method execution is finished at ' . date( 'Y-m-d H:i:s' );
 
 		$fn = $existingOption['_func'];
 
-		$fn[__FUNCTION__] = self::STATUS_METHOD_EXECUTED;
+		$fn[ __FUNCTION__ ] = self::STATUS_METHOD_EXECUTED;
 
 		$existingOption['_func'] = $fn;
 		$existingOption['_log']  = $log;
 
-		update_option($wpOptionKey, $existingOption);
+		update_option( $wpOptionKey, $existingOption );
 
-
-		return [
+		return array(
 			'status' => 'success',
 			'log'    => $log,
-		];
+		);
 	}
 
 
@@ -191,7 +187,7 @@ class Migration extends Data_Migration {
 	 *
 	 * @return array
 	 */
-	public function convert_from_1_5_8_to_1_5_9($wpOptionKey, $existingOption) {
+	public function convert_from_1_5_8_to_1_5_9( $wpOptionKey, $existingOption ) {
 
 		/**
 		 * Two changes
@@ -205,20 +201,19 @@ class Migration extends Data_Migration {
 		 */
 		$log = $existingOption['_log'];
 
+		$checkList = array();
 
-		$checkList = [];
+		if ( empty( $existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] ) ) {
 
-		if(empty($existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'])) {
-
-			$checkList['duplicate_icl_translation']                              = false;
-			$checkList['retrieve_icl_string_id']                                 = false;
-			$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+			$checkList['duplicate_icl_translation']                                = false;
+			$checkList['retrieve_icl_string_id']                                   = false;
+			$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
 		} else {
-			$checkList = $existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'];
+			$checkList = $existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'];
 		}
 
-		if($checkList['retrieve_icl_string_id'] != self::SUB_ROUTINE_STATUS_DONE) {
+		if ( $checkList['retrieve_icl_string_id'] != self::SUB_ROUTINE_STATUS_DONE ) {
 
 			$ids = $this->get_all_ids();
 
@@ -228,17 +223,17 @@ class Migration extends Data_Migration {
 
 			$log[] = '- All translated strings id is retrieved.';
 
-			$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+			$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
-			$this->update_subroutine_status(__FUNCTION__, $log, $existingOption, $wpOptionKey);
+			$this->update_subroutine_status( __FUNCTION__, $log, $existingOption, $wpOptionKey );
 
-			return [
+			return array(
 				'status' => 'success',
 				'log'    => $log,
-			];
+			);
 		}
 
-		if($checkList['duplicate_icl_translation'] != self::SUB_ROUTINE_STATUS_DONE) {
+		if ( $checkList['duplicate_icl_translation'] != self::SUB_ROUTINE_STATUS_DONE ) {
 
 			/**
 			 * We have retrieved ids of all translated string in previous sub routine
@@ -247,7 +242,7 @@ class Migration extends Data_Migration {
 			 *
 			 */
 
-			if(!empty($checkList['_icl_log']['ids'])) {
+			if ( ! empty( $checkList['_icl_log']['ids'] ) ) {
 
 				$ids             = $checkList['_icl_log']['ids'];
 				$max_iteration   = $this->getMaxIteration();
@@ -257,19 +252,18 @@ class Migration extends Data_Migration {
 
 				$log[] = '- Processing retrieved ids';
 
-
-				while(!empty($ids)) {
+				while ( ! empty( $ids ) ) {
 					$count_iteration++;
-					$dup = array_pop($ids);
+					$dup = array_pop( $ids );
 
 					$log[] = '-- Fetching and duplicating the entry of id - ' . $dup;
 
-					$n_id = $this->fetch_and_duplicate($dup);
+					$n_id = $this->fetch_and_duplicate( $dup );
 
-					$tmp           .= $dup . ', ';
-					$tmp_arr[$dup] = $n_id;
+					$tmp            .= $dup . ', ';
+					$tmp_arr[ $dup ] = $n_id;
 
-					if($count_iteration >= $max_iteration) {
+					if ( $count_iteration >= $max_iteration ) {
 						break;
 					}
 				}
@@ -280,17 +274,16 @@ class Migration extends Data_Migration {
 				$checkList['_icl_log']['processed_log'] = $tmp_arr;
 				$checkList['_icl_log']['ids']           = $ids;
 
-				$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+				$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
-				$this->update_subroutine_status(__FUNCTION__, $log, $existingOption, $wpOptionKey);
+				$this->update_subroutine_status( __FUNCTION__, $log, $existingOption, $wpOptionKey );
 
-				return [
+				return array(
 					'status' => 'success',
 					'log'    => $log,
-				];
+				);
 
 			}
-
 
 			/**
 			 * the retrieved list is either empty or it is already processed
@@ -300,36 +293,35 @@ class Migration extends Data_Migration {
 
 			$checkList['duplicate_icl_translation'] = self::SUB_ROUTINE_STATUS_DONE;
 
-			$log[] = '-- Subroutine is finished at ' . date('Y-m-d H:i:s');
+			$log[] = '-- Subroutine is finished at ' . date( 'Y-m-d H:i:s' );
 
-			$existingOption['exec_plan'][__FUNCTION__]['progress']['check_list'] = $checkList;
+			$existingOption['exec_plan'][ __FUNCTION__ ]['progress']['check_list'] = $checkList;
 
-			$this->update_subroutine_status(__FUNCTION__, $log, $existingOption, $wpOptionKey);
+			$this->update_subroutine_status( __FUNCTION__, $log, $existingOption, $wpOptionKey );
 
-			return [
+			return array(
 				'status' => 'success',
 				'log'    => $log,
-			];
+			);
 		}
 
 		$log[] = '- All subroutine is processed.';
 		$log[] = '- Updating method execution status to executed.';
-		$log[] = '- Method execution is finished at ' . date('Y-m-d H:i:s');
+		$log[] = '- Method execution is finished at ' . date( 'Y-m-d H:i:s' );
 
 		$fn = $existingOption['_func'];
 
-		$fn[__FUNCTION__] = self::STATUS_METHOD_EXECUTED;
+		$fn[ __FUNCTION__ ] = self::STATUS_METHOD_EXECUTED;
 
 		$existingOption['_func'] = $fn;
 		$existingOption['_log']  = $log;
 
-		update_option($wpOptionKey, $existingOption);
+		update_option( $wpOptionKey, $existingOption );
 
-
-		return [
+		return array(
 			'status' => 'success',
 			'log'    => $log,
-		];
+		);
 	}
 
 
@@ -341,45 +333,41 @@ class Migration extends Data_Migration {
 	 *
 	 * @return int|string
 	 */
-	private function fetch_and_duplicate($id) {
+	private function fetch_and_duplicate( $id ) {
 
 		global $wpdb;
 
-		$qry = 'SELECT * FROM `' . $wpdb->prefix . 'icl_strings` AS ics WHERE `id`=\'' . intval($id) . '\'; ';
-
-		$row = $wpdb->get_row($qry, ARRAY_A);
+		$row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $wpdb->prefix . 'icl_strings` AS ics WHERE `id`= %d',  intval( $id ) ), ARRAY_A );
 
 		$str_id = '';
 
-		if(!empty($row)) {
+		if ( ! empty( $row ) ) {
 
-			unset($row['id']);
+			unset( $row['id'] );
 
 			$row['context'] = $this->getNewTextDomain();
 
-			$md5 = md5($this->getNewTextDomain() . $row['name'] . $row['gettext_context']);
+			$md5 = md5( $this->getNewTextDomain() . $row['name'] . $row['gettext_context'] );
 
 			$row['domain_name_context_md5'] = $md5;
 
-			$wpdb->insert($wpdb->prefix . 'icl_strings', $row);
+			$wpdb->insert( $wpdb->prefix . 'icl_strings', $row );
 
 			$str_id = $wpdb->insert_id;
 
-			if(empty($str_id)) {
+			if ( empty( $str_id ) ) {
 				return 0;
 			}
 
-			$query = 'SELECT * FROM `' . $wpdb->prefix . 'icl_string_translations` AS ics WHERE `string_id`=\'' . intval($id) . '\'; ';
+			$rows = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM `' . $wpdb->prefix . 'icl_string_translations` AS ics WHERE `string_id`= %d',  intval( $id ) ), ARRAY_A );
 
-			$rows = $wpdb->get_results($query, ARRAY_A);
+			foreach ( $rows as $entry ) {
 
-			foreach($rows as $entry) {
-
-				unset($entry['id']);
+				unset( $entry['id'] );
 
 				$entry['string_id'] = $str_id;
 
-				$wpdb->insert($wpdb->prefix . 'icl_string_translations', $entry);
+				$wpdb->insert( $wpdb->prefix . 'icl_string_translations', $entry );
 			}
 		}
 
@@ -398,19 +386,18 @@ class Migration extends Data_Migration {
 	 *
 	 * @return array
 	 */
-	private function update_subroutine_status($func, $log, $existingOption, $wpOptionKey) {
-
+	private function update_subroutine_status( $func, $log, $existingOption, $wpOptionKey ) {
 
 		$log[] = '- Entering into paused phase.';
 
 		$fn = $existingOption['_func'];
 
-		$fn[$func] = self::STATUS_METHOD_PAUSED;
+		$fn[ $func ] = self::STATUS_METHOD_PAUSED;
 
 		$existingOption['_func'] = $fn;
 		$existingOption['_log']  = $log;
 
-		update_option($wpOptionKey, $existingOption);
+		update_option( $wpOptionKey, $existingOption );
 
 		return $log;
 	}
@@ -425,11 +412,11 @@ class Migration extends Data_Migration {
 	 *
 	 * @return array
 	 */
-	private function get_all_ids($context = 'elementskit-lite') {
+	private function get_all_ids( $context = 'elementskit-lite' ) {
 
 		global $wpdb;
 
-		$ret = [];
+		$ret = array();
 		$tbl = $wpdb->prefix . 'icl_string_translations';
 
 		/**
@@ -437,19 +424,13 @@ class Migration extends Data_Migration {
 		 * by checking if table exists
 		 */
 
-		if($wpdb->get_var("SHOW TABLES LIKE '$tbl'") == $tbl) {
+		if ( $wpdb->get_var( $wpdb->prepare(  "SHOW TABLES LIKE %s", $tbl  ) ) == $tbl ) {
 
-			$qry = 'SELECT ict.id, ict.string_id, ict.language, ict.status, ics.context ';
-			$qry .= 'FROM `' . $tbl . '` AS ict ';
-			$qry .= 'LEFT JOIN `' . $wpdb->prefix . 'icl_strings` AS ics ON ict.string_id = ics.id ';
-			$qry .= 'WHERE ics.context = \'' . $context . '\';';
+			$rows = $wpdb->get_results( $wpdb->prepare( 'SELECT ict.id, ict.string_id, ict.language, ict.status, ics.context FROM `' . $wpdb->prefix . 'icl_string_translations` AS ict LEFT JOIN `' . $wpdb->prefix . 'icl_strings` AS ics ON ict.string_id = ics.id WHERE ics.context = %s', $context  ) );
 
-			$rows = $wpdb->get_results($qry);
+			foreach ( $rows as $row ) {
 
-
-			foreach($rows as $row) {
-
-				$ret[$row->string_id] = $row->string_id;
+				$ret[ $row->string_id ] = $row->string_id;
 			}
 		}
 
@@ -464,41 +445,33 @@ class Migration extends Data_Migration {
 	 *
 	 * @return array
 	 */
-	private function get_all_post_ids_by_meta_key($key = '_elementor_data') {
+	private function get_all_post_ids_by_meta_key( $key = '_elementor_data' ) {
 
 		global $wpdb;
 
-		$qry = 'SELECT meta_id, meta_key, post_id ';
-		$qry .= 'FROM `' . $wpdb->prefix . 'postmeta` ';
-		$qry .= 'WHERE meta_key = \'' . $key . '\';';
+		$rows = $wpdb->get_results( $wpdb->prepare( 'SELECT meta_id, meta_key, post_id FROM `' . $wpdb->prefix . 'postmeta` WHERE meta_key = %s',  $key) );
+		$ret  = array();
 
-		$rows = $wpdb->get_results($qry);
-		$ret  = [];
+		foreach ( $rows as $row ) {
 
-		foreach($rows as $row) {
-
-			$ret[$row->post_id] = $row->post_id;
+			$ret[ $row->post_id ] = $row->post_id;
 		}
 
 		return $ret;
 	}
 
 
-	private function get_post_meta_by_post_id($post_id, $key = '_elementor_data') {
+	private function get_post_meta_by_post_id( $post_id, $key = '_elementor_data' ) {
 
 		global $wpdb;
 
-		$qry = 'SELECT * ';
-		$qry .= 'FROM `' . $wpdb->prefix . 'postmeta` ';
-		$qry .= 'WHERE post_id = \'' . intval($post_id) . '\' AND meta_key = \'' . $key . '\';';
-
-		$row = $wpdb->get_row($qry);
+		$row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $wpdb->prefix . 'postmeta` WHERE post_id = %d AND meta_key = %s', intval( $post_id ), $key) );
 
 		return $row;
 	}
 
 
-	private function update_post_meta_by_meta_id($meta_id, $value) {
+	private function update_post_meta_by_meta_id( $meta_id, $value ) {
 
 		global $wpdb;
 
@@ -506,7 +479,7 @@ class Migration extends Data_Migration {
 
 		//$qry = 'UPDATE `'.$tbl.'` SET `meta_value` = \''.$value.'\'  WHERE `meta_id`=\''.intval($meta_id).'\';';
 
-		return $wpdb->update($tbl, array('meta_value' => $value,), array('meta_id' => intval($meta_id)), array('%s'), array('%d'));
+		return $wpdb->update( $tbl, array( 'meta_value' => $value ), array( 'meta_id' => intval( $meta_id ) ), array( '%s' ), array( '%d' ) );
 	}
 
 
@@ -519,16 +492,16 @@ class Migration extends Data_Migration {
 	 *
 	 * @return mixed
 	 */
-	private function fetch_and_correct_meta_value($post_id, $meta_key = '_elementor_data') {
+	private function fetch_and_correct_meta_value( $post_id, $meta_key = '_elementor_data' ) {
 
-		$row = $this->get_post_meta_by_post_id($post_id, $meta_key);
+		$row = $this->get_post_meta_by_post_id( $post_id, $meta_key );
 
 		$check_arr   = $this->get_original_string_array();
 		$replace_arr = $this->get_replace_string_array();
 
-		$modified = str_replace($check_arr, $replace_arr, $row->meta_value);
+		$modified = str_replace( $check_arr, $replace_arr, $row->meta_value );
 
-		return $this->update_post_meta_by_meta_id($row->meta_id, $modified);
+		return $this->update_post_meta_by_meta_id( $row->meta_id, $modified );
 
 		//get_post_meta($post_id, $meta_key, true);
 		//update_post_meta($post_id, $meta_key, $modified);
@@ -537,7 +510,7 @@ class Migration extends Data_Migration {
 
 	private function get_original_string_array() {
 
-		$original = [
+		$original = array(
 			'{"value":"icon icon-home","library":"ekiticons"}',
 			'{"value":"icon icon-apartment1","library":"ekiticons"}',
 			'{"value":"icon icon-pencil","library":"ekiticons"}',
@@ -1443,7 +1416,7 @@ class Migration extends Data_Migration {
 			'{"value":"icon icon-vertical-timeline","library":"ekiticons"}',
 			'{"value":"icon icon-video-player","library":"ekiticons"}',
 			'{"value":"icon icon-weather","library":"ekiticons"}',
-		];
+		);
 
 		return $original;
 	}
@@ -1451,7 +1424,7 @@ class Migration extends Data_Migration {
 
 	private function get_replace_string_array() {
 
-		$replace = [
+		$replace = array(
 			'{"value":"ekiticon ekiticon-home","library":"ekiticons"}',
 			'{"value":"ekiticon ekiticon-apartment1","library":"ekiticons"}',
 			'{"value":"ekiticon ekiticon-pencil","library":"ekiticons"}',
@@ -2357,7 +2330,7 @@ class Migration extends Data_Migration {
 			'{"value":"ekiticon ekiticon-vertical-timeline","library":"ekiticons"}',
 			'{"value":"ekiticon ekiticon-video-player","library":"ekiticons"}',
 			'{"value":"ekiticon ekiticon-weather","library":"ekiticons"}',
-		];
+		);
 
 		return $replace;
 	}

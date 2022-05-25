@@ -669,10 +669,7 @@ class ElementsKit_Widget_Wp_Forms extends Widget_Base {
         $settings = $this->get_settings();
 
 		if ( ! empty( $settings['ekit_wpform_form_id'] ) ) {
-            echo \ElementsKit_Lite\Utils::ekit_do_shortcode( 'wpforms', [
-                'id' => intval($settings['ekit_wpform_form_id']),
-            ] );
+            echo do_shortcode('[wpforms id="'.intval($settings['ekit_wpform_form_id']).'"]' );
 		}
-
 	}
 }

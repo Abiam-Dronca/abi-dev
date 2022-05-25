@@ -2833,9 +2833,9 @@ class ElementsKit_Widget_Blog_Posts extends Widget_Base {
        $post_query = new \WP_Query( $default );
 
        ?>
-        <div <?php echo $this->get_render_attribute_string('post_items'); ?>>
-        <?php  if ( 'elementskit-blog-block-post' == $ekit_blog_posts_layout_style ) {
-                $ekit_blog_posts_column = 'ekit-md-12';
+        <div <?php echo $this->get_render_attribute_string('post_items'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
+        <?php if ( 'elementskit-blog-block-post' == $ekit_blog_posts_layout_style ) {
+			$ekit_blog_posts_column = 'ekit-md-12';
         }
         $column_size   = 'ekit-md-12';
         $img_order     = 'order-1';
@@ -2855,122 +2855,121 @@ class ElementsKit_Widget_Blog_Posts extends Widget_Base {
                 $column_size = 'ekit-md-6';
             }
 
-                ob_start(); ?>
-                <h2 class="entry-title">
-                    <a href="<?php the_permalink(); ?>">
-                            <?php if($ekit_blog_posts_title_trim !='' || $ekit_blog_posts_title_trim > 0):
-                                echo \ElementsKit_Lite\Utils::trim_words(get_the_title(), $ekit_blog_posts_title_trim);
-                            else:
-                                the_title();
-                            endif; ?>
-                    </a>
-                </h2>
-                <?php $title_html = ob_get_clean();
-            $meta_data_html = '';
-            if ( 'yes' == $ekit_blog_posts_meta ):
-                ob_start(); ?>
-                <?php if($ekit_blog_posts_meta == 'yes' && $ekit_blog_posts_meta_select != '') : ?>
-                <div class="post-meta-list">
-                    <?php foreach($ekit_blog_posts_meta_select as $meta): ?>
-                        <?php if($meta == 'author'): ?>
-                            <span class="meta-author">
-                                <?php if( 'yes' == $ekit_blog_posts_author_image): ?>
-                                    <span class="author-img">
-                                        <?php echo get_avatar( get_the_author_meta( "ID" )); ?>
-                                    </span>
-                                <?php else: ?>
+			ob_start(); ?>
+				<h2 class="entry-title">
+					<a href="<?php the_permalink(); ?>">
+						<?php if($ekit_blog_posts_title_trim !='' || $ekit_blog_posts_title_trim > 0):
+							echo esc_html( wp_trim_words(get_the_title(), $ekit_blog_posts_title_trim) );
+						else:
+							the_title();
+						endif; ?>
+					</a>
+				</h2>
+			<?php $title_html = ob_get_clean();
 
-                                    <?php
-                                        // new icon
-                                        $migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_author_icons'] );
-                                        // Check if its a new widget without previously selected icon using the old Icon control
-                                        $is_new = empty( $settings['ekit_blog_posts_meta_author_icon'] );
-                                        if ( $is_new || $migrated ) {
-                                            // new icon
-                                            Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_author_icons'], [ 'aria-hidden' => 'true'] );
-                                        } else {
-                                            ?>
-                                            <i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_author_icon']); ?>" aria-hidden="true"></i>
-                                            <?php
-                                        }
-                                    ?>
+			$meta_data_html = '';
+			if ( 'yes' == $ekit_blog_posts_meta ):
+				ob_start(); ?>
+					<?php if($ekit_blog_posts_meta == 'yes' && $ekit_blog_posts_meta_select != '') : ?>
+						<div class="post-meta-list">
+							<?php foreach($ekit_blog_posts_meta_select as $meta): ?>
+								<?php if($meta == 'author'): ?>
+									<span class="meta-author">
+										<?php if( 'yes' == $ekit_blog_posts_author_image): ?>
+											<span class="author-img">
+												<?php echo get_avatar( get_the_author_meta( "ID" )); ?>
+											</span>
+										<?php else: ?>
 
-                                <?php endif; ?>
-                                <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" class="author-name"><?php the_author_meta('display_name'); ?></a>
-                            </span>
-                        <?php endif; ?>
-                        <?php if($meta == 'date'): ?>
-                            <span class="meta-date">
+											<?php
+												// new icon
+												$migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_author_icons'] );
+												// Check if its a new widget without previously selected icon using the old Icon control
+												$is_new = empty( $settings['ekit_blog_posts_meta_author_icon'] );
+												if ( $is_new || $migrated ) {
+													// new icon
+													Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_author_icons'], [ 'aria-hidden' => 'true'] );
+												} else {
+													?>
+													<i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_author_icon']); ?>" aria-hidden="true"></i>
+													<?php
+												}
+											?>
 
-                                <?php
-                                    // new icon
-                                    $migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_date_icons'] );
-                                    // Check if its a new widget without previously selected icon using the old Icon control
-                                    $is_new = empty( $settings['ekit_blog_posts_meta_date_icon'] );
-                                    if ( $is_new || $migrated ) {
-                                        // new icon
-                                        Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_date_icons'], [ 'aria-hidden' => 'true' ] );
-                                    } else {
-                                        ?>
-                                        <i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_date_icon']); ?>" aria-hidden="true"></i>
-                                        <?php
-                                    }
-                                ?>
+										<?php endif; ?>
+										<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" class="author-name"><?php the_author_meta('display_name'); ?></a>
+									</span>
+								<?php endif; ?>
+								<?php if($meta == 'date'): ?>
+									<span class="meta-date">
 
-                                <span class="meta-date-text">
-                                    <?php echo esc_html( get_the_date() ); ?>
-                                </span>
-                            </span>
-                        <?php endif; ?>
-                        <?php if($meta == 'category'): ?>
-                            <span class="post-cat">
+										<?php
+											// new icon
+											$migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_date_icons'] );
+											// Check if its a new widget without previously selected icon using the old Icon control
+											$is_new = empty( $settings['ekit_blog_posts_meta_date_icon'] );
+											if ( $is_new || $migrated ) {
+												// new icon
+												Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_date_icons'], [ 'aria-hidden' => 'true' ] );
+											} else {
+												?>
+												<i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_date_icon']); ?>" aria-hidden="true"></i>
+												<?php
+											}
+										?>
 
-                                <?php
-                                    // new icon
-                                    $migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_category_icons'] );
-                                    // Check if its a new widget without previously selected icon using the old Icon control
-                                    $is_new = empty( $settings['ekit_blog_posts_meta_category_icon'] );
-                                    if ( $is_new || $migrated ) {
-                                        // new icon
-                                        Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_category_icons'], [ 'aria-hidden' => 'true' ] );
-                                    } else {
-                                        ?>
-                                        <i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_category_icon']); ?>" aria-hidden="true"></i>
-                                        <?php
-                                    }
-                                ?>
+										<span class="meta-date-text">
+											<?php echo esc_html( get_the_date() ); ?>
+										</span>
+									</span>
+								<?php endif; ?>
+								<?php if($meta == 'category'): ?>
+									<span class="post-cat">
 
-                                <?php echo get_the_category_list( ' | ' ); ?>
-                            </span>
-                        <?php endif; ?>
-                        <?php if($meta == 'comment'): ?>
-                            <span class="post-comment">
+										<?php
+											// new icon
+											$migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_category_icons'] );
+											// Check if its a new widget without previously selected icon using the old Icon control
+											$is_new = empty( $settings['ekit_blog_posts_meta_category_icon'] );
+											if ( $is_new || $migrated ) {
+												// new icon
+												Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_category_icons'], [ 'aria-hidden' => 'true' ] );
+											} else {
+												?>
+												<i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_category_icon']); ?>" aria-hidden="true"></i>
+												<?php
+											}
+										?>
 
-                                <?php
-                                    // new icon
-                                    $migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_comment_icons'] );
-                                    // Check if its a new widget without previously selected icon using the old Icon control
-                                    $is_new = empty( $settings['ekit_blog_posts_meta_comment_icon'] );
-                                    if ( $is_new || $migrated ) {
-                                        // new icon
-                                        Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_comment_icons'], [ 'aria-hidden' => 'true' ] );
-                                    } else {
-                                        ?>
-                                        <i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_comment_icon']); ?>" aria-hidden="true"></i>
-                                        <?php
-                                    }
-                                ?>
+										<?php echo get_the_category_list( ' | ' ); // phpcs:ignore WordPress.Security.EscapeOutput -- Already escaped by WordPress ?>
+									</span>
+								<?php endif; ?>
+								<?php if($meta == 'comment'): ?>
+									<span class="post-comment">
 
-                                <a href="<?php comments_link(); ?>"><?php echo esc_html( get_comments_number() ); ?></a>
-                            </span>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
-                <?php
-                $meta_data_html .= ob_get_clean();
-            endif;
+										<?php
+											// new icon
+											$migrated = isset( $settings['__fa4_migrated']['ekit_blog_posts_meta_comment_icons'] );
+											// Check if its a new widget without previously selected icon using the old Icon control
+											$is_new = empty( $settings['ekit_blog_posts_meta_comment_icon'] );
+											if ( $is_new || $migrated ) {
+												// new icon
+												Icons_Manager::render_icon( $settings['ekit_blog_posts_meta_comment_icons'], [ 'aria-hidden' => 'true' ] );
+											} else {
+												?>
+												<i class="<?php echo esc_attr($settings['ekit_blog_posts_meta_comment_icon']); ?>" aria-hidden="true"></i>
+												<?php
+											}
+										?>
 
+										<a href="<?php comments_link(); ?>"><?php echo esc_html( get_comments_number() ); ?></a>
+									</span>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</div>
+					<?php endif;
+				$meta_data_html .= ob_get_clean();
+			endif;
 
             $column_size = self::format_colname($column_size);
             $ekit_blog_posts_column = self::format_colname($ekit_blog_posts_column);
@@ -2992,31 +2991,31 @@ class ElementsKit_Widget_Blog_Posts extends Widget_Base {
                                 <div class="elementskit-post-body <?php echo esc_attr($highlight_border); ?>">
                                     <div class="elementskit-entry-header">
                                         <?php if ( 'yes' == $ekit_blog_posts_title && 'before_meta' == $ekit_blog_posts_title_position ): ?>
-                                                <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
+											<?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
                                         <?php endif; ?>
 
                                             <?php if ('after_content' != $ekit_blog_posts_title_position ): ?>
-                                                <?php echo $meta_data_html;  ?>
+                                                <?php echo $meta_data_html; // phpcs:ignore WordPress.Security.EscapeOutput -- Buffering output line number 2972 ?>
                                             <?php endif; ?>
 
                                             <?php if ('yes' == $ekit_blog_posts_title && 'after_content' == $ekit_blog_posts_title_position ): ?>
-                                                <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
+                                                <?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
                                             <?php endif; ?>
 
                                             <?php if ( 'yes' == $ekit_blog_posts_title && 'after_meta' == $ekit_blog_posts_title_position ): ?>
-                                                <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
+                                                <?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
                                             <?php endif; ?>
                                     </div><!-- .elementskit-entry-header END -->
 
                                     <?php if ( 'yes' == $ekit_blog_posts_content ): ?>
                                         <div class="elementskit-post-footer">
                                             <?php if($ekit_blog_posts_content_trim !='' || $ekit_blog_posts_content_trim > 0): ?>
-                                                <p><?php echo \ElementsKit_Lite\Utils::trim_words(get_the_excerpt(), $ekit_blog_posts_content_trim); ?></p>
+                                                <p><?php echo esc_html( wp_trim_words(get_the_excerpt(), $ekit_blog_posts_content_trim) ); ?></p>
                                             <?php else: ?>
-                                                <?php echo the_excerpt(); ?>
+                                                <?php the_excerpt(); ?>
                                             <?php endif; ?>
                                             <?php if ( 'after_content' == $ekit_blog_posts_title_position ): ?>
-                                                <?php echo $meta_data_html;  ?>
+                                                <?php echo $meta_data_html; // phpcs:ignore WordPress.Security.EscapeOutput -- Buffering output line number 2972 ?>
                                             <?php endif; ?>
                                         </div><!-- .elementskit-post-footer END -->
                                     <?php endif; ?>
@@ -3047,70 +3046,70 @@ class ElementsKit_Widget_Blog_Posts extends Widget_Base {
                             <?php if('yes' == $settings['ekit_blog_posts_floating_category']) : ?>
                                 <div class="elementskit-meta-categories">
                                     <span class="elementskit-meta-wraper">
-                                        <span><?php echo get_the_category_list( '</span><span>' ); ?></span>
+                                        <span><?php echo get_the_category_list( '</span><span>' ); // phpcs:ignore WordPress.Security.EscapeOutput -- Already escaped by WordPress ?></span>
                                     </span>
                                 </div>
                             <?php endif; ?>
 
-                            <?php if ( 'elementskit-post-card' == $ekit_blog_posts_layout_style):
-                                    if('yes' == $ekit_blog_posts_title && 'before_meta' == $ekit_blog_posts_title_position ): ?>
-                                        <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
+							<?php if ( 'elementskit-post-card' == $ekit_blog_posts_layout_style) :
+								if('yes' == $ekit_blog_posts_title && 'before_meta' == $ekit_blog_posts_title_position ): ?>
+									<?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 
-                                        <?php if ( 'yes' == $ekit_blog_posts_title_separator ): ?>
-                                            <span class="elementskit-border-hr"></span>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
+									<?php if ( 'yes' == $ekit_blog_posts_title_separator ): ?>
+										<span class="elementskit-border-hr"></span>
+									<?php endif; ?>
+								<?php endif; ?>
 
-                                    <?php if ( 'after_content' != $ekit_blog_posts_title_position ): ?>
-                                        <?php echo $meta_data_html; ?>
-                                    <?php endif; ?>
+								<?php if ( 'after_content' != $ekit_blog_posts_title_position ): ?>
+									<?php echo $meta_data_html; // phpcs:ignore WordPress.Security.EscapeOutput -- Buffering output line number 2972 ?>
+								<?php endif; ?>
 
-                                    <?php if ( 'yes' == $ekit_blog_posts_title && 'after_content' == $ekit_blog_posts_title_position ): ?>
-                                        <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
+								<?php if ( 'yes' == $ekit_blog_posts_title && 'after_content' == $ekit_blog_posts_title_position ): ?>
+									<?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 
-                                        <?php if ( 'yes' == $ekit_blog_posts_title_separator ): ?>
-                                            <span class="elementskit-border-hr"></span>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
+									<?php if ( 'yes' == $ekit_blog_posts_title_separator ): ?>
+										<span class="elementskit-border-hr"></span>
+									<?php endif; ?>
+								<?php endif; ?>
 
-                                    <?php if ( 'yes' == $ekit_blog_posts_title && 'after_meta' == $ekit_blog_posts_title_position ): ?>
-                                        <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
+								<?php if ( 'yes' == $ekit_blog_posts_title && 'after_meta' == $ekit_blog_posts_title_position ): ?>
+									<?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 
-                                        <?php if ( 'yes' == $ekit_blog_posts_title_separator ): ?>
-                                            <span class="elementskit-border-hr"></span>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                        </div><!-- .elementskit-entry-header END -->
+									<?php if ( 'yes' == $ekit_blog_posts_title_separator ): ?>
+										<span class="elementskit-border-hr"></span>
+									<?php endif; ?>
+								<?php endif; ?>
+							<?php endif; ?>
+						</div><!-- .elementskit-entry-header END -->
 
-                        <div class="elementskit-post-body <?php echo esc_attr($highlight_border); ?>">
-                            <?php if ( 'elementskit-post-image-card' == $ekit_blog_posts_layout_style):
-                                        if ('yes' == $ekit_blog_posts_title && 'before_meta' == $ekit_blog_posts_title_position ): ?>
-                                        <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
-                                        <?php endif; ?>
+						<div class="elementskit-post-body <?php echo esc_attr($highlight_border); ?>">
+							<?php if ( 'elementskit-post-image-card' == $ekit_blog_posts_layout_style):
+								if ('yes' == $ekit_blog_posts_title && 'before_meta' == $ekit_blog_posts_title_position ): ?>
+									<?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
+								<?php endif; ?>
 
-                                        <?php if ( 'after_content' != $ekit_blog_posts_title_position ): ?>
-                                        <?php echo $meta_data_html;  ?>
-                                        <?php endif; ?>
+								<?php if ( 'after_content' != $ekit_blog_posts_title_position ): ?>
+									<?php echo $meta_data_html; // phpcs:ignore WordPress.Security.EscapeOutput -- Buffering output line number 2972 ?>
+								<?php endif; ?>
 
-                                        <?php if ( 'yes' == $ekit_blog_posts_title && 'after_content' == $ekit_blog_posts_title_position ): ?>
-                                        <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
-                                        <?php endif; ?>
+								<?php if ( 'yes' == $ekit_blog_posts_title && 'after_content' == $ekit_blog_posts_title_position ): ?>
+									<?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
+								<?php endif; ?>
 
-                                        <?php if ( 'yes' == $ekit_blog_posts_title && 'after_meta' == $ekit_blog_posts_title_position ): ?>
-                                        <?php echo \ElementsKit_Lite\Utils::kses($title_html);  ?>
-                                        <?php endif; ?>
-                                <?php endif; ?>
-                            <?php if ( 'yes' == $ekit_blog_posts_content ): ?>
-                                <?php if($ekit_blog_posts_content_trim !='' || $ekit_blog_posts_content_trim > 0): ?>
-                                        <p><?php echo \ElementsKit_Lite\Utils::trim_words(get_the_excerpt(), $ekit_blog_posts_content_trim); ?></p>
-                                    <?php else: ?>
-                                        <?php echo the_excerpt(); ?>
-                                    <?php endif; ?>
-                            <?php endif; ?>
-                            <?php if ( 'after_content' == $ekit_blog_posts_title_position ): ?>
-                                    <?php echo $meta_data_html;  ?>
-                                <?php endif; ?>
+								<?php if ( 'yes' == $ekit_blog_posts_title && 'after_meta' == $ekit_blog_posts_title_position ): ?>
+									<?php echo wp_kses($title_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
+								<?php endif; ?>
+							<?php endif; ?>
+							<?php if ( 'yes' == $ekit_blog_posts_content ): ?>
+								<?php if($ekit_blog_posts_content_trim !='' || $ekit_blog_posts_content_trim > 0): ?>
+									<p><?php echo esc_html( wp_trim_words(get_the_excerpt(), $ekit_blog_posts_content_trim) ); ?></p>
+								<?php else: ?>
+									<?php the_excerpt(); ?>
+								<?php endif; ?>
+							<?php endif; ?>
+							<?php if ( 'after_content' == $ekit_blog_posts_title_position ): ?>
+									<?php echo $meta_data_html; // phpcs:ignore WordPress.Security.EscapeOutput -- Buffering output line number 2972 ?>
+							<?php endif; ?>
                             <?php
                             if($ekit_blog_posts_read_more == 'yes'):
                                 $btn_text = $settings['ekit_blog_posts_btn_text'];

@@ -1509,7 +1509,6 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
         // end style section for buttun
 
         $this->insert_pro_message();
-
     }
 
     protected function render( ) {
@@ -1582,18 +1581,18 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
         $image_pos = 'image-box-img-' . $ekit_image_box_content_text_align_value_escape;
 ?>
 
-            <div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string('wrapper')); ?> >
+            <div <?php echo ($this->get_render_attribute_string('wrapper')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> >
 
                 <?php if($settings['ekit_image_box_enable_link'] == 'yes' && isset($settings['ekit_image_box_website_link']['url'])) {
                     $this->add_link_attributes( 'button', $settings['ekit_image_box_website_link'] );
 
-                    echo "<a ". $this->get_render_attribute_string( 'button' ) .">";
+                    echo "<a ". $this->get_render_attribute_string( 'button' )  .">"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor
                 }
                 ?>
 
-                <div class="elementskit-box-header <?php echo \ElementsKit_Lite\Utils::render($image_pos); ?>">
+                <div class="elementskit-box-header <?php echo esc_attr($image_pos); ?>">
 
-                    <?php echo  \ElementsKit_Lite\Utils::render($image_html); ?>
+                    <?php echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 
                 </div>
                 <?php if($settings['ekit_image_box_enable_link'] == 'yes' && isset($settings['ekit_image_box_website_link']['url'])) {
@@ -1605,7 +1604,7 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
                         <?php
                         if ($settings['ekit_image_box_title_text'] != '') :
                         ?>
-                        <<?php echo \ElementsKit_Lite\Utils::esc_options($settings['ekit_image_box_title_size'], $options_ekit_image_box_title_size, 'h3'); ?> class="elementskit-info-box-title">
+                        <<?php echo in_array($settings['ekit_image_box_title_size'], $options_ekit_image_box_title_size) ? esc_attr($settings['ekit_image_box_title_size']) : 'h3'; ?> class="elementskit-info-box-title">
 
                         <?php if(($settings['ekit_image_box_front_title_icons'] != '') && ($settings['ekit_image_box_front_title_icon_position'] == 'left') && ($settings['ekit_image_box_style_simple'] == 'floating-style')) : ?>
 
@@ -1626,7 +1625,10 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
 
                         <?php endif; ?>
 
-                        <?php echo \ElementsKit_Lite\Utils::render($link_wrapper_start . esc_html($settings['ekit_image_box_title_text']) . $link_wrapper_end); ?>
+                        <?php
+				    $ekit_image_box_title_html = ($link_wrapper_start . ($settings['ekit_image_box_title_text']) . $link_wrapper_end);
+                        echo wp_kses($ekit_image_box_title_html, \ElementsKit_Lite\Utils::get_kses_array());
+				    ?>
 
                         <?php if(($settings['ekit_image_box_front_title_icons'] != '') && ($settings['ekit_image_box_front_title_icon_position'] == 'right') && ($settings['ekit_image_box_style_simple'] == 'floating-style')) : ?>
                                 
@@ -1647,7 +1649,7 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
 
                         <?php endif; ?>
 
-                    </<?php echo \ElementsKit_Lite\Utils::esc_options($settings['ekit_image_box_title_size'], $options_ekit_image_box_title_size, 'h3'); ?>>
+                    </<?php echo in_array($settings['ekit_image_box_title_size'], $options_ekit_image_box_title_size) ? esc_attr($settings['ekit_image_box_title_size']) : 'h3'; ?>>
                     <?php
 
                         endif;
@@ -1655,7 +1657,7 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
                     <?php if ($settings['ekit_image_box_description_text'] != '') { ?>
                     <div class="elementskit-box-style-content">
                         <?php
-                        echo \ElementsKit_Lite\Utils::kses($settings['ekit_image_box_description_text']);
+                        echo wp_kses($settings['ekit_image_box_description_text'], \ElementsKit_Lite\Utils::get_kses_array())
                         ?>
                     </div>
                     <?php }; ?>
@@ -1666,7 +1668,7 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
                     <div class="box-footer">
                         <div class="btn-wraper">
                             <?php if($settings['ekit_image_box_icon_align'] == 'right'): ?>
-                                <a <?php echo $this->get_render_attribute_string( 'button-2' ); ?> class="elementskit-btn whitespace--normal">
+                                <a <?php echo $this->get_render_attribute_string( 'button-2' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> class="elementskit-btn whitespace--normal">
                                     <?php echo esc_html( $btn_text ); ?>
 
                                     <?php
@@ -1686,7 +1688,7 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
 
                                 </a>
                                 <?php elseif ($settings['ekit_image_box_icon_align'] == 'left') : ?>
-                                <a <?php echo $this->get_render_attribute_string( 'button-2' ); ?> class="elementskit-btn whitespace--normal">
+                                <a <?php echo $this->get_render_attribute_string( 'button-2' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor?> class="elementskit-btn whitespace--normal">
                                     
                                     <?php
                                         // new icon
@@ -1706,7 +1708,7 @@ class ElementsKit_Widget_Image_Box extends Widget_Base {
                                     <?php echo esc_html( $btn_text ); ?>
                                 </a>
                                 <?php else : ?>
-                                <a <?php echo $this->get_render_attribute_string( 'button-2' ); ?> class="elementskit-btn whitespace--normal">
+                                <a <?php echo $this->get_render_attribute_string( 'button-2' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?> class="elementskit-btn whitespace--normal">
                                     <?php echo esc_html( $btn_text ); ?>
                                 </a>
                             <?php endif; ?>

@@ -2305,13 +2305,13 @@ class ElementsKit_Widget_Team extends Widget_Base {
 		<?php if($ekit_team_style == 'long_height_details'): ?> <div class="profile-square-v square-v6 no_gutters"> <?php endif; ?>
 		<?php if($ekit_team_style == 'long_height_details_hover'): ?> <div class="profile-square-v square-v6 square-v6-v2 no_gutters"><?php endif; ?>
 
-		<div <?php echo $this->get_render_attribute_string('profile_card'); ?>>
+		<div <?php echo $this->get_render_attribute_string('profile_card'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 			<?php if ($settings['ekit_team_chose_popup'] == 'yes') : ?>
 				<a href="javascript:void(0)" data-mfp-src="#ekit_team_modal_<?php echo esc_attr($this->get_id()); ?>" class="ekit-team-popup">
 			<?php endif; ?>
 			
 				<div class="profile-header ekit-team-img <?php echo esc_attr($ekit_team_style == 'default' ? 'ekit-img-overlay ekit-team-img-block' : ''); ?>" <?php if ( (isset($settings['ekit_team_chose_popup']) ? $ekit_team_chose_popup : 'no')  == 'yes') :?> data-toggle="modal" data-target="ekit_team_modal_#<?php echo esc_attr($this->get_id()); ?>" <?php endif; ?>>
-					<?php echo \ElementsKit_Lite\Utils::kses($image_html); ?>
+					<?php echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 				</div><!-- .profile-header END -->
 			<?php if ($settings['ekit_team_chose_popup'] == 'yes') : ?>
 				</a>
@@ -2350,7 +2350,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
 					</h2>
 					<p class="profile-designation"><?php echo esc_html( $ekit_team_position ); ?></p>
 					<?php if($ekit_team_show_short_description == 'yes' && $ekit_team_short_description != ''): ?>
-					<p class="profile-content"><?php echo \ElementsKit_Lite\Utils::kses($ekit_team_short_description); ?></p>
+					<p class="profile-content"><?php echo wp_kses($ekit_team_short_description, \ElementsKit_Lite\Utils::get_kses_array()); ?></p>
 					<?php endif;?>
 				</div><!-- .profile-body END -->
 
@@ -2373,13 +2373,13 @@ class ElementsKit_Widget_Team extends Widget_Base {
 					<div class="profile-image-card elementor-animation-<?php echo esc_attr($team_hover_animation) ?> ekit-team-img ekit-team-style-<?php echo esc_attr($ekit_team_style); ?> <?php if(isset($ekit_team_content_text_align)) { echo esc_attr($ekit_team_content_text_align);} ?>">
 
 						<?php if($ekit_team_style == 'long_height_hover'){ ?>
-							<?php echo \ElementsKit_Lite\Utils::kses($image_html); ?>
+							<?php echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 						<?php
 							$modalClass = 'team-sidebar_'.$ekit_team_style.'';
 						}else{
 							$modalClass = 'team-modal_'.$ekit_team_style.'';
 						?>
-							<?php echo \ElementsKit_Lite\Utils::kses($image_html); ?>
+							<?php echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 						<?php }?>
 						<div class="hover-area">
 							<div class="profile-body">
@@ -2394,7 +2394,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
 								</h2>
 								<p class="profile-designation"><?php echo esc_html( $ekit_team_position ); ?></p>
 								<?php if($ekit_team_show_short_description == 'yes' && $ekit_team_short_description != ''): ?>
-								<p class="profile-content"><?php echo \ElementsKit_Lite\Utils::kses($ekit_team_short_description); ?></p>
+								<p class="profile-content"><?php echo wp_kses($ekit_team_short_description, \ElementsKit_Lite\Utils::get_kses_array()); ?></p>
 								<?php endif;?>
 							</div>
 							<?php if(isset($ekit_team_socail_enable) && $ekit_team_socail_enable == 'yes'){?>
@@ -2416,7 +2416,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
 				<div class="profile-square-v square-v4 elementor-animation-<?php echo esc_attr($team_hover_animation) ?> ekit-team-style-<?php echo esc_attr($ekit_team_style); ?>">
 					<div class="profile-card <?php if(isset($ekit_team_content_text_align)) { echo esc_attr($ekit_team_content_text_align);} ?>">
 						<div class="profile-header ekit-team-img" <?php if ($settings['ekit_team_chose_popup'] == 'yes') :?> data-toggle="modal" data-target="#ekit_team_modal_<?php echo esc_attr($this->get_id()); ?>" <?php endif; ?>>
-							<?php echo \ElementsKit_Lite\Utils::kses($image_html); ?>
+							<?php echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 						</div><!-- .profile-header END -->
 						<div class="profile-body">
 							<h2 class="profile-title">
@@ -2430,7 +2430,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
 							</h2>
 							<p class="profile-designation"><?php echo esc_html( $ekit_team_position ); ?></p>
 							<?php if($ekit_team_show_short_description == 'yes' && $ekit_team_short_description != ''): ?>
-							<p class="profile-content"><?php echo \ElementsKit_Lite\Utils::kses($ekit_team_short_description); ?></p>
+							<p class="profile-content"><?php echo wp_kses($ekit_team_short_description, \ElementsKit_Lite\Utils::get_kses_array()); ?></p>
 							<?php endif;?>
 							<?php
 								if ( isset($ekit_team_socail_enable) && $ekit_team_socail_enable == 'yes' ) {
@@ -2453,7 +2453,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
 						<div class="modal-body">
 							<?php if ( !empty($image_html) ) { ?>
 								<div class="ekit-team-modal-img">
-									<?php echo \ElementsKit_Lite\Utils::kses($image_html); ?>
+									<?php echo wp_kses($image_html, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 								</div>
 							<?php } ?>
 
@@ -2462,7 +2462,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
 								<p class="ekit-team-modal-position"><?php echo esc_html( $ekit_team_position ); ?></p>
 								
 								<div class="ekit-team-modal-content">
-									<?php echo \ElementsKit_Lite\Utils::kses($ekit_team_description); ?>
+									<?php echo wp_kses($ekit_team_description, \ElementsKit_Lite\Utils::get_kses_array()); ?>
 								</div>
 
 								<?php if ( $ekit_team_phone || $ekit_team_email ) { ?>

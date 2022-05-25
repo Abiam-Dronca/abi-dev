@@ -1000,7 +1000,7 @@ class ElementsKit_Widget_Page_List extends Widget_Base {
 			$this->add_render_attribute( 'list_item', 'class', 'elementor-inline-item' );
 		}
 		?>
-		<div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'icon_list' )); ?>>
+		<div <?php echo ($this->get_render_attribute_string( 'icon_list' )); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 			<?php
 			foreach ( $settings['icon_list'] as $index => $item ) :
 				$post = '';
@@ -1035,7 +1035,7 @@ class ElementsKit_Widget_Page_List extends Widget_Base {
 					$text = empty($item['text']) ? $post->post_title : $item['text'];
 				?>
 				<div class="elementor-icon-list-item <?php echo esc_attr($grid_d); ?> <?php echo esc_attr($grid_t); ?> <?php echo esc_attr($grid_m); ?>" >
-					<a <?php echo esc_attr($target); ?> rel="<?php echo esc_attr($rel);?>"  href="<?php echo esc_url($href); ?>" class="elementor-repeater-item-<?php echo esc_attr( $item[ '_id' ] ); ?> <?php echo \ElementsKit_Lite\Utils::render( esc_attr( $settings['ekit_menu_list_label_align'] ) ); ?>">
+					<a <?php echo esc_attr($target); ?> rel="<?php echo esc_attr($rel);?>"  href="<?php echo esc_url($href); ?>" class="elementor-repeater-item-<?php echo esc_attr( $item[ '_id' ] ); ?> <?php echo  esc_attr( $settings['ekit_menu_list_label_align'] ); ?>">
 						<div class="ekit_page_list_content">
 							<?php if ( ! empty( $item['icons'] ) && $item['ekit_page_list_show_icon'] == 'yes') : ?>
 								<span class="elementor-icon-list-icon">
@@ -1056,7 +1056,7 @@ class ElementsKit_Widget_Page_List extends Widget_Base {
 								</span>
 							<?php endif; ?>
 							<span class="elementor-icon-list-text">
-								<span class="ekit_page_list_title_title"><?php echo \ElementsKit_Lite\Utils::render( esc_html( $text ) ); ?></span>
+								<span class="ekit_page_list_title_title"><?php echo esc_html( $text ); ?></span>
 								<?php if ($item['ekit_menu_widget_sub_title'] != '') : ?>
 								<span class="ekit_menu_subtitle"><?php echo esc_html($item['ekit_menu_widget_sub_title']); ?></span>
 								<?php endif; ?>
@@ -1064,7 +1064,7 @@ class ElementsKit_Widget_Page_List extends Widget_Base {
 						</div>
 						<?php if ( ! empty( $item['ekit_menu_list_label_title'] ) && $item['ekit_menu_list_show_label'] == 'yes') : ?>
 						    <span class="ekit_menu_label">
-                                <?php echo \ElementsKit_Lite\Utils::render( esc_html( $item['ekit_menu_list_label_title'] ) ); ?>
+                                <?php echo esc_html( $item['ekit_menu_list_label_title'] ); ?>
 						    </span>
 						<?php endif; ?>
 					</a>

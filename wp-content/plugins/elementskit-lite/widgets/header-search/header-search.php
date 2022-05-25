@@ -370,7 +370,6 @@ class ElementsKit_Widget_Header_Search extends Widget_Base
 		$this->end_controls_section();
 
         $this->insert_pro_message();
-
     }
 
 

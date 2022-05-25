@@ -188,7 +188,7 @@ class ElementsKit_Widget_Drop_Caps extends Widget_Base {
 		?>
 		<div class="ekit-dropcap-wraper">
 			<?php if( !empty( $settings['ekit_dropcaps_text'] ) ) : ?>
-			<p class="ekit-dropcap-cotnent"><?php echo \ElementsKit_Lite\Utils::kses($settings['ekit_dropcaps_text'])?></p>
+			<p class="ekit-dropcap-cotnent"><?php echo wp_kses($settings['ekit_dropcaps_text'], \ElementsKit_Lite\Utils::get_kses_array()); ?></p>
 			<?php endif; ?>
 		</div>
         <?php

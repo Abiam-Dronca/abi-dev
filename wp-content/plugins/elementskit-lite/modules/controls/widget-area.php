@@ -26,11 +26,11 @@ class Widget_Area extends \Elementor\Base_Data_Control {
 	 */
 	public function enqueue() {
 		// styles
-		wp_register_style( 'elementskit-css-widgetarea-control-inspactor',  Init::get_url() . 'assets/css/widgetarea-inspactor.css', [], '1.0.0' );
+		wp_register_style( 'elementskit-css-widgetarea-control-inspactor', Init::get_url() . 'assets/css/widgetarea-inspactor.css', array(), '1.0.0' );
 		wp_enqueue_style( 'elementskit-css-widgetarea-control-inspactor' );
 
 		// script
-		wp_register_script( 'elementskit-js-widgetarea-control-inspactor',  Init::get_url() . 'assets/js/widgetarea-inspactor.js' );
+		wp_register_script( 'elementskit-js-widgetarea-control-inspactor', Init::get_url() . 'assets/js/widgetarea-inspactor.js' );
 		wp_enqueue_script( 'elementskit-js-widgetarea-control-inspactor' );
 	}
 
@@ -49,9 +49,9 @@ class Widget_Area extends \Elementor\Base_Data_Control {
 		$control_uid = $this->get_control_uid();
 		?>
 		<div style="display:none" class="elementor-control-field">
-			<label for="<?php echo esc_attr($control_uid); ?>" class="elementor-control-title">{{{ data.label }}}</label>
+			<label for="<?php echo esc_attr( $control_uid ); ?>" class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-input-wrapper">
-				<input id="<?php echo esc_attr($control_uid); ?>" type="text" data-setting="{{ data.name }}" />
+				<input id="<?php echo esc_attr( $control_uid ); ?>" type="text" data-setting="{{ data.name }}" />
 			</div>
 		</div>
 		<# if ( data.description ) { #>
@@ -72,9 +72,9 @@ class Widget_Area extends \Elementor\Base_Data_Control {
 	 * @return array Control default settings.
 	 */
 	protected function get_default_settings() {
-		return [
-			'label_block' => true,
+		return array(
+			'label_block'      => true,
 			'show_edit_button' => false,
-		];
+		);
 	}
 }

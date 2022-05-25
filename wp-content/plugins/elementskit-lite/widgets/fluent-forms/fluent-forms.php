@@ -55,7 +55,6 @@ class ElementsKit_Widget_Fluent_Forms extends Widget_Base {
         }
 
         return $forms;
-
     }
 
     protected function register_controls() {
@@ -2651,7 +2650,7 @@ class ElementsKit_Widget_Fluent_Forms extends Widget_Base {
 
         if ( ! empty( $form_list_id_sanitize ) ) { ?>
 
-            <div <?php echo $this->get_render_attribute_string('ekit_fluent_forms_widget_wrapper'); ?>>
+            <div <?php echo $this->get_render_attribute_string('ekit_fluent_forms_widget_wrapper'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped by elementor ?>>
 
                 <?php if ($custom_title_description == 'yes') { ?>
                     <div class="ekit-fluentform-widget-heading">
@@ -2662,7 +2661,7 @@ class ElementsKit_Widget_Fluent_Forms extends Widget_Base {
                         <?php } ?>
                         <?php if ($form_description_custom != '') { ?>
                             <p class="ekit-fluentform-widget-description">
-                                <?php echo \ElementsKit_Lite\Utils::kses($form_description_custom); ?>
+                                <?php echo wp_kses($form_description_custom, \ElementsKit_Lite\Utils::get_kses_array()); ?>
                             </p>
                         <?php } ?>
                     </div>
@@ -2673,6 +2672,5 @@ class ElementsKit_Widget_Fluent_Forms extends Widget_Base {
 
             <?php
         }
-
 	}
 }
