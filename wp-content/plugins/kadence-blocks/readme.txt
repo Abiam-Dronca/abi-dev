@@ -3,8 +3,8 @@ Contributors: britner, oakesjosh
 Tags: gutenberg, blocks, page builder, google fonts, dual buttons, svg icons, editor width,
 Donate link: https://www.kadencewp.com/about-us/
 Requires at least: 5.9
-Tested up to: 5.9
-Stable tag: 2.4.4
+Tested up to: 6.0
+Stable tag: 2.4.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,18 @@ Install the plugin into the `/wp-content/plugins/` folder, and activate it.
 6. Editor Width settings inside Gutenberg
 
 == Changelog ==
+
+= 2.4.5 =
+Release Date: May 25th, 2022
+* Add: Background overlay options in sections.
+* Update: zIndex control for Image block.
+* Update: Sections gap to use gap css.
+* Update: Sections inside of rows have sticky options.
+* Update: Row content max width to have rem option.
+* Fix: Issue with nocookie youtube popup in button.
+* Fix: Issue with FSE and styles outputting before doc type.
+* Fix: Issue with context not being passed with image block.
+* Fix: Issue with sections layout breaking if hidden. 
 
 = 2.4.4 =
 Release Date: April 14th, 2022
