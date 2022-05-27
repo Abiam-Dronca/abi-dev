@@ -189,7 +189,7 @@ class Starter_Templates {
 			define( 'KADENCE_STARTER_TEMPLATES_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 		}
 		if ( ! defined( 'KADENCE_STARTER_TEMPLATES_VERSION' ) ) {
-			define( 'KADENCE_STARTER_TEMPLATES_VERSION', '1.2.13' );
+			define( 'KADENCE_STARTER_TEMPLATES_VERSION', '1.2.14' );
 		}
 	}
 
@@ -961,7 +961,9 @@ class Starter_Templates {
 				'subscribe_progress'   => esc_html__( 'Getting Started', 'kadence-starter-templates' ),
 				'plugin_progress'      => esc_html__( 'Checking/Installing/Activating Required Plugins', 'kadence-starter-templates' ),
 				'content_progress'     => esc_html__( 'Importing Content...', 'kadence-starter-templates' ),
-				'content_new_progress' => esc_html__( 'Importing Content... Still Importing.', 'kadence-starter-templates' ),
+				'content_new_progress' => esc_html__( 'Importing Content... Creating pages.', 'kadence-starter-templates' ),
+				'content_newer_progress' => esc_html__( 'Importing Content... Downloading images.', 'kadence-starter-templates' ),
+				'content_newest_progress' => esc_html__( 'Importing Content... Still Importing.', 'kadence-starter-templates' ),
 				'widgets_progress'     => esc_html__( 'Importing Widgets...', 'kadence-starter-templates' ),
 				'customizer_progress'  => esc_html__( 'Importing Customizer Settings...', 'kadence-starter-templates' ),
 				'user_email'           => $user_email,
@@ -1511,6 +1513,7 @@ class Starter_Templates {
 	public function subscribe_ajax_callback() {
 		Helpers::verify_ajax_call();
 		$email = empty( $_POST['email'] ) ? '' : sanitize_text_field( $_POST['email'] );
+		$selected_index = empty( $_POST['selected'] ) ? '' : sanitize_text_field( $_POST['selected'] );
 		// Do you have the data?
 		if ( $email && is_email( $email ) && filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
 			list( $user, $domain ) = explode( '@', $email );
@@ -1524,9 +1527,10 @@ class Starter_Templates {
 				return wp_send_json( 'emailDomainPostError' );
 			}
 			$args = array(
-				'email'  => $email,
-				'tag'    => 'wire',
-				'list'   => '20',
+				'email'   => $email,
+				'tag'     => 'starter',
+				'list'    => '20',
+				'starter' => $selected_index,
 			);
 			// Get the response.
 			$api_url  = add_query_arg( $args, 'https://www.kadencewp.com/kadence-blocks/wp-json/kadence-subscribe/v1/subscribe/' );

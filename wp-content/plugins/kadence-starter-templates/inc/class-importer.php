@@ -178,14 +178,14 @@ class Importer {
 		} else {
 			add_filter( 'wxr_importer.pre_process.post_meta', array( $this, 'process_elementor_images' ), 10, 2 );
 			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
-			//add_filter( 'wp_import_post_data_processed', array( $this, 'process_kadence_block_css_post' ), 10, 2 );
+				//add_filter( 'wp_import_post_data_processed', array( $this, 'process_kadence_block_css_post' ), 10, 2 );
 			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_internal_links' ), 11, 4 );
-			//add_action( 'wxr_importer.processed.post', array( $this, 'process_internal_links' ), 10, 5 );
-			// Check, if we need to send another AJAX request and set the importing author to the current user.
+				//add_action( 'wxr_importer.processed.post', array( $this, 'process_internal_links' ), 10, 5 );
+				// Check, if we need to send another AJAX request and set the importing author to the current user.
 			add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
-			//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_block_css_processed' ), 10, 5 );
-			//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 5 );
-			//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_galleries' ), 10, 5 );
+				//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_block_css_processed' ), 10, 5 );
+				//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 5 );
+				//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_galleries' ), 10, 5 );
 		}
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
@@ -268,7 +268,9 @@ class Importer {
 				}
 				if ( ! empty( $link_mapping ) ) {
 					foreach ( $link_mapping as $old_url => $new_url ) {
-						$data['post_content'] = str_replace( $old_url, $new_url, $data['post_content'] );
+						$old_url_full = '"' . $old_url . '"';
+						$new_url_full = '"' . $new_url . '"';
+						$data['post_content'] = str_replace( $old_url_full, $new_url_full, $data['post_content'] );
 
 						// Replace the slashed URLs if any exist.
 						$old_url = str_replace( '/', '/\\', $old_url );
