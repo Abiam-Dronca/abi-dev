@@ -8,7 +8,7 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Nextend\SmartSlider3\Platform\WordPress\Shortcode\Shortcode;
 
-class ElementorWidgetSmartSlider extends Widget_Base {
+class ElementorWidgetSmartSlider290 extends Widget_Base {
 
     public function get_name() {
         return 'smartslider';
@@ -22,7 +22,7 @@ class ElementorWidgetSmartSlider extends Widget_Base {
         return 'eicon-slider-3d';
     }
 
-    protected function register_controls() {
+    protected function _register_controls() {
 
         $this->start_controls_section('section_smart_slider_elementor', [
             'label' => esc_html('Smart Slider'),
@@ -58,7 +58,11 @@ class ElementorWidgetSmartSlider extends Widget_Base {
     public function render_plain_content() {
     }
 
-    protected function content_template() {
+    /**
+     * The Elementor deprecated this function in version 2.9.0 and it will be removed in 3.7.0
+     * @url https://developers.elementor.com/v2-9-0-planned-deprecations/
+     */
+    protected function _content_template() {
         echo Shortcode::renderIframe('{{{settings.smartsliderid}}}');
     }
 }

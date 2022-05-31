@@ -347,7 +347,7 @@ class Slide extends AbstractRenderableOwner {
                 $attributes['tabindex'] = '-1';
             }
 
-            $this->html = Html::tag('div', $attributes, $this->getTitle());
+            $this->html = Html::tag('div', $attributes, Sanitize::remove_all_html($this->getTitle()));
             $this->html .= Html::tag('div', $this->containerAttributes, $mainContainer->render($this->sliderObject->isAdmin));
         }
     }

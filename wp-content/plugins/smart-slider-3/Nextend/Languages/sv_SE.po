@@ -1,64 +1,65 @@
-# NEXTEND 02 <ramona@nextendweb.com>, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: 2022-05-13 07:44+0200\n"
-"PO-Revision-Date: 2022-05-17 14:21+0200\n"
+"PO-Revision-Date: 2022-05-17 14:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: zh_TW\n"
+"Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: ;n2_;n2_e;n2_n:1,2;n2_en:1,2;n2_x:1,2c;n2_ex:1,2c\n"
 "X-Poedit-Flags-xgettext: --no-location\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: Framework/Asset/Builder/cache\n"
 
 msgid "Debug error"
 msgstr ""
 
 msgid "CURL disabled in your php.ini configuration. Please enable it!"
-msgstr "在您伺服器的 php.ini 配置中已關閉了 CURL。請啟用它！"
+msgstr ""
 
 msgid "Unable to contact with the licensing server, please try again later!"
-msgstr "無法連接至授權伺服器，請稍後再試一次！"
+msgstr ""
 
 msgid "You are not allowed to upload!"
-msgstr "您不允許上傳！"
+msgstr ""
 
 msgid "Folder is missing!"
-msgstr "遺失資料夾！"
+msgstr ""
 
 msgid "Menu item"
-msgstr "選單項目"
+msgstr ""
 
 msgid "You are not authorised to view this resource."
 msgstr ""
 
 #, php-format
 msgid "Missing parameter: %s"
-msgstr "遺失參數：%s"
+msgstr ""
 
 msgid "Database error"
-msgstr "資料庫錯誤"
+msgstr ""
 
 msgid "Security token mismatch"
-msgstr "密鑰不符"
+msgstr ""
 
 msgid "Unexpected error"
-msgstr "意外錯誤"
+msgstr ""
 
 msgid "Set is not editable"
-msgstr "設置不可編輯"
+msgstr ""
 
 msgid "Visual do not exists"
-msgstr "視覺效果不存在"
+msgstr ""
 
 msgid "Not editable"
-msgstr "不可編輯"
+msgstr ""
 
 msgid "Security token mismatch. Please refresh the page!"
 msgstr ""
@@ -79,96 +80,95 @@ msgid "Try to repair database"
 msgstr ""
 
 msgid "Font manager"
-msgstr "字體管理"
+msgstr ""
 
 msgid "Text"
-msgstr "文字"
+msgstr ""
 
 msgid "Hover"
-msgstr "指向"
+msgstr ""
 
 msgid "Heading"
-msgstr "標題"
+msgstr ""
 
 msgid "Link"
-msgstr "連結"
+msgstr ""
 
 msgid "Button"
-msgstr "按鈕"
+msgstr ""
 
 msgid "Paragraph"
-msgstr "段落"
+msgstr ""
 
 msgid "Dot"
-msgstr "點"
+msgstr ""
 
 msgid "Active"
-msgstr "啟動"
+msgstr ""
 
 msgid "List"
-msgstr "列表"
+msgstr ""
 
 msgid "Highlight"
 msgstr ""
 
 msgctxt "Default font"
 msgid "Roboto,Arial"
-msgstr "Roboto，Arial"
+msgstr ""
 
 msgid "Font settings"
-msgstr "字體設定"
+msgstr ""
 
 msgid "Clear tab"
-msgstr "清除標籤頁"
+msgstr ""
 
-#, fuzzy
 msgid "Family"
-msgstr "系列"
+msgstr ""
 
 msgid "Color"
-msgstr "色彩"
+msgstr ""
 
 msgid "Size"
-msgstr "尺寸"
+msgstr ""
 
 msgid "Font weight"
-msgstr "字重"
+msgstr ""
 
 msgid "Decoration"
-msgstr "裝飾"
+msgstr ""
 
 msgid "Line height"
-msgstr "行距"
+msgstr ""
 
 msgid "Text align"
-msgstr "文字對齊"
+msgstr ""
 
 msgid "Letter spacing"
-msgstr "字距"
+msgstr ""
 
 msgid "Word spacing"
-msgstr "字距"
+msgstr ""
 
 msgid "Transform"
-msgstr "轉變"
+msgstr ""
 
 msgid "None"
-msgstr "無"
+msgstr ""
 
 msgid "Capitalize"
-msgstr "大寫"
+msgstr ""
 
 msgid "Uppercase"
-msgstr "全部大寫"
+msgstr ""
 
 msgid "Lowercase"
-msgstr "全部小寫"
+msgstr ""
 
 msgid "Text shadow"
-msgstr "文字陰影"
+msgstr ""
 
 msgid "Preview"
-msgstr "預覽"
+msgstr ""
 
 msgid "Frontend"
 msgstr ""
@@ -191,152 +191,146 @@ msgid "You can load Google Fonts in the backend."
 msgstr ""
 
 msgid "Style"
-msgstr "樣式"
+msgstr ""
 
 msgctxt "Font style"
 msgid "Italic"
 msgstr ""
 
 msgid "Normal"
-msgstr "普通"
+msgstr ""
 
 msgid "Choose"
-msgstr "選擇"
+msgstr ""
 
 msgid "Orientation"
-msgstr "方向"
+msgstr ""
 
 msgid "Portrait"
-msgstr "直向"
+msgstr ""
 
 msgid "Landscape"
-msgstr "橫向"
+msgstr ""
 
 msgid "Mobile"
-msgstr "手機"
+msgstr ""
 
 msgid "Large mobile"
 msgstr ""
 
 msgid "Tablet"
-msgstr "平板"
+msgstr ""
 
 msgid "Large tablet"
 msgstr ""
 
 msgid "Desktop"
-msgstr "桌面"
+msgstr ""
 
 msgid "Large desktop"
 msgstr ""
 
 msgid "More"
-msgstr "更多"
+msgstr ""
 
 msgid "Less"
 msgstr ""
 
 msgid "View records"
-msgstr "查看紀錄"
+msgstr ""
 
 msgid "Font"
-msgstr "字體"
+msgstr ""
 
 msgid "Warning"
 msgstr ""
 
-#, fuzzy
 msgid "Dotted"
-msgstr "點狀"
+msgstr ""
 
 msgid "Dashed"
-msgstr "虛線"
+msgstr ""
 
 msgid "Solid"
-msgstr "實線"
+msgstr ""
 
-#, fuzzy
 msgid "Double"
-msgstr "雙重"
+msgstr ""
 
-#, fuzzy
 msgid "Groove"
-msgstr "凹線"
+msgstr ""
 
-#, fuzzy
 msgid "Ridge"
-msgstr "凸線"
+msgstr ""
 
-#, fuzzy
 msgid "Inset"
-msgstr "嵌入線"
+msgstr ""
 
-#, fuzzy
 msgid "Outset"
-msgstr "浮出線"
+msgstr ""
 
 msgid "Field"
-msgstr "欄位"
+msgstr ""
 
 msgid "Order"
-msgstr "排序"
+msgstr ""
 
 msgid "Ascending"
-msgstr "升序"
+msgstr ""
 
 msgid "Descending"
-msgstr "降序"
+msgstr ""
 
 msgid "Off"
-msgstr "關閉"
+msgstr ""
 
 msgid "On"
-msgstr "開啟"
+msgstr ""
 
 msgid ""
 "Hold down the ctrl (Windows) or command (MAC) button to select multiple "
 "options."
-msgstr "按住鍵盤的 Ctrl (Windows) 或 command (MAC) 並點擊左鍵來選取多個項目。"
+msgstr ""
 
 msgid "Fill"
-msgstr "填滿"
+msgstr ""
 
 msgid "Blur fit"
 msgstr ""
 
 msgid "Fit"
-msgstr "符合"
+msgstr ""
 
 msgid "Stretch"
-msgstr "拉伸"
+msgstr ""
 
 msgid "Center"
-msgstr "中間"
+msgstr ""
 
 msgid "Slider's default"
 msgstr ""
 
 msgid "All"
-msgstr "所有"
+msgstr ""
 
 #, php-format
 msgid "Not %s"
-msgstr "不是 %s"
+msgstr ""
 
 msgid "Bold"
-msgstr "粗體"
+msgstr ""
 
 msgid "Extra light"
-msgstr "極細"
+msgstr ""
 
 msgid "Light"
-msgstr "亮色"
+msgstr ""
 
 msgid "Semi bold"
-msgstr "半粗體"
+msgstr ""
 
 msgid "Extra bold"
-msgstr "極粗體"
+msgstr ""
 
 msgid "Self"
 msgstr ""
@@ -348,41 +342,37 @@ msgid "Parent"
 msgstr ""
 
 msgid "Top"
-msgstr "上方"
+msgstr ""
 
 msgid "Select images for devices"
 msgstr ""
 
 msgid "Select a page or a blog post from your WordPress site."
-msgstr "從您的 WordPress 網站選擇一個頁面或部落格文章。"
+msgstr ""
 
 msgid "Select article or menu item from your site."
-msgstr "從您的網站中選擇文章或選單。"
+msgstr ""
 
-#, fuzzy
 msgid "Reset to normal state"
-msgstr "重置成普通狀態"
+msgstr ""
 
 msgid "Default"
-msgstr "預設"
+msgstr ""
 
 msgid "The image is empty"
 msgstr ""
 
-#, fuzzy
 msgid "Empty"
-msgstr "空白"
+msgstr ""
 
 msgid "Image manager"
-msgstr "圖片管理"
+msgstr ""
 
-#, fuzzy
-#| msgid "Desktop Retina"
 msgid "Desktop retina"
-msgstr "桌面的 Retina"
+msgstr ""
 
 msgid "Image"
-msgstr "圖片"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -395,50 +385,46 @@ msgid "%s is not readable"
 msgstr ""
 
 msgid "Style manager"
-msgstr "樣式管理"
+msgstr ""
 
 msgid "Style settings"
-msgstr "樣式設定"
+msgstr ""
 
 msgid "Background color"
-msgstr "背景色彩"
+msgstr ""
 
 msgid "Opacity"
-msgstr "不透明度"
+msgstr ""
 
 msgid "Padding"
-msgstr "內距"
+msgstr ""
 
 msgid "Border"
-msgstr "框線"
+msgstr ""
 
 msgid "Border radius"
-msgstr "圓角半徑"
+msgstr ""
 
 msgid "Box shadow"
-msgstr "盒子陰影"
+msgstr ""
 
 msgid "Single"
-msgstr "單一"
+msgstr ""
 
-#, fuzzy
 msgid "Simple"
-msgstr "簡易"
+msgstr ""
 
 msgid "Box"
-msgstr "盒子"
+msgstr ""
 
 msgid "Heading active"
 msgstr ""
 
-#, fuzzy
 msgid "Dashboard"
-msgstr "儀錶板"
+msgstr ""
 
-#, fuzzy
-#| msgid "Drop your images here!"
 msgid "Drop files here"
-msgstr "拖曳您的圖片到此處！"
+msgstr ""
 
 msgid "Parent directory"
 msgstr ""
@@ -446,9 +432,8 @@ msgstr ""
 msgid "Current path"
 msgstr ""
 
-#, fuzzy
 msgid "Preset"
-msgstr "預配置"
+msgstr ""
 
 msgid ""
 "You can use presets to save style settings for later use. Clicking on any "
@@ -474,13 +459,13 @@ msgid "You have not created any presets for this layer yet."
 msgstr ""
 
 msgid "Save as"
-msgstr "儲存為"
+msgstr ""
 
 msgid "Name"
-msgstr "名稱"
+msgstr ""
 
 msgid "Please fill the name field!"
-msgstr "請填寫名稱欄位！"
+msgstr ""
 
 msgid "Preset saved."
 msgstr ""
@@ -495,16 +480,16 @@ msgid "Choose folder"
 msgstr ""
 
 msgid "Select"
-msgstr "選擇"
+msgstr ""
 
 msgid "Disabled"
-msgstr "關閉"
+msgstr ""
 
 msgid "Image field can not be empty!"
 msgstr ""
 
 msgid "Done"
-msgstr "完成"
+msgstr ""
 
 msgid "No file selected."
 msgstr ""
@@ -513,13 +498,13 @@ msgid "Open docs"
 msgstr ""
 
 msgid "The changes you made will be lost if you navigate away from this page."
-msgstr "若您離開目前頁面，現在的更改將會遺失。"
+msgstr ""
 
 msgid "Icons"
 msgstr ""
 
 msgid "Search"
-msgstr "搜尋"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr ""
@@ -533,19 +518,19 @@ msgid "The deletion is irreversible, and it's not possible to recover %s."
 msgstr ""
 
 msgid "Cancel"
-msgstr "取消"
+msgstr ""
 
 msgid "Delete"
-msgstr "刪除"
+msgstr ""
 
 msgid "Close"
-msgstr "關閉"
+msgstr ""
 
 msgid "Create group"
-msgstr "建立群組"
+msgstr ""
 
 msgid "Group name"
-msgstr "群組名稱"
+msgstr ""
 
 msgid "Group created"
 msgstr ""
@@ -560,34 +545,28 @@ msgid "Got it"
 msgstr ""
 
 msgid "General"
-msgstr "一般"
+msgstr ""
 
-#, fuzzy
-#| msgid "Content list"
 msgid "Content tab"
-msgstr "內容列表"
+msgstr ""
 
-#, fuzzy
-#| msgid "Style sets"
 msgid "Style tab"
-msgstr "樣式設置"
+msgstr ""
 
-#, fuzzy
-#| msgid "Animation"
 msgid "Animation tab"
-msgstr "動畫"
+msgstr ""
 
 msgid "Add Layer"
 msgstr ""
 
 msgid "Layer List"
-msgstr "圖層列表"
+msgstr ""
 
 msgid "Timeline"
 msgstr ""
 
 msgid "View"
-msgstr "查看"
+msgstr ""
 
 msgid "Adjust"
 msgstr ""
@@ -596,7 +575,7 @@ msgid "Move (Absolute)"
 msgstr ""
 
 msgid "Arrows"
-msgstr "箭頭"
+msgstr ""
 
 msgid "Align (Absolute)"
 msgstr ""
@@ -605,13 +584,13 @@ msgid "Numeric keys"
 msgstr ""
 
 msgid "Action"
-msgstr "操作"
+msgstr ""
 
 msgid "Duplicate"
-msgstr "複製"
+msgstr ""
 
 msgid "Copy"
-msgstr "複製"
+msgstr ""
 
 msgid "Paste"
 msgstr ""
@@ -623,12 +602,10 @@ msgid "Redo"
 msgstr ""
 
 msgid "Save"
-msgstr "儲存"
+msgstr ""
 
-#, fuzzy
-#| msgid "Layer animations"
 msgid "Play animations"
-msgstr "圖層動畫"
+msgstr ""
 
 msgid "Clear device specific settings"
 msgstr ""
@@ -649,28 +626,28 @@ msgid "Unexpected response"
 msgstr ""
 
 msgid "Scroll to"
-msgstr "捲動至"
+msgstr ""
 
 msgid "Scroll to alias"
 msgstr ""
 
 msgid "Go to slide"
-msgstr "前往幻燈片"
+msgstr ""
 
 msgid "Go to slide ID"
-msgstr "前往幻燈片 ID"
+msgstr ""
 
 msgid "Previous slide"
-msgstr "上一張幻燈片"
+msgstr ""
 
 msgid "Next slide"
-msgstr "下一張幻燈片"
+msgstr ""
 
 msgid "Slide event"
-msgstr "幻燈片事件"
+msgstr ""
 
 msgid "Examples"
-msgstr "範例"
+msgstr ""
 
 msgid "Scrolls to the top of the page."
 msgstr ""
@@ -682,8 +659,6 @@ msgid ""
 "You can use any jQuery selector to scroll to a specific element on the page. "
 "Example: \"#pricing\" scrolls to the element with the id of \"pricing\"."
 msgstr ""
-"您可以使用任何 jQuery selector 捲動到頁面上的特定元素。例如：點選 “#pricing” "
-"則會捲動到 id  為 “pricing” 的元素。"
 
 msgid "Slider alias"
 msgstr ""
@@ -692,21 +667,19 @@ msgid "Slider alias set at Slider settings > General"
 msgstr ""
 
 msgid "Slide index"
-msgstr "幻燈片首頁"
+msgstr ""
 
 msgid "Direction"
-msgstr "方向"
+msgstr ""
 
 msgid "Auto"
-msgstr "自動"
+msgstr ""
 
-#, fuzzy
 msgid "Backward"
-msgstr "向後"
+msgstr ""
 
-#, fuzzy
 msgid "Forward"
-msgstr "向前"
+msgstr ""
 
 #, javascript-format
 msgid "slide index: 2 %s direction: backward"
@@ -723,7 +696,7 @@ msgid "Switches to the fifth slide as if the next arrow was pressed"
 msgstr ""
 
 msgid "Slide ID"
-msgstr "幻燈片 ID"
+msgstr ""
 
 msgid ""
 "Switches to the slide with the #2 ID as if the previous arrow was pressed"
@@ -733,7 +706,7 @@ msgid "Switches to the slide with the #5 ID as if the next arrow was pressed"
 msgstr ""
 
 msgid "Event name"
-msgstr "事件名稱"
+msgstr ""
 
 msgid "An event you use to trigger layer animation(s) with"
 msgstr ""
@@ -742,13 +715,13 @@ msgid "Content List - One Per Line"
 msgstr ""
 
 msgid "Choose images"
-msgstr "選擇圖片"
+msgstr ""
 
 msgid "Titles - One Per Line"
 msgstr ""
 
 msgid "Autoplay duration"
-msgstr "自動播放持續持間"
+msgstr ""
 
 msgid "URL"
 msgstr ""
@@ -757,13 +730,13 @@ msgid "Search keyword"
 msgstr ""
 
 msgid "Posts"
-msgstr "貼文"
+msgstr ""
 
 msgid "Lightbox"
-msgstr "燈箱"
+msgstr ""
 
 msgid "Insert"
-msgstr "插入"
+msgstr ""
 
 msgid "Oops, Something Went Wrong"
 msgstr ""
@@ -786,9 +759,8 @@ msgstr ""
 msgid "Deleted."
 msgstr ""
 
-#, fuzzy
 msgid "Static"
-msgstr "靜態"
+msgstr ""
 
 msgid "Save as New"
 msgstr ""
@@ -796,44 +768,42 @@ msgstr ""
 msgid "Saved."
 msgstr ""
 
-#, fuzzy
 msgid "Enabled"
-msgstr "已啟用"
+msgstr ""
 
 msgid "Column"
-msgstr "欄"
+msgstr ""
 
 msgid "There is no layer available to be parent of the current layer!"
 msgstr ""
 
 msgid "Pick the parent layer!"
-msgstr "選取主圖層"
+msgstr ""
 
 msgid "Pick the align point of the parent layer!"
-msgstr "點選主圖層的對齊點"
+msgstr ""
 
 msgid "Pick the align point of the child layer!"
-msgstr "點選子圖層的對齊點"
+msgstr ""
 
 msgid "Advanced"
-msgstr "進階"
+msgstr ""
 
-#, fuzzy, javascript-format
-#| msgid "Outer color"
+#, javascript-format
 msgid "Outer %s"
-msgstr "外部色彩"
+msgstr ""
 
 msgid "Left"
-msgstr "左"
+msgstr ""
 
 msgid "Right"
-msgstr "右"
+msgstr ""
 
 msgid "Middle"
 msgstr ""
 
 msgid "Bottom"
-msgstr "下方"
+msgstr ""
 
 msgid "Layer(s)"
 msgstr ""
@@ -842,36 +812,34 @@ msgid "Hide on"
 msgstr ""
 
 msgid "Rename"
-msgstr "重新命名"
+msgstr ""
 
 msgid "Show/Hide in editor"
 msgstr ""
 
 msgid "Animation"
-msgstr "動畫"
+msgstr ""
 
 msgid "Add animation"
-msgstr "加入動畫"
+msgstr ""
 
 msgid "Remove animations"
-msgstr "刪除動畫"
+msgstr ""
 
 msgid "Layer Animation - Basic"
-msgstr "圖層動畫 - 基本"
+msgstr ""
 
-#, fuzzy
-#| msgid "Add Keyframe"
 msgid "Add keyframe"
-msgstr "加入關鍵影格"
+msgstr ""
 
 msgid "Loop"
-msgstr "循環"
+msgstr ""
 
 msgid "Special Zero"
 msgstr ""
 
 msgid "Keyframe"
-msgstr "關鍵影格"
+msgstr ""
 
 msgid "Layer Animation - Reveal"
 msgstr ""
@@ -880,7 +848,7 @@ msgid "Open/Close"
 msgstr ""
 
 msgid "Content"
-msgstr "內容"
+msgstr ""
 
 msgid "Child layers"
 msgstr ""
@@ -891,24 +859,20 @@ msgstr ""
 msgid "Highlighted heading"
 msgstr ""
 
-#, fuzzy
-#| msgid "Split text animation"
 msgid "Text animation in"
-msgstr "分割文字動畫"
+msgstr ""
 
-#, fuzzy
-#| msgid "Split text animation"
 msgid "Text animation out"
-msgstr "分割文字動畫"
+msgstr ""
 
 msgid "Layer"
-msgstr "圖層"
+msgstr ""
 
 msgid "Row"
-msgstr "行列"
+msgstr ""
 
 msgid "Slide"
-msgstr "幻燈片"
+msgstr ""
 
 msgid "Theme"
 msgstr ""
@@ -940,21 +904,19 @@ msgid "Smart snap"
 msgstr ""
 
 msgid "Round to 5px"
-msgstr "圓角 5 px"
+msgstr ""
 
 msgid "Ruler"
-msgstr "尺規"
+msgstr ""
 
-#, fuzzy
-#| msgid "Clear Guides"
 msgid "Clear guides"
-msgstr "清除參考線"
+msgstr ""
 
 msgid "Activate Smart Slider 3 Pro"
 msgstr ""
 
 msgid "Activation is required to unlock all features!"
-msgstr "解鎖所有功能需要先啟用！"
+msgstr ""
 
 msgid ""
 "Register Smart Slider 3 Pro on this domain to enable auto update, slider "
@@ -962,22 +924,22 @@ msgid ""
 msgstr ""
 
 msgid "Skip"
-msgstr "略過"
+msgstr ""
 
 msgid "Activate"
-msgstr "啟用"
+msgstr ""
 
 msgid "Smart Slider 3 activated!"
-msgstr "Smart Slider 3 已啟用！"
+msgstr ""
 
 msgid "Laptop"
 msgstr ""
 
 msgid "Width"
-msgstr "寬度"
+msgstr ""
 
 msgid "Height"
-msgstr "高度"
+msgstr ""
 
 #, javascript-format
 msgid "Below %s pixels."
@@ -999,40 +961,40 @@ msgid "Data"
 msgstr ""
 
 msgid "Filter"
-msgstr "過濾"
+msgstr ""
 
 msgid "No"
-msgstr "否"
+msgstr ""
 
 msgid "Clean HTML"
-msgstr "清除 HTML"
+msgstr ""
 
 msgid "Remove HTML"
-msgstr "移除 HTML"
+msgstr ""
 
 msgid "Split by Chars"
 msgstr ""
 
 msgid "Strict"
-msgstr "嚴格"
+msgstr ""
 
 msgid "Respect words"
-msgstr "敬語"
+msgstr ""
 
 msgid "Find image"
-msgstr "找尋圖片"
+msgstr ""
 
 msgid "Find link"
-msgstr "找尋連結"
+msgstr ""
 
 msgid "Remove links"
-msgstr "刪除連結"
+msgstr ""
 
 msgid "Remove line breaks"
 msgstr ""
 
 msgid "Result"
-msgstr "結果"
+msgstr ""
 
 msgid "Change slider type"
 msgstr ""
@@ -1072,55 +1034,47 @@ msgid ""
 "interface. You can choose from hundreds of premade templates."
 msgstr ""
 
-#, fuzzy
-#| msgid "Local import file"
 msgid "or import your own files"
-msgstr "本地匯入檔案"
+msgstr ""
 
-#, fuzzy
-#| msgid "Create set"
 msgid "Create new project"
-msgstr "建立設置"
+msgstr ""
 
-#, fuzzy
-#| msgid "Product types"
 msgid "Project type"
-msgstr "商品類型"
+msgstr ""
 
 msgid "Slider"
-msgstr "幻燈片"
+msgstr ""
 
 msgid "Block"
-msgstr "區塊"
+msgstr ""
 
 msgid "Full page"
-msgstr "全頁面"
+msgstr ""
 
 msgid "Carousel"
-msgstr "跑馬燈"
+msgstr ""
 
 msgid "Showcase"
-msgstr "展示庫"
+msgstr ""
 
 msgid "Pro"
 msgstr ""
 
 msgid "Settings"
-msgstr "設定"
+msgstr ""
 
-#, fuzzy
-#| msgid "My photos"
 msgid "My project"
-msgstr "我的照片"
+msgstr ""
 
 msgid "Boxed"
 msgstr ""
 
 msgid "Full width"
-msgstr "全寬"
+msgstr ""
 
 msgid "Layout"
-msgstr "版型"
+msgstr ""
 
 msgid "Slide width"
 msgstr ""
@@ -1129,7 +1083,7 @@ msgid "Slide height"
 msgstr ""
 
 msgid "Create"
-msgstr "建立"
+msgstr ""
 
 msgid "Join The Smart Slider 3 Community"
 msgstr ""
@@ -1143,33 +1097,29 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
-#, fuzzy
-#| msgid "Create group"
 msgid "Change group"
-msgstr "建立群組"
+msgstr ""
 
 msgid "Groups"
-msgstr "群組"
+msgstr ""
 
 msgid "Set"
-msgstr "設置"
+msgstr ""
 
 msgid "Edit"
-msgstr "編輯"
+msgstr ""
 
 msgid "Group"
-msgstr "群組"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider"
 msgid "Edit Slider"
-msgstr "幻燈片"
+msgstr ""
 
 msgid "Up"
 msgstr ""
 
 msgid "Insert group"
-msgstr "插入群組"
+msgstr ""
 
 msgid "Move to trash"
 msgstr ""
@@ -1177,92 +1127,74 @@ msgstr ""
 msgid "empty the trash"
 msgstr ""
 
-#, fuzzy
-#| msgid "Delete set"
 msgid "Delete permanently"
-msgstr "刪除設置"
+msgstr ""
 
-#, fuzzy
-#| msgid "Delete slider"
 msgid "delete this slider"
-msgstr "刪除幻燈片"
+msgstr ""
 
 msgid "Publish"
-msgstr "發佈"
+msgstr ""
 
 msgid "Unpublish"
-msgstr "取消發佈"
+msgstr ""
 
 msgid "Edit generator"
-msgstr "編輯產生器"
+msgstr ""
 
 msgid "Set as first"
-msgstr "設為第一個"
+msgstr ""
 
-#, fuzzy
-#| msgid "Go to slide"
 msgid "Convert to slide"
-msgstr "前往幻燈片"
+msgstr ""
 
 msgid "Copy slide to"
 msgstr ""
 
 msgid "Add post"
-msgstr "加入貼文"
+msgstr ""
 
 msgid "Please select a Post first!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Delete slide"
 msgid "delete these slides"
-msgstr "刪除幻燈片"
+msgstr ""
 
-#, fuzzy
-#| msgid "Delete slide"
 msgid "delete this slide"
-msgstr "刪除幻燈片"
+msgstr ""
 
 msgid "Max width"
-msgstr "最大寬度"
+msgstr ""
 
 msgid "Margin"
-msgstr "外距"
+msgstr ""
 
-#, fuzzy
-#| msgid "Top"
 msgid "top"
-msgstr "上方"
+msgstr ""
 
-#, fuzzy
-#| msgid "Light"
 msgid "right"
-msgstr "亮色"
+msgstr ""
 
-#, fuzzy
-#| msgid "Bottom"
 msgid "bottom"
-msgstr "下方"
+msgstr ""
 
-#, fuzzy
-#| msgid "To left"
 msgid "left"
-msgstr "往左"
+msgstr ""
 
 msgid "Animations"
-msgstr "動畫"
+msgstr ""
 
 msgid "Effects"
 msgstr ""
 
 msgid "Shape divider"
-msgstr "形狀分隔"
+msgstr ""
 
 msgid "Particle effect"
-msgstr "粒子效果"
+msgstr ""
 
 msgid "Layer animations"
-msgstr "圖層動畫"
+msgstr ""
 
 msgid "Play on load"
 msgstr ""
@@ -1273,13 +1205,13 @@ msgid ""
 msgstr ""
 
 msgid "Play once"
-msgstr "播放一次"
+msgstr ""
 
 msgid "Plays the layer animations only during the first loop."
 msgstr ""
 
 msgid "Play on"
-msgstr "播放於"
+msgstr ""
 
 msgid "Main animation start"
 msgstr ""
@@ -1288,13 +1220,13 @@ msgid "Main animation end"
 msgstr ""
 
 msgid "Mode"
-msgstr "模式"
+msgstr ""
 
 msgid "Skippable"
-msgstr "可略過"
+msgstr ""
 
 msgid "Forced"
-msgstr "強制"
+msgstr ""
 
 msgid ""
 "You can make the outgoing layer animations, which don't have events, to play "
@@ -1305,31 +1237,31 @@ msgid "Layer parallax"
 msgstr ""
 
 msgid "Enable"
-msgstr "啟用"
+msgstr ""
 
 msgid "Animate"
-msgstr "動畫"
+msgstr ""
 
 msgid "Horizontal"
-msgstr "水平"
+msgstr ""
 
 msgid "Mouse"
-msgstr "鼠標"
+msgstr ""
 
 msgid "Invert"
 msgstr ""
 
 msgid "Vertical"
-msgstr "垂直"
+msgstr ""
 
 msgid "Scroll"
-msgstr "捲動"
+msgstr ""
 
 msgid "Mouse origin"
 msgstr ""
 
 msgid "Slider center"
-msgstr "幻燈片中間"
+msgstr ""
 
 msgid "Mouse enter position"
 msgstr ""
@@ -1338,22 +1270,22 @@ msgid "Scroll move"
 msgstr ""
 
 msgid "Both"
-msgstr "皆有"
+msgstr ""
 
 msgid "To bottom"
-msgstr "往下"
+msgstr ""
 
 msgid "To top"
-msgstr "往上"
+msgstr ""
 
 msgid "Autoplay"
-msgstr "自動播放"
+msgstr ""
 
 msgid "Slide duration"
-msgstr "幻燈片持續時間"
+msgstr ""
 
 msgid "Autostart"
-msgstr "自動開始"
+msgstr ""
 
 msgid "Allow restart"
 msgstr ""
@@ -1376,10 +1308,10 @@ msgid "Stop on mouse"
 msgstr ""
 
 msgid "Enter"
-msgstr "輸入"
+msgstr ""
 
 msgid "Leave"
-msgstr "離開"
+msgstr ""
 
 msgid "Stop on media"
 msgstr ""
@@ -1394,7 +1326,7 @@ msgid "Resume on media"
 msgstr ""
 
 msgid "Controls"
-msgstr "控制"
+msgstr ""
 
 msgid "Drag"
 msgstr ""
@@ -1403,22 +1335,22 @@ msgid "Defines the drag (and touch) direction for your slider."
 msgstr ""
 
 msgid "Mouse wheel"
-msgstr "滑鼠滾動"
+msgstr ""
 
 msgid "Allows switching slides with the mouse wheel."
 msgstr ""
 
 msgid "Keyboard"
-msgstr "鍵盤"
+msgstr ""
 
 msgid "Allows switching slides with the keyboard."
 msgstr ""
 
 msgid "Developer"
-msgstr "開發者"
+msgstr ""
 
 msgid "Block right click"
-msgstr "禁止右鍵複製"
+msgstr ""
 
 msgid "Block carousel"
 msgstr ""
@@ -1490,15 +1422,13 @@ msgid "Slider CSS classes"
 msgstr ""
 
 msgid "You can put custom CSS classes to the slider's container."
-msgstr "您可將自訂的 CSS 類別用於幻燈片的內容中。"
+msgstr ""
 
 msgid "JavaScript callbacks"
 msgstr ""
 
-#, fuzzy
-#| msgid "Loading animation"
 msgid "Loading animation waiting time"
-msgstr "載入動畫"
+msgstr ""
 
 msgid "Post IDs"
 msgstr ""
@@ -1509,15 +1439,11 @@ msgstr ""
 msgid "The cache of the posts with the given ID will be cleared upon save."
 msgstr ""
 
-#, fuzzy
-#| msgid "Back to slider"
 msgid "Fallback slider"
-msgstr "返回幻燈片"
+msgstr ""
 
-#, fuzzy
-#| msgid "Alias"
 msgid "ID or Alias"
-msgstr "別名"
+msgstr ""
 
 msgid ""
 "Select another slider by its ID or Alias that displays if your current "
@@ -1525,7 +1451,7 @@ msgid ""
 msgstr ""
 
 msgid "Thumbnail"
-msgstr "縮圖"
+msgstr ""
 
 msgid "Slider thumbnail which appears in the slider list."
 msgstr ""
@@ -1537,12 +1463,10 @@ msgid "It allows you to label your slider for screen readers."
 msgstr ""
 
 msgid "Alias"
-msgstr "別名"
+msgstr ""
 
-#, fuzzy
-#| msgid "You can put custom CSS classes to the slider's container."
 msgid "You can use this alias in the slider's shortcode."
-msgstr "您可將自訂的 CSS 類別用於幻燈片的內容中。"
+msgstr ""
 
 msgid "Use as anchor"
 msgstr ""
@@ -1580,43 +1504,41 @@ msgid "Slider design"
 msgstr ""
 
 msgid "Slider background image"
-msgstr "幻燈片背景圖片"
+msgstr ""
 
 msgid "Fixed"
-msgstr "固定"
+msgstr ""
 
 msgid "Background video"
 msgstr ""
 
 msgid "Muted"
-msgstr "靜音"
+msgstr ""
 
 msgctxt "Video/Audio play"
 msgid "Loop"
 msgstr ""
 
 msgid "Fill mode"
-msgstr "填滿模式"
+msgstr ""
 
 msgid "Align"
-msgstr "對齊"
+msgstr ""
 
 msgid "Puts a fix margin around your slider."
 msgstr ""
 
 msgid "Perspective"
-msgstr "透視"
+msgstr ""
 
 msgid "Optimize"
-msgstr "優化"
+msgstr ""
 
 msgid "Loading"
-msgstr "載入"
+msgstr ""
 
-#, fuzzy
-#| msgid "Loading"
 msgid "Loading type"
-msgstr "載入"
+msgstr ""
 
 msgid "Instant"
 msgstr ""
@@ -1636,7 +1558,7 @@ msgid "Load delay"
 msgstr ""
 
 msgid "Play when visible"
-msgstr "可見時播放"
+msgstr ""
 
 msgid ""
 "Makes sure that the autoplay and layer animations only start when your "
@@ -1644,28 +1566,26 @@ msgid ""
 msgstr ""
 
 msgid "At"
-msgstr "在"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider background image"
 msgid "Slide background images"
-msgstr "幻燈片背景圖片"
+msgstr ""
 
 msgid "Loading mode"
 msgstr ""
 
 msgid "Delayed loading"
-msgstr "延遲載入"
+msgstr ""
 
 msgid "Lazy loading"
-msgstr "延遲載入"
+msgstr ""
 
 msgid ""
 "You can speed up your site's loading by delaying the slide background images."
 msgstr ""
 
 msgid "Load neighbor"
-msgstr "載入前後幻燈片"
+msgstr ""
 
 msgctxt "Unit"
 msgid "slides"
@@ -1677,41 +1597,29 @@ msgid ""
 "limit%s if you get a blank page."
 msgstr ""
 
-#, fuzzy
-#| msgid "Go to slide"
 msgid "Convert to WebP"
-msgstr "前往幻燈片"
+msgstr ""
 
 msgid "Resize"
 msgstr ""
 
 msgid "Quality"
-msgstr "品質"
+msgstr ""
 
-#, fuzzy
-#| msgid "Default width percentage"
 msgid "Default width"
-msgstr "預設寬度百分比"
+msgstr ""
 
-#, fuzzy
-#| msgid "Medium Light"
 msgid "Medium width"
-msgstr "中型亮色"
+msgstr ""
 
-#, fuzzy
-#| msgid "Medium Light"
 msgid "Medium height"
-msgstr "中型亮色"
+msgstr ""
 
-#, fuzzy
-#| msgid "Full width"
 msgid "Small width"
-msgstr "全寬"
+msgstr ""
 
-#, fuzzy
-#| msgid "Small Light"
 msgid "Small height"
-msgstr "小型亮色"
+msgstr ""
 
 msgid "Retina"
 msgstr ""
@@ -1724,15 +1632,11 @@ msgid ""
 "to match the aspect ratio of the slider and image on that device."
 msgstr ""
 
-#, fuzzy
-#| msgid "Thumbnail"
 msgid "Resize Thumbnail"
-msgstr "縮圖"
+msgstr ""
 
-#, fuzzy
-#| msgid "Thumbnail"
 msgid "Thumbnail Quality"
-msgstr "縮圖"
+msgstr ""
 
 msgid "Thumbnail width"
 msgstr ""
@@ -1741,7 +1645,7 @@ msgid "Thumbnail height"
 msgstr ""
 
 msgid "Layer images"
-msgstr "圖層圖片"
+msgstr ""
 
 msgid "Base64 embed"
 msgstr ""
@@ -1753,7 +1657,7 @@ msgid "Max file size"
 msgstr ""
 
 msgid "Other"
-msgstr "其它"
+msgstr ""
 
 msgid "JetPack Photon image optimizer"
 msgstr ""
@@ -1762,7 +1666,7 @@ msgid "Background video on mobile"
 msgstr ""
 
 msgid "Slider size"
-msgstr "幻燈片秀尺寸"
+msgstr ""
 
 msgid "Limit slide width"
 msgstr ""
@@ -1772,7 +1676,7 @@ msgid ""
 msgstr ""
 
 msgid "Max"
-msgstr "最大"
+msgstr ""
 
 msgid "Breakpoints"
 msgstr ""
@@ -1803,37 +1707,33 @@ msgid ""
 msgstr ""
 
 msgid "Slides"
-msgstr "幻燈片"
+msgstr ""
 
 msgid "Slides design"
 msgstr ""
 
 msgid "Slide background image fill"
-msgstr "幻燈片背景圖片填滿"
+msgstr ""
 
 msgid ""
 "If the size of your image is not the same as your slider's, you can improve "
 "the result with the filling modes."
 msgstr ""
 
-#, fuzzy
-#| msgid "Background color"
 msgid "Background Blur"
-msgstr "背景色彩"
+msgstr ""
 
 msgid "Randomize"
-msgstr "隨機"
+msgstr ""
 
-#, fuzzy
-#| msgid "Randomize"
 msgid "Randomize slides"
-msgstr "隨機"
+msgstr ""
 
 msgid "Randomize first"
 msgstr ""
 
 msgid "Cache support"
-msgstr "快取支援"
+msgstr ""
 
 msgid "Cache variations"
 msgstr ""
@@ -1869,37 +1769,37 @@ msgid ""
 msgstr ""
 
 msgid "Show label"
-msgstr "顯示標籤"
+msgstr ""
 
 msgid "Only slide name"
-msgstr "只有幻燈片名稱"
+msgstr ""
 
 msgid "Slide name and description"
-msgstr "幻燈片名稱與敘述"
+msgstr ""
 
 msgid "Background parallax"
 msgstr ""
 
 msgid "Strength"
-msgstr "強度"
+msgstr ""
 
 msgid "Super soft"
-msgstr "非常輕柔"
+msgstr ""
 
 msgid "Soft"
 msgstr ""
 
 msgid "Strong"
-msgstr "強烈"
+msgstr ""
 
 msgid "Super strong"
-msgstr "非常強烈"
+msgstr ""
 
 msgid "Generator created."
-msgstr "產生器已建立。"
+msgstr ""
 
 msgid "Generator updated and cache cleared."
-msgstr "產生器已更新並清除快取。"
+msgstr ""
 
 msgid "Generator group not found"
 msgstr ""
@@ -1908,28 +1808,28 @@ msgid "Generator source not found"
 msgstr ""
 
 msgid "No records found for the filter"
-msgstr "此篩選找不到任何紀錄"
+msgstr ""
 
 msgid "Authentication successful."
-msgstr "認證成功。"
+msgstr ""
 
 msgid "Not installed"
-msgstr "未安裝"
+msgstr ""
 
 msgid "Visit"
 msgstr ""
 
 msgid "Add dynamic slides"
-msgstr "加入動態幻燈片"
+msgstr ""
 
 msgid "Configure"
-msgstr "配置"
+msgstr ""
 
 msgid "Add"
-msgstr "新增"
+msgstr ""
 
 msgid "Generator"
-msgstr "產生器"
+msgstr ""
 
 msgid "How to upgrade to Smart Slider 3 Pro?"
 msgstr ""
@@ -1963,13 +1863,13 @@ msgstr ""
 
 #, php-format
 msgid "Unable to connect to the API (%s)."
-msgstr "無法連接 API (%s)."
+msgstr ""
 
 msgid "See <b>Debug Information</b> for more details!"
-msgstr "查看 <b>除錯資訊</b> 以取得更多細節！"
+msgstr ""
 
 msgid "Successful connection with the API."
-msgstr "成功連接 API。"
+msgstr ""
 
 msgid "Welcome to Help Center"
 msgstr ""
@@ -1979,15 +1879,11 @@ msgid ""
 "shows you the basic settings."
 msgstr ""
 
-#, fuzzy
-#| msgid "Possible Conflicts"
 msgid "Possible conflicts"
-msgstr "可能的衝突"
+msgstr ""
 
-#, fuzzy
-#| msgid "Reset position"
 msgid "Test connection"
-msgstr "重設位置"
+msgstr ""
 
 msgid "No conflicts detected."
 msgstr ""
@@ -1999,7 +1895,7 @@ msgid "Search in the knowledge base"
 msgstr ""
 
 msgid "Documentation"
-msgstr "文件"
+msgstr ""
 
 msgid ""
 "To get started with Smart Slider 3, please refer to this guide for "
@@ -2007,7 +1903,7 @@ msgid ""
 msgstr ""
 
 msgid "Email support"
-msgstr "電子郵件支援"
+msgstr ""
 
 msgid ""
 "Need one-to-one assistance? Get in touch with our Support team! We'd love "
@@ -2025,10 +1921,8 @@ msgstr ""
 msgid "Selected articles"
 msgstr ""
 
-#, fuzzy
-#| msgid "Debug Information"
 msgid "Debug information"
-msgstr "除錯資訊"
+msgstr ""
 
 #, php-format
 msgid "%s or later"
@@ -2043,16 +1937,14 @@ msgid ""
 "browsers are the following: %s."
 msgstr ""
 
-#, fuzzy
-#| msgid "Slider center"
 msgid "Help center"
-msgstr "幻燈片中間"
+msgstr ""
 
 msgid "Help"
-msgstr "幫助"
+msgstr ""
 
 msgid "Read more"
-msgstr "閱讀更多"
+msgstr ""
 
 msgid "Need more?"
 msgstr ""
@@ -2061,7 +1953,7 @@ msgid "Unlock all the pro features by upgrading to Smart Slider 3 Pro."
 msgstr ""
 
 msgid "Changelog"
-msgstr "更新日誌"
+msgstr ""
 
 msgid "Check for update"
 msgstr ""
@@ -2073,7 +1965,7 @@ msgid "Your license is active"
 msgstr ""
 
 msgid "Deactivate license"
-msgstr "停用授權許可"
+msgstr ""
 
 msgid "Activate your license"
 msgstr ""
@@ -2094,19 +1986,19 @@ msgid "Rate your experience"
 msgstr ""
 
 msgid "Hated it"
-msgstr "非常差"
+msgstr ""
 
 msgid "Disliked it"
-msgstr "很差"
+msgstr ""
 
 msgid "It was ok"
-msgstr "還可以"
+msgstr ""
 
 msgid "Liked it"
-msgstr "不錯"
+msgstr ""
 
 msgid "Loved it"
-msgstr "非常喜歡"
+msgstr ""
 
 msgid "Why upgrade to Smart Slider 3 Pro?"
 msgstr ""
@@ -2118,10 +2010,9 @@ msgstr ""
 msgid "Full slide library access"
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Text layer"
+#, php-format
 msgid "%d new layers"
-msgstr "文字圖層"
+msgstr ""
 
 msgid "Extra advanced options"
 msgstr ""
@@ -2133,19 +2024,19 @@ msgid "Lifetime update & support"
 msgstr ""
 
 msgid "Apply"
-msgstr "套用"
+msgstr ""
 
 msgid "Back"
 msgstr ""
 
 msgid "Import"
-msgstr "匯入"
+msgstr ""
 
 msgid "Layers"
 msgstr ""
 
 msgid "Library"
-msgstr "資料庫"
+msgstr ""
 
 msgid "Absolute"
 msgstr ""
@@ -2161,19 +2052,19 @@ msgid "Positions the layers inside horizontally."
 msgstr ""
 
 msgid "Vertical align"
-msgstr "垂直對齊"
+msgstr ""
 
 msgid "Positions the layers inside vertically."
 msgstr ""
 
 msgid "Target window"
-msgstr "目標視窗"
+msgstr ""
 
 msgid "Background image"
-msgstr "背景圖片"
+msgstr ""
 
 msgid "Focus"
-msgstr "焦點"
+msgstr ""
 
 msgid ""
 "You can set the starting position of a background image. This makes sure "
@@ -2182,16 +2073,16 @@ msgid ""
 msgstr ""
 
 msgid "Background"
-msgstr "背景"
+msgstr ""
 
 msgid "Gradient"
-msgstr "漸層"
+msgstr ""
 
 msgid "Color end"
-msgstr "結束色彩"
+msgstr ""
 
 msgid "Position"
-msgstr "位置"
+msgstr ""
 
 msgid "The editing mode the layer is positioned in."
 msgstr ""
@@ -2206,7 +2097,7 @@ msgid "With margins you can create distance between your layers."
 msgstr ""
 
 msgid "Responsive"
-msgstr "響應式"
+msgstr ""
 
 msgid "Linked to"
 msgstr ""
@@ -2232,36 +2123,34 @@ msgid "Erases all device specific changes you made on the current device."
 msgstr ""
 
 msgid "Effect"
-msgstr "效果"
+msgstr ""
 
 msgid "Parallax"
-msgstr "視差式"
+msgstr ""
 
 msgid "More parallax options in slider settings -> Layer animations tab."
-msgstr "更多的視差動畫選項在幻燈片設定 -> 圖層動畫。"
+msgstr ""
 
 msgid "Crop"
-msgstr "裁切"
+msgstr ""
 
 msgid "Mask"
-msgstr "遮罩"
+msgstr ""
 
 msgid "If your content is larger than the layer, you can crop it to fit."
 msgstr ""
 
 msgid "Rotation"
-msgstr "旋轉"
+msgstr ""
 
 msgid "CSS Class"
-msgstr "CSS 類別"
+msgstr ""
 
 msgid "You can add a custom CSS class on the layer container."
 msgstr ""
 
-#, fuzzy
-#| msgid "Tab background"
 msgid "Content background"
-msgstr "標籤背景"
+msgstr ""
 
 msgid "Spacing"
 msgstr ""
@@ -2278,16 +2167,16 @@ msgid ""
 msgstr ""
 
 msgid "Columns"
-msgstr "欄"
+msgstr ""
 
 msgid "Gutter"
-msgstr "間隔"
+msgstr ""
 
 msgid "Creates space between the columns"
 msgstr ""
 
 msgid "Wrap after"
-msgstr "到下一行"
+msgstr ""
 
 msgid "Breaks the columns to the given amount of rows."
 msgstr ""
@@ -2296,21 +2185,19 @@ msgid "Makes the row fill the available vertical space"
 msgstr ""
 
 msgid "Slide title"
-msgstr "幻燈片標題"
+msgstr ""
 
 msgid "Description"
-msgstr "描述"
+msgstr ""
 
-#, fuzzy
-#| msgid "Thumbnail"
 msgid "Thumbnail alt"
-msgstr "縮圖"
+msgstr ""
 
 msgid "Custom lightbox image"
-msgstr "自訂燈箱圖片"
+msgstr ""
 
 msgid "Published"
-msgstr "已發佈"
+msgstr ""
 
 msgid "Publish on"
 msgstr ""
@@ -2322,7 +2209,7 @@ msgid "Thumbnail type"
 msgstr ""
 
 msgid "Video"
-msgstr "影片"
+msgstr ""
 
 msgid ""
 "If you have a video on your slide, you can put a play icon on the thumbnail "
@@ -2335,10 +2222,8 @@ msgid ""
 "them.%2$s"
 msgstr ""
 
-#, fuzzy
-#| msgid "Slider background video"
 msgid "Slide background video"
-msgstr "幻燈片背景影片"
+msgstr ""
 
 msgid "Restart on slide change"
 msgstr ""
@@ -2346,10 +2231,8 @@ msgstr ""
 msgid "Starts the video from the beginning when the slide is viewed again."
 msgstr ""
 
-#, fuzzy
-#| msgid "Slider background image"
 msgid "Slide background"
-msgstr "幻燈片背景圖片"
+msgstr ""
 
 msgid ""
 "Select a background image for the slide. By clicking the small screen icon, "
@@ -2362,16 +2245,14 @@ msgid ""
 "background correctly."
 msgstr ""
 
-#, fuzzy
-#| msgid "Background color"
 msgid "Background blur"
-msgstr "背景色彩"
+msgstr ""
 
 msgid "Blur"
-msgstr "模糊"
+msgstr ""
 
 msgid "Overlay"
-msgstr "覆蓋"
+msgstr ""
 
 msgid "Puts the color in front of the image."
 msgstr ""
@@ -2379,16 +2260,11 @@ msgstr ""
 msgid "SEO"
 msgstr ""
 
-#, fuzzy
-#| msgctxt "Slide item"
-#| msgid "Image area"
 msgid "Image alt"
-msgstr "圖片區域"
+msgstr ""
 
-#, fuzzy
-#| msgid "Image size"
 msgid "Image title"
-msgstr "圖片尺寸"
+msgstr ""
 
 msgctxt "Layer animation"
 msgid "In"
@@ -2403,31 +2279,31 @@ msgid "Events"
 msgstr ""
 
 msgid "Plays in when"
-msgstr "播放進場時機"
+msgstr ""
 
 msgid "Plays out when"
-msgstr "播放退場時機"
+msgstr ""
 
 msgid "Plays loop when"
-msgstr "重複播放時機"
+msgstr ""
 
 msgid "Pauses loop when"
-msgstr "暫停重複播放時機"
+msgstr ""
 
 msgid "Stops loop when"
-msgstr "停止重複播放時機"
+msgstr ""
 
 msgid "Repeatable"
-msgstr "允許重複"
+msgstr ""
 
 msgid "Allows the layer animations to play more than once."
 msgstr ""
 
 msgid "Start delay"
-msgstr "延遲開始"
+msgstr ""
 
 msgid "End delay"
-msgstr "延遲結束"
+msgstr ""
 
 msgid "Repeat loop only"
 msgstr ""
@@ -2439,28 +2315,28 @@ msgid "Trigger custom event on"
 msgstr ""
 
 msgid "Click"
-msgstr "點擊"
+msgstr ""
 
 msgid "Mouse enter"
-msgstr "鼠標移入"
+msgstr ""
 
 msgid "Mouse leave"
-msgstr "鼠標移出"
+msgstr ""
 
 msgid "Media started"
-msgstr "媒體開始"
+msgstr ""
 
 msgid "Media paused"
-msgstr "媒體已暫停"
+msgstr ""
 
 msgid "Media stopped"
-msgstr "媒體已停止"
+msgstr ""
 
 msgid "Duration"
-msgstr "持續時間"
+msgstr ""
 
 msgid "Delay"
-msgstr "延遲"
+msgstr ""
 
 msgid "Easing"
 msgstr ""
@@ -2469,13 +2345,13 @@ msgid "Offset"
 msgstr ""
 
 msgid "Rotate"
-msgstr "旋轉"
+msgstr ""
 
 msgid "Scale"
-msgstr "縮放"
+msgstr ""
 
 msgid "Skew"
-msgstr "傾斜"
+msgstr ""
 
 msgid "Transform origin"
 msgstr ""
@@ -2485,13 +2361,11 @@ msgid ""
 "its canvas position."
 msgstr ""
 
-#, fuzzy
-#| msgid "Repeat Count"
 msgid "Repeat count"
-msgstr "重複次數"
+msgstr ""
 
 msgid "loops"
-msgstr "循環"
+msgstr ""
 
 msgid ""
 "You can restrict the loop to play only a certain amount of loops, instead of "
@@ -2506,31 +2380,31 @@ msgid "Curtains"
 msgstr ""
 
 msgid "Diagonal"
-msgstr "對角線"
+msgstr ""
 
 msgid "Circle"
-msgstr "圓形"
+msgstr ""
 
 msgid "From"
-msgstr "從"
+msgstr ""
 
 msgid "To"
-msgstr "到"
+msgstr ""
 
 msgid "Fade"
-msgstr "融合"
+msgstr ""
 
 msgid "Scale up"
-msgstr "放大"
+msgstr ""
 
 msgid "Scale down"
-msgstr "縮小"
+msgstr ""
 
 msgid "Static overlay"
 msgstr ""
 
 msgid "First slide"
-msgstr "首張幻燈片"
+msgstr ""
 
 msgid "Unpublished"
 msgstr ""
@@ -2539,28 +2413,28 @@ msgid "Bulk actions"
 msgstr ""
 
 msgid "Select all"
-msgstr "全選"
+msgstr ""
 
 msgid "Select none"
-msgstr "取消全選"
+msgstr ""
 
 msgid "Select published"
-msgstr "所選已發佈"
+msgstr ""
 
 msgid "Select unpublished"
-msgstr "所選已取消發佈"
+msgstr ""
 
 msgid "Blank"
 msgstr ""
 
 msgid "Post"
-msgstr "貼文"
+msgstr ""
 
 msgid "Dynamic slides"
 msgstr ""
 
 msgid "Add slide"
-msgstr "加入幻燈片"
+msgstr ""
 
 msgid "Block must contain only one slide. Need more?"
 msgstr ""
@@ -2568,60 +2442,44 @@ msgstr ""
 msgid "Convert to slider"
 msgstr ""
 
-#, fuzzy
-#| msgid "Slide index"
 msgid "Slide one"
-msgstr "幻燈片首頁"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slide to top"
 msgid "Slide two"
-msgstr "整個幻燈片至上"
+msgstr ""
 
-#, fuzzy
-#| msgid "Drop your images here!"
 msgid "Drop images here"
-msgstr "拖曳您的圖片到此處！"
+msgstr ""
 
-#, fuzzy
-#| msgid "Search"
 msgid "Search Project"
-msgstr "搜尋"
+msgstr ""
 
-#, fuzzy
-#| msgid "View %s"
 msgid "View trash"
-msgstr "查看 %s"
+msgstr ""
 
 msgid "Order by"
-msgstr "排序依"
+msgstr ""
 
 msgid "Manual order"
-msgstr "手動排序"
+msgstr ""
 
 msgid "A-Z"
-msgstr "A 到 Z"
+msgstr ""
 
 msgid "Z-A"
-msgstr "Z 到 A"
+msgstr ""
 
-#, fuzzy
-#| msgid "Newest First"
 msgid "Newest first"
-msgstr "最新的排前"
+msgstr ""
 
-#, fuzzy
-#| msgid "Oldest First"
 msgid "Oldest first"
-msgstr "最舊的排前"
+msgstr ""
 
 msgid "Export"
-msgstr "匯出"
+msgstr ""
 
-#, fuzzy
-#| msgid "Show on"
 msgid "Show"
-msgstr "顯示在"
+msgstr ""
 
 #, php-format
 msgid "Showing %s to %s of %s projects"
@@ -2639,40 +2497,39 @@ msgstr ""
 msgid "Please try searching with another term."
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Showing items match for \"%s\""
+#, php-format
 msgid "Showing %s results for %s."
-msgstr "顯示符合 \"%s\" 的項目"
+msgstr ""
 
 msgid "Module"
-msgstr "模組"
+msgstr ""
 
 msgid "Displays the slider in a template module position."
 msgstr ""
 
 msgid "Create module"
-msgstr "建立模組"
+msgstr ""
 
 msgid "Related modules"
 msgstr ""
 
 msgid "Articles"
-msgstr "文章"
+msgstr ""
 
 msgid "Paste the code into article:"
-msgstr "貼上這段代碼到文章中："
+msgstr ""
 
 msgid "PHP code"
-msgstr "PHP 程式碼"
+msgstr ""
 
 msgid "Paste the PHP code into source code:"
-msgstr "貼上這段 PHP 程式碼到原始碼編輯器中："
+msgstr ""
 
 msgid "Shortcode"
-msgstr "代碼"
+msgstr ""
 
 msgid "Copy and paste this shortcode into your posts or pages:"
-msgstr "複製貼上此代碼到您的文章或頁面內容中："
+msgstr ""
 
 msgid "Pages and Posts"
 msgstr ""
@@ -2684,10 +2541,8 @@ msgstr ""
 msgid "Paste the PHP code into your theme's file:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Slider is empty."
 msgid "Trash is empty."
-msgstr "幻燈片是空的"
+msgstr ""
 
 msgid "Restore"
 msgstr ""
@@ -2711,7 +2566,7 @@ msgid "Framework"
 msgstr ""
 
 msgid "Fonts"
-msgstr "字體"
+msgstr ""
 
 msgid "Layer defaults"
 msgstr ""
@@ -2723,15 +2578,13 @@ msgid "Saved and slider cache invalidated."
 msgstr ""
 
 msgid "Cache cleared."
-msgstr "快取已清除。"
+msgstr ""
 
 msgid "Clear cache"
-msgstr "清除快取"
+msgstr ""
 
-#, fuzzy
-#| msgid "Clear cache"
 msgid "Clear cache options"
-msgstr "清除快取"
+msgstr ""
 
 msgid "Delete resized image cache"
 msgstr ""
@@ -2741,7 +2594,7 @@ msgid "If enabled the following folder will be <b>permanently deleted</b>: %s"
 msgstr ""
 
 msgid "Configuration"
-msgstr "配置"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -2751,13 +2604,13 @@ msgid ""
 msgstr ""
 
 msgid "Default family"
-msgstr "預設字體"
+msgstr ""
 
 msgid "This font family is used for the newly added layers."
 msgstr ""
 
 msgid "Preset font families"
-msgstr "預先設置字體"
+msgstr ""
 
 msgid "These font families appear in the dropdown list."
 msgstr ""
@@ -2793,7 +2646,7 @@ msgid ""
 msgstr ""
 
 msgid "Script attributes"
-msgstr "Script 屬性"
+msgstr ""
 
 msgid "Slider's inline JavaScript"
 msgstr ""
@@ -2816,24 +2669,23 @@ msgid "Load Font Awesome 4"
 msgstr ""
 
 msgid "API requests"
-msgstr "API 要求"
+msgstr ""
 
 #, php-format
 msgctxt "Curl"
 msgid "Use %s"
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Clean HTML"
+#, php-format
 msgctxt "curl proxy"
 msgid "Clean %s"
-msgstr "清除 HTML"
+msgstr ""
 
 msgid "General settings"
-msgstr "一般設定"
+msgstr ""
 
 msgid "Automatic update check"
-msgstr "自動檢查更新"
+msgstr ""
 
 msgid "Alternative save slide"
 msgstr ""
@@ -2857,29 +2709,27 @@ msgid "YouTube and Vimeo privacy enhanced mode"
 msgstr ""
 
 msgid "Smooth scroll speed"
-msgstr "平滑捲動速度"
+msgstr ""
 
 msgid "Editor - additional CSS files"
-msgstr "編輯 - 附加的 CSS 檔案"
+msgstr ""
 
 msgid ""
 "You can call your own CSS files to our backend, for example, to be able to "
 "use custom fonts. Write each URL to a new line."
 msgstr ""
 
-#, fuzzy
-#| msgid "Font settings"
 msgid "WordPress settings"
-msgstr "字體設定"
+msgstr ""
 
 msgid "Show editor icon"
-msgstr "顯示編輯圖示"
+msgstr ""
 
 msgid "Show in admin bar"
 msgstr ""
 
 msgid "YOAST SEO sitemap - add images"
-msgstr "YOAST SEO 網站地圖 - 加入圖片"
+msgstr ""
 
 msgid "Create widget area"
 msgstr ""
@@ -2910,7 +2760,7 @@ msgid "Run content plugins on sliders"
 msgstr ""
 
 msgid "Exclude plugins"
-msgstr "排除外掛"
+msgstr ""
 
 msgid ""
 "At each slider you can override the global breakpoints with local values."
@@ -2926,7 +2776,7 @@ msgid ""
 msgstr ""
 
 msgid "Translate url"
-msgstr "翻譯網址"
+msgstr ""
 
 msgid ""
 "You can change the frontend URL our assets are loading from. It can be "
@@ -2939,40 +2789,36 @@ msgstr ""
 msgid "The new URL you want to use. E.g. https://newsite.com"
 msgstr ""
 
-#, fuzzy
-#| msgid "Slider created."
 msgid "Slider restored."
-msgstr "幻燈片秀已建立。"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider deleted."
 msgid "Slider permanently deleted."
-msgstr "幻燈片秀已刪除。"
+msgstr ""
 
 msgid "Slider created."
-msgstr "幻燈片秀已建立。"
+msgstr ""
 
 msgid "Slider renamed."
 msgstr ""
 
 msgid "Slider saved."
-msgstr "幻燈片秀已儲存。"
+msgstr ""
 
 #, php-format
 msgid "Import url is not valid: %s"
-msgstr "匯入網址無法使用：%s"
+msgstr ""
 
 msgid "License key required for premium features!"
-msgstr "使用進階功能需要授權碼！"
+msgstr ""
 
 msgid "Slider imported."
-msgstr "幻燈片秀已匯入。"
+msgstr ""
 
 msgid "Import error!"
-msgstr "匯入錯誤！"
+msgstr ""
 
 msgid "Slide duplicated."
-msgstr "幻燈片已複製。"
+msgstr ""
 
 #, php-format
 msgid "%s slider type is not available."
@@ -2984,13 +2830,11 @@ msgstr ""
 msgid "Slider moved to the trash."
 msgstr ""
 
-#, fuzzy
-#| msgid "Remove from group"
 msgid "Slider removed from the group."
-msgstr "從群組移除"
+msgstr ""
 
 msgid "Slider duplicated."
-msgstr "幻燈片秀已複製。"
+msgstr ""
 
 msgid "Slider settings"
 msgstr ""
@@ -3008,31 +2852,29 @@ msgid "Ordering"
 msgstr ""
 
 msgid "Video url"
-msgstr "影片網址"
+msgstr ""
 
 msgid "Actions"
-msgstr "動作"
+msgstr ""
 
 #, php-format
 msgid "Export %1$s as HTML"
 msgstr ""
 
 msgid "Duplicate slider"
-msgstr "複製幻燈片"
+msgstr ""
 
 msgid "Simple edit"
 msgstr ""
 
 msgid "Slider order saved."
-msgstr "幻燈片秀的排序已儲存。"
+msgstr ""
 
 msgid "Slider(s) moved to the trash."
 msgstr ""
 
-#, fuzzy
-#| msgid "Remove from group"
 msgid "Slider(s) removed from the group."
-msgstr "從群組移除"
+msgstr ""
 
 msgid "Slider(s) deleted permanently from the trash."
 msgstr ""
@@ -3042,8 +2884,6 @@ msgid ""
 "Your server has an upload file limit at %s, so if you have bigger export "
 "file, please use the local import file method."
 msgstr ""
-"您的伺服器有上傳檔案限制於 %s，所以若您有更大的匯出檔案，請使用本機匯入檔案方"
-"式。"
 
 msgid "You have to unzip your "
 msgstr ""
@@ -3052,15 +2892,13 @@ msgid "Only *.ss3 files can be uploaded!"
 msgstr ""
 
 msgid "The imported file is not readable!"
-msgstr "匯入檔案無法讀取！"
+msgstr ""
 
 msgid "Go to dashboard"
 msgstr ""
 
-#, fuzzy
-#| msgid "Learn Smart Slider 3"
 msgid "Welcome to Smart Slider 3"
-msgstr "學習 Smart Slider 3"
+msgstr ""
 
 msgid "Don't show again"
 msgstr ""
@@ -3084,7 +2922,7 @@ msgid ""
 msgstr ""
 
 msgid "File"
-msgstr "檔案"
+msgstr ""
 
 #, php-format
 msgid "Files with <i>.ss3</i> extension are listed from: %s"
@@ -3105,16 +2943,16 @@ msgid ""
 msgstr ""
 
 msgid "Image mode"
-msgstr "匯入模式"
+msgstr ""
 
 msgid "Clone"
-msgstr "複製"
+msgstr ""
 
 msgid "Old site url"
-msgstr "舊網站的網址"
+msgstr ""
 
 msgid "Original"
-msgstr "原本"
+msgstr ""
 
 msgid "You can choose how the slide images are loaded."
 msgstr ""
@@ -3122,77 +2960,72 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-#, fuzzy
-#| msgid "Empty title"
 msgid "Empty trash"
-msgstr "空白標題"
+msgstr ""
 
 msgid "Slide saved."
-msgstr "幻燈片已儲存。"
+msgstr ""
 
 #, php-format
 msgid "%d static slides generated."
-msgstr "%d 狀態的多個幻燈片已產生。"
+msgstr ""
 
 msgid "Slide renamed."
 msgstr ""
 
 msgid "First slide changed."
-msgstr "已更改第一個的幻燈片。"
+msgstr ""
 
 msgid "Static overlay converted to slide."
 msgstr ""
 
 msgid "Slide published."
-msgstr "幻燈片已發佈。"
+msgstr ""
 
 msgid "Slide unpublished."
-msgstr "幻燈片已取消發佈。"
+msgstr ""
 
 msgid "Slide order saved."
-msgstr "幻燈片的排序已儲存。"
+msgstr ""
 
 msgid "Slide(s) copied."
-msgstr "幻燈片已複製。"
+msgstr ""
 
 msgid "Slide deleted."
-msgstr "幻燈片已刪除。"
+msgstr ""
 
 msgid "Slides created."
 msgstr ""
 
-#, fuzzy
-#| msgid "Slide created."
-#| msgid_plural "Slides created."
 msgid "Slide created."
-msgstr "多個幻燈片已建立。"
+msgstr ""
 
 msgid "Failed to create slides."
 msgstr ""
 
 msgid "Static save"
-msgstr "儲存狀態"
+msgstr ""
 
 msgid "Generator settings"
-msgstr "產生器設定"
+msgstr ""
 
 msgid "Cache expiration"
-msgstr "過期快取"
+msgstr ""
 
 msgid "Hours"
-msgstr "小時"
+msgstr "Timmar"
 
 msgid "Start index"
-msgstr "起始首頁"
+msgstr ""
 
 msgid "Group result"
-msgstr "群組結果"
+msgstr ""
 
 msgid "Smart Slider 3 deactivated on this site!"
 msgstr ""
 
 msgid "New slider"
-msgstr "新的幻燈片秀"
+msgstr ""
 
 msgid "Alias removed"
 msgstr ""
@@ -3205,22 +3038,22 @@ msgid "Alias updated to: %s"
 msgstr ""
 
 msgid "Background animation"
-msgstr "背景動畫"
+msgstr ""
 
 msgid "Animation type"
 msgstr ""
 
 msgid "The importing failed at the unzipping part."
-msgstr "該匯入於解壓縮部份時發生失敗"
+msgstr ""
 
 msgid "You can't import sliders from Smart Slider 2."
-msgstr "無法匯入 Smart Slider 2 的幻燈片"
+msgstr ""
 
 msgid "Export file corrupted! Slider data is missing."
-msgstr "匯出檔案錯誤！幻燈片資料遺失。"
+msgstr ""
 
 msgid "Learn more"
-msgstr "了解更多"
+msgstr ""
 
 #, php-format
 msgid "Increase %1$s in php.ini to 1000 or more. Current value: %2$s"
@@ -3233,7 +3066,7 @@ msgid ""
 msgstr ""
 
 msgid "Unable to connect to the API"
-msgstr "無法連接此 API"
+msgstr ""
 
 msgid "MySQL table missing"
 msgstr ""
@@ -3273,19 +3106,19 @@ msgid "Add column"
 msgstr ""
 
 msgid "Year"
-msgstr "年"
+msgstr "År"
 
 msgid "Month"
-msgstr "月份"
+msgstr "Månad"
 
 msgid "Day"
-msgstr "天"
+msgstr "Dag"
 
 msgid "Hour"
-msgstr "一小时"
+msgstr "Timme"
 
 msgid "Minute"
-msgstr "分钟"
+msgstr "Minut"
 
 msgid "Stack"
 msgstr ""
@@ -3293,10 +3126,8 @@ msgstr ""
 msgid "No description."
 msgstr ""
 
-#, fuzzy
-#| msgid "Folder not found."
 msgid "Generator not found"
-msgstr "未找到資料夾。"
+msgstr ""
 
 msgid "Test generator."
 msgstr ""
@@ -3318,22 +3149,22 @@ msgid "Article"
 msgstr ""
 
 msgid "Category"
-msgstr "分類"
+msgstr ""
 
 msgid "Creates slides from your Joomla articles in the selected categories."
 msgstr ""
 
 msgid "Tags"
-msgstr "標籤"
+msgstr ""
 
 msgid "Featured"
-msgstr "精選"
+msgstr ""
 
 msgid "User ID"
 msgstr ""
 
 msgid "Language"
-msgstr "語言"
+msgstr ""
 
 msgid "Extra variables"
 msgstr ""
@@ -3342,34 +3173,34 @@ msgid "Turn on these options to generate more variables for the slides."
 msgstr ""
 
 msgid "Date format"
-msgstr "日期格式"
+msgstr ""
 
 msgid "Time format"
-msgstr "時間格式"
+msgstr ""
 
 msgid "Translate date and time"
-msgstr "翻譯日期和時間"
+msgstr ""
 
 msgid "Title"
-msgstr "標題"
+msgstr ""
 
 msgid "User name"
-msgstr "帳戶名稱"
+msgstr ""
 
 msgid "Hits"
-msgstr "點擊數"
+msgstr ""
 
 msgid "Creation time"
-msgstr "建立時間"
+msgstr ""
 
 msgid "Modification time"
-msgstr "修改時間"
+msgstr ""
 
 msgid "Publish time"
 msgstr ""
 
 msgid "Featured article ordering"
-msgstr "精選文章排序"
+msgstr ""
 
 msgid "View article"
 msgstr ""
@@ -3379,29 +3210,29 @@ msgid ""
 msgstr ""
 
 msgid "Parent category"
-msgstr "主分類"
+msgstr ""
 
 msgid "View category"
 msgstr ""
 
 msgid "Nothing"
-msgstr "無"
+msgstr ""
 
 #, php-format
 msgid "Creates slides from %1$s."
 msgstr ""
 
 msgid "Posts by filter"
-msgstr "篩選的貼文"
+msgstr ""
 
 msgid "Posts by IDs"
-msgstr "依照 ID 的貼文"
+msgstr ""
 
 msgid "Custom"
-msgstr "自訂"
+msgstr ""
 
 msgid "All custom posts"
-msgstr "所有自訂貼文"
+msgstr ""
 
 msgid "Creates slides from the posts of all your post types."
 msgstr ""
@@ -3454,13 +3285,13 @@ msgid ""
 msgstr ""
 
 msgid "Post date"
-msgstr "張貼日期"
+msgstr ""
 
 msgid "Modification date"
-msgstr "修改日期"
+msgstr ""
 
 msgid "Random"
-msgstr "隨機"
+msgstr ""
 
 msgid "Given IDs"
 msgstr ""
@@ -3579,7 +3410,7 @@ msgid "Creates slides from your posts in the selected categories."
 msgstr ""
 
 msgid "Categories"
-msgstr "分類"
+msgstr ""
 
 msgid "Remove shortcodes"
 msgstr ""
@@ -3628,7 +3459,7 @@ msgid ""
 msgstr ""
 
 msgid "Comment count"
-msgstr "留言計數"
+msgstr ""
 
 msgid "Creates slides from the posts with the set IDs."
 msgstr ""
@@ -3643,18 +3474,16 @@ msgid ""
 msgstr ""
 
 msgid "Whole group"
-msgstr "整個群組"
+msgstr ""
 
 msgid "Select Slider"
-msgstr "選擇幻燈片"
+msgstr ""
 
 msgid "OR"
-msgstr "或"
+msgstr ""
 
-#, fuzzy
-#| msgid "Insert the slider into pages with the icon:"
 msgid "Insert a slider into your content"
-msgstr "使用此圖示來將幻燈片插入到頁面裡"
+msgstr ""
 
 msgid "Select the slider you want to insert."
 msgstr ""
@@ -3664,10 +3493,10 @@ msgid "MORE"
 msgstr ""
 
 msgid "Label"
-msgstr "標籤"
+msgstr ""
 
 msgid "No wrap"
-msgstr "不要斷行"
+msgstr ""
 
 msgid "Prevents the text from breaking into more lines"
 msgstr ""
@@ -3683,7 +3512,7 @@ msgid ""
 msgstr ""
 
 msgid "Icon"
-msgstr "圖示"
+msgstr ""
 
 msgid "Placement"
 msgstr ""
@@ -3693,7 +3522,7 @@ msgid "Class on the %s element."
 msgstr ""
 
 msgid "Heading layer"
-msgstr "標題圖層"
+msgstr ""
 
 msgid "Text animation"
 msgstr ""
@@ -3716,10 +3545,10 @@ msgid "Fix height for the %1$s."
 msgstr ""
 
 msgid "Alt tag"
-msgstr "Alt 標籤"
+msgstr ""
 
 msgid "Optimize image"
-msgstr "壓縮圖片"
+msgstr ""
 
 msgid ""
 "You can turn off the Layer image optimization for this image, to resize it "
@@ -3728,15 +3557,15 @@ msgstr ""
 
 msgctxt "Layer group"
 msgid "Special"
-msgstr "特殊"
+msgstr ""
 
 msgctxt "Layer group"
 msgid "Media"
-msgstr "媒體"
+msgstr ""
 
 msgctxt "Layer group"
 msgid "Advanced"
-msgstr "進階"
+msgstr ""
 
 msgctxt "Layer"
 msgid "Missing"
@@ -3750,19 +3579,19 @@ msgid "Custom text for tablet"
 msgstr ""
 
 msgid "Tablet text"
-msgstr "平板文字"
+msgstr ""
 
 msgid "Custom text for mobile"
 msgstr ""
 
 msgid "Mobile text"
-msgstr "手機文字"
+msgstr ""
 
 msgid "Vimeo url or Video ID"
 msgstr ""
 
 msgid "Cover image"
-msgstr "封面圖片"
+msgstr ""
 
 msgid "Aspect ratio"
 msgstr ""
@@ -3786,19 +3615,19 @@ msgid "Go to next slide"
 msgstr ""
 
 msgid "Start time"
-msgstr "開始時間"
+msgstr ""
 
 msgid "Volume"
-msgstr "音量"
+msgstr ""
 
 msgid "Mute"
-msgstr "靜音"
+msgstr ""
 
 msgid "Pause on scroll"
 msgstr ""
 
 msgid "Never"
-msgstr "永不"
+msgstr ""
 
 msgid "When partly visible"
 msgstr ""
@@ -3810,13 +3639,13 @@ msgid "You can pause the video when the visitor scrolls away from the slider"
 msgstr ""
 
 msgid "Display"
-msgstr "顯示"
+msgstr ""
 
 msgid "Only works on videos of Vimeo Pro users."
 msgstr ""
 
 msgid "Remove controls"
-msgstr "移除控制"
+msgstr ""
 
 msgid ""
 "Removes the controls of the video, but it only works on videos of Vimeo Pro "
@@ -3838,22 +3667,22 @@ msgid ""
 msgstr ""
 
 msgid "Play button"
-msgstr "播放按鈕"
+msgstr ""
 
 msgid "Play"
-msgstr "播放"
+msgstr ""
 
 msgid "YouTube URL or Video ID"
 msgstr ""
 
 msgid "End time"
-msgstr "結束時間"
+msgstr ""
 
 msgid "Hide YouTube logo"
-msgstr "隱藏 YouTube logo"
+msgstr ""
 
 msgid "Centered"
-msgstr "已置中"
+msgstr ""
 
 msgid "Scales up and crops the video to cover the whole layer."
 msgstr ""
@@ -3880,13 +3709,13 @@ msgid "Slider error! Generator source not found: "
 msgstr ""
 
 msgid "Downscale"
-msgstr "縮小"
+msgstr ""
 
 msgid "Allows the slider to scale down for smaller screens."
 msgstr ""
 
 msgid "Upscale"
-msgstr "放大"
+msgstr ""
 
 msgid "Allows the slider to scale up for larger screens."
 msgstr ""
@@ -3898,7 +3727,7 @@ msgid "Prevents the slider from getting smaller than the set value."
 msgstr ""
 
 msgid "Force full width"
-msgstr "強制全寬"
+msgstr ""
 
 msgid "The slider tries to fill the full width of the browser."
 msgstr ""
@@ -3926,22 +3755,22 @@ msgid "Slider size is too small!"
 msgstr ""
 
 msgid "Ken Burns effect"
-msgstr "Ken Burns 效果"
+msgstr ""
 
 msgid "Speed"
-msgstr "速度"
+msgstr ""
 
 msgid "Super slow"
-msgstr "極慢"
+msgstr ""
 
 msgid "Slow"
-msgstr "慢"
+msgstr ""
 
 msgid "Fast"
-msgstr "快"
+msgstr ""
 
 msgid "Super fast"
-msgstr "極快"
+msgstr ""
 
 msgid "Border width"
 msgstr ""
@@ -3957,10 +3786,10 @@ msgid "Simple slider"
 msgstr ""
 
 msgid "Main animation"
-msgstr "主要動畫"
+msgstr ""
 
 msgid "No animation"
-msgstr "無動畫"
+msgstr ""
 
 msgid "Crossfade"
 msgstr ""
@@ -3996,122 +3825,122 @@ msgid "Slider CSS Preset"
 msgstr ""
 
 msgid "Light shadow"
-msgstr "亮色陰影"
+msgstr ""
 
 msgid "Dark shadow"
-msgstr "暗色陰影"
+msgstr ""
 
 msgid "Photo"
-msgstr "照片"
+msgstr ""
 
 msgid "Photo rounded"
-msgstr "圓形照片"
+msgstr ""
 
 #, php-format
 msgid "Demo slider is not available with the following ID: %s"
 msgstr ""
 
 msgid "Blue"
-msgstr "藍色"
+msgstr ""
 
 msgid "White"
-msgstr "白色"
+msgstr ""
 
 msgid "Green"
-msgstr "綠色"
+msgstr ""
 
 msgid "Purple"
-msgstr "紫色"
+msgstr ""
 
 msgid "Grey"
-msgstr "灰色"
+msgstr ""
 
 msgid "Black"
-msgstr "黑色"
+msgstr ""
 
 msgid "Rounded Blue"
-msgstr "藍色圓形"
+msgstr ""
 
 msgid "Rounded Green"
-msgstr "綠色圓形"
+msgstr ""
 
 msgid "Rounded Purple"
-msgstr "紫色圓形"
+msgstr ""
 
 msgid "Rounded Grey"
-msgstr "灰色圓形"
+msgstr ""
 
 msgid "Rounded White"
-msgstr "白色圓形"
+msgstr ""
 
 msgid "Rounded Black"
-msgstr "黑色圓形"
+msgstr ""
 
 msgid "Border White"
-msgstr "白色框線"
+msgstr ""
 
 msgid "Border Dark"
-msgstr "深色線框"
+msgstr ""
 
 msgid "Rectangle Green"
-msgstr "綠色方塊"
+msgstr ""
 
 msgid "Rectangle Blue"
-msgstr "藍色方塊"
+msgstr ""
 
 msgid "Rectangle Purple"
-msgstr "紫色方塊"
+msgstr ""
 
 msgid "Rectangle Grey"
-msgstr "灰色方塊"
+msgstr ""
 
 msgid "Rounded Rectangle Green"
-msgstr "綠色矩形圓角"
+msgstr ""
 
 msgid "Rounded Rectangle Blue"
-msgstr "藍色矩形圓角"
+msgstr ""
 
 msgid "Rounded Rectangle Purple"
-msgstr "紫色矩形圓角"
+msgstr ""
 
 msgid "Border Light"
-msgstr "亮色線框"
+msgstr ""
 
 msgid "My styles"
-msgstr "我的樣式"
+msgstr ""
 
 msgid "X-small Light"
-msgstr "超小亮色"
+msgstr ""
 
 msgid "X-small Dark"
-msgstr "超小暗色"
+msgstr ""
 
 msgid "Small Light"
-msgstr "小型亮色"
+msgstr ""
 
 msgid "Small Dark"
-msgstr "小型暗色"
+msgstr ""
 
 msgid "Medium Light"
-msgstr "中型亮色"
+msgstr ""
 
 msgid "Medium Dark"
-msgstr "中型暗色"
+msgstr ""
 
 msgid "Large Light"
-msgstr "大型亮色"
+msgstr ""
 
 msgid "Large Dark"
-msgstr "大型暗色"
+msgstr ""
 
 msgid "X-large Light"
-msgstr "超大亮色"
+msgstr ""
 
 msgid "X-large Dark"
-msgstr "超大暗色"
+msgstr ""
 
 msgid "My fonts"
-msgstr "我的字體"
+msgstr ""
 
 msgid "Warp"
 msgstr ""
@@ -4120,21 +3949,19 @@ msgid "Twirl"
 msgstr ""
 
 msgid "Domino"
-msgstr "骨牌"
+msgstr ""
 
 msgid "Stand up"
-msgstr "站立"
+msgstr ""
 
 msgid "Rotate down"
-msgstr "往下翻轉"
+msgstr ""
 
 msgid "Elastic"
-msgstr "彈跳"
+msgstr ""
 
-#, fuzzy
-#| msgid "Random Elastic"
 msgid "Random elastic"
-msgstr "亂數彈跳"
+msgstr ""
 
 msgid "My text animations"
 msgstr ""
@@ -4197,294 +4024,294 @@ msgid "Slices - Reversed triangle"
 msgstr ""
 
 msgid "Scale to left"
-msgstr "縮放至左"
+msgstr ""
 
 msgid "Rotate to left"
-msgstr "旋轉至左"
+msgstr ""
 
 msgid "Fixed to left"
-msgstr "固定至左"
+msgstr ""
 
 msgid "Parallax to left"
-msgstr "視差移動至左"
+msgstr ""
 
 msgid "Flow"
-msgstr "浮動"
+msgstr ""
 
 msgid "Flowing rows"
-msgstr "浮動橫列"
+msgstr ""
 
 msgid "Flowing cols"
-msgstr "浮動直欄"
+msgstr ""
 
 msgid "Flowing tiles"
-msgstr "浮動磚塊"
+msgstr ""
 
 msgid "Slide to left"
-msgstr "整個幻燈片至左"
+msgstr ""
 
 msgid "Stage"
-msgstr "舞台"
+msgstr ""
 
 msgid "Zoom"
-msgstr "縮放"
+msgstr ""
 
 msgid "Zoom out"
-msgstr "縮小"
+msgstr ""
 
 msgid "Curtain to left"
-msgstr "百葉窗至左"
+msgstr ""
 
 msgid "Blocks to left"
-msgstr "方塊至左"
+msgstr ""
 
 msgid "Slices to left"
-msgstr "分割至左"
+msgstr ""
 
 msgid "Reversed slices to left"
-msgstr "反方向分割至左"
+msgstr ""
 
 msgid "Puzzle"
-msgstr "拼圖"
+msgstr ""
 
 msgid "Switching to left"
-msgstr "切換至左"
+msgstr ""
 
 msgid "Explode"
-msgstr "爆炸"
+msgstr ""
 
 msgid "Rebuild"
-msgstr "重建"
+msgstr ""
 
 msgid "Page turn to left"
-msgstr "翻頁至左"
+msgstr ""
 
 msgid "3D bricks to left"
-msgstr "3D 磚塊至左"
+msgstr ""
 
 msgid "Vertical spin to left"
-msgstr "水平旋轉至左"
+msgstr ""
 
 msgid "3D rows to left"
-msgstr "3D 橫列旋轉至左"
+msgstr ""
 
 msgid "3D columns to left"
-msgstr "3D 直欄旋轉至左"
+msgstr ""
 
 msgid "Spinning cuboid to left"
-msgstr "旋轉方盒至左"
+msgstr ""
 
 msgid "Turning cuboid to left"
-msgstr "轉動方盒至左"
+msgstr ""
 
 msgid "Scale to top"
-msgstr "縮放至上"
+msgstr ""
 
 msgid "Scale to bottom"
-msgstr "縮放至下"
+msgstr ""
 
 msgid "Rotate to top"
-msgstr "旋轉至上"
+msgstr ""
 
 msgid "Rotate to bottom"
-msgstr "旋轉至下"
+msgstr ""
 
 msgid "Fixed to top"
-msgstr "固定至頂端"
+msgstr ""
 
 msgid "Fixed to bottom"
-msgstr "固定至底部"
+msgstr ""
 
 msgid "Parallax to top"
-msgstr "視差移動至上"
+msgstr ""
 
 msgid "Parallax to bottom"
-msgstr "視差移動至下"
+msgstr ""
 
 msgid "Flowing tiles vertical"
-msgstr "垂直浮動方塊"
+msgstr ""
 
 msgid "Slide to bottom"
-msgstr "整個幻燈片至下"
+msgstr ""
 
 msgid "Slide to top"
-msgstr "整個幻燈片至上"
+msgstr ""
 
 msgid "Curtain to bottom"
-msgstr "百葉窗至下"
+msgstr ""
 
 msgid "Curtain to top"
-msgstr "百葉窗至上"
+msgstr ""
 
 msgid "Switching to bottom"
-msgstr "切換至下"
+msgstr ""
 
 msgid "Switching to top"
-msgstr "切換至上"
+msgstr ""
 
 msgid "Horizontal spin to bottom"
-msgstr "垂直旋轉至下"
+msgstr ""
 
 msgid "Horizontal spin to top"
-msgstr "垂直旋轉至上"
+msgstr ""
 
 msgid "3D bricks to bottom"
-msgstr "3D 方塊至下"
+msgstr ""
 
 msgid "3D bricks to top"
-msgstr "3D 方塊至上"
+msgstr ""
 
 msgid "3D rows to bottom"
-msgstr "3D 橫列至下"
+msgstr ""
 
 msgid "3D rows to top"
-msgstr "3D 橫列至上"
+msgstr ""
 
 msgid "3D columns to bottom"
-msgstr "3D 直欄至下"
+msgstr ""
 
 msgid "3D columns to top"
-msgstr "3D 直欄至上"
+msgstr ""
 
 msgid "Spinning cuboid to bottom"
-msgstr "旋轉方盒至下"
+msgstr ""
 
 msgid "Spinning cuboid to top"
-msgstr "旋轉方盒至上"
+msgstr ""
 
 msgid "Turning cuboid to bottom"
-msgstr "轉動方盒至下"
+msgstr ""
 
 msgid "Turning cuboid to top"
-msgstr "轉動方盒至上"
+msgstr ""
 
 msgid "Scale to right"
-msgstr "縮放至右"
+msgstr ""
 
 msgid "Rotate to right"
-msgstr "旋轉至右"
+msgstr ""
 
 msgid "Fixed to right"
-msgstr "固定至右"
+msgstr ""
 
 msgid "Parallax to right"
-msgstr "視差移動至右"
+msgstr ""
 
 msgid "Flow - reversed"
-msgstr "浮動 - 反向"
+msgstr ""
 
 msgid "Slide to right"
-msgstr "整個幻燈片至右"
+msgstr ""
 
 msgid "Curtain to right"
-msgstr "百葉窗至右"
+msgstr ""
 
 msgid "Blocks to right"
-msgstr "方塊至右"
+msgstr ""
 
 msgid "Slices to right"
-msgstr "分割至右"
+msgstr ""
 
 msgid "Reversed slices to right"
-msgstr "反向分割至右"
+msgstr ""
 
 msgid "Switching to right"
-msgstr "切換至右"
+msgstr ""
 
 msgid "Page turn to right"
-msgstr "翻頁至右"
+msgstr ""
 
 msgid "Vertical spin to right"
-msgstr "水平往右旋轉"
+msgstr ""
 
 msgid "3D bricks to right"
-msgstr "3D 方塊至右"
+msgstr ""
 
 msgid "3D rows to right"
-msgstr "3D 橫列至右"
+msgstr ""
 
 msgid "3D columns to right"
-msgstr "3D 直欄至右"
+msgstr ""
 
 msgid "Spinning cuboid to right"
-msgstr "往右旋轉方盒"
+msgstr ""
 
 msgid "Turning cuboid to right"
-msgstr "往右轉動方盒"
+msgstr ""
 
 msgid "Downscale left"
-msgstr "往左縮小"
+msgstr ""
 
 msgid "Downscale right"
-msgstr "往右縮小"
+msgstr ""
 
 msgid "Downscale top"
-msgstr "往上縮小"
+msgstr ""
 
 msgid "Downscale bottom"
-msgstr "往下縮小"
+msgstr ""
 
 msgid "Upscale left"
-msgstr "往左放大"
+msgstr ""
 
 msgid "Upscale right"
-msgstr "往右放大"
+msgstr ""
 
 msgid "Upscale top"
-msgstr "往上放大"
+msgstr ""
 
 msgid "Upscale bottom"
-msgstr "往下放大"
+msgstr ""
 
 msgid "To left"
-msgstr "往左"
+msgstr ""
 
 msgid "To right"
-msgstr "往右"
+msgstr ""
 
 msgid "To top left"
-msgstr "至左上方"
+msgstr ""
 
 msgid "To top right"
-msgstr "往右上"
+msgstr ""
 
 msgid "To bottom left"
-msgstr "往左下"
+msgstr ""
 
 msgid "To bottom right"
-msgstr "往右下"
+msgstr ""
 
 msgid "My layouts"
-msgstr "我的版型"
+msgstr ""
 
 msgctxt "Arrow direction"
 msgid "Previous"
 msgstr ""
 
 msgid "Previous image"
-msgstr "上一張圖片"
+msgstr ""
 
 msgid "Hover color"
-msgstr "指向色彩"
+msgstr ""
 
 msgid "Mirror"
-msgstr "覆蓋"
+msgstr ""
 
 msgctxt "Arrow direction"
 msgid "Next"
 msgstr ""
 
 msgid "Next image"
-msgstr "下一張圖片"
+msgstr ""
 
 msgid "Arrow"
-msgstr "箭頭"
+msgstr ""
 
 msgid "Previous position"
-msgstr "上一個位置"
+msgstr ""
 
 msgid "Next position"
-msgstr "下一個位置"
+msgstr ""
 
 msgid "Previous alt tag"
 msgstr ""
@@ -4504,26 +4331,20 @@ msgstr ""
 msgid "Image width - Desktop"
 msgstr ""
 
-#, fuzzy
-#| msgid "Image size"
 msgid "Image width - Tablet"
-msgstr "圖片尺寸"
+msgstr ""
 
-#, fuzzy
-#| msgid "Image size"
 msgid "Image width - Mobile"
-msgstr "圖片尺寸"
+msgstr ""
 
 msgid "Pause"
-msgstr "暫停"
+msgstr ""
 
-#, fuzzy
-#| msgid "Pause autoplay"
 msgid "Play autoplay"
-msgstr "暫停自動播放"
+msgstr ""
 
 msgid "Pause autoplay"
-msgstr "暫停自動播放"
+msgstr ""
 
 msgid "Bar"
 msgstr ""
@@ -4537,7 +4358,7 @@ msgid ""
 msgstr ""
 
 msgid "Separator"
-msgstr "分隔"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -4554,17 +4375,15 @@ msgid "Shows on hover"
 msgstr ""
 
 msgid "Hide on slides"
-msgstr "在幻燈片上隱藏"
+msgstr ""
 
 msgid ""
 "List the slides separated by commas on which you want the controls to be "
 "hidden."
 msgstr ""
 
-#, fuzzy
-#| msgid "Text Bar"
 msgid "Text bar"
-msgstr "文字標示"
+msgstr ""
 
 msgid "Bullets"
 msgstr ""
@@ -4573,53 +4392,43 @@ msgid "Side"
 msgstr ""
 
 msgid "Before"
-msgstr "之前"
+msgstr ""
 
 msgid "After"
-msgstr "之後"
+msgstr ""
 
 msgid "Shadow"
-msgstr "陰影"
+msgstr ""
 
 msgid "Thumbnails"
-msgstr "縮圖"
+msgstr ""
 
-#, fuzzy
-#| msgid "Desktop"
 msgid "Desktop width"
-msgstr "桌面"
+msgstr ""
 
-#, fuzzy
-#| msgid "Tablet text"
 msgid "Tablet width"
-msgstr "平板文字"
+msgstr ""
 
-#, fuzzy
-#| msgid "Mobile text"
 msgid "Mobile width"
-msgstr "手機文字"
+msgstr ""
 
 msgid "Align thumbnails"
-msgstr "縮圖對齊"
+msgstr ""
 
 msgid "Start"
-msgstr "開始"
+msgstr ""
 
 msgid "End"
 msgstr ""
 
-#, fuzzy
-#| msgid "Published between"
 msgid "Space between"
-msgstr "發佈時間"
+msgstr ""
 
-#, fuzzy
-#| msgid "Background"
 msgid "Space around"
-msgstr "背景"
+msgstr ""
 
 msgid "Caption"
-msgstr "說明"
+msgstr ""
 
 msgid ""
 "The height (horizontal orientation) or width (vertical orientation) of the "
@@ -4664,19 +4473,19 @@ msgid "Switches to the %s. slide."
 msgstr ""
 
 msgid "Top and bottom"
-msgstr "上方和下方"
+msgstr ""
 
 msgid "License key cannot be empty!"
-msgstr "授權碼不可為空！"
+msgstr ""
 
 msgid "License key is active!"
-msgstr "授權碼已啟用！"
+msgstr ""
 
 msgid "Missing sliders!"
-msgstr "遺失幻燈片！"
+msgstr ""
 
 msgid "Line color"
-msgstr "線條色彩"
+msgstr ""
 
 msgid "Number of particles"
 msgstr ""
@@ -4694,33 +4503,31 @@ msgid "Push"
 msgstr ""
 
 msgid "Remove"
-msgstr "移除"
+msgstr ""
 
 msgid "Hide on mobile"
 msgstr ""
 
 msgid "Type"
-msgstr "類型"
+msgstr ""
 
 msgid "Secondary"
-msgstr "次要"
+msgstr ""
 
 msgid "Flip"
-msgstr "翻轉"
+msgstr ""
 
 msgid "Grow"
-msgstr "增長"
+msgstr ""
 
 msgid "Shrink"
-msgstr "收縮"
+msgstr ""
 
 msgid "Interval"
-msgstr "間隔"
+msgstr ""
 
-#, fuzzy
-#| msgid "Font size modifier"
 msgid "Interval modifier"
-msgstr "字體大小調整"
+msgstr ""
 
 msgctxt "Autoplay modifier"
 msgid "loops"
@@ -4746,36 +4553,35 @@ msgid "next slide"
 msgstr ""
 
 msgid "Polygons"
-msgstr "多邊形"
+msgstr ""
 
 msgid "Bloom"
 msgstr ""
 
 msgid "Web"
-msgstr "網狀"
+msgstr ""
 
 msgid "Black widow"
-msgstr "黑色視窗"
+msgstr ""
 
 msgid "Zodiac"
-msgstr "星空"
+msgstr ""
 
 msgid "Fading dots"
 msgstr ""
 
 msgid "Pirouette"
-msgstr "原地旋轉"
+msgstr ""
 
 msgid "Sparkling"
-msgstr "煙火"
+msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Curve 1"
+#, php-format
 msgid "Curve %d"
-msgstr "曲線 1"
+msgstr ""
 
 msgid "Curves"
-msgstr "曲線"
+msgstr ""
 
 #, php-format
 msgid "Fan %d"
@@ -4784,10 +4590,9 @@ msgstr ""
 msgid "Hills"
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Inline"
+#, php-format
 msgid "Incline %d"
-msgstr "行內"
+msgstr ""
 
 msgid "Inverse arrow"
 msgstr ""
@@ -4806,18 +4611,16 @@ msgstr ""
 msgid "Triangle %d"
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Wave 1"
+#, php-format
 msgid "Wave %d"
-msgstr "波浪 1"
+msgstr ""
 
 msgid "Waves"
-msgstr "波浪"
+msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Columns"
+#, php-format
 msgid "Columns %d"
-msgstr "欄"
+msgstr ""
 
 #, php-format
 msgid "Paper %d"
@@ -4833,7 +4636,7 @@ msgid "Masked waves"
 msgstr ""
 
 msgid "Ribbon"
-msgstr "緞帶"
+msgstr ""
 
 msgid "The secret is empty. Please insert that value too!"
 msgstr ""
@@ -4869,16 +4672,12 @@ msgid ""
 "Access\" within your App."
 msgstr ""
 
-#, fuzzy
-#| msgid "No permission: %s"
 msgctxt "Facebook app permission"
 msgid "user photos"
-msgstr "沒有權限：%s"
+msgstr ""
 
-#, fuzzy
-#| msgid "No permission: %s"
 msgid "User photos permission"
-msgstr "沒有權限：%s"
+msgstr ""
 
 msgid ""
 "You need \"user_photos\" permission to access photos of users, except your "
@@ -4889,35 +4688,35 @@ msgid "Token"
 msgstr ""
 
 msgid "Callback url"
-msgstr "回傳網址"
+msgstr ""
 
 msgid "The token expired. Please request new token! "
-msgstr "此金鑰已過期。請輸入新金鑰！"
+msgstr ""
 
 msgid "Request token"
-msgstr "要求金鑰"
+msgstr ""
 
 msgid "Facebook photos or posts on your page"
 msgstr ""
 
 msgid "Photos by album"
-msgstr "相簿的照片"
+msgstr ""
 
 msgid "Posts by page"
-msgstr "頁面的貼文"
+msgstr ""
 
 msgid "User or page"
-msgstr "帳戶或頁面"
+msgstr ""
 
 msgid "Album"
-msgstr "相簿"
+msgstr ""
 
 msgctxt "Facebook generator type"
 msgid "Facebook posts"
 msgstr ""
 
 msgid "Page"
-msgstr "頁面"
+msgstr ""
 
 msgid "Feed"
 msgstr ""
@@ -4925,33 +4724,29 @@ msgstr ""
 msgid "Remove special characters"
 msgstr ""
 
-#, fuzzy
-#| msgid "Exclude plugins"
 msgid "Exclude Types"
-msgstr "排除外掛"
+msgstr ""
 
-#, fuzzy
-#| msgid "Separate them by comma."
 msgid "Separate the types by a comma. E.g.: share,album"
-msgstr "使用半型逗號來分隔。"
+msgstr ""
 
 msgid "The key and secret is not valid!"
-msgstr "此金鑰與密鑰無法使用！"
+msgstr ""
 
 msgid "There are no photos in this album!"
-msgstr "此相簿沒有任何照片！"
+msgstr ""
 
 msgid "Please choose an album!"
-msgstr "請選擇一個相簿"
+msgstr ""
 
 msgid "There are no photos in this gallery!"
-msgstr "此圖庫沒有任何照片！"
+msgstr ""
 
 msgid "Please chooose a gallery!"
-msgstr "請選取一個圖庫！"
+msgstr ""
 
 msgid "Privacy"
-msgstr "隱私"
+msgstr ""
 
 msgid "There are no photos with this privacy filter!"
 msgstr ""
@@ -4961,30 +4756,28 @@ msgid "Flickr search"
 msgstr ""
 
 msgid "User name or ID"
-msgstr "帳戶名稱或 ID"
+msgstr ""
 
 msgid "Search in title, description or tags"
-msgstr "搜尋標題，描述或標籤"
+msgstr ""
 
 msgid "Folder"
-msgstr "資料夾"
+msgstr ""
 
 msgid "Images in folder"
-msgstr "資料夾中的圖片"
+msgstr ""
 
 msgid "Images in folder and subfolders"
-msgstr "在資料夾與子資料夾中的圖片"
+msgstr ""
 
 msgid "Videos in folder"
-msgstr "資料夾中的影片"
+msgstr ""
 
 msgid "Source folder"
-msgstr "來源資料夾"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slide name and description"
 msgid "Filename based exclusion"
-msgstr "幻燈片名稱與敘述"
+msgstr ""
 
 msgid "Remove resized images"
 msgstr ""
@@ -5013,10 +4806,10 @@ msgid ""
 msgstr ""
 
 msgid "Filename"
-msgstr "檔案名稱"
+msgstr ""
 
 msgid "Creation date"
-msgstr "建立日期"
+msgstr ""
 
 msgid ""
 "Wrong path. This is the default image folder path, so try to navigate from "
@@ -5024,7 +4817,7 @@ msgid ""
 msgstr ""
 
 msgid "Folder not found."
-msgstr "未找到資料夾。"
+msgstr ""
 
 msgid ""
 "Wrong path. This is the default upload/media folder path, so try to navigate "
@@ -5040,20 +4833,14 @@ msgstr ""
 msgid "Access token was not returned.Please check the credentials!"
 msgstr ""
 
-#, fuzzy
-#| msgid "The token expired. Please request new token! "
 msgid "The token expired. Please request new token!"
-msgstr "此金鑰已過期。請輸入新金鑰！"
+msgstr ""
 
-#, fuzzy
-#| msgid "The token expired. Please request new token! "
 msgid "The token will expire in two days! Please refresh the token!"
-msgstr "此金鑰已過期。請輸入新金鑰！"
+msgstr ""
 
-#, fuzzy
-#| msgid "Request token"
 msgid "Refresh Token"
-msgstr "要求金鑰"
+msgstr ""
 
 msgid "Refresh"
 msgstr ""
@@ -5103,7 +4890,7 @@ msgid ""
 msgstr ""
 
 msgid "Images"
-msgstr "圖片"
+msgstr ""
 
 msgid "Offset hours"
 msgstr ""
@@ -5121,13 +4908,13 @@ msgid "CSV from input"
 msgstr ""
 
 msgid "View tweet"
-msgstr "查看推文"
+msgstr ""
 
 msgid "Comments"
-msgstr "留言"
+msgstr ""
 
 msgid "Date"
-msgstr "日期"
+msgstr ""
 
 msgid "Likes"
 msgstr ""
@@ -5135,10 +4922,8 @@ msgstr ""
 msgid "Manual"
 msgstr ""
 
-#, fuzzy
-#| msgid "Modification time"
 msgid "Modified time"
-msgstr "修改時間"
+msgstr ""
 
 msgid "Plays"
 msgstr ""
@@ -5157,16 +4942,16 @@ msgid "Include subcategories"
 msgstr ""
 
 msgid "Frontpage"
-msgstr "前台"
+msgstr ""
 
 msgid "Exclude ID"
 msgstr ""
 
 msgid "Category title"
-msgstr "分類標題"
+msgstr ""
 
 msgid "Username"
-msgstr "帳號"
+msgstr ""
 
 msgid "View post"
 msgstr ""
@@ -5181,13 +4966,13 @@ msgid "View discussion"
 msgstr ""
 
 msgid "Events"
-msgstr "事件"
+msgstr ""
 
 msgid "Albums"
-msgstr "相簿"
+msgstr ""
 
 msgid "Videos"
-msgstr "影片"
+msgstr ""
 
 msgid "Pages"
 msgstr ""
@@ -5196,25 +4981,25 @@ msgid "Users"
 msgstr ""
 
 msgid "Allowed user IDs"
-msgstr "允許的帳戶 ID"
+msgstr ""
 
 msgid "Separate them by comma."
-msgstr "使用半型逗號來分隔。"
+msgstr ""
 
 msgid "Banned user IDs"
-msgstr "封鎖的帳戶 ID"
+msgstr ""
 
 msgid "Started"
-msgstr "已開始"
+msgstr ""
 
 msgid "Ended"
-msgstr "已結束"
+msgstr ""
 
 msgid "All day"
-msgstr "全天"
+msgstr ""
 
 msgid "Recurring events"
-msgstr "重複事件"
+msgstr ""
 
 msgid "Open"
 msgstr ""
@@ -5226,7 +5011,7 @@ msgid "Invite only"
 msgstr ""
 
 msgid "Location"
-msgstr "所在地"
+msgstr ""
 
 msgid "Pull posts only from these users. Separate them by comma."
 msgstr ""
@@ -5238,20 +5023,16 @@ msgid "Public"
 msgstr ""
 
 msgid "Private"
-msgstr "私人"
+msgstr ""
 
 msgid "Notification"
 msgstr ""
 
-#, fuzzy
-#| msgid "Email support"
 msgid "Email only"
-msgstr "電子郵件支援"
+msgstr ""
 
-#, fuzzy
-#| msgid "Interval"
 msgid "Internal only"
-msgstr "間隔"
+msgstr ""
 
 msgid "Profiles"
 msgstr ""
@@ -5269,16 +5050,16 @@ msgid "Points"
 msgstr ""
 
 msgid "Products"
-msgstr "商品"
+msgstr ""
 
 msgid "Manufacturer"
 msgstr ""
 
 msgid "On discount"
-msgstr "打折"
+msgstr ""
 
 msgid "In stock"
-msgstr "庫存"
+msgstr ""
 
 msgid "Currency"
 msgstr ""
@@ -5293,16 +5074,16 @@ msgid "Manufacturer language"
 msgstr ""
 
 msgid "Price"
-msgstr "價格"
+msgstr ""
 
 msgid "Product name"
-msgstr "商品名稱"
+msgstr ""
 
 msgid "Product ID"
-msgstr "商品 ID"
+msgstr ""
 
 msgid "Locations"
-msgstr "位置"
+msgstr ""
 
 msgid "Recurring"
 msgstr ""
@@ -5323,13 +5104,13 @@ msgid "Menu item (item ID)"
 msgstr ""
 
 msgid "Start date"
-msgstr "開始日期"
+msgstr ""
 
 msgid "End date"
-msgstr "結束日期"
+msgstr ""
 
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 msgid "Discount"
 msgstr ""
@@ -5377,7 +5158,7 @@ msgid "Brand"
 msgstr ""
 
 msgid "Tag"
-msgstr "標籤"
+msgstr ""
 
 msgid "Warehouse"
 msgstr ""
@@ -5389,7 +5170,7 @@ msgid "Sales"
 msgstr ""
 
 msgid "Average score"
-msgstr "平均分數"
+msgstr ""
 
 msgid "Total vote"
 msgstr ""
@@ -5414,13 +5195,11 @@ msgstr ""
 msgid "Date variable offset"
 msgstr ""
 
-#, fuzzy
-#| msgid "Delete file after import"
 msgid "Date filter offset"
-msgstr "匯入後刪除檔案"
+msgstr ""
 
 msgid "Status"
-msgstr "狀態"
+msgstr ""
 
 msgid "Trashed"
 msgstr ""
@@ -5429,16 +5208,16 @@ msgid "Ask down all product images"
 msgstr ""
 
 msgid "Items"
-msgstr "項目"
+msgstr ""
 
 msgid "View item"
 msgstr ""
 
 msgid "Viewed"
-msgstr "已觀看"
+msgstr ""
 
 msgid "View image"
-msgstr "查看圖片"
+msgstr ""
 
 msgid "All day event"
 msgstr ""
@@ -5454,7 +5233,7 @@ msgid "Creates slides from %1$s galleries."
 msgstr ""
 
 msgid "Gallery"
-msgstr "圖庫"
+msgstr ""
 
 msgid "View gallery"
 msgstr ""
@@ -5518,7 +5297,7 @@ msgid "Multisite Posts"
 msgstr ""
 
 msgid "Source gallery"
-msgstr "來源圖庫"
+msgstr ""
 
 msgid "Organizers"
 msgstr ""
@@ -5530,13 +5309,13 @@ msgid "Hide From Event Listings"
 msgstr ""
 
 msgid "Event start date"
-msgstr "事件開始日期"
+msgstr ""
 
 msgid "Event end date"
-msgstr "事件結束日期"
+msgstr ""
 
 msgid "Event cost"
-msgstr "活動花費"
+msgstr ""
 
 msgid "Event creation date"
 msgstr ""
@@ -5554,25 +5333,25 @@ msgid "Sorting method"
 msgstr ""
 
 msgid "Galleries"
-msgstr "圖庫"
+msgstr ""
 
 msgid "Upload date"
-msgstr "上傳日期"
+msgstr ""
 
 msgid "Average rating"
-msgstr "平均評分"
+msgstr ""
 
 msgid "Rate count"
-msgstr "評分數"
+msgstr ""
 
 msgid "Hit count"
-msgstr "點擊數"
+msgstr ""
 
 msgid "Root"
 msgstr ""
 
 msgid "Products by filter"
-msgstr "篩選的商品"
+msgstr ""
 
 msgid "Products by IDs and/or SKUs"
 msgstr ""
@@ -5583,7 +5362,7 @@ msgid ""
 msgstr ""
 
 msgid "Submenu limit"
-msgstr "子選單限制"
+msgstr ""
 
 msgid "No limit"
 msgstr ""
@@ -5592,16 +5371,16 @@ msgid "Hide empty categories"
 msgstr ""
 
 msgid "Yes"
-msgstr "是"
+msgstr ""
 
 msgid "Downloadable"
-msgstr "可下載的"
+msgstr ""
 
 msgid "Virtual"
-msgstr "虛擬"
+msgstr ""
 
 msgid "Create text variables (one per line)"
-msgstr "建立文字變數（每一行為分隔）"
+msgstr ""
 
 msgid ""
 "if 'variable' equals to 'equalvalue', then you will get the text 'true', but "
@@ -5641,52 +5420,52 @@ msgid "Any PHP date format can be used: %s"
 msgstr ""
 
 msgid "Total sales"
-msgstr "總銷售"
+msgstr ""
 
 msgid "Regular price"
-msgstr "標準金額"
+msgstr ""
 
 msgid "Sale price"
-msgstr "販售價格"
+msgstr ""
 
 msgid "IDs (one per line)"
-msgstr "ID (每一行)"
+msgstr ""
 
 msgid "SKUs (one per line)"
 msgstr ""
 
 msgid "Move"
-msgstr "移動"
+msgstr ""
 
 msgid "Reveal"
 msgstr ""
 
 msgid "Bounce"
-msgstr "彈出"
+msgstr ""
 
 msgid "Special"
-msgstr "特殊"
+msgstr ""
 
 msgid "Left fade"
-msgstr "往右融合"
+msgstr ""
 
 msgid "Right fade"
-msgstr "往左融合"
+msgstr ""
 
 msgid "Top fade"
-msgstr "往下融合"
+msgstr ""
 
 msgid "Bottom fade"
-msgstr "往上融合"
+msgstr ""
 
 msgid "Flash"
-msgstr "閃爍"
+msgstr ""
 
 msgid "Left to Right"
-msgstr "從左到右"
+msgstr ""
 
 msgid "Top to Bottom"
-msgstr "從上到下"
+msgstr ""
 
 msgid "Skew Left to Right"
 msgstr ""
@@ -5698,37 +5477,37 @@ msgid "Upscale back out"
 msgstr ""
 
 msgid "Pulse"
-msgstr "脈搏"
+msgstr ""
 
 msgid "Flip left"
-msgstr "往左翻動"
+msgstr ""
 
 msgid "Flip right"
-msgstr "往右翻動"
+msgstr ""
 
 msgid "Flip down"
-msgstr "往下翻動"
+msgstr ""
 
 msgid "Flip up"
-msgstr "往上翻動"
+msgstr ""
 
 msgid "Flip in X"
-msgstr "水平翻轉"
+msgstr ""
 
 msgid "Flip in Y"
-msgstr "垂直翻轉"
+msgstr ""
 
 msgid "Flap"
-msgstr "扇動"
+msgstr ""
 
 msgid "Rotate top left"
-msgstr "左上旋轉"
+msgstr ""
 
 msgid "Rotate top right"
-msgstr "右上旋轉"
+msgstr ""
 
 msgid "Roll in"
-msgstr "旋轉"
+msgstr ""
 
 msgid "Rotate top left back out"
 msgstr ""
@@ -5737,46 +5516,46 @@ msgid "Rotate all axis"
 msgstr ""
 
 msgid "Bounce in"
-msgstr "彈跳"
+msgstr ""
 
 msgid "Bounce in left"
-msgstr "由左彈跳"
+msgstr ""
 
 msgid "Bounce in right"
-msgstr "由右彈跳"
+msgstr ""
 
 msgid "Bounce in down"
-msgstr "往下彈跳"
+msgstr ""
 
 msgid "Bounce in up"
 msgstr ""
 
 msgid "Rubber band"
-msgstr "橡皮筋"
+msgstr ""
 
 msgid "Shake"
-msgstr "搖動"
+msgstr ""
 
 msgid "Swing"
-msgstr "擺動"
+msgstr ""
 
 msgid "Wooble"
-msgstr "搖晃"
+msgstr ""
 
 msgid "Roll"
-msgstr "滾動"
+msgstr ""
 
 msgid "Grow rotate"
-msgstr "縮放並旋轉"
+msgstr ""
 
 msgid "Pendulum"
-msgstr "擺盪"
+msgstr ""
 
 msgid "Pendulum 3D"
-msgstr "3D 擺盪"
+msgstr ""
 
 msgid "Vertical pendulum 3D"
-msgstr "3D 垂直擺盪"
+msgstr ""
 
 msgid "We are Passionate About"
 msgstr ""
@@ -5787,13 +5566,13 @@ msgid ""
 msgstr ""
 
 msgid "Before text"
-msgstr "文字之前"
+msgstr ""
 
 msgid "Animated text"
-msgstr "動畫文字"
+msgstr ""
 
 msgid "After text"
-msgstr "文字之後"
+msgstr ""
 
 msgid "Rotating"
 msgstr ""
@@ -5808,25 +5587,23 @@ msgid "Typewriter"
 msgstr ""
 
 msgid "Chars"
-msgstr "字符"
+msgstr ""
 
 msgid "Chars 2"
 msgstr ""
 
 msgid "Auto width"
-msgstr "自動寬度"
+msgstr ""
 
-#, fuzzy
-#| msgid "Hover color"
 msgid "Cursor color"
-msgstr "指向色彩"
+msgstr ""
 
 msgctxt "Effect"
 msgid "Loop"
 msgstr ""
 
 msgid "Show duration"
-msgstr "顯示持續時間"
+msgstr ""
 
 msgid "Class on the selected tag element."
 msgstr ""
@@ -5841,13 +5618,13 @@ msgid "Audio"
 msgstr ""
 
 msgid "MP3 audio"
-msgstr "MP3 音訊"
+msgstr ""
 
 msgid "Main color"
-msgstr "主要色彩"
+msgstr ""
 
 msgid "Secondary color"
-msgstr "次要色彩"
+msgstr ""
 
 msgid "Audio settings"
 msgstr ""
@@ -5862,133 +5639,91 @@ msgid "Starts the audio from the beginning when the slide is viewed again."
 msgstr ""
 
 msgid "Progress"
-msgstr "進度"
+msgstr ""
 
 msgid "Time"
-msgstr "時間"
+msgstr ""
 
-#, fuzzy
-#| msgid "Size"
 msgid "Icon Size"
-msgstr "尺寸"
+msgstr ""
 
-#, fuzzy
-#| msgid "Before text"
 msgid "Before After"
-msgstr "文字之前"
+msgstr ""
 
-#, fuzzy
-#| msgid "Left to Right"
 msgid "Left top"
-msgstr "從左到右"
+msgstr ""
 
-#, fuzzy
-#| msgid "Center"
 msgid "Center top"
-msgstr "中間"
+msgstr ""
 
-#, fuzzy
-#| msgid "Right"
 msgid "Right top"
-msgstr "右"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider center"
 msgid "Left center"
-msgstr "幻燈片中間"
+msgstr ""
 
-#, fuzzy
-#| msgid "Center"
 msgid "Right Center"
-msgstr "中間"
+msgstr ""
 
-#, fuzzy
-#| msgid "To bottom"
 msgid "Left bottom"
-msgstr "往下"
+msgstr ""
 
-#, fuzzy
-#| msgid "Curtain to bottom"
 msgid "Center bottom"
-msgstr "百葉窗至下"
+msgstr ""
 
-#, fuzzy
-#| msgid "To bottom"
 msgid "Right bottom"
-msgstr "往下"
+msgstr ""
 
-#, fuzzy
-#| msgid "Before text"
 msgid "Before Image"
-msgstr "文字之前"
+msgstr ""
 
-#, fuzzy
-#| msgid "After text"
 msgid "After Image"
-msgstr "文字之後"
+msgstr ""
 
 msgid "Labels"
 msgstr ""
 
-#, fuzzy
-#| msgid "Show label"
 msgid "Show Label"
-msgstr "顯示標籤"
+msgstr ""
 
 msgid "Always"
 msgstr ""
 
-#, fuzzy
-#| msgid "Before text"
 msgid "Before label"
-msgstr "文字之前"
+msgstr ""
 
-#, fuzzy
-#| msgid "Previous label"
 msgid "After label"
-msgstr "上一個標籤"
+msgstr ""
 
 msgid "Behavior"
 msgstr ""
 
-#, fuzzy
-#| msgid "Instructions"
 msgid "Interaction"
-msgstr "說明"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider"
 msgid "Divider"
-msgstr "幻燈片"
+msgstr ""
 
-#, fuzzy
-#| msgid "Lines"
 msgid "Line"
-msgstr "行"
+msgstr ""
 
-#, fuzzy
-#| msgid "Show duration"
 msgid "Show Caption"
-msgstr "顯示持續時間"
+msgstr ""
 
-#, fuzzy
-#| msgid "Caption"
 msgid "Caption text"
-msgstr "說明"
+msgstr ""
 
 msgid "Before image alt tag"
 msgstr ""
 
-#, fuzzy
-#| msgid "Average rating"
 msgid "After image alt tag"
-msgstr "平均評分"
+msgstr ""
 
 msgid "Optimize images"
-msgstr "壓縮圖片"
+msgstr ""
 
 msgid "Full"
-msgstr "完整"
+msgstr ""
 
 msgid "Scales up the image on hover"
 msgstr ""
@@ -6006,16 +5741,16 @@ msgid "Counter"
 msgstr ""
 
 msgid "Value"
-msgstr "數值"
+msgstr ""
 
 msgid "Start from"
-msgstr "開始從"
+msgstr ""
 
 msgid "Total"
 msgstr ""
 
 msgid "Active color"
-msgstr "啟用色彩"
+msgstr ""
 
 msgid "Stroke width"
 msgstr ""
@@ -6030,31 +5765,25 @@ msgid "Pre"
 msgstr ""
 
 msgid "Animation duration"
-msgstr "動畫持續時間"
+msgstr ""
 
-#, fuzzy
-#| msgid "Count"
 msgid "Countdown"
-msgstr "計數"
+msgstr ""
 
 msgid "Days"
-msgstr "天数"
+msgstr "Dagar"
 
 msgid "Minutes"
-msgstr "会议记录"
+msgstr "Minuter"
 
 msgid "Seconds"
-msgstr "秒钟"
+msgstr "Sekunder"
 
-#, fuzzy
-#| msgid "First slide changed."
 msgid "Use slide schedule"
-msgstr "已更改第一個的幻燈片。"
+msgstr ""
 
-#, fuzzy
-#| msgid "You can put custom CSS classes to the slider's container."
 msgid "You can use the \"Unpublished on\" date of the slide itself."
-msgstr "您可將自訂的 CSS 類別用於幻燈片的內容中。"
+msgstr ""
 
 msgid "Use Slide Schedule"
 msgstr ""
@@ -6074,36 +5803,26 @@ msgstr ""
 msgid "Creates vertical and horizontal distance between the counter elements."
 msgstr ""
 
-#, fuzzy
-#| msgid "Tablet scale"
 msgid "Tablet style"
-msgstr "平板縮放"
+msgstr ""
 
 msgid "Set custom Gap and Column for tablet."
 msgstr ""
 
-#, fuzzy
-#| msgid "Mobile scale"
 msgid "Mobile style"
-msgstr "手機縮放"
+msgstr ""
 
 msgid "Set custom Gap and Column for mobile."
 msgstr ""
 
-#, fuzzy
-#| msgid "Actions"
 msgid "Action when ends"
-msgstr "動作"
+msgstr ""
 
-#, fuzzy
-#| msgid "No animation"
 msgid "No action"
-msgstr "無動畫"
+msgstr ""
 
-#, fuzzy
-#| msgid "Hide slider"
 msgid "Hide layer"
-msgstr "隱藏幻燈片"
+msgstr ""
 
 msgid "Redirect to URL"
 msgstr ""
@@ -6117,10 +5836,9 @@ msgstr ""
 msgid "Amazing"
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Circle"
+#, php-format
 msgid "Circle %d"
-msgstr "圓形"
+msgstr ""
 
 #, php-format
 msgid "Curly %d"
@@ -6130,15 +5848,13 @@ msgstr ""
 msgid "Highlight %d"
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Line height"
+#, php-format
 msgid "Line Through %d"
-msgstr "行距"
+msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Rectangle Blue"
+#, php-format
 msgid "Rectangle %d"
-msgstr "藍色方塊"
+msgstr ""
 
 #, php-format
 msgid "Underline %d"
@@ -6179,23 +5895,20 @@ msgid ""
 msgstr ""
 
 msgid "Item"
-msgstr "項目"
+msgstr ""
 
 msgid ""
 "Item 1\n"
 "Item 2\n"
 "Item 3"
 msgstr ""
-"項目 1\n"
-"項目 2\n"
-"項目 3"
 
 msgid "List type"
-msgstr "列表類型"
+msgstr ""
 
 msgctxt "List layer type"
 msgid "None"
-msgstr "無"
+msgstr ""
 
 msgctxt "List layer type"
 msgid "Disc"
@@ -6207,7 +5920,7 @@ msgstr ""
 
 msgctxt "List layer type"
 msgid "Circle"
-msgstr "圓形"
+msgstr ""
 
 msgctxt "List layer type"
 msgid "Decimal"
@@ -6278,7 +5991,7 @@ msgid "Upper-roman"
 msgstr ""
 
 msgid "Icon not found"
-msgstr "未找到圖示"
+msgstr ""
 
 #, php-format
 msgid "Enter an %1$s aria-label attribute %2$s that describes the link."
@@ -6293,31 +6006,27 @@ msgid ""
 "only suggest using this layer if you are a developer!"
 msgstr ""
 
-#, fuzzy
-#| msgid "iframe url"
 msgid "Iframe url"
-msgstr "iframe 網址"
+msgstr ""
 
 msgid "You can disable the scroll on the iframe content."
 msgstr ""
 
-#, fuzzy
-#| msgid "iframe url"
 msgid "Iframe title"
-msgstr "iframe 網址"
+msgstr ""
 
 msgid "Image area"
 msgstr ""
 
 msgid "Image box"
-msgstr "圖片方框"
+msgstr ""
 
 msgid ""
 "Positions the text inside the layer. Only works with left and right layout."
 msgstr ""
 
 msgid "Input"
-msgstr "輸入"
+msgstr ""
 
 msgid "Container"
 msgstr ""
@@ -6331,7 +6040,7 @@ msgid ""
 msgstr ""
 
 msgid "Placeholder text"
-msgstr "預置文字"
+msgstr ""
 
 msgid "Form"
 msgstr ""
@@ -6340,22 +6049,22 @@ msgid "Input name"
 msgstr ""
 
 msgid "Method"
-msgstr "方式"
+msgstr ""
 
 msgid "Form action"
 msgstr ""
 
 msgid "Parameters"
-msgstr "參數"
+msgstr ""
 
 msgid "Slide action to submit"
 msgstr ""
 
 msgid "JavaScript"
-msgstr "JavaScript"
+msgstr ""
 
 msgid "Progress bar"
-msgstr "進度條"
+msgstr ""
 
 msgid "Over"
 msgstr ""
@@ -6370,10 +6079,10 @@ msgid "Back image"
 msgstr ""
 
 msgid "Vertical flip"
-msgstr "垂直翻頁"
+msgstr ""
 
 msgid "Horizontal flip"
-msgstr "水平翻頁"
+msgstr ""
 
 msgid "Front image alt tag"
 msgstr ""
@@ -6382,10 +6091,10 @@ msgid "Back image alt tag"
 msgstr ""
 
 msgid "MP4 video"
-msgstr "MP4 影片"
+msgstr ""
 
 msgid "Preload"
-msgstr "預先載入"
+msgstr ""
 
 msgid "Joomla module"
 msgstr ""
@@ -6448,7 +6157,7 @@ msgid "Carousel slider"
 msgstr ""
 
 msgid "Slide size"
-msgstr "幻燈片尺寸"
+msgstr ""
 
 msgid "Max pane width"
 msgstr ""
@@ -6482,40 +6191,26 @@ msgstr ""
 msgid "Mobile side spacing"
 msgstr ""
 
-#, fuzzy
-#| msgid "Slider background video"
 msgid "Slide background color"
-msgstr "幻燈片背景影片"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slide order saved."
 msgid "Slide border width"
-msgstr "幻燈片的排序已儲存。"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slide order saved."
 msgid "Slide border color"
-msgstr "幻燈片的排序已儲存。"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slide order saved."
 msgid "Slide border radius"
-msgstr "幻燈片的排序已儲存。"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider order saved."
 msgid "Slider border width"
-msgstr "幻燈片秀的排序已儲存。"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider order saved."
 msgid "Slider border color"
-msgstr "幻燈片秀的排序已儲存。"
+msgstr ""
 
-#, fuzzy
-#| msgid "Slider order saved."
 msgid "Slider border radius"
-msgstr "幻燈片秀的排序已儲存。"
+msgstr ""
 
 msgid "The Single Switch setting can only move the slides horizontally!"
 msgstr ""
@@ -6540,7 +6235,7 @@ msgid "Showcase slider"
 msgstr ""
 
 msgid "Slide distance"
-msgstr "幻燈片距離"
+msgstr ""
 
 msgid "Fix space between the slides."
 msgstr ""
@@ -6548,16 +6243,14 @@ msgstr ""
 msgid "Slide CSS Preset"
 msgstr ""
 
-#, fuzzy
-#| msgid "No animation"
 msgid "Showcase animation"
-msgstr "無動畫"
+msgstr ""
 
 msgid "Horizontal showcase"
-msgstr "水平展示庫"
+msgstr ""
 
 msgid "Vertical showcase"
-msgstr "垂直展示庫"
+msgstr ""
 
 msgid "Horizontal cover flow"
 msgstr ""
@@ -6575,22 +6268,22 @@ msgid ""
 msgstr ""
 
 msgid "Save as new animation"
-msgstr "另存為新動畫"
+msgstr ""
 
 msgid "Sets"
-msgstr "設置"
+msgstr ""
 
 msgid "Text animation settings"
 msgstr ""
 
 msgid "Words"
-msgstr "字詞"
+msgstr ""
 
 msgid "Sort"
-msgstr "排序"
+msgstr ""
 
 msgid "Reversed"
-msgstr "反轉"
+msgstr ""
 
 msgid "Side shifted"
 msgstr ""
@@ -6599,7 +6292,7 @@ msgid "Center shifted"
 msgstr ""
 
 msgid "Stagger"
-msgstr "錯開"
+msgstr ""
 
 msgid "Turn"
 msgstr ""
@@ -6608,13 +6301,13 @@ msgid "Prev"
 msgstr ""
 
 msgid "Next"
-msgstr "下一個"
+msgstr ""
 
 msgid "Previous label"
-msgstr "上一個標籤"
+msgstr ""
 
 msgid "Next label"
-msgstr "下一個標籤"
+msgstr ""
 
 msgid "To normal"
 msgstr ""
@@ -6625,15 +6318,11 @@ msgstr ""
 msgid "Fullscreen"
 msgstr ""
 
-#, fuzzy
-#| msgid "Full screen"
 msgid "Exit full screen"
-msgstr "全螢幕"
+msgstr ""
 
-#, fuzzy
-#| msgid "Full screen"
 msgid "Enter Full screen"
-msgstr "全螢幕"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -6642,7 +6331,7 @@ msgid ""
 msgstr ""
 
 msgid "Indicator"
-msgstr "進度標示"
+msgstr ""
 
 msgid "Line thickness"
 msgstr ""
@@ -6652,1186 +6341,3 @@ msgstr ""
 
 msgid "Bar color"
 msgstr ""
-
-#~ msgctxt "Default Google font family for admin"
-#~ msgid "Montserrat"
-#~ msgstr "蒙特塞拉特"
-
-#~ msgctxt "Default Google font charset for admin"
-#~ msgid "latin"
-#~ msgstr "拉丁"
-
-#~ msgid "Character set"
-#~ msgstr "字符集"
-
-#~ msgctxt "Default font sets"
-#~ msgid "latin"
-#~ msgstr "拉丁"
-
-#~ msgid "Select slider"
-#~ msgstr "選擇幻燈片"
-
-#~ msgid "Loop single slide"
-#~ msgstr "循環播放單一幻燈片"
-
-#~ msgid "Curve 2"
-#~ msgstr "曲線 2"
-
-#~ msgid "Curve 3"
-#~ msgstr "曲線 3"
-
-#~ msgid "Curve 4"
-#~ msgstr "曲線 4"
-
-#~ msgid "Wave 2"
-#~ msgstr "波浪 2"
-
-#~ msgid "Expired"
-#~ msgstr "已過期"
-
-#~ msgid "On sale"
-#~ msgstr "販售中"
-
-#~ msgid "Discount price"
-#~ msgstr "折扣價格"
-
-#~ msgid "Async"
-#~ msgstr "Async"
-
-#~ msgid "Combine"
-#~ msgstr "結合"
-
-#~ msgid "Approved"
-#~ msgstr "已匹准"
-
-#~ msgid "Show hidden"
-#~ msgstr "顯示隱藏的"
-
-#~ msgid "Generate"
-#~ msgstr "產生"
-
-#~ msgid "Desktop image is empty!"
-#~ msgstr "桌面圖片是空白的！"
-
-#, fuzzy
-#~| msgid "Tablet Retina"
-#~ msgid "Tablet retina"
-#~ msgstr "平板的 Retina"
-
-#, fuzzy
-#~| msgid "Mobile text"
-#~ msgid "Mobile retina"
-#~ msgstr "手機文字"
-
-#, fuzzy
-#~| msgid "Watch now"
-#~ msgid "Watch video"
-#~ msgstr "立即觀看"
-
-#, fuzzy
-#~| msgid "Next position"
-#~ msgid "Absolute position"
-#~ msgstr "下一個位置"
-
-#, fuzzy
-#~| msgid "Read more"
-#~ msgid "Read docs"
-#~ msgstr "閱讀更多"
-
-#~ msgid "Hide until complete load"
-#~ msgstr "隱藏直到載入完畢"
-
-#~ msgid "Load jQuery on frontend"
-#~ msgstr "於前台載入 jQuery"
-
-#~ msgid "Load GSAP on frontend"
-#~ msgstr "於前台載入 GSAP"
-
-#~ msgid "CSS mode"
-#~ msgstr "CSS 模式"
-
-#~ msgid "Background image dynamic height"
-#~ msgstr "背景圖片動態高度"
-
-#, fuzzy
-#~| msgid "Tablet scale"
-#~ msgid "Tablet size"
-#~ msgstr "平板縮放"
-
-#, fuzzy
-#~| msgid "Mobile scale"
-#~ msgid "Mobile size"
-#~ msgstr "手機縮放"
-
-#~ msgid "Minimum thumbnail count"
-#~ msgstr "最小縮圖數量"
-
-#, fuzzy
-#~| msgid "Text Color"
-#~ msgid "Text color"
-#~ msgstr "文字色彩"
-
-#~ msgctxt "Slider type"
-#~ msgid "Accordion"
-#~ msgstr "折疊"
-
-#~ msgid "Dark"
-#~ msgstr "暗色"
-
-#~ msgid "Outer color"
-#~ msgstr "外部色彩"
-
-#~ msgid "Inner color"
-#~ msgstr "內部色彩"
-
-#~ msgid "Tab background"
-#~ msgstr "標籤背景"
-
-#, fuzzy
-#~| msgid "Slider background video"
-#~ msgid "Slider background color"
-#~ msgstr "幻燈片背景影片"
-
-#~ msgid "Show Joomla admin footer"
-#~ msgstr "顯示 Joomla 管理頁尾"
-
-#, fuzzy
-#~| msgid "Image manager"
-#~ msgid "manage pages"
-#~ msgstr "圖片管理"
-
-#~ msgid "Top Left"
-#~ msgstr "左上"
-
-#~ msgid "Top Right"
-#~ msgstr "右上"
-
-#~ msgid "Bottom Left"
-#~ msgstr "左下"
-
-#~ msgid "Bottom Right"
-#~ msgstr "右下"
-
-#~ msgid "Reset design to default"
-#~ msgstr "重置設計回預設"
-
-#~ msgid "Save design as new preset"
-#~ msgstr "儲存設計為新配置"
-
-#~ msgid "Load design"
-#~ msgstr "載入設計"
-
-#~ msgid "Save as new"
-#~ msgstr "另存新的"
-
-#~ msgid "Keyword"
-#~ msgstr "關鍵字"
-
-#~ msgid "No search term specified. Showing recent items."
-#~ msgstr "未指定搜索內容，顯示最近的項目。"
-
-#~ msgid "Create lightbox from image, video or iframe."
-#~ msgstr "從圖片、影片或 iframe 來建立燈箱效果。"
-
-#~ msgid "Create action for click or tap."
-#~ msgstr "為點擊或觸碰建立動作。"
-
-#~ msgid "One per line"
-#~ msgstr "每行"
-
-#~ msgid "Scrolls to the top of the page"
-#~ msgstr "捲動至頁面頂端"
-
-#~ msgid "Scrolls to the bottom of the page"
-#~ msgstr "捲動至頁面底部"
-
-#~ msgid "Delete and never ask for confirmation again"
-#~ msgstr "刪除並且不再詢問確認訊息"
-
-#~ msgid "Are you sure you want to delete?"
-#~ msgstr "您確定要刪除？"
-
-#~ msgid "Show only errors"
-#~ msgstr "只顯示錯誤"
-
-#~ msgid "There are no messages to display."
-#~ msgstr "沒有任何顯示訊息。"
-
-#~ msgid "Got it!"
-#~ msgstr "收到！"
-
-#~ msgid "success"
-#~ msgstr "成功"
-
-#~ msgid "error"
-#~ msgstr "錯誤"
-
-#~ msgid "notice"
-#~ msgstr "注意"
-
-#~ msgid "Drop files anywhere to upload or"
-#~ msgstr "拖曳檔案到任一處來上傳或"
-
-#~ msgid "Select files"
-#~ msgstr "選擇檔案"
-
-#~ msgid "font"
-#~ msgstr "字體"
-
-#~ msgid "fonts"
-#~ msgstr "字體"
-
-#~ msgid "image"
-#~ msgstr "圖片"
-
-#~ msgid "images"
-#~ msgstr "圖片"
-
-#~ msgid "visual"
-#~ msgstr "視覺效果"
-
-#~ msgid "visuals"
-#~ msgstr "視覺效果"
-
-#~ msgid "Overwrite current"
-#~ msgstr "覆寫目前的"
-
-#, javascript-format
-#~ msgid "%s changed - %s"
-#~ msgstr "%s 已更改 - %s"
-
-#~ msgid "Set renamed"
-#~ msgstr "重新命名"
-
-#~ msgid "Unable to delete the set"
-#~ msgstr "無法刪除此設置"
-
-#~ msgid "Add new"
-#~ msgstr "新增"
-
-#, javascript-format
-#~ msgid "%s sets"
-#~ msgstr "%s 設置"
-
-#~ msgid "Set added"
-#~ msgstr "設置已新增"
-
-#~ msgid "Rename set"
-#~ msgstr "重新命名設置"
-
-#, javascript-format
-#~ msgid "Do you really want to delete the set and all associated %s?"
-#~ msgstr "您確定要刪除該設置及所有指定到 %s 的關聯嗎？"
-
-#~ msgid "style"
-#~ msgstr "樣式"
-
-#~ msgid "styles"
-#~ msgstr "樣式"
-
-#~ msgid "Joomla"
-#~ msgstr "Joomla"
-
-#~ msgid "Media Library"
-#~ msgstr "媒體資料庫"
-
-#~ msgid "Save as new font"
-#~ msgstr "儲存為新字體"
-
-#~ msgid "Apply as linked"
-#~ msgstr "套用為已連結"
-
-#~ msgid "Save as new style"
-#~ msgstr "儲存為新樣式"
-
-#~ msgid "Log out"
-#~ msgstr "登出"
-
-#~ msgid "Extra CSS"
-#~ msgstr "額外 CSS"
-
-#~ msgid "Font sets"
-#~ msgstr "字體設置"
-
-#~ msgid "Login"
-#~ msgstr "登入"
-
-#~ msgid "Password"
-#~ msgstr "密碼"
-
-#~ msgid "Accordion Slide Title"
-#~ msgstr "折疊幻燈片標題"
-
-#~ msgid "Folders"
-#~ msgstr "資料夾"
-
-#~ msgid "No image"
-#~ msgstr "沒有圖片"
-
-#~ msgid "Manage"
-#~ msgstr "管理"
-
-#~ msgid "Choose a file to import"
-#~ msgstr "選擇檔案來匯入"
-
-#~ msgid "Expert"
-#~ msgstr "進階"
-
-#~ msgid "Multiple animations"
-#~ msgstr "多重動畫"
-
-#~ msgid "Single animation"
-#~ msgstr "單一動畫"
-
-#~ msgid "To chain layers together, please switch to desktop portrait mode!"
-#~ msgstr "要將圖層鏈結在一起，請先切換到桌面橫向模式！"
-
-#~ msgid "Pick the child layer!"
-#~ msgstr "選取子圖層"
-
-#~ msgid "LOOP"
-#~ msgstr "循環"
-
-#~ msgid "Delete layer"
-#~ msgstr "刪除圖層"
-
-#~ msgid "Duplicate layer"
-#~ msgstr "複製圖層"
-
-#~ msgctxt "Layer group"
-#~ msgid "Content"
-#~ msgstr "內容"
-
-#~ msgid "Smart Snap"
-#~ msgstr "智慧型對齊"
-
-#~ msgid "Dark Mode"
-#~ msgstr "深色模式"
-
-#~ msgid "Show Guides"
-#~ msgstr "顯示參考線"
-
-#~ msgid "Lock Guides"
-#~ msgstr "鎖定參考線"
-
-#~ msgid "Activate Smart Slider 3"
-#~ msgstr "啟用 Smart Slider 3"
-
-#~ msgid "Activate Now"
-#~ msgstr "立即啟用"
-
-#~ msgid "Choose the group"
-#~ msgstr "選擇此群組"
-
-#~ msgid "Choose the variable"
-#~ msgstr "選擇此變數"
-
-#~ msgid "Split by chars"
-#~ msgstr "依字符分割"
-
-#~ msgid "Length"
-#~ msgstr "長度"
-
-#~ msgid "Index"
-#~ msgstr "首頁"
-
-#~ msgid "Insert variable"
-#~ msgstr "插入變數"
-
-#~ msgctxt "Slider type"
-#~ msgid "Block"
-#~ msgstr "區塊"
-
-#~ msgctxt "Slider type"
-#~ msgid "Carousel"
-#~ msgstr "跑馬燈"
-
-#~ msgctxt "Slider type"
-#~ msgid "Showcase"
-#~ msgstr "展示庫"
-
-#~ msgid "Thumbnail - horizontal"
-#~ msgstr "縮圖 - 水平"
-
-#~ msgid "Thumbnail - vertical"
-#~ msgstr "縮圖 - 垂直"
-
-#~ msgid "Horizontal accordion"
-#~ msgstr "水平摺疊"
-
-#~ msgid "Vertical accordion"
-#~ msgstr "垂直摺疊"
-
-#~ msgid "Create Slider"
-#~ msgstr "建立幻燈片"
-
-#~ msgid "Slider name"
-#~ msgstr "幻燈片名稱"
-
-#~ msgid "Import Sample Sliders"
-#~ msgstr "匯入範例幻燈片"
-
-#~ msgid "Add to group"
-#~ msgstr "加入到群組"
-
-#~ msgid "Quick Edit - Slides"
-#~ msgstr "快速編輯 - 幻燈片"
-
-#~ msgid "Copy slide to ..."
-#~ msgstr "複製幻燈片到 ..."
-
-#~ msgid "Add video"
-#~ msgstr "加入影片"
-
-#~ msgid "This video url is not supported!"
-#~ msgstr "此影片網址不支援！"
-
-#~ msgid "Join the Smart Slider community!"
-#~ msgstr "加入 Smart Slider 討論區！"
-
-#~ msgid "Visit site"
-#~ msgstr "查看網站"
-
-#~ msgid "Choose dynamic source"
-#~ msgstr "選擇動態來源"
-
-#~ msgid "No conflicts detected"
-#~ msgstr "未偵測到衝突"
-
-#~ msgid "Hey! How can we help you today?"
-#~ msgstr "嘿！今天我們能幫你什麼呢？"
-
-#~ msgid "Selected Articles"
-#~ msgstr "已選擇的文章"
-
-#~ msgid "Log in"
-#~ msgstr "登入"
-
-#~ msgid "Options"
-#~ msgstr "選項"
-
-#~ msgid "Secondary server"
-#~ msgstr "次要伺服器"
-
-#~ msgid "Force english backend"
-#~ msgstr "強制後台為英文"
-
-#~ msgid "CSS"
-#~ msgstr "CSS"
-
-#~ msgid "Clear sliders"
-#~ msgstr "清除幻燈片秀"
-
-#~ msgid "Clear generators"
-#~ msgstr "清除產生器"
-
-#~ msgid "Fonts Configuration"
-#~ msgstr "字體配置"
-
-#~ msgid "Framework settings"
-#~ msgstr "框架設定"
-
-#~ msgid "Clear slider cache"
-#~ msgstr "清除幻燈片快取"
-
-#~ msgid "Export slider as HTML"
-#~ msgstr "匯出幻燈片為 HTML"
-
-#~ msgid "Export as HTML"
-#~ msgstr "匯出成 HTML"
-
-#~ msgid "Duplicate group"
-#~ msgstr "複製群組"
-
-#~ msgid "Delete group"
-#~ msgstr "刪除群組"
-
-#~ msgid "Live Preview"
-#~ msgstr "即時預覽"
-
-#~ msgid "Only .ss3 files can be uploaded!"
-#~ msgstr "只可上傳 .ss3 格式的檔案！"
-
-#~ msgid "Import slider"
-#~ msgstr "匯入幻燈片"
-
-#~ msgid "Check for updates"
-#~ msgstr "檢查更新"
-
-#, php-format
-#~ msgid "Version %s available!"
-#~ msgstr "版本 %s 已提供！"
-
-#~ msgid "Update"
-#~ msgstr "更新"
-
-#~ msgid "You can upload the files which exported by Smart Slider 3."
-#~ msgstr "您可上傳由 Smart Slider 3 所製作的檔案。"
-
-#~ msgid "Version"
-#~ msgstr "版本"
-
-#~ msgid "Activate Smart Slider 3 PRO"
-#~ msgstr "啟用 Smart Slider 3 PRO"
-
-#~ msgid "Activate now"
-#~ msgstr "立即啟用"
-
-#, php-format
-#~ msgid "%d slide(s) modified!"
-#~ msgstr "%d 幻燈片已修改！"
-
-#~ msgid "This feature requires valid license key!"
-#~ msgstr "此功能需要有效的許可證密鑰！"
-
-#~ msgid "Add empty slide"
-#~ msgstr "加入空白幻燈片"
-
-#~ msgid "Add layer"
-#~ msgstr "新增圖層"
-
-#~ msgid "Structure"
-#~ msgstr "結構"
-
-#~ msgid "Image layer"
-#~ msgstr "圖片圖層"
-
-#~ msgid "Button layer"
-#~ msgstr "按鈕圖層"
-
-#~ msgid "Layer list"
-#~ msgstr "圖層列表"
-
-#~ msgctxt "Structure"
-#~ msgid "Basic"
-#~ msgstr "基本"
-
-#~ msgctxt "Structure"
-#~ msgid "Special"
-#~ msgstr "特殊"
-
-#~ msgid "Canvas settings"
-#~ msgstr "畫布設定"
-
-#~ msgid "Create layer chain relation - align layers to each other"
-#~ msgstr "建立圖層鍊結關係 - 將圖層彼此對齊"
-
-#~ msgid "Horizontal align - Left"
-#~ msgstr "水平對齊 - 置左"
-
-#~ msgid "Horizontal align - Center"
-#~ msgstr "水平對齊 - 置中"
-
-#~ msgid "Horizontal align - Right"
-#~ msgstr "水平對齊 - 置右"
-
-#~ msgid "Vertical align - Top"
-#~ msgstr "垂直對齊 - 置頂"
-
-#~ msgid "Vertical align - Middle"
-#~ msgstr "垂直對齊 - 置中"
-
-#~ msgid "Vertical align - Bottom"
-#~ msgstr "垂直對齊 - 置底"
-
-#~ msgid "Show layer on selected devices"
-#~ msgstr "在所選裝置上顯示圖層"
-
-#~ msgid "Adaptive (Off: auto-scaled, On: fixed) font size"
-#~ msgstr "自適應 (Off: 自動縮放，On: 固定) 文字尺寸"
-
-#~ msgid "Font size scaling - enlarge or shrink text on each device"
-#~ msgstr "文字大小縮放 - 放大或縮小文字於每個裝置"
-
-#~ msgid "Clear device specific layer settings"
-#~ msgstr "清除裝置特定的圖層設定"
-
-#~ msgid "Responsive tricks"
-#~ msgstr "自適應技巧"
-
-#~ msgid "Responsive tips"
-#~ msgstr "自適應技巧"
-
-#~ msgid "Canvas"
-#~ msgstr "畫布"
-
-#~ msgid "Duplicate slide"
-#~ msgstr "複製幻燈片"
-
-#~ msgid "Split text settings"
-#~ msgstr "分割文字設定"
-
-#, php-format
-#~ msgid "Update found, <a href=\"%s\">Click here to update!</a>"
-#~ msgstr "找到更新，<a href=\"%s\">點擊此處做更新！</a>"
-
-#~ msgid "You have the latest version!"
-#~ msgstr "您擁有最新版本！"
-
-#~ msgid "Smart Slider 3 updated to the latest version!"
-#~ msgstr "Smart Slider 3 已更新到最新版本！"
-
-#~ msgctxt "Layer group"
-#~ msgid "Image"
-#~ msgstr "圖片"
-
-#~ msgctxt "Slide item"
-#~ msgid "Image"
-#~ msgstr "圖片"
-
-#~ msgctxt "Slide item"
-#~ msgid "Video"
-#~ msgstr "影片"
-
-#~ msgctxt "Slider type"
-#~ msgid "Simple"
-#~ msgstr "簡單"
-
-#~ msgid "Unit"
-#~ msgstr "單位"
-
-#~ msgid "UP"
-#~ msgstr "上"
-
-#~ msgid "Rate your experience!"
-#~ msgstr "評價你的體驗！"
-
-#~ msgid "Item defaults"
-#~ msgstr "預設項目"
-
-#, php-format
-#~ msgid "%s generator"
-#~ msgstr "%s 產生器"
-
-#~ msgid "Add Slide"
-#~ msgstr "加入幻燈片"
-
-#~ msgid "Dynamic"
-#~ msgstr "動態"
-
-#, php-format
-#~ msgid "Slide #%d"
-#~ msgstr "幻燈片 #%d"
-
-#~ msgid "Drop images to create slides"
-#~ msgstr "拖曳圖片來建立幻燈片"
-
-#~ msgid "Template library"
-#~ msgstr "選取佈景主題"
-
-#~ msgid "Why upgrade to PRO?"
-#~ msgstr "為何要升級至 PRO？"
-
-#~ msgid "See all features"
-#~ msgstr "查看所有功能"
-
-#~ msgid "Buy Smart Slider 3 Pro!"
-#~ msgstr "購買 Smart Slider 3 Pro！"
-
-#~ msgid "Go Pro!"
-#~ msgstr "獲得專業版"
-
-#~ msgctxt "Slide item"
-#~ msgid "Heading"
-#~ msgstr "標題"
-
-#~ msgctxt "Slide item"
-#~ msgid "Button"
-#~ msgstr "按鈕"
-
-#~ msgctxt "Slide item"
-#~ msgid "List"
-#~ msgstr "列表"
-
-#~ msgid "My split text animations"
-#~ msgstr "我的分割文字動畫"
-
-#~ msgid "Design"
-#~ msgstr "設計"
-
-#~ msgid "In"
-#~ msgstr "進場"
-
-#~ msgid "Out"
-#~ msgstr "退場"
-
-#~ msgid "loop"
-#~ msgstr "循環"
-
-#~ msgid "Scale Up"
-#~ msgstr "放大"
-
-#~ msgid "Scale Down"
-#~ msgstr "縮小"
-
-#~ msgid "Hide layer if provided variable is empty"
-#~ msgstr "若提供參數是空的話隱藏圖層"
-
-#~ msgid "Parallax depth"
-#~ msgstr "視差效果深度"
-
-#~ msgid "Adaptive sizing"
-#~ msgstr "自適應尺寸"
-
-#~ msgid "CSS class"
-#~ msgstr "CSS 類別"
-
-#~ msgid "Reset"
-#~ msgstr "重置"
-
-#~ msgid "Show help beacon"
-#~ msgstr "顯示幫助對話框"
-
-#~ msgid "Hardware acceleration on sliders"
-#~ msgstr "對幻燈片使用硬體加速"
-
-#~ msgid "Send slide as file"
-#~ msgstr "傳送幻燈片作為檔案"
-
-#~ msgid "Open preview in new window"
-#~ msgstr "在新視窗開啟預覽"
-
-#~ msgid "Show in WordPress admin bar"
-#~ msgstr "顯示 WordPress 後台導覽列"
-
-#~ msgid "Force Joomla RTL backend"
-#~ msgstr "強制後台為 Joomla RTL(右至左)版型"
-
-#~ msgid "YouTube privacy enhanced mode"
-#~ msgstr "YouTube 隱私加強模式"
-
-#~ msgid "Responsive mode"
-#~ msgstr "響應式模式"
-
-#~ msgid "Based on"
-#~ msgstr "基於"
-
-#~ msgid "Real device detection"
-#~ msgstr "偵測真實裝置"
-
-#~ msgid "Maximum screen width"
-#~ msgstr "最大螢幕寬度"
-
-#~ msgid "Combined"
-#~ msgstr "綜合"
-
-#~ msgid "Desktop portrait"
-#~ msgstr "直向桌面畫面"
-
-#~ msgid "Tablet landscape"
-#~ msgstr "橫向平板畫面"
-
-#~ msgid "Tablet portrait"
-#~ msgstr "直向平板畫面"
-
-#~ msgid "Mobile landscape"
-#~ msgstr "橫向手機畫面"
-
-#~ msgid "Mobile portrait"
-#~ msgstr "直向手機畫面"
-
-#~ msgid "Cache"
-#~ msgstr "快取"
-
-#~ msgid "ARIA Label"
-#~ msgstr "無障礙標籤"
-
-#~ msgid "Find the description of the options by hovering over their titles."
-#~ msgstr "當指向項目時將出現的相關描述。"
-
-#~ msgid "Touch and Pointer drag"
-#~ msgstr "觸碰拖曳"
-
-#~ msgid "Slider Type"
-#~ msgstr "幻燈片秀類型"
-
-#~ msgid "Show on devices"
-#~ msgstr "在裝置上顯示"
-
-#~ msgid "Min. font size"
-#~ msgstr "最小字體尺寸"
-
-#~ msgid "Desktop landscape slider size"
-#~ msgstr "桌面橫向幻燈片尺寸"
-
-#~ msgid "Customize"
-#~ msgstr "自訂"
-
-#~ msgid "Finish autoplay on"
-#~ msgstr "完成自動播放在"
-
-#~ msgid "slide count"
-#~ msgstr "幻燈片數量"
-
-#~ msgid "last slide"
-#~ msgstr "上一張幻燈片"
-
-#~ msgid "next slide"
-#~ msgstr "下一張幻燈片"
-
-#~ msgid "Allow restart after finish"
-#~ msgstr "允許重複播放"
-
-#~ msgid "Stop autoplay on"
-#~ msgstr "停止自動播放在"
-
-#~ msgid "Resume autoplay on"
-#~ msgstr "回復自動播放在"
-
-#~ msgid "Media ended"
-#~ msgstr "媒體結束"
-
-#~ msgid "Play on first load"
-#~ msgstr "首次載入即播放"
-
-#~ msgid "slides"
-#~ msgstr "幻燈片"
-
-#~ msgid "Thumbnail image resize"
-#~ msgstr "縮圖尺寸"
-
-#~ msgid "Layer image resize"
-#~ msgstr "圖層圖片重調整大小"
-
-#~ msgid "on load"
-#~ msgstr "載入時"
-
-#~ msgid "on scroll"
-#~ msgstr "捲動時"
-
-#~ msgid "Maximum slide count"
-#~ msgstr "最大幻燈片數量"
-
-#~ msgid "Hide website's scrollbar"
-#~ msgstr "隱藏網站的捲軸"
-
-#~ msgid "Hide"
-#~ msgstr "隱藏"
-
-#~ msgid "Browser width"
-#~ msgstr "瀏覽器寬度"
-
-#~ msgid " - copy"
-#~ msgstr " - 複製"
-
-#~ msgid "Show on mobile"
-#~ msgstr "在手機上顯示"
-
-#~ msgid "Guides"
-#~ msgstr "參考線"
-
-#~ msgid "Properties"
-#~ msgstr "屬性"
-
-#~ msgid "Publish up"
-#~ msgstr "發佈開始"
-
-#~ msgid "Publish down"
-#~ msgstr "發佈結束"
-
-#~ msgid "Static slide"
-#~ msgstr "固定幻燈片"
-
-#~ msgid "Dynamic slide"
-#~ msgstr "動態幻燈片"
-
-#~ msgid "never"
-#~ msgstr "永不"
-
-#~ msgid "Pimary color"
-#~ msgstr "主要色彩"
-
-#~ msgid "Record"
-#~ msgstr "紀錄"
-
-#~ msgid "Record viewer"
-#~ msgstr "紀錄查看"
-
-#~ msgid "Split text sets"
-#~ msgstr "分割文字設定"
-
-#~ msgid "Common split text properties"
-#~ msgstr "一般分割文字屬性"
-
-#~ msgid "The store ID is not valid!"
-#~ msgstr "商店 ID 無效！"
-
-#~ msgid "Random products"
-#~ msgstr "隨機商品"
-
-#~ msgid "order"
-#~ msgstr "排序"
-
-#~ msgid "My feed"
-#~ msgstr "我的動態"
-
-#~ msgid "Search by tag"
-#~ msgstr "以標籤搜尋"
-
-#~ msgid "Description is not available"
-#~ msgstr "描述無法使用"
-
-#~ msgid "Alphabetical"
-#~ msgstr "按英文字母順序"
-
-#~ msgid "Custom CSS classes"
-#~ msgstr "自訂 CSS 類別"
-
-#~ msgctxt "Slide item"
-#~ msgid "Area"
-#~ msgstr "區域"
-
-#~ msgid "Custom CSS"
-#~ msgstr "自訂 CSS"
-
-#~ msgctxt "Slide item"
-#~ msgid "Audio"
-#~ msgstr "音訊"
-
-#~ msgid "MORE"
-#~ msgstr "更多"
-
-#~ msgctxt "Slide item"
-#~ msgid "Icon"
-#~ msgstr "圖示"
-
-#~ msgctxt "Slide item"
-#~ msgid "Caption"
-#~ msgstr "說明"
-
-#~ msgid "label"
-#~ msgstr "標籤"
-
-#~ msgctxt "Slide item"
-#~ msgid "Text"
-#~ msgstr "文字"
-
-#~ msgid "Split text - in"
-#~ msgstr "分割文字 - 進入"
-
-#~ msgid "Split text - out"
-#~ msgstr "分割文字 - 退出"
-
-#~ msgctxt "Slide item"
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgctxt "Slide item"
-#~ msgid "Icon - Legacy"
-#~ msgstr "圖示 - 標準"
-
-#~ msgctxt "Slide item"
-#~ msgid "iframe"
-#~ msgstr "iframe"
-
-#~ msgctxt "Slider responsive mode"
-#~ msgid "Auto"
-#~ msgstr "自動"
-
-#~ msgid "Background position"
-#~ msgstr "背景位置"
-
-#~ msgctxt "Slide item"
-#~ msgid "Image box"
-#~ msgstr "圖片方框"
-
-#~ msgctxt "Slide item"
-#~ msgid "Input"
-#~ msgstr "輸入"
-
-#~ msgid "Input button"
-#~ msgstr "輸入按鈕"
-
-#~ msgid "Input container"
-#~ msgstr "輸入內容"
-
-#~ msgctxt "Slide item"
-#~ msgid "Progress Bar"
-#~ msgstr "進度條"
-
-#~ msgid "Progress bar label"
-#~ msgstr "進度條的標籤"
-
-#~ msgctxt "Slide item"
-#~ msgid "Transition"
-#~ msgstr "轉變"
-
-#~ msgctxt "Slide item"
-#~ msgid "Vimeo"
-#~ msgstr "Vimeo"
-
-#~ msgctxt "Slide item"
-#~ msgid "YouTube"
-#~ msgstr "YouTube"
-
-#~ msgctxt "Slider responsive mode"
-#~ msgid "Fixed"
-#~ msgstr "固定"
-
-#~ msgid "Down scale"
-#~ msgstr "縮小"
-
-#~ msgid "Up scale"
-#~ msgstr "放大"
-
-#~ msgid "Slider height"
-#~ msgstr "幻燈片秀高度"
-
-#~ msgid "Min"
-#~ msgstr "最小"
-
-#~ msgctxt "Slider responsive mode"
-#~ msgid "Fullpage"
-#~ msgstr "全頁面"
-
-#~ msgid "Horizontal mask"
-#~ msgstr "水平覆蓋"
-
-#~ msgid "Real height"
-#~ msgstr "真實高度"
-
-#~ msgid "CSS 100vh"
-#~ msgstr "CSS 100vh"
-
-#~ msgctxt "Slider responsive mode"
-#~ msgid "Fullwidth"
-#~ msgstr "全寬"
-
-#~ msgid "Screen width and height"
-#~ msgstr "螢幕寬度與高度"
-
-#~ msgid "Screen width only"
-#~ msgstr "只有螢幕寬度"
-
-#~ msgid "Remove vertical margin"
-#~ msgstr "移除垂直外距"
-
-#~ msgid "Main animation properties"
-#~ msgstr "主要動畫屬性"
-
-#~ msgid "Dynamic slider height"
-#~ msgstr "動態幻燈片高度"
-
-#~ msgid "Showcase slider type"
-#~ msgstr "展示庫幻燈片秀類型"
-
-#~ msgid "Animation(s)"
-#~ msgstr "動畫（可複選）"
-
-#~ msgid "Slide CSS"
-#~ msgstr "幻燈片的 CSS"
-
-#~ msgid "Shadows"
-#~ msgstr "陰影"
-
-#~ msgid "Previous"
-#~ msgstr "上一個"
-
-#~ msgid "Shape"
-#~ msgstr "形狀"
-
-#~ msgid "PREV"
-#~ msgstr "上一個"
-
-#~ msgid "NEXT"
-#~ msgstr "下一個"
-
-#~ msgid "Play image"
-#~ msgstr "播放圖片"
-
-#~ msgid "Pause image"
-#~ msgstr "暫停圖片"
-
-#~ msgid "Title font"
-#~ msgstr "標題字體"
-
-#~ msgid "Description font"
-#~ msgstr "描述字體"
-
-#~ msgid "Shadow image"
-#~ msgstr "陰影圖片"
-
-#~ msgid "Show arrow"
-#~ msgstr "顯示箭頭"
-
-#~ msgid "Height (horizontal) or Width (vertical)"
-#~ msgstr "高度（水平）或寬度（垂直）"
-
-#~ msgid "Width (horizontal) or Height (vertical)"
-#~ msgstr "寬度（垂直）或高度（水平）"
-
-#~ msgid "You can upload the slider any website:"
-#~ msgstr "您可上傳此幻燈片秀到任何網站："
-
-#~ msgid "Publish as HTML"
-#~ msgstr "發佈為 HTML"
-
-#~ msgid "You can add the slider any website:"
-#~ msgstr "您可上傳此幻燈片秀到任何網站："
-
-#~ msgid "Create a module to display the slider in template module position:"
-#~ msgstr "建立可顯示該幻燈片秀的模組，並將它用在佈景主題中的模組位置："
-
-#~ msgid "Source"
-#~ msgstr "來源"
-
-#~ msgid "Limit"
-#~ msgstr "限制"
-
-#~ msgid "record"
-#~ msgstr "紀錄"
-
-#~ msgid "post"
-#~ msgstr "貼文"
-
-#~ msgid "discussion"
-#~ msgstr "討論"
-
-#~ msgid "Manufacturers"
-#~ msgstr "製造商"
-
-#~ msgid "Product"
-#~ msgstr "商品"
-
-#~ msgid "group"
-#~ msgstr "群組"
-
-#~ msgid "article"
-#~ msgstr "文章"
-
-#~ msgid "category"
-#~ msgstr "分類"
-
-#~ msgid "item"
-#~ msgstr "項目"
-
-#~ msgid "E-card"
-#~ msgstr "電子賀卡"
-
-#~ msgctxt "magento"
-#~ msgid "Insert widget"
-#~ msgstr "插入 Widget"
-
-#~ msgid "Copy and paste this shortcode into your pages:"
-#~ msgstr "複製並貼上這個短碼到您的頁面："
-
-#~ msgid "Page or Post editor"
-#~ msgstr "頁面內容編輯器"
-
-#~ msgid "Copy and paste this shortcode anywhere:"
-#~ msgstr "複製貼上這段代碼到任何地方："
-
-#~ msgid "Attribute sets"
-#~ msgstr "屬性設置"
-
-#~ msgid "Only special price"
-#~ msgstr "只限特價"
-
-#~ msgid "Product price"
-#~ msgstr "商品價格"
-
-#~ msgid "Insert it into an existing post with the icon:"
-#~ msgstr "使用此圖示來將此插入到已存在的文章裡："
-
-#~ msgid "gallery"
-#~ msgstr "圖庫"

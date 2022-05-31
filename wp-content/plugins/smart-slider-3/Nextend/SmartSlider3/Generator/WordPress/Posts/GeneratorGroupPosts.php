@@ -57,7 +57,7 @@ class GeneratorGroupPosts extends AbstractGeneratorGroup {
         self::$ElementorWidgetType = '';
     }
 
-    public static function extractPostMeta($post_meta) {
+    public static function extractPostMeta($post_meta, $pre = '') {
         $record = array();
         if (count($post_meta) && is_array($post_meta) && !empty($post_meta)) {
             $excluded_metas = array(
@@ -82,6 +82,7 @@ class GeneratorGroupPosts extends AbstractGeneratorGroup {
                                 '',
                                 ''
                             ), $key);
+                            $key = $pre . $key;
                             if (array_key_exists($key, $record)) {
                                 $key = 'meta' . $key;
                             }
@@ -125,7 +126,7 @@ class GeneratorGroupPosts extends AbstractGeneratorGroup {
         return $record;
     }
 
-    public static function getACFData($postID) {
+    public static function getACFData($postID, $pre = '') {
         $record = array();
         if (class_exists('acf')) {
             $fields = get_fields($postID);
@@ -133,6 +134,7 @@ class GeneratorGroupPosts extends AbstractGeneratorGroup {
                 foreach ($fields as $k => $v) {
                     $type = self::getACFType($k, $postID);
                     $k    = str_replace('-', '', $k);
+                    $k    = $pre . $k;
 
                     while (isset($record[$k])) {
                         $k = 'acf_' . $k;

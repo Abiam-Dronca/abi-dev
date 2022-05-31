@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: slider, wordpress slider, image slider, layer slider, responsive slider, slideshow, fullwidth slider, post slider, horizontal slider, vertical slider, photo slider, video slider
 Donate link: https://sites.fastspring.com/nextend/product/smartslider3donate
 Requires at least: 4.9
-Tested up to: 5.9
-Stable tag: 3.5.1.4
+Tested up to: 6.0
+Stable tag: 3.5.1.7
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -208,6 +208,21 @@ Of course! Smart Slider use protocol relative urls which works fine on http:// a
 9. Layer slider with layers styles. Made with FREE version.
 
 == Changelog ==
+
+= 3.5.1.7 - 26. May 2022 =
+* Fix: Major overhaul of the way the plugin deals with options. This should fix a some bugs and provide improved security. To enhance security the "JavaScript callbacks" option was removed. If you need to write custom codes to manipulate the slider [follow this guide](https://smartslider.helpscoutdocs.com/article/2089-how-to-write-your-own-javascript-code) to learn how. 
+* Fix: Improved check for valid values at layer content and name. 
+* Fix: Aria-role attribute is renamed to role. 
+* Fix: UIPress.co compatibility. 
+* Fix: Grabbing cursor now properly displays when the slides are switching with mouse grabbing.
+* Fix: Fix for a Deprecated: preg_match(): Passing null to parameter #4 error in rare cases. 
+* Fix: The CSS code that hides the Bullet thumbnail was strengthened to avoid 3rd party codes overriding it and messing up the layout. 
+* Fix: The style tag for the Slide CSS will only be added to the HTML if it has any content. 
+* Fix: The old default family, Montserrat is not used anymore at the backend so its call was removed. 
+* Fix: Elementor has deprecated the controls_registered method so from 3.6.0 and above we use the new register method to include the Smart Slider widget to Elementor. 
+* Fix: Compatibility fix for Divi on PHP 8. 
+* Other: Translation related improvements, including unifying texts that do the same action on different places. 
+* Other: Spanish translation is updated. Thanks, Rodrigo!
 
 = 3.5.1.4 - 28. Feburary 2022 =
 * Feature: Save Fonts Locally option to cache Google Fonts. 

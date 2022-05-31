@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-01-17 09:52+0100\n"
-"PO-Revision-Date: 2022-01-17 13:27+0100\n"
+"POT-Creation-Date: 2022-05-13 07:44+0200\n"
+"PO-Revision-Date: 2022-05-17 12:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: ;n2_;n2_e;n2_n:1,2;n2_en:1,2;n2_x:1,2c;n2_ex:1,2c\n"
 "X-Poedit-Flags-xgettext: --no-location\n"
@@ -26,10 +26,6 @@ msgid "Unable to contact with the licensing server, please try again later!"
 msgstr ""
 "¡No se puede conectar con el servidor de licencias, por favor inténtalo más "
 "tarde!"
-
-msgctxt "Default Google font family for admin"
-msgid "Montserrat"
-msgstr "Montserrat"
 
 msgid "You are not allowed to upload!"
 msgstr "¡No tienes permisos para subir archivos!"
@@ -182,6 +178,16 @@ msgstr "Frontend"
 
 msgid "You can load Google Fonts on the frontend."
 msgstr "Puedes cargar fuentes de Google Fonts en el frontend."
+
+msgid "Save fonts locally"
+msgstr "Grabar las fuentes en forma local"
+
+msgid ""
+"You can store the used Google Fonts on your server. This way all Google "
+"Fonts will load from your own domain."
+msgstr ""
+"Puedes almacenar las fuentes de Google Font en su servidor. De esta manera "
+"se cargarán las fuentes desde tu propio dominio."
 
 msgid "Backend"
 msgstr "Backend"
@@ -1146,7 +1152,7 @@ msgstr "Editar"
 msgid "Group"
 msgstr "Grupo"
 
-msgid "Edit slider"
+msgid "Edit Slider"
 msgstr "Editar slider"
 
 msgid "Up"
@@ -2119,14 +2125,16 @@ msgstr "Me encantó"
 msgid "Why upgrade to Smart Slider 3 Pro?"
 msgstr "¿Por qué actualizarse a Smart Slider 3 Pro?"
 
-msgid "120+ slider templates"
-msgstr "Más de 120 plantillas de sliders"
+#, php-format
+msgid "%d+ slider templates"
+msgstr "Más de %d plantillas de sliders"
 
 msgid "Full slide library access"
 msgstr "Acceso completo a la Biblioteca de Slides"
 
-msgid "20 new layers"
-msgstr "20 nuevas capas"
+#, php-format
+msgid "%d new layers"
+msgstr "%d nuevas capas"
 
 msgid "Extra advanced options"
 msgstr "Opciones extra avanzadas"
@@ -2625,7 +2633,7 @@ msgstr "Mostrar"
 
 #, php-format
 msgid "Showing %s to %s of %s projects"
-msgstr "Mostrando %s de %s de %s proyectos"
+msgstr "Mostrando %s a %s de %s proyectos"
 
 msgid "No projects to show"
 msgstr "No hay proyectos para mostrar"
@@ -2644,7 +2652,7 @@ msgid "Showing %s results for %s."
 msgstr "Mostrando %s resultados para %s."
 
 msgid "Module"
-msgstr "Modulo"
+msgstr "Module"
 
 msgid "Displays the slider in a template module position."
 msgstr "Muestra el slider en una posición de módulo de tu plantilla."
@@ -3194,8 +3202,8 @@ msgstr "Configuración del generador"
 msgid "Cache expiration"
 msgstr "Expiración del Cache"
 
-msgid "hours"
-msgstr "horas"
+msgid "Hours"
+msgstr "Horas"
 
 msgid "Start index"
 msgstr "Indice de inicio"
@@ -3723,23 +3731,14 @@ msgstr ""
 msgid "Whole group"
 msgstr "Todo el grupo"
 
-msgid "Select slider"
-msgstr "Seleccionar slider"
+msgid "Select Slider"
+msgstr "Selecciona un slider"
 
 msgid "OR"
 msgstr "O"
 
-msgid "Select A Slider"
-msgstr "Seleccionar un slider"
-
 msgid "Insert a slider into your content"
 msgstr "Insertar un slider en tu contenido"
-
-msgid "Select Slider"
-msgstr "Selecciona un slider"
-
-msgid "Edit Slider"
-msgstr "Editar slider"
 
 msgid "Select the slider you want to insert."
 msgstr "Selecciona el slider que deseas insertar."
@@ -3771,7 +3770,7 @@ msgstr ""
 "atributos rel con un espacio. Ejemplo: nofollow noopener noreferrer"
 
 msgid "Icon"
-msgstr "Icono"
+msgstr "Ícono"
 
 msgid "Placement"
 msgstr "Ubicación"
@@ -4682,9 +4681,6 @@ msgstr "Barra de texto"
 msgid "Bullets"
 msgstr "Viñetas"
 
-msgid "Bullet"
-msgstr "Viñeta"
-
 msgid "Side"
 msgstr "Lado"
 
@@ -4877,44 +4873,23 @@ msgstr "Pirueta"
 msgid "Sparkling"
 msgstr "Burbujeante"
 
-msgid "Curve 1"
-msgstr "Curva 1"
-
-msgid "Curve 2"
-msgstr "Curva 2"
-
-msgid "Curve 3"
-msgstr "Curva 3"
-
-msgid "Curve 4"
-msgstr "Curva 4"
+#, php-format
+msgid "Curve %d"
+msgstr "Curva %d"
 
 msgid "Curves"
 msgstr "Curvas"
 
-msgid "Fan 1"
-msgstr "Abanico 1"
-
-msgid "Fan 2"
-msgstr "Abanico 2"
-
-msgid "Fan 3"
-msgstr "Abanico 3"
-
-msgid "Fan 4"
-msgstr "Abanico 4"
+#, php-format
+msgid "Fan %d"
+msgstr "Abanico %d"
 
 msgid "Hills"
 msgstr "Colinas"
 
-msgid "Incline 1"
-msgstr "Inclinar 1"
-
-msgid "Incline 2"
-msgstr "Inclinar 2"
-
-msgid "Incline 3"
-msgstr "Inclinar 3"
+#, php-format
+msgid "Incline %d"
+msgstr "Pendiente %d"
 
 msgid "Inverse arrow"
 msgstr "Flecha inversa"
@@ -4925,44 +4900,28 @@ msgstr "Rectángulo"
 msgid "Slopes"
 msgstr "Pendientes"
 
-msgid "Tilt 1"
-msgstr "Inclinación 1"
+#, php-format
+msgid "Tilt %d"
+msgstr "Inclinación %d"
 
-msgid "Tilt 2"
-msgstr "Inclinación 2"
+#, php-format
+msgid "Triangle %d"
+msgstr "Triángulo %d"
 
-msgid "Triangle 1"
-msgstr "Triángulo 1"
-
-msgid "Triangle 2"
-msgstr "Triángulo 2"
-
-msgid "Wave 1"
-msgstr "Ola 1"
-
-msgid "Wave 2"
-msgstr "Ola 2"
+#, php-format
+msgid "Wave %d"
+msgstr "Ola %d"
 
 msgid "Waves"
 msgstr "Olas"
 
-msgid "Columns 1"
-msgstr "Columnas 1"
+#, php-format
+msgid "Columns %d"
+msgstr "Columnas %d"
 
-msgid "Columns 2"
-msgstr "Columnas 2"
-
-msgid "Paper 1"
-msgstr "Papel 1"
-
-msgid "Paper 2"
-msgstr "Papel 2"
-
-msgid "Paper 3"
-msgstr "Papel 3"
-
-msgid "Paper 4"
-msgstr "Papel 4"
+#, php-format
+msgid "Paper %d"
+msgstr "Papel %d"
 
 msgid "2 Colors"
 msgstr "2 colores"
@@ -4985,12 +4944,13 @@ msgstr "¡El ID de la app está vacío. Por favor ingresa ese valor!"
 #, php-format
 msgid ""
 "%1$s allows HTTPS Redirect URIs only! You must move your site to HTTPS in "
-"order to use this generator! - %2$s How to get SSL for my WordPress site? "
-"%3$s"
+"order to use this generator!"
 msgstr ""
 "%1$s permite solo URIs de redireccionamiento HTTPS. ¡Puedes mover tu sitio a "
-"HTTPS para poder utilizar este generador! %2$s ¿Cómo usar SSL para mi sitio "
-"en WordPress? %3$s"
+"HTTPS para poder utilizar este generador!"
+
+msgid "How to get SSL for my website?"
+msgstr "¿Cómo usar SSL para mi sitio?"
 
 #, php-format
 msgid ""
@@ -5113,7 +5073,7 @@ msgid "Folder"
 msgstr "Carpeta"
 
 msgid "Images in folder"
-msgstr "Imagenes en el directorio"
+msgstr "Imágenes en la carpeta"
 
 msgid "Images in folder and subfolders"
 msgstr "Imágenes en la carpeta y subcarpetas"
@@ -5122,7 +5082,10 @@ msgid "Videos in folder"
 msgstr "Videos en carpeta"
 
 msgid "Source folder"
-msgstr "Directorio origen"
+msgstr "Carpeta de origen"
+
+msgid "Filename based exclusion"
+msgstr "Excluir basado en el nombre del archivo"
 
 msgid "Remove resized images"
 msgstr "Remover imágenes redimensionadas"
@@ -5138,6 +5101,28 @@ msgstr ""
 "ejemplo, \"mifotografia.jpg\" permanecerá en los resultados del generador, "
 "mientras que \"mifotografia-120x120.jpg\" será removida, ya que es la misma "
 "imagen, pero en un tamaño más pequeño."
+
+msgid "Filename has to contain"
+msgstr "El nombre del archivo debe contener"
+
+msgid ""
+"Only those images will be asked down, which have the given texts within "
+"their filenames. You can write down multiple texts separated by comma."
+msgstr ""
+"Solo se llamarán las imágenes que contengan el texto que especifiques en su "
+"nombre de archivo. Puedes escribir múltiples parámetros separándolos con una "
+"coma."
+
+msgid "Filename cannot contain"
+msgstr "El nombre del archivo no debe contener"
+
+msgid ""
+"Only those images will be asked down, which don't have the given texts "
+"within their filenames. You can write down multiple texts separated by comma."
+msgstr ""
+"Solo se llamarán las imágenes que no contengan el texto que especifiques en "
+"su nombre de archivo. Puedes escribir múltiples parámetros separándolos con "
+"una coma."
 
 msgid "Filename"
 msgstr "Nombre de archivo"
@@ -5161,6 +5146,41 @@ msgid ""
 msgstr ""
 "Dirección incorrecta. Esta es la dirección de la carpeta de medios y subida "
 "de archivos por defecto, trata navegar desde aquí:"
+
+msgid "The App ID and the Secret is empty!"
+msgstr "¡Los parámetros \"App ID\" y \"Secret\" están vacíos!"
+
+msgid "The token will expire at:"
+msgstr "El tocken expirará en:"
+
+msgid "Access token was not returned.Please check the credentials!"
+msgstr ""
+"El token de acceso no devolvió ningún resultado. ¡Por favor comprueba las "
+"credenciales!"
+
+msgid "The token expired. Please request new token!"
+msgstr "¡El token expiró. Por favor solicite uno nuevo!"
+
+msgid "The token will expire in two days! Please refresh the token!"
+msgstr "¡El token expirará en dos días!. ¡Por favor solicita uno nuevo!"
+
+msgid "Refresh Token"
+msgstr "Actualizar token"
+
+msgid "Refresh"
+msgstr "Recargar"
+
+msgid "Album loading method"
+msgstr "Método de carga del álbum"
+
+msgid "Load first images only"
+msgstr "Cargar solo las primeras imágenes"
+
+msgid "Load album images separately"
+msgstr "Cargar imágenes del álbum por separado"
+
+msgid "Load Album images as record data"
+msgstr "Cargar imágenes del álbum como datos de registro"
 
 msgid "JSON from url"
 msgstr "JSON desde una url"
@@ -5207,6 +5227,9 @@ msgstr ""
 msgid "Images"
 msgstr "Imagenes"
 
+msgid "Offset hours"
+msgstr "Horas de compensación"
+
 msgid "Timezone offset in hours. For example: +2 or -7."
 msgstr "Compensación de zona horaria expresada en horas. Por ejemplo: +2 ó -7."
 
@@ -5249,57 +5272,6 @@ msgstr "opcional"
 #, php-format
 msgid "Creates slides from %1$s content."
 msgstr "Crea slides del contenido de %1$s."
-
-msgid "Items"
-msgstr "Items"
-
-msgid "Locations"
-msgstr "Ubicaciones"
-
-msgid "Types"
-msgstr "Tipos"
-
-msgid "Expired"
-msgstr "Expiro"
-
-msgid "Started"
-msgstr "Iniciado"
-
-msgid "Auction"
-msgstr "Subasta"
-
-msgid "Negotiable price"
-msgstr "Negociar precio"
-
-msgid "Blocked by User"
-msgstr "Bloqueado por un usuario"
-
-msgid "Paid"
-msgstr "Pagado"
-
-msgid "Buynow"
-msgstr "Comprar ahora"
-
-msgid "Menu item (item ID)"
-msgstr "Ítem del menú (item ID)"
-
-msgid ""
-"Your url will point to the item within this menu item. You will only get a "
-"good result, if you will pick one of your DJ Classifields menu items or "
-"leave it on 'Default'."
-msgstr ""
-"Tu url apuntará a un ítem dentro del menú. Obtendrás buenos resultados si "
-"escoges uno de los ítems del menú de DJ Classifields y dejas la opción "
-"'Default'."
-
-msgid "Start date"
-msgstr "Fecha de inicio"
-
-msgid "Expiration date"
-msgstr "Fecha de vencimiento"
-
-msgid "Price"
-msgstr "Precio"
 
 msgid "Include subcategories"
 msgstr "Incluir subcategorias"
@@ -5351,6 +5323,9 @@ msgstr "Sepáralos con coma."
 
 msgid "Banned user IDs"
 msgstr "ID's de usuarios bloqueadas"
+
+msgid "Started"
+msgstr "Iniciado"
 
 msgid "Ended"
 msgstr "Finalizado"
@@ -5433,11 +5408,17 @@ msgstr "Lenguaje de la Categoría"
 msgid "Manufacturer language"
 msgstr "Lenguaje del Fabricante"
 
+msgid "Price"
+msgstr "Precio"
+
 msgid "Product name"
 msgstr "Nombre del producto"
 
 msgid "Product ID"
 msgstr "ID del producto"
+
+msgid "Locations"
+msgstr "Ubicaciones"
 
 msgid "Recurring"
 msgstr "Recurrente"
@@ -5453,6 +5434,12 @@ msgstr "Solo eventos principales recurrentes"
 
 msgid "Only not recurring events"
 msgstr "Solo eventos no recurrentes"
+
+msgid "Menu item (item ID)"
+msgstr "Ítem del menú (item ID)"
+
+msgid "Start date"
+msgstr "Fecha de inicio"
 
 msgid "End date"
 msgstr "Fecha de finalización"
@@ -5496,6 +5483,15 @@ msgstr "Máxima fecha de finalización"
 msgid "Only display items with these IDs"
 msgstr "Mostrar solo los items con estos IDs"
 
+msgid ""
+"Timezone offset in hours. For example: +2 or -7. If you leave it empty, "
+"Joomla's System -> Global Configuration -> Server -> Server Time Zone "
+"setting will be used."
+msgstr ""
+"Desfasaje de Zona Horaria establecido en horas. Po ejemplo +2 ó -7. Sí dejas "
+"el campo vacío, se utilizará lo establecido en la opción de Joomla: Sistema -"
+"> Configuración Global -> Servidor -> Zona horaria del sitio."
+
 msgid "Brand"
 msgstr "Marca"
 
@@ -5536,17 +5532,11 @@ msgstr "Eventos que se repiten"
 msgid "Date language"
 msgstr "Lenguaje de la Fecha"
 
-msgid "Offset value"
-msgstr "Valor de compensación"
+msgid "Date variable offset"
+msgstr "Variable de compensación de fecha"
 
-msgid ""
-"Timezone offset in hours. For example: +2 or -7. If you leave it empty, "
-"Joomla's System -> Global Configuration -> Server -> Server Time Zone "
-"setting will be used."
-msgstr ""
-"Desfasaje de Zona Horaria establecido en horas. Po ejemplo +2 ó -7. Sí dejas "
-"el campo vacío, se utilizará lo establecido en la opción de Joomla: Sistema -"
-"> Configuración Global -> Servidor -> Zona horaria del sitio."
+msgid "Date filter offset"
+msgstr "Filtro de compensación de fecha"
 
 msgid "Status"
 msgstr "Estado"
@@ -5557,6 +5547,9 @@ msgstr "En la papelera"
 msgid "Ask down all product images"
 msgstr "Preguntar por todas las imágenes de productos"
 
+msgid "Items"
+msgstr "Items"
+
 msgid "View item"
 msgstr "Ver ítem"
 
@@ -5566,15 +5559,6 @@ msgstr "Visto"
 msgid "View image"
 msgstr "Ver imagen"
 
-msgid "Supplier"
-msgstr "Proveedor"
-
-msgid "On sale"
-msgstr "En venta"
-
-msgid "Discount price"
-msgstr "Precio de descuento"
-
 msgid "All day event"
 msgstr "Evento todo el día"
 
@@ -5583,40 +5567,6 @@ msgstr "Lenguaje de resguardo (fallback)"
 
 msgid "Show parent products only"
 msgstr "Mostrar solo los productos principales"
-
-#, php-format
-msgid "Creates slides from %1$s events."
-msgstr "Crea slides desde los eventos de %1$s."
-
-msgid "Create custom date variables"
-msgstr "Crear variables de fecha personalizadas"
-
-msgid ""
-"You can write any date format (http://php.net/manual/en/function.date.php) "
-"in separate lines, and new variables will be created for them."
-msgstr ""
-"Puedes escribir cualquier formato de fecha (http://php.net/manual/en/"
-"function.date.php) en líneas separadas y nuevas variables se crearán para "
-"ellos."
-
-msgid ""
-"Write the original text, like 'Monday' then two | signs, and the text you "
-"want it to be translated to, for example 'Montag'. Together: Monday||Montag"
-msgstr ""
-"Escribe el texto original, como 'Monday' seguido por dos signos |, y después "
-"el texto que quieres al que se traduzca. Ejemplo: Monday||Lunes"
-
-msgid "Event start date"
-msgstr "Fecha de inicio del evento"
-
-msgid "Event end date"
-msgstr "Fecha de finalización del evento"
-
-msgid "Event creation date"
-msgstr "Fecha de creación del evento"
-
-msgid "Event modification date"
-msgstr "Fecha de modificación del evento"
 
 #, php-format
 msgid "Creates slides from %1$s galleries."
@@ -5641,6 +5591,10 @@ msgstr ""
 
 msgid "No options given"
 msgstr "No se ingresaron opciones"
+
+#, php-format
+msgid "Creates slides from %1$s events."
+msgstr "Crea slides desde los eventos de %1$s."
 
 msgid "Exclude event IDs (One ID per line)"
 msgstr "Excluir IDs de eventos (un ID por línea)"
@@ -5698,8 +5652,20 @@ msgstr "Locales"
 msgid "Hide From Event Listings"
 msgstr "Ocultar de los listados de eventos"
 
+msgid "Event start date"
+msgstr "Fecha de inicio del evento"
+
+msgid "Event end date"
+msgstr "Fecha de finalización del evento"
+
 msgid "Event cost"
 msgstr "Costo del evento"
+
+msgid "Event creation date"
+msgstr "Fecha de creación del evento"
+
+msgid "Event modification date"
+msgstr "Fecha de modificación del evento"
 
 msgid "Metakey name"
 msgstr "Nombre de la clave meta"
@@ -5933,13 +5899,21 @@ msgid "Grow rotate"
 msgstr "Girar creciendo"
 
 msgid "Pendulum"
-msgstr "Pendulo"
+msgstr "Péndulo"
 
 msgid "Pendulum 3D"
-msgstr "Pendulo 3D"
+msgstr "Péndulo 3D"
 
 msgid "Vertical pendulum 3D"
-msgstr "Pendulo vertical 3D"
+msgstr "Péndulo vertical 3D"
+
+msgid "We are Passionate About"
+msgstr ""
+
+msgid ""
+"Amazing Food\n"
+"Great Hospitality"
+msgstr ""
 
 msgid "Before text"
 msgstr "Antes del texto"
@@ -6091,21 +6065,6 @@ msgstr "Mostrar leyenda"
 msgid "Caption text"
 msgstr "Leyenda"
 
-msgid "2"
-msgstr "2"
-
-msgid "4"
-msgstr "4"
-
-msgid "6"
-msgstr "6"
-
-msgid "8"
-msgstr "8"
-
-msgid "10"
-msgstr "10"
-
 msgid "Before image alt tag"
 msgstr "Alt de imagen antes"
 
@@ -6165,9 +6124,6 @@ msgstr "Cuenta regresiva"
 
 msgid "Days"
 msgstr "Días"
-
-msgid "Hours"
-msgstr "Horas"
 
 msgid "Minutes"
 msgstr "Minutos"
@@ -6231,68 +6187,45 @@ msgstr "Redirigir a la URL"
 msgid "Choose what happens after the counter reached zero."
 msgstr "Selecciona lo que ocurre cuando el contador alcanza el cero."
 
-msgid "Circle 1"
-msgstr "Círculo 1"
+#, fuzzy
+#| msgid "The image is empty"
+msgid "This page is"
+msgstr "La imagen está vacía"
 
-msgid "Circle 2"
-msgstr "Círculo 2"
+msgid "Amazing"
+msgstr ""
 
-msgid "Circle 3"
-msgstr "Círculo 3"
+#, php-format
+msgid "Circle %d"
+msgstr "Círculo %d"
 
-msgid "Curly 1"
-msgstr "Rizo 1"
+#, php-format
+msgid "Curly %d"
+msgstr "Rizo %d"
 
-msgid "Curly 2"
-msgstr "Rizo 2"
+#, php-format
+msgid "Highlight %d"
+msgstr "Remarcado %d"
 
-msgid "Highlight 1"
-msgstr "Remarcado 1"
+#, php-format
+msgid "Line Through %d"
+msgstr "Línea atravesada %d"
 
-msgid "Highlight 2"
-msgstr "Remarcado 2"
+#, php-format
+msgid "Rectangle %d"
+msgstr "Rectángulo %d"
 
-msgid "Highlight 3"
-msgstr "Remarcado 3"
+#, php-format
+msgid "Underline %d"
+msgstr "Subrayado %d"
 
-msgid "Line Through 1"
-msgstr "Línea del medio 1"
+#, php-format
+msgid "Underline double %d"
+msgstr "Subrayado doble %d"
 
-msgid "Line Through 2"
-msgstr "Línea del medio 2"
-
-msgid "Line Through 3"
-msgstr "Línea del medio 3"
-
-msgid "Rectangle 1"
-msgstr "Rectángulo 1"
-
-msgid "Rectangle 2"
-msgstr "Rectángulo 2"
-
-msgid "Underline 1"
-msgstr "Subrayado 1"
-
-msgid "Underline 2"
-msgstr "Subrayado 2"
-
-msgid "Underline 3"
-msgstr "Subrayado 3"
-
-msgid "Underline double 1"
-msgstr "Subrayado doble 1"
-
-msgid "Underline double 2"
-msgstr "Subrayado doble 2"
-
-msgid "ZigZag 1"
-msgstr "ZigZag 1"
-
-msgid "ZigZag 2"
-msgstr "ZigZag 2"
-
-msgid "ZigZag 3"
-msgstr "ZigZag 3"
+#, php-format
+msgid "ZigZag %d"
+msgstr "ZigZag %d"
 
 msgid "Highlighted text"
 msgstr "Texto remarcado"
@@ -6308,6 +6241,9 @@ msgstr "Retardo del bucle"
 
 msgid "HTML"
 msgstr "HTML"
+
+msgid "Empty element"
+msgstr ""
 
 msgid ""
 "Please note that <b>we do not support</b> the HTML layer and the 3rd party "
@@ -6424,18 +6360,12 @@ msgstr "Superior-romano"
 msgid "Icon not found"
 msgstr "Ícono no encontrado"
 
-msgid "Aria label"
-msgstr "Etiqueta Aria"
-
 #, php-format
 msgid "Enter an %1$s aria-label attribute %2$s that describes the link."
 msgstr "Enter an %1$s aria-label attribute %2$s that describes the link."
 
 msgid "Iframe"
 msgstr "Iframe"
-
-msgid "iframe"
-msgstr "iframe"
 
 msgid ""
 "Please note, that <b>we do not support</b> customized coding! The iframe "
@@ -6447,14 +6377,14 @@ msgstr ""
 "tu mismo/a, así que sugerimos que utilices esta capa solo si eres un "
 "desarrollador/a!"
 
-msgid "iframe url"
-msgstr "url iframe"
+msgid "Iframe url"
+msgstr "Url del iframe"
 
 msgid "You can disable the scroll on the iframe content."
 msgstr "Puedes desactivar el desplazamiento para el contenido del iframe."
 
-msgid "iframe title"
-msgstr "título del iframe"
+msgid "Iframe title"
+msgstr "Título del iframe"
 
 msgid "Image area"
 msgstr "Área de la imagen"
@@ -6519,10 +6449,10 @@ msgid "Transition"
 msgstr "Transición"
 
 msgid "Front image"
-msgstr "Imagen del frente"
+msgstr "Imagen de frente"
 
 msgid "Back image"
-msgstr "Imagen del fondo"
+msgstr "Imagen de atrás"
 
 msgid "Vertical flip"
 msgstr "Voltear vertical"
@@ -6531,10 +6461,10 @@ msgid "Horizontal flip"
 msgstr "Voltear horizontal"
 
 msgid "Front image alt tag"
-msgstr "Etiqueta alt de imagen del frente"
+msgstr "Etiqueta alt de imagen de frente"
 
 msgid "Back image alt tag"
-msgstr "Etiqueta alt de imagen de fondo"
+msgstr "Etiqueta alt de imagen de atrás"
 
 msgid "MP4 video"
 msgstr "Video MP4"
@@ -6816,6 +6746,191 @@ msgstr "Color de la pista"
 
 msgid "Bar color"
 msgstr "Color de la barra"
+
+#~ msgctxt "Default Google font family for admin"
+#~ msgid "Montserrat"
+#~ msgstr "Montserrat"
+
+#~ msgid "Edit slider"
+#~ msgstr "Editar slider"
+
+#~ msgid "hours"
+#~ msgstr "horas"
+
+#~ msgid "Select slider"
+#~ msgstr "Seleccionar slider"
+
+#~ msgid "Select A Slider"
+#~ msgstr "Seleccionar un slider"
+
+#~ msgid "Bullet"
+#~ msgstr "Viñeta"
+
+#~ msgid "Curve 2"
+#~ msgstr "Curva 2"
+
+#~ msgid "Curve 3"
+#~ msgstr "Curva 3"
+
+#~ msgid "Curve 4"
+#~ msgstr "Curva 4"
+
+#~ msgid "Fan 2"
+#~ msgstr "Abanico 2"
+
+#~ msgid "Fan 3"
+#~ msgstr "Abanico 3"
+
+#~ msgid "Fan 4"
+#~ msgstr "Abanico 4"
+
+#~ msgid "Incline 2"
+#~ msgstr "Inclinar 2"
+
+#~ msgid "Incline 3"
+#~ msgstr "Inclinar 3"
+
+#~ msgid "Tilt 2"
+#~ msgstr "Inclinación 2"
+
+#~ msgid "Triangle 2"
+#~ msgstr "Triángulo 2"
+
+#~ msgid "Wave 2"
+#~ msgstr "Ola 2"
+
+#~ msgid "Columns 2"
+#~ msgstr "Columnas 2"
+
+#~ msgid "Paper 2"
+#~ msgstr "Papel 2"
+
+#~ msgid "Paper 3"
+#~ msgstr "Papel 3"
+
+#~ msgid "Paper 4"
+#~ msgstr "Papel 4"
+
+#~ msgid "Types"
+#~ msgstr "Tipos"
+
+#~ msgid "Expired"
+#~ msgstr "Expiro"
+
+#~ msgid "Auction"
+#~ msgstr "Subasta"
+
+#~ msgid "Negotiable price"
+#~ msgstr "Negociar precio"
+
+#~ msgid "Blocked by User"
+#~ msgstr "Bloqueado por un usuario"
+
+#~ msgid "Paid"
+#~ msgstr "Pagado"
+
+#~ msgid "Buynow"
+#~ msgstr "Comprar ahora"
+
+#~ msgid ""
+#~ "Your url will point to the item within this menu item. You will only get "
+#~ "a good result, if you will pick one of your DJ Classifields menu items or "
+#~ "leave it on 'Default'."
+#~ msgstr ""
+#~ "Tu url apuntará a un ítem dentro del menú. Obtendrás buenos resultados si "
+#~ "escoges uno de los ítems del menú de DJ Classifields y dejas la opción "
+#~ "'Default'."
+
+#~ msgid "Expiration date"
+#~ msgstr "Fecha de vencimiento"
+
+#~ msgid "Supplier"
+#~ msgstr "Proveedor"
+
+#~ msgid "On sale"
+#~ msgstr "En venta"
+
+#~ msgid "Discount price"
+#~ msgstr "Precio de descuento"
+
+#~ msgid "2"
+#~ msgstr "2"
+
+#~ msgid "4"
+#~ msgstr "4"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "Circle 2"
+#~ msgstr "Círculo 2"
+
+#~ msgid "Circle 3"
+#~ msgstr "Círculo 3"
+
+#~ msgid "Curly 2"
+#~ msgstr "Rizo 2"
+
+#~ msgid "Highlight 2"
+#~ msgstr "Remarcado 2"
+
+#~ msgid "Highlight 3"
+#~ msgstr "Remarcado 3"
+
+#~ msgid "Line Through 2"
+#~ msgstr "Línea del medio 2"
+
+#~ msgid "Line Through 3"
+#~ msgstr "Línea del medio 3"
+
+#~ msgid "Rectangle 2"
+#~ msgstr "Rectángulo 2"
+
+#~ msgid "Underline 2"
+#~ msgstr "Subrayado 2"
+
+#~ msgid "Underline 3"
+#~ msgstr "Subrayado 3"
+
+#~ msgid "Underline double 2"
+#~ msgstr "Subrayado doble 2"
+
+#~ msgid "ZigZag 2"
+#~ msgstr "ZigZag 2"
+
+#~ msgid "ZigZag 3"
+#~ msgstr "ZigZag 3"
+
+#~ msgid "Aria label"
+#~ msgstr "Etiqueta Aria"
+
+#~ msgid "iframe"
+#~ msgstr "iframe"
+
+#~ msgid "Create custom date variables"
+#~ msgstr "Crear variables de fecha personalizadas"
+
+#~ msgid ""
+#~ "You can write any date format (http://php.net/manual/en/function.date."
+#~ "php) in separate lines, and new variables will be created for them."
+#~ msgstr ""
+#~ "Puedes escribir cualquier formato de fecha (http://php.net/manual/en/"
+#~ "function.date.php) en líneas separadas y nuevas variables se crearán para "
+#~ "ellos."
+
+#~ msgid ""
+#~ "Write the original text, like 'Monday' then two | signs, and the text you "
+#~ "want it to be translated to, for example 'Montag'. Together: Monday||"
+#~ "Montag"
+#~ msgstr ""
+#~ "Escribe el texto original, como 'Monday' seguido por dos signos |, y "
+#~ "después el texto que quieres al que se traduzca. Ejemplo: Monday||Lunes"
 
 #~ msgid "Private video"
 #~ msgstr "Video privado"

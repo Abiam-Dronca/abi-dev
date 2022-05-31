@@ -8,7 +8,7 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Nextend\SmartSlider3\Platform\WordPress\Shortcode\Shortcode;
 
-class ElementorWidgetDeprecatedSmartSlider extends Widget_Base {
+class ElementorWidgetSmartSlider350 extends Widget_Base {
 
     public function get_name() {
         return 'smartslider';
@@ -58,11 +58,7 @@ class ElementorWidgetDeprecatedSmartSlider extends Widget_Base {
     public function render_plain_content() {
     }
 
-    /**
-     * The Elementor deprecated this function in version 2.9.0 and it will be removed in 3.7.0
-     * @url https://developers.elementor.com/v2-9-0-planned-deprecations/
-     */
-    protected function _content_template() {
+    protected function content_template() {
         echo Shortcode::renderIframe('{{{settings.smartsliderid}}}');
     }
 }
