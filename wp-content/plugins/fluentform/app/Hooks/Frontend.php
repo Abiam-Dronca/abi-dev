@@ -24,3 +24,32 @@ if(defined('WP_ROCKET_VERSION')) {
         return $lines;
     });
 }
+/*
+ * Push captcha in all forms when enabled from global settings
+ */
+add_filter('fluentform_rendering_form', function ($form) {
+    $option = get_option('_fluentform_global_form_settings');
+    $enabled = \FluentForm\Framework\Helpers\ArrayHelper::get($option, 'misc.autoload_captcha');
+    if (!$enabled) {
+        return $form;
+    }
+    $type = \FluentForm\Framework\Helpers\ArrayHelper::get($option, 'misc.captcha_type');
+    $reCaptcha = [
+        "element"    => "recaptcha",
+        "attributes" => [
+            "name" => "recaptcha",
+        ],
+    ];
+    $hCaptcha = [
+        "element"    => "hcaptcha",
+        "attributes" => [
+            "name" => "hcaptcha",
+        ],
+    ];
+    if ($type == 'recaptcha') {
+        $form->fields['fields'][] = $reCaptcha;
+    } elseif ($type == 'hcaptcha') {
+        $form->fields['fields'][] = $hCaptcha;
+    }
+    return $form;
+}, 10, 1);

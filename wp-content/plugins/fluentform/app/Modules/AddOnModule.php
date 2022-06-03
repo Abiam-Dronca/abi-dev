@@ -360,6 +360,14 @@ class AddOnModule
                 'purchase_url' => $purchaseUrl,
                 'category'     => 'crm'
             ),
+            'mailjet'      => array(
+                'title'        => 'Mailjet',
+                'description'  => 'Mailjet is an easy-to-use all-in-one e-mail platform.',
+                'logo'         => App::publicUrl('img/integrations/mailjet.png'),
+                'enabled'      => 'no',
+                'purchase_url' => $purchaseUrl,
+                'category'     => 'crm'
+            ),
         );
     }
 }

@@ -592,7 +592,7 @@ class Helper
         if ($ff_list) {
             $forms[0] = esc_html__('Select a Fluent Forms', 'fluentform');
             foreach ($ff_list as $form) {
-                $forms[$form->id] = $form->title .' ('.$form->id.')';
+                $forms[$form->id] = esc_html($form->title) .' ('.$form->id.')';
             }
         } else {
             $forms[0] = esc_html__('Create a Form First', 'fluentform');

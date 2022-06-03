@@ -429,7 +429,8 @@ class FormHandler
      */
     private function validateReCaptcha()
     {
-        if (FormFieldsParser::hasElement($this->form, 'recaptcha')) {
+        $autoInclude = apply_filters('ff_has_auto_recaptcha', false);
+        if (FormFieldsParser::hasElement($this->form, 'recaptcha') || $autoInclude) {
             $keys = get_option('_fluentform_reCaptcha_details');
             $token = Arr::get($this->formData, 'g-recaptcha-response');
             $version = 'v2_visible';
@@ -455,8 +456,9 @@ class FormHandler
      */
     private function validateHCaptcha()
     {
+        $autoInclude = apply_filters('ff_has_auto_hcaptcha', false);
         FormFieldsParser::resetData();
-        if (FormFieldsParser::hasElement($this->form, 'hcaptcha')) {
+        if (FormFieldsParser::hasElement($this->form, 'hcaptcha') || $autoInclude) {
             $keys = get_option('_fluentform_hCaptcha_details');
             $token = Arr::get($this->formData, 'h-captcha-response');
             $isValid = HCaptcha::validate($token, $keys['secretKey']);

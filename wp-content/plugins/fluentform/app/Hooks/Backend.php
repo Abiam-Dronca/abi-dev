@@ -363,8 +363,38 @@ add_action('fluentform_addons_page_render_fluentform_pdf', function () {
 });
 
 //Add file upload location in global settings
-add_filter('fluentform_get_global_settings_values', function ($value) {
-    $value['file_upload_optoins'] = FluentForm\App\Helpers\Helper::fileUploadLocations();
-    return $value;
-}, 10, 1);
+add_filter('fluentform_get_global_settings_values', function ($values, $key) {
+    if(is_array($key) && in_array('_fluentform_global_form_settings',$key)){
+        $values['file_upload_optoins'] = FluentForm\App\Helpers\Helper::fileUploadLocations();
+    }
+    return $values;
+}, 10, 2);
+
+//Enables recaptcha validation when autoload recaptcha enabled for all forms
+$autoIncludeRecaptcha = [
+    [
+        'type'=>'hcaptcha',
+        'is_disabled'=>!get_option('_fluentform_hCaptcha_keys_status', false)
+    ],
+    [
+        'type'=>'recaptcha',
+        'is_disabled'=>!get_option('_fluentform_reCaptcha_keys_status', false)
+    ],
+];
+
+foreach ($autoIncludeRecaptcha as $input) {
+    if($input['is_disabled']){
+        continue;
+    }
+    add_filter('ff_has_auto_' . $input['type'], function () use ($input) {
+        $option = get_option('_fluentform_global_form_settings');
+        $autoload = \FluentForm\Framework\Helpers\ArrayHelper::get($option, 'misc.autoload_captcha');
+        $type = \FluentForm\Framework\Helpers\ArrayHelper::get($option, 'misc.captcha_type');
+        
+        if ($autoload && $type == $input['type']) {
+            return true;
+        }
+        return false;
+    });
+}
 

@@ -427,16 +427,14 @@ class OxyFluentFormWidget extends OxygenEl
     {
         if ($options['ff_form'] == "no") {
             echo '<h5 class="ff-template-missing">' . __('Select a Form', 'fluentform') . '</h5>';
-
             return;
         }
 
         if (function_exists('do_oxygen_elements')) {
-            echo do_oxygen_elements($content);
+            echo do_oxygen_elements('[fluentform id="' . $options['ff_form'] . '"]');
         } else {
             if (Helper::isConversionForm($options['ff_form'])) {
                 _e("This is a Conversational Form. You must use the default Design tab for this type of forms.", 'fluentform');
-
                 return;
             }
             echo do_shortcode('[fluentform id="' . $options['ff_form'] . '"]');
