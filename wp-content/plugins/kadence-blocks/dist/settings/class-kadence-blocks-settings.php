@@ -64,7 +64,7 @@ class Kadence_Blocks_Settings {
 		add_action( 'admin_init', array( $this, 'load_settings' ) );
 		add_action( 'init', array( $this, 'load_api_settings' ) );
 		add_action( 'after_setup_theme', array( $this, 'load_color_palette' ), 999 );
-		add_action( 'init',  array( $this, 'init_post_meta' ) );
+		add_action( 'init', array( $this, 'init_post_meta' ) );
 		add_action( 'admin_head-post.php', array( $this, 'admin_editor_width' ), 100 );
 		add_action( 'admin_head-post-new.php', array( $this, 'admin_editor_width' ), 100 );
 		add_action( 'kadence_blocks_dash_side_panel_pro', array( $this, 'admin_pro_kadence_notice' ), 10 );

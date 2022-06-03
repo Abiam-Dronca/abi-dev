@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Kadence Blocks – Gutenberg Blocks for Page Builder Features plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kadence Blocks – Gutenberg Blocks for Page Builder Features 2.4.0\n"
+"Project-Id-Version: Kadence Blocks – Gutenberg Blocks for Page Builder Features 2.4.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kadence-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-04-08T18:25:16+00:00\n"
+"POT-Creation-Date: 2022-06-01T17:50:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: kadence-blocks\n"
@@ -111,30 +111,30 @@ msgstr ""
 msgid "Secs"
 msgstr ""
 
-#: dist/class-kadence-blocks-frontend.php:1696
+#: dist/class-kadence-blocks-frontend.php:1663
 #: dist/build/blocks.js:39
 msgid "Please fix the errors to proceed"
 msgstr ""
 
-#: dist/class-kadence-blocks-frontend.php:1698
+#: dist/class-kadence-blocks-frontend.php:1665
 #: dist/build/blocks.js:37
 msgid "is required"
 msgstr ""
 
-#: dist/class-kadence-blocks-frontend.php:1699
+#: dist/class-kadence-blocks-frontend.php:1666
 msgid "does not match"
 msgstr ""
 
-#: dist/class-kadence-blocks-frontend.php:1700
+#: dist/class-kadence-blocks-frontend.php:1667
 #: dist/build/blocks.js:37
 msgid "is not valid"
 msgstr ""
 
-#: dist/class-kadence-blocks-frontend.php:1701
+#: dist/class-kadence-blocks-frontend.php:1668
 msgid "requires a unique entry and this value has already been used"
 msgstr ""
 
-#: dist/class-kadence-blocks-frontend.php:1702
+#: dist/class-kadence-blocks-frontend.php:1669
 #: dist/build/blocks.js:35
 msgid "Item"
 msgstr ""
@@ -213,23 +213,23 @@ msgid "No data"
 msgstr ""
 
 #: dist/class-kadence-blocks-table-of-contents.php:190
-#: dist/class-kadence-blocks-table-of-contents.php:843
-#: dist/class-kadence-blocks-table-of-contents.php:852
+#: dist/class-kadence-blocks-table-of-contents.php:842
+#: dist/class-kadence-blocks-table-of-contents.php:851
 msgid "Expand Table of Contents"
 msgstr ""
 
 #: dist/class-kadence-blocks-table-of-contents.php:191
-#: dist/class-kadence-blocks-table-of-contents.php:843
-#: dist/class-kadence-blocks-table-of-contents.php:852
+#: dist/class-kadence-blocks-table-of-contents.php:842
+#: dist/class-kadence-blocks-table-of-contents.php:851
 msgid "Collapse Table of Contents"
 msgstr ""
 
-#: dist/class-kadence-blocks-table-of-contents.php:838
+#: dist/class-kadence-blocks-table-of-contents.php:837
 #: dist/build/blocks.js:39
 msgid "Table Of Contents"
 msgstr ""
 
-#: dist/class-kadence-blocks-table-of-contents.php:846
+#: dist/class-kadence-blocks-table-of-contents.php:845
 #: dist/settings/class-kadence-blocks-settings.php:911
 #: dist/build/blocks.js:39
 msgid "Table of Contents"
@@ -1995,6 +1995,11 @@ msgstr ""
 msgid "Mayfair"
 msgstr ""
 
+#: dist/build/blocks.js:15
+#: dist/build/blocks.js:32
+msgid "Z-Index Control"
+msgstr ""
+
 #: dist/build/blocks.js:17
 msgid "Advanced Image"
 msgstr ""
@@ -3413,10 +3418,6 @@ msgid "Inner Column Height 100%"
 msgstr ""
 
 #: dist/build/blocks.js:32
-msgid "Z-Index Control"
-msgstr ""
-
-#: dist/build/blocks.js:32
 msgid "User Visibility Settings"
 msgstr ""
 
@@ -3565,6 +3566,22 @@ msgstr ""
 
 #: dist/build/blocks.js:32
 msgid "Link entire section"
+msgstr ""
+
+#: dist/build/blocks.js:32
+msgid "Sticky Settings"
+msgstr ""
+
+#: dist/build/blocks.js:32
+msgid "Make sticky"
+msgstr ""
+
+#: dist/build/blocks.js:32
+msgid "This will stick the section to viewport for the height of outer row block."
+msgstr ""
+
+#: dist/build/blocks.js:32
+msgid "Sticky Header Offset"
 msgstr ""
 
 #: dist/build/blocks.js:32
