@@ -2,9 +2,9 @@
 Contributors: britner
 Tags: translation-ready, two-columns, right-sidebar, left-sidebar, footer-widgets, blog, custom-logo, custom-background, custom-menu, rtl-language-support, editor-style, threaded-comments, custom-colors, featured-images, wide-blocks, full-width-template, theme-options, e-commerce.
 Requires at least: 5.4
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 7.0
-Stable tag: 1.1.18
+Stable tag: 1.1.19
 License: GNU General Public License v3.0 (or later)
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,6 +18,21 @@ Kadence is released under GNU General Public License v3.0 (or later)
 
 
 = Changelog =
+
+== 1.1.19 | 31st May 2022 ==
+* Add: Option to enable font smoothing.
+* Update: All available google fonts.
+* Update: Tutor template.
+* Update: Add Scroll to id offset filter.
+* Fix: Possible issue with layout settings not following events archive when setting main events page as home page.
+* Fix: Possible issue with Polylang that created a php notice in logs.
+* Fix: possible issue with Page Title background.
+* Fix: Missing titles for payment icons.
+* Fix: Small css tweak for buttons in woocommerce.
+* Fix: Issue with scroll to ID and reveal on scroll up header.
+* Fix: Issue with possible missing font weights.
+* Fix: Styling for inline images.
+* Fix: Instagram brand color.
 
 == 1.1.18 | 27th April 2022 ==
 * Add: Option to turn off body shift when menu toggles.
@@ -958,9 +973,9 @@ https://wprig.io/
 
 The theme uses the following third-party resources:
 
-* Tiny Slider 2 Javascript, William Lin
-Tiny Slider 2 licensed under the the MIT license.
-Source: https://github.com/ganlanyuan/tiny-slider
+* Splide Javascript, Naotoshi Fujita
+Splide licensed under the the MIT license.
+Source: https://splidejs.com/
 
 * css-vars-ponyfill Javascript, John Hildenbiddle
 css-vars-ponyfill licensed under the the MIT license.

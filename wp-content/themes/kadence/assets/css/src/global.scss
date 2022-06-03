@@ -208,7 +208,7 @@ were hidden (via .neverending) before. */
 }
 // Maybe CSS option for mobile animate in.
 #wrapper {
-	overflow: hidden;
+	overflow: clip;
 }
 
 // Align.

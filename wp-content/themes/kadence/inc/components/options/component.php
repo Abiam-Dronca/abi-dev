@@ -486,6 +486,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					'lightbox' => false,
 					'enable_popup_body_animate' => true,
 					// Typography.
+					'font_rendering' => false,
 					'base_font' => array(
 						'size' => array(
 							'desktop' => 17,

@@ -216,7 +216,9 @@ p, .wp-block[data-type="kadence/advancedheading"]:not(:last-child) p {
 p:last-child {
 	margin-bottom: 0;
 }
-
+p > img {
+    display: inline-block;
+}
 pre {
 	margin-bottom: var(--global-md-spacing);
 }

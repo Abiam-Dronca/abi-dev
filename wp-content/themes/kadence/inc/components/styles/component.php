@@ -301,8 +301,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					$css->add_property( 'background-attachment', $attachement );
 				} else {
 					$css->add_property( 'background-repeat', 'no-repeat' );
-					$css->add_property( 'background-position', 'cover' );
-					$css->add_property( 'background-size', 'center' );
+					$css->add_property( 'background-position', 'center' );
+					$css->add_property( 'background-size', 'cover' );
 					$css->add_property( 'background-attachment', 'scroll' );
 				}
 			}
@@ -1411,6 +1411,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		// }
 		$css->set_selector( 'body' );
 		$css->render_background( kadence()->sub_option( 'site_background', 'desktop' ), $css );
+		if ( kadence()->option( 'font_rendering' ) ) {
+			$css->add_property( '-webkit-font-smoothing', 'antialiased' );
+			$css->add_property( '-moz-osx-font-smoothing', 'grayscale' );
+		}
 		$css->set_selector( 'body, input, select, optgroup, textarea' );
 		$css->render_font( kadence()->option( 'base_font' ), $css, 'body' );
 		$css->set_selector( '.content-bg, body.content-style-unboxed .site' );
@@ -1449,7 +1453,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->set_selector( 'h6' );
 		$css->render_font( kadence()->option( 'h6_font' ), $css );
 		$css->set_selector( '.entry-hero h1' );
-		$css->render_font( kadence()->option( 'title_above_font' ), $css );
+		$css->render_font( kadence()->option( 'title_above_font' ), $css, 'heading' );
 		$css->set_selector( '.entry-hero .kadence-breadcrumbs, .entry-hero .search-form' );
 		$css->render_font( kadence()->option( 'title_above_breadcrumb_font' ), $css );
 		$css->start_media_query( $media_query['tablet'] );
@@ -2122,7 +2126,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		// Page Title.
 		$css->set_selector( '.wp-site-blocks .page-title h1' );
-		$css->render_font( kadence()->option( 'page_title_font' ), $css );
+		$css->render_font( kadence()->option( 'page_title_font' ), $css, 'heading' );
 		$css->start_media_query( $media_query['tablet'] );
 		$css->set_selector( '.wp-site-blocks .page-title h1' );
 		$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'page_title_font' ), 'tablet' ) );
@@ -2257,7 +2261,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->stop_media_query();
 			// Post Related Title.
 			$css->set_selector( '.wp-site-blocks .entry-related h2.entry-related-title' );
-			$css->render_font( kadence()->option( 'post_related_title_font' ), $css );
+			$css->render_font( kadence()->option( 'post_related_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.wp-site-blocks .entry-related h2.entry-related-title' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'post_related_title_font' ), 'tablet' ) );
@@ -2272,7 +2276,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->stop_media_query();
 			// Post Title.
 			$css->set_selector( '.wp-site-blocks .post-title h1' );
-			$css->render_font( kadence()->option( 'post_title_font' ), $css );
+			$css->render_font( kadence()->option( 'post_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.wp-site-blocks .post-title h1' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'post_title_font' ), 'tablet' ) );
@@ -2441,7 +2445,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->stop_media_query();
 		// Post archive item title.
 		$css->set_selector( '.loop-entry.type-post h2.entry-title' );
-		$css->render_font( kadence()->option( 'post_archive_item_title_font' ), $css );
+		$css->render_font( kadence()->option( 'post_archive_item_title_font' ), $css, 'heading' );
 		$css->start_media_query( $media_query['tablet'] );
 		$css->set_selector( '.loop-entry.type-post h2.entry-title' );
 		$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'post_archive_item_title_font' ), 'tablet' ) );
@@ -2542,7 +2546,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->stop_media_query();
 		// Search Results item title.
 		$css->set_selector( '.search-results .loop-entry h2.entry-title' );
-		$css->render_font( kadence()->option( 'search_archive_item_title_font' ), $css );
+		$css->render_font( kadence()->option( 'search_archive_item_title_font' ), $css, 'heading' );
 		$css->start_media_query( $media_query['tablet'] );
 		$css->set_selector( '.search-results .loop-entry h2.entry-title' );
 		$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'search_archive_item_title_font' ), 'tablet' ) );
@@ -2679,7 +2683,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->stop_media_query();
 			// Product Above Extra Title.
 			$css->set_selector( '.wp-site-blocks .product-hero-section .extra-title' );
-			$css->render_font( kadence()->option( 'product_above_title_font' ), $css );
+			$css->render_font( kadence()->option( 'product_above_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.wp-site-blocks .product-hero-section .extra-title' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'product_above_title_font' ), 'tablet' ) );
@@ -2694,7 +2698,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->stop_media_query();
 			// Product Title.
 			$css->set_selector( '.woocommerce div.product .product_title' );
-			$css->render_font( kadence()->option( 'product_title_font' ), $css );
+			$css->render_font( kadence()->option( 'product_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.woocommerce div.product .product_title' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'product_title_font' ), 'tablet' ) );
@@ -2790,7 +2794,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->add_property( 'min-height', $this->render_range( kadence()->option( 'product_archive_title_height' ), 'mobile' ) );
 			$css->stop_media_query();
 			$css->set_selector( '.product-archive-title h1' );
-			$css->render_font( kadence()->option( 'product_archive_title_heading_font' ), $css );
+			$css->render_font( kadence()->option( 'product_archive_title_heading_font' ), $css, 'heading' );
 			$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'product_archive_title_color', 'color' ) ) );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.product-archive-title h1' );
@@ -2925,7 +2929,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'sfwd-courses_archive_title_description_color', 'hover' ) ) );
 			// Course Title.
 			$css->set_selector( '.sfwd-courses-title h1' );
-			$css->render_font( kadence()->option( 'sfwd-courses_title_font' ), $css );
+			$css->render_font( kadence()->option( 'sfwd-courses_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.sfwd-courses-title h1' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'sfwd-courses_title_font' ), 'tablet' ) );
@@ -3003,7 +3007,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				if ( ! $in_focus_mode ) {
 					// Lesson Title.
 					$css->set_selector( '.sfwd-lessons-title h1' );
-					$css->render_font( kadence()->option( 'sfwd-lessons_title_font' ), $css );
+					$css->render_font( kadence()->option( 'sfwd-lessons_title_font' ), $css, 'heading' );
 					$css->start_media_query( $media_query['tablet'] );
 					$css->set_selector( '.sfwd-lessons-title h1' );
 					$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'sfwd-lessons_title_font' ), 'tablet' ) );
@@ -3078,7 +3082,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					$css->stop_media_query();
 					// Quiz Title.
 					$css->set_selector( '.sfwd-quiz-title h1' );
-					$css->render_font( kadence()->option( 'sfwd-quiz_title_font' ), $css );
+					$css->render_font( kadence()->option( 'sfwd-quiz_title_font' ), $css, 'heading' );
 					$css->start_media_query( $media_query['tablet'] );
 					$css->set_selector( '.sfwd-quiz-title h1' );
 					$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'sfwd-quiz_title_font' ), 'tablet' ) );
@@ -3153,7 +3157,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					$css->stop_media_query();
 					// Topic Title.
 					$css->set_selector( '.sfwd-topic-title h1' );
-					$css->render_font( kadence()->option( 'sfwd-topic_title_font' ), $css );
+					$css->render_font( kadence()->option( 'sfwd-topic_title_font' ), $css, 'heading' );
 					$css->start_media_query( $media_query['tablet'] );
 					$css->set_selector( '.sfwd-topic-title h1' );
 					$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'sfwd-topic_title_font' ), 'tablet' ) );
@@ -3230,7 +3234,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			}
 			// Group Title.
 			$css->set_selector( '.wp-site-blocks .groupe-title h1' );
-			$css->render_font( kadence()->option( 'groupe_title_font' ), $css );
+			$css->render_font( kadence()->option( 'groupe_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.wp-site-blocks .groupe-title h1' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'groupe_title_font' ), 'tablet' ) );
@@ -3288,7 +3292,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->stop_media_query();
 			// Essay Title.
 			$css->set_selector( '.wp-site-blocks .sfwd-essays-title h1' );
-			$css->render_font( kadence()->option( 'sfwd-essays_title_font' ), $css );
+			$css->render_font( kadence()->option( 'sfwd-essays_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.wp-site-blocks .sfwd-essays-title h1' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'sfwd-essays_title_font' ), 'tablet' ) );
@@ -3432,7 +3436,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->stop_media_query();
 			// Course Title.
 			$css->set_selector( '.wp-site-blocks .course-title h1' );
-			$css->render_font( kadence()->option( 'course_title_font' ), $css );
+			$css->render_font( kadence()->option( 'course_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.wp-site-blocks .course-title h1' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'course_title_font' ), 'tablet' ) );
@@ -3490,7 +3494,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$css->stop_media_query();
 			// Lesson Title.
 			$css->set_selector( '.wp-site-blocks .lesson-title h1' );
-			$css->render_font( kadence()->option( 'lesson_title_font' ), $css );
+			$css->render_font( kadence()->option( 'lesson_title_font' ), $css, 'heading' );
 			$css->start_media_query( $media_query['tablet'] );
 			$css->set_selector( '.wp-site-blocks .lesson-title h1' );
 			$css->add_property( 'font-size', $this->render_font_size( kadence()->option( 'lesson_title_font' ), 'tablet' ) );
@@ -3645,7 +3649,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					$css->stop_media_query();
 					// CPT Title.
 					$css->set_selector( '.wp-site-blocks .' . $post_type_name . '-title h1' );
-					$css->render_font( kadence()->option( $post_type_name . '_title_font' ), $css );
+					$css->render_font( kadence()->option( $post_type_name . '_title_font' ), $css, 'heading' );
 					$css->start_media_query( $media_query['tablet'] );
 					$css->set_selector( '.wp-site-blocks .' . $post_type_name . '-title h1' );
 					$css->add_property( 'font-size', $this->render_font_size( kadence()->option( $post_type_name . '_title_font' ), 'tablet' ) );
@@ -3815,7 +3819,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					$css->stop_media_query();
 					// CTP archive item title.
 					$css->set_selector( '.loop-entry.type-' . $post_type_name . ' h2.entry-title' );
-					$css->render_font( kadence()->option( $post_type_name . '_archive_item_title_font' ), $css );
+					$css->render_font( kadence()->option( $post_type_name . '_archive_item_title_font' ), $css, 'heading' );
 					$css->start_media_query( $media_query['tablet'] );
 					$css->set_selector( '.loop-entry.type-' . $post_type_name . ' h2.entry-title' );
 					$css->add_property( 'font-size', $this->render_font_size( kadence()->option( $post_type_name . '_archive_item_title_font' ), 'tablet' ) );

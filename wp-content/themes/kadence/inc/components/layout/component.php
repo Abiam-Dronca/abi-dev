@@ -621,17 +621,22 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				$archive_type = 'post_archive';
 				$trans_type   = 'archive';
 			} elseif ( is_home() && ! is_front_page() ) {
-				$post_id         = get_option( 'page_for_posts' );
-				$archivelayout   = get_post_meta( $post_id, '_kad_post_layout', true );
-				$archiveboxed    = get_post_meta( $post_id, '_kad_post_content_style', true );
-				$archivesidebar  = get_post_meta( $post_id, '_kad_post_sidebar_id', true );
-				$archivefeature  = get_post_meta( $post_id, '_kad_post_feature', true );
-				$archivetitle    = get_post_meta( $post_id, '_kad_post_title', true );
-				$archivetrans    = get_post_meta( $post_id, '_kad_post_transparent', true );
-				$archivevpadding = get_post_meta( $post_id, '_kad_post_vertical_padding', true );
-				$postf_position  = get_post_meta( $post_id, '_kad_post_feature_position', true );
-				$archive_type    = 'post_archive';
-				$trans_type      = 'archive';
+				if ( get_query_var( 'tribe_events_front_page' ) ) {
+					$archive_type = 'tribe_events_archive';
+					$trans_type   = 'archive';
+				} else {
+					$post_id         = get_option( 'page_for_posts' );
+					$archivelayout   = get_post_meta( $post_id, '_kad_post_layout', true );
+					$archiveboxed    = get_post_meta( $post_id, '_kad_post_content_style', true );
+					$archivesidebar  = get_post_meta( $post_id, '_kad_post_sidebar_id', true );
+					$archivefeature  = get_post_meta( $post_id, '_kad_post_feature', true );
+					$archivetitle    = get_post_meta( $post_id, '_kad_post_title', true );
+					$archivetrans    = get_post_meta( $post_id, '_kad_post_transparent', true );
+					$archivevpadding = get_post_meta( $post_id, '_kad_post_vertical_padding', true );
+					$postf_position  = get_post_meta( $post_id, '_kad_post_feature_position', true );
+					$archive_type    = 'post_archive';
+					$trans_type      = 'archive';
+				}
 			} elseif ( class_exists( 'woocommerce' ) && is_shop() && ! is_search() ) {
 				$post_id         = wc_get_page_id( 'shop' );
 				$archivelayout   = get_post_meta( $post_id, '_kad_post_layout', true );
@@ -713,6 +718,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				$trans_type = 'archive';
 			} elseif ( is_category() || is_tag() ) {
 				$archive_type = 'post_archive';
+				$trans_type = 'archive';
+			} elseif ( is_tax( 'knowledgebase_cat' ) ) {
+				$archive_type = 'knowledgebase_archive';
 				$trans_type = 'archive';
 			} else {
 				$post_type  = get_post_type();

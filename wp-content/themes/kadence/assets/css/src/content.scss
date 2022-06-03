@@ -110,6 +110,9 @@ article.sticky {
 	.wp-block-buttons .wp-block-button {
 		margin-bottom: 0;
 	}
+	p > img {
+		display: inline-block;
+	}
 	// This removes the extra space when adding a spacer below the paragraph.
 	p:not(.wp-block-kadence-advancedheading) + .wp-block-kadence-spacer {
 		margin-top: calc( 0rem - var(--global-md-spacing) );

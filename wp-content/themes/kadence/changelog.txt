@@ -1,3 +1,18 @@
+== 1.1.19 | 31st May 2022 ==
+* Add: Option to enable font smoothing.
+* Update: All available google fonts.
+* Update: Tutor template.
+* Update: Add Scroll to id offset filter.
+* Fix: Possible issue with layout settings not following events archive when setting main events page as home page.
+* Fix: Possible issue with Polylang that created a php notice in logs.
+* Fix: possible issue with Page Title background.
+* Fix: Missing titles for payment icons.
+* Fix: Small css tweak for buttons in woocommerce.
+* Fix: Issue with scroll to ID and reveal on scroll up header.
+* Fix: Issue with possible missing font weights.
+* Fix: Styling for inline images.
+* Fix: Instagram brand color.
+
 == 1.1.18 | 27th April 2022 ==
 * Add: Option to turn off body shift when menu toggles.
 * Update: Related posts carousel to use splide.

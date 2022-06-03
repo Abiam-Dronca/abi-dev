@@ -132,7 +132,7 @@ class Component implements Component_Interface {
 		$css->stop_media_query();
 		// Events Title Font.
 		$css->set_selector( '.tribe_events-title h1' );
-		$css->render_font( kadence()->option( 'tribe_events_title_font' ), $css );
+		$css->render_font( kadence()->option( 'tribe_events_title_font' ), $css, 'heading' );
 		$css->start_media_query( $media_query['tablet'] );
 		$css->set_selector( '.tribe_events-title h1' );
 		$css->add_property( 'font-size', $css->render_font_size( kadence()->option( 'tribe_events_title_font' ), 'tablet' ) );

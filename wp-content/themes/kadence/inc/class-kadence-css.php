@@ -559,6 +559,14 @@ class Kadence_CSS {
 		if ( isset( $font['letterSpacing'] ) && isset( $font['letterSpacing']['desktop'] ) && is_numeric( $font['letterSpacing']['desktop'] ) ) {
 			$css->add_property( 'letter-spacing', $font['letterSpacing']['desktop'] . $letter_type );
 		}
+		$special_inherit = ( isset( $font['family'] ) && ! empty( $font['family'] ) && 'inherit' === $font['family'] ? true : false );
+		if ( $special_inherit ) {
+			if ( ! empty( $inherit ) && 'heading' === $inherit ) {
+				$this->maybe_add_google_variant( $font, $inherit );
+			} else {
+				$this->maybe_add_google_variant( $font );
+			}
+		}
 		$family = ( isset( $font['family'] ) && ! empty( $font['family'] ) && 'inherit' !== $font['family'] ? $font['family'] : '' );
 		if ( ! empty( $family ) ) {
 			if ( ! empty( $inherit ) && 'body' === $inherit ) {
@@ -1126,6 +1134,39 @@ class Kadence_CSS {
 		}
 
 		return $border_string;
+	}
+	/**
+	 * Add google font to array.
+	 *
+	 * @param array  $font the font settings.
+	 * @param string $area the font use case.
+	 */
+	public function maybe_add_google_variant( $font, $area = null ) {
+		if ( empty( $font['variant'] ) ) {
+			return;
+		}
+		$maybe_add = false;
+		if ( ! empty( $area ) && 'headers' === $area ) {
+			$parent_font = kadence()->option( 'heading_font' );
+			if ( isset( $parent_font['family'] ) && 'inherit' === $parent_font['family'] ) {
+				$parent_font = kadence()->sub_option( 'base_font' );
+				if ( isset( $parent_font['google'] ) && true === $parent_font['google'] ) {
+					$maybe_add = true;
+				}
+			} elseif ( isset( $parent_font['google'] ) && true === $parent_font['google'] ) {
+				$maybe_add = true;
+			}
+		} else {
+			$parent_font = kadence()->sub_option( 'base_font' );
+			if ( isset( $parent_font['google'] ) && true === $parent_font['google'] ) {
+				$maybe_add = true;
+			}
+		}
+		if ( $maybe_add ) {
+			if ( ! in_array( $font['variant'], self::$google_fonts[ $parent_font['family'] ]['fontvariants'], true ) ) {
+				array_push( self::$google_fonts[ $parent_font['family'] ]['fontvariants'], $font['variant'] );
+			}
+		}
 	}
 	/**
 	 * Add google font to array.

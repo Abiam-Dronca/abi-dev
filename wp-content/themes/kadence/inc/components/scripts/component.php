@@ -159,6 +159,7 @@ class Component implements Component_Interface {
 					'desktop' => esc_attr( $breakpoint ),
 					'tablet' => 768,
 				),
+				'scrollOffset' => apply_filters( 'kadence_scroll_to_id_additional_offset', 0 ),
 			)
 		);
 	}

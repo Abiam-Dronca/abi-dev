@@ -402,7 +402,7 @@ class Component implements Component_Interface {
 		$css->stop_media_query();
 		// Course Title.
 		$css->set_selector( '.tutor-single-course-lead-info h1.tutor-course-header-h1, .tutor-course-details-title .tutor-fs-4' );
-		$css->render_font( kadence()->option( 'courses_title_font' ), $css );
+		$css->render_font( kadence()->option( 'courses_title_font' ), $css, 'heading' );
 		$css->start_media_query( $media_query['tablet'] );
 		$css->set_selector( '.tutor-single-course-lead-info h1.tutor-course-header-h1, .tutor-course-details-title .tutor-fs-4' );
 		$css->add_property( 'font-size', $css->render_font_size( kadence()->option( 'courses_title_font' ), 'tablet' ) );
