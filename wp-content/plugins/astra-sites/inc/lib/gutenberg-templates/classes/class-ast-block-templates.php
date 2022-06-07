@@ -336,7 +336,7 @@ if ( ! class_exists( 'Ast_Block_Templates' ) ) :
 				)
 			);
 
-			$demo_api_uri = add_query_arg( $request_params, $api_uri );
+			$demo_api_uri = esc_url_raw( add_query_arg( $request_params, $api_uri ) );
 
 			// API Call.
 			$response = wp_remote_get( $demo_api_uri, $api_args );
