@@ -87,7 +87,7 @@ class TenWebLibNew {
 
   public function init_classes() {
     $wd_options = $this->config;
-    $current_url = $_SERVER['REQUEST_URI'];
+    $current_url = esc_url($_SERVER['REQUEST_URI']);
     if ( $wd_options->deactivate === TRUE ) {
       if ( strpos($current_url, "plugins.php") !== FALSE ) {
         new TenWebNewLibDeactivate($this->config);

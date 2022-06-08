@@ -805,7 +805,7 @@ class BWGViewGalleryBox {
             }
             if ($params['popup_enable_pinterest']) {
               ?>
-              <a id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode($share_url); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', BWG()->prefix); ?>">
+              <a id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode(urlencode($share_url)); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', BWG()->prefix); ?>">
                 <i title="<?php echo __('Share on Pinterest', BWG()->prefix); ?>" class="bwg-icon-pinterest-square bwg_ctrl_btn bwg_pinterest"></i>
               </a>
               <?php

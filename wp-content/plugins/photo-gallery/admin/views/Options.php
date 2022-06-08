@@ -146,8 +146,8 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="images_directory"><?php _e('Images directory', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input id="images_directory" name="images_directory" type="text" style="display:inline-block; width:100%;" value="<?php echo esc_url($row->images_directory); ?>" />
-                    <input type="hidden" id="old_images_directory" name="old_images_directory" value="<?php echo esc_url($row->old_images_directory); ?>" />
+                    <input id="images_directory" name="images_directory" type="text" style="display:inline-block; width:100%;" value="<?php echo esc_html($row->images_directory); ?>" />
+                    <input type="hidden" id="old_images_directory" name="old_images_directory" value="<?php echo esc_html($row->old_images_directory); ?>" />
                   </div>
                   <p class="description"><?php _e('Provide the path of an existing folder inside the WordPress directory of your website to store uploaded images.<br />The content of the previous directory will be moved to the new one.', BWG()->prefix); ?></p>
                 </div>
