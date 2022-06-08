@@ -53,8 +53,8 @@ class WP_Members_User_Export {
 	 *         @type string $role             The user's role (or roles, if multiple).
 	 *     }
 	 *     @type  array   $exclude_fields  @deprecated 3.4.0
-	 *     @type  boolean $entity_decode
-	 *     @type  string  $date_format
+	 *     @type  boolean $entity_decode   Whether HTML entities should be decoded (default: false)
+	 *     @type  string  $date_format     A PHP readable date format (default: Y-m-d which results in YYYY-MM-DD)
 	 * }
 	 * @param array  $users Array of user IDs to export.
 	 * @param string $tag
@@ -284,6 +284,9 @@ class WP_Members_User_Export {
 		$export_fields['username'] = __( 'Username', 'wp-members' );
 		if ( wpmem_is_enabled( 'mod_reg' ) ) {
 			$export_fields['active'] = __( 'Activated?', 'wp-members' );
+		}
+		if ( wpmem_is_enabled( 'act_link' ) ) {
+			$export_fields['_wpmem_user_confirmed'] = __( 'Confirmed?', 'wp-members' );
 		}
 		if ( defined( 'WPMEM_EXP_MODULE' ) && wpmem_is_enabled( 'use_exp' ) ) {
 			$export_fields['exp_type'] = __( 'Subscription', 'wp-members' );

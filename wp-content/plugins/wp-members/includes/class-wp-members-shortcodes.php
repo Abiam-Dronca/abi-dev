@@ -93,6 +93,10 @@ class WP_Members_Shortcodes {
 	 */
 	function forms( $atts, $content, $tag ) {
 
+		if ( is_admin() ) {
+			return;
+		}
+
 		global $wpmem, $wpmem_themsg;
 
 		// Defaults.
@@ -113,7 +117,14 @@ class WP_Members_Shortcodes {
 		switch ( $atts['form'] ) {
 
 			case 'wp_login':
-				$content = wpmem_wp_login_form( $atts );
+				if ( is_user_logged_in() && '1' != $customizer ) {
+					// If the user is logged in, return any nested content (if any) or the default bullet links if no nested content.
+					$content = ( $content ) ? $content : $this->render_links( 'login' );
+				} else {
+					$atts['echo'] = false;
+					$atts['redirect'] = ( isset( $atts['redirect'] ) ) ? $atts['redirect'] : ( ( isset( $atts['redirect_to'] ) ) ? $atts['redirect_to'] : wpmem_current_url() );
+					$content = wpmem_wp_login_form( $atts );
+				}
 				break;
 
 			case 'register':
@@ -218,6 +229,9 @@ class WP_Members_Shortcodes {
 	 *     @tryp string $compare     Can specify a comparison operator when using meta_key/meta_value (optional).
 	 *     @type string $product     If the user has a specific product/membership (optional).
 	 *     @type string $membership  If the user has a specific product/membership (optional).
+	 *     @type string $wrap_id     Adds a div wrapper with specified id.
+	 *     @type string $wrap_class  Adds a div wrapper with specified class.
+	 *     @type string $wrap_tag    Specifies wrapper tag (default: div)
 	 * }
 	 * @param  string $content Shortcode content.
 	 * @param  string $tag     The shortcode's tag (wpmem_logged_in).
@@ -327,6 +341,16 @@ class WP_Members_Shortcodes {
 				// Prevents display if the current page is the user profile and an action is being handled.
 				if ( ( wpmem_current_url( true, false ) == wpmem_profile_url() ) && isset( $_GET['a'] ) ) {
 					$do_return = false;
+				}
+
+				// Adds optional wrapper.
+				if ( isset( $atts['wrap_id'] ) || isset( $atts['wrap_class'] ) ) {
+					$tag = ( isset( $atts['wrap_tag'] ) ) ? $atts['wrap_tag'] : 'div';
+					$wrapper  = '<' . $tag;
+					$wrapper .= ( isset( $atts['wrap_id']    ) ) ? ' id="'    . $atts['wrap_id']    . '"' : '';
+					$wrapper .= ( isset( $atts['wrap_class'] ) ) ? ' class="' . $atts['wrap_class'] . '"' : '';
+					$wrapper .= '>';
+					$content = $wrapper . $content . '</' . $tag . '>';
 				}
 
 			}
@@ -857,7 +881,7 @@ class WP_Members_Shortcodes {
 			// If the password shortcode page is set as User Profile page.
 			if ( 'getusername' == $wpmem->action ) {
 
-				return wpmem_page_forgot_username( $wpmem_regchk, $content );
+				return $this->render_forgot_username( $wpmem_regchk, $content );
 
 			} else {
 

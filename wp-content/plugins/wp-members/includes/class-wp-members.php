@@ -338,6 +338,13 @@ class WP_Members {
 	 * @var string
 	 */
 	public $upload_base = 'wpmembers';
+
+	/**
+	 * Opt in to update and security notifications.
+	 * 
+	 * @since 3.4.2
+	 */
+	public $optin;
 	
 	/**
 	 * Plugin initialization function.
@@ -356,6 +363,18 @@ class WP_Members {
 		// Load dependent files.
 		$this->load_dependencies();
 	
+		$settings = get_option( 'wpmembers_settings' );
+		
+		// Validate that v3 settings are loaded.
+		if ( ! isset( $settings['version'] ) 
+			|| $settings['version'] != $this->version
+			|| ! isset( $settings['db_version'] ) 
+			|| $settings['db_version'] != $this->db_version ) {
+			// Load installation routine and pdate settings.
+			require_once( $this->path . 'includes/install.php' );
+			$settings = wpmem_do_install();
+		}
+
 		/**
 		 * Filter the options before they are loaded into constants.
 		 *
@@ -364,26 +383,15 @@ class WP_Members {
 		 *
 		 * @param array $this->settings An array of the WP-Members settings.
 		 */
-		$settings = apply_filters( 'wpmem_settings', get_option( 'wpmembers_settings' ) );
+		$settings = apply_filters( 'wpmem_settings', $settings );
 
-		// Validate that v3 settings are loaded.
-		if ( ! isset( $settings['version'] ) 
-			|| $settings['version'] != $this->version
-			|| ! isset( $settings['db_version'] ) 
-			|| $settings['db_version'] != $this->db_version ) {
-			/**
-			 * Load installation routine.
-			 */
-			require_once( $this->path . 'includes/install.php' );
-			// Update settings.
-			/** This filter is documented in /inc/class-wp-members.php */
-			$settings = apply_filters( 'wpmem_settings', wpmem_do_install() );
-		}
-		
 		// Assemble settings.
 		foreach ( $settings as $key => $val ) {
 			$this->$key = $val;
 		}
+
+		// @todo Until I think of a better place to put this.
+		$this->optin = get_option( 'wpmembers_optin' );
 		
 		$this->load_user_pages();
 		$this->set_style();
@@ -460,18 +468,16 @@ class WP_Members {
 		
 		add_action( 'init',                  array( $this, 'load_textdomain' ) );
 		add_action( 'init',                  array( $this->membership, 'add_cpt' ), 0 ); // Adds membership plans custom post type.
+		add_action( 'init',                  array( $this, 'load_admin'  ) );            // @todo Check user role to load correct dashboard
 		add_action( 'widgets_init',          array( $this, 'widget_init' ) );            // initializes the widget
-		add_action( 'admin_init',            array( $this, 'load_admin'  ) );            // check user role to load correct dashboard
 		add_action( 'rest_api_init',         array( $this, 'rest_init'   ) );
+		add_action( 'admin_menu',            'wpmem_admin_options' );                    // Adds admin menu
+		add_action( 'pre_get_posts',         array( $this, 'do_hide_posts' ), 20 );
 		add_action( 'template_redirect',     array( $this, 'get_action'  ) );
-		
 		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_style_wp_login' ) ); // styles the native registration
 		add_action( 'wp_enqueue_scripts',    array( $this, 'enqueue_style' ) );          // Enqueues the stylesheet.
 		add_action( 'wp_enqueue_scripts',    array( $this, 'loginout_script' ) );
-		
-		add_action( 'pre_get_posts',         array( $this, 'do_hide_posts' ), 20 );
 		add_action( 'customize_register',    array( $this, 'customizer_settings' ) );
-		add_action( 'admin_menu',            'wpmem_admin_options' );                    // Adds admin menu
 		add_action( 'wp_footer',             array( $this, 'invisible_captcha' ) );
 		
 		if ( is_user_logged_in() ) {
@@ -713,8 +719,9 @@ class WP_Members {
 		 * Fires when the wpmem action is retrieved.
 		 *
 		 * @since 3.1.7
+		 * @since 3.4.2 Added action as a param.
 		 */
-		do_action( 'wpmem_get_action' );
+		do_action( 'wpmem_get_action', $this->action );
 
 		// Get the regchk value (if any).
 		$this->regchk = $this->get_regchk( $this->action );
@@ -749,11 +756,17 @@ class WP_Members {
 				break;
 			
 			case 'pwdchange':
+			case 'set_password_from_key':
 				$regchk = $this->user->password_update( 'change' );
 				break;
 
 			case 'pwdreset':
-				$regchk = $this->user->password_update( 'reset' );
+				global $wpmem;
+				if ( 1 == $wpmem->pwd_link ) {
+					$regchk = $this->user->password_update( 'link' );
+				} else {
+					$regchk = $this->user->password_update( 'reset' );
+				}
 				break;
 			
 			case 'getusername':
@@ -1766,7 +1779,7 @@ class WP_Members {
 			$html.= ( is_user_logged_in() ) ? '<input type="hidden" name="a" value="logout" />' : '';
 			$html.= '<input type="submit" value="' . $text . '" /></form>';
 		} else {
-			$html = sprintf( '<a href="%s" id="%" class="%s">%s</a>', $link, $args['id'], $args['class'], $text );
+			$html = sprintf( '<a href="%s" id="%s" class="%s">%s</a>', $link, $args['id'], $args['class'], $text );
 		}
 		return $html;
 	}
