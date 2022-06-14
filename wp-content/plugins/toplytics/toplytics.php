@@ -1,5 +1,9 @@
 <?php
 
+use Toplytics\Engine;
+use Toplytics\Activator;
+use Toplytics\Deactivator;
+
 /**
  *
  * @link              https://github.com/PressLabs/toplytics
@@ -10,7 +14,7 @@
  * Plugin Name:       Toplytics - Popular Posts Widget
  * Plugin URI:        https://www.presslabs.org/toplytics/
  * Description:       Display top posts in a widget without putting any pressure on your host and database. This plugin helps you achieve this using the Google Analytics API to get the data from there so your server will stay clear of the preasure of monitoring and counting every single page view to display top posts.
- * Version:           4.0.9
+ * Version:           4.0.10
  * Author:            Presslabs
  * Author URI:        https://www.presslabs.com/
  * License:           GPL-2.0+
@@ -27,7 +31,7 @@ if (! defined('WPINC')) {
 /**
  * Plugin default settings
  */
-define('TOPLYTICS_VERSION', '4.0.9');
+define('TOPLYTICS_VERSION', '4.0.10');
 define('TOPLYTICS_APP_NAME', 'Toplytics - Popular Posts Widget');
 define('TOPLYTICS_DOMAIN', 'toplytics');
 define('TOPLYTICS_ENTRY', 'toplytics.php');
@@ -43,6 +47,7 @@ define('TOPLYTICS_AUTH_API_BASE_URL', 'https://toplytics.presslabs.org/toplytics
 define('TOPLYTICS_AUTH_API_BASE_CONFIG', 'apiconfig.json');
 define('TOPLYTICS_WIDGET_TEMPLATE_VERSION', '2039481e7f61d8ee7f3cdd3dea2b0689');
 define('TOPLYTICS_FOLDER_ROOT', plugin_dir_path(__FILE__));
+define('TOPLYTICS_MAX_API_ERRORS_COUNT', 20);
 
 /**
  * We use the following 2 constants to show upgrade messaged after the upgrade is
@@ -64,7 +69,7 @@ require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
  */
 function activate_toplytics()
 {
-    \Toplytics\Activator::activate();
+    Activator::activate();
 }
 
 /**
@@ -73,7 +78,7 @@ function activate_toplytics()
  */
 function deactivate_toplytics()
 {
-    \Toplytics\Deactivator::deactivate();
+    Deactivator::deactivate();
 }
 
 register_activation_hook(__FILE__, 'activate_toplytics');
@@ -90,7 +95,7 @@ register_deactivation_hook(__FILE__, 'deactivate_toplytics');
  */
 function toplytics_ready()
 {
-    $engine = new \Toplytics\Engine();
+    $engine = new Engine();
     $engine->start();
     return $engine;
 }

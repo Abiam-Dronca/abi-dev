@@ -3,8 +3,8 @@ Contributors: PressLabs, cristianuibar
 Donate link: http://www.presslabs.com/
 Tags: presslabs, analytics, posts, top, most visited, most viewed posts, top content, toplytics, popular, google analytics, high traffic, popular posts, oauth, server resources, settings, widget, embed code, javascript, json, json file, simple, post views
 Requires at least: 4.7.3
-Tested up to: 5.8.3
-Stable tag: 4.0.9
+Tested up to: 6.0
+Stable tag: 4.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -245,6 +245,15 @@ The outcome will look like this:
 == Screenshots ==
 
 == Changelog ==
+
+= 4.0.10 =
+
+* Tweek: Added an error count threshold to prevent "sudden disconnect syndrome"
+* Tweek: Improved class handling by importing the required ones where needed
+* Improved: Exception handling and display of cURL errors
+* Fixed: Replaced deprecated Google Exception class with the correct one
+* Fixed: Small code fixes like deprecated filters, undefined vars in templates, etc.
+* Fixed: Array offset warning on first activation (#156)
 
 = 4.0.9 =
 

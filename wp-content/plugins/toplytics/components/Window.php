@@ -68,7 +68,7 @@ class Window
         // Add PHP file extension.
         $view .= '.php';
         // Return the full file path.
-        return $this->viewsFolder . '/' . $view;
+        return $this->getViewsFolder() . '/' . $view;
     }
 
     /**
@@ -82,13 +82,13 @@ class Window
     protected function displayQueryMessage()
     {
 
-        $message = filter_input(INPUT_GET, 'message', FILTER_SANITIZE_STRING) ?: false;
+        $message = filter_input(INPUT_GET, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: false;
 
         if (! $message) {
             return false;
         }
 
-        $status = filter_input(INPUT_GET, 'status', FILTER_SANITIZE_STRING) ?: 'info';
+        $status = filter_input(INPUT_GET, 'status', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: 'info';
         $message = get_transient('message_' . $message);
         delete_transient('message_' . $message);
 
@@ -116,6 +116,9 @@ class Window
     public function setTabs($tabs = [])
     {
         // $tabs = array( 'homepage' => 'Home Settings', 'general' => 'General', 'footer' => 'Footer' );
+
+        $current = filter_input(INPUT_GET, 'tab', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?: 'overview';
+
         if ($tabs) {
             foreach ($tabs as $tab => $name) {
                 $class = ( $tab == $current ) ? ' nav-tab-active' : '';
@@ -153,17 +156,19 @@ class Window
 
         /**
          * We should only display notifications to admin users
-         * and make sure we already started initialization
          */
-        if (!function_exists('wp_get_current_user') ||
-            !current_user_can('activate_plugins') ||
-            !is_admin()) {
+        if (!is_admin()) {
             return false;
         }
 
-        global $toplytics_engine;
+        /**
+         * We override the $lateLoad variable in case we are not yet initialized
+         */
+        if ($lateLoad && (!function_exists('wp_get_current_user') ||
+            !current_user_can('activate_plugins'))) $lateLoad = false;
+
         ob_start();
-        include $toplytics_engine->backend->getWindow()->getView( 'backend.partials.notification' );
+        include $this->getView( 'backend.partials.notification' );
         $notification = ob_get_clean();
 
         if ( $lateLoad ) {
