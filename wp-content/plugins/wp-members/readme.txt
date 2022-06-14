@@ -3,15 +3,13 @@ Contributors: cbutlerjr
 Tags: access, authentication, content, login, member, membership, password, protect, register, registration, restriction, subscriber
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 3.4.2
+Stable tag: 3.4.2.1
 
 License: GPLv3
 
 == Description ==
 
-The original membership plugin for WordPress. Content restriction, user registration, login, user profile and more.
-
-WP-Members was the first WordPress membership plugin, and it continues in active development to keep pace with what's new and current in WordPress. The plugin's original idea is still it's most important: keep it simple to setup and configure, but provide standard hooks to allow it to be customized as needed. 
+The original membership plugin with content restriction, custom registration, and more.
 
 === Membership Sites. Simplified. ===
 
@@ -110,7 +108,7 @@ The FAQs are maintained at https://rocketgeek.com/plugins/wp-members/docs/faqs/
 
 == Upgrade Notice ==
 
-WP-Members 3.4.2 is a minor update. Backup prior to upgrading is recommended, but rollback is possible. See changelog for a list of updates. Minimum WP version is 4.0.
+WP-Members 3.4.2 is a minor update. WP-Members 3.4.2.1 is a bug fix release. Backup prior to upgrading is recommended, but rollback is possible. See changelog for a list of updates. Minimum WP version is 4.0.
 
 
 == Screenshots ==
@@ -134,13 +132,16 @@ WP-Members 3.4.2 is a minor update. Backup prior to upgrading is recommended, bu
 
 == Changelog ==
 
-= 3.5.0 @todos ==
+= 3.5.0 =
 
-* WP-Members pluggable deprecated for use in theme functions.php (init wpmem when plugins are loaded).
+* @todo WP-Members pluggable deprecated for use in theme functions.php (wpmem will be initialized when plugins are loaded).  If you have any WP-Members pluggable functions that load in the theme functions.php, you'll need to move these to another location, such as a custom plugin file.  Keep in mind, pluggable functions are no longer the preferred way of customizing (and have not been for many years) as most customizations, if not all, can be handled by using the plugin's filter and action hooks.
+
+= 3.4.2.1 =
+
+* Bug fix in the onboarding notification that causes form conflicts if the install/upgrade process is not finalized.
 
 = 3.4.2 =
 
-Includes all updates from 3.4.1.x:
 * Applies checkbox CSS in add new user form.
 * Code consolidation in admin options tab file (remove final use of wpmem_use_ssl()).
 * Add wpmem_recaptcha_url filter to allow for changing the URL of the recaptcha script.
@@ -148,7 +149,6 @@ Includes all updates from 3.4.1.x:
 * Fixes undefined $wpmem->reg_form_showing.
 * Fixes a bug in the password change shortcode that causes a "too few arguments" error.
 * Changes wpmem_is_user_current() to wpmem_user_is_current() for backwards compatibility with the plugin's premium PayPal extension.
-
 * Added the action being done as a parameter passed to the wpmem_get_action action hook.
 * Added support for arrays, urls, and classes to wpmem_sanitize_field() (alias of rktgk_sanitize_field()). This is in addition to the sanitization already supported.
 * apply_custom_product_message() now runs do_shortcode() to natively support shortcodes in custom membership product messages.
