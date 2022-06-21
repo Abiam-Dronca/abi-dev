@@ -1,17 +1,17 @@
 # Copyright (C) 2022 Kadence WP
-# This file is distributed under the same license as the Kadence Blocks – Gutenberg Blocks for Page Builder Features plugin.
+# This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Kadence Blocks – Gutenberg Blocks for Page Builder Features 2.4.6\n"
+"Project-Id-Version: Kadence Blocks – Gutenberg Blocks for Page Builder Features 2.4.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kadence-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-01T17:50:07+00:00\n"
+"POT-Creation-Date: 2022-06-15T21:06:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
+"X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: kadence-blocks\n"
 
 #. Plugin Name of the plugin
@@ -90,7 +90,6 @@ msgstr ""
 msgid "Source"
 msgstr ""
 
-#. translators: block keyword
 #: dist/class-kadence-blocks-countdown.php:209
 #: dist/build/blocks.js:55
 msgid "Days"
@@ -761,7 +760,6 @@ msgstr ""
 msgid "Create a contact form or marketing form and style it within the block editor."
 msgstr ""
 
-#. translators: %1$d is the order number of the image, %2$d is the total number of images.
 #: dist/settings/class-kadence-blocks-settings.php:852
 #: dist/build/blocks.js:37
 msgid "Advanced Gallery"
@@ -1076,7 +1074,6 @@ msgstr ""
 msgid "Heading %d"
 msgstr ""
 
-#. translators: %d: heading level e.g: "1", "2", "3"
 #: dist/build/blocks.js:3
 #: dist/build/blocks.js:35
 #: dist/plugin/plugin.js:6
@@ -1133,7 +1130,6 @@ msgstr ""
 msgid "Change Heading Tag"
 msgstr ""
 
-#. translators: %d: heading level e.g: "1", "2", "3"
 #: dist/build/blocks.js:5
 #: dist/build/blocks.js:19
 #: dist/build/blocks.js:35
@@ -1229,13 +1225,22 @@ msgstr ""
 msgid "Use %s rule to change block styles."
 msgstr ""
 
-#. translators: The %s is for selector code
 #: dist/build/blocks.js:13
 msgid "Mobile:"
 msgstr ""
 
 #: dist/build/blocks.js:13
 msgid "Tablet:"
+msgstr ""
+
+#: dist/build/blocks.js:13
+msgctxt "block title"
+msgid "Lottie Animations"
+msgstr ""
+
+#: dist/build/blocks.js:13
+msgctxt "block description"
+msgid "Display lottie animations on your site"
 msgstr ""
 
 #: dist/build/blocks.js:13
@@ -2004,9 +2009,29 @@ msgstr ""
 msgid "Advanced Image"
 msgstr ""
 
+#: dist/build/blocks.js:17
+msgctxt "block title"
+msgid "Advanced Image"
+msgstr ""
+
+#: dist/build/blocks.js:17
+msgctxt "block description"
+msgid "Image block with greater controls and advanced features"
+msgstr ""
+
 #. translators: Caption accompanying an image of the Mont Blanc, which serves as an example for the Image block.
 #: dist/build/blocks.js:19
 msgid "Mont Blanc appears—still, snowy, and serene."
+msgstr ""
+
+#: dist/build/blocks.js:19
+msgctxt "block title"
+msgid "Google Maps"
+msgstr ""
+
+#: dist/build/blocks.js:19
+msgctxt "block description"
+msgid "Display google maps on your site"
 msgstr ""
 
 #: dist/build/blocks.js:19
@@ -2594,7 +2619,6 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#. translators: %s is Prebuilt Name
 #: dist/build/blocks.js:22
 #: dist/build/blocks.js:24
 #: dist/build/blocks.js:26
@@ -2751,7 +2775,6 @@ msgstr ""
 msgid "Error attempting to subscribe, please reload our page and try again."
 msgstr ""
 
-#. translators: %s is Prebuilt Name
 #: dist/build/blocks.js:32
 msgid "Subscribe to Kadence WP Product Updates for Instant Access"
 msgstr ""
@@ -3474,6 +3497,16 @@ msgid "column"
 msgstr ""
 
 #: dist/build/blocks.js:32
+msgctxt "block title"
+msgid "Section"
+msgstr ""
+
+#: dist/build/blocks.js:32
+msgctxt "block description"
+msgid "A container to style a section of content"
+msgstr ""
+
+#: dist/build/blocks.js:32
 msgid "Flex Align Settings"
 msgstr ""
 
@@ -3577,7 +3610,7 @@ msgid "Make sticky"
 msgstr ""
 
 #: dist/build/blocks.js:32
-msgid "This will stick the section to viewport for the height of outer row block."
+msgid "This will stick the section to viewport for the height of an outer block."
 msgstr ""
 
 #: dist/build/blocks.js:32
@@ -5376,7 +5409,6 @@ msgstr ""
 msgid "Field %1$d of %2$d in form"
 msgstr ""
 
-#. translators: %1$d: field number %2$d: max amount of fields
 #: dist/build/blocks.js:39
 msgid "Move Field Up"
 msgstr ""
@@ -6363,6 +6395,16 @@ msgstr ""
 
 #: dist/build/blocks.js:63
 msgid "Show Less"
+msgstr ""
+
+#: dist/build/blocks.js:63
+msgctxt "block title"
+msgid "Show More"
+msgstr ""
+
+#: dist/build/blocks.js:63
+msgctxt "block description"
+msgid "Hide content and enable a show more button to reveal"
 msgstr ""
 
 #: dist/plugin/plugin.js:1

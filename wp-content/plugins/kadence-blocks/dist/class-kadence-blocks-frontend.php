@@ -1155,7 +1155,7 @@ class Kadence_Blocks_Frontend {
 				}
 			}
 
-			$show_hide_more = isset( $attributes['showHideMore'] ) && $attributes['showHideMore'] === false ? '' : "hideMoreButton" . $show_more_id . ".style.display = 'block';";
+			$show_hide_more = isset( $attributes['showHideMore'] ) && $attributes['showHideMore'] === false ? '' : "hideMoreButton" . $show_more_id . ".style.display = 'inline-flex';";
 			$preview_height = ( isset( $attributes['heightDesktop'] ) ? $attributes['heightDesktop'] : 250 ) . ( ! empty( $attributes['heightType'] ) ? $attributes['heightType'] : 'px' );
 			$maskvalue = 'none';
 			if ( isset( $attributes['enableFadeOut'] ) && $attributes['enableFadeOut'] ) {
@@ -1163,7 +1163,7 @@ class Kadence_Blocks_Frontend {
 			}
 			$content = $content . "<script>
 				var showMoreContainer" . $show_more_id . " = document.querySelector('." . $show_more_container_id . " > .wp-block-kadence-column');
-				var buttons" . $show_more_id . " = document.querySelectorAll('." . $show_more_container_id . " > .wp-block-kadence-advancedbtn div');
+				var buttons" . $show_more_id . " = document.querySelectorAll('." . $show_more_container_id . " > .wp-block-kadence-advancedbtn > .kt-btn-wrap');
 				var showMoreButton" . $show_more_id . " = buttons" . $show_more_id . "[0];
 				var hideMoreButton" . $show_more_id . " = buttons" . $show_more_id . "[1];
 				showMoreButton" . $show_more_id . ".addEventListener('click', function(e) {
@@ -1178,7 +1178,7 @@ class Kadence_Blocks_Frontend {
 				hideMoreButton" . $show_more_id . ".addEventListener('click', function (e) {
 					e.preventDefault();
 					showMoreContainer" . $show_more_id . ".style.maxHeight =  '" . $preview_height . "';
-					showMoreButton" . $show_more_id . ".style.display = 'block';
+					showMoreButton" . $show_more_id . ".style.display = 'inline-flex';
 					hideMoreButton" . $show_more_id . ".style.display = 'none';
 					showMoreContainer" . $show_more_id . ".style['mask-image'] = '" . $maskvalue . "';
 					showMoreContainer" . $show_more_id . ".style['-webkit-mask-image'] = '" . $maskvalue . "';
@@ -3441,9 +3441,11 @@ class Kadence_Blocks_Frontend {
 		$key_positions = [ 'top', 'right', 'bottom', 'left'];
 		$css->set_selector( '.kb-lottie-container' . $unique_id );
 
-		// Margins
-		foreach(['Desktop', 'Tablet', 'Mobile'] as $breakpoint) {
-			$css->start_media_query( $media_query[ strtolower($breakpoint)] );
+		// Margins.
+		foreach( [ 'Desktop', 'Tablet', 'Mobile' ] as $breakpoint ) {
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->start_media_query( $media_query[ strtolower($breakpoint)] );
+			}
 			if ( isset( $attr['margin' . $breakpoint] ) && is_array( $attr['margin' . $breakpoint] ) ) {
 				foreach ( $attr['margin' . $breakpoint] as $key => $marginValue ) {
 					if ( is_numeric( $marginValue ) ) {
@@ -3452,12 +3454,16 @@ class Kadence_Blocks_Frontend {
 					}
 				}
 			}
-			$css->stop_media_query();
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->stop_media_query();
+			}
 		}
 
-		// Padding
-		foreach(['Desktop', 'Tablet', 'Mobile'] as $breakpoint) {
-			$css->start_media_query( $media_query[ strtolower($breakpoint) ] );
+		// Padding.
+		foreach( [ 'Desktop', 'Tablet', 'Mobile' ] as $breakpoint) {
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->start_media_query( $media_query[ strtolower($breakpoint)] );
+			}
 			if ( isset( $attr['padding' . $breakpoint] ) && is_array( $attr['padding' . $breakpoint] ) ) {
 				foreach ( $attr['padding' . $breakpoint] as $key => $paddingValue ) {
 					if ( is_numeric( $paddingValue ) ) {
@@ -3466,7 +3472,9 @@ class Kadence_Blocks_Frontend {
 					}
 				}
 			}
-			$css->stop_media_query();
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->stop_media_query();
+			}
 		}
 
 		return $css->css_output();
@@ -6960,7 +6968,9 @@ class Kadence_Blocks_Frontend {
 		}
 		// Margins
 		foreach(['Desktop', 'Tablet', 'Mobile'] as $breakpoint) {
-			$css->start_media_query( $media_query[ strtolower($breakpoint)] );
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->start_media_query( $media_query[ strtolower($breakpoint)] );
+			}
 			if ( isset( $attr['margin' . $breakpoint] ) && is_array( $attr['margin' . $breakpoint] ) ) {
 				foreach ( $attr['margin' . $breakpoint] as $key => $marginValue ) {
 					if ( is_numeric( $marginValue ) ) {
@@ -6969,7 +6979,9 @@ class Kadence_Blocks_Frontend {
 					}
 				}
 			}
-			$css->stop_media_query();
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->stop_media_query();
+			}
 		}
 		$align = ( ! empty( $attr['align'] ) ? $attr['align'] : '' );
 		if ( $align !== 'wide' && $align !== 'full' ) {
@@ -7014,7 +7026,9 @@ class Kadence_Blocks_Frontend {
 		$css->set_selector( '.kb-image' . $unique_id . ' img.kb-img, .kb-image' . $unique_id . ' .kb-img img' );
 		// Padding
 		foreach(['Desktop', 'Tablet', 'Mobile'] as $breakpoint) {
-			$css->start_media_query( $media_query[ strtolower($breakpoint) ] );
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->start_media_query( $media_query[ strtolower($breakpoint)] );
+			}
 			if ( isset( $attr['padding' . $breakpoint] ) && is_array( $attr['padding' . $breakpoint] ) ) {
 				foreach ( $attr['padding' . $breakpoint] as $key => $paddingValue ) {
 					if ( is_numeric( $paddingValue ) ) {
@@ -7023,7 +7037,9 @@ class Kadence_Blocks_Frontend {
 					}
 				}
 			}
-			$css->stop_media_query();
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->stop_media_query();
+			}
 		}
 
 		// Border Color
@@ -7034,7 +7050,9 @@ class Kadence_Blocks_Frontend {
 
 		// Border widths
 		foreach(['Desktop', 'Tablet', 'Mobile'] as $breakpoint) {
-			$css->start_media_query( $media_query[strtolower($breakpoint)] );
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->start_media_query( $media_query[ strtolower($breakpoint)] );
+			}
 			if ( isset( $attr['borderWidth' . $breakpoint] ) && is_array( $attr['borderWidth' . $breakpoint] ) ) {
 				foreach ( $attr['borderWidth' . $breakpoint] as $key => $bDesktop ) {
 					if ( is_numeric( $bDesktop ) ) {
@@ -7042,7 +7060,9 @@ class Kadence_Blocks_Frontend {
 					}
 				}
 			}
-			$css->stop_media_query();
+			if ( $breakpoint !== 'Desktop' ) {
+				$css->stop_media_query();
+			}
 		}
 
 		// Background Color
