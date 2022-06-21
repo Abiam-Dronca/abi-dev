@@ -219,7 +219,7 @@ class AutoLoader
 						<p>
 							<strong>
 							<?php
-							_e('WP Google Maps', 'wp-google-maps');
+							_e('WP Go Maps', 'wp-google-maps');
 							?></strong>:
 							<?php
 							_e('The plugins autoloader failed to register one or more modules. This is usually due to missing files. Please re-install the plugin and any relevant add-ons. Technical details are as follows: ', 'wp-google-maps');

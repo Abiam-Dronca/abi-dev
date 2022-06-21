@@ -92,8 +92,7 @@ class DOMDocument extends \DOMDocument
 	
 	public function onError($severity, $message, $file, $unused)
 	{
-		if(!preg_match('/DOMDocument::loadHTML.+line: (\d+)/', $message, $m))
-		{
+		if(!preg_match('/DOMDocument::loadHTML.+line: (\d+)/', $message, $m)){
 			trigger_error($message, E_USER_WARNING);
 			return;
 		}
@@ -121,8 +120,14 @@ class DOMDocument extends \DOMDocument
 				);
 
 				/* Supress error because MO files cause issues which can be ignored */
+				/* Update 2022-05-12 -> We don't need to log these at all, 
+				 * even surpression results in php-error class being added to WP admin area
+				 * 
+				 * So we simply don't track the notice as it doesn't serve a real purpose on account of MO files 
+				*/
+				/*
 				@trigger_error($message, E_USER_WARNING);
-				
+				*/
 				return;
 			}
 			
@@ -143,6 +148,14 @@ class DOMDocument extends \DOMDocument
 			
 			if(!$inPhp)
 				$lineCounter++;
+		}
+
+		$safeEntities = array('progress');
+		foreach($safeEntities as $entity){
+			if(preg_match("/DOMDocument::loadHTML.+{$entity} invalid in Entity/", $message, $m)){
+				// HTML 5 safe entity, doesn't need to be logged
+				return;
+			}
 		}
 		
 		trigger_error("Failed to translate line number", E_USER_WARNING);

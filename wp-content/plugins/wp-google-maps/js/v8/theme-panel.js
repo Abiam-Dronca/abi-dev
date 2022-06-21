@@ -12,11 +12,13 @@ jQuery(function($) {
 		this.element = $("#wpgmza-theme-panel");
 		this.map = WPGMZA.maps[0];
 		
-		if(WPGMZA.settings.engine == "open-layers")
-		{
+		if(WPGMZA.settings.engine == "open-layers"){
 			this.element.remove();
+
+			/* Init OL Theme Panel from here, we could use createInstance for this, but for now it's not needed */
+			this.olThemePanel = new WPGMZA.OLThemePanel();
 			return;
-		}
+		} 
 		
 		if(!this.element.length)
 		{
@@ -29,7 +31,7 @@ jQuery(function($) {
 			dots: true
 		});
 		
-		this.element.on("click", "#wpgmza-theme-presets label", function(event) {
+		this.element.on("click", "#wpgmza-theme-presets label, .theme-selection-panel label", function(event) {
 			self.onThemePresetClick(event);
 		});
 		
@@ -54,7 +56,7 @@ jQuery(function($) {
 	WPGMZA.ThemePanel.prototype.onThemePresetClick = function(event)
 	{
 		var selectedData	= $(event.currentTarget).find("[data-theme-json]").attr("data-theme-json");
-		var textarea		= $(this.element).find("textarea[name='wpgmza_theme_data']");
+		var textarea		= $("textarea[name='wpgmza_theme_data']");
 		var existingData	= textarea.val();
 		var allPresetData	= [];
 		

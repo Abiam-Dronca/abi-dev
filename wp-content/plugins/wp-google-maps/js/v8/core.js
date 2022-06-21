@@ -11,7 +11,10 @@ jQuery(function($) {
 		PAGE_MAP_LIST: 			"map-list",
 		PAGE_MAP_EDIT:			"map-edit",
 		PAGE_SETTINGS:			"map-settings",
+		PAGE_STYLING:			"map-styling",
 		PAGE_SUPPORT:			"map-support",
+
+		PAGE_INSTALLER: 			"installer",
 		
 		PAGE_CATEGORIES:		"categories",
 		PAGE_ADVANCED:			"advanced",
@@ -65,6 +68,9 @@ jQuery(function($) {
 				case "wp-google-maps-menu":
 					if(window.location.href.match(/action=edit/) && window.location.href.match(/map_id=\d+/))
 						return WPGMZA.PAGE_MAP_EDIT;
+
+					if(window.location.href.match(/action=installer/))
+						return WPGMZA.PAGE_INSTALLER;
 				
 					return WPGMZA.PAGE_MAP_LIST;
 					break;
@@ -72,7 +78,11 @@ jQuery(function($) {
 				case 'wp-google-maps-menu-settings':
 					return WPGMZA.PAGE_SETTINGS;
 					break;
-					
+				
+				case 'wp-google-maps-menu-styling':
+					return WPGMZA.PAGE_STYLING;
+					break;
+
 				case 'wp-google-maps-menu-support':
 					return WPGMZA.PAGE_SUPPORT;
 					break;
@@ -367,37 +377,32 @@ jQuery(function($) {
 		 * @static
 		 * @return {void}
 		 */
-		openMediaDialog: function(callback) {
-			// Media upload
+		openMediaDialog: function(callback, config) {
 			var file_frame;
 			
-			// If the media frame already exists, reopen it.
 			if ( file_frame ) {
-				// Set the post ID to what we want
 				file_frame.uploader.uploader.param( 'post_id', set_to_post_id );
-				// Open frame
 				file_frame.open();
 				return;
 			}
 			
-			// Create the media frame.
-			file_frame = wp.media.frames.file_frame = wp.media({
-				title: 'Select a image to upload',
-				button: {
-					text: 'Use this image',
-				},
-				multiple: false	// Set to true to allow multiple files to be selected
-			});
-			
-			// When an image is selected, run a callback.
+			if(config){
+				file_frame = wp.media.frames.file_frame = wp.media(config);
+			} else {
+				file_frame = wp.media.frames.file_frame = wp.media({
+					title: 'Select a image to upload',
+					button: {
+						text: 'Use this image',
+					},
+					multiple: false	
+				});
+			}
+
 			file_frame.on( 'select', function() {
-				// We set multiple to false so only get one image from the uploader
 				attachment = file_frame.state().get('selection').first().toJSON();
-				
-				callback(attachment.id, attachment.url);
+				callback(attachment.id, attachment.url, attachment);
 			});
-			
-			// Finally, open the modal
+
 			file_frame.open();
 		},
 		
@@ -752,15 +757,18 @@ jQuery(function($) {
 					console.warn("Element missing class wpgmza-initialized but does have wpgmzaMap property. No new instance will be created");
 					return;
 				}
-				
-				try {
+				try{
 					el.wpgmzaMap = WPGMZA.Map.createInstance(el);
 				} catch (ex){
 					console.warn('Map initalization: ' + ex);
 				}
 			});
 			
-				WPGMZA.Map.nextInitTimeoutID = setTimeout(WPGMZA.initMaps, 3000);
+			WPGMZA.Map.nextInitTimeoutID = setTimeout(WPGMZA.initMaps, 3000);
+		},
+
+		initCapsules: function(){
+			WPGMZA.capsuleModules = WPGMZA.CapsuleModules.createInstance(); 
 		},
 
 		onScroll: function(){
@@ -776,9 +784,50 @@ jQuery(function($) {
 				}
 				
 			});
+		},
+
+		initInstallerRedirect : function(url){
+			$('.wpgmza-wrap').hide();
+			
+			window.location.href = url;
 		}
 		
 	};
+	
+	var wpgmzaisFullScreen = false;
+
+
+	// NB: Warn the user if the built in Array prototype has been extended. This will save debugging headaches where for ... in loops do bizarre things.
+	for(var key in [])
+	{
+		console.warn("It appears that the built in JavaScript Array has been extended, this can create issues with for ... in loops, which may cause failure.");
+		break;
+	}
+	
+	if(window.WPGMZA)
+		window.WPGMZA = $.extend(window.WPGMZA, core);
+	else
+		window.WPGMZA = core;
+
+	/* Usercentrics base level integration */
+	if(window.uc && window.uc.reloadOnOptIn){
+		window.uc.reloadOnOptIn(
+		    'S1pcEj_jZX'
+		); 	
+
+		window.uc.reloadOnOptOut(
+			'S1pcEj_jZX'
+		);
+	}
+
+	
+	for(var key in WPGMZA_localized_data)
+	{
+		var value = WPGMZA_localized_data[key];
+		WPGMZA[key] = value;
+	}
+	
+	// delete window.WPGMZA_localized_data;
 	
 	var wpgmzaisFullScreen = false;
 
@@ -816,8 +865,11 @@ jQuery(function($) {
 	
 	WPGMZA.settings.useLegacyGlobals = true;
 	
-	$(document).on("fullscreenchange", function() {
+	$(document).on("fullscreenchange mozfullscreenchange webkitfullscreenchange", function() {
 		wpgmzaisFullScreen = document.fullscreenElement ? true : false;
+
+		/* Dispatch a global event */
+		$(document.body).trigger("fullscreenchange.wpgmza");
 	});
 
 	$('body').on('click',"#wpgmzaCloseChat", function(e) {
@@ -852,6 +904,7 @@ jQuery(function($) {
 
 	$(document.body).on('preinit.wpgmza', function(){
 		$(window).trigger("ready.wpgmza");
+		$(document.body).trigger('ready.body.wpgmza');
 		
 		// Combined script warning
 		if($("script[src*='wp-google-maps.combined.js'], script[src*='wp-google-maps-pro.combined.js']").length){
@@ -876,7 +929,7 @@ jQuery(function($) {
 		
 		// Geolocation warnings
 		if(window.location.protocol != 'https:'){
-			var warning = '<div class="notice notice-warning"><p>' + WPGMZA.localized_strings.unsecure_geolocation + "</p></div>";
+			var warning = '<div class="' + (WPGMZA.InternalEngine.isLegacy() ? '' : 'wpgmza-shadow wpgmza-card wpgmza-pos-relative ') + 'notice notice-warning"><p>' + WPGMZA.localized_strings.unsecure_geolocation + "</p></div>";
 			
 			$(".wpgmza-geolocation-setting").first().after( $(warning) );
 		}
@@ -887,6 +940,8 @@ jQuery(function($) {
 					$(el).append($(WPGMZA.api_consent_html));
 					$(el).css({height: "auto"});
 				});*/
+
+				$('.wpgmza-inner-stack').hide();
 				
 				$("button.wpgmza-api-consent").on("click", function(event) {
 					Cookies.set("wpgmza-api-consent-given", true);
@@ -918,7 +973,12 @@ jQuery(function($) {
 			
 			WPGMZA.initMaps();
 			WPGMZA.onScroll();
+
+			WPGMZA.initCapsules();
+
+			$(document.body).trigger('postinit.wpgmza');
+			
 		});
 	})($);
-
+	
 });

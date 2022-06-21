@@ -2,10 +2,12 @@
  * @namespace WPGMZA
  * @module OLRectangle
  * @requires WPGMZA.Rectangle
+ * @pro-requires WPGMZA.ProRectangle
  */
 jQuery(function($) {
 	
 	var Parent = WPGMZA.Rectangle;
+
 	
 	WPGMZA.OLRectangle = function(options, olFeature)
 	{
@@ -70,7 +72,11 @@ jQuery(function($) {
 			this.setOptions(options);
 	}
 	
-	WPGMZA.extend(WPGMZA.OLRectangle, WPGMZA.Rectangle);
+
+	if(WPGMZA.isProVersion())
+		Parent = WPGMZA.ProRectangle;
+	
+	WPGMZA.extend(WPGMZA.OLRectangle, Parent);
 	
 	// NB: Would be nice to move this onto OLFeature
 	WPGMZA.OLRectangle.prototype.getBounds = function()

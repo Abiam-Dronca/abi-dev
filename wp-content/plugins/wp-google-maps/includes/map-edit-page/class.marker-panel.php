@@ -13,6 +13,10 @@ class MarkerPanel extends FeaturePanel
 		wp_enqueue_script('jquery-ui');
 		wp_enqueue_script('jquery-ui-sortable');
 		// wp_enqueue_script('wpgmza-jquery-ui-sortable-animation', WPGMZA_PRO_DIR_URL . 'lib/jquery.ui.sortable-animation.js', array(), $wpgmza->getProVersion());
+
+		if(!$wpgmza->internalEngine->isLegacy()){
+			$wpgmza->scriptLoader->enqueueWritersblock();
+		}
 		
 		if(!$wpgmza->isProVersion())
 		{

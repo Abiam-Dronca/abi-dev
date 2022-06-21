@@ -163,7 +163,7 @@ jQuery(function($) {
 				return coord;
 			return parseFloat( String(coord).replace(/[\(\)\s]/, "") );
 		}
-
+		
 		var latLng = new google.maps.LatLng(
 			formatCoord(latLngCoords[0]),
 			formatCoord(latLngCoords[1])

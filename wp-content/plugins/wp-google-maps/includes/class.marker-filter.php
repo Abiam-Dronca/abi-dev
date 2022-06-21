@@ -213,6 +213,7 @@ class MarkerFilter extends Factory
 			$markers[] = Marker::createInstance($data, Crud::BULK_READ);
 		}
 		
+		/* Developer Hook (Filter) - Alter marker filter results, passes markers and marker filter instance, must return markers */
 		return apply_filters('wpgmza_fetch_integrated_markers', $markers, $this);
 	}
 	
@@ -227,6 +228,7 @@ class MarkerFilter extends Factory
 		$sql = $query->build();
 		$ids = $wpdb->get_col($sql);
 		
+		/* Developer Hook (Filter) - Add or alter integrated markers output, unused and not safe to use */
 		$integrated = apply_filters('wpgmza_fetch_integrated_markers', $markers, $this);
 		foreach($integrated as $key => $value)
 			$ids[] = $value->id;

@@ -14,6 +14,10 @@ class DataTable extends AjaxTable
 		AjaxTable::__construct($table_name, '/datatables/', $ajax_parameters);
 		
 		$this->element->setAttribute('data-wpgmza-datatable', 'true');
+
+		if($wpgmza->isProVersion()){
+			$this->element->setAttribute('data-wpgmza-pro-datatable', 'true');
+		}
 		
 		if($datatable_options)
 			$this->setDataTableOptions($datatable_options);

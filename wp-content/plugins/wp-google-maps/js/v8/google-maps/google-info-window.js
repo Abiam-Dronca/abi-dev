@@ -79,6 +79,18 @@ jQuery(function($) {
 		
 		this.createGoogleInfoWindow();
 		this.setFeature(feature);
+
+		/* Handle one shot auto pan disabler */
+		if(typeof feature._osDisableAutoPan !== 'undefined'){
+			if(feature._osDisableAutoPan){
+				/* This has been flagged to not be an auto-pan open call */
+				this.googleInfoWindow.setOptions({disableAutoPan : true});
+				feature._osDisableAutoPan = false;
+			} else {
+				/* Restore auto pan for manual interactions */
+				this.googleInfoWindow.setOptions({disableAutoPan : false});
+			}
+		}
 		
 		this.googleInfoWindow.open(
 			this.feature.map.googleMap,

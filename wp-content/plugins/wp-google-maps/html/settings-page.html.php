@@ -57,6 +57,16 @@
 				<option value="open-layers"><?php esc_html_e('OpenLayers', 'wp-google-maps'); ?></option>
 			</select>
 		</fieldset>
+
+		<fieldset>
+			<legend>
+				<?php esc_html_e('Build', 'wp-google-maps'); ?>
+			</legend>
+			<select name="internal_engine" id="internal_engine">
+				<option value="legacy"><?php esc_html_e('Legacy', 'wp-google-maps'); ?></option>
+				<option value="atlas-novus"><?php esc_html_e('Atlas Novus', 'wp-google-maps'); ?></option>
+			</select>
+		</fieldset>
 	
 		<fieldset>
 			<legend>
@@ -126,7 +136,6 @@
 						<?php esc_html_e('Disable Mouse Double Click Zooming', 'wp-google-maps'); ?>
 					</div>
 				</label>
-
 			</div>
 		</fieldset>
 		
@@ -303,8 +312,8 @@
 				<option value="https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png"
 					data-preview-image="https://b.tile.opencyclemap.org/cycle/16/33199/22539.png">
 					<?php
-					_e('OpenCycleMap *', 'wp-google-maps');
-					?>
+					_e('OpenCycleMap', 'wp-google-maps');
+					?> *
 				</option>
 				
 				<option value="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
@@ -345,22 +354,22 @@
 				<option value="https://tile.thunderforest.com/transport/{z}/{x}/{y}.png"
 					data-preview-image="https://a.tile2.opencyclemap.org/transport/13/4150/2819.png">
 					<?php
-					_e('Transport Map *', 'wp-google-maps');
-					?>
+					_e('Transport Map', 'wp-google-maps');
+					?> *
 				</option>
 				
 				<option value="https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png"
 					data-preview-image="https://a.tile.thunderforest.com/landscape/14/4773/6144.png">
 					<?php
-					_e('Thunderforest Landscape *', 'wp-google-maps');
-					?>
+					_e('Thunderforest Landscape', 'wp-google-maps');
+					?> *
 				</option>
 				
 				<option value="https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png"
 					data-preview-image="https://a.tile.thunderforest.com/outdoors/14/4772/6144.png">
 					<?php
-					_e('Thunderforest Outdoors *', 'wp-google-maps');
-					?>
+					_e('Thunderforest Outdoors', 'wp-google-maps');
+					?> *
 				</option>
 				
 				<option value="https://tile.memomaps.de/tilegen/{z}/{x}/{y}.png"
@@ -379,45 +388,45 @@
 				
 				<option value="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png">
 					<?php
-					_e('Carto Light (Positron) *', 'wp-google-maps');
-					?>
+					_e('Carto Light (Positron)', 'wp-google-maps');
+					?> *
 				</option>
 				
 				<option value="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
 					data-preview-image="https://wiki.openstreetmap.org/w/images/b/ba/Cartodb_dark_tile.png">
 					<?php
-					_e('Carto Dark (Dark Matter) *', 'wp-google-maps');
-					?>
+					_e('Carto Dark (Dark Matter)', 'wp-google-maps');
+					?> *
 				</option>
 
 				<option value="https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png">
 					<?php
-					_e('MapTiler Streets *', 'wp-google-maps');
-					?>
+					_e('MapTiler Streets', 'wp-google-maps');
+					?> *
 				</option>
 
 				<option value="https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png">
 					<?php
-					_e('MapTiler Outdoor *', 'wp-google-maps');
-					?>
+					_e('MapTiler Outdoor', 'wp-google-maps');
+					?> *
 				</option>
 
 				<option value="https://api.maptiler.com/maps/pastel/{z}/{x}/{y}.png">
 					<?php
-					_e('MapTiler Pastel *', 'wp-google-maps');
-					?>
+					_e('MapTiler Pastel', 'wp-google-maps');
+					?> *
 				</option>
 
 				<option value="https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png">
 					<?php
-					_e('MapTiler Basic *', 'wp-google-maps');
-					?>
+					_e('MapTiler Basic', 'wp-google-maps');
+					?> *
 				</option>
 				
 				<option value="https://caltopo.com/tile/mb_topo/{z}/{x}/{y}.png">
 					<?php
-					_e('Caltopo *', 'wp-google-maps');
-					?>
+					_e('Caltopo', 'wp-google-maps');
+					?> *
 				</option>
 
 				<option value="custom_override">
@@ -1293,14 +1302,14 @@
 		
 		<h3><?php esc_html_e('Custom Scripts', 'wp-google-maps'); ?></h3>
 		
-		<fieldset>
+		<fieldset class='wpgmza-code-mirror-legacy-port'>
 			<legend>
 				<?php esc_html_e('Custom CSS', 'wp-google-maps'); ?>
 			</legend>
 			<textarea name="wpgmza_custom_css"></textarea>
 		</fieldset>
 		
-		<fieldset>
+		<fieldset class='wpgmza-code-mirror-legacy-port'>
 			<legend>
 				<?php esc_html_e('Custom JS', 'wp-google-maps'); ?>
 			</legend>
@@ -1483,7 +1492,7 @@
 				_e('Require consent before loading Maps API', 'wp-google-maps');
 				?>
 				<i class="fa fa-question-circle" 
-					title="<?php _e('The GDPR views IP Addresses as Personal Data, which requires consent before being processed. Loading the Google Maps API stores some user information, such as IP Addresses. WP Google Maps endeavours to uphold the spirit of data protection as per the GDPR. Enable this to option to prevent the Maps API from loading, until a user has consented to it.', 'wp-google-maps'); ?>"/>
+					title="<?php _e('The GDPR views IP Addresses as Personal Data, which requires consent before being processed. Loading the Google Maps API stores some user information, such as IP Addresses. WP Go Maps endeavours to uphold the spirit of data protection as per the GDPR. Enable this to option to prevent the Maps API from loading, until a user has consented to it.', 'wp-google-maps'); ?>"/>
 			</label>
 			<input name="wpgmza_gdpr_require_consent_before_load" type="checkbox"/>
 		</fieldset>
@@ -1495,7 +1504,7 @@
 			?>
 			<br><br>
 			<?php
-				_e('WP Google Maps GDPR options have been disabled as they are fully controlled by Complianz', 'wp-google-maps');
+				_e('WP Go Maps GDPR options have been disabled as they are fully controlled by Complianz', 'wp-google-maps');
 			?>
 		</span>
 	</div>

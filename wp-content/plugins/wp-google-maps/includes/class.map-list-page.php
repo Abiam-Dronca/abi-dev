@@ -9,7 +9,7 @@ class MapListPage extends Page
 		global $wpgmza;
 		
 		$this->_document = new \WPGMZA\DOMDocument();
-		$this->_document->loadPHPFile(WPGMZA_PLUGIN_DIR_PATH . 'html/map-list-page.html.php');
+		$this->_document->loadPHPFile($wpgmza->internalEngine->getTemplate('map-list-page.html.php'));
 		
 		// Review nag
 		if(isset($_GET['wpgmza-close-review-nag']))
@@ -37,6 +37,23 @@ class MapListPage extends Page
 				ProPage::removeUpsells($this->document);
 			}
 		}
+
+		$notices = $wpgmza->adminNotices->displayNext();
+		$noticeWrapper = $this->document->querySelector('.wpgmza-persistent-notice-container');
+		if(!empty($notices)){
+			$noticeWrapper->import($notices);
+
+			if($wpgmza->isProVersion()){
+				/* Using Pro, but Pre V9 needs to hide persistent notices as they become unfunctional */
+				if(method_exists($wpgmza, 'getProVersion')){
+					if(version_compare($wpgmza->getProVersion(), '9.0.0', '<')){
+						$noticeWrapper->remove();
+					}
+				}
+			}
+		} else {
+			$noticeWrapper->remove();
+		}
 		
 		// The map table
 		$adminMapDataTableOptions = array(
@@ -47,6 +64,9 @@ class MapListPage extends Page
 		$adminMapDataTable = new \WPGMZA\AdminMapDataTable(null, $adminMapDataTableOptions);
 		$this->hideSelectedProFeatures();
 		$this->_document->querySelector("#wpgmza-admin-map-table-container")->import($adminMapDataTable->document->html);
+
+	    /* Developer Hook (Action) - Alter output of the map list page, passes DOMDocument for mutation */     
+		do_action("wpgmza_map_list_page_created", $this->_document);
 	}
 	
 	public function __get($name)

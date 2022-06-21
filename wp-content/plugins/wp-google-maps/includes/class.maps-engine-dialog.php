@@ -43,12 +43,25 @@ class MapsEngineDialog
 	 * @return void
 	 */
 	public function html(){
+		$installerParams = array();
+
+		if(!empty($_GET['map_id'])){
+			$installerParams[] = "map_id=" . intval($_GET['map_id']);
+		}
+
+		if(!empty($installerParams)){
+			$installerParams = '&' . implode('&', $installerParams);
+		} else {
+			$installerParams = '';
+		}
+
 		ob_start();
 
 		?>
 		<div 
 			id="wpgmza-maps-engine-dialog" style="display: none;" 
 			data-ajax-nonce="<?php echo wp_create_nonce('wpgmza_maps_engine_dialog_set_engine'); ?>"
+			data-installer-link="<?php echo admin_url('admin.php?page=wp-google-maps-menu&action=installer' . $installerParams); ?>"
 			>
 			<h1>
 				<?php
@@ -155,7 +168,7 @@ class MapsEngineDialog
 			
 			<!--<footer>
 				<img src="<?php echo plugin_dir_url(__DIR__); ?>images/WP-google-maps-logo-1-B-transparent.png" 
-					alt="<?php _e('WP Google Maps', 'wp-google-maps'); ?>"
+					alt="<?php _e('WP Go Maps', 'wp-google-maps'); ?>"
 					/>
 				<img src="<?php echo plugin_dir_url(__DIR__); ?>images/codecabin.png"
 					alt="by CODECABIN_"

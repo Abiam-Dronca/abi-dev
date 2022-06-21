@@ -1,11 +1,12 @@
 /**
  * @namespace WPGMZA
  * @module Rectangle
- * @requires WPGMZA.Feature
+ * @requires WPGMZA.Shape
+ * @pro-requires WPGMZA.ProShape
  */
 jQuery(function($) {
 	
-	var Parent = WPGMZA.Feature;
+	var Parent = WPGMZA.Shape;
 	
 	/**
 	 * Base class for circles. <strong>Please <em>do not</em> call this constructor directly. Always use createInstance rather than instantiating this class directly.</strong> Using createInstance allows this class to be externally extensible.
@@ -29,8 +30,12 @@ jQuery(function($) {
 		
 		Parent.apply(this, arguments);
 	}
+
+	if(WPGMZA.isProVersion())
+		Parent = WPGMZA.ProShape;
+
 	
-	WPGMZA.extend(WPGMZA.Rectangle, WPGMZA.Feature);
+	WPGMZA.extend(WPGMZA.Rectangle, Parent);
 	
 	Object.defineProperty(WPGMZA.Rectangle.prototype, "fillColor", {
 		
@@ -72,7 +77,13 @@ jQuery(function($) {
 		
 		"get": function()
 		{
-			return "#000000";
+			if(!this.lineColor){
+				return "#000000";
+			}
+			return this.lineColor;
+		},
+		"set": function(a){
+			this.lineColor = a;
 		}
 		
 	});
@@ -83,7 +94,13 @@ jQuery(function($) {
 		
 		"get": function()
 		{
-			return 0;
+			if(!this.lineOpacity && this.lineOpacity != 0)
+				return 0;
+			
+			return parseFloat(this.lineOpacity);
+		},
+		"set": function(a){
+			this.lineOpacity = a;
 		}
 		
 	});
@@ -95,10 +112,18 @@ jQuery(function($) {
 		switch(WPGMZA.settings.engine)
 		{
 			case "open-layers":
+				if(WPGMZA.isProVersion()){
+					constructor = WPGMZA.OLProRectangle;
+					break;
+				}
 				constructor = WPGMZA.OLRectangle;
 				break;
 			
 			default:
+				if(WPGMZA.isProVersion()){
+					constructor = WPGMZA.GoogleProRectangle;
+					break;
+				}
 				constructor = WPGMZA.GoogleRectangle;
 				break;
 		}

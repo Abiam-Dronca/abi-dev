@@ -27,7 +27,10 @@ jQuery(function($) {
 		
 		this.adjustSubMode = false;
 
-		this.onTabActivated(null);
+		if(WPGMZA.InternalEngine.isLegacy()){
+			/* Only applies in legacy */
+			this.onTabActivated(null);
+		}
 
 		$(document.body).on("click", "[data-adjust-" + this.featureType + "-id]", function(event) {
 			self.onAdjustFeature(event);
@@ -84,7 +87,8 @@ jQuery(function($) {
 			return;
 		
 		var pos = this.feature.getPosition();
-		addressField.val(pos.lat + ',' + pos.lng);
+		addressField.val(pos.lat + ', ' + pos.lng);
+		addressField.trigger('change');
 	}
 
 	WPGMZA.MarkerPanel.prototype.setTargetFeature = function(feature){
@@ -169,23 +173,14 @@ jQuery(function($) {
 				geocodingData.lng = parseFloat(cloud_lng);
 			}
 		}
-
-		var addressUnchanged = false;
-		if(this.feature && this.feature.address && address){
-			if(typeof this.feature.address === 'string' && typeof address === 'string'){
-				if(this.feature.address.trim() === address.trim()){
-					/** Address was not changed by the edit, let's go ahead and skip geocoding on save */
-					addressUnchanged = true;
-				}
-			}
-		}
+		
+		var addressUnchanged = !this.hasDirtyField('address');
 
 		if(this.adjustSubMode || addressUnchanged){
 			// Trust the force!
 			WPGMZA.FeaturePanel.prototype.onSave.apply(self, arguments);
 		} else {
 			geocoder.geocode(geocodingData, function(results, status) {
-				
 				switch(status)
 				{
 					case WPGMZA.Geocoder.ZERO_RESULTS:

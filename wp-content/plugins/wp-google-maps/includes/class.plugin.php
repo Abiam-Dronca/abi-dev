@@ -8,11 +8,12 @@ if(!defined('ABSPATH'))
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.auto-loader.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.gdpr-compliance.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/3rd-party-integration/class.wp-migrate-db-integration.php');
-wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/3rd-party-integration/class.gutenberg.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/open-layers/class.nominatim-geocode-cache.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.maps-engine-dialog.php');
+wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.installer-page.php');
 
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.settings-page.php');
+wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/styling/class.styling-page.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/map-edit-page/class.map-edit-page.php');
 
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . "base/classes/widget_module.class.php" );
@@ -30,8 +31,12 @@ class Plugin extends Factory
 	const PAGE_MAP_LIST			= "map-list";
 	const PAGE_MAP_EDIT			= "map-edit";
 	const PAGE_MAP_CREATE_PAGE	= "create-map-page";
+	const PAGE_MAP_WIZARD		= "wizard";
 	const PAGE_SETTINGS			= "map-settings";
+	const PAGE_STYLING			= "map-styling";
 	const PAGE_SUPPORT			= "map-support";
+
+	const PAGE_INSTALLER 	  	= "installer";
 	
 	const PAGE_CATEGORIES		= "categories";
 	const PAGE_ADVANCED			= "advanced";
@@ -49,6 +54,7 @@ class Plugin extends Factory
 	
 	private $_database;
 	private $_settings;
+	private $_stylingSettings;
 	private $_gdprCompliance;
 	private $_restAPI;
 	private $_gutenbergIntegration;
@@ -56,8 +62,9 @@ class Plugin extends Factory
 	private $_dynamicTranslations;
 	private $_spatialFunctionPrefix = '';
 	
+	protected $_internalEngine;
 	protected $_scriptLoader;
-	
+
 	private $mysqlVersion = null;
 	private $cachedVersion = null;
 	private $legacySettings;
@@ -101,13 +108,19 @@ class Plugin extends Factory
 		
 		// Modules
 		$this->_settings = new GlobalSettings();
+		$this->_stylingSettings = new StylingSettings();
 		$this->_pro7Compatiblity = new Pro7Compatibility();
+		$this->_pro9Compatibility = new Pro9Compatibility();
+
 		$this->_restAPI = RestAPI::createInstance();
 		
 		$this->_gutenbergIntegration = Integration\Gutenberg::createInstance();
 	
 		if(!empty($this->settings->wpgmza_maps_engine))
 			$this->settings->engine = $this->settings->wpgmza_maps_engine;
+
+		$this->_internalEngine = new InternalEngine($this->settings->internal_engine);
+		$this->_shortcodes = Shortcodes::createInstance($this->_internalEngine);
 		
 		// Initialisation listener
 		add_action('init', array($this, 'onInit'), 9);
@@ -138,7 +151,7 @@ class Plugin extends Factory
 				$this->settings->wpgmza_settings_marker_pull = '0';
 				
 				add_action('admin_notices', function() {
-					echo '<div class="error"><p>' . __('<strong>WP Google Maps:</strong> Cannot find the specified XML folder. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
+					echo '<div class="error"><p>' . __('<strong>WP Go Maps:</strong> Cannot find the specified XML folder. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
 				});
 			}
       
@@ -147,7 +160,7 @@ class Plugin extends Factory
 				$this->settings->displayXMLExecutionTimeWarning = false;
 				
 				add_action('admin_notices', function() {
-					echo '<div class="error"><p>' . __('<strong>WP Google Maps:</strong> Execution time limit was reached whilst generating XML cache. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
+					echo '<div class="error"><p>' . __('<strong>WP Go Maps:</strong> Execution time limit was reached whilst generating XML cache. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
 				});
 			}
 			
@@ -156,7 +169,7 @@ class Plugin extends Factory
 				$this->settings->displayXMLMemoryLimitWarning = false;
 				
 				add_action('admin_notices', function() {
-					echo '<div class="error"><p>' . __('<strong>WP Google Maps:</strong> Allowed memory size was reached whilst generating XML cache. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
+					echo '<div class="error"><p>' . __('<strong>WP Go Maps:</strong> Allowed memory size was reached whilst generating XML cache. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
 				});
 			}
 		}
@@ -178,6 +191,7 @@ class Plugin extends Factory
 		switch($name)
 		{
 			case 'settings':
+			case 'stylingSettings':
 			case 'gdprCompliance':
 			case 'restAPI':
 			case 'spatialFunctionPrefix':
@@ -185,6 +199,8 @@ class Plugin extends Factory
 			case 'dynamicTranslations':
 			case 'adminUI':
 			case 'scriptLoader':
+			case 'internalEngine':
+			case 'adminNotices':
 				return $this->{'_' . $name};
 				break;
 		}
@@ -197,6 +213,7 @@ class Plugin extends Factory
 		switch($name)
 		{
 			case 'settings':
+			case 'stylingSettings':
 			case 'gdprCompliance':
 			case 'restAPI':
 			case 'spatialFunctionPrefix':
@@ -211,6 +228,9 @@ class Plugin extends Factory
 	public function onActivated()
 	{
         update_option("wpgmza_temp_api",'AIzaSyDo_fG7DXBOVvdhlrLa-PHREuFDpTklWhY');
+
+	    /* Developer Hook (Action) - Add to plugin activation logic */     
+		do_action("wpgmza_plugin_core_on_activate");
 		
 		if(get_option('wpgmza-first-run'))
 			return; // Not first run
@@ -243,13 +263,14 @@ class Plugin extends Factory
 	
 	public function onDeactivated()
 	{
-		// No actions are taken here presently
+	    /* Developer Hook (Action) - Add to plugin deactivation logic */     
+		do_action("wpgmza_plugin_core_on_deactivate");
 	}
 	
-	public function onInit()
-	{
+	public function onInit(){
 		$this->_gdprCompliance = new GDPRCompliance();
-		
+		$this->_adminNotices = new AdminNotices();
+
 		// Create the XML directory if it doesn't already exist
 		$other_settings = get_option('WPGMZA_OTHER_SETTINGS');
 		if (isset($other_settings['wpgmza_settings_marker_pull']) && $other_settings['wpgmza_settings_marker_pull'] == '1') {
@@ -262,6 +283,9 @@ class Plugin extends Factory
 				}
 			}
 		}
+
+	    /* Developer Hook (Action) - Add to plugin init logic */     
+		do_action("wpgmza_plugin_core_on_init");
 	}
 	
 	protected function onFirstRun()
@@ -271,6 +295,9 @@ class Plugin extends Factory
 		$this->database->onFirstRun();
 		
 		update_option('wpgmza-first-run', date(\DateTime::ISO8601));
+
+	    /* Developer Hook (Action) - Add to first run plugin logic */     
+		do_action("wpgmza_plugin_core_on_first_run");
 
 		if($current_screen && $current_screen->id == "appearance_page_install-required-plugins")
 			return; // Bulk activating plugins, don't redirect just yet
@@ -311,24 +338,29 @@ class Plugin extends Factory
 			}
 		}
 		
+	    /* Developer Hook (Action) - Load additional plugin scripts */     
 		do_action('wpgmza_plugin_load_scripts');
 	}
 	
 	public function getLocalizedData()
 	{
-		global $post;
+		global $post, $wpgmza;
 		
 		$document = new DOMDocument();
-		$document->loadPHPFile(plugin_dir_path(__DIR__) . 'html/google-maps-api-error-dialog.html.php');
+		
+		$document->loadPHPFile($wpgmza->internalEngine->getTemplate('google-maps-api-error-dialog.html.php'));
+
 		$googleMapsAPIErrorDialogHTML = $document->saveInnerBody();
 		
 		$strings = new Strings();
 		
 		$settings = clone $this->settings;
+		$stylingSettings = clone $this->stylingSettings;
 		
 		$resturl = preg_replace('#/$#', '', get_rest_url(null, 'wpgmza/v1'));
 		$resturl = preg_replace('#^http(s?):#', '', $resturl);
 		
+		/* Developer Hook (Filter) - Add or alter localization variables */
 		$result = apply_filters('wpgmza_plugin_get_localized_data', array(
 			'adminurl'				=> admin_url(),
 			'siteHash'				=> md5(site_url()),
@@ -349,6 +381,7 @@ class Plugin extends Factory
 			'restnoncetable'		=> $this->restAPI->getNonceTable(),
 
 			'settings' 				=> $settings,
+			'stylingSettings'		=> $stylingSettings,
 			'currentPage'			=> $this->getCurrentPage(),
 			
 			'userCanAdministrator'	=> (current_user_can('administrator') ? 1 : 0),
@@ -365,7 +398,9 @@ class Plugin extends Factory
 			'is_admin'				=> (is_admin() ? 1 : 0),
 			'locale'				=> get_locale(),
 			
-			'isServerIIS'			=> (isset($_SERVER["SERVER_SOFTWARE"]) && preg_match('/microsoft-iis/i', $_SERVER["SERVER_SOFTWARE"]))
+			'isServerIIS'			=> (isset($_SERVER["SERVER_SOFTWARE"]) && preg_match('/microsoft-iis/i', $_SERVER["SERVER_SOFTWARE"])),
+			'labelpointIcon'		=> plugin_dir_url(WPGMZA_FILE) . 'images/label-point.png',
+			'buildCode' 			=> $wpgmza->internalEngine->getBuildVersion(),
 		));
 		
 		if($post)
@@ -389,13 +424,22 @@ class Plugin extends Factory
 		switch($_GET['page'])
 		{
 			case 'wp-google-maps-menu':
-				if(isset($_GET['action']))
-				{
-					if($_GET['action'] == 'edit')
-					return Plugin::PAGE_MAP_EDIT;
+				if(isset($_GET['action'])){
+					if($_GET['action'] == 'edit'){
+						return Plugin::PAGE_MAP_EDIT;
+					}
 				
-					if($_GET['action'] == 'create-map-page')
+					if($_GET['action'] == 'create-map-page'){
 						return Plugin::PAGE_MAP_CREATE_PAGE;
+					}
+
+					if($_GET['action'] == 'wizard'){
+						return Plugin::PAGE_MAP_WIZARD;
+					}
+
+					if($_GET['action'] == 'installer'){
+						return Plugin::PAGE_INSTALLER;
+					}
 				}
 				
 				return Plugin::PAGE_MAP_LIST;
@@ -403,6 +447,10 @@ class Plugin extends Factory
 				
 			case 'wp-google-maps-menu-settings':
 				return Plugin::PAGE_SETTINGS;
+				break;
+
+			case 'wp-google-maps-menu-styling':
+				return Plugin::PAGE_STYLING;
 				break;
 				
 			case 'wp-google-maps-menu-support':
@@ -436,6 +484,9 @@ class Plugin extends Factory
 			$map = Map::createInstance($id);
 			$map->updateXMLFile();
 		}
+
+	    /* Developer Hook (Action) - Update all XML files */     
+		do_action("wpgmza_plugin_core_update_all_xml_files");
 	}
 	
 	public function isModernComponentStyleAllowed()
@@ -475,170 +526,174 @@ class Plugin extends Factory
 	}
 	
 
-
+	/**
+	 * Danger Zone Delete method 
+	 * 
+	 * This has been refactored a bit in V9.0.0, some notes on that:
+	 * - The original implementation had no notable issues
+	 * - It did however include a few repeating truncate calls, which could be optimized for better long term dataset management 
+	 * - We also added some filters/actions to allow developers to hook into this call if they need to 
+	 * - Not needed, but improvements will help streamline things into the future 
+	 * 
+	 * @param string $type The type of delete action being taken 
+	 * 
+	 * @return bool 
+	 */
 	public function deleteAllData($type) {
-		global $WPGMZA_TABLE_NAME_MARKERS;
-		global $WPGMZA_TABLE_NAME_MAPS;
-		global $WPGMZA_TABLE_NAME_POLYGONS;
-		global $WPGMZA_TABLE_NAME_POLYLINES;
-		global $WPGMZA_TABLE_NAME_CIRCLES;
-		global $WPGMZA_TABLE_NAME_RECTANGLES;
-		global $WPGMZA_TABLE_NAME_HEATMAPS;
-
-		global $WPGMZA_TABLE_NAME_CATEGORIES;
-		global $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES;
-
-		global $WPGMZA_TABLE_NAME_CATEGORY_MAPS;
+		global $wpdb, $WPGMZA_TABLE_NAME_MARKERS, $WPGMZA_TABLE_NAME_MAPS,
+			$WPGMZA_TABLE_NAME_POLYGONS, $WPGMZA_TABLE_NAME_POLYLINES,
+			$WPGMZA_TABLE_NAME_CIRCLES, $WPGMZA_TABLE_NAME_RECTANGLES,
+			$WPGMZA_TABLE_NAME_HEATMAPS, $WPGMZA_TABLE_NAME_POINT_LABELS,
+			$WPGMZA_TABLE_NAME_IMAGE_OVERLAYS, $WPGMZA_TABLE_NAME_ADMIN_NOTICES,
+			$WPGMZA_TABLE_NAME_CATEGORIES, $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES,
+			$WPGMZA_TABLE_NAME_CATEGORY_MAPS, $WPGMZA_TABLE_NAME_CUSTOM_FIELDS,
+			$WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS, $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS,
+			$WPGMZA_TABLE_NAME_BATCHED_IMPORTS;
 
 
-		global $WPGMZA_TABLE_NAME_CUSTOM_FIELDS;
-		global $WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS;
+		$type = !empty($type) ? str_replace("wpgmza_", "", $type) : false;
+		
+		$truncateTables = array();
+		$dropOptions = false;
+		$simulateFirstRun = false;
 		
 
-		global $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS;
+		switch($type){
+			case 'destroy_all_data':
+				/* Primary Tables */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MAPS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS;
+				
+				/* Shapes */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POLYGONS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POLYLINES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CIRCLES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_RECTANGLES;
 
+				/* Datasets */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_HEATMAPS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POINT_LABELS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_IMAGE_OVERLAYS;
 
-		global $wpdb;
-		/*
-		
-		DROP TABLE IF EXISTS wp_wpgmza_datasets;
-		DROP TABLE IF EXISTS wp_wpgmza_live_tracking_devices;
-		DROP TABLE IF EXISTS wp_wpgmza_markers_has_custom_fields;
-		DROP TABLE IF EXISTS wp_wpgmza_markers_has_ratings;_cache;
-		DROP TABLE IF EXISTS wp_wpgmza_nominatim_geocode
-		
-		*/
-	
-		if ($type == 'wpgmza_destroy_all_data') {
-			if (isset($WPGMZA_TABLE_NAME_MAPS) && $WPGMZA_TABLE_NAME_MAPS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MAPS.'`');
+				/* Categories */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CATEGORIES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CATEGORY_MAPS;
 
-			if (isset($WPGMZA_TABLE_NAME_MARKERS) && $WPGMZA_TABLE_NAME_MARKERS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS.'`');
+				/* Fields */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CUSTOM_FIELDS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS;
 
-			if (isset($WPGMZA_TABLE_NAME_POLYGONS) && $WPGMZA_TABLE_NAME_POLYGONS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_POLYGONS.'`');
+				/* Back office */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_ADMIN_NOTICES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_BATCHED_IMPORTS;
 
-			if (isset($WPGMZA_TABLE_NAME_POLYLINES) && $WPGMZA_TABLE_NAME_POLYLINES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_POLYLINES.'`');
+				$dropOptions = true;
+				$simulateFirstRun = true;
+				
+				break;
+			case 'reset_all_settings':
+				$dropOptions = true;
+				break;
+			case 'destroy_maps':
+				/* Primary Tables */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MAPS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS;
+				
+				/* Shapes */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POLYGONS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POLYLINES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CIRCLES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_RECTANGLES;
 
-			if (isset($WPGMZA_TABLE_NAME_CIRCLES) && $WPGMZA_TABLE_NAME_CIRCLES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CIRCLES.'`');
+				/* Datasets */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_HEATMAPS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POINT_LABELS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_IMAGE_OVERLAYS;
 
-			if (isset($WPGMZA_TABLE_NAME_RECTANGLES) && $WPGMZA_TABLE_NAME_RECTANGLES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_RECTANGLES.'`');
+				/* Categories */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CATEGORIES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CATEGORY_MAPS;
 
-			if (isset($WPGMZA_TABLE_NAME_HEATMAPS) && $WPGMZA_TABLE_NAME_HEATMAPS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_HEATMAPS.'`');
+				/* Fields */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CUSTOM_FIELDS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS;
 
-			if (isset($WPGMZA_TABLE_NAME_CATEGORIES) && $WPGMZA_TABLE_NAME_CATEGORIES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CATEGORIES.'`');
+				break;
+			case 'destroy_markers':
+				/* Markers */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS;
 
-			if (isset($WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES) && $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES.'`');			
+				/* Marker categorties */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES;
 
-			if (isset($WPGMZA_TABLE_NAME_CATEGORY_MAPS) && $WPGMZA_TABLE_NAME_CATEGORY_MAPS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CATEGORY_MAPS.'`');		
+				/* Marker fields */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS;
 
-			if (isset($WPGMZA_TABLE_NAME_CUSTOM_FIELDS) && $WPGMZA_TABLE_NAME_CUSTOM_FIELDS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CUSTOM_FIELDS.'`');
+				break;
+			case 'destroy_shapes':
+				/* Shapes */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POLYGONS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POLYLINES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_CIRCLES;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_RECTANGLES;
 
-			if (isset($WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS) && $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS.'`');
+				/* Datasets */
+				$truncateTables[] = $WPGMZA_TABLE_NAME_HEATMAPS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_POINT_LABELS;
+				$truncateTables[] = $WPGMZA_TABLE_NAME_IMAGE_OVERLAYS;
+				break;
+			default:
+				/*
+				 * Pay respects to the original logic which use to live here 
+				 * ----
+				 * Is this the real life?
+				 * Is this just fantasy?
+				 * Caught in a landslide
+				 * No escape from reality
+				 * Open your eyes
+				 * Look up to the skies and seeeee................there is nothing here ¯\_(ツ)_/¯
+				*/
+				break;
 
-			if (isset($WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS) && $WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS.'`');
+		}
 
+	    /* Developer Hook (Action) - Run actions before danger zone delete, passes type */     
+		do_action("wpgmza_settings_danger_zone_before_delete", $type);
 
-			$wpdb->query('DELETE FROM `wp_options` WHERE `option_name` LIKE "wpgm%" LIMIT 30');	 // we really shouldnt have more than 30 options stored anyway...		
-			
+		if(!empty($truncateTables)){
+			$filteredTables = array();
+			foreach($truncateTables as $table){
+				if(!empty($table)){
+					$filteredTables[] = $table;
+				}
+			}
 
+			/* Developer Hook (Filter) - Allows for addition/removal of tables from the danger zone action, passes tables, and current action type */
+			$truncateTables = apply_filters("wpgmza_settings_danger_zone_truncate_tables", $filteredTables, $type);
+
+			if(!empty($truncateTables) && is_array($truncateTables)){
+				foreach($truncateTables as $table){
+					/* Truncate the table */
+					$wpdb->query("TRUNCATE TABLE `{$table}`");
+				}
+			}
+		}
+
+		if($dropOptions){
+			/* Drop the options we have setup */
+			$optionsTable = "{$wpdb->prefix}options";
+			$wpdb->query("DELETE FROM `{$optionsTable}` WHERE `option_name` LIKE 'wpgm%' LIMIT 30");		
+		}
+
+	    /* Developer Hook (Action) - Run actions after danger zone delete, passes type */     
+		do_action("wpgmza_settings_danger_zone_after_delete", $type);
+
+		if($simulateFirstRun){
 			$this->onFirstRun();
-		}
-
-		else if ($type == 'wpgmza_reset_all_settings') {
-			$wpdb->query('DELETE FROM `wp_options` WHERE `option_name` LIKE "wpgm%" LIMIT 30');	 // we really shouldnt have more than 30 options stored anyway...		
-		} 
-
-		else if ($type == 'wpgmza_destroy_maps') {
-			if (isset($WPGMZA_TABLE_NAME_MAPS) && $WPGMZA_TABLE_NAME_MAPS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MAPS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_MARKERS) && $WPGMZA_TABLE_NAME_MARKERS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_POLYGONS) && $WPGMZA_TABLE_NAME_POLYGONS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_POLYGONS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_POLYLINES) && $WPGMZA_TABLE_NAME_POLYLINES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_POLYLINES.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_CIRCLES) && $WPGMZA_TABLE_NAME_CIRCLES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CIRCLES.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_RECTANGLES) && $WPGMZA_TABLE_NAME_RECTANGLES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_RECTANGLES.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_HEATMAPS) && $WPGMZA_TABLE_NAME_HEATMAPS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_HEATMAPS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_CATEGORIES) && $WPGMZA_TABLE_NAME_CATEGORIES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CATEGORIES.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES) && $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES.'`');			
-
-			if (isset($WPGMZA_TABLE_NAME_CATEGORY_MAPS) && $WPGMZA_TABLE_NAME_CATEGORY_MAPS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CATEGORY_MAPS.'`');		
-
-			if (isset($WPGMZA_TABLE_NAME_CUSTOM_FIELDS) && $WPGMZA_TABLE_NAME_CUSTOM_FIELDS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CUSTOM_FIELDS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS) && $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS) && $WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MAPS_HAS_CUSTOM_FIELDS_FILTERS.'`');
-
-		}
-		else if ($type == 'wpgmza_destroy_markers') {
-			if (isset($WPGMZA_TABLE_NAME_MARKERS) && $WPGMZA_TABLE_NAME_MARKERS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES) && $WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS_HAS_CATEGORIES.'`');			
-
-			if (isset($WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS) && $WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_MARKERS_HAS_CUSTOM_FIELDS.'`');
-
-		}
-		else if ($type == 'wpgmza_destroy_shapes') {
-			if (isset($WPGMZA_TABLE_NAME_POLYGONS) && $WPGMZA_TABLE_NAME_POLYGONS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_POLYGONS.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_POLYLINES) && $WPGMZA_TABLE_NAME_POLYLINES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_POLYLINES.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_CIRCLES) && $WPGMZA_TABLE_NAME_CIRCLES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_CIRCLES.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_RECTANGLES) && $WPGMZA_TABLE_NAME_RECTANGLES !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_RECTANGLES.'`');
-
-			if (isset($WPGMZA_TABLE_NAME_HEATMAPS) && $WPGMZA_TABLE_NAME_HEATMAPS !== '')
-				$wpdb->query('TRUNCATE TABLE `'.$WPGMZA_TABLE_NAME_HEATMAPS.'`');
-
-
-		}
-		else {
-			/* 
-				Is this the real life?
-				Is this just fantasy?
-				Caught in a landslide
-				No escape from reality
-				Open your eyes
-				Look up to the skies and seeeee................there is nothing here ¯\_(ツ)_/¯
-			*/
 		}
 
 		return true;
@@ -970,7 +1025,7 @@ function wpgmza_create_plugin()
 				<div class="notice notice-error is-dismissible">
 					<p>
 						<?php
-						_e('WP Google Maps', 'wp-google-maps');
+						_e('WP Go Maps', 'wp-google-maps');
 						?>:
 						<?php
 						_e('The plugin cannot initialise due to a fatal error. This is usually due to missing files or incompatible software. Please re-install the plugin and any relevant add-ons. We recommend that you use at least PHP 5.6. Technical details are as follows: ', 'wp-google-maps');

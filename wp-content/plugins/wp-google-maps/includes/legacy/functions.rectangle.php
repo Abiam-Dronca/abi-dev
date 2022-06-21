@@ -35,7 +35,7 @@ function wpgmza_b_add_rectangle($mid)
             
           
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Add rectangle","wp-google-maps")."</h2>
@@ -130,7 +130,7 @@ function wpgmza_b_edit_rectangle($mid)
 		
         echo "
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Edit rectangle","wp-google-maps")."</h2>

@@ -274,7 +274,7 @@ class AjaxTable extends Table
 		$count_where = $this->getWhereClause($input_params, $count_query_params, false);
 		return "SELECT COUNT(id) FROM {$this->table_name} WHERE $count_where";
 	}
-
+	
 	public function getRecords($input_params)
 	{
 		global $wpdb;
@@ -303,7 +303,7 @@ class AjaxTable extends Table
 		
 		// Build query string
 		$qstr = $this->buildQueryString($columns, $where, $having, $input_params, $query_params);
-
+		
 		// This code allows for more natural numeric sorting on text fields, not just numeric fields
 		if(empty($order_column))
 			$order_column = 'id';
@@ -347,7 +347,7 @@ class AjaxTable extends Table
 		} else{
 			$stmt = $qstr;
 		}
-		
+
 		$rows = $wpdb->get_results($stmt);
 		
 		$this->filterResults($rows);

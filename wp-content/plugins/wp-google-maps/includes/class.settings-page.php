@@ -7,19 +7,21 @@ class SettingsPage extends Page {
 		global $wpgmza;
 		
 		Page::__construct();
-		
-		$this->document->loadPHPFile(plugin_dir_path(__DIR__) . 'html/settings-page.html.php');
-		
+
+		$this->document->loadPHPFile($wpgmza->internalEngine->getTemplate('settings-page.html.php'));
+
 		$this->disableProFeatures();
 		$this->hideSelectedProFeatures();
 		
 		$this->form = $this->document->querySelector('form');
 
+		/* Developer Hook (Filter) - Add tabs to global settings page */
 		$addOnTabs = apply_filters("wpgmza_global_settings_tabs", "");
 		if(!empty($addOnTabs)){
 			$this->form->querySelector('.settings-tabs-nav')->import($addOnTabs);
 		}
 
+		/* Developer Hook (Filter) - Add tab content to global settings page */
 		$addOnContent = apply_filters("wpgmza_global_settings_tab_content", "");
 		if(!empty($addOnContent)){
 			$this->form->querySelector('.addition-tabs')->import($addOnContent);
@@ -30,13 +32,23 @@ class SettingsPage extends Page {
 			$this->form->querySelector('#wpgmza-gdpr-compliance-notice')->addClass('wpgmza-hidden');
 			$this->form->querySelector('input[name="wpgmza_gdpr_require_consent_before_load"]')->setAttribute('disabled', 'disabled');
 		}
+
+		if(class_exists("WPGMZA\\MapSelect")){
+			if($wooCheckoutMapSelectWrapper = $this->document->querySelector('.woo-checkout-map-select-wrapper')){
+				$wooCheckoutMapSelect = new MapSelect('woo_checkout_map_id');
+				$wooCheckoutMapSelectWrapper->import($wooCheckoutMapSelect);
+			}
+		}
+
+	    /* Developer Hook (Action) - Alter output of the settings page, passes DOMDocument for mutation */     
+		do_action("wpgmza_global_settings_page_created", $this->document);
 		
 		if(empty($_POST)) {
 			$this->document->populate($wpgmza->settings);
 			$this->addFormNonces();
-		}
-		else
-		{
+			$wpgmza->scriptLoader->enqueueCodeMirror();
+
+		} else {
 			if(!$this->isNonceValid($this->form, $_POST['nonce']))
 				throw new \Exception("Invalid nonce");
 			
@@ -61,14 +73,16 @@ class SettingsPage extends Page {
 			
 			$data			= $this->form->serializeFormData();
 
+			/* Developer Hook (Filter) - Add data to be saved to global storage, reduxed */
 			$data = apply_filters("wpgmza_global_settings_save_redux", $data);
 			
 			foreach($data as $key => $value)
 				$wpgmza->settings->{$key} = $value;
 			
 			// Update XML caches if we've just switched to XML mode
-			if($wpgmza->settings->wpgmza_settings_marker_pull == Plugin::MARKER_PULL_XML && $oldPullMethod != Plugin::MARKER_PULL_XML)
+			if($wpgmza->settings->wpgmza_settings_marker_pull == Plugin::MARKER_PULL_XML && $oldPullMethod != Plugin::MARKER_PULL_XML){
 				$wpgmza->updateAllMarkerXMLFiles();
+			}
 			
 			wp_redirect($_SERVER['HTTP_REFERER']);
 			return;
@@ -88,6 +102,7 @@ class SettingsPage extends Page {
 			exit;
 		}
 
+
 		$type = sanitize_text_field($_POST['type']);
 		$wpgmza->deleteAllData($type);
 		
@@ -101,9 +116,9 @@ class SettingsPage extends Page {
 }
 
 add_action('admin_post_wpgmza_save_settings', function() {
-	
+
 	$settingsPage = SettingsPage::createInstance();
-	
+
 });
 
 add_action('wp_ajax_wpgmza_maps_settings_danger_zone_delete_data', array('WPGMZA\\SettingsPage', 'dangerZoneDelete'));

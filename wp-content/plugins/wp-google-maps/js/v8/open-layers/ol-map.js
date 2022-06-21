@@ -25,8 +25,19 @@ jQuery(function($) {
 			layers: [
 				this.getTileLayer()
 			],
-			view: new ol.View(viewOptions)
+			view: this.getTileView(viewOptions)
 		});
+
+		if(this.customTileMode){
+			/* The system is in custom tile view mode */
+			if(!(ol.extent.containsCoordinate(this.customTileModeExtent, this.olMap.getView().getCenter()))){
+				const view = this.olMap.getView();
+
+				view.setCenter(ol.extent.getCenter(this.customTileModeExtent));
+				this.wrapLongitude();
+				this.onBoundsChanged();
+			}
+		}
 		
 		// NB: Handles legacy checkboxes as well as new, standard controls
 		function isSettingDisabled(value)
@@ -67,7 +78,9 @@ jQuery(function($) {
 			{
 				// On touch devices, require two fingers to drag and pan
 				// NB: Temporarily removed due to inconsistent behaviour
-				/*this.olMap.getInteractions().forEach(function(interaction) {
+
+				// Reintroduced: 9.0.0 -> We have made some changes to improve consistency 
+				this.olMap.getInteractions().forEach(function(interaction) {
 					
 					if(interaction instanceof ol.interaction.DragPan)
 						self.olMap.removeInteraction(interaction);
@@ -77,8 +90,18 @@ jQuery(function($) {
 				this.olMap.addInteraction(new ol.interaction.DragPan({
 					
 					condition: function(olBrowserEvent) {
-						
-						var allowed = olBrowserEvent.originalEvent.touches.length == 2;
+						let allowed = false;
+						let originalEvent = olBrowserEvent.originalEvent; 
+						if(originalEvent instanceof PointerEvent){
+							/* Handle this as a pointer */
+							if(this.targetPointers && this.targetPointers.length){
+								allowed = this.targetPointers.length == 2;
+							}
+						} else if (originalEvent instanceof TouchEvent){
+							if(originalEvent.touches && originalEvent.touches.length){
+								allowed = originalEvent.touches.length == 2;
+							}
+						}
 						
 						if(!allowed)
 							self.showGestureOverlay();
@@ -88,7 +111,7 @@ jQuery(function($) {
 					
 				}));
 				
-				this.gestureOverlay.text(WPGMZA.localized_strings.use_two_fingers);*/
+				this.gestureOverlay.text(WPGMZA.localized_strings.use_two_fingers);
 			}
 			else
 			{
@@ -132,7 +155,7 @@ jQuery(function($) {
 			
 			this.olMap.on("click", function(event) {
 				var features = self.olMap.getFeaturesAtPixel(event.pixel);
-
+				
 				if(!features || !features.length)
 					return;
 				
@@ -234,7 +257,7 @@ jQuery(function($) {
 			
 			var isRight;
 			event = event || window.event;
-			
+
 			var latLng = self.pixelsToLatLng(event.offsetX, event.offsetY);
 			
 			if("which" in event)
@@ -342,10 +365,61 @@ jQuery(function($) {
 				options.url += "?apikey=" + WPGMZA.settings.open_layers_api_key.trim();
 			}
 		}
+
+		if(this.settings && this.settings.custom_tile_enabled){
+			if(this.settings.custom_tile_image_width && this.settings.custom_tile_image_height){
+				const width = parseInt(this.settings.custom_tile_image_width);
+				const height = parseInt(this.settings.custom_tile_image_height);
+				
+				if(this.settings.custom_tile_image){
+					const extent = [0, 0, width, height];
+		
+					const projection = new ol.proj.Projection({
+						code: 'custom-tile-map',
+						units: 'pixels',
+						extent: extent
+					});
+
+					return new ol.layer.Image({
+						source: new ol.source.ImageStatic({
+							attributions: this.settings.custom_tile_image_attribution ? this.settings.custom_tile_image_attribution : '©',
+							url: this.settings.custom_tile_image,
+							projection: projection,
+							imageExtent: extent
+						})
+					});
+				}
+			}
+		}
 		
 		return new ol.layer.Tile({
 			source: new ol.source.OSM(options)
 		});
+	}
+
+	WPGMZA.OLMap.prototype.getTileView = function(viewOptions){
+		if(this.settings && this.settings.custom_tile_enabled){
+			if(this.settings.custom_tile_image_width && this.settings.custom_tile_image_height){
+				const width = parseInt(this.settings.custom_tile_image_width);
+				const height = parseInt(this.settings.custom_tile_image_height);
+				
+				if(this.settings.custom_tile_image){
+					const extent = [0, 0, width, height];
+		
+					const projection = new ol.proj.Projection({
+						code: 'custom-tile-map',
+						units: 'pixels',
+						extent: extent
+					});
+
+					viewOptions.projection = projection;
+
+					this.customTileModeExtent = extent;
+					this.customTileMode = true;
+				}
+			}
+		}
+		return new ol.View(viewOptions)
 	}
 	
 	WPGMZA.OLMap.prototype.wrapLongitude = function()

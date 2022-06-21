@@ -18,11 +18,17 @@ jQuery(function($) {
 		
 		WPGMZA.EventDispatcher.call(this);
 		
-		$("#wpgmaps_options fieldset").wrapInner("<div class='wpgmza-flex'></div>");
+		if(!WPGMZA.settings.internalEngine || WPGMZA.InternalEngine.isLegacy()){
+			// Only force this if we are in legacy
+			// New internal engines will handle this internally instead
+			$("#wpgmaps_options fieldset").wrapInner("<div class='wpgmza-flex'></div>");
+		}
 		
 		this.themePanel = new WPGMZA.ThemePanel();
 		this.themeEditor = new WPGMZA.ThemeEditor();
-		
+
+		this.sidebarGroupings = new WPGMZA.SidebarGroupings();
+
 		this.map = WPGMZA.maps[0];
 		
 		// Drawing manager
@@ -35,7 +41,11 @@ jQuery(function($) {
 		this.initJQueryUIControls();
 
 		if(WPGMZA.locale !== 'en'){
-			$('#datatable_no_result_message,#datatable_search_string').parent().parent().hide();
+			if(WPGMZA.InternalEngine.isLegacy()){
+				$('#datatable_no_result_message,#datatable_search_string').parent().parent().hide();
+			} else {
+				$('#datatable_no_result_message,#datatable_search_string').parent().hide();
+			}
 		}
 		
 		// Address input
@@ -44,7 +54,8 @@ jQuery(function($) {
 		});
 
 		$('#wpgmza-map-edit-page input[type="color"]').each(function(){
-			$("<div class='button-secondary wpgmza-paste-color-btn' title='Paste a HEX color code'><i class='fa fa-clipboard' aria-hidden='true'></i></div>").insertAfter(this);
+			var buttonClass = WPGMZA.InternalEngine.isLegacy() ? 'button-secondary' : 'wpgmza-button';
+			$("<div class='" + buttonClass + " wpgmza-paste-color-btn' title='Paste a HEX color code'><i class='fa fa-clipboard' aria-hidden='true'></i></div>").insertAfter(this);
 		});
 
 
@@ -73,7 +84,7 @@ jQuery(function($) {
 				    	colorBtn.parent().find('input[type="color"]').val("#" + textcopy.replace("#","").trim());
 				  	})
 				  	.catch(function(err) {
-				    	console.error("WP Google Maps: Could not access clipboard", err);
+				    	console.error("WP Go Maps: Could not access clipboard", err);
 				  	});
 
 			} catch(c_ex){
@@ -167,7 +178,7 @@ jQuery(function($) {
 				    // clear the previous timer
 				    clearTimeout(wpgmzaAjaxTimeout);
 
-				    $('#wpgmza_autocomplete_search_results').html('Searching...');
+				    $('#wpgmza_autocomplete_search_results').html('<div class="wpgmza-pad-5">Searching...</div>');
 				    $('#wpgmza_autocomplete_search_results').show();
 
 					
@@ -234,7 +245,7 @@ jQuery(function($) {
 					                        
 					                    }
 				                    } catch (exception) {
-				                    	console.error("WP Google Maps Plugin: There was an error returning the list of places for your search");
+				                    	console.error("WP Go Maps Plugin: There was an error returning the list of places for your search");
 				                    }
 
 
@@ -327,6 +338,29 @@ jQuery(function($) {
 		$(element).on("click", "#wpgmza-open-advanced-theme-data", function(event){
 			event.preventDefault();
 			$('.wpgmza_theme_data_container').toggleClass('wpgmza_hidden');
+		});
+
+		$(element).on("click", ".wpgmza-shortcode-button", function(event){
+			event.preventDefault();
+			$(element).find('.wpgmza-shortcode-description').addClass('wpgmza-hidden');
+
+			const nearestRow = $(this).closest('.wpgmza-row');
+			if(nearestRow.length){
+				const nearestHint = nearestRow.next('.wpgmza-shortcode-description');
+				if(nearestHint.length){
+					nearestHint.removeClass('wpgmza-hidden');
+				}
+			}
+
+			const shortcode = $(this).text();
+			if(shortcode.length){
+				const temp = jQuery('<input>');
+		        $(document.body).append(temp);
+		        temp.val(shortcode).select();
+		        document.execCommand("copy");
+		        temp.remove();
+		        WPGMZA.notification("Shortcode Copied");
+			}
 		});
 	}
 	
@@ -499,11 +533,15 @@ jQuery(function($) {
 			});
 		
 			this.rightClickMarker.on("dragend", function(event) {
-				$(".wpgmza-marker-panel [data-ajax-name='address']").val(event.latLng.lat + "," + event.latLng.lng);
+				$(".wpgmza-marker-panel [data-ajax-name='address']").val(event.latLng.lat + ", " + event.latLng.lng);
 			});
 			
 			this.map.on("click", function(event) {
+				/* Remove the marker on left click*/
 				self.rightClickMarker.setMap(null);
+
+				/* Seeing as we are removing the marker, clear the lat/lng combo as well */
+				$(".wpgmza-marker-panel [data-ajax-name='address']").val("");
 			});
 		}
 		

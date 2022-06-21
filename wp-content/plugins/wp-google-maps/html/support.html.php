@@ -1,5 +1,5 @@
 <div class="wrap">
-	<h1><?php _e("WP Google Maps Support","wp-google-maps"); ?></h1>
+	<h1><?php _e("WP Go Maps Support","wp-google-maps"); ?></h1>
 	<div id="wpgmza-support__row" class="wpgmza_row">
 		<div class='wpgmza_row_col wpgmza-support__col'>
 			<div class="wpgmza-card">
@@ -46,7 +46,7 @@
 					<li>
 						<a href='https://www.wpgmaps.com/documentation/'
 							target='_BLANK' 
-							title='<?php _e("WP Google Maps Documentation","wp-google-maps"); ?>'>
+							title='<?php _e("WP Go Maps Documentation","wp-google-maps"); ?>'>
 							<?php 
 							_e("View all documentation.","wp-google-maps"); 
 							?>
@@ -65,7 +65,7 @@
 				</h2>
 				<p>
 					<?php 
-					_e("WP Google Maps has a diverse and wide range of features which may, from time to time, run into conflicts with the thousands of themes and other plugins on the market.","wp-google-maps"); 
+					_e("WP Go Maps has a diverse and wide range of features which may, from time to time, run into conflicts with the thousands of themes and other plugins on the market.","wp-google-maps"); 
 					?>
 				</p>
 				<p>
@@ -96,6 +96,18 @@
 					<li><a href='https://www.reddit.com/r/wpgooglemaps/' target='_BLANK' title='<?php _e("Support forum","wp-google-maps"); ?>'><?php _e("Reddit Community","wp-google-maps"); ?></a></li>
 					<li><a href='https://www.wpgmaps.com/contact-us/' target='_BLANK' title='<?php _e("Contact us","wp-google-maps"); ?>'><?php _e("Contact us","wp-google-maps"); ?></a></li>
 				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="wpgmza-support__row_alt" class="wpgmza_row">
+		<div class='wpgmza_row_col wpgmza-support__col'>
+			<div class="wpgmza-card">
+				<h2><i class="fa fa-bullhorn "></i> <?php _e("System Info","wp-google-maps"); ?></h2>
+				<p><?php _e("Our support team may ask for the following information to provie you with better support", "wp-google-maps"); ?></p>
+				<pre class="system-info"></pre>
+				<div>
+					<div class="wpgmza button wpgmza-copy-sysinfo"><?php _e("Copy Info", "wp-google-maps"); ?></div> 
+				</div>
 			</div>
 		</div>
 	</div>

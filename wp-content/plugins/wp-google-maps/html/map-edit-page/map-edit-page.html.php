@@ -1,7 +1,7 @@
 <div id="wpgmza-map-edit-page" class='wrap'>
 	<h1 id="wpgmza-main-heading">
 		<?php
-		_e('WP Google Maps', 'wp-google-maps');
+		_e('WP Go Maps', 'wp-google-maps');
 		?>
 		<span id="wpgmza-title-label" class="wpgmza-label-amber"><small></small></span>
 	</h1>
@@ -194,6 +194,7 @@
 						<select id='wpgmza_map_width_type' name='map_width_type'>
 							<option value="px">px</option>
 							<option value="%" selected="selected">%</option>
+							<option value="vw">vw</option>
 						</select>
 
 						<small>
@@ -217,6 +218,7 @@
 						<select id='wpgmza_map_height_type' name='map_height_type'>
 							<option value="px">px</option>
 							<option value="%">%</option>
+							<option value="vh">vh</option>
 						</select>
 						
 						<span style='display:none;' id='wpgmza_height_warning'>
@@ -233,7 +235,7 @@
 				
 					<span class='notice notice-warning' data-wpgmza-require-engine="open-layers">
 						<?php
-						_e("Not available while using the OpenLayers engine.", "wp-google-maps");
+						_e("Not available while using the OpenLayers engine and Legacy build. Switch to Atlas Novus build, or Google Maps engine, under Maps -> Settings to access themes", "wp-google-maps");
 						?>
 					</span>
 				
@@ -1872,7 +1874,7 @@
 							_e("Override zoom level on listing click", "wp-google-maps");
 							?>
 						</legend>
-						
+
 						<div>
 							<div class='switch'>
 								<input type='checkbox' 
@@ -1898,10 +1900,9 @@
 						</legend>
 
 						<input name="zoom_level_on_marker_listing_click" style="display: none;" type="text" id="zoom_level_on_marker_listing_click">
-						
+
 						 <div id="zoom-on-marker-listing-click-slider"></div> 
 					</fieldset>
-
 					
 
 					<h3>
@@ -2487,7 +2488,7 @@
 					<?php
 						echo sprintf(
 							__('Please ensure you <a href="%s">enter a Google Maps API key</a> to continue using Google Maps. Alternatively, swap over to Open Layers by clicking <a id="wpgm-swap-to-open-layers" href="%s">here</a>.', 'wp-google-maps'),
-							"admin.php?page=wp-google-maps-menu-settings",
+							"admin.php?page=wp-google-maps-menu-settings#advanced-settings",
 							"javascript:void(0);"
 						);
 					?>
@@ -2625,12 +2626,12 @@
 		<p id='wpgmza-basic-footer-text'>
 				<small>
 					<?php
-					_e("Thank you for using <a href='https://www.wpgmaps.com'>WP Google Maps</a>! Please <a href='https://wordpress.org/support/plugin/wp-google-maps/reviews/'>rate us on WordPress.org</a>", 'wp-google-maps');
+					_e("Thank you for using <a href='https://www.wpgmaps.com'>WP Go Maps</a>! Please <a href='https://wordpress.org/support/plugin/wp-google-maps/reviews/'>rate us on WordPress.org</a>", 'wp-google-maps');
 					?>
 					|
 					<?php
 					echo sprintf(
-						__("WP Google Maps is a product of <img src='%s' alt='CODECABIN_' style='height: 1em;' class='wpgmze_cc_footer_image'/>", 'wp-google-maps'),
+						__("WP Go Maps is a product of <img src='%s' alt='CODECABIN_' style='height: 1em;' class='wpgmze_cc_footer_image'/>", 'wp-google-maps'),
 						WPGMZA_PLUGIN_DIR_URL . 'images/codecabin.png'
 					);
 					?>
@@ -2640,7 +2641,7 @@
 					?>
 					|
 					<?php
-					_e("WP Google Maps encourages you to make use of the amazing icons at ", "wp-google-maps");
+					_e("WP Go Maps encourages you to make use of the amazing icons at ", "wp-google-maps");
 					?>
 					<a href='https://mappity.org'>https://mappity.org</a>
 					|

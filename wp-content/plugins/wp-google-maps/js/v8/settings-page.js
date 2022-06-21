@@ -19,9 +19,6 @@ if(document.location.toString().indexOf('?') !== -1) {
        $_GET[aux[0]] = aux[1];
     }
 }
-//get the 'index' query parameter
-
-
 
 jQuery(function($) {
 	
@@ -30,10 +27,13 @@ jQuery(function($) {
 		var self = this;
 		
 		this._keypressHistory = [];
+		this._codemirrors = {};
 		
 		this.updateEngineSpecificControls();
 		this.updateStorageControls();
+		this.updateBatchControls();
 		this.updateGDPRControls();
+		this.updateWooControls();
 		
 		//$("#wpgmza-developer-mode").hide();
 		$(window).on("keypress", function(event) {
@@ -48,7 +48,7 @@ jQuery(function($) {
 			e.preventDefault();
 			var ttype = jQuery(this).attr('danger');
 			var warning = 'Are you sure?';
-			if (ttype == 'wpgmza_destroy_all_data') { warning = 'Are you sure? This will delete ALL data and settings for WP Google Maps!'; }
+			if (ttype == 'wpgmza_destroy_all_data') { warning = 'Are you sure? This will delete ALL data and settings for WP Go Maps!'; }
 			if (window.confirm(warning)) {
 	            
 				jQuery.ajax(WPGMZA.ajaxurl, {
@@ -83,9 +83,17 @@ jQuery(function($) {
 		$('[name="wpgmza_settings_marker_pull"]').on('click', function(event) {
 			self.updateStorageControls();
 		});
+
+		$('input[name="enable_batch_loading"]').on('change', function(event) {
+			self.updateBatchControls();
+		});
 		
 		$("input[name='wpgmza_gdpr_require_consent_before_load'], input[name='wpgmza_gdpr_require_consent_before_vgm_submit'], input[name='wpgmza_gdpr_override_notice']").on("change", function(event) {
 			self.updateGDPRControls();
+		});
+
+		$('input[name="woo_checkout_map_enabled"]').on('change', function(event) {
+			self.updateWooControls();
 		});
 
 		$('select[name="tile_server_url"]').on('change', function(event){
@@ -105,7 +113,7 @@ jQuery(function($) {
 		$("#wpgmza-global-settings").tabs({
 	       create: function(event, ui) {
 	       		
-	       		if (typeof $_GET['highlight'] !== 'undefined') {
+	       	if (typeof $_GET['highlight'] !== 'undefined') {
 
 					var elmnt = document.getElementById($_GET['highlight']);
 					elmnt.classList.add('highlight-item');
@@ -119,6 +127,11 @@ jQuery(function($) {
 					window.scrollTo({top: y, behavior: 'smooth'});
 				
 				}
+	       },
+	       activate: function(){
+	       	for(var i in self._codemirrors){
+	       		self._codemirrors[i].refresh();
+	       	}
 	       }
 	    });
 
@@ -132,6 +145,77 @@ jQuery(function($) {
 			var children = $(el).children(":not(legend)");
 			children.wrapAll("<span class='settings-group'></span>");
 			
+		});
+
+		$("textarea[name^='wpgmza_custom_']").each(function(){
+			var name = $(this).attr('name');
+			var type = name.replace("wpgmza_custom_", "") === "js" ? "javascript" : "css";
+
+			self._codemirrors[name] = wp.CodeMirror.fromTextArea(this, {
+				lineNumbers: true,
+				mode: type,
+				theme: "wpgmza"
+			});
+
+			self._codemirrors[name].on('change', function(instance){
+				instance.save();
+			});
+
+			self._codemirrors[name].refresh();
+		});
+
+		$('.wpgmza-integration-tool-button').on('click', function(event){
+			event.preventDefault();
+			const type = $(this).data('tool-type');
+			if(type){
+				const data = {
+					type : type
+				};
+
+				const button = $(this);
+				button.attr('disabled', 'disabled');
+
+				WPGMZA.restAPI.call("/integration-tools/", {
+					method:	"POST",
+					data:	data,
+					success: function(data, status, xhr) {
+						button.removeAttr('disabled');
+
+						if(data){
+							if(data.type){
+								switch(data.type){
+									case 'test_collation':
+										if(!data.success){
+											$('.wpgmza-integration-tool-button[data-tool-type="test_collation"]').addClass('wpgmza-hidden');
+											$('.wpgmza-integration-tool-button[data-tool-type="resolve_collation"]').removeClass('wpgmza-hidden');
+										}
+
+										if(data.message){
+											window.alert(data.message);
+										}
+										break;
+									case 'resolve_collation':
+										if(!data.success){
+											$('.wpgmza-integration-tool-button[data-tool-type="test_collation"]').removeClass('wpgmza-hidden');
+											$('.wpgmza-integration-tool-button[data-tool-type="resolve_collation"]').addClass('wpgmza-hidden');
+										}
+
+										if(data.message){
+											window.alert(data.message);
+										}
+										break;
+									default:
+										if(data.message){
+											window.alert(data.message);
+										}
+										break;
+								}
+							}
+						}
+					}
+				});
+
+			}
 		});
 	}
 	
@@ -160,6 +244,14 @@ jQuery(function($) {
 		else
 			$("#xml-cache-settings").hide();
 	}
+
+	WPGMZA.SettingsPage.prototype.updateBatchControls = function(){
+		if($("input[name='enable_batch_loading']").is(":checked")){
+			$('#batch-loader-settings').show();
+		} else {
+			$('#batch-loader-settings').hide();
+		}
+	}
 	
 	/**
 	 * Updates the GDPR controls (eg visibility state) based on the selected GDPR settings
@@ -177,22 +269,30 @@ jQuery(function($) {
 		
 		var showOverrideTextarea = showNoticeControls && $("input[name='wpgmza_gdpr_override_notice']").prop("checked");
 		
-		if(showNoticeControls)
-		{
-			$("#wpgmza-gdpr-compliance-notice").show("slow");
-		}
-		else
-		{
-			$("#wpgmza-gdpr-compliance-notice").hide("slow");
+		if(showNoticeControls) {
+			$("#wpgmza-gdpr-compliance-notice").show(WPGMZA.InternalEngine.isLegacy() ? "slow" : false);
+		} else {
+			$("#wpgmza-gdpr-compliance-notice").hide(WPGMZA.InternalEngine.isLegacy() ? "slow" : false);
 		}
 		
-		if(showOverrideTextarea)
-		{
-			$("#wpgmza_gdpr_override_notice_text").show("slow");
+		if(showOverrideTextarea) {
+			$("#wpgmza_gdpr_override_notice_text").show(WPGMZA.InternalEngine.isLegacy() ? "slow" : false);
+		} else {
+			$("#wpgmza_gdpr_override_notice_text").hide(WPGMZA.InternalEngine.isLegacy() ? "slow" : false);
 		}
-		else
-		{
-			$("#wpgmza_gdpr_override_notice_text").hide("slow");
+	}
+
+	/**
+	 * Update the Woo controls (visibility etc) based on toggle selections
+	 * @method
+	 * @memberof WPGMZA.SettingsPage
+	*/
+	WPGMZA.SettingsPage.prototype.updateWooControls = function(){
+		const showMapSelect =  $("input[name='woo_checkout_map_enabled']").prop("checked");
+		if(showMapSelect){
+			$('.woo-checkout-maps-select-row').show();
+		} else {
+			$('.woo-checkout-maps-select-row').hide();
 		}
 	}
 

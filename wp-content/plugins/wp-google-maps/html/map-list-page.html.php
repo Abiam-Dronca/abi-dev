@@ -26,10 +26,12 @@
 			esc_html_e("My Maps", "wp-google-maps");
 			?>
 		</h1>
+
+		<div class="wpgmza-persistent-notice-container"></div>
 		
 		<div class='wpgmza-review-nag'>
 			<?php
-			echo sprintf( __( '<h3>We need your love!</h3><p>If you are enjoying our plugin, please consider <a href="%1$s" target="_blank" class="button-border button-border__green">reviewing WP Google Maps</a>. It would mean the world to us! If you are experiencing issues with the plugin, please <a href="%2$s" target="_blank"  class="button-border button-border__green">contact us</a> and we will help you as soon as humanly possible!</p>', 'wp-google-maps' ),
+			echo sprintf( __( '<h3>We need your love!</h3><p>If you are enjoying our plugin, please consider <a href="%1$s" target="_blank" class="button-border button-border__green">reviewing WP Go Maps</a>. It would mean the world to us! If you are experiencing issues with the plugin, please <a href="%2$s" target="_blank"  class="button-border button-border__green">contact us</a> and we will help you as soon as humanly possible!</p>', 'wp-google-maps' ),
 				esc_url('https://wordpress.org/support/view/plugin-reviews/wp-google-maps?filter=5'),
 				esc_url('http://www.wpgmaps.com/contact-us/')
 			);
@@ -64,7 +66,7 @@
 				?></a>
 				
 			<?php
-			esc_html_e("of WP Google Maps for only", "wp-google-maps");
+			esc_html_e("of WP Go Maps for only", "wp-google-maps");
 			?>
 			
 			<strong>$39.99 <?php esc_html_e("once off!","wp-google-maps"); ?></strong>

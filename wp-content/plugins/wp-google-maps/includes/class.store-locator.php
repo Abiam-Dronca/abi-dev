@@ -16,14 +16,14 @@ class StoreLocator extends Factory implements \IteratorAggregate
 		$this->_map = $map;
 		
 		$this->_document = new DOMDocument();
-		$this->_document->loadPHPFile(plugin_dir_path(WPGMZA_FILE) . 'html/store-locator.html.php');
-		
+
+		$this->_document->loadPHPFile($wpgmza->internalEngine->getTemplate('store-locator.html.php'));
+				
 		$this->_document->populate($this);
 		
 		$this->populateRadiusSelect();
-		
-		if($wpgmza->settings->useLegacyHTML)
-		{
+
+		if($wpgmza->settings->useLegacyHTML && $wpgmza->internalEngine->isLegacy()){
 			$document = $this->_document;
 			
 			$document
@@ -59,7 +59,7 @@ class StoreLocator extends Factory implements \IteratorAggregate
 				->addClass("wpgmza-form-field__input wpgmza_sl_radius_select");
 			
 			$document
-				->querySelectorAll("input.wpgmza-search")
+				->querySelectorAll("input.wpgmza-search,svg.wpgmza-search")
 				->addClass("wpgmza_sl_search_button")
 				->addClass("wpgmza_sl_search_button_{$this->map->id}")
 				->setAttribute("onclick", "searchLocations({$this->map->id})");
@@ -103,7 +103,11 @@ class StoreLocator extends Factory implements \IteratorAggregate
 				
 				return $defaults[$name];
 				break;
-				
+			
+			case "document":
+				return $this->_document;
+				break;
+
 			case "html":
 				return $this->_document->html;
 				break;
@@ -149,6 +153,9 @@ class StoreLocator extends Factory implements \IteratorAggregate
 		if(!empty($this->map->store_locator_distance) && $this->map->store_locator_distance == 1)
 			$suffix = __('mi', 'wp-google-maps');
 
+		/* Developer Hook (Filter) - Modify store locator radii options */
+		$radii = apply_filters("wpgmza_store_locator_radii_options", $radii);
+		
 		if(!in_array($this->defaultRadius, $radii)){
 			$this->defaultRadius = $radii[0];
 		}

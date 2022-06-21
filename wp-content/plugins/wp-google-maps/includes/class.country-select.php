@@ -48,5 +48,8 @@ class CountrySelect extends DOMDocument {
 			
 			$select->appendChild($option);
 		}
+
+	    /* Developer Hook (Action) - Alter the country select output, passes DOMElement for mutation */     
+		do_action("wpgmza_country_select_created", $select);
 	}
 }

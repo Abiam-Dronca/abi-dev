@@ -2,6 +2,7 @@
  * @namespace WPGMZA
  * @module OLCircle
  * @requires WPGMZA.Circle
+ * @pro-requires WPGMZA.ProCircle
  */
 jQuery(function($) {
 	
@@ -57,6 +58,9 @@ jQuery(function($) {
 		if(options)
 			this.setOptions(options);
 	}
+	
+	if(WPGMZA.isProVersion())
+		Parent = WPGMZA.ProCircle;
 	
 	WPGMZA.OLCircle.prototype = Object.create(Parent.prototype);
 	WPGMZA.OLCircle.prototype.constructor = WPGMZA.OLCircle;
