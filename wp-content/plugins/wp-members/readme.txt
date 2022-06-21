@@ -3,7 +3,7 @@ Contributors: cbutlerjr
 Tags: access, authentication, content, login, member, membership, password, protect, register, registration, restriction, subscriber
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 3.4.2.1
+Stable tag: 3.4.3
 
 License: GPLv3
 
@@ -108,7 +108,7 @@ The FAQs are maintained at https://rocketgeek.com/plugins/wp-members/docs/faqs/
 
 == Upgrade Notice ==
 
-WP-Members 3.4.2 is a minor update. WP-Members 3.4.2.1 is a bug fix release. Backup prior to upgrading is recommended, but rollback is possible. See changelog for a list of updates. Minimum WP version is 4.0.
+WP-Members 3.4.3 is a minor update. WP-Members 3.4.2.1 is a bug fix release. Backup prior to upgrading is recommended, but rollback is possible. See changelog for a list of updates. Minimum WP version is 4.0.
 
 
 == Screenshots ==
@@ -136,9 +136,13 @@ WP-Members 3.4.2 is a minor update. WP-Members 3.4.2.1 is a bug fix release. Bac
 
 * @todo WP-Members pluggable deprecated for use in theme functions.php (wpmem will be initialized when plugins are loaded).  If you have any WP-Members pluggable functions that load in the theme functions.php, you'll need to move these to another location, such as a custom plugin file.  Keep in mind, pluggable functions are no longer the preferred way of customizing (and have not been for many years) as most customizations, if not all, can be handled by using the plugin's filter and action hooks.
 
-= 3.4.2.1 =
+= 3.4.3 =
 
-* Bug fix in the onboarding notification that causes form conflicts if the install/upgrade process is not finalized.
+* Simplified check_validated() and check_activated() functions, included check for null $user.
+* Added wpmem_check_validated and wpmem_check_activated filter hooks.
+* Added display="url" attribute to the [wpmem_field] shortcode for file and image field types.
+* Fix undefined variable in password reset.
+* Improve onboarding process for both new installs and updates.
 
 = 3.4.2 =
 

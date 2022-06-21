@@ -753,7 +753,7 @@ class WP_Members_User {
 				return "reg_generic";
 			}
 
-			$user_to_check = ( strpos( $user_to_check, '@' ) ) ? sanitize_email( $arr['user'] ) : sanitize_user( $arr['user'] );
+			$user_to_check = ( strpos( $arr['user'], '@' ) ) ? sanitize_email( $arr['user'] ) : sanitize_user( $arr['user'] );
 
 			if ( username_exists( $user_to_check ) ) {
 				$user = get_user_by( 'login', $user_to_check );
@@ -1223,20 +1223,19 @@ class WP_Members_User {
 	 * @return object $user     The WordPress User object.
 	 */ 
 	function check_activated( $user, $username, $password ) {
-		// Password must be validated.
-		$pass = ( ! is_wp_error( $user ) && ! is_null( $user ) && $password ) ? wp_check_password( $password, $user->user_pass, $user->ID ) : false;
-
-		if ( ! $pass ) { 
-			return $user;
+		if ( ! is_wp_error( $user ) && ! is_null( $user ) && false == $this->is_user_activated( $user->ID ) ) {
+			$user = new WP_Error( 'authentication_failed', __( '<strong>ERROR</strong>: User has not been activated.', 'wp-members' ) );
 		}
-
-		// Activation flag must be validated.
-		if ( ! $this->is_user_activated( $user->ID ) ) {
-			return new WP_Error( 'authentication_failed', __( '<strong>ERROR</strong>: User has not been activated.', 'wp-members' ) );
-		}
-
-		// If the user is validated, return the $user object.
-		return $user;
+		/**
+		 * Filters the check_validated result.
+		 * 
+		 * @since 3.4.2
+		 * 
+		 * @param  mixed  $user
+		 * @param  string $username
+		 * @param  string $password
+		 */
+		return apply_filters( 'wpmem_check_activated', $user, $username, $password );
 	}
 	
 	/**
