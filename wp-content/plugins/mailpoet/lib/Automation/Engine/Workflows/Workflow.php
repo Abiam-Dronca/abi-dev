@@ -11,6 +11,7 @@ use MailPoet\Automation\Engine\Utils\Json;
 class Workflow {
   public const STATUS_ACTIVE = 'active';
   public const STATUS_INACTIVE = 'inactive';
+  public const STATUS_DRAFT = 'draft';
 
   /** @var int */
   private $id;
@@ -19,7 +20,7 @@ class Workflow {
   private $name;
 
   /** @var string */
-  private $status = self::STATUS_INACTIVE;
+  private $status = self::STATUS_DRAFT;
 
   /** @var DateTimeImmutable */
   private $createdAt;
@@ -33,12 +34,17 @@ class Workflow {
   /** @param Step[] $steps */
   public function __construct(
     string $name,
-    array $steps
+    array $steps,
+    int $id = null
   ) {
     $this->name = $name;
     $this->steps = [];
     foreach ($steps as $step) {
       $this->steps[$step->getId()] = $step;
+    }
+
+    if ($id) {
+      $this->id = $id;
     }
 
     $now = new DateTimeImmutable();
