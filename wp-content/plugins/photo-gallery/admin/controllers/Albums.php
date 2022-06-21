@@ -35,20 +35,20 @@ class AlbumsController_bwg {
     $this->page = WDWLibrary::get('page');
     $this->actions = array(
       'publish' => array(
-        'title' => __('Publish', BWG()->prefix),
-        $this->bulk_action_name => __('published', BWG()->prefix),
+        'title' => __('Publish', 'photo-gallery'),
+        $this->bulk_action_name => __('published', 'photo-gallery'),
       ),
       'unpublish' => array(
-        'title' => __('Unpublish', BWG()->prefix),
-        $this->bulk_action_name => __('unpublished', BWG()->prefix),
+        'title' => __('Unpublish', 'photo-gallery'),
+        $this->bulk_action_name => __('unpublished', 'photo-gallery'),
       ),
       'duplicate' => array(
-        'title' => __('Duplicate', BWG()->prefix),
-        $this->bulk_action_name => __('duplicate', BWG()->prefix),
+        'title' => __('Duplicate', 'photo-gallery'),
+        $this->bulk_action_name => __('duplicate', 'photo-gallery'),
       ),
       'delete' => array(
-        'title' => __('Delete', BWG()->prefix),
-        $this->bulk_action_name => __('deleted', BWG()->prefix),
+        'title' => __('Delete', 'photo-gallery'),
+        $this->bulk_action_name => __('deleted', 'photo-gallery'),
       ),
     );
     $user = get_current_user_id();
@@ -92,7 +92,7 @@ class AlbumsController_bwg {
     // Set params for view.
     $params = array();
     $params['page'] = $this->page;
-    $params['page_title'] = __('Gallery Groups', BWG()->prefix);
+    $params['page_title'] = __('Gallery Groups', 'photo-gallery');
     $params['actions'] = $this->actions;
     $params['order'] = WDWLibrary::get('order', 'asc');
     $params['orderby'] = WDWLibrary::get('orderby', '');
@@ -167,7 +167,7 @@ class AlbumsController_bwg {
         }
         if ($successfully_updated) {
           $bulk_action = $this->bulk_action_name;
-          $message = sprintf(_n('%s item successfully %s.', '%s items successfully %s.', $successfully_updated, BWG()->prefix), $successfully_updated, $this->actions[$task][$bulk_action]);
+          $message = sprintf(_n('%s item successfully %s.', '%s items successfully %s.', $successfully_updated, 'photo-gallery'), $successfully_updated, $this->actions[$task][$bulk_action]);
         }
         $key = ($message === 2 ? 'message' : 'msg');
         $url_arg[$key] = $message;

@@ -31,20 +31,20 @@ class GalleriesController_bwg {
 
     $this->actions = array(
       'publish' => array(
-        'title' => __('Publish', BWG()->prefix),
-        'bulk_action' => __('published', BWG()->prefix),
+        'title' => __('Publish', 'photo-gallery'),
+        'bulk_action' => __('published', 'photo-gallery'),
       ),
       'unpublish' => array(
-        'title' => __('Unpublish', BWG()->prefix),
-        'bulk_action' => __('unpublished', BWG()->prefix),
+        'title' => __('Unpublish', 'photo-gallery'),
+        'bulk_action' => __('unpublished', 'photo-gallery'),
       ),
       'duplicate' => array(
-        'title' => __('Duplicate', BWG()->prefix),
-        'bulk_action' => __('duplicated', BWG()->prefix),
+        'title' => __('Duplicate', 'photo-gallery'),
+        'bulk_action' => __('duplicated', 'photo-gallery'),
       ),
       'delete' => array(
-        'title' => __('Delete', BWG()->prefix),
-        'bulk_action' => __('deleted', BWG()->prefix),
+        'title' => __('Delete', 'photo-gallery'),
+        'bulk_action' => __('deleted', 'photo-gallery'),
       ),
     );
 
@@ -94,7 +94,7 @@ class GalleriesController_bwg {
     // Set params for view.
     $params = array();
     $params['page'] = $this->page;
-    $params['page_title'] = __('Galleries', BWG()->prefix);
+    $params['page_title'] = __('Galleries', 'photo-gallery');
     $params['actions'] = $this->actions;
     $params['order'] = WDWLibrary::get('order', 'asc');
     $params['orderby'] = WDWLibrary::get('orderby', 'order');
@@ -175,14 +175,14 @@ class GalleriesController_bwg {
           }
         }
         if ( $successfully_updated ) {
-          $message = sprintf(_n('%s item successfully %s.', '%s items successfully %s.', $successfully_updated, BWG()->prefix), $successfully_updated, $this->actions[$task]['bulk_action']);
+          $message = sprintf(_n('%s item successfully %s.', '%s items successfully %s.', $successfully_updated, 'photo-gallery'), $successfully_updated, $this->actions[$task]['bulk_action']);
         }
         $key = ($message === 2 ? 'message' : 'msg');
         $url_arg[$key] = $message;
       }
     }
 
-   WDWLibrary::redirect(add_query_arg($url_arg, admin_url('admin.php')));
+    WDWLibrary::redirect(add_query_arg($url_arg, admin_url('admin.php')));
   }
 
   /**
@@ -402,9 +402,9 @@ class GalleriesController_bwg {
     $params['pager'] = 0;
     $params['facebook_embed'] = $this->get_facebook_embed();
 
-    $gallery_types = array('' => __('Mixed', BWG()->prefix), 'instagram' => __('Instagram only', BWG()->prefix));
+    $gallery_types = array('' => __('Mixed', 'photo-gallery'), 'instagram' => __('Instagram only', 'photo-gallery'));
     if ( has_action('init_display_facebook_gallery_options_bwg') && $id != 0 ) {
-      $gallery_types['facebook'] = __('Facebook', BWG()->prefix);
+      $gallery_types['facebook'] = __('Facebook', 'photo-gallery');
     }
     $params['gallery_types'] = apply_filters('bwg_get_gallery_types', $gallery_types);
 

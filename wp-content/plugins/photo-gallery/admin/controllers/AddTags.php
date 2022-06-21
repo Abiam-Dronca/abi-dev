@@ -50,7 +50,7 @@ class AddTagsController_bwg {
     // Set params for view.
     $params = array();
     $params['page'] = $this->page;
-    $params['page_title'] = __('Tags', BWG()->prefix);
+    $params['page_title'] = __('Tags', 'photo-gallery');
     $params['order'] = WDWLibrary::get('order', 'asc');
     $params['orderby'] = WDWLibrary::get('orderby', 'name');
     // To prevent SQL injections.

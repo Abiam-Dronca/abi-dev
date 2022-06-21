@@ -155,10 +155,10 @@ class BWGViewSite {
             }
             if ( isset($params['image_rows']) && !count($params['image_rows']['images']) ) {
               if ( $params['tag'] ) {
-                echo WDWLibrary::message(__('There are no images.', BWG()->prefix), 'wd_error');
+                echo WDWLibrary::message(__('There are no images.', 'photo-gallery'), 'wd_error');
               }
               else {
-                echo WDWLibrary::message(__('No Images found.', BWG()->prefix), 'wd_error');
+                echo WDWLibrary::message(__('No Images found.', 'photo-gallery'), 'wd_error');
               }
             }
             if ( $params['album_view_type'] == 'album' || isset($params['image_rows']) && count($params['image_rows']['images']) ) {
@@ -257,10 +257,10 @@ class BWGViewSite {
 
     if ( isset($params['image_rows']) && !count($params['image_rows']['images']) ) {
       if ( $params['tag'] ) {
-        echo WDWLibrary::message(__('There are no images.', BWG()->prefix), 'wd_error');
+        echo WDWLibrary::message(__('There are no images.', 'photo-gallery'), 'wd_error');
       }
       else {
-        echo WDWLibrary::message(__('No Images found.', BWG()->prefix), 'wd_error');
+        echo WDWLibrary::message(__('No Images found.', 'photo-gallery'), 'wd_error');
       }
     }
     //$get_bwg_load_more = WDWLibrary::get("bwg_load_more_".$bwg);
@@ -331,7 +331,7 @@ class BWGViewSite {
       echo '<style>' . $inline_style . '</style>';
     }
     ?>
-    <div class="bwg_back bwg_back_<?php echo sanitize_html_class($bwg); ?>" onclick="bwg_ajax('gal_front_form_<?php echo $bwg; ?>', '<?php echo $bwg; ?>', '<?php echo $params['container_id']; ?>', 'back', '', 'album')"><i class="bwg-icon-arrow-left"></i> <?php _e('Back', BWG()->prefix); ?></div>
+    <div class="bwg_back bwg_back_<?php echo sanitize_html_class($bwg); ?>" onclick="bwg_ajax('gal_front_form_<?php echo $bwg; ?>', '<?php echo $bwg; ?>', '<?php echo $params['container_id']; ?>', 'back', '', 'album')"><i class="bwg-icon-arrow-left"></i> <?php _e('Back', 'photo-gallery'); ?></div>
     <?php
   }
 
@@ -409,7 +409,7 @@ class BWGViewSite {
         ?>
         <div class="bwg_download_gallery">
           <a href="<?php echo esc_url($query_url); ?>">
-            <i title="<?php _e('Download gallery', BWG()->prefix); ?>" class="bwg-icon-download bwg_ctrl_btn"></i>
+            <i title="<?php _e('Download gallery', 'photo-gallery'); ?>" class="bwg-icon-download bwg_ctrl_btn"></i>
           </a>
         </div>
         <?php
@@ -463,16 +463,16 @@ class BWGViewSite {
         <div class="bwg_search_container_2" id="bwg_search_container_2_<?php echo sanitize_html_class($current_view); ?>">
         <span class="bwg_search_input_container">
           <span class="bwg_search_loupe_container1 bwg-hidden">
-             <i title="<?php echo __('SEARCH...', BWG()->prefix); ?>" class="bwg-icon-search bwg_search" onclick="bwg_ajax('<?php echo $form_id; ?>', '<?php echo $current_view; ?>', '<?php echo $cur_gal_id; ?>', <?php echo $album_gallery_id; ?>, '', '<?php echo $type; ?>', 1)"></i>
+             <i title="<?php echo __('SEARCH...', 'photo-gallery'); ?>" class="bwg-icon-search bwg_search" onclick="bwg_ajax('<?php echo $form_id; ?>', '<?php echo $current_view; ?>', '<?php echo $cur_gal_id; ?>', <?php echo $album_gallery_id; ?>, '', '<?php echo $type; ?>', 1)"></i>
           </span>
           <input id="bwg_search_input_<?php echo sanitize_html_class($current_view); ?>" class="bwg_search_input" type="text" onkeypress="bwg_key_press(this); return bwg_check_search_input_enter(this, event);" name="bwg_search_<?php echo $current_view; ?>" value="<?php echo esc_attr($bwg_search); ?>" placeholder="<?php echo esc_attr($placeholder); ?>" />
           <span class="bwg_search_reset_container <?echo sanitize_html_class($bwg_search_reset); ?>">
-          <i title="<?php echo __('Reset', BWG()->prefix); ?>" class="bwg-icon-times bwg_reset" onclick="bwg_clear_search_input('<?php echo $current_view; ?>'); <?php echo $bwg_ajax_reset;?> "></i>
+          <i title="<?php echo __('Reset', 'photo-gallery'); ?>" class="bwg-icon-times bwg_reset" onclick="bwg_clear_search_input('<?php echo $current_view; ?>'); <?php echo $bwg_ajax_reset;?> "></i>
         </span>
           <input id="bwg_images_count_<?php echo sanitize_html_class($current_view); ?>" class="bwg_search_input" type="hidden" name="bwg_images_count_<?php echo esc_attr($current_view); ?>" value="<?php echo esc_attr($images_count); ?>">
             <span class="search_placeholder_title" onclick="bwg_search_focus(this)" <?php echo $bwg_search_focus; ?>>
                 <span class="bwg_search_loupe_container">
-                  <i title="<?php echo __('SEARCH...', BWG()->prefix); ?>" class="bwg-icon-search bwg_search"></i>
+                  <i title="<?php echo __('SEARCH...', 'photo-gallery'); ?>" class="bwg-icon-search bwg_search"></i>
                 </span>
                 <span style="font-size: 12px; font-family: Ubuntu;"><?php echo esc_html($placeholder); ?></span>
           </span>
@@ -511,22 +511,22 @@ class BWGViewSite {
         <select id="bwg_order_<?php echo sanitize_html_class($current_view); ?>" class="bwg_order bwg_order_<?php echo sanitize_html_class($current_view); ?>" onchange="bwg_ajax('<?php echo $form_id; ?>', '<?php echo $current_view; ?>', '<?php echo $cur_gal_id; ?>', <?php echo $album_gallery_id; ?>, '', '<?php echo $type; ?>', 1, '', this.value)">
           <option <?php if ( $sort_by == 'default' ) {
             echo 'selected';
-          } ?> value="default"><?php echo __('Order by Default', BWG()->prefix); ?></option>
+          } ?> value="default"><?php echo __('Order by Default', 'photo-gallery'); ?></option>
           <option <?php if ( $sort_by == 'alt' ) {
             echo 'selected';
-          } ?> value="alt"><?php echo __('Title', BWG()->prefix); ?></option>
+          } ?> value="alt"><?php echo __('Title', 'photo-gallery'); ?></option>
           <option <?php if ( $sort_by == 'date' ) {
             echo 'selected';
-          } ?> value="date"><?php echo __('Date', BWG()->prefix); ?></option>
+          } ?> value="date"><?php echo __('Date', 'photo-gallery'); ?></option>
           <option <?php if ( $sort_by == 'filename' ) {
             echo 'selected';
-          } ?> value="filename"><?php echo __('Filename', BWG()->prefix); ?></option>
+          } ?> value="filename"><?php echo __('Filename', 'photo-gallery'); ?></option>
           <option <?php if ( $sort_by == 'size' ) {
             echo 'selected';
-          } ?> value="size"><?php echo __('Size', BWG()->prefix); ?></option>
+          } ?> value="size"><?php echo __('Size', 'photo-gallery'); ?></option>
           <option <?php if ( $sort_by == 'random' || $sort_by == 'RAND()' ) {
             echo 'selected';
-          } ?> value="random"><?php echo __('Random', BWG()->prefix); ?></option>
+          } ?> value="random"><?php echo __('Random', 'photo-gallery'); ?></option>
         </select>
       </div>
       <?php
@@ -625,7 +625,7 @@ class BWGViewSite {
       else { ?>
         <div class="bwg_tags_container_<?php echo sanitize_html_class($current_view); ?>">
           <div class="bwg_tag_button_view_container" >
-             <button type="button" class="bwg_all_tags active" data-filter="All Tags"><?php echo __('All Tags', BWG()->prefix);?></button><div class="verLine"></div>
+             <button type="button" class="bwg_all_tags active" data-filter="All Tags"><?php echo __('All Tags', 'photo-gallery');?></button><div class="verLine"></div>
              <?php
              foreach ( $tags_rows as $tags_row ) {
                 $active = ( !empty($bwg_search_tags) && in_array($tags_row->term_id ? $tags_row->term_id : '', $bwg_search_tags)) ? 'active' : '';
@@ -635,7 +635,7 @@ class BWGViewSite {
              }
              ?>
           </div>
-          <div class="bwg_tag_button_see_all"><div class="see_all_tags bwg_show"><span>&#43;</span><?php echo __('see all tags', BWG()->prefix);?></div></div>
+          <div class="bwg_tag_button_see_all"><div class="see_all_tags bwg_show"><span>&#43;</span><?php echo __('see all tags', 'photo-gallery');?></div></div>
         <?php
         } ?>
         <input type="hidden" id="bwg_tag_id_<?php echo sanitize_html_class($cur_gal_id); ?>" value="<?php echo esc_attr($get_filter_teg) ?>" />
@@ -818,15 +818,15 @@ class BWGViewSite {
           <?php
           if ( $theme_row->page_nav_number ) {
             ?>
-            <span class="displaying-num_<?php echo sanitize_html_class($current_view); ?>"><?php echo esc_html($count_items) . ' ' . __(' item(s)', BWG()->prefix); ?></span>
+            <span class="displaying-num_<?php echo sanitize_html_class($current_view); ?>"><?php echo esc_html($count_items) . ' ' . __(' item(s)', 'photo-gallery'); ?></span>
             <?php
           }
           if ( $count_items > $limit ) {
             if ( $theme_row->page_nav_button_text ) {
-              $first_button = __('First', BWG()->prefix);
-              $previous_button = __('Previous', BWG()->prefix);
-              $next_button = __('Next', BWG()->prefix);
-              $last_button = __('Last', BWG()->prefix);
+              $first_button = __('First', 'photo-gallery');
+              $previous_button = __('Previous', 'photo-gallery');
+              $next_button = __('Next', 'photo-gallery');
+              $last_button = __('Last', 'photo-gallery');
             }
             else {
               $first_button = '«';
@@ -845,19 +845,19 @@ class BWGViewSite {
             ?>
             <span class="pagination-links_<?php echo sanitize_html_class($current_view); ?> pagination-links" data-pages-count="<?php echo esc_attr($items_county); ?>">
               <span class="pagination-links_col1">
-              <a class="bwg-a <?php echo esc_html($first_page); ?>" title="<?php echo __('Go to the first page', BWG()->prefix); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number > 1) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($first_button); ?></a>
-              <a class="bwg-a <?php echo esc_html($prev_page); ?>" title="<?php echo __('Go to the previous page', BWG()->prefix); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number > 1) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number - 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($previous_button); ?></a>
+              <a class="bwg-a <?php echo esc_html($first_page); ?>" title="<?php echo __('Go to the first page', 'photo-gallery'); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number > 1) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($first_button); ?></a>
+              <a class="bwg-a <?php echo esc_html($prev_page); ?>" title="<?php echo __('Go to the previous page', 'photo-gallery'); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number > 1) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number - 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($previous_button); ?></a>
               </span>
 							<span class="pagination-links_col2">
 									<input type="number" class="bwg_current_page" name="bwg_current_page" value="<?php echo esc_attr($page_number); ?>" data-url-info="page_number_<?php echo esc_attr($current_view); ?>" onkeypress="return bwg_change_page_<?php echo $current_view; ?>(event, this)" min="1" oninput="validity.valid||(value='')" />
-										<?php echo __('of', BWG()->prefix); ?>
+										<?php echo __('of', 'photo-gallery'); ?>
 										<span class="total-pages_<?php echo sanitize_html_class($current_view); ?>">
 											<?php echo esc_html($items_county); ?>
 										</span>
 							</span>
               <span class="pagination-links_col3">
-                <a class="bwg-a <?php echo esc_html($next_page) ?>" title="<?php echo __('Go to the next page', BWG()->prefix); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number + 1 <= $items_county) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number + 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($next_button); ?></a>
-                <a class="bwg-a <?php echo esc_html($last_page) ?>" title="<?php echo __('Go to the last page', BWG()->prefix); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number < $items_county) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $items_county ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($last_button); ?></a>
+                <a class="bwg-a <?php echo esc_html($next_page) ?>" title="<?php echo __('Go to the next page', 'photo-gallery'); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number + 1 <= $items_county) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number + 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($next_button); ?></a>
+                <a class="bwg-a <?php echo esc_html($last_page) ?>" title="<?php echo __('Go to the last page', 'photo-gallery'); ?>" <?php echo (($enable_dynamic_url || $enable_seo) && $page_number < $items_county) ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $items_county ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo esc_html($last_button); ?></a>
               </span>
 						</span>
 						<?php
@@ -870,7 +870,7 @@ class BWGViewSite {
         if ($count_items > ($limit * ($page_number - 1)) + $items_per_page['images_per_page']) {
         ?>
           <div id="bwg_load_<?php echo sanitize_html_class($current_view); ?>" class="tablenav-pages_<?php echo sanitize_html_class($current_view); ?>">
-            <a class="bwg-a bwg_load_btn_<?php echo sanitize_html_class($current_view); ?> bwg_load_btn" href="javascript:void(0);"><?php echo __('Load More...', BWG()->prefix); ?></a>
+            <a class="bwg-a bwg_load_btn_<?php echo sanitize_html_class($current_view); ?> bwg_load_btn" href="javascript:void(0);"><?php echo __('Load More...', 'photo-gallery'); ?></a>
             <input type="hidden" id="bwg_load_more_<?php echo sanitize_html_class($current_view); ?>" name="bwg_load_more_<?php echo esc_attr($current_view); ?>" value="on" />
           </div>
         <?php

@@ -563,6 +563,16 @@ class BWGViewGalleryBox {
       #bwg_comment_form label {
         color: #<?php echo $theme_row->lightbox_comment_font_color; ?>;
       }
+      @media (max-width: 768px) {
+        .bwg_image_info {
+          width: 260px;
+        }
+      }
+      @media (max-width: 480px) {
+        .bwg_image_info {
+          width: 100%;
+        }
+      }
     </style>
     <?php
     $image_id_exist = FALSE;
@@ -626,7 +636,7 @@ class BWGViewGalleryBox {
     }
 
     if ( !$image_id_exist ) {
-      echo WDWLibrary::message(__('The image has been deleted.', BWG()->prefix), 'wd_error');
+      echo WDWLibrary::message(__('The image has been deleted.', 'photo-gallery'), 'wd_error');
       die();
     }
     ?>
@@ -769,58 +779,58 @@ class BWGViewGalleryBox {
           if( $params['popup_enable_ctrl_btn'] ) {
 					$share_url = add_query_arg(array('curr_url' => urlencode($current_url), 'image_id' => $current_image_id), WDWLibrary::get_share_page()) . '#bwg' . $gallery_id . '/' . $current_image_id;
 					?>
-            <i title="<?php echo __('Play', BWG()->prefix); ?>" class="bwg-icon-play bwg_ctrl_btn bwg_play_pause"></i>
+            <i title="<?php echo __('Play', 'photo-gallery'); ?>" class="bwg-icon-play bwg_ctrl_btn bwg_play_pause"></i>
             <?php if ($params['popup_enable_fullscreen']) {
               if (!$params['popup_fullscreen']) {
             ?>
-            <i title="<?php echo __('Maximize', BWG()->prefix); ?>" class="bwg-icon-expand bwg_ctrl_btn bwg_resize-full"></i>
+            <i title="<?php echo __('Maximize', 'photo-gallery'); ?>" class="bwg-icon-expand bwg_ctrl_btn bwg_resize-full"></i>
             <?php
             }
             ?>
-            <i title="<?php echo __('Fullscreen', BWG()->prefix); ?>" class="bwg-icon-arrows-out bwg_ctrl_btn bwg_fullscreen"></i>
+            <i title="<?php echo __('Fullscreen', 'photo-gallery'); ?>" class="bwg-icon-arrows-out bwg_ctrl_btn bwg_fullscreen"></i>
             <?php } if ($params['popup_enable_info']) { ?>
-            <i title="<?php echo __('Show info', BWG()->prefix); ?>" class="bwg-icon-info-circle bwg_ctrl_btn bwg_info"></i>
+            <i title="<?php echo __('Show info', 'photo-gallery'); ?>" class="bwg-icon-info-circle bwg_ctrl_btn bwg_info"></i>
             <?php } if ($params['popup_enable_comment']) { ?>
-            <i title="<?php echo __('Show comments', BWG()->prefix); ?>" class="bwg-icon-comment-square bwg_ctrl_btn bwg_comment"></i>
+            <i title="<?php echo __('Show comments', 'photo-gallery'); ?>" class="bwg-icon-comment-square bwg_ctrl_btn bwg_comment"></i>
             <?php } if ($params['popup_enable_rate']) { ?>
-            <i title="<?php echo __('Show rating', BWG()->prefix); ?>" class="bwg-icon-<?php echo $theme_row->lightbox_rate_icon; ?> bwg_ctrl_btn bwg_rate"></i>
+            <i title="<?php echo __('Show rating', 'photo-gallery'); ?>" class="bwg-icon-<?php echo $theme_row->lightbox_rate_icon; ?> bwg_ctrl_btn bwg_rate"></i>
             <?php } if ($params['popup_enable_zoom']) { ?>
-            <i title="<?php echo __('Zoom in-out', BWG()->prefix); ?>" class="bwg-icon-search bwg_ctrl_btn bwg_zoom"></i>
+            <i title="<?php echo __('Zoom in-out', 'photo-gallery'); ?>" class="bwg-icon-search bwg_ctrl_btn bwg_zoom"></i>
             <?php }
             $is_embed = preg_match('/EMBED/', $current_filetype) == 1 ? TRUE : FALSE;
             $share_image_url = str_replace(array('%252F', '%25252F'), '%2F', urlencode( $is_embed ? $current_thumb_url : BWG()->upload_url . rawurlencode($current_image_url)));
             if ($params['popup_enable_facebook']) {
               ?>
-              <a id="bwg_facebook_a" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Facebook', BWG()->prefix); ?>">
-                <i title="<?php echo __('Share on Facebook', BWG()->prefix); ?>" class="bwg-icon-facebook-square bwg_ctrl_btn bwg_facebook"></i>
+              <a id="bwg_facebook_a" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>">
+                <i title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>" class="bwg-icon-facebook-square bwg_ctrl_btn bwg_facebook"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_twitter']) {
               ?>
-              <a id="bwg_twitter_a" href="https://twitter.com/intent/tweet?url=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Twitter', BWG()->prefix); ?>">
-                <i title="<?php echo __('Share on Twitter', BWG()->prefix); ?>" class="bwg-icon-twitter-square bwg_ctrl_btn bwg_twitter"></i>
+              <a id="bwg_twitter_a" href="https://twitter.com/intent/tweet?url=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>">
+                <i title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>" class="bwg-icon-twitter-square bwg_ctrl_btn bwg_twitter"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_pinterest']) {
               ?>
-              <a id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode(urlencode($share_url)); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', BWG()->prefix); ?>">
-                <i title="<?php echo __('Share on Pinterest', BWG()->prefix); ?>" class="bwg-icon-pinterest-square bwg_ctrl_btn bwg_pinterest"></i>
+              <a id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode(urlencode($share_url)); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>">
+                <i title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>" class="bwg-icon-pinterest-square bwg_ctrl_btn bwg_pinterest"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_tumblr']) {
               ?>
-              <a id="bwg_tumblr_a" href="https://www.tumblr.com/share/photo?source=<?php echo $share_image_url; ?>&caption=<?php echo urlencode($current_image_alt); ?>&clickthru=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Tumblr', BWG()->prefix); ?>">
-                <i title="<?php echo __('Share on Tumblr', BWG()->prefix); ?>" class="bwg-icon-tumblr-square bwg_ctrl_btn bwg_tumblr"></i>
+              <a id="bwg_tumblr_a" href="https://www.tumblr.com/share/photo?source=<?php echo $share_image_url; ?>&caption=<?php echo urlencode($current_image_alt); ?>&clickthru=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>">
+                <i title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>" class="bwg-icon-tumblr-square bwg_ctrl_btn bwg_tumblr"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_fullsize_image']) {
               ?>
               <a id="bwg_fullsize_image" href="<?php echo !$is_embed ? BWG()->upload_url . urldecode($current_image_url) : urldecode($current_image_url); ?>" data-elementor-open-lightbox="no"  target="_blank">
-                <i title="<?php echo __('Open image in original size.', BWG()->prefix); ?>" class="bwg-icon-sign-out bwg_ctrl_btn"></i>
+                <i title="<?php echo __('Open image in original size.', 'photo-gallery'); ?>" class="bwg-icon-sign-out bwg_ctrl_btn"></i>
               </a>
               <?php
             }
@@ -835,14 +845,14 @@ class BWGViewGalleryBox {
               }
                 ?>
                 <a id="bwg_download" <?php if ($is_embed) { ?> class="bwg-hidden" <?php } ?>  href="<?php echo $download_href; ?>" target="_blank" download="<?php echo end($current_image_arr); ?>">
-                  <i title="<?php echo __('Download original image', BWG()->prefix); ?>" class="bwg-icon-download bwg_ctrl_btn"></i>
+                  <i title="<?php echo __('Download original image', 'photo-gallery'); ?>" class="bwg-icon-download bwg_ctrl_btn"></i>
                 </a>
                 <?php
 
             }
             if ( function_exists('BWGEC') && $params['popup_enable_ecommerce'] == 1 ) {
              ?>
-            <i title="<?php echo __('Ecommerce', BWG()->prefix); ?>" style="<?php echo $pricelist_id == 0 ? "display:none;": "";?>" class="bwg-icon-shopping-cart bwg_ctrl_btn bwg_ecommerce"></i>
+            <i title="<?php echo __('Ecommerce', 'photo-gallery'); ?>" style="<?php echo $pricelist_id == 0 ? "display:none;": "";?>" class="bwg-icon-shopping-cart bwg_ctrl_btn bwg_ecommerce"></i>
              <?php
             }
             ?>
@@ -868,7 +878,7 @@ class BWGViewGalleryBox {
           <div class="bwg_image_hit_container2">
             <span class="bwg_image_hit_spun">
               <div class="bwg_image_hit">
-                <div class="bwg_image_hits"><?php echo __('Hits: ', BWG()->prefix); ?><span><?php echo $current_image_hit_count; ?></span></div>
+                <div class="bwg_image_hits"><?php echo __('Hits: ', 'photo-gallery'); ?><span><?php echo $current_image_hit_count; ?></span></div>
               </div>
             </span>
           </div>
@@ -890,7 +900,7 @@ class BWGViewGalleryBox {
                   <span class="bwg_image_rate_disabled"></span>
                   <form id="bwg_rate_form" method="post" action="<?php echo $popup_url; ?>">
                     <span id="bwg_star" class="bwg_star" data-score="<?php echo $current_avg_rating; ?>"></span>
-                    <span id="bwg_rated" data-params='<?php echo $data_rated; ?>' class="bwg_rated"><?php echo __('Rated.', BWG()->prefix); ?></span>
+                    <span id="bwg_rated" data-params='<?php echo $data_rated; ?>' class="bwg_rated"><?php echo __('Rated.', 'photo-gallery'); ?></span>
                     <span id="bwg_hint" class="bwg_hint"></span>
                     <input id="rate_ajax_task" name="ajax_task" type="hidden" value="" />
                     <input id="rate_image_id" name="image_id" type="hidden" value="<?php echo $image_id; ?>" />
@@ -1013,24 +1023,24 @@ class BWGViewGalleryBox {
           </span>
         </div>
         <div class="bwg_comments bwg_popup_sidebar">
-            <div title="<?php echo __('Hide Comments', BWG()->prefix); ?>" class="bwg_comments_close bwg_popup_sidebar_close">
+            <div title="<?php echo __('Hide Comments', 'photo-gallery'); ?>" class="bwg_comments_close bwg_popup_sidebar_close">
               <i class="bwg-icon-arrow-<?php echo sanitize_html_class($theme_row->lightbox_comment_pos); ?> bwg_comments_close_btn bwg_popup_sidebar_close_btn"></i>
             </div>
             <form id="bwg_comment_form" method="post" action="<?php echo esc_url($popup_url); ?>">
-								<p><label for="bwg_name"><?php echo __('Name', BWG()->prefix); ?> </label></p>
+								<p><label for="bwg_name"><?php echo __('Name', 'photo-gallery'); ?> </label></p>
 								<p><input class="bwg-validate" type="text" name="bwg_name" id="bwg_name" <?php echo ((get_current_user_id() != 0) ? 'readonly="readonly"' : ''); ?> value="<?php echo ((get_current_user_id() != 0) ? esc_attr(get_userdata(get_current_user_id())->display_name) : esc_attr($bwg_name)); ?>" />
 								</p>
 								<p><span class="bwg_comment_error bwg_comment_name_error"></span></p>
 							  <?php if ($params['popup_enable_email']) { ?>
-									<p><label for="bwg_email"><?php echo __('Email', BWG()->prefix); ?> </label></p>
+									<p><label for="bwg_email"><?php echo __('Email', 'photo-gallery'); ?> </label></p>
 									<p><input class="bwg-validate" type="text" name="bwg_email" id="bwg_email" value="<?php echo ((get_current_user_id() != 0) ? esc_attr(get_userdata(get_current_user_id())->user_email) : esc_attr($bwg_email)); ?>" /></p>
 									<p><span class="bwg_comment_error bwg_comment_email_error"></span></p>
 								<?php } ?>
-								<p><label for="bwg_comment"><?php echo __('Comment', BWG()->prefix); ?> </label></p>
+								<p><label for="bwg_comment"><?php echo __('Comment', 'photo-gallery'); ?> </label></p>
 								<p><textarea class="bwg-validate bwg_comment_textarea" name="bwg_comment" id="bwg_comment"></textarea></p>
 								<p><span class="bwg_comment_error bwg_comment_textarea_error"></span></p>
 								<?php if ( $params['popup_enable_captcha'] && !BWG()->options->gdpr_compliance) { ?>
-									<p><label for="bwg_captcha_input"><?php echo __('Verification Code', BWG()->prefix); ?></label></p>
+									<p><label for="bwg_captcha_input"><?php echo __('Verification Code', 'photo-gallery'); ?></label></p>
 									<p>
 										<input id="bwg_captcha_input" name="bwg_captcha_input" class="bwg_captcha_input" type="text" autocomplete="off">
 										<img id="bwg_captcha_img" class="bwg_captcha_img" type="captcha" digit="6" src="<?php echo add_query_arg(array('action' => 'bwg_captcha', 'digit' => 6, 'i' => ''), admin_url('admin-ajax.php')); ?>" onclick="bwg_captcha_refresh('bwg_captcha')" ontouchend="bwg_captcha_refresh('bwg_captcha')" />
@@ -1053,8 +1063,8 @@ class BWGViewGalleryBox {
 										type="checkbox"
 										value="1" <?php echo (WDWLibrary::get('bwg_comment_privacy_policy') ? 'checked' : ''); ?> />
 									<?php
-									$privacy_policy_text = __('I consent collecting this data and processing it according to %s of this website.', BWG()->prefix);
-									$privacy_policy_link = ' <a href="' . WDWLibrary::get_privacy_policy_url() . '" target="_blank">' . __('Privacy Policy', BWG()->prefix) . '</a>';
+									$privacy_policy_text = __('I consent collecting this data and processing it according to %s of this website.', 'photo-gallery');
+									$privacy_policy_link = ' <a href="' . WDWLibrary::get_privacy_policy_url() . '" target="_blank">' . __('Privacy Policy', 'photo-gallery') . '</a>';
 									echo sprintf($privacy_policy_text, $privacy_policy_link);
 									?>
 									</label>
@@ -1063,9 +1073,9 @@ class BWGViewGalleryBox {
 								<?php } ?>
 								<p>
 								<input <?php echo ($privacy_policy_url) ? 'disabled="disabled"' : ''; ?> onclick="bwg_add_comment(); return false;" ontouchend="bwg_add_comment(); return false;" class="bwg_submit <?php echo ($privacy_policy_url) ? 'bwg-submit-disabled' : ''; ?>" type="submit"
-									 name="bwg_submit" id="bwg_submit" value="<?php echo __('Submit', BWG()->prefix); ?>" />
+									 name="bwg_submit" id="bwg_submit" value="<?php echo __('Submit', 'photo-gallery'); ?>" />
 								</p>
-								<p class="bwg_comment_waiting_message"><?php _e('Your comment is awaiting moderation', BWG()->prefix); ?></p>
+								<p class="bwg_comment_waiting_message"><?php _e('Your comment is awaiting moderation', 'photo-gallery'); ?></p>
 								<input id="ajax_task" name="ajax_task" type="hidden" value="" />
 								<input id="image_id" name="image_id" type="hidden" value="<?php echo esc_attr($image_id); ?>" />
 								<input id="comment_id" name="comment_id" type="hidden" value="" />
@@ -1100,16 +1110,16 @@ class BWGViewGalleryBox {
 					</div>
 					<div class="bwg_ecommerce_panel bwg_popup_sidebar_panel bwg_popup_sidebar">
 						<div id="bwg_ecommerce">
-							<p title="<?php echo __('Hide Ecommerce', BWG()->prefix); ?>" class="bwg_ecommerce_close bwg_popup_sidebar_close" >
+							<p title="<?php echo __('Hide Ecommerce', 'photo-gallery'); ?>" class="bwg_ecommerce_close bwg_popup_sidebar_close" >
 								<i class="bwg-icon-arrow-<?php echo $theme_row->lightbox_comment_pos; ?> bwg_ecommerce_close_btn bwg_popup_sidebar_close_btn"></i>
 							</p>
 							<form id="bwg_ecommerce_form" method="post" action="<?php echo esc_url($popup_url); ?>">
 								<div class="pge_add_to_cart">
 									<div>
-										<span class="pge_add_to_cart_title"><?php echo (__('Add to cart', BWG()->prefix)); ?></span>
+										<span class="pge_add_to_cart_title"><?php echo (__('Add to cart', 'photo-gallery')); ?></span>
 									</div>
 									<div>
-										<a href="<?php echo esc_url(get_permalink($options->checkout_page));?>"><?php echo "<span class='products_in_cart'>".esc_html($products_in_cart) ."</span> ". __('items', BWG()->prefix); ?></a>
+										<a href="<?php echo esc_url(get_permalink($options->checkout_page));?>"><?php echo "<span class='products_in_cart'>".esc_html($products_in_cart) ."</span> ". __('items', 'photo-gallery'); ?></a>
 									</div>
 								</div>
 								<div class="bwg_ecommerce_body">
@@ -1117,14 +1127,14 @@ class BWGViewGalleryBox {
 										<li id="manual_li" <?php if(!in_array("manual",$pricelist_sections)) { echo "style='display:none;'"; } ?> class="pge_active">
 											<a href= "#manual">
 												<span class="manualh4" >
-													<?php echo __('Prints and products', BWG()->prefix); ?>
+													<?php echo __('Prints and products', 'photo-gallery'); ?>
 												</span>
 											</a>
 										</li>
 										<li id="downloads_li" <?php if(!in_array("downloads",$pricelist_sections)) echo "style='display:none;'"; ?> >
 											<a href= "#downloads">
 											<span class="downloadsh4" >
-												<?php echo __('Downloads', BWG()->prefix); ?>
+												<?php echo __('Downloads', 'photo-gallery'); ?>
 											</span>
 											</a>
 										</li>
@@ -1134,11 +1144,11 @@ class BWGViewGalleryBox {
 									<div class="manual pge_pricelist" id="manual" <?php if( count($pricelist_sections) == 2  || (count($pricelist_sections) == 1 && end($pricelist_sections) == "manual")) echo 'style="display: block;"'; else echo 'style="display: none;"'; ?>  >
 										<div>
 											<div class="product_manual_price_div">
-												<p><?php echo $pricelist->manual_title ? __('Name', BWG()->prefix).': '.$pricelist->manual_title : "";?></p>
+												<p><?php echo $pricelist->manual_title ? __('Name', 'photo-gallery').': '.$pricelist->manual_title : "";?></p>
                                                <?php if ($pricelist->price) {
                                                  ?>
 												<p>
-													<span><?php echo __('Price', BWG()->prefix).': '.esc_html($options->currency_sign);?></span>
+													<span><?php echo __('Price', 'photo-gallery').': '.esc_html($options->currency_sign);?></span>
 													<span class="_product_manual_price"><?php echo number_format((float)$pricelist->price,2)?></span>
 												</p>
                                                   <?php
@@ -1149,7 +1159,7 @@ class BWGViewGalleryBox {
                                           ?>
 											<div class="product_manual_desc_div">
 												<p>
-													<span><?php echo __('Description', BWG()->prefix);?>:</span>
+													<span><?php echo __('Description', 'photo-gallery');?>:</span>
 													<span class="product_manual_desc"><?php echo esc_html($pricelist->manual_description);?></span>
 												</p>
 											</div>
@@ -1158,13 +1168,13 @@ class BWGViewGalleryBox {
                                               ?>
 											<div class="image_count_div">
 												<p>
-													<?php echo __('Count', BWG()->prefix).': ';?>
+													<?php echo __('Count', 'photo-gallery').': ';?>
 													<input type="number" min="1" class="image_count" value="1" onchange="changeMenualTotal(this);">
 												</p>
 											</div>
 											<?php if ( empty($parameters) == false ) { ?>
 											<div class="image_parameters">
-												<p><?php //echo __('Parameters', BWG()->prefix); ?></p>
+												<p><?php //echo __('Parameters', 'photo-gallery'); ?></p>
 												<?php
 													$i = 0;
 													foreach($parameters as $parameter_id => $parameter){
@@ -1238,7 +1248,7 @@ class BWGViewGalleryBox {
 											</div>
 											<?php } ?>
 											<p>
-												<span><b><?php echo __('Total', BWG()->prefix).': '.esc_html($options->currency_sign);?></b></span>
+												<span><b><?php echo __('Total', 'photo-gallery').': '.esc_html($options->currency_sign);?></b></span>
 												<b><span class="product_manual_price" data-price="<?php echo esc_attr($pricelist->price); ?>" data-actual-price="<?php echo esc_attr($pricelist->price); ?>"><?php echo number_format((float)$pricelist->price,2)?></span></b>
 											</p>
 										</div>
@@ -1248,10 +1258,10 @@ class BWGViewGalleryBox {
 										<table>
 											<thead>
 												<tr>
-													<th><?php echo __('Name', BWG()->prefix); ?></th>
-													<th><?php echo __('Dimensions', BWG()->prefix); ?></th>
-													<th><?php echo __('Price', BWG()->prefix); ?></th>
-												  <th><?php echo __('Choose', BWG()->prefix); ?></th>
+													<th><?php echo __('Name', 'photo-gallery'); ?></th>
+													<th><?php echo __('Dimensions', 'photo-gallery'); ?></th>
+													<th><?php echo __('Price', 'photo-gallery'); ?></th>
+												  <th><?php echo __('Choose', 'photo-gallery'); ?></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -1282,15 +1292,15 @@ class BWGViewGalleryBox {
 											</tbody>
 										</table>
 										<p>
-											<span><b><?php echo __('Total', BWG()->prefix).': '.esc_html($options->currency_sign);?></b></span>
+											<span><b><?php echo __('Total', 'photo-gallery').': '.esc_html($options->currency_sign);?></b></span>
 											<b><span class="product_downloads_price">0</span></b>
 										</p>
 									</div>
 									</div>
 								</div>
 								<div style="margin-top:10px;">
-									<input type="button" class="bwg_submit" value="<?php echo __('Add to cart', BWG()->prefix); ?>" onclick="onBtnClickAddToCart();">
-									<input type="button" class="bwg_submit" value="<?php echo __('View cart', BWG()->prefix); ?>" onclick="onBtnViewCart()">
+									<input type="button" class="bwg_submit" value="<?php echo __('Add to cart', 'photo-gallery'); ?>" onclick="onBtnClickAddToCart();">
+									<input type="button" class="bwg_submit" value="<?php echo __('View cart', 'photo-gallery'); ?>" onclick="onBtnViewCart()">
 									&nbsp;<span class="add_to_cart_msg"></span>
 								</div>
 								<input id="ajax_task" name="ajax_task" type="hidden" value="" />
@@ -1401,7 +1411,7 @@ class BWGViewGalleryBox {
 			<?php if ( current_user_can('manage_options') ) { ?>
 				<i onclick="bwg_remove_comment(<?php echo $row->id; ?>); return false;"
 					ontouchend="bwg_remove_comment(<?php echo $row->id; ?>); return false;"
-					title="<?php _e('Delete Comment', BWG()->prefix); ?>" class="bwg-icon-times bwg_comment_delete_btn"></i>
+					title="<?php _e('Delete Comment', 'photo-gallery'); ?>" class="bwg-icon-times bwg_comment_delete_btn"></i>
 			<?php } ?>
 		  <span class="bwg_comment_date"><?php echo esc_html($row->date); ?></span>
 		</p>

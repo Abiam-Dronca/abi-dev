@@ -993,6 +993,7 @@ margin-right: 10px;
 }
 
 .bwg_thumbnail.bwg_container .search_line .SumoSelect > .CaptionCont > label > i {
+  background: none;
   line-height: 100%;
   height: 100%;
 }

@@ -84,172 +84,177 @@ class WDWLibrary {
     if ($message_id) {
       switch($message_id) {
         case 1: {
-          $message = __('Item successfully saved.', BWG()->prefix);
+          $message = __('Item successfully saved.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 2: {
-          $message = __('Failed.', BWG()->prefix);
+          $message = __('Failed.', 'photo-gallery');
           $type = 'error';
           break;
 
         }
         case 3: {
-          $message = __('Item successfully deleted.', BWG()->prefix);
+          $message = __('Item successfully deleted.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 4: {
-          $message = __("You can't delete default theme.", BWG()->prefix);
+          $message = __("You can't delete default theme.", 'photo-gallery');
           $type = 'error';
           break;
 
         }
         case 5: {
-          $message = __('Items successfully deleted.', BWG()->prefix);
+          $message = __('Items successfully deleted.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 6: {
-          $message = __('You must set watermark type from Options page.', BWG()->prefix);
+          $message = __('You must set watermark type from Options page.', 'photo-gallery');
           $type = 'wd_error';
           break;
 
         }
         case 7: {
-          $message = __('The item is successfully set as default.', BWG()->prefix);
+          $message = __('The item is successfully set as default.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 8: {
-          $message = __('Options successfully saved.', BWG()->prefix);
+          $message = __('Options successfully saved.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 9: {
-          $message = __('Item successfully published.', BWG()->prefix);
+          $message = __('Item successfully published.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 10: {
-          $message = __('Item successfully unpublished.', BWG()->prefix);
+          $message = __('Item successfully unpublished.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 11: {
-          $message = __('Item successfully duplicated.', BWG()->prefix);
+          $message = __('Item successfully duplicated.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 12: {
           // ToDO: delete
-          $message = __('Items successfully unpublished.', BWG()->prefix);
+          $message = __('Items successfully unpublished.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 13: {
-          $message = __('Ordering successfully saved.', BWG()->prefix);
+          $message = __('Ordering successfully saved.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 14: {
-          $message = __('A term with the name provided already exists.', BWG()->prefix);
+          $message = __('A term with the name provided already exists.', 'photo-gallery');
           $type = 'error';
           break;
 
         }
         case 15: {
-          $message = __('Name field is required.', BWG()->prefix);
+          $message = __('Name field is required.', 'photo-gallery');
           $type = 'error';
           break;
 
         }
         case 16: {
-          $message = __('The slug must be unique.', BWG()->prefix);
+          $message = __('The slug must be unique.', 'photo-gallery');
           $type = 'error';
           break;
 
         }
         case 17: {
-          $message = __('Changes must be saved.', BWG()->prefix);
+          $message = __('Changes must be saved.', 'photo-gallery');
           $type = 'error';
           break;
 
         }
          case 18: {
-          $message = __('Theme successfully copied.', BWG()->prefix);
+          $message = __('Theme successfully copied.', 'photo-gallery');
           $type = 'updated';
           break;
 
         }
         case 19: {
-          $message = __('Failed.', BWG()->prefix);
+          $message = __('Failed.', 'photo-gallery');
           $type = 'error';
           break;
         }
         case 20: {
-          $message = __('Items were reset successfully.', BWG()->prefix);
+          $message = __('Items were reset successfully.', 'photo-gallery');
           $type = 'updated';
           break;
         }
         case 21: {
-          $message = __('Watermark successfully set.', BWG()->prefix);
+          $message = __('Watermark successfully set.', 'photo-gallery');
           $type = 'updated';
           break;
         }
         case 22: {
-          $message = __('Items successfully rotated.', BWG()->prefix);
+          $message = __('Items successfully rotated.', 'photo-gallery');
           $type = 'updated';
           break;
         }
         case 23: {
-          $message = __('Items successfully recreated.', BWG()->prefix);
+          $message = __('Items successfully recreated.', 'photo-gallery');
           $type = 'updated';
           break;
         }
         case 24: {
-          $message = __('Items successfully resized.', BWG()->prefix);
+          $message = __('Items successfully resized.', 'photo-gallery');
           $type = 'updated';
           break;
         }
         case 25: {
-          $message = __('Items successfully edited.', BWG()->prefix);
+          $message = __('Items successfully edited.', 'photo-gallery');
           $type = 'updated';
           break;
         }
 		    case 26: {
-          $message = __('Watermark could not be set. The image URL is incorrect.', BWG()->prefix);
+          $message = __('Watermark could not be set. The image URL is incorrect.', 'photo-gallery');
           $type = 'error';
           break;
         }
         case 27: {
-          $message = __('http:// wrapper is disabled in the server configuration by allow_url_fopen=0.', BWG()->prefix);
+          $message = __('http:// wrapper is disabled in the server configuration by allow_url_fopen=0.', 'photo-gallery');
           $type = 'error';
           break;
         }
         case 28: {
-          $message = __('All items are successfully duplicated.', BWG()->prefix);
+          $message = __('All items are successfully duplicated.', 'photo-gallery');
           $type = 'updated';
           break;
         }
         case 29: {
-          $message = __('Connected successfully.', BWG()->prefix);
+          $message = __('Connected successfully.', 'photo-gallery');
           $type = 'updated';
           break;
         }
         case 30: {
-          $message = __('Connect successfully deleted.', BWG()->prefix);
+          $message = __('Connect successfully deleted.', 'photo-gallery');
           $type = 'updated';
+          break;
+        }
+        case 31: {
+          $message = __('The webp support should be enabled for GD and/or ImageMagick.', 'photo-gallery');
+          $type = 'error';
           break;
         }
         default: {
@@ -299,7 +304,7 @@ class WDWLibrary {
     ?>
     <th id="order-<?php echo sanitize_html_class($id); ?>" class="<?php echo esc_html(implode(' ', $class)); ?>">
       <a href="<?php echo esc_url(add_query_arg( array('orderby' => $id, 'order' => $order), $page_url )); ?>"
-         title="<?php _e('Click to sort by this item', BWG()->prefix); ?>">
+         title="<?php _e('Click to sort by this item', 'photo-gallery'); ?>">
         <span><?php echo esc_html($text); ?></span><span class="sorting-indicator"></span>
       </a>
     </th>
@@ -314,13 +319,13 @@ class WDWLibrary {
    */
   public static function admin_images_ordering_choices() {
     return array(
-      'order_asc' => __('Default sorting', BWG()->prefix),
-      'filename_asc' => __('File name (Asc)', BWG()->prefix),
-      'filename_desc' => __('File name (Desc)', BWG()->prefix),
-      'alt_asc' => __('Alt/Title (Asc)', BWG()->prefix),
-      'alt_desc' => __('Alt/Title (Desc)', BWG()->prefix),
-      'description_asc' => __('Description (Asc)', BWG()->prefix),
-      'description_desc' => __('Description (Desc)', BWG()->prefix),
+      'order_asc' => __('Default sorting', 'photo-gallery'),
+      'filename_asc' => __('File name (Asc)', 'photo-gallery'),
+      'filename_desc' => __('File name (Desc)', 'photo-gallery'),
+      'alt_asc' => __('Alt/Title (Asc)', 'photo-gallery'),
+      'alt_desc' => __('Alt/Title (Desc)', 'photo-gallery'),
+      'description_asc' => __('Description (Asc)', 'photo-gallery'),
+      'description_desc' => __('Description (Desc)', 'photo-gallery'),
     );
   }
 
@@ -378,8 +383,8 @@ class WDWLibrary {
         <input type="text" id="search_value" name="search_value" class="spider_search_value" onkeypress="return check_search_key(event, this);" value="<?php echo esc_attr($search_value); ?>" style="width: 150px;margin-right:<?php echo $margin_right; ?>px; padding-top:10px; <?php echo (get_bloginfo('version') > '3.7') ? ' height: 33px;' : ''; ?>" />
       </div>
       <div class="alignleft actions">
-        <input type="button" value="" title="<?php _e('Search',BWG()->prefix); ?>" onclick="spider_search()" class="wd-search-btn action">
-        <input type="button" value="" title="<?php _e('Reset',BWG()->prefix); ?>" onclick="spider_reset()" class="wd-reset-btn action">
+        <input type="button" value="" title="<?php _e('Search', 'photo-gallery'); ?>" onclick="spider_search()" class="wd-search-btn action">
+        <input type="button" value="" title="<?php _e('Reset', 'photo-gallery'); ?>" onclick="spider_reset()" class="wd-reset-btn action">
       </div>
     </div>
     <?php
@@ -455,7 +460,7 @@ class WDWLibrary {
       <span class="displaying-num">
         <?php
         if ($count_items != 0) {
-          printf(_n('%s item', '%s items', $count_items, BWG()->prefix), $count_items);
+          printf(_n('%s item', '%s items', $count_items, 'photo-gallery'), $count_items);
         }
         ?>
       </span>
@@ -484,7 +489,7 @@ class WDWLibrary {
         <span class="paging-input">
           <span class="total-pages">
           <input class="current_page" id="current_page" name="current_page" value="<?php echo esc_attr($page_number); ?>" onkeypress="return check_enter_key(event, this)" title="Go to the page" type="text" size="1" />
-        </span> <?php echo __('of', BWG()->prefix); ?>
+        </span> <?php echo __('of', 'photo-gallery'); ?>
         <span class="total-pages">
             <?php echo esc_html($items_county); ?>
           </span>
@@ -530,8 +535,8 @@ class WDWLibrary {
         <input type="text" id="search_value" name="search_value" class="spider_search_value" onkeypress="return check_search_key(event, this);" value="<?php echo esc_attr($search_value); ?>" style="width: 150px;margin-right:5px;<?php echo (get_bloginfo('version') > '3.7') ? ' height: 33px;' : ''; ?>" />
       </div>
       <div class="alignleft actions">
-        <input type="button" value="" title="<?php echo __('Search',BWG()->prefix); ?>" onclick="spider_search()" class="wd-search-btn action">
-        <input type="button" value="" title="<?php echo __('Reset',BWG()->prefix); ?>" onclick="spider_reset()" class="wd-reset-btn action">
+        <input type="button" value="" title="<?php echo __('Search', 'photo-gallery'); ?>" onclick="spider_search()" class="wd-search-btn action">
+        <input type="button" value="" title="<?php echo __('Reset', 'photo-gallery'); ?>" onclick="spider_reset()" class="wd-reset-btn action">
       </div>
     </div>
     <?php
@@ -602,7 +607,7 @@ class WDWLibrary {
       <span class="displaying-num">
         <?php
         if ($count_items != 0) {
-          printf(_n('%s item', '%s items', $count_items, BWG()->prefix), $count_items);
+          printf(_n('%s item', '%s items', $count_items, 'photo-gallery'), $count_items);
         }
         ?>
       </span>
@@ -631,7 +636,7 @@ class WDWLibrary {
         <span class="paging-input">
           <span class="total-pages">
           <input class="current_page" id="current_page" name="current_page" value="<?php echo esc_attr($page_number); ?>" onkeypress="return check_enter_key(event, this)" title="Go to the page" type="text" size="1" />
-        </span> <?php echo __('of', BWG()->prefix); ?>
+        </span> <?php echo __('of', 'photo-gallery'); ?>
         <span class="total-pages">
             <?php echo esc_html($items_county); ?>
           </span>
@@ -1793,7 +1798,7 @@ class WDWLibrary {
 
   public static function resize_image($source, $destination, $max_width, $max_height) {
     $image = wp_get_image_editor( $source );
-    if ( ! is_wp_error( $image ) ) {
+    if ( !is_wp_error( $image ) ) {
       $image_size = $image->get_size();
       $img_width = $image_size[ 'width' ];
       $img_height = $image_size[ 'height' ];
@@ -1823,7 +1828,7 @@ class WDWLibrary {
       if ( $source !== $destination ) {
         return copy( $source, $destination );
       }
-      return true;
+      return false;
     }
   }
 
@@ -2382,7 +2387,7 @@ class WDWLibrary {
     $title = ($title != '') ? strtolower($title) : 'items';
     ob_start();
     ?><tr class="no-items">
-    <td class="colspanchange" <?php echo $colspan_count ? 'colspan="' . esc_attr($colspan_count) . '"' : ''?>><?php echo sprintf(__('No %s found.', BWG()->prefix), $title); ?></td>
+    <td class="colspanchange" <?php echo $colspan_count ? 'colspan="' . esc_attr($colspan_count) . '"' : ''?>><?php echo sprintf(__('No %s found.', 'photo-gallery'), $title); ?></td>
     </tr><?php
     return ob_get_clean();
   }
@@ -2438,7 +2443,7 @@ class WDWLibrary {
       'show_in_nav_menus' => FALSE,
       'show_tagcloud' => TRUE,
       'hierarchical' => FALSE,
-      'label' => __('Gallery Tags', BWG()->prefix),
+      'label' => __('Gallery Tags', 'photo-gallery'),
       'query_var' => TRUE,
       'rewrite' => TRUE));
   }
@@ -2666,84 +2671,84 @@ class WDWLibrary {
     else {
       $image_actions = array(
         'image_resize' => array(
-          'title' => __('Resize', BWG()->prefix),
-          'bulk_action' => __('resized', BWG()->prefix),
+          'title' => __('Resize', 'photo-gallery'),
+          'bulk_action' => __('resized', 'photo-gallery'),
           'disabled' => (BWG()->wp_editor_exists ? '' : 'disabled="disabled"'),
         ),
         'image_recreate_thumbnail' => array(
-          'title' => __('Recreate thumbnail', BWG()->prefix),
-          'bulk_action' => __('recreated', BWG()->prefix),
+          'title' => __('Recreate thumbnail', 'photo-gallery'),
+          'bulk_action' => __('recreated', 'photo-gallery'),
           'disabled' => (BWG()->wp_editor_exists ? '' : 'disabled="disabled"'),
         ),
         'image_rotate_left' => array(
-          'title' => __('Rotate left', BWG()->prefix),
-          'bulk_action' => __('rotated left', BWG()->prefix),
+          'title' => __('Rotate left', 'photo-gallery'),
+          'bulk_action' => __('rotated left', 'photo-gallery'),
           'disabled' => (BWG()->wp_editor_exists ? '' : 'disabled="disabled"'),
         ),
         'image_rotate_right' => array(
-          'title' => __('Rotate right', BWG()->prefix),
-          'bulk_action' => __('rotated right', BWG()->prefix),
+          'title' => __('Rotate right', 'photo-gallery'),
+          'bulk_action' => __('rotated right', 'photo-gallery'),
           'disabled' => (BWG()->wp_editor_exists ? '' : 'disabled="disabled"'),
         ),
         'image_set_watermark' => array(
-          'title' => __('Set watermark', BWG()->prefix),
-          'bulk_action' => __('edited', BWG()->prefix),
+          'title' => __('Set watermark', 'photo-gallery'),
+          'bulk_action' => __('edited', 'photo-gallery'),
           'disabled' => (BWG()->wp_editor_exists ? '' : 'disabled="disabled"'),
         ),
         'image_reset' => array(
-          'title' => __('Reset', BWG()->prefix),
-          'bulk_action' => __('reset', BWG()->prefix),
+          'title' => __('Reset', 'photo-gallery'),
+          'bulk_action' => __('reset', 'photo-gallery'),
           'disabled' => '',
         ),
       );
     }
     $image_actions += array(
       'image_edit_alt' => array(
-        'title' => __('Edit Alt/Title', BWG()->prefix),
-        'bulk_action' => __('edited', BWG()->prefix),
+        'title' => __('Edit Alt/Title', 'photo-gallery'),
+        'bulk_action' => __('edited', 'photo-gallery'),
         'disabled' => '',
       ),
       'image_edit_description' => array(
-        'title' => __('Edit description', BWG()->prefix),
-        'bulk_action' => __('edited', BWG()->prefix),
+        'title' => __('Edit description', 'photo-gallery'),
+        'bulk_action' => __('edited', 'photo-gallery'),
         'disabled' => '',
       ),
       'image_edit_redirect' => array(
-        'title' => __('Edit redirect URL', BWG()->prefix),
-        'bulk_action' => __('edited', BWG()->prefix),
+        'title' => __('Edit redirect URL', 'photo-gallery'),
+        'bulk_action' => __('edited', 'photo-gallery'),
         'disabled' => '',
       ),
       'image_add_tag' => array(
-        'title' => __('Add/Remove tag', BWG()->prefix),
-        'bulk_action' => __('edited', BWG()->prefix),
+        'title' => __('Add/Remove tag', 'photo-gallery'),
+        'bulk_action' => __('edited', 'photo-gallery'),
         'disabled' => '',
       ),
       'image_publish' => array(
-        'title' => __('Publish', BWG()->prefix),
-        'bulk_action' => __('published', BWG()->prefix),
+        'title' => __('Publish', 'photo-gallery'),
+        'bulk_action' => __('published', 'photo-gallery'),
         'disabled' => '',
       ),
       'image_unpublish' => array(
-        'title' => __('Unpublish', BWG()->prefix),
-        'bulk_action' => __('unpublished', BWG()->prefix),
+        'title' => __('Unpublish', 'photo-gallery'),
+        'bulk_action' => __('unpublished', 'photo-gallery'),
         'disabled' => '',
       ),
       'image_delete' => array(
-        'title' => __('Delete', BWG()->prefix),
-        'bulk_action' => __('deleted', BWG()->prefix),
+        'title' => __('Delete', 'photo-gallery'),
+        'bulk_action' => __('deleted', 'photo-gallery'),
         'disabled' => '',
       ),
     );
 
     if ( function_exists('BWGEC') ) {
       $image_actions['set_image_pricelist'] = array(
-        'title' => __('Add pricelist', BWG()->prefix),
-        'bulk_action' => __('edited', BWG()->prefix),
+        'title' => __('Add pricelist', 'photo-gallery'),
+        'bulk_action' => __('edited', 'photo-gallery'),
         'disabled' => '',
       );
       $image_actions['remove_pricelist_all'] = array(
-        'title' => __('Remove pricelist', BWG()->prefix),
-        'bulk_action' => __('edited', BWG()->prefix),
+        'title' => __('Remove pricelist', 'photo-gallery'),
+        'bulk_action' => __('edited', 'photo-gallery'),
         'disabled' => '',
       );
     }
@@ -2849,10 +2854,10 @@ class WDWLibrary {
           <div class="bwg-topbar bwg-topbar-content">
             <div class="bwg-topbar-content-container">
               <div class="bwg-topbar-content-title">
-                <?php _e('Photo Gallery Premium', BWG()->prefix); ?>
+                <?php _e('Photo Gallery Premium', 'photo-gallery'); ?>
               </div>
               <div class="bwg-topbar-content-body">
-                <?php _e('Get more stunning views with fully customizable themes, powerful lightbox and much more.', BWG()->prefix); ?>
+                <?php _e('Get more stunning views with fully customizable themes, powerful lightbox and much more.', 'photo-gallery'); ?>
               </div>
             </div>
             <div class="bwg-topbar-content-button-container">
@@ -2870,7 +2875,7 @@ class WDWLibrary {
                 ?>
                 <a href="<?php echo esc_url($user_guide_link); ?>" target="_blank" class="bwg-topbar_user_guid">
                   <div class="bwg-topbar-links-item">
-                    <?php _e('User guide', BWG()->prefix); ?>
+                    <?php _e('User guide', 'photo-gallery'); ?>
                   </div>
                 </a>
                 <?php
@@ -2885,7 +2890,7 @@ class WDWLibrary {
                 <a href="<?php echo esc_url($support_forum_link); ?>" target="_blank" class="bwg-topbar_support_forum">
                   <div class="bwg-topbar-links-item">
                     <img src="<?php echo  esc_url(BWG()->plugin_url . '/css/images/help.svg'); ?>" class="help_icon" />
-                    <?php _e('Ask a question', BWG()->prefix); ?>
+                    <?php _e('Ask a question', 'photo-gallery'); ?>
                   </div>
                 </a>
               </div>
@@ -2899,15 +2904,15 @@ class WDWLibrary {
       $menus = array(
         'manage' => array(
           'href' => add_query_arg( array('page' => 'manage' . BWG()->menu_postfix ), admin_url('admin.php')),
-          'name' => __('Forms', BWG()->prefix)
+          'name' => __('Forms', 'photo-gallery')
         ),
         'addons' => array(
           'href' => add_query_arg( array('page' => 'addons' . BWG()->menu_postfix ), admin_url('admin.php')),
-          'name' => __('Add-ons', BWG()->prefix)
+          'name' => __('Add-ons', 'photo-gallery')
         ),
         'pricing' => array(
           'href' => add_query_arg( array('page' => 'pricing' . BWG()->menu_postfix ), admin_url('admin.php')),
-          'name' => __('Premium Version', BWG()->prefix) .' <span class="bwg-upgrade">' . __('Upgrade', BWG()->prefix) . '</span>'
+          'name' => __('Premium Version', 'photo-gallery') .' <span class="bwg-upgrade">' . __('Upgrade', 'photo-gallery') . '</span>'
         ),
       );
       ?>
@@ -3026,11 +3031,11 @@ class WDWLibrary {
     ob_start();
     ?>
       <div class="wd-list-view-header-free-right">
-        <p class="upgrade-header"><?php _e('Unleash the full benefits & ', BWG()->prefix); ?></p>
-        <p class="upgrade-text"><?php _e('features of the Premium Plugin', BWG()->prefix); ?></p>
+        <p class="upgrade-header"><?php _e('Unleash the full benefits & ', 'photo-gallery'); ?></p>
+        <p class="upgrade-text"><?php _e('features of the Premium Plugin', 'photo-gallery'); ?></p>
         <a class="upgrade-button" href="<?php echo $premium_link; ?>" target="_blank"><?php _e( 'Upgrade Now', BWG()->prefix ); ?></a>
       </div>
-      <a class="wd-list-view-ask-question" href="<?php echo esc_url($support_forum_link); ?>" target="_blank"><?php _e('Ask a question', BWG()->prefix); ?></a>
+      <a class="wd-list-view-ask-question" href="<?php echo esc_url($support_forum_link); ?>" target="_blank"><?php _e('Ask a question', 'photo-gallery'); ?></a>
     <?php
     echo ob_get_clean();
   }
@@ -3044,7 +3049,7 @@ class WDWLibrary {
     $support_forum_link = 'https://wordpress.org/support/plugin/photo-gallery/#new-post';
     ob_start();
     ?>
-    <a class="wd-list-view-ask-question" href="<?php echo esc_url($support_forum_link); ?>" target="_blank"><?php _e('Ask a question', BWG()->prefix); ?></a>
+    <a class="wd-list-view-ask-question" href="<?php echo esc_url($support_forum_link); ?>" target="_blank"><?php _e('Ask a question', 'photo-gallery'); ?></a>
     <?php
     echo ob_get_clean();
   }
@@ -3091,7 +3096,7 @@ class WDWLibrary {
     $rows = $wpdb->get_results($query);
 
     $galleries = array();
-    $galleries[0] = __('All images', BWG()->prefix);
+    $galleries[0] = __('All images', 'photo-gallery');
     foreach ( $rows as $row ) {
       $galleries[$row->id] = $row->name;
     }
@@ -3110,7 +3115,7 @@ class WDWLibrary {
     $rows = $wpdb->get_results($query);
 
     $gallery_groups = array();
-    $gallery_groups[0] = __('All galleries', BWG()->prefix);
+    $gallery_groups[0] = __('All galleries', 'photo-gallery');
     foreach ( $rows as $row ) {
       $gallery_groups[$row->id] = $row->name;
     }
@@ -3155,7 +3160,7 @@ class WDWLibrary {
     $rows = $wpdb->get_results($query);
 
     $tags = array();
-    $tags[0] = __('All tags', BWG()->prefix);
+    $tags[0] = __('All tags', 'photo-gallery');
     foreach ( $rows as $row ) {
       $tags[$row->term_id] = $row->name;
     }
@@ -3177,7 +3182,7 @@ class WDWLibrary {
   }
 
   public static function error_message_ids() {
-	  return array( 26, 27 );
+	  return array( 26, 27, 31 );
   }
 
   /**

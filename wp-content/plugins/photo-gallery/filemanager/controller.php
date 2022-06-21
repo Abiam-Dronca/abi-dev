@@ -186,7 +186,7 @@ class FilemanagerController {
     $new_dir_path = $this->esc_dir($new_dir_path);
 
     if (file_exists($new_dir_path) == true) {
-      $msg = __("Directory already exists.", BWG()->prefix);
+      $msg = __("Directory already exists.", 'photo-gallery');
     }
     else {
       $msg = '';
@@ -284,11 +284,11 @@ class FilemanagerController {
     $msg = '';
 
     if (file_exists($file_path) == false) {
-      $msg = __("File doesn't exist.", BWG()->prefix);
+      $msg = __("File doesn't exist.", 'photo-gallery');
     }
     elseif (is_dir($file_path) == true) {
       if (rename($file_path, $cur_dir_path . '/' . sanitize_file_name($file_new_name)) == false) {
-        $msg = __("Can't rename the file.", BWG()->prefix);
+        $msg = __("Can't rename the file.", 'photo-gallery');
       }
       else {
         $args = array(
@@ -347,7 +347,7 @@ class FilemanagerController {
     elseif ((strrpos($file_name, '.') !== false)) {
       $file_extension = substr($file_name, strrpos($file_name, '.') + 1);
       if (rename($file_path, $cur_dir_path . '/' . $file_new_name . '.' . $file_extension) == false) {
-        $msg = __("Can't rename the file.", BWG()->prefix);
+        $msg = __("Can't rename the file.", 'photo-gallery');
       }
       else {
         $wpdb->update($wpdb->prefix . 'bwg_image', array(
@@ -387,7 +387,7 @@ class FilemanagerController {
       }
     }
     else {
-      $msg = __("Can't rename the file.", BWG()->prefix);
+      $msg = __("Can't rename the file.", 'photo-gallery');
 	}
     $_REQUEST['file_names'] = '';
     $args = array(
@@ -426,7 +426,7 @@ class FilemanagerController {
       $thumb_file_path = $cur_dir_path . '/thumb/' . $file_name;
       $original_file_path = $cur_dir_path . '/.original/' . $file_name;
       if (file_exists($file_path) == false) {
-        $msg = __("Some of the files couldn't be removed.", BWG()->prefix);
+        $msg = __("Some of the files couldn't be removed.", 'photo-gallery');
       }
       else {
         if ( is_dir($file_path) == true ) {
@@ -536,7 +536,7 @@ class FilemanagerController {
 					}
 				}
 				if ( !$this->copy_file_dir($src, $dest) ) {
-					$msg = __("Failed to copy some of the files.", BWG()->prefix);
+					$msg = __("Failed to copy some of the files.", 'photo-gallery');
 				}
 				if ( !is_dir($src_dir . '/' . $file_name) ) {
 					$_file_name = !empty($new_file_name) ? $new_file_name : $file_name;
@@ -583,7 +583,7 @@ class FilemanagerController {
 					$flag = rename($src, $dest);
 				}
 				if ( !$flag ) {
-					$msg = __("Failed to move some of the files.", BWG()->prefix);
+					$msg = __("Failed to move some of the files.", 'photo-gallery');
 				}
 				else {
 					if ( is_dir($dest_dir . '/' . $file_name) ) {

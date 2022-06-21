@@ -39,11 +39,11 @@ class BWGViewThumbnails extends BWGViewSite {
         $href = '';
         $title = '<div class="bwg-title1"><div class="bwg-title2">' . ($image_row->alt ? htmlspecialchars_decode($image_row->alt, ENT_COMPAT | ENT_QUOTES) : '&nbsp;') . '</div></div>';
         $description = '<div class="bwg-thumb-description bwg_thumb_description_0"><span>' . ($image_row->description ? htmlspecialchars_decode($image_row->description, ENT_COMPAT | ENT_QUOTES) : '') . '</span></div>';
-        $play_icon = '<div class="bwg-play-icon1"><i title="' . __('Play', BWG()->prefix) . '" class="bwg-icon-play bwg-title2 bwg-play-icon2"></i></div>';
+        $play_icon = '<div class="bwg-play-icon1"><i title="' . __('Play', 'photo-gallery') . '" class="bwg-icon-play bwg-title2 bwg-play-icon2"></i></div>';
         $ecommerce_icon = '<div class="bwg-ecommerce1"><div class="bwg-ecommerce2">';
         if ( $image_row->pricelist_id ) {
-          $ecommerce_icon .= '<i title="' . __('Open', BWG()->prefix) . '" class="bwg-icon-sign-out bwg_ctrl_btn bwg_open"></i>&nbsp;';
-          $ecommerce_icon .= '<i title="' . __('Ecommerce', BWG()->prefix) . '" class="bwg-icon-shopping-cart bwg_ctrl_btn bwg_ecommerce"></i>';
+          $ecommerce_icon .= '<i title="' . __('Open', 'photo-gallery') . '" class="bwg-icon-sign-out bwg_ctrl_btn bwg_open"></i>&nbsp;';
+          $ecommerce_icon .= '<i title="' . __('Ecommerce', 'photo-gallery') . '" class="bwg-icon-shopping-cart bwg_ctrl_btn bwg_ecommerce"></i>';
         }
         else {
           $ecommerce_icon .= '&nbsp;';
@@ -81,7 +81,7 @@ class BWGViewThumbnails extends BWGViewSite {
                    data-width="<?php echo esc_attr($image_thumb_width); ?>"
                    data-height="<?php echo esc_attr($image_thumb_height); ?>"
                    data-src="<?php echo $bwg_thumb_url; ?>"
-                   src="<?php if( !$lazyload ) { echo $bwg_thumb_url; } else { echo esc_url(BWG()->plugin_url."/images/lazy_placeholder.gif"); } ?>"
+                   src="<?php if( !$lazyload ) { echo $bwg_thumb_url; } else { echo esc_url(BWG()->plugin_url . '/images/lazy_placeholder.gif'); } ?>"
                    alt="<?php echo esc_attr($image_row->alt); ?>"
                    title="<?php echo esc_attr($image_row->alt); ?>" />
             </div>

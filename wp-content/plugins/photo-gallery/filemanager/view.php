@@ -63,16 +63,16 @@ class FilemanagerView {
     <script src="<?php echo BWG()->plugin_url; ?>/filemanager/js/jq_uploader/jquery.fileupload.js?v=10.31.0"></script>
     <script>
 	    var DS = "<?php echo addslashes('/'); ?>";
-      var demo_message = "<?php echo addslashes(__('This option is disabled in demo.', BWG()->prefix)); ?>";
+      var demo_message = "<?php echo addslashes(__('This option is disabled in demo.', 'photo-gallery')); ?>";
       var ajaxurl = "<?php echo wp_nonce_url( admin_url('admin-ajax.php'), 'addImages', 'bwg_nonce' ); ?>";
       var ajax_pagination_url = "<?php echo $ajax_pagination_url; ?>";
 	    var ajax_get_all_select_url = "<?php echo $ajax_get_all_select_url; ?>";
-      var errorLoadingFile = "<?php echo __('File loading failed', BWG()->prefix); ?>";
-      var warningRemoveItems = "<?php echo __('Are you sure you want to permanently remove selected items?', BWG()->prefix); ?>";
-      var warningCancelUploads = "<?php echo __('This will cancel uploads. Continue?', BWG()->prefix); ?>";
-      var messageEnterDirName = "<?php echo __('Enter directory name', BWG()->prefix); ?>";
-      var messageEnterNewName = "<?php echo __('Enter new name', BWG()->prefix); ?>";
-      var messageFilesUploadComplete = "<?php echo __('Processing uploaded files...', BWG()->prefix); ?>";
+      var errorLoadingFile = "<?php echo __('File loading failed', 'photo-gallery'); ?>";
+      var warningRemoveItems = "<?php echo __('Are you sure you want to permanently remove selected items?', 'photo-gallery'); ?>";
+      var warningCancelUploads = "<?php echo __('This will cancel uploads. Continue?', 'photo-gallery'); ?>";
+      var messageEnterDirName = "<?php echo __('Enter directory name', 'photo-gallery'); ?>";
+      var messageEnterNewName = "<?php echo __('Enter new name', 'photo-gallery'); ?>";
+      var messageFilesUploadComplete = "<?php echo __('Processing uploaded files...', 'photo-gallery'); ?>";
       var root = "<?php echo addslashes($this->controller->get_uploads_dir()); ?>";
       var dir = "<?php echo(isset($_REQUEST['dir']) ? str_replace(array('\\', '../'), '', WDWLibrary::get('dir', '', 'sanitize_text_field', 'REQUEST')) : ''); ?>";
       var dirUrl = "<?php echo $this->controller->get_uploads_url() . (isset($_REQUEST['dir']) ? str_replace(array('\\', '../'), '', WDWLibrary::get('dir', '', 'sanitize_text_field', 'REQUEST')) . '/' : ''); ?>";
@@ -93,25 +93,25 @@ class FilemanagerView {
 		    <div id="file_manager">
           <div class="ctrls_bar ctrls_bar_header">
             <div class="ctrls_left header_bar">
-              <span class="dashicons dashicons-arrow-up-alt ctrl_bar_btn" onclick="onBtnUpClick(event, this);" title="<?php echo __('Up', BWG()->prefix); ?>"></span>
-              <span class="dashicons dashicons-category ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnMakeDirClick(event, this)'); ?>" title="<?php echo __('Make a directory', BWG()->prefix); ?>"></span>
-              <span class="dashicons dashicons-edit ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnRenameItemClick(event, this)'); ?>" title="<?php echo __('Rename item', BWG()->prefix); ?>"></span>
+              <span class="dashicons dashicons-arrow-up-alt ctrl_bar_btn" onclick="onBtnUpClick(event, this);" title="<?php echo __('Up', 'photo-gallery'); ?>"></span>
+              <span class="dashicons dashicons-category ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnMakeDirClick(event, this)'); ?>" title="<?php echo __('Make a directory', 'photo-gallery'); ?>"></span>
+              <span class="dashicons dashicons-edit ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnRenameItemClick(event, this)'); ?>" title="<?php echo __('Rename item', 'photo-gallery'); ?>"></span>
               <span class="ctrl_bar_divider">|</span>
-              <span class="dashicons dashicons-admin-page ctrl_bar_btn"  onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnCopyClick(event, this)'); ?>" title="<?php echo __('Copy', BWG()->prefix); ?>"></span>
-              <span class="dashicons dashicons-media-document ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnCutClick(event, this)'); ?>" title="<?php echo __('Cut', BWG()->prefix); ?>"></span>
-              <span class="dashicons dashicons-editor-paste-text ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnPasteClick(event, this)'); ?>" title="<?php echo __('Paste', BWG()->prefix); ?>"></span>
-              <span class="dashicons dashicons-trash ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnRemoveItemsClick(event, this)'); ?>" title="<?php echo __('Remove items', BWG()->prefix); ?>"></span>
+              <span class="dashicons dashicons-admin-page ctrl_bar_btn"  onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnCopyClick(event, this)'); ?>" title="<?php echo __('Copy', 'photo-gallery'); ?>"></span>
+              <span class="dashicons dashicons-media-document ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnCutClick(event, this)'); ?>" title="<?php echo __('Cut', 'photo-gallery'); ?>"></span>
+              <span class="dashicons dashicons-editor-paste-text ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnPasteClick(event, this)'); ?>" title="<?php echo __('Paste', 'photo-gallery'); ?>"></span>
+              <span class="dashicons dashicons-trash ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnRemoveItemsClick(event, this)'); ?>" title="<?php echo __('Remove items', 'photo-gallery'); ?>"></span>
               <span class="ctrl_bar_divider">|</span>
-              <span class="dashicons dashicons-update ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnParsingItemsClick(event, this)'); ?>" title="<?php echo __('Refresh', BWG()->prefix); ?>"></span>
+              <span class="dashicons dashicons-update ctrl_bar_btn" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnParsingItemsClick(event, this)'); ?>" title="<?php echo __('Refresh', 'photo-gallery'); ?>"></span>
               <span class="ctrl_bar_divider">|</span>
             </div>
             <div class="ctrls_right">
-              <span class="dashicons dashicons-grid-view ctrl_bar_btn" onclick="onBtnViewThumbsClick(event, this);" title="<?php echo __('View thumbs', BWG()->prefix); ?>"></span>
-              <span class="dashicons dashicons-list-view ctrl_bar_btn" onclick="onBtnViewListClick(event, this);" title="<?php echo __('View list', BWG()->prefix); ?>"></span>
+              <span class="dashicons dashicons-grid-view ctrl_bar_btn" onclick="onBtnViewThumbsClick(event, this);" title="<?php echo __('View thumbs', 'photo-gallery'); ?>"></span>
+              <span class="dashicons dashicons-list-view ctrl_bar_btn" onclick="onBtnViewListClick(event, this);" title="<?php echo __('View list', 'photo-gallery'); ?>"></span>
             </div>
             <div class="ctrls_left header_bar">
               <span id="upload_images_cont" class="ctrl_bar_btn">
-                <a id="upload_images" class="button button-primary button-large" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnShowUploaderClick(event, this)'); ?>"><?php echo __('Upload files', BWG()->prefix); ?></a>
+                <a id="upload_images" class="button button-primary button-large" onclick="<?php echo (BWG()->is_demo ? 'alert(demo_message)' : 'onBtnShowUploaderClick(event, this)'); ?>"><?php echo __('Upload files', 'photo-gallery'); ?></a>
               </span>
               <span id="search_by_name" class="ctrl_bar_btn">
                 <input type="search" placeholder="Search" class="ctrl_bar_btn search_by_name">
@@ -130,12 +130,12 @@ class FilemanagerView {
             <div id="explorer_header_wrapper">
               <div id="explorer_header_container">
                 <div id="explorer_header">
-                  <span class="item_numbering"><?php echo $items_view == 'thumbs' ? __('Order by:', BWG()->prefix) : '#'; ?></span>
+                  <span class="item_numbering"><?php echo $items_view == 'thumbs' ? __('Order by:', 'photo-gallery') : '#'; ?></span>
                   <span class="item_icon"></span>
-                  <span class="item_name" title="<?php _e('Click to sort by name', BWG()->prefix); ?>">
+                  <span class="item_name" title="<?php _e('Click to sort by name', 'photo-gallery'); ?>">
                     <span class="clickable" onclick="onNameHeaderClick(event, this);">
                         <?php
-                        echo '<span>'.__('Name', BWG()->prefix).'</span>';
+                        echo '<span>'.__('Name', 'photo-gallery').'</span>';
                         if ($sort_by == 'name') {
                           if( $sort_order == 'asc' ){
                           ?>
@@ -148,10 +148,10 @@ class FilemanagerView {
                         ?>
                     </span>
                   </span>
-                  <span class="item_size" title="<?php _e('Click to sort by size', BWG()->prefix); ?>">
+                  <span class="item_size" title="<?php _e('Click to sort by size', 'photo-gallery'); ?>">
                     <span class="clickable" onclick="onSizeHeaderClick(event, this);">
                       <?php
-                      echo '<span>'.__('Size', BWG()->prefix).'</span>';
+                      echo '<span>'.__('Size', 'photo-gallery').'</span>';
                       if ($sort_by == 'size') {
                         if( $sort_order == 'asc' ){
                         ?>
@@ -164,10 +164,10 @@ class FilemanagerView {
                       ?>
                     </span>
                   </span>
-                  <span class="item_date_modified" title="<?php _e('Click to sort by date modified', BWG()->prefix); ?>">
+                  <span class="item_date_modified" title="<?php _e('Click to sort by date modified', 'photo-gallery'); ?>">
                     <span class="clickable" onclick="onDateModifiedHeaderClick(event, this);">
                       <?php
-                      echo '<span>'.__('Date modified', BWG()->prefix).'</span>';
+                      echo '<span>'.__('Date modified', 'photo-gallery').'</span>';
                       if ($sort_by == 'date_modified') {
                         if( $sort_order == 'asc' ){
                         ?>
@@ -198,14 +198,14 @@ class FilemanagerView {
                   ?>
                 </div>
                 <div class="fm-no-found-wrap">
-                  <h2><?php _e('No items found.', BWG()->prefix); ?></h2>
+                  <h2><?php _e('No items found.', 'photo-gallery'); ?></h2>
                 </div>
               </div>
             </div>
           </div>
           <div class="ctrls_bar ctrls_bar_footer">
             <div class="ctrls_left">
-              <a id="select_all_images" class="button button-primary button-large" onclick="onBtnSelectAllClick('<?php echo $dir; ?>');"><?php echo __('Select All', BWG()->prefix); ?></a>
+              <a id="select_all_images" class="button button-primary button-large" onclick="onBtnSelectAllClick('<?php echo $dir; ?>');"><?php echo __('Select All', 'photo-gallery'); ?></a>
             </div>
             <div class="ctrls_right">
               <span id="file_names_span">
@@ -213,13 +213,13 @@ class FilemanagerView {
                 </span>
               </span>
               <?php
-              $add_image_btn = (isset($_REQUEST['callback']) && WDWLibrary::get('callback','','sanitize_text_field','REQUEST') == 'bwg_add_image') ? __('Add selected images to gallery', BWG()->prefix) : __('Add', BWG()->prefix);
+              $add_image_btn = (isset($_REQUEST['callback']) && WDWLibrary::get('callback','','sanitize_text_field','REQUEST') == 'bwg_add_image') ? __('Add selected images to gallery', 'photo-gallery') : __('Add', 'photo-gallery');
               ?>
               <a id="add_selectid_img" title="<?php echo $add_image_btn; ?>" class="button button-primary button-large" onclick="window.parent.bwg_create_loading_block(); onBtnOpenClick(event, this);">
                 <div id="bwg_img_add"><?php echo $add_image_btn; ?></div>
               </a>
-              <a id="cancel_add_img" class="button button-secondary button-large" title="<?php _e('Cancel', BWG()->prefix); ?>" onclick="onBtnCancelClick(event, this);">
-                <div id="bwg_img_cancel"><?php _e('Cancel', BWG()->prefix); ?></div>
+              <a id="cancel_add_img" class="button button-secondary button-large" title="<?php _e('Cancel', 'photo-gallery'); ?>" onclick="onBtnCancelClick(event, this);">
+                <div id="bwg_img_cancel"><?php _e('Cancel', 'photo-gallery'); ?></div>
               </a>
             </div>
           </div>
@@ -228,17 +228,17 @@ class FilemanagerView {
           <div id="uploader_bg"></div>
           <div class="ctrls_bar ctrls_bar_header">
 						<div class="ctrls_left">
-							<span class="dashicons dashicons-arrow-left-alt ctrl_bar_btn" onclick="onBtnBackClick(event, this);" title="<?php echo __('Back', BWG()->prefix); ?>"></span>
+							<span class="dashicons dashicons-arrow-left-alt ctrl_bar_btn" onclick="onBtnBackClick(event, this);" title="<?php echo __('Back', 'photo-gallery'); ?>"></span>
 						</div>
 						<div class="ctrls_left upload_thumb">
-              <div class="upload_thumb thumb_full_title"><?php _e("Thumbnail Max Dimensions:", BWG()->prefix); ?></div>
-              <div class="upload_thumb thumb_title"><?php _e("Thumbnail:", BWG()->prefix); ?></div>
+              <div class="upload_thumb thumb_full_title"><?php _e("Thumbnail Max Dimensions:", 'photo-gallery'); ?></div>
+              <div class="upload_thumb thumb_title"><?php _e("Thumbnail:", 'photo-gallery'); ?></div>
               <input type="text" class="upload_thumb_dim" name="upload_thumb_width" id="upload_thumb_width" value="<?php echo BWG()->options->upload_thumb_width; ?>" /> x
               <input type="text" class="upload_thumb_dim" name="upload_thumb_height" id="upload_thumb_height" value="<?php echo BWG()->options->upload_thumb_height; ?>" /> px
             </div>
             <div class="ctrls_right_img upload_thumb">
-              <div class="upload_thumb thumb_full_title"><?php _e("Image Max Dimensions:", BWG()->prefix); ?></div>
-              <div class="upload_thumb thumb_title"><?php _e("Image:", BWG()->prefix); ?></div>
+              <div class="upload_thumb thumb_full_title"><?php _e("Image Max Dimensions:", 'photo-gallery'); ?></div>
+              <div class="upload_thumb thumb_title"><?php _e("Image:", 'photo-gallery'); ?></div>
               <input type="text" class="upload_thumb_dim" name="upload_img_width" id="upload_img_width" value="<?php echo BWG()->options->upload_img_width; ?>" /> x
               <input type="text" class="upload_thumb_dim" name="upload_img_height" id="upload_img_height" value="<?php echo BWG()->options->upload_img_height; ?>" /> px
             </div>
@@ -246,7 +246,7 @@ class FilemanagerView {
           <label for="jQueryUploader">
             <div id="uploader_hitter">
               <div id="btnBrowseContainer">
-				<div class="bwg-select-file-text"><?php _e('Drag files here', BWG()->prefix); ?><br><?php _e('or', BWG()->prefix); ?><br><span class="button"><?php _e('Select Files', BWG()->prefix); ?></span></div>
+				<div class="bwg-select-file-text"><?php _e('Drag files here', 'photo-gallery'); ?><br><?php _e('or', 'photo-gallery'); ?><br><span class="button"><?php _e('Select Files', 'photo-gallery'); ?></span></div>
 				<?php
 				  $query_url = wp_nonce_url( admin_url('admin-ajax.php'), 'bwg_upl', 'bwg_nonce' );
 				  $query_url = add_query_arg(array('action' => 'bwg_upl', 'dir' => (isset($_REQUEST['dir']) ? str_replace(array('\\', '../'), '', WDWLibrary::get('dir', '', 'sanitize_text_field', 'REQUEST')) : '') . '/'), $query_url);
@@ -265,7 +265,7 @@ class FilemanagerView {
               <div></div>
             </div>
             <span id="uploader_progress_text" class="uploader_text">
-              <?php echo __('No files to upload', BWG()->prefix); ?>
+              <?php echo __('No files to upload', 'photo-gallery'); ?>
             </span>
           </div>
         </div>
@@ -292,10 +292,10 @@ class FilemanagerView {
 		errorFiles = {};
 		errorMessages = {};
 		messages = {
-			'uploaded' : '<?php _e('Uploaded', BWG()->prefix); ?>',
-			'upload_failed' : '<?php _e('Upload failed', BWG()->prefix); ?>',
-			'upload_problem': '<?php _e('There has been a problem while trying to upload the following images. Please try to upload them again.', BWG()->prefix); ?>',
-			'allowed_upload_types' : '<?php _e('Allowed upload types JPG, JPEG, GIF, PNG, SVG.', BWG()->prefix); ?>'
+			'uploaded' : '<?php _e('Uploaded', 'photo-gallery'); ?>',
+			'upload_failed' : '<?php _e('Upload failed', 'photo-gallery'); ?>',
+			'upload_problem': '<?php _e('There has been a problem while trying to upload the following images. Please try to upload them again.', 'photo-gallery'); ?>',
+			'allowed_upload_types' : '<?php _e('Allowed upload types JPG, JPEG, GIF, PNG, SVG.', 'photo-gallery'); ?>'
 		};
     last_uploaded = [];
     jQuery(function () {
@@ -310,7 +310,7 @@ class FilemanagerView {
         });
         /*
         This is the option when the number of downloadable files is less than the number of images displayed on page 1 (pagination 1).
-        which means that the downloaded files will be automatically selected·
+        which means that the downloaded files will be automatically selectedâ€¤
         */
         if ( page_per >= bwg_selected_images.length ) {
           localStorage.removeItem('bwg_selected_images');

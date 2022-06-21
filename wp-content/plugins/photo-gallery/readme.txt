@@ -3,7 +3,7 @@ Contributors: webdorado,wdsupport,photogallerysupport,10web
 Tags: gallery, photo gallery, image gallery, responsive gallery, wordpress gallery plugin, photo albums, gallery slider, gallery lightbox, wordpress photo gallery plugin, fullscreen gallery, watermarking, video gallery
 Requires at least: 4.6
 Tested up to: 6.0
-Stable tag: 1.6.6
+Stable tag: 1.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -282,6 +282,14 @@ Choose whether to display random or the first/last specific number of images.
 
 == Changelog ==
 
+= 1.6.7 =
+* Improved: Updated external libraries.
+* Fixed: Security vulnerability.
+* Fixed: Broken thumbnail for embed Instagram.
+* Fixed: Load more duplicate images if order is random.
+* Fixed: Scrollbar with short title in info.
+* Fixed: HTML in masonry gallery group description.
+
 = 1.6.6 =
 * Fixed: Minor security vulnerability.
 
@@ -289,6 +297,7 @@ Choose whether to display random or the first/last specific number of images.
 * Fixed: Image upload error.
 
 = 1.6.4 =
+* Fixed: Image upload error.
 * Improved: Allow WEBP file format.
 * Improved: Bulk actions for all images except one.
 * Fixed: Images duplication in Add Images popup.

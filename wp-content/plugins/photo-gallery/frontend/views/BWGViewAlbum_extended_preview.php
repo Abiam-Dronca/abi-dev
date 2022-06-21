@@ -83,7 +83,7 @@ class BWGViewAlbum_extended_preview extends BWGViewSite {
            class="bwg-album-extended bwg-border-box bwg-thumbnails bwg-container bwg-container-<?php echo sanitize_html_class($bwg); ?> bwg-album-thumbnails bwg_album_extended_thumbnails_<?php echo sanitize_html_class($bwg); ?>">
         <?php
         if ( !$params['album_gallery_rows']['page_nav']['total'] ) {
-          echo WDWLibrary::message(__('No results found.', BWG()->prefix), 'wd_error');
+          echo WDWLibrary::message(__('No results found.', 'photo-gallery'), 'wd_error');
         }
         foreach ( $params['album_gallery_rows']['rows'] as $row ) {
           $href = esc_url( add_query_arg( array(
@@ -158,10 +158,10 @@ class BWGViewAlbum_extended_preview extends BWGViewSite {
                       <?php echo WDWLibrary::strip_tags(stripslashes($description_full)); ?>
                     </span>
                   </span>
-                  <span data-more-msg="<?php _e('More', BWG()->prefix); ?>"
-                        data-hide-msg="<?php _e('Hide', BWG()->prefix); ?>"
+                  <span data-more-msg="<?php _e('More', 'photo-gallery'); ?>"
+                        data-hide-msg="<?php _e('Hide', 'photo-gallery'); ?>"
                         class="bwg_description_more bwg_description_more_<?php echo sanitize_html_class($bwg); ?> bwg_more">
-                    <?php _e('More', BWG()->prefix); ?>
+                    <?php _e('More', 'photo-gallery'); ?>
                   </span>
                 </span>
                   <?php

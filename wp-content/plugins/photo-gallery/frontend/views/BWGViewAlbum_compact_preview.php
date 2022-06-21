@@ -74,14 +74,13 @@ class BWGViewAlbum_compact_preview extends BWGViewSite {
          class="bwg-thumbnails bwg-container bwg-container-<?php echo sanitize_html_class($bwg); ?> bwg-album-thumbnails <?php echo sanitize_html_class($params['album_gallery_div_class']); ?>">
       <?php
       if ( !$params['album_gallery_rows']['page_nav']['total'] ) {
-        echo WDWLibrary::message(__('No results found.', BWG()->prefix), 'wd_error');
+        echo WDWLibrary::message(__('No results found.', 'photo-gallery'), 'wd_error');
       }
       foreach ( $params['album_gallery_rows']['rows'] as $row ) {
         $href = esc_url( add_query_arg(array(
                                 "type_" . $bwg => $row->def_type,
                                 "album_gallery_id_" . $bwg => (($params['album_gallery_id'] != 0) ? $row->alb_gal_id : $row->id),
                               ), $_SERVER['REQUEST_URI']) );
-
         $href = $this->http_strip_query_param($href, 'bwg_search_' . $bwg);
         $href = $this->http_strip_query_param($href, 'page_number_' . $bwg);
         $title = '<div class="bwg-title1"><div class="bwg-title2">' . ($row->name ? htmlspecialchars_decode($row->name, ENT_COMPAT | ENT_QUOTES) : '&nbsp;') . '</div></div>';

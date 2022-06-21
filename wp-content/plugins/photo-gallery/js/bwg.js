@@ -336,7 +336,7 @@ function bwg_lazy_load_gallery() {
     var src = currImg.data('src');
         src = src.split('?bwg=');
     if ( src.length > 0 && typeof src !== 'undefined' && typeof src[0] !== 'undefined' ) {
-      src = src[0] + ( (is_instagram) ? '&' : '?' ) + 'bwg=' + d.getTime();
+      src = src[0] + ( (is_instagram && currImg.data('type') != 'EMBED_OEMBED_INSTAGRAM_POST') ? '&' : '?' ) + 'bwg=' + d.getTime();
       currImg.attr('src', src);
       currImg.removeAttr('data-src');
       currImg.on('load', function () {
@@ -2078,6 +2078,10 @@ function bwg_add_image( files, add_type ) {
       jQuery('#tbody_arr').append("<tr id='tr_" + bwg_j + "'>");
     }
     jQuery('#tr_' + bwg_j ).html( html );
+    // Disabled OEMBED_INSTAGRAM_POST preview.
+    if ( filetype == 'EMBED_OEMBED_INSTAGRAM_POST' ) {
+      jQuery('#tr_' + bwg_j ).find('.has-media-icon').html(jQuery('#tr_' + bwg_j ).find('.thickbox.thickbox-preview').html());
+    }
 
     /* Change the popup dimensions. */
     bwg_tb_window( "#tr_" + bwg_j );
@@ -2323,24 +2327,27 @@ function bwg_recreate_thumb( limit ) {
   if ( limit == 0 ) {
     jQuery( '#loading_div' ).show();
     jQuery( '.updated' ).remove();
+    jQuery( '.error' ).remove();
   }
   jQuery.ajax( {
     type: "POST",
+    dataType: "json",
     url: bwg_options_url_ajax,
     data: post_data,
-    success: function () {
+    success: function ( data ) {
       if ( limit < imgcount ) {
         limit += 50;
         bwg_recreate_thumb( limit );
       }
       else {
-        jQuery( '#loading_div' ).hide();
-        jQuery( "<div class=\"updated inline\">\n" +
-          "      <p><strong>" + bwg_objectL10B.recreate_success + "</strong></p>" +
-          "      </div>" ).insertBefore( jQuery( "#bwg_options_form" ).parent() );
+        var class_name = ((data.status) ? 'updated' : 'error');
+        jQuery('#loading_div').hide();
+        jQuery("<div class='" + class_name + " inline' style='display: block;'>\n" +
+          "<p><strong>" + data.message + "</strong></p>" +
+          "</div>" ).insertBefore( jQuery( "#bwg_options_form" ).parent() );
       }
     }
-  } );
+  });
   return false;
 }
 

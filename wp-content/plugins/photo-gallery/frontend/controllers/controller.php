@@ -90,13 +90,13 @@ class BWGControllerSite {
       $params['showthumbs_name'] = $params['show_album_name'];
       if ($params['album_view_type'] == 'album') { // Album in album.
         $from = (isset($params['from']) ? esc_html($params['from']) : 0);
-        $album_row = $this->model->get_album_row_data($params['album_gallery_id'], $from === "widget");
+        $album_row = $this->model->get_album_row_data($params['album_gallery_id'], $from === "widget", $bwg);
         $params['album_row'] = $album_row;
         if (isset($album_row->published) && $album_row->published == 0) {
           return;
         }
         if (!$params['album_row']) {
-          echo WDWLibrary::message(__('There is no album selected or the gallery was deleted.', BWG()->prefix), 'wd_error');
+          echo WDWLibrary::message(__('There is no album selected or the gallery was deleted.', 'photo-gallery'), 'wd_error');
           return;
         }
         if ('xml_sitemap' == $from_shortcode) {
@@ -284,7 +284,7 @@ class BWGControllerSite {
         $gallery_row = $this->model->get_gallery_row_data($params['gallery_id']);
 
         if (empty($gallery_row) && $params['type'] == '' && $params["tag"] == 0) {
-          echo WDWLibrary::message(__('There is no gallery selected or the gallery was deleted.', BWG()->prefix), 'wd_error');
+          echo WDWLibrary::message(__('There is no gallery selected or the gallery was deleted.', 'photo-gallery'), 'wd_error');
           return;
         } else {
           $params['gallery_row'] = $gallery_row;
@@ -318,7 +318,7 @@ class BWGControllerSite {
         return;
       }
       if (empty($gallery_row) && $params['type'] == '' && $params["tag"] == 0) {
-        echo WDWLibrary::message(__('There is no gallery selected or the gallery was deleted.', BWG()->prefix), 'wd_error');
+        echo WDWLibrary::message(__('There is no gallery selected or the gallery was deleted.', 'photo-gallery'), 'wd_error');
         return;
       } else {
         $params['gallery_row'] = $gallery_row;

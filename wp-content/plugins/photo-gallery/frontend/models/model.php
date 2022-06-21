@@ -49,7 +49,7 @@ class BWGModelSite {
     return $row;
   }
 
-  public function get_album_row_data( $id, $from ) {
+  public function get_album_row_data( $id, $from, $bwg = 0 ) {
     global $wpdb;
     if ( $id == 0 ) {
       $row = $wpdb->get_results('SELECT * FROM ' . $wpdb->prefix . 'bwg_gallery');
@@ -57,6 +57,7 @@ class BWGModelSite {
     else {
       $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'bwg_album WHERE id="%d"', $id));
     }
+    $GLOBALS['bwg_random_seed_' . $bwg] = rand();
     if ( is_object($row) ) {
       if ( $from ) {
         $row->permalink = WDWLibrary::get_custom_post_permalink(array( 'slug' => $row->slug, 'post_type' => 'album' ));

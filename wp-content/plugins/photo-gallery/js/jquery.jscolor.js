@@ -5,7 +5,7 @@
  * @license For open source use: GPLv3
  *          For commercial use: JSColor Commercial License
  * @author  Jan Odvarko - East Desire
- * @version 2.4.5
+ * @version 2.4.8
  *
  * See usage examples at http://jscolor.com/examples/
  */
@@ -379,24 +379,6 @@ var jsc = {
 	},
 
 
-	captureTarget : function (target) {
-		// IE
-		if (target.setCapture) {
-			jsc._capturedTarget = target;
-			jsc._capturedTarget.setCapture();
-		}
-	},
-
-
-	releaseTarget : function () {
-		// IE
-		if (jsc._capturedTarget) {
-			jsc._capturedTarget.releaseCapture();
-			jsc._capturedTarget = null;
-		}
-	},
-
-
 	triggerEvent : function (el, eventName, bubbles, cancelable) {
 		if (!el) {
 			return;
@@ -578,19 +560,19 @@ var jsc = {
 
 	hexColor : function (r, g, b) {
 		return '#' + (
-			('0' + Math.round(r).toString(16)).substr(-2) +
-			('0' + Math.round(g).toString(16)).substr(-2) +
-			('0' + Math.round(b).toString(16)).substr(-2)
+			('0' + Math.round(r).toString(16)).slice(-2) +
+			('0' + Math.round(g).toString(16)).slice(-2) +
+			('0' + Math.round(b).toString(16)).slice(-2)
 		).toUpperCase();
 	},
 
 
 	hexaColor : function (r, g, b, a) {
 		return '#' + (
-			('0' + Math.round(r).toString(16)).substr(-2) +
-			('0' + Math.round(g).toString(16)).substr(-2) +
-			('0' + Math.round(b).toString(16)).substr(-2) +
-			('0' + Math.round(a * 255).toString(16)).substr(-2)
+			('0' + Math.round(r).toString(16)).slice(-2) +
+			('0' + Math.round(g).toString(16)).slice(-2) +
+			('0' + Math.round(b).toString(16)).slice(-2) +
+			('0' + Math.round(a * 255).toString(16)).slice(-2)
 		).toUpperCase();
 	},
 
@@ -797,19 +779,19 @@ var jsc = {
 				// 8-char notation (= with alpha)
 				ret.format = 'hexa';
 				ret.rgba = [
-					parseInt(m[1].substr(0,2),16),
-					parseInt(m[1].substr(2,2),16),
-					parseInt(m[1].substr(4,2),16),
-					parseInt(m[1].substr(6,2),16) / 255
+					parseInt(m[1].slice(0,2),16),
+					parseInt(m[1].slice(2,4),16),
+					parseInt(m[1].slice(4,6),16),
+					parseInt(m[1].slice(6,8),16) / 255
 				];
 
 			} else if (m[1].length === 6) {
 				// 6-char notation
 				ret.format = 'hex';
 				ret.rgba = [
-					parseInt(m[1].substr(0,2),16),
-					parseInt(m[1].substr(2,2),16),
-					parseInt(m[1].substr(4,2),16),
+					parseInt(m[1].slice(0,2),16),
+					parseInt(m[1].slice(2,4),16),
+					parseInt(m[1].slice(4,6),16),
 					null
 				];
 
@@ -1232,7 +1214,6 @@ var jsc = {
 
 
 	_pointerOrigin : null,
-	_capturedTarget : null,
 
 
 	onDocumentKeyUp : function (e) {
@@ -1297,7 +1278,6 @@ var jsc = {
 		var thisObj = jsc.getData(target, 'instance');
 
 		jsc.preventDefault(e);
-		jsc.captureTarget(target);
 
 		var registerDragEvents = function (doc, offset) {
 			jsc.attachGroupEvent('drag', doc, jsc._pointerMoveEvent[pointerType],
@@ -1367,7 +1347,6 @@ var jsc = {
 		return function (e) {
 			var thisObj = jsc.getData(target, 'instance');
 			jsc.detachGroupEvents('drag');
-			jsc.releaseTarget();
 
 			// Always trigger changes AFTER detaching outstanding mouse handlers,
 			// in case some color change that occured in user-defined onChange/onInput handler
@@ -1672,6 +1651,7 @@ var jsc = {
 		this.format = 'auto'; // 'auto' | 'any' | 'hex' | 'hexa' | 'rgb' | 'rgba' - Format of the input/output value
 		this.value = undefined; // INITIAL color value in any supported format. To change it later, use method fromString(), fromHSVA(), fromRGBA() or channel()
 		this.alpha = undefined; // INITIAL alpha value. To change it later, call method channel('A', <value>)
+		this.random = false; // whether to randomize the initial color. Either true | false, or an array of ranges: [minV, maxV, minS, maxS, minH, maxH, minA, maxA]
 		this.onChange = undefined; // called when color changes. Value can be either a function or a string with JS code.
 		this.onInput = undefined; // called repeatedly as the color is being changed, e.g. while dragging a slider. Value can be either a function or a string with JS code.
 		this.valueElement = undefined; // element that will be used to display and input the color value
@@ -1999,6 +1979,25 @@ var jsc = {
 				flags
 			);
 			return true;
+		};
+
+
+		this.randomize = function (minV, maxV, minS, maxS, minH, maxH, minA, maxA) {
+			if (minV === undefined) { minV = 0; }
+			if (maxV === undefined) { maxV = 100; }
+			if (minS === undefined) { minS = 0; }
+			if (maxS === undefined) { maxS = 100; }
+			if (minH === undefined) { minH = 0; }
+			if (maxH === undefined) { maxH = 359; }
+			if (minA === undefined) { minA = 1; }
+			if (maxA === undefined) { maxA = 1; }
+
+			this.fromHSVA(
+				minH + Math.floor(Math.random() * (maxH - minH + 1)),
+				minS + Math.floor(Math.random() * (maxS - minS + 1)),
+				minV + Math.floor(Math.random() * (maxV - minV + 1)),
+				((100 * minA) + Math.floor(Math.random() * (100 * (maxA - minA) + 1))) / 100
+			);
 		};
 
 
@@ -3278,10 +3277,15 @@ var jsc = {
 		// let's also parse and expose the initial alpha value, if any
 		//
 		// Note: If the initial color value contains alpha value in it (e.g. in rgba format),
-		// this will overwrite it. So we should only process alpha input if there was any initial
+		// this will overwrite it. So we should only process alpha input if there was initial
 		// alpha explicitly set, otherwise we could needlessly lose initial value's alpha
 		if (initAlpha !== undefined) {
 			this.processAlphaInput(initAlpha);
+		}
+
+		if (this.random) {
+			// randomize the initial color value
+			this.randomize.apply(this, Array.isArray(this.random) ? this.random : []);
 		}
 
 	}

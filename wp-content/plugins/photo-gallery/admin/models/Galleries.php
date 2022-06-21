@@ -866,7 +866,7 @@ class GalleriesModel_bwg {
     }
     if ( !in_array($image_message, WDWLibrary::error_message_ids()) && $image_action && $checked_items_count ) {
       $actions = WDWLibrary::image_actions();
-      $image_message = sprintf(_n('%s item successfully %s.', '%s items successfully %s.', $checked_items_count, BWG()->prefix), $checked_items_count, $actions[$image_action]['bulk_action']);
+      $image_message = sprintf(_n('%s item successfully %s.', '%s items successfully %s.', $checked_items_count, 'photo-gallery'), $checked_items_count, $actions[$image_action]['bulk_action']);
     }
     if ( $all && $image_action && method_exists($this, $image_action) ) {
       $get_excludeIds = WDWLibrary::get('ids_exclude', FALSE);
@@ -1341,11 +1341,13 @@ class GalleriesModel_bwg {
       $prepareArgs[] = "%" . trim($search) . "%";
       $prepareArgs[] = "%" . trim($search) . "%";
     }
+    $message_id = 24;
+    $resize_status = true;
     foreach ( $img_ids as $img_id ) {
       $file_path = str_replace("thumb", ".original", htmlspecialchars_decode(BWG()->upload_dir . $img_id->thumb_url, ENT_COMPAT | ENT_QUOTES));
       $new_file_path = htmlspecialchars_decode(BWG()->upload_dir . $img_id->thumb_url, ENT_COMPAT | ENT_QUOTES);
       if ( WDWLibrary::repair_image_original($file_path) ) {
-        WDWLibrary::resize_image($file_path, $new_file_path, BWG()->options->upload_thumb_width, BWG()->options->upload_thumb_height);
+        $resize_status = WDWLibrary::resize_image($file_path, $new_file_path, BWG()->options->upload_thumb_width, BWG()->options->upload_thumb_height);
         $resolution_thumb = WDWLibrary::$thumb_dimansions;
         if ( $resolution_thumb != '' ) {
           WDWLibrary::update_thumb_dimansions($resolution_thumb, "id = $img_id->id");
@@ -1354,7 +1356,10 @@ class GalleriesModel_bwg {
     }
     WDWLibrary::update_image_modified_date($where, $prepareArgs);
 
-    return 23;
+    if ( ! $resize_status ) {
+      $message_id = 31;
+    }
+    return $message_id;
   }
 
   /**
@@ -1395,19 +1400,23 @@ class GalleriesModel_bwg {
     }
     $query = $wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'bwg_image` WHERE ' . $where, $prepareArgs);
     $images = $wpdb->get_results( $query );
+    $message_id = 24;
+    $resize_status = true;
     if ( !empty($images) ) {
       foreach ( $images as $image ) {
         $file_path = BWG()->upload_dir . $image->image_url;
         $thumb_filename = BWG()->upload_dir . $image->thumb_url;
         $original_filename = str_replace('/thumb/', '/.original/', $thumb_filename);
         if ( WDWLibrary::repair_image_original($original_filename) ) {
-          WDWLibrary::resize_image($original_filename, $file_path, $image_width, $image_height);
+          $resize_status = WDWLibrary::resize_image($original_filename, $file_path, $image_width, $image_height);
         }
       }
     }
     WDWLibrary::update_image_modified_date($where, $prepareArgs);
-
-    return 24;
+    if ( ! $resize_status ) {
+      $message_id = 31;
+    }
+    return $message_id;
   }
 
   /**
@@ -1690,7 +1699,7 @@ class GalleriesModel_bwg {
       }
     }
     if ( empty($not_set_items) === FALSE ) {
-      echo "<div class='bwg_msg'>" . __('Selected pricelist item longest dimension greater than some original images dimensions.', BWG()->prefix) . "</div>";
+      echo "<div class='bwg_msg'>" . __('Selected pricelist item longest dimension greater than some original images dimensions.', 'photo-gallery') . "</div>";
     }
   }
 
