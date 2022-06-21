@@ -3,8 +3,8 @@
 Contributors: Ataurr, wpmet, emranio, easin55474
 Tags: elementor addons, mega menu builder, header footer builder, elementor widgets, Accordion tab, elementor modules, page builder addons, elementor addon, elementor widget, addons
 Requires at least: 5.0
-Tested up to: 6.0
-Stable tag: 2.6.1
+Tested up to: 5.9
+Stable tag: 2.6.2
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -412,6 +412,15 @@ Do you want to integrate the Facebook Messenger chat-head to any of your web pag
 Start using the Facebook Messenger module chat-head by providing the Page ID, choosing any color, logged in user greeting, and logged out user greeting. You can also show your visitors a dialogue box if you wish to. However, make sure that your domain is whitelisted on the page you’re linking to.
 
 == Changelog ==
+Version: 2.6.2 (2022-06-20)
+Fixed: Twitter feed widget token not working
+Fixed: WPML compatibility
+Fixed: Post tab control
+Fixed: Console error for image-accordion widget
+Fixed: Widgets and modules active toggle button not working
+Tweaked: Phpcs security improvement 
+Tweaked: Control and placeholder of funfact widget
+
 Version: 2.6.1 (2022-05-24)
 Added: Form signature fields for Elementor.
 Added: Form conditional fields for Elementor.

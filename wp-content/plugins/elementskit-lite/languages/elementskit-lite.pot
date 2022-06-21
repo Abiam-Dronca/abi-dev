@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ElementsKit Lite package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ElementsKit Lite 2.6.1\n"
+"Project-Id-Version: ElementsKit Lite 2.6.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/elementskit-lite\n"
-"POT-Creation-Date: 2022-05-24 11:24:00+00:00\n"
+"POT-Creation-Date: 2022-06-20 08:25:51+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -908,7 +908,7 @@ msgid "Loading"
 msgstr ""
 
 #: modules/controls/widget-area-utils.php:28
-#: modules/controls/widget-area-utils.php:87
+#: modules/controls/widget-area-utils.php:97
 msgid "Click here to add content."
 msgstr ""
 
@@ -1023,7 +1023,7 @@ msgstr ""
 msgid "ElementsKit Icon Pack"
 msgstr ""
 
-#: modules/header-footer/cpt-api.php:82 modules/header-footer/cpt-hooks.php:55
+#: modules/header-footer/cpt-api.php:89 modules/header-footer/cpt-hooks.php:55
 #: widgets/client-logo/client-logo.php:1222
 #: widgets/fluent-forms/fluent-forms.php:1682
 #: widgets/fluent-forms/fluent-forms.php:1881 widgets/nav-menu/nav-menu.php:465
@@ -1032,7 +1032,7 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: modules/header-footer/cpt-api.php:83 modules/header-footer/cpt-hooks.php:56
+#: modules/header-footer/cpt-api.php:90 modules/header-footer/cpt-hooks.php:56
 msgid "Inactive"
 msgstr ""
 
@@ -5702,7 +5702,7 @@ msgid "First name"
 msgstr ""
 
 #: widgets/mail-chimp/mail-chimp.php:155
-msgid "Your frist name"
+msgid "Your first name"
 msgstr ""
 
 #: widgets/mail-chimp/mail-chimp.php:165 widgets/mail-chimp/mail-chimp.php:259

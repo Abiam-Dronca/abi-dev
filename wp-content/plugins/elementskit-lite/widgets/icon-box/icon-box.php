@@ -1794,7 +1794,7 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
                 </<?php echo esc_attr ($ekit_icon_box_title_size_esc); ?>>
             <?php } ?>
             <?php if($settings['ekit_icon_box_description_text'] != ''): ?>
-		  <?php echo wp_kses($settings['ekit_icon_box_description_text'], \ElementsKit_Lite\Utils::get_kses_array()) ?>
+		  <p><?php echo wp_kses($settings['ekit_icon_box_description_text'], \ElementsKit_Lite\Utils::get_kses_array()); ?></p>
             <?php endif; ?>
             <?php if($settings['ekit_icon_box_enable_btn'] == 'yes') :  ?>
                 <div class="box-footer <?php if($settings['ekit_icon_box_enable_hover_btn']== 'yes'){echo esc_attr("enable_hover_btn");} else {echo esc_attr("disable_hover_button");}?>">
