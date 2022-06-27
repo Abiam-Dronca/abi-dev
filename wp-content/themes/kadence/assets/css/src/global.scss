@@ -210,7 +210,12 @@ were hidden (via .neverending) before. */
 #wrapper {
 	overflow: clip;
 }
-
+.kadence-scrollbar-fixer {
+    margin-right: var( --scrollbar-offset, unset );
+	.item-is-fixed {
+		right: var(--scrollbar-offset, 0 );
+	}
+}
 // Align.
 .alignleft {
 	float: left;

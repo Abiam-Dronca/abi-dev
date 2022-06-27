@@ -290,6 +290,7 @@ if ( window.NodeList && ! NodeList.prototype.forEach ) {
 			var toggle = element;
 			var target = document.querySelector( toggle.dataset.toggleTarget );
 			var _doc   = document;
+			var scrollBar = window.innerWidth - document.documentElement.clientWidth;
 			var duration = ( toggle.dataset.toggleDuration ? toggle.dataset.toggleDuration : 250 );
 			window.kadence.toggleAttribute( toggle, 'aria-expanded', 'true', 'false' );
 			if ( target.classList.contains('show-drawer') ) {
@@ -299,6 +300,7 @@ if ( window.NodeList && ! NodeList.prototype.forEach ) {
 				// Hide the drawer.
 				target.classList.remove('active');
 				target.classList.remove('pop-animated');
+				_doc.body.classList.remove( 'kadence-scrollbar-fixer' );
 				setTimeout(function () {
 					target.classList.remove('show-drawer');
 					if ( toggle.dataset.setFocus && changeFocus ) {
@@ -317,6 +319,10 @@ if ( window.NodeList && ! NodeList.prototype.forEach ) {
 				// Toggle body class
 				if ( toggle.dataset.toggleBodyClass ) {
 					_doc.body.classList.toggle( toggle.dataset.toggleBodyClass );
+					if ( toggle.dataset.toggleBodyClass.includes( 'showing-popup-drawer-' ) ) {
+						_doc.body.style.setProperty('--scrollbar-offset', scrollBar + 'px' );
+						_doc.body.classList.add( 'kadence-scrollbar-fixer' );
+					}
 				}
 				setTimeout(function () {
 					target.classList.add('active');

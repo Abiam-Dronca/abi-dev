@@ -337,6 +337,8 @@ class TypographyComponent extends Component {
 		let currentSize;
 		let currentLineHeight;
 		let currentLetterSpacing;
+		var placeholderLineHeight = this.controlParams.headingInherit ? 1.5 : 1.4;
+		var placeholderSize = this.controlParams.id === 'base_font' || ( this.controlParams.canInherit && ! this.controlParams.headingInherit ) ? 17 : '';
 		if ( 'all' === this.controlParams.options || 'no-color' === this.controlParams.options || 'family' === this.controlParams.options ) {
 			currentFamily = ( this.state.value.family && 'inherit' !== this.state.value.family ? this.state.value.family : fontVar );
 		}
@@ -479,16 +481,23 @@ class TypographyComponent extends Component {
 						tooltip={ false }
 					>
 						<RangeControl
-								initialPosition={ ( currentSize ? currentSize : 17 ) }
-								value={ currentSize }
-								onChange={ (val) => {
+							allowReset={ true }
+							initialPosition={ ( currentSize ? currentSize : placeholderSize ) }
+							value={ currentSize }
+							onChange={ (val) => {
+								if ( val ) {
 									let value = this.state.value;
 									value.size[ this.state.currentDevice ] = val;
 									this.updateValues( value );
-								} }
-								min={this.controlParams.min[this.state.value.sizeType]}
-								max={this.controlParams.max[this.state.value.sizeType]}
-								step={this.controlParams.step[this.state.value.sizeType]}
+								} else {
+									let value = this.state.value;
+									value.size[ this.state.currentDevice ] = '';
+									this.updateValues( value );
+								}
+							} }
+							min={this.controlParams.min[this.state.value.sizeType]}
+							max={this.controlParams.max[this.state.value.sizeType]}
+							step={this.controlParams.step[this.state.value.sizeType]}
 						/>
 						{ this.controlParams.sizeUnits && (
 							<div className="kadence-select-units">
@@ -504,16 +513,23 @@ class TypographyComponent extends Component {
 						tooltip={ false }
 					>
 						<RangeControl
-								initialPosition={ ( currentLineHeight ? currentLineHeight : 1.4 ) }
-								value={ currentLineHeight }
-								onChange={ (val) => {
+							allowReset={ true }
+							initialPosition={ ( currentLineHeight ? currentLineHeight : placeholderLineHeight ) }
+							value={ currentLineHeight }
+							onChange={ (val) => {
+								if ( val ) {
 									let value = this.state.value;
 									value.lineHeight[ this.state.currentDevice ] = val;
 									this.updateValues( value );
-								} }
-								min={this.controlParams.min[this.state.value.lineType]}
-								max={this.controlParams.max[this.state.value.lineType]}
-								step={this.controlParams.step[this.state.value.lineType]}
+								} else {
+									let value = this.state.value;
+									value.lineHeight[ this.state.currentDevice ] = '';
+									this.updateValues( value );
+								}
+							} }
+							min={this.controlParams.min[this.state.value.lineType]}
+							max={this.controlParams.max[this.state.value.lineType]}
+							step={this.controlParams.step[this.state.value.lineType]}
 						/>
 						{ this.controlParams.lineUnits && (
 							<div className="kadence-select-units">
@@ -529,16 +545,23 @@ class TypographyComponent extends Component {
 						tooltip={ false }
 					>
 						<RangeControl
-								value={ currentLetterSpacing }
-								initialPosition={ ( currentLetterSpacing ? currentLetterSpacing : 1 ) }
-								onChange={ (val) => {
+							allowReset={ true }
+							value={ currentLetterSpacing }
+							initialPosition={ ( currentLetterSpacing ? currentLetterSpacing : '' ) }
+							onChange={ (val) => {
+								if ( val ) {
 									let value = this.state.value;
 									value.letterSpacing[ this.state.currentDevice ] = val;
 									this.updateValues( value );
-								} }
-								min={-4}
-								max={this.controlParams.max[this.state.value.spacingType]}
-								step={this.controlParams.step[this.state.value.spacingType]}
+								} else {
+									let value = this.state.value;
+									value.letterSpacing[ this.state.currentDevice ] = '';
+									this.updateValues( value );
+								}
+							} }
+							min={-4}
+							max={this.controlParams.max[this.state.value.spacingType]}
+							step={this.controlParams.step[this.state.value.spacingType]}
 						/>
 						{ this.controlParams.spacingUnits && (
 							<div className="kadence-select-units">

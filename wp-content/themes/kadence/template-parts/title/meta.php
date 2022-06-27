@@ -273,19 +273,25 @@ $post_type_obj = get_post_type_object( get_post_type() );
 				}
 				break;
 			case 'comments':
-				if ( kadence()->show_comments() ) {
-					echo '<div class="meta-comments">';
-					if ( 'customicon' === $meta_divider ) {
-						kadence()->print_icon( 'commentsAlt', '', false );
+				$show = true;
+				if ( isset( $elements['commentsCondition'] ) && $elements['commentsCondition'] && 0 == get_comments_number() ) {
+					$show = false;
+				}
+				if ( $show ) {
+					if ( kadence()->show_comments() ) {
+						echo '<div class="meta-comments">';
+						if ( 'customicon' === $meta_divider ) {
+							kadence()->print_icon( 'commentsAlt', '', false );
+						}
+						echo '<a class="meta-comments-link anchor-scroll" href="#comments">';
+						if ( '1' === get_comments_number() ) {
+							echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comment', 'kadence' );
+						} else {
+							echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comments', 'kadence' );
+						}
+						echo '</a>';
+						echo '</div>';
 					}
-					echo '<a class="meta-comments-link anchor-scroll" href="#comments">';
-					if ( '1' === get_comments_number() ) {
-						echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comment', 'kadence' );
-					} else {
-						echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comments', 'kadence' );
-					}
-					echo '</a>';
-					echo '</div>';
 				}
 				break;
 		}

@@ -258,7 +258,7 @@ $settings = array(
 		'live_method'     => array(
 			array(
 				'type'     => 'css',
-				'selector' => '.post-archive-title h1',
+				'selector' => '.wp-site-blocks .post-archive-title h1',
 				'property' => 'color',
 				'pattern'  => '$',
 				'key'      => 'color',
