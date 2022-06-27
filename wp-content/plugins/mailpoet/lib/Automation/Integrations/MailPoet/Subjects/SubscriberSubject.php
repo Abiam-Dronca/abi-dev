@@ -36,7 +36,7 @@ class SubscriberSubject implements Subject {
           return $this->getSubscriber()->getId();
         }
       ),
-      
+
       'email' => new Field(
         'mailpoet:subscriber:email',
         Field::TYPE_STRING,

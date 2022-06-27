@@ -76,7 +76,8 @@ class AmazonSES extends PHPMailerMethod {
     $sender,
     $replyTo,
     $returnPath,
-    AmazonSESMapper $errorMapper
+    AmazonSESMapper $errorMapper,
+    WPFunctions $wp
   ) {
     $this->awsAccessKey = $accessKey;
     $this->awsSecretKey = $secretKey;
@@ -96,7 +97,7 @@ class AmazonSES extends PHPMailerMethod {
     $this->date = gmdate('Ymd\THis\Z');
     $this->dateWithoutTime = gmdate('Ymd');
     $this->errorMapper = $errorMapper;
-    $this->wp = new WPFunctions();
+    $this->wp = $wp;
     $this->blacklist = new BlacklistCheck();
     $this->mailer = $this->buildMailer();
   }
