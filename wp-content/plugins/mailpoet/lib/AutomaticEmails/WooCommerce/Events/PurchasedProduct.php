@@ -7,14 +7,11 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\AutomaticEmails\WooCommerce\WooCommerce;
 use MailPoet\DI\ContainerWrapper;
-use MailPoet\Entities\NewsletterEntity;
-use MailPoet\Entities\NewsletterOptionFieldEntity;
-use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Logging\LoggerFactory;
+use MailPoet\Models\Newsletter;
+use MailPoet\Models\Subscriber;
 use MailPoet\Newsletter\AutomaticEmailsRepository;
 use MailPoet\Newsletter\Scheduler\AutomaticEmailScheduler;
-use MailPoet\Subscribers\SubscribersRepository;
-use MailPoet\Util\Helpers;
 use MailPoet\WooCommerce\Helper as WCHelper;
 use MailPoet\WP\Functions as WPFunctions;
 
@@ -34,9 +31,6 @@ class PurchasedProduct {
   /** @var AutomaticEmailsRepository */
   private $repository;
 
-  /** @var SubscribersRepository */
-  private $subscribersRepository;
-
   public function __construct(
     WCHelper $helper = null
   ) {
@@ -47,7 +41,6 @@ class PurchasedProduct {
     $this->scheduler = ContainerWrapper::getInstance()->get(AutomaticEmailScheduler::class);
     $this->loggerFactory = LoggerFactory::getInstance();
     $this->repository = ContainerWrapper::getInstance()->get(AutomaticEmailsRepository::class);
-    $this->subscribersRepository = ContainerWrapper::getInstance()->get(SubscribersRepository::class);
   }
 
   public function init() {
@@ -123,9 +116,9 @@ class PurchasedProduct {
     }
     $customerEmail = $orderDetails->get_billing_email();
 
-    $subscriber = $this->subscribersRepository->getWooCommerceSegmentSubscriber($customerEmail);
+    $subscriber = Subscriber::getWooCommerceSegmentSubscriber($customerEmail);
 
-    if (!$subscriber instanceof SubscriberEntity) {
+    if (!$subscriber instanceof Subscriber) {
       $this->loggerFactory->getLogger(self::SLUG)->info(
         'Email not scheduled because the customer was not found as WooCommerce list subscriber',
         ['order_id' => $orderId, 'customer_email' => $customerEmail]
@@ -138,14 +131,14 @@ class PurchasedProduct {
     }, $orderDetails->get_items());
     $orderedProducts = array_values(array_filter($orderedProducts));
 
-    $schedulingCondition = function(NewsletterEntity $automaticEmail) use ($orderedProducts, $subscriber) {
+    $schedulingCondition = function(Newsletter $automaticEmail) use ($orderedProducts, $subscriber) {
       $matchedProducts = $this->getProductIdsMatchingNewsletterTrigger($automaticEmail, $orderedProducts);
       if (empty($matchedProducts)) {
         return false;
       }
 
-      if ($this->repository->wasScheduledForSubscriber((int)$automaticEmail->getId(), (int)$subscriber->getId())) {
-        $sentAllProducts = $this->repository->alreadySentAllProducts((int)$automaticEmail->getId(), (int)$subscriber->getId(), 'orderedProducts', $matchedProducts);
+      if ($this->repository->wasScheduledForSubscriber($automaticEmail->id, $subscriber->id)) {
+        $sentAllProducts = $this->repository->alreadySentAllProducts($automaticEmail->id, $subscriber->id, 'orderedProducts', $matchedProducts);
         if ($sentAllProducts) return false;
       }
 
@@ -156,20 +149,20 @@ class PurchasedProduct {
       'Email scheduled', [
         'order_id' => $orderId,
         'customer_email' => $customerEmail,
-        'subscriber_id' => $subscriber->getId(),
+        'subscriber_id' => $subscriber->id,
       ]
     );
     return $this->scheduler->scheduleAutomaticEmail(
       WooCommerce::SLUG,
       self::SLUG,
       $schedulingCondition,
-      $subscriber->getId(),
+      $subscriber->id,
       ['orderedProducts' => $orderedProducts],
       [$this, 'metaModifier']
     );
   }
 
-  public function metaModifier(NewsletterEntity $newsletter, array $meta): array {
+  public function metaModifier(Newsletter $newsletter, array $meta): array {
     $orderedProductIds = $meta['orderedProducts'] ?? null;
     if (empty($orderedProductIds)) {
       return $meta;
@@ -179,14 +172,12 @@ class PurchasedProduct {
     return $meta;
   }
 
-  private function getProductIdsMatchingNewsletterTrigger(NewsletterEntity $automaticEmail, array $orderedProductIds): array {
-    $automaticEmailMetaValue = $automaticEmail->getOptionValue(NewsletterOptionFieldEntity::NAME_META);
-    $optionValue = Helpers::isJson($automaticEmailMetaValue) ? json_decode($automaticEmailMetaValue, true) : $automaticEmailMetaValue;
-
-    if (!is_array($optionValue) || empty($optionValue['option'])) {
+  private function getProductIdsMatchingNewsletterTrigger(Newsletter $automaticEmail, array $orderedProductIds): array {
+    $automaticEmailMeta = $automaticEmail->getMeta();
+    if (empty($automaticEmailMeta['option'])) {
       return [];
     }
-    $emailTriggeringProductIds = array_column($optionValue['option'], 'id');
+    $emailTriggeringProductIds = array_column($automaticEmailMeta['option'], 'id');
 
     return array_intersect($emailTriggeringProductIds, $orderedProductIds);
   }

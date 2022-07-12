@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the MailPoet 3 (New) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MailPoet 3 (New) 3.91.0\n"
+"Project-Id-Version: MailPoet 3 (New) 3.90.1\n"
 "Report-Msgid-Bugs-To: http://support.mailpoet.com/\n"
-"POT-Creation-Date: 2022-06-22 11:41:06+00:00\n"
+"POT-Creation-Date: 2022-06-16 10:05:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -309,7 +309,7 @@ msgstr ""
 msgid "Your MailPoet Sending Service key expires on %s!"
 msgstr ""
 
-#: lib/API/JSON/v1/Services.php:124 views/settings.html:206
+#: lib/API/JSON/v1/Services.php:124 views/settings.html:203
 msgid "Your key is not valid for the MailPoet Sending Service"
 msgstr ""
 
@@ -333,7 +333,7 @@ msgstr ""
 msgid "Your Premium key expires on %s"
 msgstr ""
 
-#: lib/API/JSON/v1/Services.php:189 views/settings.html:202
+#: lib/API/JSON/v1/Services.php:189 views/settings.html:199
 msgid "Your key is not valid for MailPoet Premium"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgstr ""
 msgid "Error validating Premium key, please try again later (%s)"
 msgstr ""
 
-#: lib/API/JSON/v1/Services.php:228 views/settings.html:204
+#: lib/API/JSON/v1/Services.php:228 views/settings.html:201
 msgid "MailPoet Sending Service is not active."
 msgstr ""
 
@@ -488,120 +488,120 @@ msgstr ""
 msgid "In any WordPress role"
 msgstr ""
 
-#: lib/AdminPages/Pages/Settings.php:107
+#: lib/AdminPages/Pages/Settings.php:100
 msgctxt "Notice in Settings when WooCommerce is not enabled"
 msgid "You need to have WooCommerce active to access the MailPoet email customizer for WooCommerce."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:55
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:50
 msgctxt "This is the name of a type of automatic email for ecommerce. Those emails are sent automatically when a customer adds product to his shopping cart but never complete the checkout process."
 msgid "Abandoned Shopping Cart"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:56
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:51
 msgid "Send an email to logged-in visitors who have items in their shopping carts but left your website without checking out. Can convert up to 5% of abandoned carts."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:57
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:52
 msgctxt "Description of Abandoned Shopping Cart email"
 msgid "Email sent when a customer abandons his cart."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:59
-#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:79
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:54
+#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:74
 msgid "Must-have"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:64
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:59
 msgctxt "This is a trigger setting. It means that we will send an automatic email to a visitor 30 minutes after this visitor had left the website."
 msgid "30 minutes after last page loaded"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:68
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:63
 #: views/newsletters.html:283
 msgid "hour(s) later"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:72
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:67
 #: views/newsletters.html:284
 msgid "day(s) later"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:76
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:71
 #: views/newsletters.html:285
 msgid "week(s) later"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:83
+#: lib/AutomaticEmails/WooCommerce/Events/AbandonedCart.php:78
 msgid "We recommend setting up 3 abandoned cart emails. Here’s why."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:75
+#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:70
 msgid "First Purchase"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:76
+#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:71
 msgid "Let MailPoet send an email to customers who make their first purchase."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:77
+#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:72
 msgid "Email sent when a customer makes their first purchase."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:84
+#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:79
 msgid "Order amount"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:88
+#: lib/AutomaticEmails/WooCommerce/Events/FirstPurchase.php:83
 msgid "Order date"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:52
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:45
 msgctxt "This is the name of a type for automatic email for ecommerce. Those emails are sent automatically every time a customer buys for the first time a product in a given category"
 msgid "Purchased In This Category"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:53
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:46
 msgid "Let MailPoet send an email to customers who purchase a product for the first time in a specific category."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:54
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:47
 msgid "Email sent when a customer buys a product in category: %s"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:55
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:48
 msgid "Email sent when a customer buys a product in categories: %s"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:59
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedInCategory.php:52
 msgctxt "Search input for product category (ecommerce)"
 msgid "Search category"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:73
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:66
 msgid "Purchased This Product"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:74
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:67
 msgid "Let MailPoet send an email to customers who purchase a specific product for the first time."
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:75
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:68
 msgid "Email sent when a customer buys product: %s"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:76
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:69
 msgid "Email sent when a customer buys products: %s"
 msgstr ""
 
-#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:80
+#: lib/AutomaticEmails/WooCommerce/Events/PurchasedProduct.php:73
 #: views/segments.html:228
 msgid "Search products"
 msgstr ""
 
 #: lib/AutomaticEmails/WooCommerce/WooCommerce.php:65
 #: views/newsletter/editor.html:367 views/newsletters.html:93
-#: views/settings.html:40
+#: views/settings.html:39
 msgid "WooCommerce"
 msgstr ""
 
@@ -914,7 +914,7 @@ msgid "Number of segments per page"
 msgstr ""
 
 #: lib/Config/Menu.php:326 lib/Config/Menu.php:327 views/mp2migration.html:14
-#: views/newsletters.html:155 views/settings.html:36
+#: views/newsletters.html:155 views/settings.html:35
 msgid "Settings"
 msgstr ""
 
@@ -3255,15 +3255,15 @@ msgstr ""
 msgid "Unprocessed subscribers:"
 msgstr ""
 
-#: lib/Mailer/MailerFactory.php:104
+#: lib/Mailer/MailerFactory.php:103
 msgid "Mailing method does not exist."
 msgstr ""
 
-#: lib/Mailer/MailerFactory.php:111
+#: lib/Mailer/MailerFactory.php:110
 msgid "Mailer is not configured."
 msgstr ""
 
-#: lib/Mailer/MailerFactory.php:118
+#: lib/Mailer/MailerFactory.php:117
 msgid "Sender name and email are not configured."
 msgstr ""
 
@@ -3279,7 +3279,7 @@ msgstr ""
 msgid "Sending frequency limit has been reached."
 msgstr ""
 
-#: lib/Mailer/Methods/AmazonSES.php:83
+#: lib/Mailer/Methods/AmazonSES.php:82
 msgid "Unsupported Amazon SES region"
 msgstr ""
 
@@ -3327,7 +3327,7 @@ msgid "You have sent more emails this month than your MailPoet plan includes (%s
 msgstr ""
 
 #: lib/Mailer/Methods/ErrorMappers/MailPoetMapper.php:203
-msgid "Your subscription is currently [link]pending approval[/link]. You’ll soon be able to send once our team reviews your account. In the meantime, you can send previews to your authorized emails."
+msgid "Your subscription is currently [link]pending approval[/link].You’ll soon be able to send once our team reviews your account. In the meantime, you can send previews to your authorized emails."
 msgstr ""
 
 #: lib/Models/CustomField.php:30 lib/Models/Newsletter.php:63
@@ -3442,9 +3442,7 @@ msgstr ""
 msgid "Re-engagement emails are disabled because open and click tracking is disabled in MailPoet → Settings → Advanced."
 msgstr ""
 
-#: lib/Newsletter/NewsletterValidator.php:88 views/newsletter/editor.html:383
-#: views/newsletters.html:452
-msgctxt "(Please reuse the current translation used for the string “Automatic Latest Content”) This Error message is displayed when a user tries to send a “Post Notification” email without any “Automatic Latest Content” widget inside"
+#: lib/Newsletter/NewsletterValidator.php:88
 msgid "Please add an “Automatic Latest Content” widget to the email from the right sidebar."
 msgstr ""
 
@@ -3543,15 +3541,15 @@ msgstr ""
 msgid "View in your browser"
 msgstr ""
 
-#: lib/PostEditorBlocks/MarketingOptinBlock.php:99
+#: lib/PostEditorBlocks/MarketingOptinBlock.php:96
 msgid "Marketing opt-in"
 msgstr ""
 
-#: lib/PostEditorBlocks/MarketingOptinBlock.php:100
+#: lib/PostEditorBlocks/MarketingOptinBlock.php:97
 msgid "MailPoet marketing opt-in would be shown here if enabled. You can enable from the settings page."
 msgstr ""
 
-#: lib/PostEditorBlocks/MarketingOptinBlock.php:101
+#: lib/PostEditorBlocks/MarketingOptinBlock.php:98
 msgid "Enable opt-in for Checkout"
 msgstr ""
 
@@ -3730,7 +3728,7 @@ msgstr ""
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewsletterClicksExporter.php:14
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewsletterOpensExporter.php:14
 #: lib/Subscribers/ImportExport/PersonalDataExporters/NewslettersExporter.php:54
-#: views/settings.html:110
+#: views/settings.html:107
 msgid "Email subject"
 msgstr ""
 
@@ -3802,7 +3800,7 @@ msgstr ""
 #: views/newsletter/templates/blocks/products/settingsDisplayOptions.hbs:79
 #: views/newsletter/templates/blocks/products/settingsDisplayOptions.hbs:174
 #: views/newsletter/templates/blocks/products/settingsDisplayOptions.hbs:218
-#: views/settings.html:90 views/subscribers/importExport/import.html:112
+#: views/settings.html:89 views/subscribers/importExport/import.html:112
 msgid "No"
 msgstr ""
 
@@ -4017,19 +4015,19 @@ msgstr ""
 msgid "%d seconds"
 msgstr ""
 
-#: lib/Twig/Functions.php:192 views/settings.html:263
+#: lib/Twig/Functions.php:192 views/settings.html:260
 msgid "every minute"
 msgstr ""
 
-#: lib/Twig/Functions.php:193 views/settings.html:264
+#: lib/Twig/Functions.php:193 views/settings.html:261
 msgid "every %1$d minutes"
 msgstr ""
 
-#: lib/Twig/Functions.php:194 views/settings.html:265
+#: lib/Twig/Functions.php:194 views/settings.html:262
 msgid "every hour"
 msgstr ""
 
-#: lib/Twig/Functions.php:195 views/settings.html:266
+#: lib/Twig/Functions.php:195 views/settings.html:263
 msgid "every %1$d hours"
 msgstr ""
 
@@ -4068,7 +4066,7 @@ msgid "Email open and click tracking is now enabled. You can change how MailPoet
 msgstr ""
 
 #: lib/Util/Notices/DeprecatedFilterNotice.php:37
-msgid "The <i>mailpoet_mailer_smtp_transport_agent</i> filter no longer works. Please replace it with <i>mailpoet_mailer_smtp_options</i>. Read more in [link]documentation[/link]."
+msgid "The <i>mailpoet_mailer_smtp_transport_agent</i> filter no longer works. Please replace it with <i>mailpoet_mailer_smtp_options<i>. Read more in [link]documentation[/link]."
 msgstr ""
 
 #: lib/Util/Notices/EmailWithInvalidSegmentNotice.php:35
@@ -5049,7 +5047,7 @@ msgstr ""
 #: views/newsletter/templates/blocks/posts/settingsDisplayOptions.hbs:251
 #: views/newsletter/templates/blocks/products/settingsDisplayOptions.hbs:73
 #: views/newsletter/templates/blocks/products/settingsDisplayOptions.hbs:212
-#: views/settings.html:89 views/subscribers/importExport/import.html:111
+#: views/settings.html:88 views/subscribers/importExport/import.html:111
 msgid "Yes"
 msgstr ""
 
@@ -6077,7 +6075,7 @@ msgid "Send"
 msgstr ""
 
 #: views/newsletter/editor.html:372 views/newsletters.html:98
-#: views/newsletters.html:245 views/settings.html:235
+#: views/newsletters.html:245 views/settings.html:232
 msgid "Activate"
 msgstr ""
 
@@ -6255,6 +6253,11 @@ msgstr ""
 
 #: views/newsletter/editor.html:1516
 msgid "Edit this to insert text."
+msgstr ""
+
+#: views/newsletter/editor.html:383 views/newsletters.html:452
+msgctxt "(Please reuse the current translation used for the string “Automatic Latest Content”) This Error message is displayed when a user tries to send a “Post Notification” email without any “Automatic Latest Content” widget inside"
+msgid "Please add an “Automatic Latest Content” widget to the email from the right sidebar."
 msgstr ""
 
 #: views/newsletter/editor.html:406
@@ -7237,7 +7240,7 @@ msgid "Activate now"
 msgstr ""
 
 #: views/newsletter/templates/components/save.hbs:21 views/newsletters.html:215
-#: views/newsletters.html:374 views/newsletters.html:414 views/settings.html:65
+#: views/newsletters.html:374 views/newsletters.html:414 views/settings.html:64
 msgid "Preview"
 msgstr ""
 
@@ -7542,7 +7545,7 @@ msgstr ""
 msgid "Create your first email"
 msgstr ""
 
-#: views/newsletters.html:222 views/settings.html:234
+#: views/newsletters.html:222 views/settings.html:231
 msgid "See video guide"
 msgstr ""
 
@@ -7556,12 +7559,12 @@ msgstr ""
 msgid "Your current MailPoet plan includes advanced features, but they require the MailPoet Premium plugin to be installed and activated."
 msgstr ""
 
-#: views/newsletters.html:225 views/segments.html:260 views/settings.html:196
+#: views/newsletters.html:225 views/segments.html:260 views/settings.html:193
 #: views/subscribers/subscribers.html:152
 msgid "Download MailPoet Premium plugin"
 msgstr ""
 
-#: views/newsletters.html:226 views/segments.html:261 views/settings.html:197
+#: views/newsletters.html:226 views/segments.html:261 views/settings.html:194
 #: views/subscribers/subscribers.html:153
 msgid "Activate MailPoet Premium plugin"
 msgstr ""
@@ -7577,7 +7580,7 @@ msgstr ""
 msgid "Upgrade your plan"
 msgstr ""
 
-#: views/newsletters.html:229 views/settings.html:192
+#: views/newsletters.html:229 views/settings.html:189
 msgid "Learn more"
 msgstr ""
 
@@ -7773,7 +7776,7 @@ msgstr ""
 msgid "john.doe@email.com"
 msgstr ""
 
-#: views/newsletters.html:303 views/newsletters.html:418 views/settings.html:51
+#: views/newsletters.html:303 views/newsletters.html:418 views/settings.html:50
 msgid "Reply-to"
 msgstr ""
 
@@ -8081,7 +8084,7 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: views/newsletters.html:416 views/settings.html:49
+#: views/newsletters.html:416 views/settings.html:48
 msgid "From"
 msgstr ""
 
@@ -8895,901 +8898,893 @@ msgctxt "Dynamic segment creation: User selects this to use any woocommerce filt
 msgid "WooCommerce"
 msgstr ""
 
-#: views/settings.html:37
+#: views/settings.html:36
 msgid "Basics"
 msgstr ""
 
-#: views/settings.html:38
+#: views/settings.html:37
 msgid "Sign-up Confirmation"
 msgstr ""
 
-#: views/settings.html:39
+#: views/settings.html:38
 msgid "Send With..."
 msgstr ""
 
-#: views/settings.html:41
+#: views/settings.html:40
 msgid "Advanced"
 msgstr ""
 
-#: views/settings.html:42
+#: views/settings.html:41
 msgid "Key Activation"
 msgstr ""
 
-#: views/settings.html:44
+#: views/settings.html:43
 msgid "Save settings"
 msgstr ""
 
-#: views/settings.html:45
+#: views/settings.html:44
 msgid "Settings saved"
 msgstr ""
 
-#: views/settings.html:47
+#: views/settings.html:46
 msgid "Default sender"
 msgstr ""
 
-#: views/settings.html:48
+#: views/settings.html:47
 msgid "These email addresses will be selected by default for each new email."
 msgstr ""
 
-#: views/settings.html:50
+#: views/settings.html:49
 msgid "Your name"
 msgstr ""
 
-#: views/settings.html:53
+#: views/settings.html:52
 msgid "Subscribe in comments"
 msgstr ""
 
-#: views/settings.html:54
+#: views/settings.html:53
 msgid "Visitors that comment on a post can subscribe to your list via a checkbox."
 msgstr ""
 
-#: views/settings.html:55
+#: views/settings.html:54
 msgid "Subscribe in registration form"
 msgstr ""
 
-#: views/settings.html:56
+#: views/settings.html:55
 msgid "Allow users who register as a WordPress user on your website to subscribe to a MailPoet list (in addition to the \"WordPress Users\" list). This also enables WordPress users to receive confirmation emails (if sign-up confirmation is enabled)."
 msgstr ""
 
-#: views/settings.html:57
+#: views/settings.html:56
 msgid "Users will be subscribed to these lists:"
 msgstr ""
 
-#: views/settings.html:58
+#: views/settings.html:57
 msgid "Yes, add me to your mailing list"
 msgstr ""
 
-#: views/settings.html:59
+#: views/settings.html:58
 msgid "Choose a list"
 msgstr ""
 
-#: views/settings.html:61
+#: views/settings.html:60
 msgid "Manage Subscription page"
 msgstr ""
 
-#: views/settings.html:62
+#: views/settings.html:61
 msgid "When your subscribers click the \"Manage your subscription\" link, they will be directed to this page."
 msgstr ""
 
-#: views/settings.html:63
+#: views/settings.html:62
 msgid "Want to use a custom Subscription page? Check out our [link]Knowledge Base[/link] for instructions."
 msgstr ""
 
-#: views/settings.html:64
+#: views/settings.html:63
 msgid "Preview page"
 msgstr ""
 
-#: views/settings.html:66
+#: views/settings.html:65
 msgid "Subscribers can choose from these lists:"
 msgstr ""
 
-#: views/settings.html:67
+#: views/settings.html:66
 msgid "Leave this field empty to display all lists"
 msgstr ""
 
-#: views/settings.html:69
+#: views/settings.html:68
 msgid "Re-engagement page"
 msgstr ""
 
-#: views/settings.html:70
+#: views/settings.html:69
 msgid "Thank your subscribers reactivated by the Re-engagement email for their continued interest in your emails."
 msgstr ""
 
-#: views/settings.html:72
+#: views/settings.html:71
 msgid "Unsubscribe page"
 msgstr ""
 
-#: views/settings.html:73
+#: views/settings.html:72
 msgid "When your subscribers click the \"Unsubscribe\" link, they will be directed to a confirmation page. After confirming, the success page will be shown. These pages must contain the [mailpoet_page] shortcode."
 msgstr ""
 
-#: views/settings.html:75 views/settings.html:113
+#: views/settings.html:74 views/settings.html:110
 msgid "Confirmation page"
 msgstr ""
 
-#: views/settings.html:76
+#: views/settings.html:75
 msgid "Success page"
 msgstr ""
 
-#: views/settings.html:83
+#: views/settings.html:82
 msgid "Newsletters and Post Notifications"
 msgstr ""
 
-#: views/settings.html:85
+#: views/settings.html:84
 msgid "Please fill the email address."
 msgstr ""
 
-#: views/settings.html:87
+#: views/settings.html:86
 msgid "New subscriber notifications"
 msgstr ""
 
-#: views/settings.html:88
+#: views/settings.html:87
 msgid "Enter the email address that should receive notifications when someone subscribes."
 msgstr ""
 
-#: views/settings.html:91
+#: views/settings.html:90
 msgid "Never"
 msgstr ""
 
-#: views/settings.html:93
+#: views/settings.html:92
 msgid "Archive page shortcode"
 msgstr ""
 
-#: views/settings.html:94
+#: views/settings.html:93
 msgid "Paste this shortcode on a page to display a list of past newsletters."
 msgstr ""
 
-#: views/settings.html:95
+#: views/settings.html:94
 msgid "Shortcode to display total number of subscribers"
 msgstr ""
 
-#: views/settings.html:96
+#: views/settings.html:95
 msgid "Paste this shortcode on a post or page to display the total number of confirmed subscribers."
 msgstr ""
 
-#: views/settings.html:98
+#: views/settings.html:97
 msgid "Be GDPR compliant"
 msgstr ""
 
-#: views/settings.html:99
+#: views/settings.html:98
 msgid "You need to comply with European law in regards to data privacy if you have European subscribers. Rest assured, it’s easy!"
 msgstr ""
 
-#: views/settings.html:100
+#: views/settings.html:99
 msgid "Read our guide"
 msgstr ""
 
-#: views/settings.html:102
+#: views/settings.html:101
 msgid "Invalid email address"
 msgstr ""
 
 #: views/settings.html:103
-msgid "You need to authorize the email address [email] to be able to send with it."
-msgstr ""
-
-#: views/settings.html:104
-msgid "Authorize my email address"
-msgstr ""
-
-#: views/settings.html:106
 msgid "Enable sign-up confirmation"
 msgstr ""
 
-#: views/settings.html:107
+#: views/settings.html:104
 msgid "If you enable this option, your subscribers will first receive a confirmation email after they subscribe. Once they confirm their subscription (via this email), they will be marked as 'confirmed' and will begin to receive your email newsletters."
 msgstr ""
 
-#: views/settings.html:108
+#: views/settings.html:105
 msgid "Read more about Double Opt-in confirmation."
 msgstr ""
 
-#: views/settings.html:109
+#: views/settings.html:106
 msgid "Sign-up confirmation is mandatory when using the MailPoet Sending Service."
 msgstr ""
 
-#: views/settings.html:111
+#: views/settings.html:108
 msgid "Email content"
 msgstr ""
 
-#: views/settings.html:112
+#: views/settings.html:109
 msgid "Don't forget to include:<br /><br />[activation_link]Confirm your subscription.[/activation_link]<br /><br />Optional: [lists_to_confirm]."
 msgstr ""
 
-#: views/settings.html:114
+#: views/settings.html:111
 msgid "When subscribers click on the activation link, they will be redirected to this page."
 msgstr ""
 
-#: views/settings.html:115
+#: views/settings.html:112
 msgid "Subscribers will need to activate their subscription via email in order to receive your newsletters. This is highly recommended!"
 msgstr ""
 
-#: views/settings.html:116
+#: views/settings.html:113
 msgid "New subscribers will be automatically confirmed, without having to confirm their subscription. This is not recommended!"
 msgstr ""
 
-#: views/settings.html:118
+#: views/settings.html:115
 msgid "Bounce email address"
 msgstr ""
 
-#: views/settings.html:119
+#: views/settings.html:116
 msgid "Your bounced emails will be sent to this address."
 msgstr ""
 
-#: views/settings.html:121
+#: views/settings.html:118
 msgid "Newsletter task scheduler (cron)"
 msgstr ""
 
-#: views/settings.html:122
+#: views/settings.html:119
 msgid "Select what will activate your newsletter queue."
 msgstr ""
 
-#: views/settings.html:123
+#: views/settings.html:120
 msgid "Visitors to your website (recommended)"
 msgstr ""
 
-#: views/settings.html:124
+#: views/settings.html:121
 msgid "Server side cron (Linux cron)"
 msgstr ""
 
-#: views/settings.html:125
+#: views/settings.html:122
 msgid "To use this option please add this command to your crontab:"
 msgstr ""
 
-#: views/settings.html:126
+#: views/settings.html:123
 msgid "With the frequency of running it every minute:"
 msgstr ""
 
-#: views/settings.html:127
+#: views/settings.html:124
 msgid "Roles and capabilities"
 msgstr ""
 
-#: views/settings.html:128
+#: views/settings.html:125
 msgid "Manage which WordPress roles access which features of MailPoet."
 msgstr ""
 
-#: views/settings.html:129
+#: views/settings.html:126
 msgid "Manage using the Members plugin"
 msgstr ""
 
-#: views/settings.html:130
+#: views/settings.html:127
 msgid "Install the plugin [link]Members[/link] (free) to manage permissions."
 msgstr ""
 
-#: views/settings.html:131
+#: views/settings.html:128
 msgid "Re-engagement emails were deactivated."
 msgstr ""
 
-#: views/settings.html:132
+#: views/settings.html:129
 msgid "Re-engagement emails are now enabled. Don’t forget to [link]activate them[/link]."
 msgstr ""
 
-#: views/settings.html:137
+#: views/settings.html:134
 msgid "Note: attachments, CC, BCC and multiple TO are not supported. [link]Learn more[/link]"
 msgstr ""
 
-#: views/settings.html:139
+#: views/settings.html:136
 msgid "Stop sending to inactive subscribers"
 msgstr ""
 
-#: views/settings.html:140
+#: views/settings.html:137
 msgid "Gmail, Yahoo and other email providers will treat your emails like spam if your subscribers don't open your emails in the long run. This option will mark your subscribers as Inactive and MailPoet will stop sending to them."
 msgstr ""
 
-#: views/settings.html:141
+#: views/settings.html:138
 msgid "This option is disabled because tracking is disabled."
 msgstr ""
 
-#: views/settings.html:142
+#: views/settings.html:139
 msgid "After 3 months (recommended if you send once a day)"
 msgstr ""
 
-#: views/settings.html:143
+#: views/settings.html:140
 msgid "After 6 months (recommended if you send at least twice a month)"
 msgstr ""
 
-#: views/settings.html:144
+#: views/settings.html:141
 msgid "After 12 months (default)"
 msgstr ""
 
-#: views/settings.html:145
+#: views/settings.html:142
 msgid "After 18 months"
 msgstr ""
 
-#: views/settings.html:146
+#: views/settings.html:143
 msgid "Load 3rd-party libraries"
 msgstr ""
 
-#: views/settings.html:147
+#: views/settings.html:144
 msgid "E.g. Google Fonts (used in Form Editor) and HelpScout (used for support). This needs to be enabled if you want to be able to contact support."
 msgstr ""
 
-#: views/settings.html:148
+#: views/settings.html:145
 msgid "Share anonymous data"
 msgstr ""
 
-#: views/settings.html:149
+#: views/settings.html:146
 msgid "Share anonymous data and help us improve the plugin. We appreciate your help!"
 msgstr ""
 
-#: views/settings.html:150
+#: views/settings.html:147
 msgid "Protect your forms against spam signups"
 msgstr ""
 
-#: views/settings.html:151
+#: views/settings.html:148
 msgid "Built-in CAPTCHA protects your subscription forms against bots. Alternatively, use reCAPTCHA by Google."
 msgstr ""
 
-#: views/settings.html:152
+#: views/settings.html:149
 msgid "Please use the same reCAPTCHA type as in Google reCAPTCHA Settings."
 msgstr ""
 
-#: views/settings.html:153
+#: views/settings.html:150
 msgid "Sign up for an API key pair here."
 msgstr ""
 
-#: views/settings.html:154
+#: views/settings.html:151
 msgid "Built-in CAPTCHA (default)"
 msgstr ""
 
-#: views/settings.html:155
+#: views/settings.html:152
 msgid "(disabled because GD or FreeType extension is missing)"
 msgstr ""
 
-#: views/settings.html:156
+#: views/settings.html:153
 msgid "Google reCAPTCHA v2 Checkbox"
 msgstr ""
 
-#: views/settings.html:157
+#: views/settings.html:154
 msgid "Google reCAPTCHA v2 Invisible"
 msgstr ""
 
-#: views/settings.html:158
+#: views/settings.html:155
 msgid "Your reCAPTCHA Site Key"
 msgstr ""
 
-#: views/settings.html:159
+#: views/settings.html:156
 msgid "Your reCAPTCHA Secret Key"
 msgstr ""
 
-#: views/settings.html:160
+#: views/settings.html:157
 msgid "Please fill the reCAPTCHA keys."
 msgstr ""
 
-#: views/settings.html:161
+#: views/settings.html:158
 msgid "Disable"
 msgstr ""
 
-#: views/settings.html:162
+#: views/settings.html:159
 msgid "Recalculate Subscriber Scores"
 msgstr ""
 
-#: views/settings.html:163
+#: views/settings.html:160
 msgid "MailPoet will recalculate subscriber engagement scores for all subscribers. This may take some time to complete."
 msgstr ""
 
-#: views/settings.html:164
+#: views/settings.html:161
 msgid "Update now…"
 msgstr ""
 
-#: views/settings.html:165
+#: views/settings.html:162
 msgid "Subscriber score recalculation has been scheduled and will start soon. It may take some time to complete."
 msgstr ""
 
-#: views/settings.html:166
+#: views/settings.html:163
 msgid "Reinstall from scratch"
 msgstr ""
 
-#: views/settings.html:167
+#: views/settings.html:164
 msgid "Want to start from the beginning? This will completely delete MailPoet and reinstall it from scratch. Remember: you will lose all of your data!"
 msgstr ""
 
-#: views/settings.html:168
+#: views/settings.html:165
 msgid "Reinstall now..."
 msgstr ""
 
-#: views/settings.html:169
+#: views/settings.html:166
 msgid "Logging"
 msgstr ""
 
-#: views/settings.html:170
+#: views/settings.html:167
 msgid "Enables logging for diagnostics of plugin behavior."
 msgstr ""
 
-#: views/settings.html:171
+#: views/settings.html:168
 msgid "See logs."
 msgstr ""
 
-#: views/settings.html:175
+#: views/settings.html:172
 msgid "Are you sure? All of your MailPoet data will be permanently erased (newsletters, statistics, subscribers, etc.)."
 msgstr ""
 
-#: views/settings.html:178
+#: views/settings.html:175
 msgid "Get notified when someone subscribes"
 msgstr ""
 
-#: views/settings.html:179
+#: views/settings.html:176
 msgid "It’s been a popular feature request from our users, we hope you get lots of emails about all your new subscribers!"
 msgstr ""
 
-#: views/settings.html:180
+#: views/settings.html:177
 msgid "(You can turn this feature off if it’s too many emails.)"
 msgstr ""
 
-#: views/settings.html:182
+#: views/settings.html:179
 msgid "Activation Key"
 msgstr ""
 
-#: views/settings.html:183
+#: views/settings.html:180
 msgid "This key is used to validate your free or paid subscription. Paying customers will enjoy automatic upgrades of their Premium plugin and access to faster support."
 msgstr ""
 
-#: views/settings.html:184
+#: views/settings.html:181
 msgid "Please specify a license key before validating it."
 msgstr ""
 
-#: views/settings.html:185 views/subscribers/importExport/import.html:118
+#: views/settings.html:182 views/subscribers/importExport/import.html:118
 msgid "Verify"
 msgstr ""
 
-#: views/settings.html:186
+#: views/settings.html:183
 msgid "Your key is valid"
 msgstr ""
 
-#: views/settings.html:187
+#: views/settings.html:184
 msgid "Your key is not valid"
 msgstr ""
 
-#: views/settings.html:188
+#: views/settings.html:185
 msgid "Yikes, we can’t validate your key because:"
 msgstr ""
 
-#: views/settings.html:189
+#: views/settings.html:186
 msgid "You’re on localhost or using an IP address instead of a domain. Not allowed for security reasons!"
 msgstr ""
 
-#: views/settings.html:190
+#: views/settings.html:187
 msgid "Your host is blocking the activation, e.g. Altervista"
 msgstr ""
 
-#: views/settings.html:191
+#: views/settings.html:188
 msgid "This website is on an Intranet. Activating MailPoet will not be possible."
 msgstr ""
 
-#: views/settings.html:193
+#: views/settings.html:190
 msgid "MailPoet Premium is active"
 msgstr ""
 
-#: views/settings.html:194
+#: views/settings.html:191
 msgid "MailPoet Premium is not installed."
 msgstr ""
 
-#: views/settings.html:195
+#: views/settings.html:192
 msgid "MailPoet Premium is installed but not activated."
 msgstr ""
 
-#: views/settings.html:198
+#: views/settings.html:195
 msgid "downloading MailPoet Premium…"
 msgstr ""
 
-#: views/settings.html:199
+#: views/settings.html:196
 msgid "activating MailPoet Premium…"
 msgstr ""
 
-#: views/settings.html:200
+#: views/settings.html:197
 msgid "MailPoet Premium is active!"
 msgstr ""
 
-#: views/settings.html:201
+#: views/settings.html:198
 msgid "Something went wrong. Please [link]download the Premium plugin from your account[/link] and [link]contact our support team[/link]."
 msgstr ""
 
-#: views/settings.html:203
+#: views/settings.html:200
 msgid "MailPoet Sending Service is active"
 msgstr ""
 
-#: views/settings.html:205
+#: views/settings.html:202
 msgid "Activate MailPoet Sending Service"
 msgstr ""
 
-#: views/settings.html:207
+#: views/settings.html:204
 msgid "Note: your account is pending approval by MailPoet."
 msgstr ""
 
-#: views/settings.html:208
+#: views/settings.html:205
 msgid "Rest assured, this only takes just a couple of hours. Until then, you can still send email previews to yourself. Any active automatic emails, like Welcome Emails, will be paused."
 msgstr ""
 
-#: views/settings.html:209
+#: views/settings.html:206
 msgid "A test email was sent to [email_address]"
 msgstr ""
 
-#: views/settings.html:215
+#: views/settings.html:212
 msgid "Customers can subscribe to the \"WooCommerce Customers\" list and optionally other lists via a checkbox on the checkout page."
 msgstr ""
 
-#: views/settings.html:216
+#: views/settings.html:213
 msgid "Lists to also subscribe customers to:"
 msgstr ""
 
-#: views/settings.html:217
+#: views/settings.html:214
 msgid "Leave empty to subscribe only to \"WooCommerce Customers\" list"
 msgstr ""
 
-#: views/settings.html:218
+#: views/settings.html:215
 msgid "Select lists..."
 msgstr ""
 
-#: views/settings.html:220
+#: views/settings.html:217
 msgid "This is the checkbox message your customers will see on your WooCommerce checkout page to subscribe to the \"WooCommerce Customers\" list and lists selected in \"Opt-in on checkout\" setting."
 msgstr ""
 
-#: views/settings.html:222
+#: views/settings.html:219
 msgid "The checkbox opt-in message cannot be empty."
 msgstr ""
 
-#: views/settings.html:223
+#: views/settings.html:220
 msgid "Subscribe old WooCommerce customers"
 msgstr ""
 
-#: views/settings.html:224
+#: views/settings.html:221
 msgid "Subscribe all my past customers to this list because they agreed to receive marketing emails from me."
 msgstr ""
 
-#: views/settings.html:226
+#: views/settings.html:223
 msgid "MailPoet Sending Service"
 msgstr ""
 
-#: views/settings.html:227
+#: views/settings.html:224
 msgid "You're now sending with MailPoet!"
 msgstr ""
 
-#: views/settings.html:228
+#: views/settings.html:225
 msgid "Solve all of your sending problems!"
 msgstr ""
 
-#: views/settings.html:229
+#: views/settings.html:226
 msgid "Reach the inbox, not the spam box."
 msgstr ""
 
-#: views/settings.html:230
+#: views/settings.html:227
 msgid "Easy configuration: enter a key to activate the sending service."
 msgstr ""
 
-#: views/settings.html:231
+#: views/settings.html:228
 msgid "Super fast: send up to 50,000 emails per hour."
 msgstr ""
 
-#: views/settings.html:232
+#: views/settings.html:229
 msgid "All emails are signed with SPF & DKIM."
 msgstr ""
 
-#: views/settings.html:233
+#: views/settings.html:230
 msgid "Automatically remove invalid and bounced addresses (bounce handling) to keep your lists clean."
 msgstr ""
 
-#: views/settings.html:236
+#: views/settings.html:233
 msgid "Activated"
 msgstr ""
 
-#: views/settings.html:237
+#: views/settings.html:234
 msgid "Free up to 1,000 subscribers"
 msgstr ""
 
-#: views/settings.html:238
+#: views/settings.html:235
 msgid "or"
 msgstr ""
 
-#: views/settings.html:239
+#: views/settings.html:236
 msgid "[link]enter your key[/link]"
 msgstr ""
 
-#: views/settings.html:240
+#: views/settings.html:237
 msgid "Other"
 msgstr ""
 
-#: views/settings.html:241
+#: views/settings.html:238
 msgid "Send emails via your host"
 msgstr ""
 
-#: views/settings.html:242
+#: views/settings.html:239
 msgid "(not recommended!)"
 msgstr ""
 
-#: views/settings.html:243
+#: views/settings.html:240
 msgid "or via a third-party sender."
 msgstr ""
 
-#: views/settings.html:244
+#: views/settings.html:241
 msgid "Your key is not valid for MailPoet Sending Service."
 msgstr ""
 
-#: views/settings.html:245
+#: views/settings.html:242
 msgid "Get a new plan"
 msgstr ""
 
-#: views/settings.html:246
+#: views/settings.html:243
 msgid "Unless you're a pro, you’ll probably end up in spam."
 msgstr ""
 
-#: views/settings.html:247
+#: views/settings.html:244
 msgid "Sending speed is limited by your host and/or your third-party (with a 2,000 per hour maximum)."
 msgstr ""
 
-#: views/settings.html:248
+#: views/settings.html:245
 msgid "Manual configuration of SPF and DKIM required."
 msgstr ""
 
-#: views/settings.html:249
+#: views/settings.html:246
 msgid "Bounce handling is available, but only with an extra [link]add-on[/link]."
 msgstr ""
 
-#: views/settings.html:250
+#: views/settings.html:247
 msgid "Configure"
 msgstr ""
 
-#: views/settings.html:251
+#: views/settings.html:248
 msgid "Method"
 msgstr ""
 
-#: views/settings.html:252
+#: views/settings.html:249
 msgid "Your web host / web server"
 msgstr ""
 
-#: views/settings.html:253
+#: views/settings.html:250
 msgid "SMTP"
 msgstr ""
 
-#: views/settings.html:254
+#: views/settings.html:251
 msgid "Select your provider"
 msgstr ""
 
-#: views/settings.html:255
+#: views/settings.html:252
 msgid "Your web host"
 msgstr ""
 
-#: views/settings.html:256
+#: views/settings.html:253
 msgid "Not listed (default)"
 msgstr ""
 
-#: views/settings.html:257
+#: views/settings.html:254
 msgid "Sending frequency"
 msgstr ""
 
-#: views/settings.html:258
+#: views/settings.html:255
 msgid "Recommended"
 msgstr ""
 
-#: views/settings.html:259
+#: views/settings.html:256
 msgid "recommended"
 msgstr ""
 
-#: views/settings.html:260
+#: views/settings.html:257
 msgid "I'll set my own frequency"
 msgstr ""
 
-#: views/settings.html:261
+#: views/settings.html:258
 msgid "emails"
 msgstr ""
 
-#: views/settings.html:262
+#: views/settings.html:259
 msgid "%1$s emails"
 msgstr ""
 
-#: views/settings.html:267
+#: views/settings.html:264
 msgid "That's <strong>%1$s emails</strong> per day"
 msgstr ""
 
-#: views/settings.html:268
+#: views/settings.html:265
 msgid "That's %1$s emails per second. <strong>We highly recommend to send 1 email per second, at the absolute maximum.</strong> MailPoet needs at least one second to process and send a single email (on most hosts.) <strong>Alternatively, send with MailPoet, which can be up to 50 times faster.</strong>"
 msgstr ""
 
-#: views/settings.html:269
+#: views/settings.html:266
 msgid "<strong>Warning!</strong> You may break the terms of your web host or provider by sending more than the recommended emails per day. Contact your host if you want to send more."
 msgstr ""
 
-#: views/settings.html:270
+#: views/settings.html:267
 msgid "SMTP Hostname"
 msgstr ""
 
-#: views/settings.html:271
+#: views/settings.html:268
 msgid "e.g.: smtp.mydomain.com"
 msgstr ""
 
-#: views/settings.html:272
+#: views/settings.html:269
 msgid "SMTP Port"
 msgstr ""
 
-#: views/settings.html:273
+#: views/settings.html:270
 msgid "Region"
 msgstr ""
 
-#: views/settings.html:274
+#: views/settings.html:271
 msgid "Access Key"
 msgstr ""
 
-#: views/settings.html:275
+#: views/settings.html:272
 msgid "Secret Key"
 msgstr ""
 
-#: views/settings.html:276
+#: views/settings.html:273
 msgid "API Key"
 msgstr ""
 
-#: views/settings.html:277
+#: views/settings.html:274
 msgid "Login"
 msgstr ""
 
-#: views/settings.html:278
+#: views/settings.html:275
 msgid "Password"
 msgstr ""
 
-#: views/settings.html:279
+#: views/settings.html:276
 msgid "Secure Connection"
 msgstr ""
 
-#: views/settings.html:280
+#: views/settings.html:277
 msgid "Authentication"
 msgstr ""
 
-#: views/settings.html:281
+#: views/settings.html:278
 msgid "Leave this option set to Yes. Only a tiny portion of SMTP services prefer Authentication to be turned off."
 msgstr ""
 
-#: views/settings.html:282
+#: views/settings.html:279
 msgid "SPF Signature (Highly recommended!)"
 msgstr ""
 
-#: views/settings.html:283
+#: views/settings.html:280
 msgid "This improves your delivery rate by verifying that you're allowed to send emails from your domain."
 msgstr ""
 
-#: views/settings.html:284
+#: views/settings.html:281
 msgid "SPF is set up in your DNS. Read your host's support documentation for more information."
 msgstr ""
 
-#: views/settings.html:285
+#: views/settings.html:282
 msgid "Test the sending method"
 msgstr ""
 
-#: views/settings.html:286
+#: views/settings.html:283
 msgid "Send a test email"
 msgstr ""
 
-#: views/settings.html:287
+#: views/settings.html:284
 msgid "Didn't receive the test email? Read our [link]quick guide[/link] to sending issues."
 msgstr ""
 
-#: views/settings.html:288
+#: views/settings.html:285
 msgid "The email could not be sent. Make sure the option \"Email notifications\" has a FROM email address in the Basics tab."
 msgstr ""
 
-#: views/settings.html:289
+#: views/settings.html:286
 msgid "This is a Sending Method Test"
 msgstr ""
 
-#: views/settings.html:290
+#: views/settings.html:287
 msgid "Yup, it works! You can start blasting away emails to the moon."
 msgstr ""
 
-#: views/settings.html:291
+#: views/settings.html:288
 msgid "The email has been sent! Check your inbox."
 msgstr ""
 
-#: views/settings.html:292
+#: views/settings.html:289
 msgid "or Cancel"
 msgstr ""
 
-#: views/settings.html:294
+#: views/settings.html:291
 msgid "Engagement analytics tracking"
 msgstr ""
 
-#: views/settings.html:295
+#: views/settings.html:292
 msgid "Choose the balance between subscriber privacy and deeper engagement insights that is right for your business."
 msgstr ""
 
-#: views/settings.html:296
+#: views/settings.html:293
 msgid "Full – additionally use browser cookies to improve the site and email engagement tracking and abandoned cart email accuracy."
 msgstr ""
 
-#: views/settings.html:297
+#: views/settings.html:294
 msgid "Partial – additionally track email engagement (opens, clicks). Disable cookie-based tracking."
 msgstr ""
 
-#: views/settings.html:298
+#: views/settings.html:295
 msgid "Basic – only use data your site already has about your subscribers. Disable email engagement and cookie-based tracking, and re-engagement emails."
 msgstr ""
 
-#: views/settings.html:74
+#: views/settings.html:73
 msgctxt "Unsubscribe pages customization link"
 msgid "[link]Learn more about customizing these pages.[/link]"
 msgstr ""
 
-#: views/settings.html:78
+#: views/settings.html:77
 msgctxt "name of a setting to automatically send statistics (newsletter open rate, click rate, etc) by email"
 msgid "Stats notifications"
 msgstr ""
 
-#: views/settings.html:79
+#: views/settings.html:78
 msgctxt "Please reuse the current translations of “Welcome Emails”"
 msgid "Enter the email address that should receive your newsletter’s stats 24 hours after it has been sent, or every first Monday of the month for Welcome Emails and WooCommerce Emails."
 msgstr ""
 
-#: views/settings.html:84
+#: views/settings.html:83
 msgctxt "Please reuse the current translations of “Welcome Emails”"
 msgid "Welcome Emails and WooCommerce emails"
 msgstr ""
 
-#: views/settings.html:120
+#: views/settings.html:117
 msgctxt "support article link label"
 msgid "Read more."
 msgstr ""
 
-#: views/settings.html:133
+#: views/settings.html:130
 msgctxt "Transational emails settings title"
 msgid "Send all site’s emails with…"
 msgstr ""
 
-#: views/settings.html:134
+#: views/settings.html:131
 msgctxt "Transational emails settings description"
 msgid "Choose which method to send all your WordPress emails (e.g. password reset, new registration, WooCommerce invoices, etc.)."
 msgstr ""
 
-#: views/settings.html:135
+#: views/settings.html:132
 msgctxt "Transactional emails settings link"
 msgid "Read more."
 msgstr ""
 
-#: views/settings.html:136
+#: views/settings.html:133
 msgctxt "Transactional emails settings option"
 msgid "The current sending method - %1$s (recommended)"
 msgstr ""
 
-#: views/settings.html:138
+#: views/settings.html:135
 msgctxt "Transactional emails settings option"
 msgid "The default WordPress sending method (default)"
 msgstr ""
 
-#: views/settings.html:172
+#: views/settings.html:169
 msgctxt "In settings: \"Logging: Everything\""
 msgid "Everything"
 msgstr ""
 
-#: views/settings.html:173
+#: views/settings.html:170
 msgctxt "In settings: \"Logging: Errors only\""
 msgid "Errors only"
 msgstr ""
 
-#: views/settings.html:174
+#: views/settings.html:171
 msgctxt "In settings: \"Logging: Nothing\""
 msgid "Nothing"
 msgstr ""
 
-#: views/settings.html:211
+#: views/settings.html:208
 msgctxt "Setting for using our editor for WooCommerce email"
 msgid "Use MailPoet to customize WooCommerce emails"
 msgstr ""
 
-#: views/settings.html:212
+#: views/settings.html:209
 msgctxt "Setting for using our editor for WooCommerce email"
 msgid "You can use the MailPoet editor to customize the template used to send WooCommerce emails (notification for order processing, completed, ...)."
 msgstr ""
 
-#: views/settings.html:213
+#: views/settings.html:210
 msgctxt "Settings button to go to WooCommerce email editor"
 msgid "Open template editor"
 msgstr ""
 
-#: views/settings.html:214
+#: views/settings.html:211
 msgctxt "settings area: add an email opt-in checkbox on the checkout page (e-commerce websites)"
 msgid "Opt-in on checkout"
 msgstr ""
 
-#: views/settings.html:219
+#: views/settings.html:216
 msgctxt "settings area: set the email opt-in message on the checkout page (e-commerce websites)"
 msgid "Checkbox opt-in message"
 msgstr ""
 
-#: views/settings.html:221
+#: views/settings.html:218
 msgctxt "placeholder text for the WooCommerce checkout opt-in message"
 msgid "Checkbox opt-in message"
 msgstr ""

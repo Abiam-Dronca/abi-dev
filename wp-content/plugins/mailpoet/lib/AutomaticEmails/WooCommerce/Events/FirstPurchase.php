@@ -7,13 +7,12 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\AutomaticEmails\WooCommerce\WooCommerce;
 use MailPoet\DI\ContainerWrapper;
-use MailPoet\Entities\NewsletterEntity;
-use MailPoet\Entities\SendingQueueEntity;
-use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Logging\LoggerFactory;
+use MailPoet\Models\Newsletter;
+use MailPoet\Models\SendingQueue;
+use MailPoet\Models\Subscriber;
 use MailPoet\Newsletter\AutomaticEmailsRepository;
 use MailPoet\Newsletter\Scheduler\AutomaticEmailScheduler;
-use MailPoet\Subscribers\SubscribersRepository;
 use MailPoet\WooCommerce\Helper as WCHelper;
 use MailPoet\WP\Functions as WPFunctions;
 
@@ -33,10 +32,7 @@ class FirstPurchase {
   private $loggerFactory;
 
   /** @var AutomaticEmailsRepository */
-  private $automaticEmailsRepository;
-
-  /** @var SubscribersRepository */
-  private $subscribersRepository;
+  private $repository;
 
   public function __construct(
     WCHelper $helper = null
@@ -47,8 +43,7 @@ class FirstPurchase {
     $this->helper = $helper;
     $this->scheduler = ContainerWrapper::getInstance()->get(AutomaticEmailScheduler::class);
     $this->loggerFactory = LoggerFactory::getInstance();
-    $this->automaticEmailsRepository = ContainerWrapper::getInstance()->get(AutomaticEmailsRepository::class);
-    $this->subscribersRepository = ContainerWrapper::getInstance()->get(SubscribersRepository::class);
+    $this->repository = ContainerWrapper::getInstance()->get(AutomaticEmailsRepository::class);
   }
 
   public function init() {
@@ -108,9 +103,9 @@ class FirstPurchase {
     }
     $this->loggerFactory->getLogger(self::SLUG)->info(
       'handleOrderDateShortcode called', [
-        'newsletter_id' => ($newsletter instanceof NewsletterEntity) ? $newsletter->getId() : null,
-        'subscriber_id' => ($subscriber instanceof SubscriberEntity) ? $subscriber->getId() : null,
-        'task_id' => ($queue instanceof SendingQueueEntity) ? (($task = $queue->getTask()) ? $task->getId() : null) : null,
+        'newsletter_id' => ($newsletter instanceof Newsletter) ? $newsletter->id : null,
+        'subscriber_id' => ($subscriber instanceof Subscriber) ? $subscriber->id : null,
+        'task_id' => ($queue instanceof SendingQueue) ? $queue->taskId : null,
         'shortcode' => $shortcode,
         'result' => $result,
       ]
@@ -131,9 +126,9 @@ class FirstPurchase {
     }
     $this->loggerFactory->getLogger(self::SLUG)->info(
       'handleOrderTotalShortcode called', [
-        'newsletter_id' => ($newsletter instanceof NewsletterEntity) ? $newsletter->getId() : null,
-        'subscriber_id' => ($subscriber instanceof SubscriberEntity) ? $subscriber->getId() : null,
-        'task_id' => ($queue instanceof SendingQueueEntity) ? (($task = $queue->getTask()) ? $task->getId() : null) : null,
+        'newsletter_id' => ($newsletter instanceof Newsletter) ? $newsletter->id : null,
+        'subscriber_id' => ($subscriber instanceof Subscriber) ? $subscriber->id : null,
+        'task_id' => ($queue instanceof SendingQueue) ? $queue->taskId : null,
         'shortcode' => $shortcode,
         'result' => $result,
       ]
@@ -170,9 +165,9 @@ class FirstPurchase {
       'order_id' => $orderDetails->get_id(),
     ];
 
-    $subscriber = $this->subscribersRepository->getWooCommerceSegmentSubscriber($customerEmail);
+    $subscriber = Subscriber::getWooCommerceSegmentSubscriber($customerEmail);
 
-    if (!$subscriber instanceof SubscriberEntity) {
+    if (!$subscriber instanceof Subscriber) {
       $this->loggerFactory->getLogger(self::SLUG)->info(
         'Email not scheduled because the customer was not found as WooCommerce list subscriber',
         ['order_id' => $orderId, 'customer_email' => $customerEmail]
@@ -180,18 +175,18 @@ class FirstPurchase {
       return;
     }
 
-    $checkEmailWasNotScheduled = function (NewsletterEntity $newsletter) use ($subscriber) {
-      return !$this->automaticEmailsRepository->wasScheduledForSubscriber((int)$newsletter->getId(), (int)$subscriber->getId());
+    $checkEmailWasNotScheduled = function (Newsletter $newsletter) use ($subscriber) {
+      return !$this->repository->wasScheduledForSubscriber($newsletter->id, $subscriber->id);
     };
 
     $this->loggerFactory->getLogger(self::SLUG)->info(
       'Email scheduled', [
         'order_id' => $orderId,
         'customer_email' => $customerEmail,
-        'subscriber_id' => $subscriber->getId(),
+        'subscriber_id' => $subscriber->id,
       ]
     );
-    $this->scheduler->scheduleAutomaticEmail(WooCommerce::SLUG, self::SLUG, $checkEmailWasNotScheduled, $subscriber->getId(), $meta);
+    $this->scheduler->scheduleAutomaticEmail(WooCommerce::SLUG, self::SLUG, $checkEmailWasNotScheduled, $subscriber->id, $meta);
   }
 
   public function getCustomerOrderCount($customerEmail) {
