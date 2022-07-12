@@ -386,7 +386,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 						),
 					),
 					// Entry Content.
-					'wp-blocks-ui'                         => false === astra_check_is_structural_setup() ? 'custom' : 'comfort',
+					'wp-blocks-ui'                         => 'custom',
 					'wp-blocks-global-padding'             => array(
 						'desktop'      => array(
 							'top'    => '',
@@ -412,7 +412,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 					),
 					// Container.
 					'site-content-layout'                  => 'content-boxed-container',
-					'single-page-content-layout'           => false === astra_check_is_structural_setup() ? 'default' : 'plain-container',
+					'single-page-content-layout'           => 'default',
 					'single-post-content-layout'           => 'default',
 					'archive-post-content-layout'          => 'default',
 					// Typography.
@@ -456,29 +456,6 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 						'desktop'      => 30,
 						'tablet'       => '',
 						'mobile'       => '',
-						'desktop-unit' => 'px',
-						'tablet-unit'  => 'px',
-						'mobile-unit'  => 'px',
-					),
-					'single-post-outside-spacing'          => array(
-						'desktop'      => array(
-							'top'    => '',
-							'right'  => '',
-							'bottom' => '',
-							'left'   => '',
-						),
-						'tablet'       => array(
-							'top'    => '',
-							'right'  => '',
-							'bottom' => '',
-							'left'   => '',
-						),
-						'mobile'       => array(
-							'top'    => '',
-							'right'  => '',
-							'bottom' => '',
-							'left'   => '',
-						),
 						'desktop-unit' => 'px',
 						'tablet-unit'  => 'px',
 						'mobile-unit'  => 'px',
@@ -551,7 +528,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 					// Sidebar.
 					'site-sidebar-layout'                  => 'right-sidebar',
 					'site-sidebar-width'                   => 30,
-					'single-page-sidebar-layout'           => false === astra_check_is_structural_setup() ? 'default' : 'no-sidebar',
+					'single-page-sidebar-layout'           => 'default',
 					'single-post-sidebar-layout'           => 'default',
 					'archive-post-sidebar-layout'          => 'default',
 

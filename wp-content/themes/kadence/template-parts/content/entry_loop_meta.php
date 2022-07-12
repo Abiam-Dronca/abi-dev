@@ -31,7 +31,6 @@ $defaults = array(
 	'categoriesEnableLabel'  => false,
 	'categoriesLabel'        => '',
 	'comments'               => false,
-	'commentsCondition'      => false,
 );
 $slug              = ( is_search() ? 'search' : get_post_type() );
 $elements          = kadence()->option( $slug . '_archive_element_meta', $defaults );
@@ -301,24 +300,18 @@ $post_type_obj = get_post_type_object( get_post_type() );
 				}
 				break;
 			case 'comments':
-				$show = true;
-				if ( isset( $elements['commentsCondition'] ) && $elements['commentsCondition'] && 0 == get_comments_number() ) {
-					$show = false;
+				echo '<div class="meta-comments">';
+				if ( 'customicon' === $meta_divider ) {
+					kadence()->print_icon( 'commentsAlt', '', false );
 				}
-				if ( $show ) {
-					echo '<div class="meta-comments">';
-					if ( 'customicon' === $meta_divider ) {
-						kadence()->print_icon( 'commentsAlt', '', false );
-					}
-					echo '<a class="meta-comments-link anchor-scroll" href="' . esc_url( get_the_permalink() ) . '#comments">';
-					if ( '1' === get_comments_number() ) {
-						echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comment', 'kadence' );
-					} else {
-						echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comments', 'kadence' );
-					}
-					echo '</a>';
-					echo '</div>';
+				echo '<a class="meta-comments-link anchor-scroll" href="' . esc_url( get_the_permalink() ) . '#comments">';
+				if ( '1' === get_comments_number() ) {
+					echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comment', 'kadence' );
+				} else {
+					echo esc_html( get_comments_number() ) . ' ' . esc_html__( 'Comments', 'kadence' );
 				}
+				echo '</a>';
+				echo '</div>';
 				break;
 		}
 	}

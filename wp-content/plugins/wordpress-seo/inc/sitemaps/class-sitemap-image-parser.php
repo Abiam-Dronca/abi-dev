@@ -208,7 +208,7 @@ class WPSEO_Sitemap_Image_Parser {
 				continue;
 			}
 
-			if ( $src !== esc_url( $src, null, 'attribute' ) ) {
+			if ( $src !== esc_url( $src ) ) {
 				continue;
 			}
 

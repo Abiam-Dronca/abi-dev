@@ -53,7 +53,6 @@ class SorterComponent extends Component {
 					'categoriesLabel': '',
 					'comments': false,
 					'commentsLabel': '',
-					'commentsCondition': false,
 				},
 				'categories': {
 					'id': 'categories',

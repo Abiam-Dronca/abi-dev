@@ -121,13 +121,6 @@ jQuery(function($) {
 				lng: latLng.lng
 			}
 		});
-
-		let fullResult = false;
-		if(options.fullResult){
-			fullResult = true;
-			delete options.fullResult;
-		}
-		
 		delete options.latLng;
 		
 		geocoder.geocode(options, function(results, status) {
@@ -138,11 +131,7 @@ jQuery(function($) {
 			if(!results || !results.length)
 				callback([], WPGMZA.Geocoder.NO_RESULTS);
 			
-			if(fullResult){
-				callback([results[0]], WPGMZA.Geocoder.SUCCESS);
-			} else {
-				callback([results[0].formatted_address], WPGMZA.Geocoder.SUCCESS);
-			}
+			callback([results[0].formatted_address], WPGMZA.Geocoder.SUCCESS);
 			
 		});
 	}

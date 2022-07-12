@@ -14,10 +14,8 @@ jQuery(function($) {
 	WPGMZA.RestAPI = function()
 	{
 		WPGMZA.RestAPI.URL = WPGMZA.resturl;
-	
+		
 		this.useAJAXFallback = false;
-
-		$(document.body).trigger("init.restapi.wpgmza");
 	}
 	
 	WPGMZA.RestAPI.CONTEXT_REST		= "REST";
@@ -360,5 +358,4 @@ jQuery(function($) {
 		});
 		
 	});
-	
 });

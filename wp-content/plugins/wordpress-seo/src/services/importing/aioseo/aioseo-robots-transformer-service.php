@@ -5,6 +5,8 @@ namespace Yoast\WP\SEO\Services\Importing\Aioseo;
 
 /**
  * Transforms AISOEO search appearance robot settings.
+ *
+ * @phpcs:disable Yoast.NamingConventions.ObjectNameDepth.MaxExceeded
  */
 class Aioseo_Robots_Transformer_Service {
 

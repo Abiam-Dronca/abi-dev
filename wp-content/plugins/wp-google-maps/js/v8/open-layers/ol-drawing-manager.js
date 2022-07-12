@@ -87,14 +87,6 @@ jQuery(function($) {
 			case WPGMZA.DrawingManager.MODE_HEATMAP:
 				return;
 				break;
-
-			case WPGMZA.DrawingManager.MODE_POINTLABEL:
-				return;
-				break;
-			case WPGMZA.DrawingManager.MODE_IMAGEOVERLAY:
-				type = "Circle";
-				endEventType = "imageoverlaycomplete";
-				break;
 			
 			default:
 				throw new Error("Invalid drawing mode");
@@ -111,7 +103,7 @@ jQuery(function($) {
 			type: type
 		};
 		
-		if(mode == WPGMZA.DrawingManager.MODE_RECTANGLE || mode == WPGMZA.DrawingManager.MODE_IMAGEOVERLAY)
+		if(mode == WPGMZA.DrawingManager.MODE_RECTANGLE)
 			options.geometryFunction = ol.interaction.Draw.createBox();
 		
 		this.interaction = new ol.interaction.Draw(options);
@@ -138,11 +130,6 @@ jQuery(function($) {
 				
 				case WPGMZA.DrawingManager.MODE_RECTANGLE:
 					WPGMZAEvent.engineRectangle = event.feature;
-					break;
-				case WPGMZA.DrawingManager.MODE_IMAGEOVERLAY:
-					WPGMZAEvent.engineImageoverlay = {
-						engineRectangle : event.feature
-					};
 					break;
 					
 				default:

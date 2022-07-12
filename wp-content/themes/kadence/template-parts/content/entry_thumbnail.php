@@ -27,15 +27,6 @@ if ( is_singular( get_post_type() ) ) {
 			<?php the_post_thumbnail( apply_filters( 'kadence_single_featured_image_size', 'full' ), array( 'class' => 'post-top-featured') ); ?>
 		</div>
 	</div><!-- .post-thumbnail -->
-	<?php 
-		if ( 'behind' !== kadence()->get_feature_position() && kadence()->option( $support_slug . '_feature_caption', false ) ) {
-			$caption = get_the_post_thumbnail_caption();
-			if ( ! empty( $caption ) ) {
-				echo '<div class="article-post-thumbnail-caption content-bg">' . wp_kses_post( $caption ) . '</div>';
-			}
-		}
-	?>
-	<?php do_action( 'kadence_single_after_featured_image' ); ?>
 	<?php
 } else {
 	?>
@@ -70,6 +61,5 @@ if ( is_singular( get_post_type() ) ) {
 			?>
 		</div>
 	</a><!-- .post-thumbnail -->
-	<?php do_action( 'kadence_loop_after_featured_image' ); ?>
 	<?php
 }

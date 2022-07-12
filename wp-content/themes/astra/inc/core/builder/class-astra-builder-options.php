@@ -83,7 +83,7 @@ function astra_hf_builder_customizer_defaults( $defaults ) {
 	 */
 	$defaults['hb-header-main-layout-width'] = 'content';
 	$defaults['hb-header-height']            = array(
-		'desktop' => ( false === astra_check_is_structural_setup() ) ? 70 : 80,
+		'desktop' => 70,
 		'tablet'  => '',
 		'mobile'  => '',
 	);

@@ -61,7 +61,6 @@ class RestAPI extends Factory
 		if(function_exists('wp_doing_ajax'))
 			return wp_doing_ajax();
 		
-		/* Developer Hook (Filter) - Alter doing ajax status for rest requests */
 		return apply_filters( 'wp_doing_ajax', defined( 'DOING_AJAX' ) && DOING_AJAX );
 	}
 	
@@ -175,8 +174,8 @@ class RestAPI extends Factory
 		$data = preg_replace('/-/', '/', $data);
 		$data = preg_replace('/ /', '+', $data);
 		$data = base64_decode($data);
-		
-		
+
+
 		if(!function_exists('zlib_decode'))
 			throw new \Exception('Server does not support inflate');
 		
@@ -207,6 +206,7 @@ class RestAPI extends Factory
 			// TODO: Legacy markerIDs was a string, because this was historically more compact than POSTing an array. This can be altered, but the marker listing modules will have to be adjusted to cater for that
 			$request['markerIDs'] = implode(',', $markerIDs);
 		}
+
 		return $request;
 	}
 	
@@ -263,8 +263,7 @@ class RestAPI extends Factory
 			'polygons'			=> "{$wpdb->prefix}wpgmza_polygon",
 			'polylines'			=> "{$wpdb->prefix}wpgmza_polylines",
 			'circles'			=> "{$wpdb->prefix}wpgmza_circles",
-			'rectangles'		=> "{$wpdb->prefix}wpgmza_rectangles",
-			'pointlabels'		=> "{$wpdb->prefix}wpgmza_point_labels"
+			'rectangles'		=> "{$wpdb->prefix}wpgmza_rectangles"
 		);
 	}
 	
@@ -288,13 +287,13 @@ class RestAPI extends Factory
 			'useCompressedPathVariable'	=> true
 		));
 		
-		$this->registerRoute('/(features|polygons|polylines|circles|rectangles|pointlabels)(\/\d+)?/', array(
+		$this->registerRoute('/(features|polygons|polylines|circles|rectangles)(\/\d+)?/', array(
 			'methods'					=> array('GET'),
 			'callback'					=> array($this, 'features'),
 			'useCompressedPathVariable' => true,
 		));
 		
-		$this->registerRoute('/(polygons|polylines|circles|rectangles|pointlabels)(\/\d+)?/', array(
+		$this->registerRoute('/(polygons|polylines|circles|rectangles)(\/\d+)?/', array(
 			'methods'					=> array('DELETE', 'POST'),
 			'callback'					=> array($this, 'features'),
 			'permission_callback'		=> array($wpgmza, 'isUserAllowedToEdit')
@@ -329,7 +328,6 @@ class RestAPI extends Factory
 			'useCompressedPathVariable'	=> true
 		));
 		
-	    /* Developer Hook (Action) - Register additional rest routes */     
 		do_action('wpgmza_register_rest_api_routes');
 	}
 	
@@ -344,13 +342,9 @@ class RestAPI extends Factory
 		global $wp_query;
 		
 		$active_plugins = get_option('active_plugins');
-		if(!empty($wp_query->query_vars) && array_search('permalink-manager/permalink-manager.php', $active_plugins)){
+		if(!empty($wp_query->query_vars) && array_search('permalink-manager/permalink-manager.php', $active_plugins))
 			$wp_query->query_vars['do_not_redirect'] = 1;
-		}
 		
-	    /* Developer Hook (Action) - Run actions as part of the Rest API initialization */     
-		do_action("wpgmza_rest_api_init");
-
 		$this->registerRoutes();
 	}
 	
@@ -469,7 +463,7 @@ class RestAPI extends Factory
 
 	public function onWPRestCacheDetermineObjectType($type, $cache_key, $data, $uri){
 		if(strpos($uri, 'wpgmza') !== FALSE){
-			return "WP Go Maps Data";
+			return "WP Google Maps Data";
 		}
 		return $type;
 	}
@@ -759,46 +753,10 @@ class RestAPI extends Factory
 					$marker = Marker::createInstance($m[1], Crud::SINGLE_READ, isset($_GET['raw_data']));
 					return $marker;
 				}
-
-				if(isset($_GET['action'])){
-					switch($_GET['action']){
-						case 'count-duplicates':
-							$total		= $wpdb->get_var("SELECT COUNT(*) FROM $wpgmza_tblname");
-							$duplicates	= $wpdb->get_var("SELECT COUNT(*) FROM $wpgmza_tblname GROUP BY lat, lng, address, title, link, description");
-							return array(
-								'count' => number_format($total - $duplicates)
-							);
-							break;
-						case 'remove-duplicates':
-							$allowed	= $wpdb->get_col("SELECT MIN(id) FROM $wpgmza_tblname GROUP BY lat, lng, address, title, link, description");
-							if(empty($allowed)){
-								return array(
-									'message' => sprintf(
-										__("Removed %s markers", "wp-google-maps"),
-										"0"
-									)
-								);
-							}
-
-							$imploded	= implode(',', $allowed);
-							$qstr		= "DELETE FROM $wpgmza_tblname WHERE id NOT IN ($imploded)";
-							$result		= $wpdb->query($qstr);
-							
-							if($result === false)
-								throw new \Exception($wpdb->last_error);
-							
-							return array(
-								'message' => sprintf(
-									__("Removed %s markers", "wp-google-maps"),
-									number_format($result)
-								)
-							);
-							
-							break;
-					}
-				}
 				
 				$fields = null;
+				
+				
 				if(isset($params['fields']) && is_string($params['fields']))
 					$fields = explode(',', $params['fields']);
 				else if(!empty($params['fields']))

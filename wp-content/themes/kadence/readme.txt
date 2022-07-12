@@ -3,8 +3,8 @@ Contributors: britner
 Tags: translation-ready, two-columns, right-sidebar, left-sidebar, footer-widgets, blog, custom-logo, custom-background, custom-menu, rtl-language-support, editor-style, threaded-comments, custom-colors, featured-images, wide-blocks, full-width-template, theme-options, e-commerce.
 Requires at least: 5.4
 Tested up to: 6.0
-Requires PHP: 7.2
-Stable tag: 1.1.22
+Requires PHP: 7.0
+Stable tag: 1.1.19
 License: GNU General Public License v3.0 (or later)
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,23 +18,6 @@ Kadence is released under GNU General Public License v3.0 (or later)
 
 
 = Changelog =
-
-== 1.1.22 | 22nd June 2022 ==
-* Add: Option to show caption with featured image.
-* Fix: Margin showing on body.
-
-== 1.1.21 | 22nd June 2022 ==
-* Fix: Footer social alignment
-
-== 1.1.20 | 21st June 2022 ==
-* Add: Option to hide comments in meta if 0.
-* Update: Allow clearing in typography settings.
-* Update: CSS for social icons to use flex gap.
-* Fix: Small issue with TutorLMS archives.
-* Fix: Issue with single column layouts unboxed.
-* Fix: Issue with related posts carousel rewind.
-* Fix: Issue with PHP 7.2
-* Fix: Issue with width reflow when opening cart modal.
 
 == 1.1.19 | 31st May 2022 ==
 * Add: Option to enable font smoothing.

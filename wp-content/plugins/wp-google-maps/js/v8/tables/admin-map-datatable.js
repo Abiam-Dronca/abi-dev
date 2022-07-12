@@ -9,8 +9,6 @@
  	{	
  		var self = this;
 
-		this.allSelected = false;
-
  		WPGMZA.DataTable.call(this, element);
 
     	$(element).on("mousedown", "button[data-action='edit']", function(event){
@@ -91,16 +89,7 @@
 
  	WPGMZA.AdminMapDataTable.prototype.onSelectAll = function(event)
 	{
-		this.allSelected = !this.allSelected;
-
-		var self = this;
-		$(this.element).find("input[name='mark']").each(function(){
-			if(self.allSelected){
-				$(this).prop("checked", true);
-			} else {
-				$(this).prop("checked", false);
-			}
-		});
+		$(this.element).find("input[name='mark']").prop("checked", true);
 	}
 
 	WPGMZA.AdminMapDataTable.prototype.onBulkDelete = function(event)
@@ -115,7 +104,7 @@
 		
 		var result = confirm(WPGMZA.localized_strings.map_bulk_delete_prompt_text);
 
-		if (result) {
+		if (result) {	
 			WPGMZA.restAPI.call("/maps/", {
 				method: "DELETE",
 				data: {

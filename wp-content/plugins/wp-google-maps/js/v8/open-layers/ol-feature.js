@@ -29,16 +29,18 @@ jQuery(function($) {
 			"opacity":			"fillOpacity",
 			"linecolor":		"strokeColor",
 			"lineopacity":		"strokeOpacity",
-			"linethickness":	"strokeWeight",
+			"linethickness":	"strokeWeight"
 		};
 		
-		for(var name in options){
+		for(var name in options)
+		{
 			if(name in map)
 				options[map[name]] = options[name];
 		}
 		
 		// Translate
-		if(options.strokeColor){
+		if(options.strokeColor)
+		{
 			var opacity = 1.0;
 			var weight = 1;
 			
@@ -54,7 +56,8 @@ jQuery(function($) {
 			});
 		}
 		
-		if(options.fillColor){
+		if(options.fillColor)
+		{
 			var opacity = 1.0;
 			
 			if("fillOpacity" in options)
@@ -66,7 +69,7 @@ jQuery(function($) {
 				color: color
 			});
 		}
-
+		
 		return new ol.style.Style(translated);
 	}
 	

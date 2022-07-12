@@ -39,10 +39,7 @@ h2.entry-related-title {
 		padding-right: 0;
 	}
 }
-.entry-related-inner-content .grid-cols {
-	display: grid;
-}
-.splide.splide-initial .splide__list.grid-cols {
+.splide.splide-initial .splide__list.grid-cols{
     display: flex;
 	gap:0;
 }

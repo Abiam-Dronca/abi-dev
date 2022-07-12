@@ -2,12 +2,9 @@
  * @namespace WPGMZA
  * @module GoogleRectangle
  * @requires WPGMZA.Rectangle
- * @pro-requires WPGMZA.ProRectangle
  */
 jQuery(function($) {
 	
-	var Parent = WPGMZA.Rectangle;
-
 	/**
 	 * Subclass, used when Google is the maps engine. <strong>Please <em>do not</em> call this constructor directly. Always use createInstance rather than instantiating this class directly.</strong> Using createInstance allows this class to be externally extensible.
 	 * @class WPGMZA.GoogleRectangle
@@ -23,7 +20,7 @@ jQuery(function($) {
 		if(!options)
 			options = {};
 		
-		Parent.call(this, options, googleRectangle);
+		WPGMZA.Rectangle.call(this, options, googleRectangle);
 		
 		if(googleRectangle)
 		{
@@ -55,11 +52,7 @@ jQuery(function($) {
 		});
 	}
 	
-
-	if(WPGMZA.isProVersion())
-		Parent = WPGMZA.ProRectangle;
-	
-	WPGMZA.GoogleRectangle.prototype = Object.create(Parent.prototype);
+	WPGMZA.GoogleRectangle.prototype = Object.create(WPGMZA.Rectangle.prototype);
 	WPGMZA.GoogleRectangle.prototype.constructor = WPGMZA.GoogleRectangle;
 	
 	WPGMZA.GoogleRectangle.prototype.getBounds = function()

@@ -55,10 +55,6 @@ jQuery(function($) {
 			$(this.element).on("mouseover", function(event) {
 				self.dispatchEvent("mouseover");
 			});
-
-			$(this.element).on("mouseout", function(event) {
-				self.dispatchEvent("mouseout");
-			});
 			
 			this.overlay = new ol.Overlay({
 				element: this.element,
@@ -304,14 +300,10 @@ jQuery(function($) {
 				};
 			}
 			
-			try{
-				$(this.element).draggable(options);
-				this.jQueryDraggableInitialized = true;
-				
-				this.rebindClickListener();
-			} catch (ex){
-				/* Draggable not available */
-			}
+			$(this.element).draggable(options);
+			this.jQueryDraggableInitialized = true;
+			
+			this.rebindClickListener();
 		}
 		else
 			$(this.element).draggable({disabled: true});

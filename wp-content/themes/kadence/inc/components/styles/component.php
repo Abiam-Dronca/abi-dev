@@ -1066,10 +1066,15 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		// Header Social.
 		$css->set_selector( '.header-social-wrap' );
 		$css->add_property( 'margin', $this->render_measure( kadence()->option( 'header_social_margin' ) ) );
-		$css->set_selector( '.header-social-wrap .header-social-inner-wrap' );
+		$css->set_selector( '.header-social-inner-wrap' );
 		$css->add_property( 'font-size', $this->render_size( kadence()->option( 'header_social_icon_size' ) ) );
-		$css->add_property( 'gap', $this->render_size( kadence()->option( 'header_social_item_spacing' ) ) );
+		$css->add_property( 'margin-top', $this->render_negative_size( kadence()->option( 'header_social_item_spacing' ) ) );
+		$css->add_property( 'margin-left', $this->render_negative_half_size( kadence()->option( 'header_social_item_spacing' ) ) );
+		$css->add_property( 'margin-right', $this->render_negative_half_size( kadence()->option( 'header_social_item_spacing' ) ) );
 		$css->set_selector( '.header-social-wrap .header-social-inner-wrap .social-button' );
+		$css->add_property( 'margin-top', $this->render_size( kadence()->option( 'header_social_item_spacing' ) ) );
+		$css->add_property( 'margin-left', $this->render_half_size( kadence()->option( 'header_social_item_spacing' ) ) );
+		$css->add_property( 'margin-right', $this->render_half_size( kadence()->option( 'header_social_item_spacing' ) ) );
 		if ( ! in_array( kadence()->option( 'header_social_brand' ), array( 'always', 'untilhover' ), true ) ) {
 			$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'header_social_color', 'color' ) ) );
 			$css->add_property( 'background', $this->render_color( kadence()->sub_option( 'header_social_background', 'color' ) ) );
@@ -1089,10 +1094,15 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		// Mobile Header Social.
 		$css->set_selector( '.header-mobile-social-wrap' );
 		$css->add_property( 'margin', $this->render_measure( kadence()->option( 'header_mobile_social_margin' ) ) );
-		$css->set_selector( '.header-mobile-social-wrap .header-mobile-social-inner-wrap' );
+		$css->set_selector( '.header-mobile-social-inner-wrap' );
 		$css->add_property( 'font-size', $this->render_size( kadence()->option( 'header_mobile_social_icon_size' ) ) );
-		$css->add_property( 'gap', $this->render_size( kadence()->option( 'header_mobile_social_item_spacing' ) ) );
+		$css->add_property( 'margin-top', $this->render_negative_size( kadence()->option( 'header_mobile_social_item_spacing' ) ) );
+		$css->add_property( 'margin-left', $this->render_negative_half_size( kadence()->option( 'header_mobile_social_item_spacing' ) ) );
+		$css->add_property( 'margin-right', $this->render_negative_half_size( kadence()->option( 'header_mobile_social_item_spacing' ) ) );
 		$css->set_selector( '.header-mobile-social-wrap .header-mobile-social-inner-wrap .social-button' );
+		$css->add_property( 'margin-top', $this->render_size( kadence()->option( 'header_mobile_social_item_spacing' ) ) );
+		$css->add_property( 'margin-left', $this->render_half_size( kadence()->option( 'header_mobile_social_item_spacing' ) ) );
+		$css->add_property( 'margin-right', $this->render_half_size( kadence()->option( 'header_mobile_social_item_spacing' ) ) );
 		if ( ! in_array( kadence()->option( 'header_mobile_social_brand' ), array( 'always', 'untilhover' ), true ) ) {
 			$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'header_mobile_social_color', 'color' ) ) );
 			$css->add_property( 'background', $this->render_color( kadence()->sub_option( 'header_mobile_social_background', 'color' ) ) );
@@ -1288,7 +1298,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->add_property( '--global-content-narrow-width', kadence()->sub_option( 'content_narrow_width', 'size' ) . kadence()->sub_option( 'content_narrow_width', 'unit' ) );
 		$css->add_property( '--global-content-edge-padding', $css->render_range( kadence()->option( 'content_edge_spacing' ), 'desktop' ) );
 		$css->add_property( '--global-calc-content-width', 'calc(' . kadence()->sub_option( 'content_width', 'size' ) . kadence()->sub_option( 'content_width', 'unit' ) . ' - var(--global-content-edge-padding) - var(--global-content-edge-padding) )' );
-		$css->add_property( '--scrollbar-offset', '0px' );
 		if ( class_exists( '\Elementor\Plugin' ) ) {
 			$css->set_selector( ':root body.kadence-elementor-colors' );
 			$css->add_property( '--e-global-color-kadence1', 'var(--global-palette1)' );
@@ -1987,10 +1996,15 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		// Footer Social.
 		$css->set_selector( '.footer-social-wrap' );
 		$css->add_property( 'margin', $this->render_measure( kadence()->option( 'footer_social_margin' ) ) );
-		$css->set_selector( '.footer-social-wrap .footer-social-inner-wrap' );
+		$css->set_selector( '.footer-social-inner-wrap' );
 		$css->add_property( 'font-size', $this->render_size( kadence()->option( 'footer_social_icon_size' ) ) );
-		$css->add_property( 'gap', $this->render_size( kadence()->option( 'footer_social_item_spacing' ) ) );
+		$css->add_property( 'margin-top', $this->render_negative_size( kadence()->option( 'footer_social_item_spacing' ) ) );
+		$css->add_property( 'margin-left', $this->render_negative_half_size( kadence()->option( 'footer_social_item_spacing' ) ) );
+		$css->add_property( 'margin-right', $this->render_negative_half_size( kadence()->option( 'footer_social_item_spacing' ) ) );
 		$css->set_selector( '.site-footer .site-footer-wrap .site-footer-section .footer-social-wrap .social-button' );
+		$css->add_property( 'margin-top', $this->render_size( kadence()->option( 'footer_social_item_spacing' ) ) );
+		$css->add_property( 'margin-left', $this->render_half_size( kadence()->option( 'footer_social_item_spacing' ) ) );
+		$css->add_property( 'margin-right', $this->render_half_size( kadence()->option( 'footer_social_item_spacing' ) ) );
 		if ( ! in_array( kadence()->option( 'footer_social_brand' ), array( 'always', 'untilhover' ), true ) ) {
 			$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_social_color', 'color' ) ) );
 			$css->add_property( 'background', $this->render_color( kadence()->sub_option( 'footer_social_background', 'color' ) ) );

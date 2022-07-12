@@ -32,7 +32,6 @@ class Page extends Factory
 			$el->parentNode->remove();
 
 		$this->document->querySelectorAll('#heatmaps')->removeAttribute('data-wpgmza-feature-type');
-		$this->document->querySelectorAll('#imageoverlays')->removeAttribute('data-wpgmza-feature-type');
 	}
 
 	protected function hideSelectedProFeatures() {
@@ -40,9 +39,6 @@ class Page extends Factory
 		
 		if($wpgmza->isProVersion())
 			return;
-
-		$this->document->querySelectorAll('.sidebar .item.hide-pro')
-			->setAttribute('style', 'display:none;');
 		
 		$this->document->querySelectorAll('.wpgmza-pro-feature-hide')
 			->setAttribute('style', 'display:none;');
@@ -69,9 +65,6 @@ class Page extends Factory
 			
 			$form->prepend($input);
 		}
-
-	    /* Developer Hook (Action) - Add form nonces to Pages, or more speciically forms within pages, passes DOMDocument for mutation */     
-		do_action("wpgmza_page_dom_add_form_nonces", $this->_document);
 	}
 	
 	protected function isNonceValid($form, $nonce)

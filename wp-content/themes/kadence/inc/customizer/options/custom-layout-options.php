@@ -306,7 +306,6 @@ foreach ( $all_post_types as $post_type_item ) {
 							'dateUpdatedEnableLabel' => false,
 							'dateUpdatedLabel'       => '',
 							'comments'               => false,
-							'commentsCondition'      => false,
 						),
 						'breadcrumb' => array(
 							'enabled' => false,
@@ -1656,7 +1655,6 @@ foreach ( $all_post_types as $post_type_item ) {
 							'categoriesEnableLabel'  => false,
 							'categoriesLabel'        => '',
 							'comments'               => false,
-							'commentsCondition'      => false,
 						) ),
 						'excerpt'    => kadence()->default( $post_type_name . '_archive_element_excerpt', array(
 							'enabled'     => true,
@@ -1865,5 +1863,5 @@ Theme_Customizer::add_settings(
 			'label'        => esc_html__( 'Custom Post Types', 'kadence' ),
 			'settings'     => false,
 		),
-	)
+	),
 );

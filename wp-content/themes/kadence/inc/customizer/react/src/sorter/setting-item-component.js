@@ -724,15 +724,6 @@ class ItemComponent extends Component {
 										this.updateValues( { comments: value } );
 									} }
 								/>
-								{ this.state.item.comments && (
-									<ToggleControl
-										label={ __( 'Show only if post has at least one comment', 'kadence' ) }
-										checked={ this.state.item.commentsCondition ? this.state.item.commentsCondition : this.props.item.commentsCondition }
-										onChange={ ( value ) => {
-											this.updateValues( { commentsCondition: value }, this.props.index );
-										} }
-									/>
-								) }
 							</div>
 						) }
 						{ undefined !== this.state.item.card_color && (

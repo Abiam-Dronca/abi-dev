@@ -21,10 +21,6 @@ jQuery(function($) {
 		WPGMZA.assertInstanceOf(this, "Polyline");
 		
 		WPGMZA.Feature.apply(this, arguments);
-
-		this.addEventListener("added", function(event) {
-            self.onAdded();
-        });
 	}
 	
 	WPGMZA.Polyline.prototype = Object.create(WPGMZA.Feature.prototype);
@@ -74,21 +70,6 @@ jQuery(function($) {
 		}
 		
 	});
-
-	Object.defineProperty(WPGMZA.Polyline.prototype, "layergroup", {
-        enumerable : true,
-        get: function() {
-            if(this._layergroup){
-                return this._layergroup;
-            }
-            return 0;
-        },
-        set: function(value) {
-            if(parseInt(value)){
-                this._layergroup = parseInt(value) + WPGMZA.Shape.BASE_LAYER_INDEX;
-            }
-        }
-    });
 	
 	/**
 	 * Returns the contructor to be used by createInstance, depending on the selected maps engine.
@@ -132,12 +113,6 @@ jQuery(function($) {
 	{
 		return this.toJSON().points;
 	}
-
-	WPGMZA.Polyline.prototype.onAdded = function(){
-        if(this.layergroup){
-            this.setLayergroup(this.layergroup);
-        }
-    }
 	
 	/**
 	 * Returns a JSON representation of this polyline, for serialization
@@ -153,14 +128,6 @@ jQuery(function($) {
 		
 		return result;
 	}
-
-	WPGMZA.Polyline.prototype.setLayergroup = function(layergroup){
-	    this.layergroup = layergroup;
-	    if(this.layergroup){
-	        this.setOptions({
-	            zIndex: this.layergroup
-	        });
-	    }
-	} 
+	
 	
 });

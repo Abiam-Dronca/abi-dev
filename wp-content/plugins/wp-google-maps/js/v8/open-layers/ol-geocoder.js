@@ -208,11 +208,6 @@ jQuery(function($) {
 			finish = function(response, status)
 			{
 				var address = response[0].display_name;
-
-				if(options.fullResult){
-					address = response[0];
-				}
-				
 				callback([address], status);
 			}
 		}

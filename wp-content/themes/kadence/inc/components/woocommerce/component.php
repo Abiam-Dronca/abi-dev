@@ -902,11 +902,9 @@ class Component implements Component_Interface {
 	 */
 	public function wc_print_notices_none_woo() {
 		if ( ! is_shop() && ! is_woocommerce() && ! is_cart() && ! is_checkout() && ! is_account_page() ) {
-			if ( function_exists( 'wc_print_notices' ) ) {
-				echo '<div class="woocommerce kadence-woo-messages-none-woo-pages woocommerce-notices-wrapper">';
-				echo wc_print_notices( true );
-				echo '</div>';
-			}
+			echo '<div class="kadence-woo-messages-none-woo-pages woocommerce-notices-wrapper">';
+			echo do_shortcode( '[woocommerce_messages]' );
+			echo '</div>';
 		}
 	}
 	/**

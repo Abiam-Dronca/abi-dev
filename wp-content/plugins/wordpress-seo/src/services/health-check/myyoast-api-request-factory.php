@@ -4,6 +4,7 @@ namespace Yoast\WP\SEO\Services\Health_Check;
 
 use WPSEO_MyYoast_Api_Request;
 
+// phpcs:disable Yoast.NamingConventions.ObjectNameDepth.MaxExceeded
 /**
  * Creates WPSEO_MyYoast_Api_Request objects.
  */

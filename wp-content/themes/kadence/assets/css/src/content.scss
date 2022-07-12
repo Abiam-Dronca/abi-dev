@@ -84,18 +84,12 @@ article.sticky {
 		display: grid;
 		grid-template-columns: 1fr 2fr;
 	}
-	.blog.content-style-unboxed, .archive.content-style-unboxed, .search-results.content-style-unboxed {
+	.blog.content-style-unboxed, .archive.content-style-unboxed {
 		.grid-lg-col-1.item-image-style-beside article.loop-entry {
 			grid-gap: 2rem;
 			.post-thumbnail {
 				margin-bottom: 0;
 			}
-		}
-	}
-	.kb-posts.kb-posts-style-unboxed.grid-lg-col-1.item-image-style-beside article.loop-entry {
-		grid-gap: 2rem;
-		.post-thumbnail {
-			margin-bottom: 0;
 		}
 	}
 }
@@ -106,17 +100,6 @@ article.sticky {
 	.entry {
 		box-shadow: none;
 	}
-}
-.article-post-thumbnail-caption {
-	font-size: 90%;
-	margin:0;
-    padding-top: 0.5em;
-	padding-bottom: 0.5em;
-	text-align: center;
-}
-.content-style-unboxed .kadence-thumbnail-position-above + .article-post-thumbnail-caption {
-	margin-top: calc( 0px - var(--global-md-spacing) );
-	margin-bottom: var(--global-md-spacing);
 }
 .single-content {
 	margin: var(--global-md-spacing) 0 0;
@@ -129,9 +112,6 @@ article.sticky {
 	}
 	p > img {
 		display: inline-block;
-		&.aligncenter {
-			display: block;
-		}
 	}
 	// This removes the extra space when adding a spacer below the paragraph.
 	p:not(.wp-block-kadence-advancedheading) + .wp-block-kadence-spacer {

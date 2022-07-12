@@ -429,8 +429,9 @@ class Elementor implements Integration_Interface {
 			'isElementorEditor'        => true,
 			'postStatus'               => \get_post_status( $post_id ),
 			'analysis'                 => [
-				'plugins' => $plugins_script_data,
-				'worker'  => $worker_script_data,
+				'plugins'                     => $plugins_script_data,
+				'worker'                      => $worker_script_data,
+				'estimatedReadingTimeEnabled' => $this->estimated_reading_time_conditional->is_met(),
 			],
 			'dismissedAlerts'          => $dismissed_alerts,
 			'webinarIntroElementorUrl' => WPSEO_Shortlinker::get( 'https://yoa.st/webinar-intro-elementor' ),

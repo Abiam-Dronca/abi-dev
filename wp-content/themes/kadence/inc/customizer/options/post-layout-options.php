@@ -836,27 +836,6 @@ $kadence_post_settings = array(
 			'responsive' => false,
 		),
 	),
-	'post_feature_caption' => array(
-		'control_type' => 'kadence_switch_control',
-		'sanitize'     => 'kadence_sanitize_toggle',
-		'section'      => 'post_layout',
-		'priority'     => 20,
-		'default'      => kadence()->default( 'post_feature_caption' ),
-		'label'        => esc_html__( 'Show Featured Image Caption?', 'kadence' ),
-		'context'      => array(
-			array(
-				'setting'    => 'post_feature',
-				'operator'   => '=',
-				'value'      => true,
-			),
-			array(
-				'setting'    => 'post_feature_position',
-				'operator'   => '!=',
-				'value'      => 'behind',
-			),
-		),
-		'transport'    => 'refresh',
-	),
 	'post_feature_ratio' => array(
 		'control_type' => 'kadence_radio_icon_control',
 		'section'      => 'post_layout',
@@ -1034,12 +1013,10 @@ $kadence_post_settings = array(
 		'default'      => kadence()->default( 'post_related_carousel_loop' ),
 		'label'        => esc_html__( 'Endlessly Loop Related Carousel?', 'kadence' ),
 		'transport'    => 'refresh',
-		'context'      => array(
-			array(
-				'setting'    => 'post_related',
-				'operator'   => '=',
-				'value'      => true,
-			),
+		array(
+			'setting'    => 'post_related',
+			'operator'   => '=',
+			'value'      => true,
 		),
 	),
 	'post_comments' => array(

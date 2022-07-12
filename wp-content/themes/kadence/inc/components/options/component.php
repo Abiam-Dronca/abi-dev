@@ -2368,7 +2368,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'dateUpdatedEnableLabel' => false,
 						'dateUpdatedLabel'       => '',
 						'comments'               => false,
-						'commentsCondition'      => false,
 					),
 					// Post Layout.
 					'post_layout'             => 'narrow',
@@ -2381,7 +2380,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					'post_navigation'         => true,
 					'post_related'            => true,
 					'post_related_style'      => 'wide',
-					'post_related_carousel_loop' => true,
+					'post_related_carousel_loop' => false,
 					'post_related_columns'    => '',
 					'post_related_title_font' => array(
 						'size' => array(
@@ -2403,7 +2402,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					'post_author_box_link'    => true,
 					'post_feature'            => true,
 					'post_feature_position'   => 'behind',
-					'post_feature_caption'    => false,
 					'post_feature_ratio'      => '2-3',
 					'post_feature_width'      => 'wide',
 					'post_background'         => '',
@@ -2555,7 +2553,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'categoriesEnableLabel'  => false,
 						'categoriesLabel'        => '',
 						'comments'               => false,
-						'commentsCondition'      => false,
 					),
 
 					// enable_preload css style sheets.
@@ -2652,7 +2649,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'categoriesEnableLabel'  => false,
 						'categoriesLabel'        => '',
 						'comments'               => false,
-						'commentsCondition'      => false,
 					),
 					'post_archive_element_feature' => array(
 						'enabled'   => true,
@@ -2793,7 +2789,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'categoriesEnableLabel'  => false,
 						'categoriesLabel'        => '',
 						'comments'               => false,
-						'commentsCondition'      => false,
 					),
 					'search_archive_element_feature' => array(
 						'enabled' => true,
@@ -4317,7 +4312,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'dateUpdatedEnableLabel' => false,
 						'dateUpdatedLabel'       => '',
 						'comments'               => false,
-						'commentsCondition'      => false,
 					);
 					$add_options[ $post_type_name . '_archive_title_height' ] = array(
 						'size' => array(
@@ -4404,7 +4398,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'categoriesEnableLabel'  => false,
 						'categoriesLabel'        => '',
 						'comments'               => false,
-						'commentsCondition'      => false,
 					);
 					$add_options[ $post_type_name . '_archive_element_feature' ] = array(
 						'enabled' => true,

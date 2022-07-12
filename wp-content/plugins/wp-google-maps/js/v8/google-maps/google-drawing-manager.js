@@ -25,10 +25,7 @@ jQuery(function($) {
 				editable: true
 			},
 			rectangleOptions: {
-				draggable: true,
-				editable: true,
-				strokeWeight: 1,
-				fillOpacity: 0
+				editable: true
 			}
 		});
 		
@@ -93,15 +90,6 @@ jQuery(function($) {
 			case WPGMZA.DrawingManager.MODE_HEATMAP:
 				googleMode = null;
 				break;
-
-			case WPGMZA.DrawingManager.MODE_POINTLABEL:
-				googleMode = null;
-				// googleMode = google.maps.drawing.OverlayType.MARKER;
-				break;
-
-			case WPGMZA.DrawingManager.MODE_IMAGEOVERLAY:
-				googleMode = google.maps.drawing.OverlayType.RECTANGLE;
-				break;
 				
 			default:
 				throw new Error("Invalid drawing mode");
@@ -144,13 +132,8 @@ jQuery(function($) {
 		this.dispatchEvent(event);
 	}
 	
-	WPGMZA.GoogleDrawingManager.prototype.onRectangleComplete = function(googleRectangle){
-		if(this.mode === WPGMZA.DrawingManager.MODE_IMAGEOVERLAY){
-			/* Uses rectangles, but doesn't store them, so relay */
-			this.onImageoverlayComplete(googleRectangle);
-			return;
-		}
-
+	WPGMZA.GoogleDrawingManager.prototype.onRectangleComplete = function(googleRectangle)
+	{
 		var event = new WPGMZA.Event("rectanglecomplete");
 		event.engineRectangle = googleRectangle;
 		this.dispatchEvent(event);
@@ -177,14 +160,6 @@ jQuery(function($) {
 		var event = new WPGMZA.Event("heatmappointadded");
 		event.position = position;
 		this.trigger(event);
-	}
-
-	WPGMZA.GoogleDrawingManager.prototype.onImageoverlayComplete = function(rectangle){
-		var event = new WPGMZA.Event("imageoverlaycomplete");
-		event.engineImageoverlay = {
-			googleRectangle : rectangle
-		};
-		this.dispatchEvent(event);	
 	}
 	
 });

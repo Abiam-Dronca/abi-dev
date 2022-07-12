@@ -53,11 +53,6 @@ class Database extends Factory
 		$this->installPolylineTable();
 		$this->installCircleTable();
 		$this->installRectangleTable();
-
-		$this->installPointLabelsTable();
-		$this->installImageOverlayTable();
-
-		$this->installAdminNoticesTable();
 		
 		$this->setDefaults();
 		
@@ -135,7 +130,6 @@ class Database extends Factory
 			sticky tinyint(1) DEFAULT '0',
 			other_data LONGTEXT NOT NULL,
 			latlng POINT,
-			layergroup INT(3) DEFAULT '0',
 			PRIMARY KEY  (id)
 			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
 
@@ -162,8 +156,6 @@ class Database extends Factory
 			ohlinecolor VARCHAR(7) NOT NULL,
 			ohopacity VARCHAR(3) NOT NULL,
 			polyname VARCHAR(100) NOT NULL,
-			linethickness VARCHAR(3) NOT NULL,
-			layergroup INT(3) DEFAULT '0',
 			PRIMARY KEY  (id)
 			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
 
@@ -182,7 +174,6 @@ class Database extends Factory
 			linethickness VARCHAR(3) NOT NULL,
 			opacity VARCHAR(3) NOT NULL,
 			polyname VARCHAR(100) NOT NULL,
-			layergroup INT(3) DEFAULT '0',
 			PRIMARY KEY  (id)
 			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
 
@@ -201,16 +192,6 @@ class Database extends Factory
 			radius FLOAT,
 			color VARCHAR(16),
 			opacity FLOAT,
-			lineColor VARCHAR(16),
-			lineOpacity FLOAT DEFAULT '0',
-			description TEXT,
-			hoverEnabled tinyint(1) DEFAULT '0',
-			ohFillColor VARCHAR(16),
-			ohLineColor VARCHAR(16),
-			ohFillOpacity FLOAT,
-			ohLineOpacity FLOAT,
-			link VARCHAR(700) NOT NULL,
-			layergroup INT(3) DEFAULT '0',
 			PRIMARY KEY  (id)
 			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
 
@@ -229,71 +210,10 @@ class Database extends Factory
 			cornerB POINT,
 			color VARCHAR(16),
 			opacity FLOAT,
-			lineColor VARCHAR(16),
-			lineOpacity FLOAT DEFAULT '0',
-			description TEXT,
-			hoverEnabled tinyint(1) DEFAULT '0',
-			ohFillColor VARCHAR(16),
-			ohLineColor VARCHAR(16),
-			ohFillOpacity FLOAT,
-			ohLineOpacity FLOAT,
-			link VARCHAR(700) NOT NULL,
-			layergroup INT(3) DEFAULT '0',
 			PRIMARY KEY  (id)
 			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
 
 		dbDelta($sql);
-	}
-
-	protected function installPointLabelsTable(){
-		global $WPGMZA_TABLE_NAME_POINT_LABELS;
-
-		$sql = "CREATE TABLE `$WPGMZA_TABLE_NAME_POINT_LABELS` (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			map_id int(11) NOT NULL,
-			name TEXT,
-			center POINT,
-			fillColor VARCHAR(16),
-			lineColor VARCHAR(16),
-			opacity FLOAT,
-			fontSize VARCHAR(3),
-			PRIMARY KEY  (id)
-			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
-
-		dbDelta($sql);
-	}
-
-	protected function installImageOverlayTable(){
-		global $WPGMZA_TABLE_NAME_IMAGE_OVERLAYS;
-
-		$sql = "CREATE TABLE `$WPGMZA_TABLE_NAME_IMAGE_OVERLAYS` (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			map_id int(11) NOT NULL,
-			name TEXT,
-			cornerA POINT,
-			cornerB POINT,
-			image VARCHAR(700),
-			opacity FLOAT,
-			PRIMARY KEY  (id)
-			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
-
-		dbDelta($sql);
-	}
-
-	protected function installAdminNoticesTable(){
-		global $WPGMZA_TABLE_NAME_ADMIN_NOTICES;
-
-		$sql = "CREATE TABLE `$WPGMZA_TABLE_NAME_ADMIN_NOTICES` (
-			id int(11) NOT NULL AUTO_INCREMENT,
-			name VARCHAR(255),
-			message TEXT,
-			active_date DATETIME,
-			options LONGTEXT,
-			dismissed TINYINT(1) DEFAULT '1',
-			PRIMARY KEY  (id)
-			) AUTO_INCREMENT=1 " . Database::getCharsetAndCollate();
-
-		dbDelta($sql);		
 	}
 	
 	protected function setDefaults()

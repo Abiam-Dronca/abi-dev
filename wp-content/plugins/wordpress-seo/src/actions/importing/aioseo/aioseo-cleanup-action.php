@@ -9,6 +9,8 @@ use Yoast\WP\SEO\Helpers\Options_Helper;
 
 /**
  * Importing action for cleaning up AIOSEO data.
+ *
+ * @phpcs:disable Yoast.NamingConventions.ObjectNameDepth.MaxExceeded
  */
 class Aioseo_Cleanup_Action extends Abstract_Aioseo_Importing_Action {
 

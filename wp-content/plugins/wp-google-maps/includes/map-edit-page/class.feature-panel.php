@@ -8,13 +8,11 @@ class FeaturePanel extends DOMDocument
 	
 	public function __construct($map_id)
 	{
-		global $wpgmza;
 		DOMDocument::__construct();
 
 		$filename = preg_replace('/^pro/i', '', $this->featureType);
 		
-		$this->loadPHPFile($wpgmza->internalEngine->getTemplate("map-edit-page/$filename-panel.html.php"));
-
+		$this->loadPHPFile(WPGMZA_DIR_PATH . "html/map-edit-page/$filename-panel.html.php");
 		$this->querySelector('input[data-ajax-name="map_id"]')->setAttribute('value', $map_id);
 		
 		$this->_map_id = $map_id;

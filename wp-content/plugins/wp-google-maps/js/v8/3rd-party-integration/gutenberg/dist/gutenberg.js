@@ -40,7 +40,7 @@ jQuery(function ($) {
 	};
 
 	WPGMZA.Integration.Gutenberg.prototype.getBlockTitle = function () {
-		return __("WP Go Maps");
+		return __("WP Google Maps");
 	};
 
 	WPGMZA.Integration.Gutenberg.prototype.getBlockInspectorControls = function (props) {
@@ -134,11 +134,12 @@ jQuery(function ($) {
 
 	WPGMZA.Integration.Gutenberg.prototype.getBlockDefinition = function (props) {
 		var _this = this;
+
 		return {
 
-			title:  WPGMZA.InternalEngine.isLegacy() ? __("WP Go Maps") : __("Map"),
+			title: __("WP Google Maps"),
 			description: __('The easiest to use Google Maps plugin! Create custom Google Maps with high quality markers containing locations, descriptions, images and links. Add your customized map to your WordPress posts and/or pages quickly and easily with the supplied shortcode. No fuss.'),
-			category:  !WPGMZA.InternalEngine.isLegacy() && this.verifyCategory("wpgmza-gutenberg") ? "wpgmza-gutenberg" : 'common',
+			category: 'common',
 			icon: 'location-alt',
 			keywords: [__('Map'), __('Maps'), __('Google')],
 			attributes: this.getBlockAttributes(),
@@ -162,18 +163,6 @@ jQuery(function ($) {
 			}
 
 		};
-	};
-
-	WPGMZA.Integration.Gutenberg.prototype.verifyCategory = function(category){
-		if(wp.blocks && wp.blocks.getCategories){
-			const categories = wp.blocks.getCategories();
-			for(let i in categories){
-				if(categories[i].slug === category){
-					return true;
-				}
-			}
-		}
-		return false;
 	};
 
 	WPGMZA.Integration.Gutenberg.getConstructor = function () {
