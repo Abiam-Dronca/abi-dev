@@ -1,10 +1,10 @@
 == Pixgraphy ==
 Contributors: themefreesia
 Tags: threaded-comments, right-sidebar, four-columns, custom-colors, custom-background, custom-header, custom-menu, editor-style, sticky-post, theme-options, translation-ready, post-formats, custom-logo, e-commerce, photography, portfolio
-Requires at least: 5.0
-Tested up to: 5.9.2
+Requires at least: 5.8
+Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.3.4
+Stable tag: 1.3.6
 License: GNU General Public License version 3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -121,6 +121,13 @@ All the theme files and other un-specified scripts are licensed under GNU Genera
 =================================================================================
 
 == CHANGE LOG ==
+= 1.3.6 =
+	- Fix - Download Google Fonts locally and then only supports local fonts.
+
+= 1.3.5 =
+	- Fix - Unwanted xml code removed
+	- New - fontawesome icons added
+
 = 1.3.4 =
 	- Fix - Display title in single page when post format is selected
 		  - Search bar issue fixed
