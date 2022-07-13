@@ -56,8 +56,14 @@ class Container extends BaseComponent
             echo "<strong>{$data['settings']['label']}</strong>";
         }
 		foreach ($data['columns'] as $columnIndex => $column) {
-            $newColumnClass = $columnClass.' ff-t-column-'.($columnIndex + 1);
-			echo "<div class='{$newColumnClass}'>";
+            if(isset($column["width"])){
+                $newColumnClass = $columnClass.' ff-t-column-'.($columnIndex);
+                echo "<div class='{$newColumnClass}' style='flex-basis: {$column["width"]}" .'%'. ";'>";
+            }
+            else {
+                $newColumnClass = $columnClass.' ff-t-column-'.($columnIndex + 1);
+                echo "<div class='{$newColumnClass}'>";
+            }
 			foreach ($column['fields'] as $item) {
 				$item = apply_filters('fluentform_before_render_item', $item, $form);
 				do_action('fluentform_render_item_'.$item['element'], $item, $form);

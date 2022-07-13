@@ -16,6 +16,7 @@ class Converter
 		$form->submit_button = $form->fields['submitButton'];
 
 		$form->reCaptcha = false;
+		$form->hCaptcha = false;
 
 		$questions = [];
 
@@ -372,7 +373,30 @@ class Converter
 				if ($apiVersion === 3) {
 					continue;
 				}
-			}
+			} elseif(($field['element'] === 'hcaptcha')) {
+                $hCaptchaConfig = get_option('_fluentform_hCaptcha_details');
+                $siteKey = ArrayHelper::get($hCaptchaConfig, 'siteKey');
+
+                if (!$siteKey) {
+                    continue;
+                }
+
+                $question['siteKey'] = $siteKey;
+
+                $api = 'https://js.hcaptcha.com/1/api.js';
+
+                $form->hCaptcha = [
+                    'siteKey' => $siteKey
+                ];
+
+                wp_enqueue_script(
+                    'hcaptcha',
+                    $api,
+                    [],
+                    FLUENTFORM_VERSION,
+                    true
+                );
+            }
 
 			if ($question['type']) {
 				$questions[] = $question;
@@ -444,6 +468,7 @@ class Converter
             'gdpr_agreement'        => 'FlowFormTermsAndConditionType',
             'MultiplePictureChoice' => 'FlowFormMultiplePictureChoiceType',
             'recaptcha' 			=> 'FlowFormReCaptchaType',
+            'hcaptcha' 			=> 'FlowFormHCaptchaType',
 		];
 
 		if (defined('FLUENTFORMPRO')) {

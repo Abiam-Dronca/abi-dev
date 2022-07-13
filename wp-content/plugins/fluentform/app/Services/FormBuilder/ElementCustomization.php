@@ -638,7 +638,7 @@ $element_customization_settings = array(
             ),
         ),
         
-    ),
+    )
 );
 
 

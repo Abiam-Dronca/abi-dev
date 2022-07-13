@@ -1262,7 +1262,7 @@ $defaultElements = array(
                 'conditional_logics' => array()
             ),
             'columns' => array(
-                array('fields' => array())
+                array('width'=> '', 'fields' => array())
             ),
             'editor_options' =>
                 array(
@@ -1279,8 +1279,8 @@ $defaultElements = array(
                 'conditional_logics' => array()
             ),
             'columns' => array(
-                array('fields' => array()),
-                array('fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' =>
                 array(
@@ -1294,12 +1294,13 @@ $defaultElements = array(
             'attributes' => array(),
             'settings' => array(
                 'container_class' => '',
-                'conditional_logics' => array()
+                'conditional_logics' => array(),
+                'width' => ''
             ),
             'columns' => array(
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
+                array('width' => '', 'fields' => array()),
+                array('width' => '', 'fields' => array()),
+                array('width' => '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Three Column Container', 'fluentform'),
@@ -1315,10 +1316,10 @@ $defaultElements = array(
                 'conditional_logics' => array()
             ),
             'columns' => array(
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Four Column Container', 'fluentform'),
@@ -1334,11 +1335,11 @@ $defaultElements = array(
                 'conditional_logics' => array()
             ),
             'columns' => array(
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Five Column Container', 'fluentform'),
@@ -1354,12 +1355,12 @@ $defaultElements = array(
                 'conditional_logics' => array()
             ),
             'columns' => array(
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
-                array('fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Six Column Container', 'fluentform'),
