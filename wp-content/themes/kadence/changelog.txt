@@ -1,3 +1,20 @@
+== 1.1.22 | 22nd June 2022 ==
+* Add: Option to show caption with featured image.
+* Fix: Margin showing on body.
+
+== 1.1.21 | 22nd June 2022 ==
+* Fix: Footer social alignment
+
+== 1.1.20 | 21st June 2022 ==
+* Add: Option to hide comments in meta if 0.
+* Update: Allow clearing in typography settings.
+* Update: CSS for social icons to use flex gap.
+* Fix: Small issue with TutorLMS archives.
+* Fix: Issue with single column layouts unboxed.
+* Fix: Issue with related posts carousel rewind.
+* Fix: Issue with PHP 7.2
+* Fix: Issue with width reflow when opening cart modal.
+
 == 1.1.19 | 31st May 2022 ==
 * Add: Option to enable font smoothing.
 * Update: All available google fonts.

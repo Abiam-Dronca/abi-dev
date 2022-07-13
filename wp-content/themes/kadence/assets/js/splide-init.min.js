@@ -30,7 +30,6 @@
 			ss = parseInt( element.getAttribute( 'data-columns-ss' ) ),
 			gutter = parseInt( element.getAttribute( 'data-slider-gutter' ) ),
 			scroll = parseInt( element.getAttribute( 'data-slider-scroll' ) );
-			element.classList.add( 'splide-initial' );
 			if ( ! nextLabel ) {
 				nextLabel = kadenceSlideConfig.next;
 			}
@@ -60,9 +59,37 @@
 				scrollSxs = 1;
 				scrollSss = 1;
 			}
+			var initialize = false;
+			var slideCount = element.querySelector( '.splide__list' ).childElementCount;
+			if ( window.innerWidth < 544 ) {
+				if ( slideCount > ss ) {
+					initialize = true;
+				}
+			} else if ( window.innerWidth < 768 ) {
+				if ( slideCount > xs ) {
+					initialize = true;
+				}
+			} else if ( window.innerWidth < 992 ) {
+				if (  slideCount > sm ) {
+					initialize = true;
+				}
+			} else if ( window.innerWidth < 1200 ) {
+				if ( slideCount > md ) {
+					initialize = true;
+				}
+			} else if ( window.innerWidth < 1500 ) {
+				if ( slideCount > xl ) {
+					initialize = true;
+				}
+			} else if ( slideCount > xxl ) {
+				initialize = true;
+			}
+			if ( initialize ) {
+				element.classList.add( 'splide-initial' );
+			}
 			var options = {
 				perPage: xxl,
-				type: 'loop',
+				type: ( 'false' === sliderLoop ? 'slide' : 'loop' ),
 				slideFocus: false,
 				perMove: scrollSxxl,
 				autoplay: ( sliderAuto == 'false' ? false : true ),
@@ -74,8 +101,7 @@
 				pagination: ( sliderDots == 'false' ? false : true ),
 				gap: gutter + 'px',
 				direction: sliderDirection,
-				loop:( 'false' === sliderLoop ? false : true ),
-				rewind:( 'false' === sliderLoop ? true : false ),
+				rewind:( sliderLoop == 'false' ? true : false ),
 				focus: 0,
 				perMove: scrollSxxl,
 				i18n: {
@@ -108,7 +134,9 @@
 				}
 			};
 			var slider = new Splide( element, options );
-			slider.mount();
+			if ( initialize ) {
+				slider.mount();
+			}
 		},
 		/**
 		 * Initiate the script to process all

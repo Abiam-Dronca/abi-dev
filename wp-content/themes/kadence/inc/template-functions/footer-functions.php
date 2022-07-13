@@ -121,7 +121,7 @@ function footer_social() {
 	if ( ! empty( $title ) ) {
 		echo '<h2 class="widget-title">' . wp_kses_post( $title ) . '</h2>';
 	}
-	echo '<div class="footer-social-inner-wrap social-show-label-' . ( $show_label ? 'true' : 'false' ) . ' social-style-' . esc_attr( kadence()->option( 'footer_social_style' ) ) . esc_attr( $brand_color_class ) . '">';
+	echo '<div class="footer-social-inner-wrap element-social-inner-wrap social-show-label-' . ( $show_label ? 'true' : 'false' ) . ' social-style-' . esc_attr( kadence()->option( 'footer_social_style' ) ) . esc_attr( $brand_color_class ) . '">';
 	if ( is_array( $items ) && ! empty( $items ) ) {
 		foreach ( $items as $item ) {
 			if ( $item['enabled'] ) {
