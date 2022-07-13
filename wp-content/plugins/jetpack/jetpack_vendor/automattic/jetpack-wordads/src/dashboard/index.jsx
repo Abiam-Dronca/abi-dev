@@ -1,9 +1,20 @@
-import { ThemeProvider } from '@automattic/jetpack-components';
-import { createReduxStore, register } from '@wordpress/data';
-import React from 'react';
+/**
+ * External dependencies
+ */
 import ReactDOM from 'react-dom';
-import WordAdsDashboard from './components/dashboard';
+import React from 'react';
+import { ThemeProvider } from '@automattic/jetpack-components';
+
+/**
+ * WordPress dependencies
+ */
+import { createReduxStore, register } from '@wordpress/data';
+
+/**
+ * Internal dependencies
+ */
 import { STORE_ID, storeConfig } from './store';
+import WordAdsDashboard from './components/dashboard';
 
 const store = createReduxStore( STORE_ID, storeConfig );
 register( store );

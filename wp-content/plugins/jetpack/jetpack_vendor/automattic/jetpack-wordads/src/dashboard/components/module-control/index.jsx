@@ -1,9 +1,20 @@
-import analytics from '@automattic/jetpack-analytics';
-import { __ } from '@wordpress/i18n';
+/**
+ * External dependencies
+ */
+import React, { useCallback } from 'react';
 import classNames from 'classnames';
+
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import analytics from '@automattic/jetpack-analytics';
 import Card from 'components/card';
 import CompactFormToggle from 'components/form-toggle/compact';
-import React, { useCallback } from 'react';
 
 import 'scss/rna-styles.scss';
 import './style.scss';

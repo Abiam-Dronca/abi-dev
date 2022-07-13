@@ -220,8 +220,7 @@ abstract class WPCOM_JSON_API_Post_v1_1_Endpoint extends WPCOM_JSON_API_Endpoint
 				case 'password':
 					$response[ $key ] = $post->get_password();
 					break;
-				/** (object|false) */
-				case 'parent':
+				case 'parent': /** (object|false) */
 					$response[ $key ] = $post->get_parent();
 					break;
 				case 'type':
@@ -260,8 +259,7 @@ abstract class WPCOM_JSON_API_Post_v1_1_Endpoint extends WPCOM_JSON_API_Endpoint
 				case 'format':
 					$response[ $key ] = $post->get_format();
 					break;
-				/** (object|false) */
-				case 'geo':
+				case 'geo': /** (object|false) */
 					$response[ $key ] = $post->get_geo();
 					break;
 				case 'menu_order':
@@ -287,8 +285,7 @@ abstract class WPCOM_JSON_API_Post_v1_1_Endpoint extends WPCOM_JSON_API_Endpoint
 					$response[ $key ]                       = $attachments;
 					$response['attachment_count']           = $attachment_count;
 					break;
-				/** (array|false) */
-				case 'metadata':
+				case 'metadata': /** (array|false) */
 					$response[ $key ] = $post->get_metadata();
 					break;
 				case 'meta':

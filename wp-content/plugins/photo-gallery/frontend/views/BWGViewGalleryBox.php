@@ -12,10 +12,10 @@ class BWGViewGalleryBox {
     require_once(BWG()->plugin_dir . '/framework/WDWLibraryEmbed.php');
 
     $bwg = WDWLibrary::get('current_view', 0, 'intval');
-    $current_url =  WDWLibrary::get('current_url', '', 'sanitize_url');
+    $current_url =  WDWLibrary::get('current_url', '', 'esc_url');
     $theme_id = WDWLibrary::get('theme_id', 0, 'intval');
-    $current_image_id = WDWLibrary::get('image_id', 0, 'intval', 'GET');
-    $gallery_id = WDWLibrary::get('gallery_id', 0, 'intval', 'GET');
+    $current_image_id = WDWLibrary::esc_script('get', 'image_id', 0, 'int');
+    $gallery_id = WDWLibrary::esc_script('get', 'gallery_id', 0, 'int');
     $tag = WDWLibrary::get('tag', 0, 'intval');
 
     $shortcode_id = WDWLibrary::get('shortcode_id', 0, 'intval');
@@ -26,9 +26,8 @@ class BWGViewGalleryBox {
       $data = WDWLibrary::parse_tagtext_to_array($shortcode);
     }
     $params = WDWLibrary::get_shortcode_option_params( $data );
-    $params['sort_by'] = WDWLibrary::get('sort_by', 'RAND()', 'sanitize_text_field', 'GET');
-    $params['order_by'] = WDWLibrary::get('order_by', 'asc', 'sanitize_text_field', 'GET');
-    $params['order_by'] = ($params['order_by'] == 'desc') ? 'desc' : 'asc';
+    $params['sort_by'] = WDWLibrary::esc_script('get', 'sort_by', 'RAND()');
+    $params['order_by'] = WDWLibrary::esc_script('get', 'order_by', 'asc');
     $params['watermark_position'] = explode('-', $params['watermark_position']);
     if ( !BWG()->is_pro ) {
       $params['popup_enable_filmstrip'] = FALSE;
@@ -41,6 +40,7 @@ class BWGViewGalleryBox {
       $params['popup_enable_tumblr'] = FALSE;
       $params['popup_enable_email'] = FALSE;
       $params['popup_enable_captcha'] = FALSE;
+      $params['gdpr_compliance'] = FALSE;
       $params['comment_moderation'] = FALSE;
       $params['enable_addthis'] = FALSE;
       $params['addthis_profile_id'] = FALSE;
@@ -83,7 +83,6 @@ class BWGViewGalleryBox {
       'gallery_id' => $gallery_id,
       'tag' => $tag,
       'theme_id' => $theme_id,
-      'shortcode_id' => $shortcode_id,
     );
     if ($params['watermark_type'] != 'none') {
       $params_array['watermark_link'] = $params['watermark_link'];
@@ -162,112 +161,112 @@ class BWGViewGalleryBox {
 
     if (BWG()->is_pro && $params['enable_addthis'] && $params['addthis_profile_id']) {
       ?>
-      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?php echo esc_html($params['addthis_profile_id']); ?>" async="async"></script>
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?php echo $params['addthis_profile_id']; ?>" async="async"></script>
       <?php
     }
     ?>
     <style>
       .bwg_inst_play {
-        background-image: url('<?php echo esc_url(BWG()->plugin_url) . '/images/play.png'; ?>');
+        background-image: url('<?php echo BWG()->plugin_url . '/images/play.png'; ?>');
       }
       .bwg_inst_play:hover {
-          background: url(<?php echo esc_url(BWG()->plugin_url) . '/images/play_hover.png'; ?>) no-repeat;
+          background: url(<?php echo BWG()->plugin_url . '/images/play_hover.png'; ?>) no-repeat;
       }
       .spider_popup_wrap {
-        background-color: rgba(<?php echo esc_html($lightbox_bg_color['red']); ?>, <?php echo esc_html($lightbox_bg_color['green']); ?>, <?php echo esc_html($lightbox_bg_color['blue']); ?>, <?php echo number_format($lightbox_bg_transparent/ 100, 2, ".", ""); ?>);
+        background-color: rgba(<?php echo $lightbox_bg_color['red']; ?>, <?php echo $lightbox_bg_color['green']; ?>, <?php echo $lightbox_bg_color['blue']; ?>, <?php echo number_format($lightbox_bg_transparent/ 100, 2, ".", ""); ?>);
       }
       .bwg_popup_image {
-        max-width: <?php echo esc_html($params['popup_width'] - ($filmstrip_direction == 'vertical' ? $image_filmstrip_width : 0)); ?>px;
-        max-height: <?php echo esc_html($params['popup_height'] - ($filmstrip_direction == 'horizontal' ? $image_filmstrip_height : 0)); ?>px;
+        max-width: <?php echo $params['popup_width'] - ($filmstrip_direction == 'vertical' ? $image_filmstrip_width : 0); ?>px;
+        max-height: <?php echo $params['popup_height'] - ($filmstrip_direction == 'horizontal' ? $image_filmstrip_height : 0); ?>px;
       }
       .bwg_ctrl_btn {
-        color: #<?php echo esc_html($theme_row->lightbox_ctrl_btn_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_ctrl_btn_height); ?>px;
-        margin: <?php echo esc_html($theme_row->lightbox_ctrl_btn_margin_top); ?>px <?php echo esc_html($theme_row->lightbox_ctrl_btn_margin_left); ?>px;
+        color: #<?php echo $theme_row->lightbox_ctrl_btn_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_ctrl_btn_height; ?>px;
+        margin: <?php echo $theme_row->lightbox_ctrl_btn_margin_top; ?>px <?php echo $theme_row->lightbox_ctrl_btn_margin_left; ?>px;
         opacity: <?php echo number_format($theme_row->lightbox_ctrl_btn_transparent / 100, 2, ".", ""); ?>;
       }
       .bwg_toggle_btn {
-        color: #<?php echo esc_html($theme_row->lightbox_ctrl_btn_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_toggle_btn_height); ?>px;
+        color: #<?php echo $theme_row->lightbox_ctrl_btn_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_toggle_btn_height; ?>px;
         opacity: <?php echo number_format($theme_row->lightbox_ctrl_btn_transparent / 100, 2, ".", ""); ?>;
       }
       .bwg_ctrl_btn_container {
 				<?php if( $params['popup_enable_ctrl_btn'] ) { ?>
         	min-height: 40px;
 				<?php } ?>
-        background-color: rgba(<?php echo esc_html($rgb_lightbox_ctrl_cont_bg_color['red']); ?>, <?php echo esc_html($rgb_lightbox_ctrl_cont_bg_color['green']); ?>, <?php echo esc_html($rgb_lightbox_ctrl_cont_bg_color['blue']); ?>, <?php echo number_format($theme_row->lightbox_ctrl_cont_transparent / 100, 2, ".", ""); ?>);
-        /*background: none repeat scroll 0 0 #<?php echo esc_html($theme_row->lightbox_ctrl_cont_bg_color); ?>;*/
+        background-color: rgba(<?php echo $rgb_lightbox_ctrl_cont_bg_color['red']; ?>, <?php echo $rgb_lightbox_ctrl_cont_bg_color['green']; ?>, <?php echo $rgb_lightbox_ctrl_cont_bg_color['blue']; ?>, <?php echo number_format($theme_row->lightbox_ctrl_cont_transparent / 100, 2, ".", ""); ?>);
+        /*background: none repeat scroll 0 0 #<?php echo $theme_row->lightbox_ctrl_cont_bg_color; ?>;*/
         <?php if ($theme_row->lightbox_ctrl_btn_pos == 'top') { ?>
-          border-bottom-left-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
-          border-bottom-right-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
+          border-bottom-left-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
+          border-bottom-right-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
           <?php
         } else {
           ?>
           bottom: 0;
-          border-top-left-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
-          border-top-right-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
+          border-top-left-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
+          border-top-right-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
           <?php
         }?>
-
-        text-align: <?php echo esc_html($theme_row->lightbox_ctrl_btn_align); ?>;
+        /*height: <?php /*echo $theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top;*/ ?>px;*/
+        text-align: <?php echo $theme_row->lightbox_ctrl_btn_align; ?>;
       }
       .bwg_toggle_container {
-        background: none repeat scroll 0 0 #<?php echo esc_html($theme_row->lightbox_ctrl_cont_bg_color); ?>;
+        background: none repeat scroll 0 0 #<?php echo $theme_row->lightbox_ctrl_cont_bg_color; ?>;
         <?php
         if ($theme_row->lightbox_ctrl_btn_pos == 'top') {
           ?>
-          border-bottom-left-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
-          border-bottom-right-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
-          /*top: <?php echo esc_html($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top); ?>px;*/
+          border-bottom-left-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
+          border-bottom-right-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
+          /*top: <?php echo $theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top; ?>px;*/
           <?php
         }
         else {
           ?>
-          border-top-left-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
-          border-top-right-radius: <?php echo esc_html($theme_row->lightbox_ctrl_cont_border_radius); ?>px;
-          /*bottom: <?php echo esc_html($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top); ?>px;*/
+          border-top-left-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
+          border-top-right-radius: <?php echo $theme_row->lightbox_ctrl_cont_border_radius; ?>px;
+          /*bottom: <?php echo $theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top; ?>px;*/
           <?php
         }?>
-        margin-left: -<?php echo esc_html($theme_row->lightbox_toggle_btn_width) / 2; ?>px;
+        margin-left: -<?php echo $theme_row->lightbox_toggle_btn_width / 2; ?>px;
         opacity: <?php echo number_format($theme_row->lightbox_ctrl_cont_transparent / 100, 2, ".", ""); ?>;
-        width: <?php echo esc_html($theme_row->lightbox_toggle_btn_width); ?>px;
+        width: <?php echo $theme_row->lightbox_toggle_btn_width; ?>px;
       }
       .bwg_close_btn {
         opacity: <?php echo number_format($theme_row->lightbox_close_btn_transparent / 100, 2, ".", ""); ?>;
       }
       .spider_popup_close {
-        background-color: #<?php echo esc_html($theme_row->lightbox_close_btn_bg_color); ?>;
-        border-radius: <?php echo esc_html($theme_row->lightbox_close_btn_border_radius); ?>;
-        border: <?php echo esc_html($theme_row->lightbox_close_btn_border_width); ?>px <?php echo esc_html($theme_row->lightbox_close_btn_border_style); ?> #<?php echo esc_html($theme_row->lightbox_close_btn_border_color); ?>;
-        box-shadow: <?php echo esc_html($theme_row->lightbox_close_btn_box_shadow); ?>;
-        color: #<?php echo esc_html($theme_row->lightbox_close_btn_color); ?>;
-        height: <?php echo esc_html($theme_row->lightbox_close_btn_height); ?>px;
-        font-size: <?php echo esc_html($theme_row->lightbox_close_btn_size); ?>px;
-        right: <?php echo esc_html($theme_row->lightbox_close_btn_right); ?>px;
-        top: <?php echo esc_html($theme_row->lightbox_close_btn_top); ?>px;
-        width: <?php echo esc_html($theme_row->lightbox_close_btn_width); ?>px;
+        background-color: #<?php echo $theme_row->lightbox_close_btn_bg_color; ?>;
+        border-radius: <?php echo $theme_row->lightbox_close_btn_border_radius; ?>;
+        border: <?php echo $theme_row->lightbox_close_btn_border_width; ?>px <?php echo $theme_row->lightbox_close_btn_border_style; ?> #<?php echo $theme_row->lightbox_close_btn_border_color; ?>;
+        box-shadow: <?php echo $theme_row->lightbox_close_btn_box_shadow; ?>;
+        color: #<?php echo $theme_row->lightbox_close_btn_color; ?>;
+        height: <?php echo $theme_row->lightbox_close_btn_height; ?>px;
+        font-size: <?php echo $theme_row->lightbox_close_btn_size; ?>px;
+        right: <?php echo $theme_row->lightbox_close_btn_right; ?>px;
+        top: <?php echo $theme_row->lightbox_close_btn_top; ?>px;
+        width: <?php echo $theme_row->lightbox_close_btn_width; ?>px;
       }
       .spider_popup_close_fullscreen {
-        color: #<?php echo esc_html($theme_row->lightbox_close_btn_full_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_close_btn_size); ?>px;
+        color: #<?php echo $theme_row->lightbox_close_btn_full_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_close_btn_size; ?>px;
       }
       #spider_popup_left-ico,
       #spider_popup_right-ico {
-        background-color: #<?php echo esc_html($theme_row->lightbox_rl_btn_bg_color); ?>;
-        border-radius: <?php echo esc_html($theme_row->lightbox_rl_btn_border_radius); ?>;
-        border: <?php echo esc_html($theme_row->lightbox_rl_btn_border_width); ?>px <?php echo esc_html($theme_row->lightbox_rl_btn_border_style); ?> #<?php echo esc_html($theme_row->lightbox_rl_btn_border_color); ?>;
-        box-shadow: <?php echo esc_html($theme_row->lightbox_rl_btn_box_shadow); ?>;
-        color: #<?php echo esc_html($theme_row->lightbox_rl_btn_color); ?>;
-        height: <?php echo esc_html($theme_row->lightbox_rl_btn_height); ?>px;
-        font-size: <?php echo esc_html($theme_row->lightbox_rl_btn_size); ?>px;
-        width: <?php echo esc_html($theme_row->lightbox_rl_btn_width); ?>px;
+        background-color: #<?php echo $theme_row->lightbox_rl_btn_bg_color; ?>;
+        border-radius: <?php echo $theme_row->lightbox_rl_btn_border_radius; ?>;
+        border: <?php echo $theme_row->lightbox_rl_btn_border_width; ?>px <?php echo $theme_row->lightbox_rl_btn_border_style; ?> #<?php echo $theme_row->lightbox_rl_btn_border_color; ?>;
+        box-shadow: <?php echo $theme_row->lightbox_rl_btn_box_shadow; ?>;
+        color: #<?php echo $theme_row->lightbox_rl_btn_color; ?>;
+        height: <?php echo $theme_row->lightbox_rl_btn_height; ?>px;
+        font-size: <?php echo $theme_row->lightbox_rl_btn_size; ?>px;
+        width: <?php echo $theme_row->lightbox_rl_btn_width; ?>px;
         opacity: <?php echo number_format($theme_row->lightbox_rl_btn_transparent / 100, 2, ".", ""); ?>;
       }
       #spider_popup_left-ico {
-        padding-right: <?php echo esc_html(($theme_row->lightbox_rl_btn_width - $theme_row->lightbox_rl_btn_size)) / 3; ?>px;
+        padding-right: <?php echo ($theme_row->lightbox_rl_btn_width - $theme_row->lightbox_rl_btn_size) / 3; ?>px;
       }
       #spider_popup_right-ico {
-        padding-left: <?php echo esc_html(($theme_row->lightbox_rl_btn_width - $theme_row->lightbox_rl_btn_size)) / 3; ?>px;
+        padding-left: <?php echo ($theme_row->lightbox_rl_btn_width - $theme_row->lightbox_rl_btn_size) / 3; ?>px;
       }
       <?php
       if($params['autohide_lightbox_navigation']){?>
@@ -293,186 +292,186 @@ class BWGViewGalleryBox {
       .spider_popup_close_fullscreen:hover,
       #spider_popup_left:hover #spider_popup_left-ico,
       #spider_popup_right:hover #spider_popup_right-ico {
-        color: #<?php echo esc_html($theme_row->lightbox_close_rl_btn_hover_color); ?>;
+        color: #<?php echo $theme_row->lightbox_close_rl_btn_hover_color; ?>;
         cursor: pointer;
       }
       .bwg_comment_container,  .bwg_ecommerce_container {
-        background-color: #<?php echo esc_html($theme_row->lightbox_comment_bg_color); ?>;
-        color: #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_comment_font_size); ?>px;
-        font-family: <?php echo esc_html($theme_row->lightbox_comment_font_style); ?>;
-        <?php echo esc_html($theme_row->lightbox_comment_pos); ?>: -<?php echo esc_html($theme_row->lightbox_comment_width); ?>px;
-        width: <?php echo esc_html($theme_row->lightbox_comment_width); ?>px;
+        background-color: #<?php echo $theme_row->lightbox_comment_bg_color; ?>;
+        color: #<?php echo $theme_row->lightbox_comment_font_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_comment_font_size; ?>px;
+        font-family: <?php echo $theme_row->lightbox_comment_font_style; ?>;
+        <?php echo $theme_row->lightbox_comment_pos; ?>: -<?php echo $theme_row->lightbox_comment_width; ?>px;
+        width: <?php echo $theme_row->lightbox_comment_width; ?>px;
       }
         .bwg_ecommerce_body  p, .bwg_ecommerce_body span, .bwg_ecommerce_body div {
-          color:#<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>!important;
+          color:#<?php echo $theme_row->lightbox_comment_font_color; ?>!important;
         }
         .pge_tabs li{
           float:left;
-          border-top: 1px solid #<?php echo esc_html($theme_row->lightbox_bg_color); ?>!important;
-          border-left: 1px solid #<?php echo esc_html($theme_row->lightbox_bg_color); ?>!important;
-          border-right: 1px solid #<?php echo esc_html($theme_row->lightbox_bg_color); ?>!important;
+          border-top: 1px solid #<?php echo $theme_row->lightbox_bg_color; ?>!important;
+          border-left: 1px solid #<?php echo $theme_row->lightbox_bg_color; ?>!important;
+          border-right: 1px solid #<?php echo $theme_row->lightbox_bg_color; ?>!important;
           margin-right: 1px !important;
-          border-radius: <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?> <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?> 0 0;
+          border-radius: <?php echo $theme_row->lightbox_comment_button_border_radius; ?> <?php echo $theme_row->lightbox_comment_button_border_radius; ?> 0 0;
           position:relative;
         }
        .pge_tabs li a{
-          color:#<?php echo esc_html($theme_row->lightbox_comment_bg_color); ?>!important;
+          color:#<?php echo $theme_row->lightbox_comment_bg_color; ?>!important;
         }
 
       .pge_tabs li.pge_active a, .pge_tabs li a:hover {
-          border-radius: <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?>;
+          border-radius: <?php echo $theme_row->lightbox_comment_button_border_radius; ?>;
 
         }
       .pge_tabs li.pge_active a>span, .pge_tabs li a>span:hover {
-        color:#<?php echo esc_html($theme_row->lightbox_comment_button_bg_color); ?> !important;
-        border-bottom: 1px solid #<?php echo esc_html($theme_row->lightbox_comment_button_bg_color); ?>;
+        color:#<?php echo $theme_row->lightbox_comment_button_bg_color; ?> !important;
+        border-bottom: 1px solid #<?php echo $theme_row->lightbox_comment_button_bg_color; ?>;
         padding-bottom: 2px;
       }
        .pge_tabs_container{
-          border:1px solid #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>;
-          border-radius: 0 0 <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?> <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?>;
+          border:1px solid #<?php echo $theme_row->lightbox_comment_font_color; ?>;
+          border-radius: 0 0 <?php echo $theme_row->lightbox_comment_button_border_radius; ?> <?php echo $theme_row->lightbox_comment_button_border_radius; ?>;
        }
 
       .pge_pricelist {
         padding:0 !important;
-        color:#<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>!important;
+        color:#<?php echo $theme_row->lightbox_comment_font_color; ?>!important;
       }
 
       .pge_add_to_cart a{
-        border: 1px solid #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>!important;
-        color:#<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>!important;
-        border-radius: <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?>;
+        border: 1px solid #<?php echo $theme_row->lightbox_comment_font_color; ?>!important;
+        color:#<?php echo $theme_row->lightbox_comment_font_color; ?>!important;
+        border-radius: <?php echo $theme_row->lightbox_comment_button_border_radius; ?>;
       }
       .bwg_comments , .bwg_ecommerce_panel{
-        font-size: <?php echo esc_html($theme_row->lightbox_comment_font_size); ?>px;
-        font-family: <?php echo esc_html($theme_row->lightbox_comment_font_style); ?>;
+        font-size: <?php echo $theme_row->lightbox_comment_font_size; ?>px;
+        font-family: <?php echo $theme_row->lightbox_comment_font_style; ?>;
       }
       .bwg_comments input[type="submit"], .bwg_ecommerce_panel input[type="button"] {
-        background: none repeat scroll 0 0 #<?php echo esc_html($theme_row->lightbox_comment_button_bg_color); ?>;
-        border: <?php echo esc_html($theme_row->lightbox_comment_button_border_width); ?>px <?php echo esc_html($theme_row->lightbox_comment_button_border_style); ?> #<?php echo esc_html($theme_row->lightbox_comment_button_border_color); ?>;
-        border-radius: <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?>;
-        color: #<?php echo esc_html($theme_row->lightbox_comment_bg_color); ?>;
-        padding: <?php echo esc_html($theme_row->lightbox_comment_button_padding); ?>;
+        background: none repeat scroll 0 0 #<?php echo $theme_row->lightbox_comment_button_bg_color; ?>;
+        border: <?php echo $theme_row->lightbox_comment_button_border_width; ?>px <?php echo $theme_row->lightbox_comment_button_border_style; ?> #<?php echo $theme_row->lightbox_comment_button_border_color; ?>;
+        border-radius: <?php echo $theme_row->lightbox_comment_button_border_radius; ?>;
+        color: #<?php echo $theme_row->lightbox_comment_bg_color; ?>;
+        padding: <?php echo $theme_row->lightbox_comment_button_padding; ?>;
       }
       .bwg_comments .bwg-submit-disabled:hover {
-          padding: <?php echo esc_html($theme_row->lightbox_comment_button_padding); ?> !important;
-          border-radius: <?php echo esc_html($theme_row->lightbox_comment_button_border_radius); ?> !important;
+          padding: <?php echo $theme_row->lightbox_comment_button_padding; ?> !important;
+          border-radius: <?php echo $theme_row->lightbox_comment_button_border_radius; ?> !important;
       }
       .bwg_comments input[type="text"],
       .bwg_comments textarea,
       .bwg_ecommerce_panel input[type="text"],
       .bwg_ecommerce_panel input[type="number"],
       .bwg_ecommerce_panel textarea , .bwg_ecommerce_panel select {
-        background: none repeat scroll 0 0 #<?php echo esc_html($theme_row->lightbox_comment_input_bg_color); ?>;
-        border: <?php echo esc_html($theme_row->lightbox_comment_input_border_width); ?>px <?php echo esc_html($theme_row->lightbox_comment_input_border_style); ?> #<?php echo esc_html($theme_row->lightbox_comment_input_border_color); ?>;
-        border-radius: <?php echo esc_html($theme_row->lightbox_comment_input_border_radius); ?>;
-        color: #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>;
+        background: none repeat scroll 0 0 #<?php echo $theme_row->lightbox_comment_input_bg_color; ?>;
+        border: <?php echo $theme_row->lightbox_comment_input_border_width; ?>px <?php echo $theme_row->lightbox_comment_input_border_style; ?> #<?php echo $theme_row->lightbox_comment_input_border_color; ?>;
+        border-radius: <?php echo $theme_row->lightbox_comment_input_border_radius; ?>;
+        color: #<?php echo $theme_row->lightbox_comment_font_color; ?>;
         font-size: 12px;
-        padding: <?php echo esc_html($theme_row->lightbox_comment_input_padding); ?>;
+        padding: <?php echo $theme_row->lightbox_comment_input_padding; ?>;
         width: 100%;
       }
       .bwg_comment_header_p {
-        border-top: <?php echo esc_html($theme_row->lightbox_comment_separator_width); ?>px <?php echo esc_html($theme_row->lightbox_comment_separator_style); ?> #<?php echo esc_html($theme_row->lightbox_comment_separator_color); ?>;
+        border-top: <?php echo $theme_row->lightbox_comment_separator_width; ?>px <?php echo $theme_row->lightbox_comment_separator_style; ?> #<?php echo $theme_row->lightbox_comment_separator_color; ?>;
       }
       .bwg_comment_header {
-        color: #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_comment_author_font_size); ?>px;
+        color: #<?php echo $theme_row->lightbox_comment_font_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_comment_author_font_size; ?>px;
       }
       .bwg_comment_date {
-        color: #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>;
+        color: #<?php echo $theme_row->lightbox_comment_font_color; ?>;
         float: right;
-        font-size: <?php echo esc_html($theme_row->lightbox_comment_date_font_size); ?>px;
+        font-size: <?php echo $theme_row->lightbox_comment_date_font_size; ?>px;
       }
       .bwg_comment_body {
-        color: #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_comment_body_font_size); ?>px;
+        color: #<?php echo $theme_row->lightbox_comment_font_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_comment_body_font_size; ?>px;
       }
       .bwg_comments_close , .bwg_ecommerce_close{
         text-align: <?php echo (($theme_row->lightbox_comment_pos == 'left') ? 'right' : 'left'); ?>!important;
       }
       #bwg_rate_form .bwg_rate:hover {
-        color: #<?php echo esc_html($theme_row->lightbox_rate_color); ?>;
+        color: #<?php echo $theme_row->lightbox_rate_color; ?>;
       }
       .bwg_facebook,
       .bwg_twitter,
       .bwg_pinterest,
       .bwg_tumblr {
-        color: #<?php echo esc_html($theme_row->lightbox_comment_share_button_color); ?>;
+        color: #<?php echo $theme_row->lightbox_comment_share_button_color; ?>;
       }
       .bwg_image_container {
-        <?php echo esc_html($theme_row->lightbox_filmstrip_pos); ?>: <?php echo esc_html(($filmstrip_direction == 'horizontal' ? $image_filmstrip_height : $image_filmstrip_width)); ?>px;
+        <?php echo $theme_row->lightbox_filmstrip_pos; ?>: <?php echo ($filmstrip_direction == 'horizontal' ? $image_filmstrip_height : $image_filmstrip_width); ?>px;
       }
       .bwg_filmstrip_container {
         display: <?php echo ($filmstrip_direction == 'horizontal'? 'table' : 'block'); ?>;
-        height: <?php echo esc_html(($filmstrip_direction == 'horizontal'? $image_filmstrip_height : $params['popup_height'])); ?>px;
-        width: <?php echo esc_html(($filmstrip_direction == 'horizontal' ? $params['popup_width'] : $image_filmstrip_width)); ?>px;
-        <?php echo esc_html($theme_row->lightbox_filmstrip_pos); ?>: 0;
+        height: <?php echo ($filmstrip_direction == 'horizontal'? $image_filmstrip_height : $params['popup_height']); ?>px;
+        width: <?php echo ($filmstrip_direction == 'horizontal' ? $params['popup_width'] : $image_filmstrip_width); ?>px;
+        <?php echo $theme_row->lightbox_filmstrip_pos; ?>: 0;
       }
       .bwg_filmstrip {
-        <?php echo esc_html($left_or_top); ?>: <?php echo esc_html($theme_row->lightbox_filmstrip_rl_btn_size); ?>px;
-        <?php echo esc_html($width_or_height); ?>: <?php echo esc_html(($filmstrip_direction == 'horizontal' ? $params['popup_width'] - 40 : $params['popup_height'] - 40)); ?>px;
+        <?php echo $left_or_top; ?>: <?php echo $theme_row->lightbox_filmstrip_rl_btn_size; ?>px;
+        <?php echo $width_or_height; ?>: <?php echo ($filmstrip_direction == 'horizontal' ? $params['popup_width'] - 40 : $params['popup_height'] - 40); ?>px;
       }
       .bwg_filmstrip_thumbnails {
-        height: <?php echo esc_html(($filmstrip_direction == 'horizontal' ? $image_filmstrip_height : ($image_filmstrip_height + $filmstrip_thumb_right_left_space) * count($image_rows))); ?>px;
-        <?php echo esc_html($left_or_top); ?>: 0px;
-        width: <?php echo esc_html(($filmstrip_direction == 'horizontal' ? ($image_filmstrip_width + $filmstrip_thumb_right_left_space) * count($image_rows) : $image_filmstrip_width)); ?>px;
+        height: <?php echo ($filmstrip_direction == 'horizontal' ? $image_filmstrip_height : ($image_filmstrip_height + $filmstrip_thumb_right_left_space) * count($image_rows)); ?>px;
+        <?php echo $left_or_top; ?>: 0px;
+        width: <?php echo ($filmstrip_direction == 'horizontal' ? ($image_filmstrip_width + $filmstrip_thumb_right_left_space) * count($image_rows) : $image_filmstrip_width); ?>px;
       }
       .bwg_filmstrip_thumbnail {
-        height: <?php echo esc_html($image_filmstrip_height); ?>px;
-        width: <?php echo esc_html($image_filmstrip_width); ?>px;
-        padding: <?php echo esc_html($theme_row->lightbox_filmstrip_thumb_margin); ?>;
+        height: <?php echo $image_filmstrip_height; ?>px;
+        width: <?php echo $image_filmstrip_width; ?>px;
+        padding: <?php echo $theme_row->lightbox_filmstrip_thumb_margin; ?>;
       }
       .bwg_filmstrip_thumbnail .bwg_filmstrip_thumbnail_img_wrap {
-        width:<?php echo esc_html($image_filmstrip_width - $filmstrip_thumb_right_left_space) ?>px;
-        height:<?php echo esc_html($image_filmstrip_height - $filmstrip_thumb_top_bottom_space);?>px;
-        border: <?php echo esc_html($theme_row->lightbox_filmstrip_thumb_border_width); ?>px <?php echo esc_html($theme_row->lightbox_filmstrip_thumb_border_style); ?> #<?php echo esc_html($theme_row->lightbox_filmstrip_thumb_border_color); ?>;
-        border-radius: <?php echo esc_html($theme_row->lightbox_filmstrip_thumb_border_radius); ?>;
+        width:<?php echo $image_filmstrip_width - $filmstrip_thumb_right_left_space ?>px;
+        height:<?php echo $image_filmstrip_height - $filmstrip_thumb_top_bottom_space;?>px;
+        border: <?php echo $theme_row->lightbox_filmstrip_thumb_border_width; ?>px <?php echo $theme_row->lightbox_filmstrip_thumb_border_style; ?> #<?php echo $theme_row->lightbox_filmstrip_thumb_border_color; ?>;
+        border-radius: <?php echo $theme_row->lightbox_filmstrip_thumb_border_radius; ?>;
       }
       .bwg_thumb_active .bwg_filmstrip_thumbnail_img_wrap {
-        border: <?php echo esc_html($theme_row->lightbox_filmstrip_thumb_active_border_width); ?>px solid #<?php echo esc_html($theme_row->lightbox_filmstrip_thumb_active_border_color); ?>;
+        border: <?php echo $theme_row->lightbox_filmstrip_thumb_active_border_width; ?>px solid #<?php echo $theme_row->lightbox_filmstrip_thumb_active_border_color; ?>;
       }
       .bwg_thumb_deactive {
         opacity: <?php echo number_format($theme_row->lightbox_filmstrip_thumb_deactive_transparent / 100, 2, ".", ""); ?>;
       }
       .bwg_filmstrip_left {
-        background-color: #<?php echo esc_html($theme_row->lightbox_filmstrip_rl_bg_color); ?>;
+        background-color: #<?php echo $theme_row->lightbox_filmstrip_rl_bg_color; ?>;
         display: <?php echo ($filmstrip_direction == 'horizontal' ? 'table-cell' : 'block') ?>;
         z-index: 99999;
-        <?php echo esc_html($width_or_height); ?>: <?php echo esc_html($theme_row->lightbox_filmstrip_rl_btn_size); ?>px;
-        <?php echo esc_html($left_or_top); ?>: 0;
+        <?php echo $width_or_height; ?>: <?php echo $theme_row->lightbox_filmstrip_rl_btn_size; ?>px;
+        <?php echo $left_or_top; ?>: 0;
         <?php echo ($filmstrip_direction == 'horizontal' ? 'position: relative;' : 'position: absolute;') ?>
         <?php echo ($filmstrip_direction == 'horizontal' ? '' : 'width: 100%;') ?>
       }
       .bwg_filmstrip_right {
-        background-color: #<?php echo esc_html($theme_row->lightbox_filmstrip_rl_bg_color); ?>;
+        background-color: #<?php echo $theme_row->lightbox_filmstrip_rl_bg_color; ?>;
         <?php echo($filmstrip_direction == 'horizontal' ? 'right' : 'bottom') ?>: 0;
         z-index: 99999;
-        <?php echo esc_html($width_or_height); ?>: <?php echo esc_html($theme_row->lightbox_filmstrip_rl_btn_size); ?>px;
+        <?php echo $width_or_height; ?>: <?php echo $theme_row->lightbox_filmstrip_rl_btn_size; ?>px;
         display: <?php echo ($filmstrip_direction == 'horizontal' ? 'table-cell' : 'block') ?>;
         <?php echo ($filmstrip_direction == 'horizontal' ? 'position: relative;' : 'position: absolute;') ?>
         <?php echo ($filmstrip_direction == 'horizontal' ? '' : 'width: 100%;') ?>
       }
       .bwg_filmstrip_left i,
       .bwg_filmstrip_right i {
-        color: #<?php echo esc_html($theme_row->lightbox_filmstrip_rl_btn_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_filmstrip_rl_btn_size); ?>px;
+        color: #<?php echo $theme_row->lightbox_filmstrip_rl_btn_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_filmstrip_rl_btn_size; ?>px;
       }
       .bwg_watermark_spun {
-        text-align: <?php echo esc_html($params['watermark_position'][1]); ?>;
-        vertical-align: <?php echo esc_html($params['watermark_position'][0]); ?>;
+        text-align: <?php echo $params['watermark_position'][1]; ?>;
+        vertical-align: <?php echo $params['watermark_position'][0]; ?>;
         /*z-index: 10140;*/
       }
       .bwg_watermark_image {
-        max-height: <?php echo esc_html($params['watermark_height']); ?>px;
-        max-width: <?php echo esc_html($params['watermark_width']); ?>px;
+        max-height: <?php echo $params['watermark_height']; ?>px;
+        max-width: <?php echo $params['watermark_width']; ?>px;
         opacity: <?php echo number_format($params['watermark_opacity'] / 100, 2, ".", ""); ?>;
       }
       .bwg_watermark_text,
       .bwg_watermark_text:hover {
-        font-size: <?php echo esc_html($params['watermark_font_size']); ?>px;
-        font-family: <?php echo esc_html($params['watermark_font']); ?>;
-        color: #<?php echo esc_html($params['watermark_color']); ?> !important;
+        font-size: <?php echo $params['watermark_font_size']; ?>px;
+        font-family: <?php echo $params['watermark_font']; ?>;
+        color: #<?php echo $params['watermark_color']; ?> !important;
         opacity: <?php echo number_format($params['watermark_opacity'] / 100, 2, ".", ""); ?>;
       }
       .bwg_image_info_container1 {
@@ -482,87 +481,87 @@ class BWGViewGalleryBox {
         display: <?php echo $params['popup_hit_counter'] ? 'table-cell' : 'none'; ?>;;
       }
       .bwg_image_info_spun {
-        text-align: <?php echo esc_html($theme_row->lightbox_info_align); ?>;
-        vertical-align: <?php echo esc_html($theme_row->lightbox_info_pos); ?>;
+        text-align: <?php echo $theme_row->lightbox_info_align; ?>;
+        vertical-align: <?php echo $theme_row->lightbox_info_pos; ?>;
       }
       .bwg_image_hit_spun {
-        text-align: <?php echo esc_html($theme_row->lightbox_hit_align); ?>;
-        vertical-align: <?php echo esc_html($theme_row->lightbox_hit_pos); ?>;
+        text-align: <?php echo $theme_row->lightbox_hit_align; ?>;
+        vertical-align: <?php echo $theme_row->lightbox_hit_pos; ?>;
       }
       .bwg_image_hit {
-        background: rgba(<?php echo esc_html($rgb_bwg_image_hit_bg_color['red']); ?>, <?php echo esc_html($rgb_bwg_image_hit_bg_color['green']); ?>, <?php echo esc_html($rgb_bwg_image_hit_bg_color['blue']); ?>, <?php echo number_format($theme_row->lightbox_hit_bg_transparent / 100, 2, ".", ""); ?>);
-        border: <?php echo esc_html($theme_row->lightbox_hit_border_width); ?>px <?php echo esc_html($theme_row->lightbox_hit_border_style); ?> #<?php echo esc_html($theme_row->lightbox_hit_border_color); ?>;
-        border-radius: <?php echo esc_html($theme_row->lightbox_info_border_radius); ?>;
-        <?php echo ($theme_row->lightbox_ctrl_btn_pos == 'bottom' && $theme_row->lightbox_hit_pos == 'bottom') ? 'bottom: ' . esc_html(($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top)) . 'px;' : '' ?>
-        margin: <?php echo esc_html($theme_row->lightbox_hit_margin); ?>;
-        padding: <?php echo esc_html($theme_row->lightbox_hit_padding); ?>;
-        <?php echo ($theme_row->lightbox_ctrl_btn_pos == 'top' && $theme_row->lightbox_hit_pos == 'top') ? 'top: ' . esc_html(($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top)) . 'px;' : '' ?>
+        background: rgba(<?php echo $rgb_bwg_image_hit_bg_color['red']; ?>, <?php echo $rgb_bwg_image_hit_bg_color['green']; ?>, <?php echo $rgb_bwg_image_hit_bg_color['blue']; ?>, <?php echo number_format($theme_row->lightbox_hit_bg_transparent / 100, 2, ".", ""); ?>);
+        border: <?php echo $theme_row->lightbox_hit_border_width; ?>px <?php echo $theme_row->lightbox_hit_border_style; ?> #<?php echo $theme_row->lightbox_hit_border_color; ?>;
+        border-radius: <?php echo $theme_row->lightbox_info_border_radius; ?>;
+        <?php echo ($theme_row->lightbox_ctrl_btn_pos == 'bottom' && $theme_row->lightbox_hit_pos == 'bottom') ? 'bottom: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : '' ?>
+        margin: <?php echo $theme_row->lightbox_hit_margin; ?>;
+        padding: <?php echo $theme_row->lightbox_hit_padding; ?>;
+        <?php echo ($theme_row->lightbox_ctrl_btn_pos == 'top' && $theme_row->lightbox_hit_pos == 'top') ? 'top: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : '' ?>
       }
       .bwg_image_hits,
       .bwg_image_hits * {
-        color: #<?php echo esc_html($theme_row->lightbox_hit_color); ?> !important;
-        font-family: <?php echo esc_html($theme_row->lightbox_hit_font_style); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_hit_font_size); ?>px;
-        font-weight: <?php echo esc_html($theme_row->lightbox_hit_font_weight); ?>;
+        color: #<?php echo $theme_row->lightbox_hit_color; ?> !important;
+        font-family: <?php echo $theme_row->lightbox_hit_font_style; ?>;
+        font-size: <?php echo $theme_row->lightbox_hit_font_size; ?>px;
+        font-weight: <?php echo $theme_row->lightbox_hit_font_weight; ?>;
       }
       .bwg_image_info {
-        background: rgba(<?php echo esc_html($rgb_bwg_image_info_bg_color['red']); ?>, <?php echo esc_html($rgb_bwg_image_info_bg_color['green']); ?>, <?php echo esc_html($rgb_bwg_image_info_bg_color['blue']); ?>, <?php echo number_format($theme_row->lightbox_info_bg_transparent / 100, 2, ".", ""); ?>);
-        border: <?php echo esc_html($theme_row->lightbox_info_border_width); ?>px <?php echo esc_html($theme_row->lightbox_info_border_style); ?> #<?php echo esc_html($theme_row->lightbox_info_border_color); ?>;
-        border-radius: <?php echo esc_html($theme_row->lightbox_info_border_radius); ?>;
-        <?php echo ((!$params['popup_enable_filmstrip'] || $theme_row->lightbox_filmstrip_pos != 'bottom') && $theme_row->lightbox_ctrl_btn_pos == 'bottom' && $theme_row->lightbox_info_pos == 'bottom') ? 'bottom: ' . esc_html(($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;') : '' ?>
+        background: rgba(<?php echo $rgb_bwg_image_info_bg_color['red']; ?>, <?php echo $rgb_bwg_image_info_bg_color['green']; ?>, <?php echo $rgb_bwg_image_info_bg_color['blue']; ?>, <?php echo number_format($theme_row->lightbox_info_bg_transparent / 100, 2, ".", ""); ?>);
+        border: <?php echo $theme_row->lightbox_info_border_width; ?>px <?php echo $theme_row->lightbox_info_border_style; ?> #<?php echo $theme_row->lightbox_info_border_color; ?>;
+        border-radius: <?php echo $theme_row->lightbox_info_border_radius; ?>;
+        <?php echo ((!$params['popup_enable_filmstrip'] || $theme_row->lightbox_filmstrip_pos != 'bottom') && $theme_row->lightbox_ctrl_btn_pos == 'bottom' && $theme_row->lightbox_info_pos == 'bottom') ? 'bottom: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : '' ?>
         <?php if ($params['popup_info_full_width']) { ?>
         width: 100%;
         <?php } else { ?>
         width: 33%;
-        margin: <?php echo esc_html($theme_row->lightbox_info_margin); ?>;
+        margin: <?php echo $theme_row->lightbox_info_margin; ?>;
         <?php } ?>
-        padding: <?php echo esc_html($theme_row->lightbox_info_padding); ?>;
-        <?php echo esc_html(((!$params['popup_enable_filmstrip'] || $theme_row->lightbox_filmstrip_pos != 'top') && $theme_row->lightbox_ctrl_btn_pos == 'top' && $theme_row->lightbox_info_pos == 'top') ? 'top: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : ''); ?>
+        padding: <?php echo $theme_row->lightbox_info_padding; ?>;
+        <?php echo ((!$params['popup_enable_filmstrip'] || $theme_row->lightbox_filmstrip_pos != 'top') && $theme_row->lightbox_ctrl_btn_pos == 'top' && $theme_row->lightbox_info_pos == 'top') ? 'top: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : '' ?>
         word-break : break-word;
       }
       .bwg_image_title,
       .bwg_image_title * {
-        color: #<?php echo esc_html($theme_row->lightbox_title_color); ?> !important;
-        font-family: <?php echo esc_html($theme_row->lightbox_title_font_style); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_title_font_size); ?>px;
-        font-weight: <?php echo esc_html($theme_row->lightbox_title_font_weight); ?>;
+        color: #<?php echo $theme_row->lightbox_title_color; ?> !important;
+        font-family: <?php echo $theme_row->lightbox_title_font_style; ?>;
+        font-size: <?php echo $theme_row->lightbox_title_font_size; ?>px;
+        font-weight: <?php echo $theme_row->lightbox_title_font_weight; ?>;
         word-wrap: break-word;
       }
       .bwg_image_description,
       .bwg_image_description * {
-        color: #<?php echo esc_html($theme_row->lightbox_description_color); ?> !important;
-        font-family: <?php echo esc_html($theme_row->lightbox_description_font_style); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_description_font_size); ?>px;
-        font-weight: <?php echo esc_html($theme_row->lightbox_description_font_weight); ?>;
+        color: #<?php echo $theme_row->lightbox_description_color; ?> !important;
+        font-family: <?php echo $theme_row->lightbox_description_font_style; ?>;
+        font-size: <?php echo $theme_row->lightbox_description_font_size; ?>px;
+        font-weight: <?php echo $theme_row->lightbox_description_font_weight; ?>;
         word-break: break-word;
       }
       .bwg_image_rate_spun {
-        text-align: <?php echo esc_html($theme_row->lightbox_rate_align); ?>;
-        vertical-align: <?php echo esc_html($theme_row->lightbox_rate_pos); ?>;
+        text-align: <?php echo $theme_row->lightbox_rate_align; ?>;
+        vertical-align: <?php echo $theme_row->lightbox_rate_pos; ?>;
       }
       .bwg_image_rate {
-        <?php echo esc_html(($theme_row->lightbox_ctrl_btn_pos == 'bottom' && $theme_row->lightbox_rate_pos == 'bottom') ? 'bottom: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : ''); ?>
-        padding: <?php echo esc_html($theme_row->lightbox_rate_padding); ?>;
-        <?php echo esc_html(($theme_row->lightbox_ctrl_btn_pos == 'top' && $theme_row->lightbox_rate_pos == 'top') ? 'top: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : ''); ?>
+        <?php echo ($theme_row->lightbox_ctrl_btn_pos == 'bottom' && $theme_row->lightbox_rate_pos == 'bottom') ? 'bottom: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : '' ?>
+        padding: <?php echo $theme_row->lightbox_rate_padding; ?>;
+        <?php echo ($theme_row->lightbox_ctrl_btn_pos == 'top' && $theme_row->lightbox_rate_pos == 'top') ? 'top: ' . ($theme_row->lightbox_ctrl_btn_height + 2 * $theme_row->lightbox_ctrl_btn_margin_top) . 'px;' : '' ?>
       }
       #bwg_rate_form .bwg_hint,
-      #bwg_rate_form .bwg-icon-<?php echo esc_attr($theme_row->lightbox_rate_icon); ?>,
-      #bwg_rate_form .bwg-icon-<?php echo esc_attr($theme_row->lightbox_rate_icon); ?>-half-o,
-      #bwg_rate_form .bwg-icon-<?php echo esc_attr($theme_row->lightbox_rate_icon); ?>-o,
+      #bwg_rate_form .bwg-icon-<?php echo $theme_row->lightbox_rate_icon; ?>,
+      #bwg_rate_form .bwg-icon-<?php echo $theme_row->lightbox_rate_icon; ?>-half-o,
+      #bwg_rate_form .bwg-icon-<?php echo $theme_row->lightbox_rate_icon; ?>-o,
       #bwg_rate_form .bwg-icon-minus-square-o {
-        color: #<?php echo esc_html($theme_row->lightbox_rate_color); ?>;
-        font-size: <?php echo esc_html($theme_row->lightbox_rate_size); ?>px;
+        color: #<?php echo $theme_row->lightbox_rate_color; ?>;
+        font-size: <?php echo $theme_row->lightbox_rate_size; ?>px;
       }
       .bwg_rate_hover {
-        color: #<?php echo esc_html($theme_row->lightbox_rate_hover_color); ?> !important;
+        color: #<?php echo $theme_row->lightbox_rate_hover_color; ?> !important;
       }
       .bwg_rated {
-        color: #<?php echo esc_html($theme_row->lightbox_rate_color); ?>;
+        color: #<?php echo $theme_row->lightbox_rate_color; ?>;
         display: none;
-        font-size: <?php echo esc_html($theme_row->lightbox_rate_size - 2); ?>px;
+        font-size: <?php echo $theme_row->lightbox_rate_size - 2; ?>px;
       }
       #bwg_comment_form label {
-        color: #<?php echo esc_html($theme_row->lightbox_comment_font_color); ?>;
+        color: #<?php echo $theme_row->lightbox_comment_font_color; ?>;
       }
       @media (max-width: 768px) {
         .bwg_image_info {
@@ -709,14 +708,14 @@ class BWGViewGalleryBox {
 				        $thumb_left = ($_image_filmstrip_width - $image_thumb_width) / 2;
                 $thumb_top = ($_image_filmstrip_height - $image_thumb_height) / 2;
                 ?>
-                <div id="bwg_filmstrip_thumbnail_<?php echo esc_attr($key); ?>" class="bwg_filmstrip_thumbnail <?php echo (($image_row->id == $current_image_id) ? 'bwg_thumb_active' : 'bwg_thumb_deactive'); ?>">
+                <div id="bwg_filmstrip_thumbnail_<?php echo sanitize_html_class($key); ?>" class="bwg_filmstrip_thumbnail <?php echo (($image_row->id == $current_image_id) ? 'bwg_thumb_active' : 'bwg_thumb_deactive'); ?>">
                   <div class="bwg_filmstrip_thumbnail_img_wrap">
                     <img <?php if( $is_embed || $resolution_thumb ) { ?>
-                      style="width:<?php echo esc_html($image_thumb_width); ?>px; height:<?php echo esc_html($image_thumb_height); ?>px; margin-left: <?php echo esc_html($thumb_left); ?>px; margin-top: <?php echo esc_html($thumb_top); ?>px;" <?php } ?>
+                      style="width:<?php echo $image_thumb_width; ?>px; height:<?php echo $image_thumb_height; ?>px; margin-left: <?php echo $thumb_left; ?>px; margin-top: <?php echo $thumb_top; ?>px;" <?php } ?>
                       class="bwg_filmstrip_thumbnail_img bwg-hidden"
                       data-url="<?php echo esc_url($bwg_thumb_url); ?>"
                       src=""
-                      onclick='bwg_change_image(parseInt(jQuery("#bwg_current_image_key").val()), "<?php echo esc_html($key); ?>")' ontouchend='bwg_change_image(parseInt(jQuery("#bwg_current_image_key").val()), "<?php echo esc_html($key); ?>")'
+                      onclick='bwg_change_image(parseInt(jQuery("#bwg_current_image_key").val()), "<?php echo $key; ?>")' ontouchend='bwg_change_image(parseInt(jQuery("#bwg_current_image_key").val()), "<?php echo $key; ?>")'
                       image_id="<?php echo esc_attr($image_row->id); ?>"
                       image_key="<?php echo esc_attr($key); ?>" alt="<?php echo esc_attr($image_row->alt); ?>" />
                   </div>
@@ -794,7 +793,7 @@ class BWGViewGalleryBox {
             <?php } if ($params['popup_enable_comment']) { ?>
             <i title="<?php echo __('Show comments', 'photo-gallery'); ?>" class="bwg-icon-comment-square bwg_ctrl_btn bwg_comment"></i>
             <?php } if ($params['popup_enable_rate']) { ?>
-            <i title="<?php echo __('Show rating', 'photo-gallery'); ?>" class="bwg-icon-<?php echo esc_attr($theme_row->lightbox_rate_icon); ?> bwg_ctrl_btn bwg_rate"></i>
+            <i title="<?php echo __('Show rating', 'photo-gallery'); ?>" class="bwg-icon-<?php echo $theme_row->lightbox_rate_icon; ?> bwg_ctrl_btn bwg_rate"></i>
             <?php } if ($params['popup_enable_zoom']) { ?>
             <i title="<?php echo __('Zoom in-out', 'photo-gallery'); ?>" class="bwg-icon-search bwg_ctrl_btn bwg_zoom"></i>
             <?php }
@@ -1008,8 +1007,8 @@ class BWGViewGalleryBox {
             </div>
           </div>
         </div>
-        <a id="spider_popup_left" <?php echo ($params['enable_loop'] == 0 && $current_key == 0) ? 'style="display: none;"' : ''; ?>><span id="spider_popup_left-ico"><span><i class="bwg_prev_btn <?php echo esc_attr($theme_row->lightbox_rl_btn_style); ?>-left"></i></span></span></a>
-        <a id="spider_popup_right" <?php echo ($params['enable_loop'] == 0 && $current_key == count($image_rows) - 1) ? 'style="display: none;"' : ''; ?>><span id="spider_popup_right-ico"><span><i class="bwg_next_btn <?php echo esc_attr($theme_row->lightbox_rl_btn_style); ?>-right"></i></span></span></a>
+        <a id="spider_popup_left" <?php echo ($params['enable_loop'] == 0 && $current_key == 0) ? 'style="display: none;"' : ''; ?>><span id="spider_popup_left-ico"><span><i class="bwg_prev_btn <?php echo sanitize_html_class($theme_row->lightbox_rl_btn_style); ?>-left"></i></span></span></a>
+        <a id="spider_popup_right" <?php echo ($params['enable_loop'] == 0 && $current_key == count($image_rows) - 1) ? 'style="display: none;"' : ''; ?>><span id="spider_popup_right-ico"><span><i class="bwg_next_btn <?php echo sanitize_html_class($theme_row->lightbox_rl_btn_style); ?>-right"></i></span></span></a>
       </div>
     </div>
     <?php if ( $params['popup_enable_comment'] ) {
@@ -1025,7 +1024,7 @@ class BWGViewGalleryBox {
         </div>
         <div class="bwg_comments bwg_popup_sidebar">
             <div title="<?php echo __('Hide Comments', 'photo-gallery'); ?>" class="bwg_comments_close bwg_popup_sidebar_close">
-              <i class="bwg-icon-arrow-<?php echo esc_attr($theme_row->lightbox_comment_pos); ?> bwg_comments_close_btn bwg_popup_sidebar_close_btn"></i>
+              <i class="bwg-icon-arrow-<?php echo sanitize_html_class($theme_row->lightbox_comment_pos); ?> bwg_comments_close_btn bwg_popup_sidebar_close_btn"></i>
             </div>
             <form id="bwg_comment_form" method="post" action="<?php echo esc_url($popup_url); ?>">
 								<p><label for="bwg_name"><?php echo __('Name', 'photo-gallery'); ?> </label></p>
@@ -1406,7 +1405,7 @@ class BWGViewGalleryBox {
   public function html_comments_block( $row = array() ) {
     ob_start();
 	?>
-	<div id="bwg_comment_block_<?php echo esc_attr($row->id); ?>" class="bwg_single_comment">
+	<div id="bwg_comment_block_<?php echo sanitize_html_class($row->id); ?>" class="bwg_single_comment">
 		<p class="bwg_comment_header_p">
 		  <span class="bwg_comment_header"><?php echo esc_html($row->name); ?></span>
 			<?php if ( current_user_can('manage_options') ) { ?>

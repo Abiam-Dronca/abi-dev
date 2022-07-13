@@ -30,9 +30,8 @@ class Publicize_UI {
 	 */
 	public function __construct() {
 		global $publicize;
-		if ( ! is_object( $publicize ) ) {
-			$publicize = new Publicize();
-		}
+
+		$publicize       = new Publicize();
 		$this->publicize = $publicize;
 
 		add_action( 'init', array( $this, 'init' ) );

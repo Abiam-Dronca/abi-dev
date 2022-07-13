@@ -1,8 +1,11 @@
-import actions from './actions';
-import controls from './controls';
+/**
+ * Internal dependencies
+ */
 import reducer from './reducer';
-import resolvers from './resolvers';
+import actions from './actions';
 import selectors from './selectors';
+import resolvers from './resolvers';
+import controls from './controls';
 
 export const STORE_ID = 'jetpack-wordads-plugin';
 export const storeConfig = {

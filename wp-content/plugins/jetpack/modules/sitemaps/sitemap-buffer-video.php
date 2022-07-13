@@ -29,9 +29,6 @@ class Jetpack_Sitemap_Buffer_Video extends Jetpack_Sitemap_Buffer {
 		$this->doc->appendChild(
 			$this->doc->createComment( "generator='jetpack-" . JETPACK__VERSION . "'" )
 		);
-		$this->doc->appendChild(
-			$this->doc->createComment( 'Jetpack_Sitemap_Buffer_Video' )
-		);
 
 		$this->doc->appendChild(
 			$this->doc->createProcessingInstruction(

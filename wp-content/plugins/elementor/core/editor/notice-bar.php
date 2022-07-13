@@ -13,14 +13,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Notice_Bar extends Base_Object {
 
 	protected function get_init_settings() {
-		if ( Plugin::$instance->get_install_time() > strtotime( '-1 days' ) ) {
+		if ( Plugin::$instance->get_install_time() > strtotime( '-7 days' ) ) {
 			return [];
 		}
 
 		return [
-			'muted_period' => 14,
+			'muted_period' => 30,
 			'option_key' => '_elementor_editor_upgrade_notice_dismissed',
-			'message' => esc_html__( 'Unleash the full power of Elementor\'s features and web creation tools.', 'elementor' ),
+			'message' => sprintf(
+				/* translators: 1: Link open tag, 2: Link close tag. */
+				esc_html__( 'Love using Elementor? %1$sLearn how you can build better sites with Elementor Pro.%2$s', 'elementor' ),
+				'<a href="%s">',
+				'</a>'
+			),
 			'action_title' => esc_html__( 'Upgrade Now', 'elementor' ),
 			'action_url' => 'https://go.elementor.com/go-pro-editor-notice-bar/',
 		];

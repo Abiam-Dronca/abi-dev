@@ -96,7 +96,7 @@ class BWGControllerGalleryBox {
 		if ( WDWLibrary::get('popup_enable_captcha') ) {
 			 WDWLibrary::bwg_session_start();
 			 $captcha = WDWLibrary::get('comment_captcha');
-			 $session_captcha = (isset($_SESSION['bwg_captcha_code']) ? sanitize_text_field(stripslashes($_SESSION['bwg_captcha_code'])) : '');
+			 $session_captcha = (isset($_SESSION['bwg_captcha_code']) ? esc_html(stripslashes($_SESSION['bwg_captcha_code'])) : '');
 			 if ( empty($captcha) ) {
 				$error = true;
 				$error_messages['captcha'] = sprintf( __('The %s field is required.', 'photo-gallery'), 'captcha' );

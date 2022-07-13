@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use Html2Text\Html2Text;
+use MailPoet\Mailer\Mailer;
 use MailPoet\Mailer\MailerFactory;
 use MailPoet\Mailer\MetaInfo;
 use MailPoet\Subscribers\SubscribersRepository;
@@ -24,6 +25,10 @@ class WordPressMailer extends PHPMailer {
   /** @var SubscribersRepository */
   private $subscribersRepository;
 
+  private $fallbackMailerConfig = [
+    'method' => Mailer::METHOD_PHPMAIL,
+  ];
+
   public function __construct(
     MailerFactory $mailerFactory,
     MetaInfo $mailerMetaInfo,
@@ -37,7 +42,6 @@ class WordPressMailer extends PHPMailer {
 
   public function send() {
     // We need this so that the PHPMailer class will correctly prepare all the headers.
-    $originalMailer = $this->Mailer; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
     $this->Mailer = 'mail'; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
 
     // Prepare everything (including the message) for sending.
@@ -50,23 +54,29 @@ class WordPressMailer extends PHPMailer {
       'meta' => $this->mailerMetaInfo->getWordPressTransactionalMetaInfo($subscriber),
     ];
 
-    try {
-      // we need to build fresh mailer for every single WP e-mail to make sure reply-to is set
+    $sendWithMailer = function ($useFallback) use ($email, $address, $extraParams) {
+      // we need to call Mailer::init() for every single WP e-mail to make sure reply-to is set
       $replyTo = $this->getReplyToAddress();
-      $mailer = $this->mailerFactory->buildMailer(null, null, $replyTo);
+      if ($useFallback) {
+        $mailer = $this->mailerFactory->buildMailer($this->fallbackMailerConfig, null, $replyTo);
+      } else {
+        $mailer = $this->mailerFactory->buildMailer(null, null, $replyTo);
+      }
       $result = $mailer->send($email, $address, $extraParams);
+
       if (!$result['response']) {
         throw new \Exception($result['error']->getMessage());
       }
-    } catch (\Exception $ePrimary) {
-      // In case the sending using MailPoet's mailer fails continue with sending using original parent PHPMailer::sent method.
-      // But if anything fails we still want tho throw the error from the primary MailPoet mailer.
+    };
+
+    try {
+      $sendWithMailer($useFallback = false);
+    } catch (\Exception $e) {
       try {
-        // Restore original settings for mailer. Some sites may use SMTP and we needed to reset it to mail
-        $this->Mailer = $originalMailer; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
-        return parent::send();
-      } catch (\Exception $eFallback) {
-        throw new PHPMailerException($ePrimary->getMessage(), $ePrimary->getCode(), $ePrimary);
+        $sendWithMailer($useFallback = true);
+      } catch (\Exception $fallbackMailerException) {
+        // throw exception passing the original (primary mailer) error
+        throw new PHPMailerException($e->getMessage(), $e->getCode(), $e);
       }
     }
     return true;

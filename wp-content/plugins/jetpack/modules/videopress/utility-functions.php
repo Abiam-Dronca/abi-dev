@@ -2,8 +2,10 @@
 
 use Automattic\Jetpack\Connection\Client;
 
+/**
+ * We won't have any videos less than sixty pixels wide. That would be silly.
+ */
 defined( 'VIDEOPRESS_MIN_WIDTH' ) || define( 'VIDEOPRESS_MIN_WIDTH', 60 );
-defined( 'VIDEOPRESS_DEFAULT_WIDTH' ) || define( 'VIDEOPRESS_DEFAULT_WIDTH', 640 );
 
 /**
  * VideoPress Privacy constants.

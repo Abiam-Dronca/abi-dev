@@ -887,13 +887,7 @@ abstract class Document extends Controls_Stack {
 				continue;
 			}
 
-			if ( $this->is_saving ) {
-				$element_data = $element->get_data_for_save();
-			} else {
-				$element_data = $element->get_raw_data( $with_html_content );
-			}
-
-			$editor_data[] = $element_data;
+			$editor_data[] = $element->get_raw_data( $with_html_content );
 		} // End foreach().
 
 		Plugin::$instance->documents->restore_document();

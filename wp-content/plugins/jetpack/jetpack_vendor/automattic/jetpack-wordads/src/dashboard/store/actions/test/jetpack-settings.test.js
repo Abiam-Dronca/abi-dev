@@ -1,6 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+/**
+ * Internal dependencies
+ */
 import { updateJetpackSettings } from '../jetpack-settings';
 
 describe( 'Jetpack Settings updateJetpackSettings action', () => {

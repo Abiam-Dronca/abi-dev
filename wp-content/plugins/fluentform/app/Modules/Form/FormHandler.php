@@ -360,15 +360,11 @@ class FormHandler
         }
 
         $errors = apply_filters('fluentform_validation_errors', $errors, $this->formData, $this->form, $fields);
-    
-        if (Helper::getFormMeta($this->form->id, '_has_user_registration') == 'yes' && !get_current_user_id()) {
+
+        if(Helper::getFormMeta($this->form->id, '_has_user_registration') == 'yes') {
             $errors = apply_filters('fluentform_validation_user_registration_errors', $errors, $this->formData, $this->form, $fields);
         }
-        
-        if (Helper::getFormMeta($this->form->id, '_has_user_update') == 'yes' && get_current_user_id()) {
-            $errors = apply_filters('fluentform_validation_user_update_errors', $errors, $this->formData, $this->form, $fields);
-        }
-        
+
         if ($errors) {
             wp_send_json(['errors' => $errors], 423);
         }

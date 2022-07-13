@@ -1,7 +1,14 @@
+/**
+ * External dependencies
+ */
 import { __ } from '@wordpress/i18n';
-import { errorNotice } from '../components/global-notices/store/actions';
-import { setJetpackSettings } from './actions/jetpack-settings';
+
+/**
+ * Internal dependencies
+ */
 import { fetchWordAdsSettings } from './controls';
+import { setJetpackSettings } from './actions/jetpack-settings';
+import { errorNotice } from '../components/global-notices/store/actions';
 
 /**
  * Yield actions to get Search Module Status

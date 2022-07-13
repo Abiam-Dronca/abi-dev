@@ -1,6 +1,9 @@
+/**
+ * External dependencies
+ */
 /*eslint lodash/import-scope: [2, "method"]*/
-import { __ } from '@wordpress/i18n';
 import uniqueId from 'lodash/uniqueId';
+import { __ } from '@wordpress/i18n';
 
 export const CREATE_NOTICE = 'CREATE_NOTICE';
 export const REMOVE_NOTICE = 'REMOVE_NOTICE';

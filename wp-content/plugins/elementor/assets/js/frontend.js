@@ -1,4 +1,4 @@
-/*! elementor - v3.6.7 - 03-07-2022 */
+/*! elementor - v3.6.6 - 08-06-2022 */
 "use strict";
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["frontend"],{
 
@@ -20,8 +20,8 @@ exports["default"] = void 0;
 var _document = _interopRequireDefault(__webpack_require__(/*! ./document */ "../assets/dev/js/frontend/document.js"));
 
 class _default extends elementorModules.ViewModule {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     this.documents = {};
     this.initDocumentClasses();
     this.attachDocumentsClasses();
@@ -100,8 +100,6 @@ var _shapes = _interopRequireDefault(__webpack_require__(/*! ./handlers/section/
 
 // Section handlers.
 module.exports = function ($) {
-  var _this = this;
-
   const handlersInstances = {};
   this.elementsHandlers = {
     'accordion.default': () => __webpack_require__.e(/*! import() | accordion */ "accordion").then(__webpack_require__.bind(__webpack_require__, /*! ./handlers/accordion */ "../assets/dev/js/frontend/handlers/accordion.js")),
@@ -136,14 +134,17 @@ module.exports = function ($) {
     });
   };
 
-  const isClassHandler = Handler => Handler.prototype?.getUniqueHandlerID;
+  const isClassHandler = Handler => {
+    var _Handler$prototype;
 
-  const addHandlerWithHook = function (elementName, Handler) {
-    let skin = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'default';
+    return (_Handler$prototype = Handler.prototype) === null || _Handler$prototype === void 0 ? void 0 : _Handler$prototype.getUniqueHandlerID;
+  };
+
+  const addHandlerWithHook = (elementName, Handler, skin = 'default') => {
     skin = skin ? '.' + skin : '';
     elementorFrontend.hooks.addAction(`frontend/element_ready/${elementName}${skin}`, $element => {
       if (isClassHandler(Handler)) {
-        _this.addHandler(Handler, {
+        this.addHandler(Handler, {
           $element
         }, true);
       } else {
@@ -154,17 +155,15 @@ module.exports = function ($) {
         }
 
         if (handlerValue instanceof Promise) {
-          handlerValue.then(_ref => {
-            let {
-              default: dynamicHandler
-            } = _ref;
-
-            _this.addHandler(dynamicHandler, {
+          handlerValue.then(({
+            default: dynamicHandler
+          }) => {
+            this.addHandler(dynamicHandler, {
               $element
             }, true);
           });
         } else {
-          _this.addHandler(handlerValue, {
+          this.addHandler(handlerValue, {
             $element
           }, true);
         }
@@ -213,10 +212,9 @@ module.exports = function ($) {
     }
 
     return new Promise(res => {
-      elementHandler().then(_ref2 => {
-        let {
-          default: dynamicHandler
-        } = _ref2;
+      elementHandler().then(({
+        default: dynamicHandler
+      }) => {
         res(dynamicHandler);
       });
     });
@@ -313,8 +311,8 @@ const EventManager = __webpack_require__(/*! elementor-utils/hooks */ "../assets
       AnchorsModule = __webpack_require__(/*! elementor-frontend/utils/anchors */ "../assets/dev/js/frontend/utils/anchors.js");
 
 class Frontend extends elementorModules.ViewModule {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
     this.config = elementorFrontendConfig;
     this.config.legacyMode = {
       get elementWrappers() {
@@ -349,7 +347,7 @@ class Frontend extends elementorModules.ViewModule {
 
   getDefaultElements() {
     const defaultElements = {
-      window,
+      window: window,
       $window: jQuery(window),
       $document: jQuery(document),
       $head: jQuery(document.head),
@@ -367,7 +365,6 @@ class Frontend extends elementorModules.ViewModule {
     this.elements.$window.on('resize', () => this.setDeviceModeData());
   }
   /**
-   * @param {string} elementName
    * @deprecated 2.4.0 Use just `this.elements` instead
    */
 
@@ -376,7 +373,6 @@ class Frontend extends elementorModules.ViewModule {
     return this.getItems(this.elements, elementName);
   }
   /**
-   * @param {string} settingName
    * @deprecated 2.4.0 This method was never in use
    */
 
@@ -609,17 +605,14 @@ class Frontend extends elementorModules.ViewModule {
     elementorFrontend.trigger('elementor/modules/init:before'); // TODO: Use this instead.
 
     elementorFrontend.trigger('elementor/modules/init/before');
-    Object.entries(handlers).forEach(_ref => {
-      let [moduleName, ModuleClass] = _ref;
+    Object.entries(handlers).forEach(([moduleName, ModuleClass]) => {
       this.modulesHandlers[moduleName] = new ModuleClass();
     });
   }
 
   populateActiveBreakpointsConfig() {
     this.config.responsive.activeBreakpoints = {};
-    Object.entries(this.config.responsive.breakpoints).forEach(_ref2 => {
-      let [breakpointKey, breakpointData] = _ref2;
-
+    Object.entries(this.config.responsive.breakpoints).forEach(([breakpointKey, breakpointData]) => {
       if (breakpointData.is_enabled) {
         this.config.responsive.activeBreakpoints[breakpointKey] = breakpointData;
       }
@@ -731,8 +724,6 @@ class BackgroundSlideshow extends elementorModules.frontend.handlers.SwiperBase 
 
       case 'slide_down':
         swiperOptions.autoplay.reverseDirection = true;
-        swiperOptions.direction = 'vertical';
-        break;
 
       case 'slide_up':
         swiperOptions.direction = 'vertical';
@@ -1142,8 +1133,8 @@ class BackgroundVideo extends elementorModules.frontend.handlers.Base {
     }
   }
 
-  onInit() {
-    super.onInit(...arguments);
+  onInit(...args) {
+    super.onInit(...args);
     this.changeVideoSize = this.changeVideoSize.bind(this);
     this.run();
   }
@@ -1268,8 +1259,8 @@ class GlobalHandler extends elementorModules.frontend.handlers.Base {
     return this.getCurrentDeviceSetting('animation') || this.getCurrentDeviceSetting('_animation');
   }
 
-  onInit() {
-    super.onInit(...arguments);
+  onInit(...args) {
+    super.onInit(...args);
 
     if (this.getAnimation()) {
       const observer = elementorModules.utils.Scroll.scrollObserver({
@@ -1344,7 +1335,8 @@ class HandlesPosition extends elementorModules.frontend.handlers.Base {
       return;
     }
 
-    const insideHandleClass = 'elementor-section--handles-inside';
+    const insideHandleClass = 'elementor-section--handles-inside',
+          $handlesElement = this.$element.find('> .elementor-element-overlay > .elementor-editor-section-settings');
 
     if (elementor.settings.page.model.attributes.scroll_snap) {
       this.$element.addClass(insideHandleClass);
@@ -1361,7 +1353,6 @@ class HandlesPosition extends elementorModules.frontend.handlers.Base {
 
     if (offset < 25) {
       this.$element.addClass(insideHandleClass);
-      const $handlesElement = this.$element.find('> .elementor-element-overlay > .elementor-editor-section-settings');
 
       if (offset < -5) {
         $handlesElement.css('top', -offset);
@@ -1466,12 +1457,12 @@ class Shapes extends elementorModules.frontend.handlers.Base {
     this.elements['$' + side + 'Container'].attr('data-negative', !!this.getElementSettings('shape_divider_' + side + '_negative'));
   }
 
-  onInit() {
+  onInit(...args) {
     if (!this.isActive(this.getSettings())) {
       return;
     }
 
-    super.onInit(...arguments);
+    super.onInit(...args);
     ['top', 'bottom'].forEach(side => {
       if (this.getElementSettings('shape_divider_' + side)) {
         this.buildSVG(side);
@@ -1561,13 +1552,13 @@ class StretchedSection extends elementorModules.frontend.handlers.Base {
     this.stretchElement.stretch();
   }
 
-  onInit() {
+  onInit(...args) {
     if (!this.isActive(this.getSettings())) {
       return;
     }
 
     this.initStretch();
-    super.onInit(...arguments);
+    super.onInit(...args);
     this.stretch();
   }
 
@@ -1603,7 +1594,7 @@ exports["default"] = StretchedSection;
 var _utils = __webpack_require__(/*! ./utils */ "../assets/dev/js/frontend/utils/utils.js");
 
 module.exports = elementorModules.ViewModule.extend({
-  getDefaultSettings() {
+  getDefaultSettings: function () {
     return {
       scrollDuration: 500,
       selectors: {
@@ -1613,20 +1604,17 @@ module.exports = elementorModules.ViewModule.extend({
       }
     };
   },
-
-  getDefaultElements() {
+  getDefaultElements: function () {
     var $ = jQuery,
         selectors = this.getSettings('selectors');
     return {
       $scrollable: $(selectors.scrollable)
     };
   },
-
-  bindEvents() {
+  bindEvents: function () {
     elementorFrontend.elements.$document.on('click', this.getSettings('selectors.links'), this.handleAnchorLinks);
   },
-
-  handleAnchorLinks(event) {
+  handleAnchorLinks: function (event) {
     var clickedLink = event.currentTarget,
         isSamePathname = location.pathname === clickedLink.pathname,
         isSameHostname = location.hostname === clickedLink.hostname,
@@ -1671,7 +1659,7 @@ module.exports = elementorModules.ViewModule.extend({
     }
 
     this.elements.$scrollable.animate({
-      scrollTop
+      scrollTop: scrollTop
     }, this.getSettings('scrollDuration'), 'linear', () => {
       // on scroll animation complete: add scroll-snap back.
       if ((0, _utils.isScrollSnapActive)()) {
@@ -1679,11 +1667,9 @@ module.exports = elementorModules.ViewModule.extend({
       }
     });
   },
-
-  onInit() {
+  onInit: function () {
     elementorModules.ViewModule.prototype.onInit.apply(this, arguments);
   }
-
 });
 
 /***/ }),
@@ -1769,12 +1755,9 @@ exports["default"] = void 0;
 class LightboxManager extends elementorModules.ViewModule {
   static getLightbox() {
     const lightboxPromise = new Promise(resolveLightbox => {
-      __webpack_require__.e(/*! import() | lightbox */ "lightbox").then(__webpack_require__.t.bind(__webpack_require__, /*! elementor-frontend/utils/lightbox/lightbox */ "../assets/dev/js/frontend/utils/lightbox/lightbox.js", 23)).then(_ref => {
-        let {
-          default: LightboxModule
-        } = _ref;
-        return resolveLightbox(new LightboxModule());
-      });
+      __webpack_require__.e(/*! import() | lightbox */ "lightbox").then(__webpack_require__.t.bind(__webpack_require__, /*! elementor-frontend/utils/lightbox/lightbox */ "../assets/dev/js/frontend/utils/lightbox/lightbox.js", 23)).then(({
+        default: LightboxModule
+      }) => resolveLightbox(new LightboxModule()));
     }),
           dialogPromise = elementorFrontend.utils.assetsLoader.load('script', 'dialog'),
           shareLinkPromise = elementorFrontend.utils.assetsLoader.load('script', 'share-link');
@@ -1844,8 +1827,8 @@ class LightboxManager extends elementorModules.ViewModule {
     elementorFrontend.elements.$document.on('click', this.getSettings('selectors.links'), event => this.onLinkClick(event));
   }
 
-  onInit() {
-    super.onInit(...arguments);
+  onInit(...args) {
+    super.onInit(...args);
 
     if (!this.isOptimizedAssetsLoading() || elementorFrontend.isEditMode()) {
       return;
@@ -2006,9 +1989,10 @@ class _default extends elementorModules.ViewModule {
     this.actions[name] = callback;
   }
 
-  runAction(url) {
+  runAction(url, ...restArgs) {
     url = decodeURIComponent(url);
-    const actionMatch = url.match(/action=(.+?)&/);
+    const actionMatch = url.match(/action=(.+?)&/),
+          settingsMatch = url.match(/settings=(.+)/);
 
     if (!actionMatch) {
       return;
@@ -2021,14 +2005,9 @@ class _default extends elementorModules.ViewModule {
     }
 
     let settings = {};
-    const settingsMatch = url.match(/settings=(.+)/);
 
     if (settingsMatch) {
       settings = JSON.parse(atob(settingsMatch[1]));
-    }
-
-    for (var _len = arguments.length, restArgs = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      restArgs[_key - 1] = arguments[_key];
     }
 
     action(settings, ...restArgs);
@@ -2098,7 +2077,9 @@ const escapeHTML = str => {
 exports.escapeHTML = escapeHTML;
 
 const isScrollSnapActive = () => {
-  const scrollSnapStatus = elementorFrontend.isEditMode() ? elementor.settings.page.model.attributes?.scroll_snap : elementorFrontend.config.settings.page?.scroll_snap;
+  var _elementor$settings$p, _elementorFrontend$co;
+
+  const scrollSnapStatus = elementorFrontend.isEditMode() ? (_elementor$settings$p = elementor.settings.page.model.attributes) === null || _elementor$settings$p === void 0 ? void 0 : _elementor$settings$p['scroll_snap'] : (_elementorFrontend$co = elementorFrontend.config.settings.page) === null || _elementorFrontend$co === void 0 ? void 0 : _elementorFrontend$co['scroll_snap'];
   return 'yes' === scrollSnapStatus ? true : false;
 };
 
@@ -2310,8 +2291,7 @@ class Breakpoints extends elementorModules.Module {
    */
 
 
-  getActiveBreakpointsList() {
-    let args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  getActiveBreakpointsList(args = {}) {
     const defaultArgs = {
       largeToSmall: false,
       withDesktop: false
@@ -2360,7 +2340,7 @@ class Breakpoints extends elementorModules.Module {
    *
    * @since 3.4.0
    *
-   * @return {string} device key
+   * @returns {string}
    */
 
 
@@ -2392,7 +2372,7 @@ class Breakpoints extends elementorModules.Module {
    *
    * @since 3.4.0
    *
-   * @return {number|*} minimum breakpoint
+   * @returns {number|*}
    */
 
 
@@ -2412,8 +2392,8 @@ class Breakpoints extends elementorModules.Module {
    *
    * @since 3.4.0
    *
-   * @param {string} device
-   * @return {number|*} minimum breakpoint
+   * @param device
+   * @returns {number|*}
    */
 
 
@@ -2454,7 +2434,7 @@ class Breakpoints extends elementorModules.Module {
    *
    * Returns a regular expression containing all active breakpoints prefixed with an underscore.
    *
-   * @return {RegExp} Active Match Regex
+   * @returns {RegExp}
    */
 
 
@@ -2488,16 +2468,14 @@ class Events {
    * Will dispatch both native event & jQuery event (as BC).
    * By default, `bcEvent` is `null`.
    *
-   * @param {Object}      context - The context that will dispatch the event.
-   * @param {string}      event   - Event to dispatch.
-   * @param {*}           data    - Data to pass to the event, default to `null`.
+   * @param {Object} context - The context that will dispatch the event.
+   * @param {string} event - Event to dispatch.
+   * @param {*} data - Data to pass to the event, default to `null`.
    * @param {string|null} bcEvent - BC event to dispatch, default to `null`.
    *
    * @return {void}
    */
-  static dispatch(context, event) {
-    let data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    let bcEvent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  static dispatch(context, event, data = null, bcEvent = null) {
     // Make sure to use the native context if it's a jQuery instance.
     context = context instanceof jQuery ? context[0] : context; // Dispatch the BC event only if exists.
 
@@ -2549,10 +2527,9 @@ var EventManager = function () {
   /**
    * Removes the specified hook by resetting the value of it.
    *
-   * @param {string}   type     Type of hook, either 'actions' or 'filters'
-   * @param {Function} hook     The hook (namespace.identifier) to remove
-   * @param {Function} callback
-   * @param {*}        context
+   * @param type Type of hook, either 'actions' or 'filters'
+   * @param hook The hook (namespace.identifier) to remove
+   *
    * @private
    */
 
@@ -2589,7 +2566,7 @@ var EventManager = function () {
    * Use an insert sort for keeping our hooks organized based on priority. This function is ridiculously faster
    * than bubble sort, etc: http://jsperf.com/javascript-sort
    *
-   * @param {Array<*>} hooks The custom array containing all of the appropriate hooks to perform an insert sort on.
+   * @param hooks The custom array containing all of the appropriate hooks to perform an insert sort on.
    * @private
    */
 
@@ -2614,20 +2591,20 @@ var EventManager = function () {
   /**
    * Adds the hook to the appropriate storage container
    *
-   * @param {string}   type      'actions' or 'filters'
-   * @param {Array<*>} hook      The hook (namespace.identifier) to add to our event manager
-   * @param {Function} callback  The function that will be called when the hook is executed.
-   * @param {number}   priority  The priority of this hook. Must be an integer.
-   * @param {*}        [context] A value to be used for this
+   * @param type 'actions' or 'filters'
+   * @param hook The hook (namespace.identifier) to add to our event manager
+   * @param callback The function that will be called when the hook is executed.
+   * @param priority The priority of this hook. Must be an integer.
+   * @param [context] A value to be used for this
    * @private
    */
 
 
   function _addHook(type, hook, callback, priority, context) {
     var hookObject = {
-      callback,
-      priority,
-      context
+      callback: callback,
+      priority: priority,
+      context: context
     }; // Utilize 'prop itself' : http://jsperf.com/hasownproperty-vs-in-vs-undefined/19
 
     var hooks = STORAGE[type][hook];
@@ -2658,9 +2635,9 @@ var EventManager = function () {
   /**
    * Runs the specified hook. If it is an action, the value is not modified but if it is a filter, it is.
    *
-   * @param {string}   type 'actions' or 'filters'
-   * @param {*}        hook The hook ( namespace.identifier ) to be ran.
-   * @param {Array<*>} args Arguments to pass to the action/filter. If it's a filter, args is actually a single parameter.
+   * @param type 'actions' or 'filters'
+   * @param hook The hook ( namespace.identifier ) to be ran.
+   * @param args Arguments to pass to the action/filter. If it's a filter, args is actually a single parameter.
    * @private
    */
 
@@ -2691,10 +2668,10 @@ var EventManager = function () {
   /**
    * Adds an action to the event manager.
    *
-   * @param {string}   action        Must contain namespace.identifier
-   * @param {Function} callback      Must be a valid callback function before this action is added
-   * @param {number}   [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
-   * @param {*}        [context]     Supply a value to be used for this
+   * @param action Must contain namespace.identifier
+   * @param callback Must be a valid callback function before this action is added
+   * @param [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
+   * @param [context] Supply a value to be used for this
    */
 
 
@@ -2713,9 +2690,7 @@ var EventManager = function () {
    */
 
 
-  function
-    /* action, arg1, arg2, ... */
-  doAction() {
+  function doAction() {
     var args = slice.call(arguments);
     var action = args.shift();
 
@@ -2728,8 +2703,8 @@ var EventManager = function () {
   /**
    * Removes the specified action if it contains a namespace.identifier & exists.
    *
-   * @param {string}   action     The action to remove
-   * @param {Function} [callback] Callback function to remove
+   * @param action The action to remove
+   * @param [callback] Callback function to remove
    */
 
 
@@ -2743,10 +2718,10 @@ var EventManager = function () {
   /**
    * Adds a filter to the event manager.
    *
-   * @param {string}   filter        Must contain namespace.identifier
-   * @param {Function} callback      Must be a valid callback function before this action is added
-   * @param {number}   [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
-   * @param {*}        [context]     Supply a value to be used for this
+   * @param filter Must contain namespace.identifier
+   * @param callback Must be a valid callback function before this action is added
+   * @param [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
+   * @param [context] Supply a value to be used for this
    */
 
 
@@ -2765,9 +2740,7 @@ var EventManager = function () {
    */
 
 
-  function
-    /* filter, filtered arg, arg2, ... */
-  applyFilters() {
+  function applyFilters() {
     var args = slice.call(arguments);
     var filter = args.shift();
 
@@ -2780,8 +2753,8 @@ var EventManager = function () {
   /**
    * Removes the specified filter if it contains a namespace.identifier & exists.
    *
-   * @param {string}   filter     The action to remove
-   * @param {Function} [callback] Callback function to remove
+   * @param filter The action to remove
+   * @param [callback] Callback function to remove
    */
 
 
@@ -2798,12 +2771,12 @@ var EventManager = function () {
 
 
   MethodsAvailable = {
-    removeFilter,
-    applyFilters,
-    addFilter,
-    removeAction,
-    doAction,
-    addAction
+    removeFilter: removeFilter,
+    applyFilters: applyFilters,
+    addFilter: addFilter,
+    removeAction: removeAction,
+    doAction: doAction,
+    addAction: addAction
   }; // return all of the publicly available methods
 
   return MethodsAvailable;

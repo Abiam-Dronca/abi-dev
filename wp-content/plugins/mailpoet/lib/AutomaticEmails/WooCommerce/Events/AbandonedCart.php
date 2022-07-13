@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 namespace MailPoet\AutomaticEmails\WooCommerce\Events;
 
@@ -7,10 +7,10 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\AutomaticEmails\WooCommerce\WooCommerce as WooCommerceEmail;
 use MailPoet\Entities\SubscriberEntity;
+use MailPoet\Models\Subscriber;
 use MailPoet\Newsletter\Scheduler\AutomaticEmailScheduler;
 use MailPoet\Statistics\Track\SubscriberActivityTracker;
 use MailPoet\Statistics\Track\SubscriberCookie;
-use MailPoet\Subscribers\SubscribersRepository;
 use MailPoet\WooCommerce\Helper as WooCommerceHelper;
 use MailPoet\WP\Functions as WPFunctions;
 
@@ -33,23 +33,18 @@ class AbandonedCart {
   /** @var SubscriberActivityTracker */
   private $subscriberActivityTracker;
 
-  /** @var SubscribersRepository */
-  private $subscribersRepository;
-
   public function __construct(
     WPFunctions $wp,
     WooCommerceHelper $wooCommerceHelper,
     SubscriberCookie $subscriberCookie,
     SubscriberActivityTracker $subscriberActivityTracker,
-    AutomaticEmailScheduler $scheduler,
-    SubscribersRepository $subscribersRepository
+    AutomaticEmailScheduler $scheduler
   ) {
     $this->wp = $wp;
     $this->wooCommerceHelper = $wooCommerceHelper;
     $this->subscriberCookie = $subscriberCookie;
     $this->subscriberActivityTracker = $subscriberActivityTracker;
     $this->scheduler = $scheduler;
-    $this->subscribersRepository = $subscribersRepository;
   }
 
   public function getEventDetails() {
@@ -163,16 +158,16 @@ class AbandonedCart {
 
   private function scheduleAbandonedCartEmail(array $cartProductIds = []) {
     $subscriber = $this->getSubscriber();
-    if (!$subscriber || $subscriber->getStatus() !== SubscriberEntity::STATUS_SUBSCRIBED) {
+    if (!$subscriber || $subscriber->status !== Subscriber::STATUS_SUBSCRIBED) {
       return;
     }
 
     $meta = [self::TASK_META_NAME => $cartProductIds];
-    $this->scheduler->scheduleOrRescheduleAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, (int)$subscriber->getId(), $meta);
+    $this->scheduler->scheduleOrRescheduleAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, $subscriber->id, $meta);
   }
 
   private function rescheduleAbandonedCartEmail(SubscriberEntity $subscriberEntity) {
-    $this->scheduler->rescheduleAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, (int)$subscriberEntity->getId());
+    $this->scheduler->rescheduleAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, $subscriberEntity->getId());
   }
 
   private function cancelAbandonedCartEmail() {
@@ -180,19 +175,19 @@ class AbandonedCart {
     if (!$subscriber) {
       return;
     }
-    $this->scheduler->cancelAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, (int)$subscriber->getId());
+    $this->scheduler->cancelAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, $subscriber->id);
   }
 
-  private function getSubscriber(): ?SubscriberEntity {
+  private function getSubscriber() {
     $wpUser = $this->wp->wpGetCurrentUser();
     if ($wpUser->exists()) {
-      return $this->subscribersRepository->findOneBy(['wpUserId' => $wpUser->ID]);
+      return Subscriber::where('wp_user_id', $wpUser->ID)->findOne() ?: null;
     }
 
     // if user not logged in, try to find subscriber by cookie
     $subscriberId = $this->subscriberCookie->getSubscriberId();
     if ($subscriberId) {
-      return $this->subscribersRepository->findOneById($subscriberId);
+      return Subscriber::findOne($subscriberId) ?: null;
     }
     return null;
   }

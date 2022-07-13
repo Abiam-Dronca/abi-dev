@@ -1,9 +1,15 @@
-import classNames from 'classnames';
-import noop from 'lodash/noop';
+/**
+ * External dependencies
+ */
 import PropTypes from 'prop-types';
 import React from 'react';
+import classNames from 'classnames';
 /*eslint lodash/import-scope: [2, "method"]*/
+import noop from 'lodash/noop';
 
+/**
+ * Internal dependencies
+ */
 import './style.scss';
 
 export default class Button extends React.Component {

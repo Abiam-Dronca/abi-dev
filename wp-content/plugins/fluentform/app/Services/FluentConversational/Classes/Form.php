@@ -338,7 +338,6 @@ class Form
             'payment_summary_component',
             'payment_coupon',
             'recaptcha',
-            'hcaptcha',
             'quiz_score',
         ];
 
@@ -525,7 +524,6 @@ class Form
                 'submit_button'  => $form->submit_button,
                 'hasPayment'     => !!$form->has_payment,
                 'reCaptcha'      => $form->reCaptcha,
-                'hCaptcha'      => $form->hCaptcha,
             ],
             'assetBaseUrl'             => FLUENT_CONVERSATIONAL_FORM_DIR_URL . 'public',
             'i18n'                     => $metaSettings['i18n'],
@@ -645,7 +643,6 @@ class Form
                 'submit_button'  => $form->submit_button,
                 'hasPayment'     => !!$form->has_payment,
                 'reCaptcha'      => $form->reCaptcha,
-                'hCaptcha'      => $form->hCaptcha,
             ],
             'form_id'                  => $form->id,
             'assetBaseUrl'             => FLUENT_CONVERSATIONAL_FORM_DIR_URL . 'public',

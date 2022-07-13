@@ -39,7 +39,7 @@ class API {
   public $urlMessages = 'https://bridge.mailpoet.com/api/v0/messages';
   public $urlBounces = 'https://bridge.mailpoet.com/api/v0/bounces/search';
   public $urlStats = 'https://bridge.mailpoet.com/api/v0/stats';
-  public $urlAuthorizedEmailAddresses = 'https://bridge.mailpoet.com/api/v1/authorized_email_address';
+  public $urlAuthorizedEmailAddresses = 'https://bridge.mailpoet.com/api/v0/authorized_email_addresses';
 
   public function __construct(
     $apiKey,
@@ -169,17 +169,16 @@ class API {
     return $isSuccess;
   }
 
-  public function getAuthorizedEmailAddresses(): ?array {
+  public function getAuthorizedEmailAddresses() {
     $result = $this->request(
       $this->urlAuthorizedEmailAddresses,
       null,
       'GET'
     );
-    if ($this->wp->wpRemoteRetrieveResponseCode($result) !== 200) {
-      return null;
+    if ($this->wp->wpRemoteRetrieveResponseCode($result) === 200) {
+      return json_decode($this->wp->wpRemoteRetrieveBody($result), true);
     }
-    $data = json_decode($this->wp->wpRemoteRetrieveBody($result), true);
-    return is_array($data) ? $data : null;
+    return false;
   }
 
   public function setKey($apiKey) {

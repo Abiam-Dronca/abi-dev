@@ -1,3 +1,6 @@
+/**
+ * Internal dependencies
+ */
 import reducer from './reducers';
 import selectors from './selectors';
 

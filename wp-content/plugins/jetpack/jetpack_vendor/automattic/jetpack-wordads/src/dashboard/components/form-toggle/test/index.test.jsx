@@ -2,10 +2,17 @@
  * @jest-environment jsdom
  */
 
+/**
+ * External dependencies
+ */
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+
+/**
+ * Internal dependencies
+ */
 import CompactFormToggle from 'components/form-toggle/compact';
-import React from 'react';
 
 describe( 'CompactFormToggle', function () {
 	const testProps = {

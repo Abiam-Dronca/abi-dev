@@ -46,25 +46,10 @@ add_filter('fluentform_rendering_form', function ($form) {
             "name" => "hcaptcha",
         ],
     ];
-    
     if ($type == 'recaptcha') {
-        $captcha = $reCaptcha;
+        $form->fields['fields'][] = $reCaptcha;
     } elseif ($type == 'hcaptcha') {
-        $captcha = $hCaptcha;
+        $form->fields['fields'][] = $hCaptcha;
     }
-    
-    // place recaptcha below custom submit button
-    $hasCustomSubmit = false;
-    foreach ($form->fields['fields'] as $index => $field) {
-        if ($field['element'] == 'custom_submit_button') {
-            $hasCustomSubmit = true;
-            array_splice($form->fields['fields'], $index, 0, [$captcha]);
-            break;
-        }
-    }
-    if (!$hasCustomSubmit) {
-        $form->fields['fields'][] = $captcha;
-    }
-    
     return $form;
 }, 10, 1);

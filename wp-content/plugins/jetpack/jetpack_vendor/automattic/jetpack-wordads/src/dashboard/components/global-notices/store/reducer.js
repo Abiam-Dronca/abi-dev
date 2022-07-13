@@ -1,3 +1,6 @@
+/**
+ * Internal dependencies
+ */
 import { CREATE_NOTICE, REMOVE_NOTICE } from './actions';
 
 const notices = ( state = { notices: [] }, action ) => {

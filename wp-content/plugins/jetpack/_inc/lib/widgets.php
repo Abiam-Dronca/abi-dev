@@ -8,6 +8,8 @@
  * Used by the REST API
  *
  * @package automattic/jetpack
+ *
+ * @autounit api widgets
  */
 
 /**
