@@ -1073,6 +1073,12 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 				}
 			}
 
+			if ( true === astra_check_is_structural_setup() ) {
+				$css_output['.ast-separate-container .ast-woocommerce-container'] = array(
+					'padding' => '3em',
+				);
+			}
+
 			/* Parse WooCommerce General CSS from array() */
 			$css_output = astra_parse_css( $css_output );
 
