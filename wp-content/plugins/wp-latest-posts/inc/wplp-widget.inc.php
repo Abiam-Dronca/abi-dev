@@ -40,7 +40,6 @@ class WPLPWidget extends WP_Widget
     public function addStyleScript()
     {
         $news_widget_id = $this->get_settings();
-
         foreach ($news_widget_id as $widgetfind) {
             if (isset($widgetfind['news_widget_id']) && !empty($widgetfind['news_widget_id'])) {
                 $widget = get_post($widgetfind['news_widget_id']);
@@ -67,20 +66,11 @@ class WPLPWidget extends WP_Widget
     {
         //phpcs:ignore WordPress.Security.EscapeOutput -- Render widget directly
         echo $args['before_widget'];
-
         if (isset($instance['news_widget_id'])) {
             $widget = get_post($instance['news_widget_id']);
             if (isset($widget) && !empty($widget)) {
                 $widget->settings = get_post_meta($widget->ID, '_wplp_settings', true);
-                $front            = new WPLPFront($widget);
-
-                if (isset($front->widget->settings['show_title'])
-                    && (int) $front->widget->settings['show_title'] === 1
-                ) {
-                    //phpcs:ignore WordPress.Security.EscapeOutput -- Content escaped after line
-                    echo $args['before_title'] . esc_html($front->widget->post_title) . $args['after_title'];
-                }
-                $front->display(true, true);
+                echo do_shortcode('[frontpage_news widget="'. (int)$instance['news_widget_id'] .'"]');
                 //phpcs:ignore WordPress.Security.EscapeOutput -- Render widget directly
                 echo $args['after_widget'];
             }

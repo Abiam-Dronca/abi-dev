@@ -2,8 +2,8 @@
 Contributors: JoomUnited
 Tags: latest post, news widget, recent posts, posts, recent post widget, news posts, latest page, custom content, previous posts, page, featured posts, article display, news display, news slider, page display, post display, article display, frontpage news, news
 Requires at least: 4.7
-Tested up to: 5.9.2
-Stable tag: 4.8.9
+Tested up to: 6.0
+Stable tag: 4.8.10
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -155,6 +155,10 @@ What's the minimum version of WordPress required to run WP Latest posts? WordPre
  
 
 == Changelog ==
+
+= 4.8.10 =
+ * Fix : Widget not work on Elementor builder
+ * Fix : Update the hook wplp_src_category_args to support sort by custom field in addon better
 
 = 4.8.9 =
  * Fix : Install formal language in the plugin translation tool

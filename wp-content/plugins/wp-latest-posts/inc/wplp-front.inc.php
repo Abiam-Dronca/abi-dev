@@ -577,7 +577,7 @@ class WPLPFront
                              *
                              * @return array
                              */
-                            $args     = apply_filters('wplp_src_category_args', $args, $this->widget->settings);
+                            $args     = apply_filters('wplp_src_category_args', $args, $this->widget);
                             $allposts = get_posts($args);
                             foreach ($allposts as $post) {
                                 $post->curent_blog_id = (int) $blog->blog_id;
@@ -612,7 +612,7 @@ class WPLPFront
                          *
                          * @ignore Hook already documented
                          */
-                        $args  = apply_filters('wplp_src_category_args', $args, $this->widget->settings);
+                        $args  = apply_filters('wplp_src_category_args', $args, $this->widget);
 
                         $allposts = get_posts($args);
                         foreach ($allposts as $post) {
@@ -646,7 +646,7 @@ class WPLPFront
                              *
                              * @ignore Hook already documented
                              */
-                            $args = apply_filters('wplp_src_category_args', $args, $this->widget->settings);
+                            $args = apply_filters('wplp_src_category_args', $args, $this->widget);
 
                             $blogs = get_sites();
                             foreach ($blogs as $blog) {
@@ -683,7 +683,7 @@ class WPLPFront
                          *
                          * @ignore Hook already documented
                          */
-                        $args  = apply_filters('wplp_src_category_args', $args, $this->widget->settings);
+                        $args  = apply_filters('wplp_src_category_args', $args, $this->widget);
                         $posts = get_posts($args);
                         foreach ($posts as $post) {
                             $post->curent_blog_id = (int) $this->widget->settings['mutilsite_page'];
@@ -744,7 +744,7 @@ class WPLPFront
                          *
                          * @ignore Hook already documented
                          */
-                        $args = apply_filters('wplp_src_category_args', $args, $this->widget->settings);
+                        $args = apply_filters('wplp_src_category_args', $args, $this->widget);
 
                         $posts = get_posts($args);
                         foreach ($posts as $post) {
@@ -823,13 +823,13 @@ class WPLPFront
                  * Filter list argument to get posts.
                  *
                  * @param array List argument
-                 * @param array List settings
+                 * @param array Widget details
                  *
                  * @return array
                  *
                  * @ignore Hook already documented
                  */
-                $args  = apply_filters('wplp_src_category_args', $args, $this->widget->settings);
+                $args  = apply_filters('wplp_src_category_args', $args, $this->widget);
                 $posts = get_posts($args);
             }
             /**

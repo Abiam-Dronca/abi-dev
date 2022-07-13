@@ -290,6 +290,7 @@ div.wplp_nav .pagi_p.squarebullet.active {
 	position: relative;
 	height: auto;
 	background: transparent;
+	left: 0 !important;
 }
 
 .wplp_container.default li {
@@ -436,6 +437,10 @@ html[dir="rtl"] .wplp_container.default .category{
 	text-align: right;
 }
 
+.wplp_listposts {
+	left: 0 !important;
+	top: 0 !important;
+}
 /* Direction Nav */
 .wplp_container .flex-direction-nav {
 	height: 0 !important;
