@@ -6,7 +6,7 @@
 	</strong>
 	<br/>
 	<a href='http://www.wpgmaps.com/documentation/troubleshooting/' 
-		title='<?php esc_attr_e('WP Google Maps Troubleshooting Section', 'wp-google-maps'); ?>'
+		title='<?php esc_attr_e('WP Go Maps Troubleshooting Section', 'wp-google-maps'); ?>'
 		target='_BLANK'>
 		<?php
 		esc_html_e("See the troubleshooting manual.", "wp-google-maps");
@@ -15,8 +15,8 @@
 	<br/>
 	<?php
 	esc_html_e("Or ask a question on our ", "wp-google-maps"); ?>
-	<a href='http://www.wpgmaps.com/forums/forum/support-forum/' 
-		title='<?php esc_attr_e('WP Google Maps Support Forum', 'wp-google-maps'); ?>'
+	<a href='http://www.wpgmaps.com/forums/forum/' 
+		title='<?php esc_attr_e('WP Go Maps Support Forum', 'wp-google-maps'); ?>'
 		target='_BLANK'>
 		<?php
 		esc_html_e("Support forum.", "wp-google-maps");

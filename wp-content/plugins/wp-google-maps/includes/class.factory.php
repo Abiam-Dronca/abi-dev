@@ -33,8 +33,7 @@ class Factory
 			throw new \Exception('Factory createInstance would return abstract Factory');
 		
 		// TODO: If the created object is a descendant of CRUD 
-		if(empty($args))
-		{
+		if(empty($args)){
 			if(is_subclass_of($class, '\\WPGMZA\\Crud'))
 				$filter_args = array($filter, -1);
 			else
@@ -43,6 +42,7 @@ class Factory
 		else
 			$filter_args = array_merge(array($filter), $args);
 		
+		/* Developer Hook (Filter) - Apply CRUD class filters */
 		$override = call_user_func_array('apply_filters', $filter_args);
 		
 

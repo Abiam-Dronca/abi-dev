@@ -23,6 +23,10 @@ jQuery(function($) {
 		this.paths = null;
 		
 		WPGMZA.Feature.apply(this, arguments);
+
+		this.addEventListener("added", function(event) {
+            self.onAdded();
+        });
 	}
 	
 	WPGMZA.Polygon.prototype = Object.create(WPGMZA.Feature.prototype);
@@ -92,6 +96,18 @@ jQuery(function($) {
 		}
 		
 	});
+
+	Object.defineProperty(WPGMZA.Polygon.prototype, "strokeWeight", {
+		enumerable: true,
+		"get": function()
+		{
+			if(!this.linethickness || !this.linethickness.length)
+				return 3;
+			
+			return parseInt(this.linethickness);
+		}
+		
+	});
 	
 	/**
 	 * Returns the contructor to be used by createInstance, depending on the selected maps engine.
@@ -130,5 +146,9 @@ jQuery(function($) {
 		var constructor = WPGMZA.Polygon.getConstructor();
 		return new constructor(row, engineObject);
 	}
+
+	WPGMZA.Polygon.prototype.onAdded = function(){
+        
+    }
 	
 });

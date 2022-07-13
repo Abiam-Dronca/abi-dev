@@ -156,6 +156,9 @@ jQuery(function($) {
 		}
 		
 		if(this.infoopen == "1"){
+			// Flag a one-shot (one use) call to disable auto-pan controllers in the native engines
+			this._osDisableAutoPan = true;
+
 			this.openInfoWindow(true);
 		}
 	}

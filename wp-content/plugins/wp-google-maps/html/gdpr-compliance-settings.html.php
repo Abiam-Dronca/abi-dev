@@ -34,7 +34,7 @@ if(!defined('ABSPATH'))
 				_e('Require consent before loading Maps API', 'wp-google-maps');
 				?>
 				<i class="fa fa-question-circle" 
-					title="<?php _e('The GDPR views IP Addresses as Personal Data, which requires consent before being processed. Loading the Google Maps API stores some user information, such as IP Addresses. WP Google Maps endeavours to uphold the spirit of data protection as per the GDPR. Enable this to option to prevent the Maps API from loading, until a user has consented to it.', 'wp-google-maps'); ?>"/>
+					title="<?php _e('The GDPR views IP Addresses as Personal Data, which requires consent before being processed. Loading the Google Maps API stores some user information, such as IP Addresses. WP Go Maps endeavours to uphold the spirit of data protection as per the GDPR. Enable this to option to prevent the Maps API from loading, until a user has consented to it.', 'wp-google-maps'); ?>"/>
 			</label>
 			<input name="wpgmza_gdpr_require_consent_before_load" type="checkbox"/>
 		</fieldset>

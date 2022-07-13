@@ -8,7 +8,7 @@ if(!defined('ABSPATH'))
 <div id="wpgmza-welcome-page" class="wrap about-wrap">
 	<p>&nbsp;</p>
 
-	<img style="width: 512px;" src="<?php echo WPGMZA_PLUGIN_DIR_URL . 'images/new-banner.png'; ?>" alt="WP Google Maps"/>
+	<img style="width: 512px;" src="<?php echo WPGMZA_PLUGIN_DIR_URL . 'images/new-banner.png'; ?>" alt="WP Go Maps"/>
 
 	<div class="about-text"><?php _e("Thank you for joining our newsletter!","wp-google-maps"); ?></div>
 

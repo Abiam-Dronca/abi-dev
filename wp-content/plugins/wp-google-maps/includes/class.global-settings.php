@@ -105,6 +105,7 @@ class GlobalSettings extends Settings
 		else
 			$filter_args = array_merge(array($filter), $args);
 		
+		/* Developer Hook (Filter) - Call global class overrie, which can be used to replace the PHP class, similarly to inheritence. We recommend using Factory for most classes */
 		$override = call_user_func_array('apply_filters', $filter_args);
 		
 		if($override)
@@ -118,12 +119,14 @@ class GlobalSettings extends Settings
 	
 	public function getDefaults()
 	{
+		/* Developer Hook (Filter) - Add or alter default plugin installation settings */
 		$settings = apply_filters('wpgmza_plugin_get_default_settings', array(
 			'engine' 				=> 'google-maps',
+			'internal_engine'		=> InternalEngine::getRandomEngine(),
 			'google_maps_api_key'	=> get_option('wpgmza_google_maps_api_key'),
 			'default_marker_icon'	=> Marker::DEFAULT_ICON,
 			'developer_mode'		=> false,
-			'user_interface_style'	=> "default"
+			'user_interface_style'	=> "default",
 		));
 		
 		return $settings;

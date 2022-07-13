@@ -27,14 +27,15 @@ class Gutenberg extends \WPGMZA\Factory
 			'onInit'
 		));
 		
-		if(function_exists('register_block_type'))
-		{
+		if(function_exists('register_block_type')){
 			register_block_type('gutenberg-wpgmza/block', array(
 				'render_callback' => array(
 					$this,
 					'onRender'
 				)
 			));
+
+			$this->extendedBlocks = GutenbergExtended::createInstance();
 		}
 	}
 	

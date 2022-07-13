@@ -10,7 +10,7 @@ class ThemePanel extends DOMDocument
 		
 		DOMDocument::__construct();
 		
-		$this->loadPHPFile(plugin_dir_path(__DIR__) . 'html/theme-panel.html.php');
+		$this->loadPHPFile($wpgmza->internalEngine->getTemplate('theme-panel.html.php'));
 		
 		$base = plugin_dir_url(__DIR__);
 		

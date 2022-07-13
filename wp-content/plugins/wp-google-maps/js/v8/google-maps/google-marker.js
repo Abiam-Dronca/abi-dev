@@ -56,6 +56,10 @@ jQuery(function($) {
 		google.maps.event.addListener(this.googleMarker, "mouseover", function() {
 			self.dispatchEvent("mouseover");
 		});
+
+		google.maps.event.addListener(this.googleMarker, "mouseout", function() {
+			self.dispatchEvent("mouseout");
+		});
 		
 		google.maps.event.addListener(this.googleMarker, "dragend", function() {
 			var googleMarkerPosition = self.googleMarker.getPosition();

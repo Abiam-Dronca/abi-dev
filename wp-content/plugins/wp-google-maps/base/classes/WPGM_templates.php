@@ -7,7 +7,7 @@ class WPGMAPS_templates {
 
 
     /**
-     * Includes WP Google Maps V6 Welome Page
+     * Includes WP Go Maps V6 Welome Page
      *
      * @return void
      */
@@ -25,7 +25,7 @@ class WPGMAPS_templates {
     }
 
     /**
-     * Outputs WP Google Maps V5 Welcome Page
+     * Outputs WP Go Maps V5 Welcome Page
      *
      * @return void
      */
@@ -37,7 +37,7 @@ class WPGMAPS_templates {
             <div class="wrap about-wrap">
 
                 <!-- <img src='<?php echo WPGMZA_PLUGIN_DIR_URL; ?>base/assets/WP-google-maps-logo.png' style="float:right; width:250px;" /> -->
-                <h1><?php _e("Welcome to","wp-google-maps"); ?> <strong>WP Google Maps</strong> <small>v6</small></h1>
+                <h1><?php _e("Welcome to","wp-google-maps"); ?> <strong>WP Go Maps</strong> <small>v6</small></h1>
 
                 <div class="about-text"><?php _e("Amazing maps. Simple interface. Powerful functionality. World Class Support.","wp-google-maps"); ?></div>
 
@@ -114,12 +114,12 @@ class WPGMAPS_templates {
 
                         <div class="feature-section three-col">
                             <div class='col'>
-                                <h4><?php _e("New to WP Google Maps?","wp-google-maps"); ?></h4>
+                                <h4><?php _e("New to WP Go Maps?","wp-google-maps"); ?></h4>
                                 <p><?php _e("You may want to","wp-google-maps"); ?> <a href='http://wpgmaps.com/documentation/' target='_blank' title='Documentation'><?php _e("review our documentation","wp-google-maps"); ?></a> <?php _e("before you get started. If you're a tech-savvy individual, you may skip this step.","wp-google-maps"); ?></p>
                             </div>
                             <div class='col'>
                                 <h4><?php _e("Help me!","wp-google-maps"); ?></h4>
-                                <p><?php _e("Visit our","wp-google-maps"); ?> <a title='Support Forum' target='_blank' href='http://www.wpgmaps.com/forums/forum/support-forum/'><?php _e("Support Forum","wp-google-maps"); ?></a> <?php _e("for quick and friendly help. We'll answer your request within 24hours.","wp-google-maps"); ?></p>
+                                <p><?php _e("Visit our","wp-google-maps"); ?> <a title='Support Forum' target='_blank' href='http://www.wpgmaps.com/forums/forum/'><?php _e("Support Forum","wp-google-maps"); ?></a> <?php _e("for quick and friendly help. We'll answer your request within 24hours.","wp-google-maps"); ?></p>
                             </div>
                             <div class='col'>
                                 <h4><?php _e("Feedback","wp-google-maps"); ?></h4>

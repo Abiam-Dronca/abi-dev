@@ -799,3 +799,32 @@ input[type='radio']:checked + .wpgmza-infowindow-picker__item span{
 .wpgmza_map .gm-svpc img {
     max-width: initial;
 }
+
+
+/* Map Placements - Ported in from Atlas Novus */
+.wpgmza_map.wpgmza-auto-left {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+	float: none !important;
+}
+
+.wpgmza_map.wpgmza-auto-center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+	float: none !important;
+}
+
+.wpgmza_map.wpgmza-auto-right {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+	float: none !important;
+}
+
+/* Simple polyfille for OpenLayers controls via variables */
+.wpgmza_map .ol-viewport{
+	--wpgmza-color-white    : #ffffff;
+    --wpgmza-color-charcoal : #333333;
+    --wpgmza-color-grey-50 : #f9f9f9;
+
+    --wpgmza-shadow-common : 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
+}

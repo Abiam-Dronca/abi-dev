@@ -16,11 +16,20 @@ class PolygonDataTable extends DataTable
 	
 	public function getColumns()
 	{
-		return array(
+		global $wpgmza;
+		
+		$columns = array(
 			'id'			=> __('ID',				'wp-google-maps'),
 			'polyname'			=> __('Name', 			'wp-google-maps'),
 			'description'	=> __('Description', 	'wp-google-maps'),
 			'link'			=> __('Link', 			'wp-google-maps')
 		);
+
+		if(!$wpgmza->internalEngine->isLegacy()){
+			/* Atlas Novus Supports HTML, hide it so it doesn't get clunky */
+			unset($columns['description']);
+		}
+
+		return $columns;
 	}
 }

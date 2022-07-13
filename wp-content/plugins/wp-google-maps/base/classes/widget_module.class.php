@@ -11,7 +11,7 @@ class wpgmza_widget extends WP_Widget {
     function __construct() {
         parent::__construct(
             'wpgmza_map_widget', 
-            __('WP Google Maps', 'wp-google-maps'), 
+            __('WP Go Maps', 'wp-google-maps'), 
             array(
                 'description' => __( 'Add your map as a widget', 'wp-google-maps' ),
                 'classname' => 'wpgmza_widget'
@@ -32,6 +32,7 @@ class wpgmza_widget extends WP_Widget {
 		if(!isset($instance['title']))
 			$instance['title'] = '';
 		
+        /* Developer Hook (Filter) - Alter the widget title */
         $title = apply_filters( 'widget_title', $instance['title'] );
         
         echo $args['before_widget'];

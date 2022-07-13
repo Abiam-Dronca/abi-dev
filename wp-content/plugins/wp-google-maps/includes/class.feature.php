@@ -42,6 +42,7 @@ class Feature extends Crud
 			require_once($file);
 		}
 		
+	    /* Developer Hook (Action) - Load required feature classes */     
 		do_action('wpgmza_require_feature_classes');
 		
 		foreach(get_declared_classes() as $class)

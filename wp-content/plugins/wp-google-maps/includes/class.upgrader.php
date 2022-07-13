@@ -13,10 +13,16 @@ class Upgrader
 			// Legacy style for upgrading users
 			$settings->user_interface_style = "legacy";
 		}
+
+		if(preg_match('/^8\./', $fromVersion)) {
+			// Legacy build for users upgrading (They will be prompted to switch if they want to)
+			$settings->internal_engine = "legacy";
+		}
 		
 		add_action('init', function() {
 			global $wpgmza;
-			
+
+    		/* Developer Hook (Action) - Run additional actions as part of an upgrade */ 
 			do_action("wpgmza_base_upgrade_hook");
 
 			$wpgmza->updateAllMarkerXMLFiles();

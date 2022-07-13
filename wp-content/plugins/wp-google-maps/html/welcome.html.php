@@ -9,18 +9,18 @@ if(!defined('ABSPATH'))
 <div id="wpgmza-welcome-page" class="wrap about-wrap">
 <p>&nbsp;</p>
 
-<img style="width: 512px;" src="<?php echo WPGMZA_PLUGIN_DIR_URL . 'images/new-banner.png'; ?>" alt="WP Google Maps"/>
+<img style="width: 512px;" src="<?php echo WPGMZA_PLUGIN_DIR_URL . 'images/new-banner.png'; ?>" alt="WP Go Maps"/>
 
 <h1><?php 
 
 global $wpgmza;
-printf(__("Welcome to WP Google Maps version %s","wp-google-maps"), $wpgmza->getBasicVersion());
+printf(__("Welcome to WP Go Maps version %s","wp-google-maps"), $wpgmza->getBasicVersion());
 
 ?></h1>
 
 <div class="about-text"><?php _e("Build amazing maps through a simple interface and powerful functionality along with world class support.","wp-google-maps"); ?></div>
 
-<a class="button-primary" style='padding:5px; padding-right:15px; padding-left:15px; height:inherit;' href="admin.php?page=wp-google-maps-menu&amp;override=1"><?php echo __("Skip intro and create a map","wp-google-maps"); ?></a>
+<a class="button-primary" style='padding:5px; padding-right:15px; padding-left:15px; height:inherit;' href="admin.php?page=wp-google-maps-menu&amp;action=installer&amp;override=1"><?php echo __("Skip intro and create a map","wp-google-maps"); ?></a>
 <p>&nbsp;</p>
 
 
@@ -38,7 +38,7 @@ printf(__("Welcome to WP Google Maps version %s","wp-google-maps"), $wpgmza->get
 
                 <a href="https://www.facebook.com/groups/wpgooglemaps" class="button-primary" target="_BLANK"><?php _e("Join Facebook", "wp-google-maps"); ?></a>
                 <br><br>
-                <small style="opacity: 0.8;"><?php _e("Get to know other WP Google Maps users, receive updates on upcoming features, and share your maps with the community", "wp-google-maps"); ?></small>
+                <small style="opacity: 0.8;"><?php _e("Get to know other WP Go Maps users, receive updates on upcoming features, and share your maps with the community", "wp-google-maps"); ?></small>
             </div>
         </div>
         <div class='col wpgmza-support__col wpgmza-margin-0'>
@@ -140,7 +140,7 @@ printf(__("Welcome to WP Google Maps version %s","wp-google-maps"), $wpgmza->get
                         <div id="wpgmza-support__row" class="feature-section three-col">
                             <div class='col wpgmza-support__col'>
                                 <div class="wpgmza-card">
-                                    <h4><?php _e("New to WP Google Maps?","wp-google-maps"); ?></h4>
+                                    <h4><?php _e("New to WP Gos Maps?","wp-google-maps"); ?></h4>
                                     <p><?php _e("You may want to","wp-google-maps"); ?> <a href='http://wpgmaps.com/documentation/' target='_blank' title='Documentation'><?php _e("review our documentation","wp-google-maps"); ?></a> <?php _e("before you get started. If you're a tech-savvy individual, you may skip this step.","wp-google-maps"); ?></p>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@ printf(__("Welcome to WP Google Maps version %s","wp-google-maps"), $wpgmza->get
                             </div>
                         </div>
                         
-                <a class="button-primary" style='padding:5px; padding-right:15px; padding-left:15px; height:inherit;' href="admin.php?page=wp-google-maps-menu&amp;override=1"><?php echo __("OK! Let's start","wp-google-maps"); ?></a>
+                <a class="button-primary" style='padding:5px; padding-right:15px; padding-left:15px; height:inherit;' href="admin.php?page=wp-google-maps-menu&amp;action=installer&amp;override=1"><?php echo __("OK! Let's start","wp-google-maps"); ?></a>
 
             </div>
         </div>

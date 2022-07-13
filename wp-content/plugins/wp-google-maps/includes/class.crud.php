@@ -121,7 +121,7 @@ class Crud extends Factory implements \IteratorAggregate, \JsonSerializable
 		Crud::$cached_columns_by_table_name[$table_name] = $columns;
 	}
 	
-	protected static function getColumnsByTableName($table_name)
+	public static function getColumnsByTableName($table_name)
 	{
 		Crud::cacheColumnsByTableName($table_name);
 		

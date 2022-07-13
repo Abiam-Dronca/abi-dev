@@ -80,7 +80,7 @@ function wpgmza_b_pro_add_poly($mid) {
             
           
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Add a Polygon","wp-google-maps")."</h2>
@@ -166,7 +166,7 @@ function wpgmza_b_pro_edit_poly($mid) {
             
 
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Edit Polygon","wp-google-maps")."</h2>
@@ -614,7 +614,7 @@ function wpgmza_b_pro_add_polyline($mid) {
             
           
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Add a Polyline","wp-google-maps")."</h2>
@@ -711,7 +711,7 @@ function wpgmza_b_pro_edit_polyline($mid) {
             
 
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Edit Polyline","wp-google-maps")."</h2>
@@ -1121,24 +1121,24 @@ function wpgmaps_admin_menu() {
     
     if (isset($wpgmza_settings['wpgmza_settings_access_level'])) { $access_level = $wpgmza_settings['wpgmza_settings_access_level']; } else { $access_level = "manage_options"; }
 	
-    add_menu_page('WP Google Maps', __('Maps','wp-google-maps'), $access_level, 'wp-google-maps-menu', 'wpgmaps_menu_layout', wpgmaps_get_plugin_url()."images/menu-icon.png");
+    add_menu_page('WP Go Maps', __('Maps','wp-google-maps'), $access_level, 'wp-google-maps-menu', 'wpgmaps_menu_layout', wpgmaps_get_plugin_url()."images/menu-icon.png");
     
 	add_submenu_page(
 		'wp-google-maps-menu',
-		'WP Google Maps - Maps',
+		'WP Go Maps - Maps',
 		__('Maps', 'wp-google-maps'),
 		$access_level,
 		'wp-google-maps-menu',
 		'wpgmaps_menu_layout'
 	);
 	
-    if (function_exists('wpgmaps_menu_category_layout')) { add_submenu_page('wp-google-maps-menu', 'WP Google Maps - Categories', __('Categories','wp-google-maps'), $access_level , 'wp-google-maps-menu-categories', 'wpgmaps_menu_category_layout'); }
+    if (function_exists('wpgmaps_menu_category_layout')) { add_submenu_page('wp-google-maps-menu', 'WP Go Maps - Categories', __('Categories','wp-google-maps'), $access_level , 'wp-google-maps-menu-categories', 'wpgmaps_menu_category_layout'); }
 	
     if (function_exists('wpgmza_register_pro_version'))
 	{
 		add_submenu_page(
 			'wp-google-maps-menu', 
-			'WP Google Maps - Advanced Options', 
+			'WP Go Maps - Advanced Options', 
 			__('Advanced','wp-google-maps'), 
 			$access_level , 
 			'wp-google-maps-menu-advanced',
@@ -1149,7 +1149,7 @@ function wpgmaps_admin_menu() {
 		
 		add_submenu_page(
 			'wp-google-maps-menu',
-			'WP Google Maps - Custom Fields',
+			'WP Go Maps - Custom Fields',
 			__('Custom Fields', 'wp-google-maps'),
 			$access_level,
 			'wp-google-maps-menu-custom-fields',
@@ -1157,10 +1157,10 @@ function wpgmaps_admin_menu() {
 		);
 	}
 	
-    add_submenu_page('wp-google-maps-menu', 'WP Google Maps - Settings', __('Settings','wp-google-maps'), $access_level , 'wp-google-maps-menu-settings', 'wpgmaps_menu_settings_layout');
-    add_submenu_page('wp-google-maps-menu', 'WP Google Maps - Support', __('Support','wp-google-maps'), $access_level , 'wp-google-maps-menu-support', 'wpgmaps_menu_support_layout');
+    add_submenu_page('wp-google-maps-menu', 'WP Go Maps - Settings', __('Settings','wp-google-maps'), $access_level , 'wp-google-maps-menu-settings', 'wpgmaps_menu_settings_layout');
+    add_submenu_page('wp-google-maps-menu', 'WP Go Maps - Support', __('Support','wp-google-maps'), $access_level , 'wp-google-maps-menu-support', 'wpgmaps_menu_support_layout');
 
-	// add_submenu_page('wp-google-maps-menu', 'WP Google Maps - Credits', __('Credits', 'wp-google-maps'), $access_level, 'wp-google-maps-menu-credits', 'wpgmaps_menu_layout');
+	// add_submenu_page('wp-google-maps-menu', 'WP Go Maps - Credits', __('Credits', 'wp-google-maps'), $access_level, 'wp-google-maps-menu-credits', 'wpgmaps_menu_layout');
 	
 }
 
@@ -1182,7 +1182,7 @@ function wpgmaps_menu_layout() {
     } else {
 
         if ($_GET['action'] == "welcome_page" || $_GET['action'] == "credits") { } else {
-            echo"<div class='wpgmza-support-notice' style='float:right; display:block; width:250px; height:65px; padding:6px; text-align:center; background-color: white;  border-top: 4px solid #0073AA; margin-right:17px;'><strong>".__("Experiencing problems with the plugin?","wp-google-maps")."</strong><br /><a href='http://www.wpgmaps.com/documentation/troubleshooting/' title='WP Google Maps Troubleshooting Section' target='_BLANK'>".__("See the troubleshooting manual.","wp-google-maps")."</a> <br />".__("Or ask a question on our ","wp-google-maps")." <a href='http://www.wpgmaps.com/forums/forum/support-forum/' title='WP Google Maps Support Forum' target='_BLANK'>".__("Support forum.","wp-google-maps")."</a></div>
+            echo"<div class='wpgmza-support-notice' style='float:right; display:block; width:250px; height:65px; padding:6px; text-align:center; background-color: white;  border-top: 4px solid #0073AA; margin-right:17px;'><strong>".__("Experiencing problems with the plugin?","wp-google-maps")."</strong><br /><a href='http://www.wpgmaps.com/documentation/troubleshooting/' title='WP Go Maps Troubleshooting Section' target='_BLANK'>".__("See the troubleshooting manual.","wp-google-maps")."</a> <br />".__("Or ask a question on our ","wp-google-maps")." <a href='http://www.wpgmaps.com/forums/forum/' title='WP Go Maps Support Forum' target='_BLANK'>".__("Support forum.","wp-google-maps")."</a></div>
             <div class='wpgmza-clear'></div>";
         }
 		
@@ -1307,6 +1307,7 @@ function wpgmaps_menu_layout() {
         }
     }
 
+    /* Developer Hook (Action) - Legacy backwards compatibiity action for older versions */ 
     do_action("wpgmza_check_map_editor_backwards_compat");
 
 
@@ -1672,6 +1673,7 @@ function wpgmaps_user_javascript_basic() {
 
     wp_enqueue_script( 'wpgmaps_core' );
 
+    /* Developer Hook (Action) - Enqueue additional scripts */ 
     do_action("wpgooglemaps_basic_hook_user_js_after_core");
 
     wp_localize_script( 'wpgmaps_core', 'wpgmaps_mapid', $wpgmza_current_map_id );
@@ -1687,6 +1689,7 @@ function wpgmaps_user_javascript_basic() {
         wp_localize_script( 'wpgmaps_core', 'wpgmaps_localize_marker_data', $markers);
     }
     
+    /* Developer Hook (Filter) - Modify settings object for localization on frontend */
     $wpgmza_settings = apply_filters("wpgmza_basic_filter_localize_settings",$wpgmza_settings);
 
     wp_localize_script( 'wpgmaps_core', 'wpgmaps_localize_global_settings', $wpgmza_settings);
@@ -2438,7 +2441,8 @@ function wpgmza_settings_page_post()
 	if (isset($_POST['wpgmza_store_locator_radii'])) { $wpgmza->settings['wpgmza_store_locator_radii'] = sanitize_text_field($_POST['wpgmza_store_locator_radii']); }
 
 	if (isset($_POST['wpgmza_settings_enable_usage_tracking'])) { $wpgmza->settings['wpgmza_settings_enable_usage_tracking'] = sanitize_text_field($_POST['wpgmza_settings_enable_usage_tracking']); }
-	
+    
+    /* Developer Hook (Filter) - Legacy, unused, storage hook */
 	$arr = apply_filters("wpgooglemaps_filter_save_settings", $wpgmza->settings);
 	
 	$wpgmza->settings->set($arr);
@@ -2474,7 +2478,7 @@ if (function_exists('wpgmaps_head_pro' )) {
 			<div class="notice notice-error">
 				<p>
 					<?php
-					_e('<strong>WP Google Maps:</strong> The Pro add-on is not compatible with this version of WP Google Maps. Please update your Pro addon to 5.24 or above', 'wp-google-maps');
+					_e('<strong>WP Go Maps:</strong> The Pro add-on is not compatible with this version of WP Go Maps. Please update your Pro addon to 5.24 or above', 'wp-google-maps');
 					?>
 				</p>
 			</div>

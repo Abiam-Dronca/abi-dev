@@ -1,11 +1,13 @@
 /**
  * @namespace WPGMZA
  * @module Circle
- * @requires WPGMZA.Feature
+ * @requires WPGMZA.Shape
+ * @pro-requires WPGMZA.ProShape
  */
 jQuery(function($) {
 	
-	var Parent = WPGMZA.Feature;
+	var Parent = WPGMZA.Shape;
+	
 	
 	/**
 	 * Base class for circles. <strong>Please <em>do not</em> call this constructor directly. Always use createInstance rather than instantiating this class directly.</strong> Using createInstance allows this class to be externally extensible.
@@ -27,7 +29,11 @@ jQuery(function($) {
 		Parent.apply(this, arguments);
 	}
 	
-	WPGMZA.extend(WPGMZA.Circle, WPGMZA.Feature);
+
+	if(WPGMZA.isProVersion())
+		Parent = WPGMZA.ProShape;
+
+	WPGMZA.extend(WPGMZA.Circle, Parent);
 	
 	Object.defineProperty(WPGMZA.Circle.prototype, "fillColor", {
 		
@@ -110,10 +116,18 @@ jQuery(function($) {
 		switch(WPGMZA.settings.engine)
 		{
 			case "open-layers":
+				if(WPGMZA.isProVersion()){
+					constructor = WPGMZA.OLProCircle;
+					break;
+				}
 				constructor = WPGMZA.OLCircle;
 				break;
 			
 			default:
+				if(WPGMZA.isProVersion()){
+					constructor = WPGMZA.GoogleProCircle;
+					break;
+				}
 				constructor = WPGMZA.GoogleCircle;
 				break;
 		}

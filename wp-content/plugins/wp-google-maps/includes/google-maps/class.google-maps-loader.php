@@ -107,6 +107,7 @@ class GoogleMapsLoader
 		else if(is_admin())
 			$params['key'] = base64_decode(GoogleMapsLoader::TEMPORARY_API_KEY);
 
+		/* Developer Hook (Filter) - Modify Googl Maps API params (URL) */
 		$params = apply_filters( 'wpgmza_google_maps_api_params', $params );
 		
 		return $params;

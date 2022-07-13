@@ -35,7 +35,7 @@ function wpgmza_b_add_circle($mid)
             
           
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Add circle","wp-google-maps")."</h2>
@@ -140,7 +140,7 @@ function wpgmza_b_edit_circle($mid)
 		
         echo "
            <div class='wrap'>
-                <h1>WP Google Maps</h1>
+                <h1>WP Go Maps</h1>
                 <div class='wide'>
 
                     <h2>".__("Edit circle","wp-google-maps")."</h2>

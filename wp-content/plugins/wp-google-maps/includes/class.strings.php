@@ -17,6 +17,7 @@ class Strings
 	 */
 	public function getLocalizedStrings()
 	{
+		/* Developer Hook (Filter) - Modify localized strings */
 		return apply_filters('wpgmza_localized_strings', array(
 			'unsecure_geolocation' 		=> __('Many browsers are no longer allowing geolocation from unsecured origins. You will need to secure your site with an SSL certificate (HTTPS) or this feature may not work for your visitors', 'wp-google-maps'),
 			'use_my_location'			=> __('Use my location', 'wp-google-maps'),
@@ -57,7 +58,7 @@ class Strings
 			'save_marker'				=> __('Save Marker', 'wp-google-maps'),
 			'please_wait'				=> __('Please Wait...', 'wp-google-maps'),
 			'zero_results'				=> __('No results found in this location. Please try again.', 'wp-google-maps'),
-			'address_not_found'			=> __('This address could not be found. WP Google Maps uses a 3rd party service (eg Google) to convert addresses to geographic coordinates. Unfortunately, the service has no records for this address at present. Please try an alternative format, or manually position the marker using right click.', 'wp-google-maps'),
+			'address_not_found'			=> __('This address could not be found. WP Go Maps uses a 3rd party service (eg Google) to convert addresses to geographic coordinates. Unfortunately, the service has no records for this address at present. Please try an alternative format, or manually position the marker using right click.', 'wp-google-maps'),
 			'geocode_fail'				=> __('Geocode failed due to technical reasons', 'wp-google-maps'),
 			
 			'you_must_check_gdpr_consent'	=> __('You must check the GDPR consent box to continue', 'wp-google-maps'),
@@ -73,7 +74,7 @@ class Strings
 			
 			'upload_complete'			=> __('Upload Complete', 'wp-google-maps'),
 			'uploading_file'			=> __('Uploading file', 'wp-google-maps'),
-			'bulk_jpeg_media_title'		=> __('WP Google Maps - Bulk JPEG Upload'),
+			'bulk_jpeg_media_title'		=> __('WP Go Maps - Bulk JPEG Upload'),
 			
 			'from_your_location'		=> __('from your location', 'wp-google-maps'),
 			'from_searched_location'	=> __('from searched location', 'wp-google-maps'),
@@ -81,7 +82,7 @@ class Strings
 			'yes'						=> __('Yes', 'wp-google-maps'),
 			'no'						=> __('No', 'wp-google-maps'),
 			
-			'requires_gold_v5'			=> __('Requires WP Google Maps - Gold add-on 5.0.0 or above', 'wp-google-maps'),
+			'requires_gold_v5'			=> __('Requires WP Go Maps - Gold add-on 5.0.0 or above', 'wp-google-maps'),
 			
 			'confirm_remove_duplicates'	=> __('This operation is not reversable. We recommend you take a backup before proceeding. Would you like to continue?', 'wp-google-maps'),
 
@@ -100,6 +101,8 @@ class Strings
 			
 			'map_delete_prompt_text'		=> __('Are you sure you want to delete this map?', 'wp-google-maps'),
 			'map_bulk_delete_prompt_text'	=> __('Are you sure you want to delete these maps?', 'wp-google-maps'),
+			
+			'general_delete_prompt_text'	=> __('Are you sure you want to delete this data?', 'wp-google-maps'),
 			
 			'new_map'						=> __('New Map', 'wp-google-maps'),
 			'cloud_api_key_error_1'			=> sprintf(__('Autocomplete disabled. <a href="%s" target="_BLANK">Find out more</a>.'),"https://wpgmaps.com/documentation/autocomplete-disabled/")

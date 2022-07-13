@@ -13,7 +13,7 @@ jQuery(function($) {
 			console.warn("The dataTables library is not loaded. Cannot create a dataTable. Did you enable 'Do not enqueue dataTables'?");
 			
 			if(WPGMZA.settings.wpgmza_do_not_enqueue_datatables && WPGMZA.getCurrentPage() == WPGMZA.PAGE_MAP_EDIT)
-				alert("You have selected 'Do not enqueue DataTables' in WP Google Maps' settings. No 3rd party software is loading the DataTables library. Because of this, the marker table cannot load. Please uncheck this option to use the marker table.");
+				alert("You have selected 'Do not enqueue DataTables' in WP Go Maps' settings. No 3rd party software is loading the DataTables library. Because of this, the marker table cannot load. Please uncheck this option to use the marker table.");
 			
 			return;
 		}
@@ -44,7 +44,7 @@ jQuery(function($) {
 		// this.dataTable			= $(this.dataTableElement).DataTable(settings);
 		this.wpgmzaDataTable	= this;
 		
-		this.useCompressedPathVariable = (WPGMZA.restAPI && WPGMZA.restAPI.isCompressedPathVariableSupported && WPGMZA.settings.enable_compressed_path_variables);
+		this.useCompressedPathVariable = (WPGMZA.restAPI.isCompressedPathVariableSupported && WPGMZA.settings.enable_compressed_path_variables);
 		this.method = (this.useCompressedPathVariable ? "GET" : "POST");
 		
 		if(this.getLanguageURL() == undefined || this.getLanguageURL() == "//cdn.datatables.net/plug-ins/1.10.12/i18n/English.json") {
@@ -147,6 +147,7 @@ jQuery(function($) {
 		options.deferLoading = true;
 		options.processing = true;
 		options.serverSide = true;
+		
 		options.ajax = function(data, callback, settings) { 
 			return WPGMZA.DataTable.prototype.onDataTableAjaxRequest.apply(self, arguments); 
 		}

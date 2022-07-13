@@ -92,7 +92,9 @@ class Map extends Crud
 			case 'storeLocator':
 				return $this->{"_$name"};
 				break;
-			
+			case 'shortcodeAttributes':
+				return $this->_overrides;
+				break;
 			case "storeLocatorDistanceUnits":
 				if(!empty($this->store_locator_distance) && $this->store_locator_distance == 1)
 					return Distance::UNITS_MI;
@@ -116,6 +118,7 @@ class Map extends Crud
 	 */
 	public static function create_instance($id_or_fields=-1)
 	{
+		/* Developer Hook (Filter) - Alter map create instnace, deprecated */
 		return apply_filters('wpgmza_create_map_instance', $id_or_fields);
 	}
 	
@@ -131,23 +134,35 @@ class Map extends Crud
 	protected function create()
 	{
 		Crud::create();
-		
+
+
 		// Set defaults 
 		$this->set(array(
-			'map_start_lat'		=> 36.778261,
-			'map_start_lng'		=> -119.4179323999,
 			'map_start_zoom'	=> 4,
 			'map_width'			=> 100,
 			'map_width_type'	=> '%',
 			'map_height'		=> 400,
 			'map_height_type'	=> 'px',
-			'map_title'			=> __('New Map', 'wp-google-maps'),
 			'map_type'			=> 1, // Roadmap,
 			'sl_stroke_color'	=> "#FF0000",
 			'sl_fill_color' 	=> "#FF0000",
 			'sl_stroke_opacity' => 1,
 			'sl_fill_opacity'	=> 0.5
 		));
+		
+		// Only default if these were not set initially 
+		if(empty($this->map_title)){
+			$this->set('map_title', __('New Map', 'wp-google-maps'));	
+		}
+
+		if(empty($this->map_start_lat) || empty($this->map_start_lng)){
+			$this->set(array(
+				'map_start_lat'		=> 36.778261,
+				'map_start_lng'		=> -119.4179323999,
+			));	
+		}
+
+
 	}
 	
 	protected function getMarkersQuery()
@@ -263,6 +278,7 @@ class Map extends Crud
 			$root->appendChild($markerElement);
 		}
 		
+		/* Developer Hook (Filter) - XML cache generated, passes DOMDOcument for mutation, must return DOMDocument */
 		$document = apply_filters('wpgmza_xml_cache_generated', $document);
 		
 		$dest	= $this->getMarkerXMLFilename();
@@ -280,7 +296,7 @@ class Map extends Crud
 				?>
 				<div class='notice notice-error'>
 					<p>
-						<strong><?php _e('WP Google Maps:', 'wp-google-maps'); ?></strong>
+						<strong><?php _e('WP Go Maps:', 'wp-google-maps'); ?></strong>
 						<?php
 						echo sprintf(
 							_e('The plugin couldn\'t find the directory %s, which is the directory your settings specify to use for XML caching. Please make sure the directory exists, and that you assign file permissions of 755 to this directory.', 'wp-google-maps'),
@@ -295,6 +311,7 @@ class Map extends Crud
 			return;
 		}
 		
+	    /* Developer Hook (Action) - Log change to the XML storage,passes destination of file */     
 		do_action('wpgmza_xml_cache_saved', $dest);
 	}
 	

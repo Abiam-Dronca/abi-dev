@@ -159,11 +159,11 @@ jQuery(function($) {
 		
 		function formatCoord(coord)
 		{
-			if($.isNumeric(coord))
+			if(WPGMZA.isNumeric(coord))
 				return coord;
 			return parseFloat( String(coord).replace(/[\(\)\s]/, "") );
 		}
-
+		
 		var latLng = new google.maps.LatLng(
 			formatCoord(latLngCoords[0]),
 			formatCoord(latLngCoords[1])
