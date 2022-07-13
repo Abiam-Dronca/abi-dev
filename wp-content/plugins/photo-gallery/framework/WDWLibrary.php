@@ -9,66 +9,90 @@ class WDWLibrary {
   /**
    * Get request value.
    *
-   * @param string $key
-   * @param string $default_value
-   * @param string $callback
+   * @param $key
+   * @param $default_value
+   * @param $callback
+   * @param $type
    *
-   * @return string|array
+   * @return array|bool|mixed|string|null
    */
   public static function get($key, $default_value = '', $callback = 'sanitize_text_field', $type = 'DEFAULT') {
     switch ($type) {
       case 'REQUEST' :
         if (isset($_REQUEST[$key])) {
-          $value = $_REQUEST[$key];
+          if ( is_bool($_REQUEST[$key]) ) {
+            return rest_sanitize_boolean($_REQUEST[$key]);
+          }
+          elseif (is_array($_REQUEST[$key])) {
+            $value = array();
+            foreach ($_REQUEST[$key] as $valKey => $val) {
+              $value[$valKey] = self::validate_data($val, $callback);
+            }
+          }
+          else {
+            $value = self::validate_data($_REQUEST[$key], $callback);
+          }
         }
         break;
       case 'DEFAULT' :
       case 'POST' :
-        if (isset($_POST[$key])) {
-          $value = $_POST[$key];
+        if ( isset($_POST[$key]) ) {
+          if ( is_bool($_POST[$key]) ) {
+            return rest_sanitize_boolean($_POST[$key]);
+          }
+          elseif ( is_array($_POST[$key]) ) {
+            $value = array();
+            foreach ( $_POST[$key] as $valKey => $val ) {
+              $value[$valKey] = self::validate_data($val, $callback);
+            }
+          }
+          else {
+            $value = self::validate_data($_POST[$key], $callback);
+          }
         }
         if ( 'POST' === $type ) break;
       case 'GET' :
         if (isset($_GET[$key])) {
-          $value = $_GET[$key];
+          if ( is_bool($_GET[$key]) ) {
+            return rest_sanitize_boolean($_GET[$key]);
+          }
+          elseif ( is_array($_GET[$key]) ) {
+            $value = array();
+            foreach ( $_GET[$key] as $valKey => $val ) {
+              $value[$valKey] = self::validate_data($val, $callback);
+            }
+          }
+          else {
+            $value = self::validate_data($_GET[$key], $callback);
+          }
         }
         break;
     }
+
     if ( !isset($value) ) {
-      if( $default_value === NULL ) {
+      if ( $default_value === NULL ) {
         return NULL;
       } else {
         $value = $default_value;
       }
     }
 
-    if ( is_bool($value) ) {
-      return $value;
-    }
-
-    if (is_array($value)) {
-      // $callback should be third parameter of the validate_data function, so there is need to add unused second parameter to validate_data function.
-      array_walk_recursive($value, array('self', 'validate_data'), $callback);
-    }
-    else {
-      self::validate_data($value, 0, $callback);
-    }
-
     return $value;
   }
 
   /**
-   * Validate data.
-   *
    * @param $value
-   * @param $key
    * @param $callback
+   *
+   * @return mixed|string
    */
-  private static function validate_data(&$value, $key, $callback) {
+  private static function validate_data($value, $callback) {
     $value = stripslashes($value);
     if ( $callback && function_exists($callback) ) {
       $value = $callback($value);
     }
+
+    return $value;
   }
 
   /**
@@ -302,7 +326,7 @@ class WDWLibrary {
     $order = (($orderby == $id) && ($order == 'asc')) ? 'desc' : 'asc';
     ob_start();
     ?>
-    <th id="order-<?php echo sanitize_html_class($id); ?>" class="<?php echo esc_html(implode(' ', $class)); ?>">
+    <th id="order-<?php echo esc_attr($id); ?>" class="<?php echo esc_html(implode(' ', $class)); ?>">
       <a href="<?php echo esc_url(add_query_arg( array('orderby' => $id, 'order' => $order), $page_url )); ?>"
          title="<?php _e('Click to sort by this item', 'photo-gallery'); ?>">
         <span><?php echo esc_html($text); ?></span><span class="sorting-indicator"></span>
@@ -586,7 +610,7 @@ class WDWLibrary {
           default:
             document.getElementById('page_number').value = 1;
         }
-        spider_ajax_save('<?php echo $form_id; ?>');
+        spider_ajax_save('<?php echo esc_html($form_id); ?>');
       }
       function check_enter_key(e, that) {
         if ( e.key == 'Enter' ) { /*Enter keycode*/
@@ -596,7 +620,7 @@ class WDWLibrary {
           else {
            document.getElementById('page_number').value = jQuery(that).val();
           }
-          spider_ajax_save('<?php echo $form_id; ?>');
+          spider_ajax_save('<?php echo esc_html($form_id); ?>');
           return false;
         }
        return true;		 
@@ -736,22 +760,6 @@ class WDWLibrary {
       $share_page = wp_insert_post($bwg_post_args);
       return get_permalink($share_page);
     }
-  }
-
-  public static function esc_script($method = '', $index = '', $default = '', $type = 'string') {
-    if ($method == 'post') {
-      $escaped_value = ((isset($_POST[$index]) && preg_match("/^[A-Za-z0-9_]+$/", $_POST[$index])) ? esc_js($_POST[$index]) : $default);
-    }
-    elseif ($method == 'get') {
-      $escaped_value = ((isset($_GET[$index]) && preg_match("/^[A-Za-z0-9_]+$/", $_GET[$index])) ? esc_js($_GET[$index]) : $default);
-    }
-    else {
-      $escaped_value = (preg_match("/^[a-zA-Z0-9]", $index) ? esc_js($index) : $default);
-    }
-    if ($type == 'int') {
-      $escaped_value = (int) $escaped_value;
-    }
-    return $escaped_value;
   }
 
   public static function get_google_fonts() {
@@ -1762,8 +1770,8 @@ class WDWLibrary {
     if ($page == 'gallery_page') {
       ?>
       <script language="javascript">
-        var image_src = window.parent.document.getElementById("image_thumb_<?php echo $image->id; ?>").src;
-        document.getElementById("image_thumb_<?php echo $image->id; ?>").src = image_src;
+        var image_src = window.parent.document.getElementById("image_thumb_<?php echo esc_html($image->id); ?>").src;
+        document.getElementById("image_thumb_<?php echo esc_html($image->id); ?>").src = image_src;
       </script>
       <?php
     }
@@ -2025,6 +2033,7 @@ class WDWLibrary {
       'images_per_page' => 0,
       'thumb_width' => BWG()->options->thumb_width,
       'thumb_height' => BWG()->options->thumb_height,
+      'gdpr_compliance' => (bool) BWG()->options->gdpr_compliance,
       'watermark_type' => (($from) ? BWG()->options->watermark_type : ($use_option_defaults ? BWG()->options->watermark_type : (isset($params['watermark_type']) ? $params['watermark_type'] : 'none'))),
       'watermark_text' => (($from) ? urlencode(BWG()->options->watermark_text) : ($use_option_defaults ? urlencode(BWG()->options->watermark_text) : (isset($params['watermark_text']) ? urlencode($params['watermark_text']) : ''))),
       'watermark_font_size' => (($from) ? BWG()->options->watermark_font_size : ($use_option_defaults ? BWG()->options->watermark_font_size : (isset($params['watermark_font_size']) ? $params['watermark_font_size'] : 12))),
@@ -2054,7 +2063,6 @@ class WDWLibrary {
     $defaults['popup_enable_comment'] = (bool) self::get_option_value('popup_enable_comment', 'popup_enable_comment', 'popup_enable_comment', $from || $use_option_defaults, $params);
     $defaults['popup_enable_email'] = (bool) self::get_option_value('popup_enable_email', 'popup_enable_email', 'popup_enable_email', $from || $use_option_defaults, $params);
     $defaults['popup_enable_captcha'] = (bool) self::get_option_value('popup_enable_captcha', 'popup_enable_captcha', 'popup_enable_captcha', $from || $use_option_defaults, $params);
-    $defaults['gdpr_compliance'] = (bool) self::get_option_value('gdpr_compliance', 'gdpr_compliance', 'gdpr_compliance', $from || $use_option_defaults, $params);
     $defaults['comment_moderation'] = (bool) self::get_option_value('comment_moderation', 'comment_moderation', 'comment_moderation', $from || $use_option_defaults, $params);
     $defaults['popup_enable_info'] = (bool) self::get_option_value('popup_enable_info', 'popup_enable_info', 'popup_enable_info', $from || $use_option_defaults, $params);
     $defaults['popup_info_always_show'] = (bool) self::get_option_value('popup_info_always_show', 'popup_info_always_show', 'popup_info_always_show', $from || $use_option_defaults, $params);
@@ -2387,7 +2395,7 @@ class WDWLibrary {
     $title = ($title != '') ? strtolower($title) : 'items';
     ob_start();
     ?><tr class="no-items">
-    <td class="colspanchange" <?php echo $colspan_count ? 'colspan="' . esc_attr($colspan_count) . '"' : ''?>><?php echo sprintf(__('No %s found.', 'photo-gallery'), $title); ?></td>
+    <td class="colspanchange" <?php echo esc_attr($colspan_count) ? 'colspan="' . esc_attr($colspan_count) . '"' : ''?>><?php echo sprintf(__('No %s found.', 'photo-gallery'), $title); ?></td>
     </tr><?php
     return ob_get_clean();
   }
@@ -3033,7 +3041,7 @@ class WDWLibrary {
       <div class="wd-list-view-header-free-right">
         <p class="upgrade-header"><?php _e('Unleash the full benefits & ', 'photo-gallery'); ?></p>
         <p class="upgrade-text"><?php _e('features of the Premium Plugin', 'photo-gallery'); ?></p>
-        <a class="upgrade-button" href="<?php echo $premium_link; ?>" target="_blank"><?php _e( 'Upgrade Now', BWG()->prefix ); ?></a>
+        <a class="upgrade-button" href="<?php echo esc_url($premium_link); ?>" target="_blank"><?php _e( 'Upgrade Now', BWG()->prefix ); ?></a>
       </div>
       <a class="wd-list-view-ask-question" href="<?php echo esc_url($support_forum_link); ?>" target="_blank"><?php _e('Ask a question', 'photo-gallery'); ?></a>
     <?php
@@ -3277,7 +3285,7 @@ class WDWLibrary {
    * @return string
    */
   public static function strip_tags($value) {
-    $allowed_tags = "<b>,<p>,<a>,<strong>,<span>,<br>,<ul>,<ol>,<li>,<i>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<img>,<blockquote>,<pre>,<section>,";
+    $allowed_tags = "<b>,<p>,<a>,<strong>,<span>,<br>,<ul>,<ol>,<li>,<i>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<img>,<blockquote>,<pre>,<section>,<div>,";
 
     return strip_tags($value, $allowed_tags);
   }

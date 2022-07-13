@@ -1511,11 +1511,11 @@ function bwg_change_image_lightbox(current_key, key, data, from_effect) {
         // Slideshow filmstrip type is Fix dimension.
         if ( gallery_box_data['enable_image_filmstrip'] ) {
           bwg_slideshow_filmstrip_fix_dimension();
+          setTimeout(function () {
+            bwg_disable_lightbox_filmstrip_left_right_arrow(gallery_box_data);
+          }, 100);
         }
         bwg_resize_instagram_post();
-        setTimeout( function () {
-         bwg_disable_lightbox_filmstrip_left_right_arrow( gallery_box_data );
-        }, 100 );
       }
       if ( !is_embed ) {
         var cur_img = jQuery(next_image_class).find('img');

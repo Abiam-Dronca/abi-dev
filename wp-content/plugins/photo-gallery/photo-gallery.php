@@ -3,7 +3,7 @@
  * Plugin Name: Photo Gallery
  * Plugin URI: https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin
  * Description: This plugin is a fully responsive gallery plugin with advanced functionality.  It allows having different image galleries for your posts and pages. You can create unlimited number of galleries, combine them into albums, and provide descriptions and tags.
- * Version: 1.6.7
+ * Version: 1.6.10
  * Author: Photo Gallery Team
  * Author URI: https://10web.io/plugins/?utm_source=photo_gallery&utm_medium=free_plugin
  * Text Domain: photo-gallery
@@ -106,8 +106,8 @@ final class BWG {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_url = $this->plugin_url;
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.6.7';
-    $this->db_version = '1.6.7';
+    $this->plugin_version = '1.6.10';
+    $this->db_version = '1.6.10';
     $this->prefix = 'bwg';
     $this->nicename = __('Photo Gallery', 'photo-gallery');
     require_once($this->plugin_dir . '/framework/WDWLibrary.php');
@@ -450,8 +450,8 @@ final class BWG {
       }
       if ( $wp_editor_message ) {
         ?>
-        <div id="bwg_image_editor_notice" class="wd-notice bwg-notice notice notice-warning is-dismissible" data-action="<?php echo $wp_editor_message_action; ?>">
-          <?php echo $wp_editor_message; ?>
+        <div id="bwg_image_editor_notice" class="wd-notice bwg-notice notice notice-warning is-dismissible" data-action="<?php echo esc_attr($wp_editor_message_action); ?>">
+          <?php echo WDWLibrary::strip_tags($wp_editor_message); ?>
         </div>
         <?php
       }
@@ -551,11 +551,11 @@ final class BWG {
       $model_page = $this->plugin_dir . '/admin/models/' . $page . '.php';
       $view_page = $this->plugin_dir . '/admin/views/' . $page . '.php';
       if ( !is_file($controller_page) ) {
-        echo wp_sprintf(esc_html__('The controller %s file not exist.', 'photo-gallery'), '"<b>' . $page . '</b>"');
+        echo wp_sprintf(esc_html__('The controller %s file not exist.', 'photo-gallery'), '"<b>' . esc_html($page) . '</b>"');
         return FALSE;
       }
       if ( !is_file($view_page) ) {
-        echo wp_sprintf(esc_html__('The view %s file not exist.', 'photo-gallery'), '"<b>' . $page . '</b>"');
+        echo wp_sprintf(esc_html__('The view %s file not exist.', 'photo-gallery'), '"<b>' . esc_html($page) . '</b>"');
         return FALSE;
       }
       // Load page file.
@@ -570,11 +570,11 @@ final class BWG {
       $view_class = $page . 'View_' . $this->prefix;
       // Checking page class.
       if ( !class_exists($controller_class) ) {
-        echo wp_sprintf(esc_html__('The %s class not exist.', 'photo-gallery'), '"<b>' . $controller_class . '</b>"');
+        echo wp_sprintf(esc_html__('The %s class not exist.', 'photo-gallery'), '"<b>' . esc_html($controller_class) . '</b>"');
         return FALSE;
       }
       if ( !class_exists($view_class) ) {
-        echo wp_sprintf(esc_html__('The %s class not exist.', 'photo-gallery'), '"<b>' . $view_class . '</b>"');
+        echo wp_sprintf(esc_html__('The %s class not exist.', 'photo-gallery'), '"<b>' . esc_html($view_class) . '</b>"');
         return FALSE;
       }
       $controller = new $controller_class();
@@ -853,7 +853,7 @@ final class BWG {
         for ( $c = 0; $c < 150; $c++ ) {
           $x = rand( 0, $cap_width - 1 );
           $y = rand( 0, 29 );
-          $col = '0x' . rand( 0, 9 ) . '0' . rand( 0, 9 ) . '0' . rand( 0, 9 ) . '0';
+          $col = imagecolorallocate($canvas, rand( 0, 255 ), rand( 0, 255 ), rand( 0, 255 ));
           imagesetpixel( $canvas, $x, $y, $col );
         }
         header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
