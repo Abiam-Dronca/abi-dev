@@ -3,7 +3,7 @@ Contributors: cbutlerjr
 Tags: access, authentication, content, login, member, membership, password, protect, register, registration, restriction, subscriber
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 3.4.3
+Stable tag: 3.4.4.2
 
 License: GPLv3
 
@@ -108,7 +108,7 @@ The FAQs are maintained at https://rocketgeek.com/plugins/wp-members/docs/faqs/
 
 == Upgrade Notice ==
 
-WP-Members 3.4.3 is a minor update. WP-Members 3.4.2.1 is a bug fix release. Backup prior to upgrading is recommended, but rollback is possible. See changelog for a list of updates. Minimum WP version is 4.0.
+WP-Members 3.4.4 is a minor update. 3.4.4.2 is a compatibility release for users of WP-Members Advanced Options. Backup prior to upgrading is recommended, but rollback is possible. See changelog for a list of updates. Minimum WP version is 4.0.
 
 
 == Screenshots ==
@@ -135,6 +135,27 @@ WP-Members 3.4.3 is a minor update. WP-Members 3.4.2.1 is a bug fix release. Bac
 = 3.5.0 =
 
 * @todo WP-Members pluggable deprecated for use in theme functions.php (wpmem will be initialized when plugins are loaded).  If you have any WP-Members pluggable functions that load in the theme functions.php, you'll need to move these to another location, such as a custom plugin file.  Keep in mind, pluggable functions are no longer the preferred way of customizing (and have not been for many years) as most customizations, if not all, can be handled by using the plugin's filter and action hooks.
+
+= 3.4.4.2 =
+
+* Fixes an issue in the 3.4.4.1 release that calls an undefined function (wpmem_admin_options()).
+
+= 3.4.4.1 =
+
+* 3.4.4 is not compatible with WP-Members Advanced Options when redirect to login is used.  This version corrects that issue by rolling back the change to only load membership restriction functions when the membership products setting is enabled.  Users with WP-Members Advanced Options should update to 3.4.4.1.
+
+= 3.4.4 =
+
+* Adds excerpt to membership restricted content when excerpts are used and the user is logged in (should work the same as blocked content for a non-logged in user).
+* Adds excerpt to wpmem_product_restricted_args arguments to be edited or removed using the filter.
+* Adds [memberships] shortcode for admin notification email; this will include a list of memberships for the user in admin notification.
+* Fixes potential issue with [wpmem_field] shortcode if field does not have a defined type.
+* Updates to [wpmem_profile] and [wpmem_form password] for improved password reset.
+* Moves password reset link actions to template_redirect action. This should resolve issues that occur when multiple instances of the_content are run (i.e. the appearance of an invalid key message upon completing the password reset).
+* Moves export class to main user object (previously loaded from admin files). @todo Export class file also remains in admin for backward compatibility if file is called directly.
+* Moves admin object load (back) to "init" action (from "admin_init") as later load can cause problems with extensions loading on the "wpmem_after_admin_init" action.
+* Load dependencies after settings are loaded (allows for conditional loading of certain dependencies).
+* Load membership/product restriction only if membership products setting is active.
 
 = 3.4.3 =
 

@@ -72,7 +72,6 @@ class WP_Members {
 	 */
 	public $url;
 	
-	
 	/**
 	 * Content block settings.
 	 *
@@ -359,9 +358,6 @@ class WP_Members {
 		$this->name = $this->path . 'wp-members.php';
 		$this->slug = substr( basename( $this->name ), 0, -4 );
 		$this->url  = plugin_dir_url ( __DIR__ );
-		
-		// Load dependent files.
-		$this->load_dependencies();
 	
 		$settings = get_option( 'wpmembers_settings' );
 		
@@ -390,6 +386,9 @@ class WP_Members {
 			$this->$key = $val;
 		}
 
+		// Load dependent files.
+		$this->load_dependencies();
+				
 		// @todo Until I think of a better place to put this.
 		$this->optin = get_option( 'wpmembers_optin' );
 		
@@ -468,10 +467,8 @@ class WP_Members {
 		
 		add_action( 'init',                  array( $this, 'load_textdomain' ) );
 		add_action( 'init',                  array( $this->membership, 'add_cpt' ), 0 ); // Adds membership plans custom post type.
-		add_action( 'init',                  array( $this, 'load_admin'  ) );            // @todo Check user role to load correct dashboard
 		add_action( 'widgets_init',          array( $this, 'widget_init' ) );            // initializes the widget
 		add_action( 'rest_api_init',         array( $this, 'rest_init'   ) );
-		add_action( 'admin_menu',            'wpmem_admin_options' );                    // Adds admin menu
 		add_action( 'pre_get_posts',         array( $this, 'do_hide_posts' ), 20 );
 		add_action( 'template_redirect',     array( $this, 'get_action'  ) );
 		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_style_wp_login' ) ); // styles the native registration
@@ -479,6 +476,10 @@ class WP_Members {
 		add_action( 'wp_enqueue_scripts',    array( $this, 'loginout_script' ) );
 		add_action( 'customize_register',    array( $this, 'customizer_settings' ) );
 		add_action( 'wp_footer',             array( $this, 'invisible_captcha' ) );
+
+		if ( is_admin() ) {
+			add_action( 'init', array( $this, 'load_admin' ) ); // @todo Check user role to load correct dashboard
+		}
 		
 		if ( is_user_logged_in() ) {
 			add_action( 'wpmem_pwd_change',  array( $this->user, 'set_password' ), 9, 2 );
@@ -523,9 +524,9 @@ class WP_Members {
 		add_filter( 'get_previous_post_where', array( $this, 'filter_get_adjacent_post_where' ) );
 		add_filter( 'get_next_post_where',     array( $this, 'filter_get_adjacent_post_where' ) );
 		add_filter( 'allow_password_reset',    array( $this->user, 'no_reset' ) );           // no password reset for non-activated users
-		
+
 		// If registration is moderated, check for activation (blocks backend login by non-activated users).
-		if ( $this->mod_reg == 1 ) { 
+		if ( 1 == $this->mod_reg ) { 
 			add_filter( 'authenticate', array( $this->user, 'check_activated' ), 99, 3 ); 
 		}
 
@@ -653,15 +654,15 @@ class WP_Members {
 		require_once( $this->path . 'includes/api/api-products.php' );
 		require_once( $this->path . 'includes/api/api-users.php' );
 		require_once( $this->path . 'includes/api/api-utilities.php' );
-		require_once( $this->path . 'includes/deprecated.php' );
-		
-		require_once( $this->path . 'includes/legacy/dialogs.php' ); // File is totally deprecated at this point; eval for removal.
-		
+
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			require_once( $this->path . 'includes/cli/class-wp-members-cli.php' );
 			require_once( $this->path . 'includes/cli/class-wp-members-cli-user.php' );
 			require_once( $this->path . 'includes/cli/class-wp-members-cli-settings.php' );
 		}
+
+		require_once( $this->path . 'includes/deprecated.php' );
+		require_once( $this->path . 'includes/legacy/dialogs.php' ); // File is totally deprecated at this point; eval for removal.
 	}
 
 	/**

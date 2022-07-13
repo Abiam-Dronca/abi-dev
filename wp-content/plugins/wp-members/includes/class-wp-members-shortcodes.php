@@ -499,11 +499,15 @@ class WP_Members_Shortcodes {
  				$content = wpmem_get_display_message( $wpmem->regchk, $wpmem_themsg );
 				$content.= ( 'loginfailed' == $wpmem->regchk || 'success' == $wpmem->regchk ) ? wpmem_login_form() : wpmem_register_form();
 				
-			} elseif ( $wpmem->action == 'pwdreset' ) {
+			} elseif ( 'pwdreset' == $wpmem->action ) {
 
 				$content = $this->render_pwd_reset( $wpmem->regchk, $content );
 
-			} elseif( $wpmem->action == 'getusername' ) {
+			} elseif ( 'set_password_from_key' == $wpmem->action ) {
+				
+				$content = ( false != $wpmem->pwd_reset->content ) ? $wpmem->pwd_reset->content : $content;
+
+			} elseif ( 'getusername' == $wpmem->action ) {
 
 				$content = $this->render_forgot_username( $wpmem->regchk, $content );
 
@@ -604,7 +608,7 @@ class WP_Members_Shortcodes {
 			global $wpmem;
 			$fields = wpmem_fields();
 			
-			$field_type = ( 'user_login' == $field ) ? 'text' : $fields[ $field ]['type'];
+			$field_type = ( 'user_login' == $field || ! isset( $fields[ $field ] ) ) ? 'text' : $fields[ $field ]['type'];
 			$user_info_field = ( isset( $field ) && is_object( $user_info ) ) ? $user_info->{$field} : '';
 			$result = false;
 
@@ -892,6 +896,10 @@ class WP_Members_Shortcodes {
 
 				return $this->render_forgot_username( $wpmem_regchk, $content );
 
+			} elseif ( 'set_password_from_key' == $wpmem->action ) {
+				
+				return ( false != $wpmem->pwd_reset->content ) ? $wpmem->pwd_reset->content : $content;
+			
 			} else {
 
 				switch( $wpmem_regchk ) {

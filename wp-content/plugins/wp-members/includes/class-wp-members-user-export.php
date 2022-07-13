@@ -12,8 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-// error_log( 'Plugin file wp-members/admin/class-wp-members-user-export.php should not be loaded directly. Use wpmem_export_users() instead.' );
-
 class WP_Members_User_Export {
 
 	/**
