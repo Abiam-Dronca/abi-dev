@@ -18,8 +18,6 @@ if (has_post_thumbnail() && $settings['eael_show_image'] == 'yes') {
 	$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'eael_image_size_customize' );
 }
 
-$enable_ratio = $settings['enable_postgrid_image_ratio'] == 'yes' ? 'eael-image-ratio':'';
-
 $title_tag = isset($settings['title_tag']) ? Helper::eael_validate_html_tag($settings['title_tag']) : 'h2';
 
 if ($settings['eael_post_grid_preset_style'] === 'two') {
@@ -42,7 +40,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
                             echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
                         echo '</div>';
 
-                        echo '<div class="eael-entry-thumbnail '.$enable_ratio.'">
+                        echo '<div class="eael-entry-thumbnail">
                                 '.$thumbnail_html.'
                               </div>
                       </div>';
@@ -162,7 +160,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
         echo '</div>';
 
-        echo '<div class="eael-entry-thumbnail '.$enable_ratio.'">
+        echo '<div class="eael-entry-thumbnail">
                  '.$thumbnail_html.'
              </div>
         </div>';
@@ -257,7 +255,7 @@ if ($settings['eael_post_grid_preset_style'] === 'two') {
         echo '<a href="' . get_the_permalink() . '"' . $link_settings['image_link_nofollow'] . '' . $link_settings['image_link_target_blank'] . '></a>';
         echo '</div>';
 
-        echo '<div class="eael-entry-thumbnail '.$enable_ratio.'">
+        echo '<div class="eael-entry-thumbnail">
                 '.$thumbnail_html.'
             </div>
         </div>';
