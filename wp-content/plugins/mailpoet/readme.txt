@@ -2,8 +2,8 @@
 Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.6
-Tested up to: 5.9
-Stable tag: 3.90.1
+Tested up to: 6.0
+Stable tag: 3.91.1
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,23 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.91.1 - 2022-07-11 =
+* Updated: npm and composer dependencies;
+* Improved: small UI changes to unify spacing and colors;
+* Improved: add "noindex, nofollow" directive on email preview page to prevent search engines to index these pages;
+* Improved: use original $phpmailer as a WordPressMailer fallback;
+* Fixed: date badges in select boxes are not vertically aligned.
+
+= 3.91.0 - 2022-06-22 =
+* Fixed: template caching.
+
+= 3.90.2 - 2022-06-20 =
+* Improved: tested up to WordPress 6.0;
+* Improved: when sending with MailPoet Sending Service, show a warning when unauthorized email is used in settings;
+* Fixed: correctly reset error message when sending resumes;
+* Fixed: MailPoet Marketing Opt-in block is not translated in WordPress 6;
+* Fixed: some special characters in WordPress name don't show correctly when synced to MailPoet.
 
 = 3.90.1 - 2022-06-16 =
 * Fixed: occasional error related to twig templates when updating the plugin.
