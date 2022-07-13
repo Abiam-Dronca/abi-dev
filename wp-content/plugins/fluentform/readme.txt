@@ -4,7 +4,7 @@ Tags: contact form, contact forms, wp forms, forms, form builder, contact form b
 Requires at least: 4.5
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 4.3.8
+Stable tag: 4.3.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,6 +363,16 @@ The entire source code is <a href="https://github.com/fluentform/fluentform">ava
 12. Asset Loading Comparison with Other Plugins
 
 == Changelog ==
+
+= 4.3.9 (Date: July 04, 2022) =
+- Adds Resizeable Container Width
+- Adds hCaptcha in conversational form
+- Improves Regex pattern Condition
+- Fixes confirmation message responsive issue
+- Fixes conditional logic empty issue
+- Fixes form duplicate issue
+- Fixes auto captcha option issue with Custom Submit Button
+- Fixes tooltip issue
 
 = 4.3.8 (Date: June 02, 2022) =
 - Adds Oxygen 4.0 support

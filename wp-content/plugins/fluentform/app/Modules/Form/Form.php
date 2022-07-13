@@ -618,8 +618,8 @@ class Form
         foreach ($extras['notifications'] as $key => $notification) {
             $notificationValue = json_decode($notification->value);
             $pdf_attachments = [];
-
-            if ($notificationValue->pdf_attachments && count($notificationValue->pdf_attachments)) {
+    
+            if (isset($notificationValue->pdf_attachments) && count($notificationValue->pdf_attachments)) {
                 foreach ($notificationValue->pdf_attachments as $attachment) {
                     $pdf_attachments[] = json_encode($pdfFeedMap[$attachment]);
                 }
