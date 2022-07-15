@@ -1,3 +1,7 @@
+== 1.1.23 | 14th July 2022 ==
+* Fix: Safari overflow issue.
+* Fix: RTL footer social.
+
 == 1.1.22 | 22nd June 2022 ==
 * Add: Option to show caption with featured image.
 * Fix: Margin showing on body.

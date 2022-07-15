@@ -673,8 +673,8 @@ function header_button() {
 		if ( kadence()->option( 'header_button_sponsored' ) ) {
 			$rel[] = 'sponsored';
 		}
-		echo '<a href="' . esc_attr( kadence()->option( 'header_button_link' ) ) . '" target="' . esc_attr( kadence()->option( 'header_button_target' ) ? '_blank' : '_self' ) . '"' . ( ! empty( $rel ) ? ' rel="' . esc_attr( implode( ' ', $rel ) ) . '"' : '' ) . ( ! empty( kadence()->option( 'header_button_download' ) ) ? ' download' : '' ) . ' class="button header-button button-size-' . esc_attr( kadence()->option( 'header_button_size' ) ) . ' button-style-' . esc_attr( kadence()->option( 'header_button_style' ) ) . '">';
-		echo esc_html( $label );
+		echo '<a href="' . esc_attr( do_shortcode( kadence()->option( 'header_button_link' ) ) ) . '" target="' . esc_attr( kadence()->option( 'header_button_target' ) ? '_blank' : '_self' ) . '"' . ( ! empty( $rel ) ? ' rel="' . esc_attr( implode( ' ', $rel ) ) . '"' : '' ) . ( ! empty( kadence()->option( 'header_button_download' ) ) ? ' download' : '' ) . ' class="button header-button button-size-' . esc_attr( kadence()->option( 'header_button_size' ) ) . ' button-style-' . esc_attr( kadence()->option( 'header_button_style' ) ) . '">';
+		echo esc_html( do_shortcode( $label ) );
 		echo '</a>';
 		echo '</div>';
 		echo '</div>';
@@ -720,8 +720,8 @@ function mobile_button() {
 		$classes[] = 'button-size-' . esc_attr( kadence()->option( 'mobile_button_size' ) );
 		$classes[] = 'button-style-' . esc_attr( kadence()->option( 'mobile_button_style' ) );
 		echo '<div class="mobile-header-button-inner-wrap">';
-		echo '<a href="' . esc_attr( kadence()->option( 'mobile_button_link' ) ) . '" target="' . esc_attr( kadence()->option( 'mobile_button_target' ) ? '_blank' : '_self' ) . '"' . ( ! empty( $rel ) ? ' rel="' . esc_attr( implode( ' ', $rel ) ) . '"' : '' ) . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">';
-		echo esc_html( $label );
+		echo '<a href="' . esc_attr( do_shortcode( kadence()->option( 'mobile_button_link' ) ) ) . '" target="' . esc_attr( kadence()->option( 'mobile_button_target' ) ? '_blank' : '_self' ) . '"' . ( ! empty( $rel ) ? ' rel="' . esc_attr( implode( ' ', $rel ) ) . '"' : '' ) . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">';
+		echo esc_html( do_shortcode( $label ) );
 		echo '</a>';
 		echo '</div>';
 		echo '</div>';
