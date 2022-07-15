@@ -193,8 +193,6 @@ function pixgraphy_page_sliders() {
 
 /*************************** ENQUEING STYLES AND SCRIPTS ****************************************/
 function pixgraphy_scripts() {
-	// Include the file.
-	require_once get_theme_file_path( 'inc/wptt-webfont-loader.php' );
 	$pixgraphy_settings = pixgraphy_get_theme_options();
 	wp_enqueue_style( 'pixgraphy-style', get_stylesheet_uri() );
 	wp_enqueue_style('font-awesome', get_template_directory_uri().'/assets/font-awesome/css/font-awesome.min.css');
@@ -231,7 +229,7 @@ function pixgraphy_scripts() {
 	array_push( $pixgraphy_googlefont, 'Open+Sans:400,400italic,600');
 	array_push( $pixgraphy_googlefont, 'Merriweather:400');
 	$pixgraphy_googlefonts = implode("|", $pixgraphy_googlefont);
-	wp_register_style( 'pixgraphy_google_fonts', wptt_get_webfont_url('https://fonts.googleapis.com/css?family='.$pixgraphy_googlefonts));
+	wp_register_style( 'pixgraphy_google_fonts', '//fonts.googleapis.com/css?family='.$pixgraphy_googlefonts);
 	wp_enqueue_style( 'pixgraphy_google_fonts' );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
