@@ -1,4 +1,4 @@
-/*! elementor - v3.6.8 - 27-07-2022 */
+/*! elementor - v3.7.2 - 21-08-2022 */
 "use strict";
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["accordion"],{
 
@@ -206,7 +206,7 @@ class baseTabs extends elementorModules.frontend.handlers.Base {
         }
       },
       keyup: event => {
-        switch (event.key) {
+        switch (event.code) {
           case 'ArrowLeft':
           case 'ArrowRight':
             this.handleKeyboardNavigation(event);
@@ -261,4 +261,4 @@ exports["default"] = baseTabs;
 /***/ })
 
 }]);
-//# sourceMappingURL=accordion.6996261641c004df9324.bundle.js.map
+//# sourceMappingURL=accordion.342cf6dd66b8f56ed3e2.bundle.js.map
