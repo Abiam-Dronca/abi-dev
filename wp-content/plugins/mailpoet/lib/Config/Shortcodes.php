@@ -9,7 +9,6 @@ use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\SendingQueueEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Form\Widget;
-use MailPoet\Models\Subscriber;
 use MailPoet\Newsletter\NewslettersRepository;
 use MailPoet\Newsletter\Shortcodes\Categories\Date;
 use MailPoet\Newsletter\Shortcodes\Categories\Link;
@@ -21,7 +20,6 @@ use MailPoet\Segments\SegmentSubscribersRepository;
 use MailPoet\Subscribers\SubscribersRepository;
 use MailPoet\Subscription\Pages;
 use MailPoet\WP\Functions as WPFunctions;
-use MailPoetVendor\Doctrine\ORM\EntityManager;
 
 class Shortcodes {
   /** @var Pages */
@@ -42,9 +40,6 @@ class Shortcodes {
   /** @var NewslettersRepository */
   private $newslettersRepository;
 
-  /** @var EntityManager */
-  private $entityManager;
-
   /** @var Date */
   private $dateCategory;
 
@@ -64,7 +59,6 @@ class Shortcodes {
     SubscribersRepository $subscribersRepository,
     NewsletterUrl $newsletterUrl,
     NewslettersRepository $newslettersRepository,
-    EntityManager $entityManager,
     Date $dateCategory,
     Link $linkCategory,
     Newsletter $newsletterCategory,
@@ -76,7 +70,6 @@ class Shortcodes {
     $this->subscribersRepository = $subscribersRepository;
     $this->newsletterUrl = $newsletterUrl;
     $this->newslettersRepository = $newslettersRepository;
-    $this->entityManager = $entityManager;
     $this->dateCategory = $dateCategory;
     $this->linkCategory = $linkCategory;
     $this->newsletterCategory = $newsletterCategory;
@@ -103,27 +96,17 @@ class Shortcodes {
     $this->wp->addFilter('mailpoet_archive_email_processed_date', [
       $this, 'renderArchiveDate',
     ], 2);
-    $this->wp->addFilter('mailpoet_archive_email_subject', [
+    $this->wp->addFilter('mailpoet_archive_email_subject_line', [
       $this, 'renderArchiveSubject',
     ], 2, 3);
 
-    // This deprecated notice can be removed after 2022-06-01
-    if ($this->wp->hasFilter('mailpoet_archive_date')) {
+    // This deprecated notice can be removed after 2023-01-11
+    if ($this->wp->hasFilter('mailpoet_archive_email_subject')) {
       $this->wp->deprecatedHook(
-        'mailpoet_archive_date',
-        '3.69.2',
-        'mailpoet_archive_email_processed_date',
-        __('Please note that mailpoet_archive_date no longer runs and that the list of parameters of the new filter is different.', 'mailpoet')
-      );
-    }
-
-    // This deprecated notice can be removed after 2022-06-01
-    if ($this->wp->hasFilter('mailpoet_archive_subject')) {
-      $this->wp->deprecatedHook(
-        'mailpoet_archive_subject',
-        '3.69.2',
+        'mailpoet_archive_email_subject_line',
+        '3.92.1',
         'mailpoet_archive_email_subject',
-        __('Please note that mailpoet_archive_subject no longer runs and that the list of parameters of the new filter is different.', 'mailpoet')
+        __('Please note that mailpoet_archive_email_subject no longer runs and that the list of parameters of the new filter is different.', 'mailpoet')
       );
     }
 
@@ -154,7 +137,9 @@ class Shortcodes {
     }
 
     if (empty($segmentIds)) {
-      return $this->wp->numberFormatI18n(Subscriber::filter('subscribed')->count());
+      return $this->wp->numberFormatI18n(
+        $this->subscribersRepository->countBy(['status' => SubscriberEntity::STATUS_SUBSCRIBED, 'deletedAt' => null])
+      );
     } else {
       return $this->wp->numberFormatI18n(
         $this->segmentSubscribersRepository->getSubscribersCountBySegmentIds($segmentIds, SubscriberEntity::STATUS_SUBSCRIBED)
@@ -175,12 +160,11 @@ class Shortcodes {
     $newsletters = $this->newslettersRepository->getArchives($segmentIds);
 
     $subscriber = $this->subscribersRepository->getCurrentWPUser();
-    $subscriber = $subscriber ? Subscriber::findOne($subscriber->getId()) : null;
 
     if (empty($newsletters)) {
       return $this->wp->applyFilters(
         'mailpoet_archive_no_newsletters',
-        $this->wp->__('Oops! There are no newsletters to display.', 'mailpoet')
+        __('Oops! There are no newsletters to display.', 'mailpoet')
       );
     } else {
       $title = $this->wp->applyFilters('mailpoet_archive_title', '');
@@ -196,7 +180,7 @@ class Shortcodes {
             $this->wp->applyFilters('mailpoet_archive_email_processed_date', $newsletter) .
           '</span>
           <span class="mailpoet_archive_subject">' .
-            $this->wp->applyFilters('mailpoet_archive_email_subject', $newsletter, $subscriber, $queue) .
+            $this->wp->applyFilters('mailpoet_archive_email_subject_line', $newsletter, $subscriber, $queue) .
           '</span>
         </li>';
       }
@@ -219,7 +203,11 @@ class Shortcodes {
     );
   }
 
-  public function renderArchiveSubject(NewsletterEntity $newsletter, $subscriber, SendingQueueEntity $queue) {
+  public function renderArchiveSubject(NewsletterEntity $newsletter, ?SubscriberEntity $subscriber, ?SendingQueueEntity $queue) {
+    if (is_null($subscriber)) {
+      $subscriber = new SubscriberEntity();
+    }
+
     $previewUrl = $this->newsletterUrl->getViewInBrowserUrl($newsletter, $subscriber, $queue);
     /**
      * An ugly workaround to make sure state is not shared via NewsletterShortcodes service
@@ -233,19 +221,14 @@ class Shortcodes {
       $this->subscriberCategory,
       $this->wp
     );
+
     $shortcodeProcessor->setNewsletter($newsletter);
 
-    if (is_object($subscriber) && !is_a($subscriber, SubscriberEntity::class) && !empty($subscriber->id)) {
-      $subscriberEntity = $this->entityManager->find(SubscriberEntity::class, $subscriber->id);
-    } else {
-      $subscriberEntity = new SubscriberEntity();
-    }
-
-    $shortcodeProcessor->setSubscriber($subscriberEntity);
+    $shortcodeProcessor->setSubscriber($subscriber);
     $shortcodeProcessor->setQueue($queue);
     return '<a href="' . esc_attr($previewUrl) . '" target="_blank" title="'
       . esc_attr(__('Preview in a new tab', 'mailpoet')) . '">'
-      . esc_attr((string)$shortcodeProcessor->replace($queue->getNewsletterRenderedSubject())) .
+      . esc_attr((string)$shortcodeProcessor->replace($queue ? $queue->getNewsletterRenderedSubject() : '')) .
       '</a>';
   }
 }

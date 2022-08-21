@@ -11,6 +11,7 @@ use MailPoet\Automation\Engine\Engine;
 use MailPoet\Automation\Engine\Hooks as AutomationHooks;
 use MailPoet\Automation\Integrations\MailPoet\MailPoetIntegration;
 use MailPoet\Cron\CronTrigger;
+use MailPoet\Cron\DaemonActionSchedulerRunner;
 use MailPoet\Features\FeaturesController;
 use MailPoet\InvalidStateException;
 use MailPoet\PostEditorBlocks\PostEditorBlock;
@@ -105,6 +106,12 @@ class Initializer {
   /** @var FeaturesController */
   private $featuresController;
 
+  /** @var PersonalDataExporters */
+  private $personalDataExporters;
+
+  /** @var DaemonActionSchedulerRunner */
+  private $actionSchedulerRunner;
+
   const INITIALIZED = 'MAILPOET_INITIALIZED';
 
   public function __construct(
@@ -132,7 +139,9 @@ class Initializer {
     AssetsLoader $assetsLoader,
     Engine $automationEngine,
     MailPoetIntegration $automationMailPoetIntegration,
-    FeaturesController $featuresController
+    FeaturesController $featuresController,
+    PersonalDataExporters $personalDataExporters,
+    DaemonActionSchedulerRunner $actionSchedulerRunner
   ) {
     $this->rendererFactory = $rendererFactory;
     $this->accessControl = $accessControl;
@@ -159,9 +168,14 @@ class Initializer {
     $this->automationEngine = $automationEngine;
     $this->automationMailPoetIntegration = $automationMailPoetIntegration;
     $this->featuresController = $featuresController;
+    $this->personalDataExporters = $personalDataExporters;
+    $this->actionSchedulerRunner = $actionSchedulerRunner;
   }
 
   public function init() {
+    // Initialize Action Scheduler. It needs to be called early because it hooks into `plugins_loaded`.
+    require_once __DIR__ . '/../../vendor/woocommerce/action-scheduler/action-scheduler.php';
+
     // load translations and setup translations update/download
     $this->setupLocalizer();
 
@@ -184,6 +198,15 @@ class Initializer {
       [
         $this,
         'runActivator',
+      ]
+    );
+
+    // deactivation function
+    $this->wpFunctions->registerDeactivationHook(
+      Env::$file,
+      [
+        $this,
+        'runDeactivation',
       ]
     );
 
@@ -351,10 +374,7 @@ class Initializer {
   }
 
   public function setupCronTrigger() {
-    // setup cron trigger only outside of cli environment
-    if (php_sapi_name() !== 'cli') {
-      $this->cronTrigger->init();
-    }
+    $this->cronTrigger->init((string)php_sapi_name());
   }
 
   public function setupConflictResolver() {
@@ -390,8 +410,7 @@ class Initializer {
   }
 
   public function setupPersonalDataExporters() {
-    $exporters = new PersonalDataExporters();
-    $exporters->init();
+    $this->personalDataExporters->init();
   }
 
   public function setupPersonalDataErasers() {
@@ -433,6 +452,10 @@ class Initializer {
       )
     );
     return array_merge($tables, $mailpoetTables);
+  }
+
+  public function runDeactivation() {
+    $this->actionSchedulerRunner->deactivate();
   }
 
   private function setupWoocommerceTransactionalEmails() {

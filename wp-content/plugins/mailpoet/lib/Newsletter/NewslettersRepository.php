@@ -425,6 +425,24 @@ class NewslettersRepository extends Repository {
     return $result;
   }
 
+  /**
+   * Returns standard newsletters ordered by sentAt
+   * @return NewsletterEntity[]
+   */
+  public function getStandardNewsletterList(): array {
+    return $this->entityManager->createQueryBuilder()
+      ->select('n')
+      ->addSelect('CASE WHEN n.sentAt IS NULL THEN 1 ELSE 0 END as HIDDEN sent_at_is_null')
+      ->from(NewsletterEntity::class, 'n')
+      ->where('n.type = :typeStandard')
+      ->andWhere('n.deletedAt IS NULL')
+      ->orderBy('sent_at_is_null', 'DESC')
+      ->addOrderBy('n.sentAt', 'DESC')
+      ->setParameter('typeStandard', NewsletterEntity::TYPE_STANDARD)
+      ->getQuery()
+      ->getResult();
+  }
+
   public function prefetchOptions(array $newsletters) {
     $this->entityManager->createQueryBuilder()
       ->select('PARTIAL n.{id}, o, opf')
@@ -447,6 +465,42 @@ class NewslettersRepository extends Repository {
       ->setParameter('newsletters', $newsletters)
       ->getQuery()
       ->getResult();
+  }
+
+  /**
+   * Returns a list of emails that are either scheduled standard emails
+   * or active automatic emails of the provided types.
+   *
+   * @param array $automaticEmailTypes
+   *
+   * @return array
+   */
+  public function getScheduledStandardEmailsAndActiveAutomaticEmails(array $automaticEmailTypes): array {
+    $queryBuilder = $this->entityManager->createQueryBuilder();
+
+    $newsletters = $queryBuilder
+      ->select('n')
+      ->from(NewsletterEntity::class, 'n')
+      ->orWhere(
+        $queryBuilder->expr()->andX(
+          $queryBuilder->expr()->eq('n.type', ':typeStandard'),
+          $queryBuilder->expr()->eq('n.status', ':statusScheduled')
+        )
+      )
+      ->orWhere(
+        $queryBuilder->expr()->andX(
+          $queryBuilder->expr()->in('n.type', ':automaticEmailTypes'),
+          $queryBuilder->expr()->eq('n.status', ':statusActive')
+        )
+      )
+      ->setParameter('typeStandard', NewsletterEntity::TYPE_STANDARD)
+      ->setParameter('statusScheduled', NewsletterEntity::STATUS_SCHEDULED)
+      ->setParameter('automaticEmailTypes', $automaticEmailTypes)
+      ->setParameter('statusActive', NewsletterEntity::STATUS_ACTIVE)
+      ->getQuery()
+      ->getResult();
+
+    return $newsletters;
   }
 
   private function fetchChildrenIds(array $parentIds) {

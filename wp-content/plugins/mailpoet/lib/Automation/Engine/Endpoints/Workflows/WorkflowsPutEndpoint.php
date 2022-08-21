@@ -10,8 +10,8 @@ use MailPoet\Automation\Engine\API\Endpoint;
 use MailPoet\Automation\Engine\API\Request;
 use MailPoet\Automation\Engine\API\Response;
 use MailPoet\Automation\Engine\Builder\UpdateWorkflowController;
-use MailPoet\Automation\Engine\Workflows\Step;
-use MailPoet\Automation\Engine\Workflows\Workflow;
+use MailPoet\Automation\Engine\Data\Step;
+use MailPoet\Automation\Engine\Data\Workflow;
 use MailPoet\Validator\Builder;
 use stdClass;
 
@@ -32,10 +32,19 @@ class WorkflowsPutEndpoint extends Endpoint {
   }
 
   public static function getRequestSchema(): array {
+    $step = Builder::object([
+      'id' => Builder::string()->required(),
+      'type' => Builder::string()->required(),
+      'key' => Builder::string()->required(),
+      'args' => Builder::object(),
+      'next_step_id' => Builder::string()->nullable(),
+    ]);
+
     return [
       'id' => Builder::integer()->required(),
-      'name' => Builder::string(),
+      'name' => Builder::string()->minLength(1),
       'status' => Builder::string(),
+      'steps' => Builder::object()->additionalProperties($step),
     ];
   }
 

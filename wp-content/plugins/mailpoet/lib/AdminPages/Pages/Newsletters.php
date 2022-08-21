@@ -11,11 +11,13 @@ use MailPoet\Config\Env;
 use MailPoet\Config\Installer;
 use MailPoet\Config\Menu;
 use MailPoet\Config\ServicesChecker;
+use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Features\FeaturesController;
 use MailPoet\Listing\PageLimit;
-use MailPoet\Models\Newsletter;
+use MailPoet\Newsletter\NewslettersRepository;
 use MailPoet\NewsletterTemplates\NewsletterTemplatesRepository;
 use MailPoet\Segments\SegmentsSimpleListRepository;
+use MailPoet\Services\AuthorizedSenderDomainController;
 use MailPoet\Services\Bridge;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Settings\TrackingConfig;
@@ -72,8 +74,17 @@ class Newsletters {
   /** @var SegmentsSimpleListRepository */
   private $segmentsListRepository;
 
+  /** @var NewslettersRepository */
+  private $newslettersRepository;
+
   /** @var TrackingConfig */
   private $trackingConfig;
+
+  /** @var Bridge */
+  private $bridge;
+
+  /** @var AuthorizedSenderDomainController */
+  private $senderDomainController;
 
   public function __construct(
     PageRenderer $pageRenderer,
@@ -90,7 +101,10 @@ class Newsletters {
     WPPostListLoader $wpPostListLoader,
     AutomaticEmails $automaticEmails,
     SegmentsSimpleListRepository $segmentsListRepository,
-    TrackingConfig $trackingConfig
+    NewslettersRepository $newslettersRepository,
+    TrackingConfig $trackingConfig,
+    Bridge $bridge,
+    AuthorizedSenderDomainController $senderDomainController
   ) {
     $this->pageRenderer = $pageRenderer;
     $this->listingPageLimit = $listingPageLimit;
@@ -107,12 +121,16 @@ class Newsletters {
     $this->wpPostListLoader = $wpPostListLoader;
     $this->segmentsListRepository = $segmentsListRepository;
     $this->trackingConfig = $trackingConfig;
+    $this->newslettersRepository = $newslettersRepository;
+    $this->bridge = $bridge;
+    $this->senderDomainController = $senderDomainController;
   }
 
   public function render() {
     global $wp_roles; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
     $installer = new Installer(Installer::PREMIUM_PLUGIN_SLUG);
     $pluginInformation = $installer->retrievePluginInformation();
+    $mssEnabled = $this->bridge->isMailpoetSendingServiceEnabled();
 
     $data = [];
 
@@ -120,7 +138,7 @@ class Newsletters {
     $segments = $this->segmentsListRepository->getListWithSubscribedSubscribersCounts();
     $data['segments'] = $segments;
     $data['settings'] = $this->settings->getAll();
-    $data['mss_active'] = Bridge::isMPSendingServiceEnabled();
+    $data['mss_active'] = $mssEnabled;
     $data['has_mss_key_specified'] = Bridge::isMSSKeySpecified();
     $data['mss_key_pending_approval'] = $this->servicesChecker->isMailPoetAPIKeyPendingApproval();
     $data['current_wp_user'] = $this->wp->wpGetCurrentUser()->to_array();
@@ -128,7 +146,7 @@ class Newsletters {
     $data['current_wp_user_firstname'] = $this->wp->wpGetCurrentUser()->user_firstname;
     $data['site_url'] = $this->wp->siteUrl();
     $data['roles'] = $wp_roles->get_names(); // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
-    $data['roles']['mailpoet_all'] = $this->wp->__('In any WordPress role', 'mailpoet');
+    $data['roles']['mailpoet_all'] = __('In any WordPress role', 'mailpoet');
 
     $installedAtDiff = (new \DateTime($this->settings->get('installed_at')))->diff(new \DateTime());
     $data['installed_days_ago'] = (int)$installedAtDiff->format('%a');
@@ -156,7 +174,7 @@ class Newsletters {
     $data['is_woocommerce_active'] = $this->woocommerceHelper->isWooCommerceActive();
     $data['is_mailpoet_update_available'] = array_key_exists(Env::$pluginPath, $this->wp->getPluginUpdates());
     $data['subscriber_count'] = $this->subscribersFeature->getSubscribersCount();
-    $data['newsletters_count'] = Newsletter::count();
+    $data['newsletters_count'] = $this->newslettersRepository->countBy([]);
     $data['mailpoet_feature_flags'] = $this->featuresController->getAllFlags();
     $data['transactional_emails_opt_in_notice_dismissed'] = $this->userFlags->get('transactional_emails_opt_in_notice_dismissed');
     $data['has_premium_support'] = $this->subscribersFeature->hasPremiumSupport();
@@ -177,7 +195,7 @@ class Newsletters {
     $data['woocommerce_optin_on_checkout'] = $this->settings->get('woocommerce.optin_on_checkout.enabled', false);
 
     $data['is_new_user'] = $this->installation->isNewInstallation();
-    $data['sent_newsletters_count'] = (int)Newsletter::where('status', Newsletter::STATUS_SENT)->count();
+    $data['sent_newsletters_count'] = $this->newslettersRepository->countBy(['status' => NewsletterEntity::STATUS_SENT]);
     $data['woocommerce_transactional_email_id'] = $this->settings->get(TransactionalEmails::SETTING_EMAIL_ID);
     $data['display_detailed_stats'] = Installer::getPremiumStatus()['premium_plugin_initialized'];
     $data['newsletters_templates_recently_sent_count'] = $this->newsletterTemplatesRepository->getRecentlySentCount();
@@ -185,6 +203,16 @@ class Newsletters {
     $data['product_categories'] = $this->wpPostListLoader->getWooCommerceCategories();
 
     $data['products'] = $this->wpPostListLoader->getProducts();
+
+    $data['authorized_emails'] = [];
+    $data['verified_sender_domains'] = [];
+    $data['all_sender_domains'] = [];
+
+    if ($mssEnabled) {
+      $data['authorized_emails'] = $this->bridge->getAuthorizedEmailAddresses();
+      $data['verified_sender_domains'] = $this->senderDomainController->getVerifiedSenderDomains();
+      $data['all_sender_domains'] = $this->senderDomainController->getAllSenderDomains();
+    }
 
     $this->pageRenderer->displayPage('newsletters.html', $data);
   }

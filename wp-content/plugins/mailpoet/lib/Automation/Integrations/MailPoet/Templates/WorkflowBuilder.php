@@ -5,46 +5,47 @@ namespace MailPoet\Automation\Integrations\MailPoet\Templates;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Workflows\Step;
-use MailPoet\Automation\Engine\Workflows\Workflow;
-use MailPoet\Automation\Integrations\Core\Actions\WaitAction;
-use MailPoet\Automation\Integrations\MailPoet\Actions\SendWelcomeEmailAction;
+use MailPoet\Automation\Engine\Data\Step;
+use MailPoet\Automation\Engine\Data\Workflow;
+use MailPoet\Automation\Integrations\Core\Actions\DelayAction;
+use MailPoet\Automation\Integrations\MailPoet\Actions\SendEmailAction;
 use MailPoet\Automation\Integrations\MailPoet\Triggers\SegmentSubscribedTrigger;
 use MailPoet\Util\Security;
+use MailPoet\Validator\Schema\ObjectSchema;
 
 class WorkflowBuilder {
 
-  /** @var WaitAction */
-  private $waitAction;
+  /** @var DelayAction */
+  private $delayAction;
 
   /** @var SegmentSubscribedTrigger */
   private $segmentSubscribedTrigger;
 
-  /** @var SendWelcomeEmailAction */
-  private $sendWelcomeEmailAction;
+  /** @var SendEmailAction */
+  private $sendEmailAction;
 
   public function __construct(
     SegmentSubscribedTrigger $segmentSubscribedTrigger,
-    SendWelcomeEmailAction $sendWelcomeEmailAction,
-    WaitAction $waitAction
+    SendEmailAction $sendEmailAction,
+    DelayAction $delayAction
   ) {
-    $this->waitAction = $waitAction;
+    $this->delayAction = $delayAction;
     $this->segmentSubscribedTrigger = $segmentSubscribedTrigger;
-    $this->sendWelcomeEmailAction = $sendWelcomeEmailAction;
+    $this->sendEmailAction = $sendEmailAction;
   }
 
   public function delayedEmailAfterSignupWorkflow(string $name): Workflow {
     $triggerStep = $this->segmentSubscribedTriggerStep();
 
-    $waitStep = $this->waitStep(60 * 60);
-    $triggerStep->setNextStepId($waitStep->getId());
+    $delayStep = $this->delayStep(null, "HOURS");
+    $triggerStep->setNextStepId($delayStep->getId());
 
     $sendEmailStep = $this->sendEmailActionStep();
-    $waitStep->setNextStepId($sendEmailStep->getId());
+    $delayStep->setNextStepId($sendEmailStep->getId());
 
     $steps = [
       $triggerStep,
-      $waitStep,
+      $delayStep,
       $sendEmailStep,
     ];
 
@@ -54,48 +55,75 @@ class WorkflowBuilder {
   public function welcomeEmailSequence(string $name): Workflow {
     $triggerStep = $this->segmentSubscribedTriggerStep();
 
-    $firstWaitStep = $this->waitStep(5 * 60);
-    $triggerStep->setNextStepId($firstWaitStep->getId());
+    $firstDelayStep = $this->delayStep( null, "HOURS");
+    $triggerStep->setNextStepId($firstDelayStep->getId());
 
-    $sendFirstEmailStep = $this->sendEmailActionStep(1);
-    $firstWaitStep->setNextStepId($sendFirstEmailStep->getId());
+    $sendFirstEmailStep = $this->sendEmailActionStep();
+    $firstDelayStep->setNextStepId($sendFirstEmailStep->getId());
 
-    $secondWaitStep = $this->waitStep(3 * 60);
-    $sendFirstEmailStep->setNextStepId($secondWaitStep->getId());
+    $secondDelayStep = $this->delayStep( null,"HOURS");
+    $sendFirstEmailStep->setNextStepId($secondDelayStep->getId());
 
-    $sendSecondEmailStep = $this->sendEmailActionStep(2);
-    $secondWaitStep->setNextStepId($sendSecondEmailStep->getId());
+    $sendSecondEmailStep = $this->sendEmailActionStep();
+    $secondDelayStep->setNextStepId($sendSecondEmailStep->getId());
 
     $steps = [
       $triggerStep,
-      $firstWaitStep,
+      $firstDelayStep,
       $sendFirstEmailStep,
-      $secondWaitStep,
+      $secondDelayStep,
       $sendSecondEmailStep,
     ];
 
     return new Workflow($name, $steps);
   }
 
-  private function waitStep(int $seconds): Step {
-    return new Step($this->uniqueId(), Step::TYPE_ACTION, $this->waitAction->getKey(), null, [
-      'seconds' => $seconds,
-    ]);
+  private function delayStep(?int $delay, string $delayType): Step {
+    return new Step(
+      $this->uniqueId(),
+      Step::TYPE_ACTION,
+      $this->delayAction->getKey(),
+      null,
+      [
+        'delay' => $delay,
+        'delay_type' => $delayType,
+      ] + $this->getDefaultArgs($this->delayAction->getArgsSchema())
+    );
   }
 
   private function segmentSubscribedTriggerStep(?int $segmentId = null): Step {
-    return new Step($this->uniqueId(), Step::TYPE_TRIGGER, $this->segmentSubscribedTrigger->getKey(), null, [
-      'segment_id' => $segmentId,
-    ]);
+    return new Step(
+      $this->uniqueId(),
+      Step::TYPE_TRIGGER,
+      $this->segmentSubscribedTrigger->getKey(),
+      null,
+      [
+        'segment_id' => $segmentId,
+      ] + $this->getDefaultArgs($this->segmentSubscribedTrigger->getArgsSchema())
+    );
   }
 
-  private function sendEmailActionStep(?int $newsletterId = null): Step {
-    return new Step($this->uniqueId(), Step::TYPE_ACTION, $this->sendWelcomeEmailAction->getKey(), null, [
-      'welcomeEmailId' => $newsletterId
-    ]);
+  private function sendEmailActionStep(): Step {
+    return new Step(
+      $this->uniqueId(),
+      Step::TYPE_ACTION,
+      $this->sendEmailAction->getKey(),
+      null,
+      $this->getDefaultArgs($this->sendEmailAction->getArgsSchema())
+    );
   }
 
   private function uniqueId(): string {
     return Security::generateRandomString(16);
+  }
+
+  private function getDefaultArgs(ObjectSchema $argsSchema): array {
+    $args = [];
+    foreach ($argsSchema->toArray()['properties'] ?? [] as $name => $schema) {
+      if (array_key_exists('default', $schema)) {
+        $args[$name] = $schema['default'];
+      }
+    }
+    return $args;
   }
 }

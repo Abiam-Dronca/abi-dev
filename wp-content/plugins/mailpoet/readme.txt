@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 3.91.1
+Stable tag: 3.95.0
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,38 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.95.0 - 2022-08-15 =
+* Added: the domain verification process can be performed in the plugin;
+* Updated: Gutenberg dependencies;
+* Fixed: emails are labeled as "Preview" on System Status page;
+* Removed support for migration data from MailPoet2.
+
+= 3.94.0 - 2022-08-08 =
+* Added: filter subscribers by a tag;
+* Added: new WordPress cron task scheduler method;
+* Improved: tooltip content when hovering over list name;
+* Improved: extract name from email when used as first name in welcome wizard;
+* Improved: radio buttons and checkboxes accessibility in forms.
+
+= 3.93.1 - 2022-08-02 =
+* Added: link to MailPoet settings from Plugins page;
+* Changed: email signup step removed from the MailPoet setup;
+* Fixed: a notice to send all emails through MailPoet can't be dismissed;
+* Fixed: MailPoet menu icon on WordPress.com.
+
+= 3.93.0 - 2022-07-25 =
+* Added: premium feature: new segment by subscriber tags.
+
+= 3.92.1 - 2022-07-20 =
+* Fixed: A database table could not be created in some installations.
+
+= 3.92.0 - 2022-07-19 =
+* Added: show tags on Subscribers listing page;
+* Added: tagging subscribers on the edit page;
+* Added: the ability to authorise the email address in the plugin;
+* Improved: when sending with MailPoet Sending Service, show a warning when unauthorized email is used immediately before sending an email;
+* Improved: don't load 3rd-party libraries on new installations unless an active consent is given.
 
 = 3.91.1 - 2022-07-11 =
 * Updated: npm and composer dependencies;

@@ -11,6 +11,8 @@ use MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject;
 use MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject;
 use MailPoet\Entities\SubscriberSegmentEntity;
 use MailPoet\InvalidStateException;
+use MailPoet\Validator\Builder;
+use MailPoet\Validator\Schema\ObjectSchema;
 use MailPoet\WP\Functions as WPFunctions;
 
 class SegmentSubscribedTrigger implements Trigger {
@@ -28,7 +30,11 @@ class SegmentSubscribedTrigger implements Trigger {
   }
 
   public function getName(): string {
-    return __('Subscribed to segment');
+    return __('Subscribed to segment', 'mailpoet');
+  }
+
+  public function getArgsSchema(): ObjectSchema {
+    return Builder::object();
   }
 
   public function registerHooks(): void {
@@ -44,8 +50,18 @@ class SegmentSubscribedTrigger implements Trigger {
     }
 
     $this->wp->doAction(Hooks::TRIGGER, $this, [
-      SegmentSubject::KEY => ['segment_id' => $segment->getId()],
-      SubscriberSubject::KEY => ['subscriber_id' => $subscriber->getId()],
+      [
+        'key' => SegmentSubject::KEY,
+        'args' => [
+          'segment_id' => $segment->getId(),
+        ],
+      ],
+      [
+        'key' => SubscriberSubject::KEY,
+        'args' => [
+          'subscriber_id' => $subscriber->getId(),
+        ],
+      ],
     ]);
   }
 }
