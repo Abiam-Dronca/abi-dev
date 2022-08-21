@@ -3,114 +3,27 @@ Contributors: mailpoet
 Tags: newsletter, email, welcome email, post notification, autoresponder, signup, subscription, SMTP
 Requires at least: 3.5
 Tested up to: 5.5
-Stable tag: 2.21
+Stable tag: 2.22
 Send newsletters post notifications or autoresponders from WordPress easily, and beautifully. Start to capture subscribers with our widget now.
 
 == Description ==
 
-Support for this plugin will cease at the end of July, 2022 – find out more [over on our blog](https://www.mailpoet.com/blog/mailpoet-2-is-being-retired/). 
-We recommend looking at [MailPoet 3](https://wordpress.org/plugins/mailpoet/) as an alternative.
-
-= Check out this 2 minute video. =
-
-https://vimeo.com/130151897
+This plugin is no longer supported. We recommend looking at [MailPoet 3](https://wordpress.org/plugins/mailpoet/) as an alternative.
 
 = Features =
 
 Please visit [MailPoet version 3 features](https://wordpress.org/plugins/mailpoet/) instead.
 
-= Premium version =
-
-MailPoet Premium offers these nifty extra features:
-
-* Send to more than 2000 subscribers
-* A beautiful statistics dashboard to compare your newsletters and subscribers
-* Detailed stats for each subscriber and newsletter
-* Automated bounce handling that keeps your subscribers' list clean
-* Test your SPAM score before you send a newsletter to your subscribers
-* Improve deliverability with DKIM signature
-* Simple install process
-* Priority support
-
 = Support =
 
-This version is no longer officially supported. Paying customer will continue to be supported until further notice.
-
-= Translations in your language =
-
-* Arabic
-* Basque
-* Catalan
-* Chinese
-* Croatian
-* Czech
-* Danish
-* Dutch
-* French (but of course!)
-* German
-* Greek
-* Hebrew
-* Hungarian
-* Indonesian
-* Italian
-* Japanese
-* Norwegian
-* Persian
-* Polish
-* Portuguese PT
-* Portuguese BR
-* Romanian
-* Russian
-* Serbian
-* Slovak
-* Slovenian
-* Spanish
-* Swedish
-* Turkish
-
-== Installation ==
-
-There are 3 ways to install this plugin:
-
-= 1. The super easy way =
-1. In your Admin, go to menu Plugins > Add
-1. Search for `mailpoet`
-1. Click to install
-1. Activate the plugin
-1. A new menu `MailPoet` will appear in your Admin
-
-= 2. The easy way =
-1. Download the plugin (.zip file) on the right column of this page
-1. In your Admin, go to menu Plugins > Add
-1. Select the tab "Upload"
-1. Upload the .zip file you just downloaded
-1. Activate the plugin
-1. A new menu `MailPoet` will appear in your Admin
-
-= 3. The old and reliable way (FTP) =
-1. Upload `wysija-newsletters` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. A new menu `MailPoet` will appear in your Admin
-
-== Frequently Asked Questions ==
-
-= Got questions? =
-
-Our [support site](https://www.mailpoet.com/support) has plenty of articles and a ticketing system.
-
-[Read more the complete FAQ on version 2.](https://www.mailpoet.com/faq-mailpoet-version-2/)
-
-== Screenshots ==
-
-1. Sample newsletters.
-2. The drag & drop editor.
-3. Subscriber management.
-4. Newsletter statistics.
-5. Subscriber statistics (Premium version).
-6. Sending method configuration in Settings.
-7. Importing subscribers with a CSV.
+This version is no longer officially supported.
 
 == Changelog ==
+
+= 2.22 - 2022-08-01 =
+* Removed: premium license checks;
+* Removed: 2000 subscribers limit;
+* Added: cron configuration info page.
 
 = 2.21 - 2022-02-11 =
 * Updated readme.txt

@@ -263,13 +263,6 @@ class WYSIJA_model_config extends WYSIJA_object{
 					}
 				}
 
-				// if the wysija's cron option has just been turned on from an off value
-				// then we check the licence from mailpoet.com to share the cron url with us
-				if ( isset( $data['cron_manual'] ) && $data['cron_manual'] != $this->getValue( 'cron_manual' ) ){
-					$helper_licence = WYSIJA::get( 'licence', 'helper' );
-					$helper_licence->check( true );
-				}
-
 				// loop through all of the checkboxes values
 				foreach ( $this->cboxes as $checkbox ){
 					// set the value as false if the value doesn't exist in the array (happens when checkbox is unchecked)

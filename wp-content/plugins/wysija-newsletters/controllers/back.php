@@ -88,21 +88,9 @@ class WYSIJA_control_back extends WYSIJA_control{
     function variousCheck(){
         $model_config = WYSIJA::get('config','model');
 
-        if(get_option('wysicheck')){
-            $helper_licence = WYSIJA::get('licence','helper');
-            $result = $helper_licence->check(true);
-            if($result['nocontact']){
-                // redirect instantly to a page with a javascript file  where we check the domain is ok
-                $data = get_option('wysijey');
-                // remotely connect to host
-                wp_enqueue_script('wysija-verif-licence', 'http://www.mailpoet.com/?wysijap=checkout&wysijashop-page=1&controller=customer&action=checkDomain&js=1&data='.$data, array( 'jquery' ), time());
-            }
-        }
-
       if (!get_option("wysija_dismiss_sunset_notice") && !$this->_notice_displayed) {
-        $notice =  __("Support for this plugin will cease at the end of July, 2022 – find out more [link1]over on our blog[/link1]. We recommend looking at [link2]MailPoet 3[/link2] as an alternative.");
-        $notice = str_replace(['[link1]', '[/link1]'], ['<a href="https://www.mailpoet.com/blog/mailpoet-2-is-being-retired/" target="_blank">', '</a>'], $notice);
-        $notice = str_replace(['[link2]', '[/link2]'], ['<a href="https://wordpress.org/plugins/mailpoet/" target="_blank">', '</a>'], $notice);
+        $notice =  __("This plugin is no longer supported. We recommend looking at [link1]MailPoet 3[/link1] as an alternative.");
+        $notice = str_replace(['[link1]', '[/link1]'], ['<a href="https://wordpress.org/plugins/mailpoet/" target="_blank">', '</a>'], $notice);
         $notice .= '<br><br>' . str_replace( ['[link]', '[/link]'], ['<a href="javascript:;" class="wysija_dismiss_sunset_notice">', '</a>'], __("[link]Dismiss[/link] this notice."));
         (new WYSIJA_object())->error($notice, true);
         $this->_notice_displayed = true; // The method is called more than once so this is here to prevent multiple display
@@ -343,28 +331,7 @@ class WYSIJA_control_back extends WYSIJA_control{
 
 
     function _checkTotalSubscribers(){
-
-        $config=WYSIJA::get('config','model');
-        $totalSubscribers=$config->getValue('total_subscribers');
-        $helper_licence = WYSIJA::get('licence','helper');
-
-        if((int)$totalSubscribers>1900){
-            if((int)$totalSubscribers>2000){
-
-                $url_checkout = $helper_licence->get_url_checkout('over200');
-                $this->error(str_replace(array('[link]','[/link]'),
-                array('<a title="'.__('Get Premium now',WYSIJA).'" target="_blank" href="'.$url_checkout.'">','</a>'),
-                sprintf(__('Yikes. You\'re over the limit of 2000 subscribers for the free version of MailPoet (%1$s in total). Sending is disabled now. Please upgrade your version to [link]premium[/link] to send without limits.',WYSIJA)
-                        ,$totalSubscribers)),true);
-
-            }else{
-                $url_checkout = $helper_licence->get_url_checkout('near200');
-                $this->notice(str_replace(array('[link]','[/link]'),
-                    array('<a title="'.__('Get Premium now',WYSIJA).'" target="_blank" href="'.$url_checkout.'">','</a>'),
-                    sprintf(__('Yikes! You\'re near the limit of %1$s subscribers for MailPoet\'s free version. Upgrade to [link]Premium[/link] to send without limits, and more.',WYSIJA)
-                            ,"2000")));
-            }
-        }
+        // there is no more subscriber limit for MP2
     }
 
     function edit($id=false){

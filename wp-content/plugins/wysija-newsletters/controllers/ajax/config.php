@@ -162,18 +162,6 @@ class WYSIJA_control_back_config extends WYSIJA_control{
         return $res;
     }
 
-    function validate(){
-        $this->requireSecurity();
-        $helper_licence = WYSIJA::get('licence','helper');
-        $result = $helper_licence->check();
-
-        if(!isset($result['result'])){
-            $result['result']=false;
-        }
-
-        return $result;
-    }
-
     function _convertPostedInarray(){
         $_POST   = stripslashes_deep($_POST);
         $data_temp = $_POST['data'];

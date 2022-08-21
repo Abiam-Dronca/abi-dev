@@ -214,7 +214,7 @@ class WYSIJA_view_back_config extends WYSIJA_view_back {
 		$field .= '<div class="cronright" id="'.$key.'_linkname">';
 
 		$text_cron_manual_trigger = __('I\'ll setup a cron job on my server to execute at the frequency I want. Read about [link]setting up a cron job yourself[/link].', WYSIJA).'<br/><span>'.__('Use this URL in your cron job: [cron_url]').'</span>';
-		$text_cron_manual_trigger = str_replace(array( '[link]', '[/link]', '[cron_url]' ), array( '<a href="http://support.mailpoet.com/knowledgebase/configure-cron-job/?utm_source=wpadmin&utm_campaign=advanced_settings" title="Seting up cron job" target="_blank">', '</a>', '<a href="'.$url_cron.'" target="_blank">'.$url_cron.'</a>' ), $text_cron_manual_trigger);
+		$text_cron_manual_trigger = str_replace(array( '[link]', '[/link]', '[cron_url]' ), array( '<a href="admin.php?page=wysija_cron_info" title="Seting up cron job" target="_blank">', '</a>', '<a href="'.$url_cron.'" target="_blank">'.$url_cron.'</a>' ), $text_cron_manual_trigger);
 
 		$text_cron_page_view	  = __('No thanks! I have enough visitors on my site. Their visits will trigger MailPoet\'s cron automatically.', WYSIJA);
 		$values_page_view_trigger = array( 2 => $text_cron_manual_trigger, 1 => $text_cron_page_view );
@@ -226,13 +226,12 @@ class WYSIJA_view_back_config extends WYSIJA_view_back {
 		$key = 'cron_page_hit_trigger';
 
 		$content_radios = $helper_forms->radios(array( 'id'   => $key, 'name' => 'wysija['.$model.']['.$key.']' ), $values_page_view_trigger, $value);
-		add_filter('wysija_extend_cron_config', array( $this, 'add_text_cron_premium' ));
-		$field .= apply_filters('wysija_extend_cron_config', $content_radios);
+		$field .= $content_radios;
 
 		$field .= '</div></div>';
 
 		// replace the variable in the text
-		$field = str_replace(array( '[link]', '[/link]', '[cron_url]' ), array( '<a href="http://support.mailpoet.com/knowledgebase/configure-cron-job/?utm_source=wpadmin&utm_campaign=advanced_settings" title="Seting up cron job" target="_blank">', '</a>', '<a href="'.$url_cron.'" target="_blank">'.$url_cron.'</a>' ), $field);
+		$field = str_replace(array( '[link]', '[/link]', '[cron_url]' ), array( '<a href="admin.php?page=wysija_cron_info" title="Seting up cron job" target="_blank">', '</a>', '<a href="'.$url_cron.'" target="_blank">'.$url_cron.'</a>' ), $field);
 
 		return $field;
 	}
@@ -253,17 +252,9 @@ class WYSIJA_view_back_config extends WYSIJA_view_back {
 		$field	= '<p>';
 
 		$text_cron_manual_trigger = __('If I want I can [link]create an additional cron job[/link] on my end to increase the frequency.', WYSIJA).'<br/><span>'.__('Use this URL in your cron job: [cron_url]').'</span>';
-		$field .= str_replace(array( '[link]', '[/link]', '[cron_url]' ), array( '<a href="http://support.mailpoet.com/knowledgebase/configure-cron-job/?utm_source=wpadmin&utm_campaign=advanced_settings" title="Seting up cron job" target="_blank">', '</a>', '<a href="'.$url_cron.'" target="_blank">'.$url_cron.'</a>' ), $text_cron_manual_trigger);
+		$field .= str_replace(array( '[link]', '[/link]', '[cron_url]' ), array( '<a href="admin.php?page=wysija_cron_info" title="Seting up cron job" target="_blank">', '</a>', '<a href="'.$url_cron.'" target="_blank">'.$url_cron.'</a>' ), $text_cron_manual_trigger);
 
 		$field .= '</p>';
-
-//        $model_config = WYSIJA::get('config', 'model');
-//        if ($model_config->getValue('cron_manual') !== true) {
-//            $model_config->save(array('cron_manual' => true));
-//
-//            $helper_licence = WYSIJA::get('licence', 'helper');
-//            $helper_licence->check(true);
-//        }
 
 		return $field;
 	}

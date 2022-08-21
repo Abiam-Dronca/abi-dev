@@ -355,8 +355,8 @@ class WYSIJA_help_back extends WYSIJA_help{
             'campaigns'=>array('title'=>'MailPoet '. $red_dot),
             'subscribers'=>array('title'=>__('Subscribers',WYSIJA)), // if the key "subscribers" is changed, please change in the filter "wysija_menus" as well.
             'config'=>array('title'=>__('Settings',WYSIJA)),
-            'premium'=>array('title'=>__('Premium',WYSIJA)),
-            'mp3'=>array('title'=>__('Try MailPoet 3',WYSIJA))
+            'mp3'=>array('title'=>__('Try MailPoet 3',WYSIJA)),
+            'cron_info'=>array('title'=>'Cron Info')
         );
         $this->menus = apply_filters('wysija_menus', $this->menus);
         $this->menuHelp = $truelinkhelp;
@@ -441,7 +441,7 @@ class WYSIJA_help_back extends WYSIJA_help{
                         $position
                     );
                 }else{
-                    $hookname=add_submenu_page($parentmenu,$menutemp['title'], $menutemp['subtitle'], $roleformenu, $actionFull , array($this->controller, 'render'));
+                    $hookname=add_submenu_page(($action === 'cron_info' ? true : $parentmenu),$menutemp['title'], $menutemp['subtitle'], $roleformenu, $actionFull , array($this->controller, 'render'));
                 }
 
                 //manage wp help tab
