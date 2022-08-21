@@ -102,8 +102,7 @@ class WidgetSlideshowView_bwg {
 			foreach ($slideshow_effects as $key => $slideshow_effect) {
 			  ?>
 			  <option value="<?php echo $key; ?>"
-                <?php echo (!BWG()->is_pro && $key != 'none' && $key != 'fade') ? 'disabled="disabled" title="' . __('This effect is disabled in free version.', 'photo-gallery') . '"' : ''; ?>
-                <?php if ($instance['effect'] == $key) echo 'selected="selected"'; ?>><?php echo $slideshow_effect; ?></option>
+                <?php if ($instance['effect'] == $key) echo 'selected="selected"'; ?>><?php echo esc_html($slideshow_effect); ?></option>
 			  <?php
 			}
 			?>
@@ -132,12 +131,9 @@ class WidgetSlideshowView_bwg {
 		  <input class="widefat" style="width:25%;" id="<?php echo $id_width; ?>" name="<?php echo $name_width; ?>" type="text" value="<?php echo $instance['width']; ?>"/> x 
 		  <input class="widefat" style="width:25%;" id="<?php echo $id_height; ?>" name="<?php echo $name_height; ?>" type="text" value="<?php echo $instance['height']; ?>"/> px
 		</p>
-		<p <?php echo (BWG()->options->slideshow_enable_filmstrip ? '' : 'style="display: none;"'); ?>>
+		<p>
 		  <label for="<?php echo $id_filmstrip_height; ?>"><?php _e('Filmstrip height:', 'photo-gallery'); ?></label><br>
-		  <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> class="widefat" style="width: 25%;" id="<?php echo $id_filmstrip_height; ?>" name="<?php echo $name_filmstrip_height; ?>" type="text" value="<?php echo $instance['filmstrip_height']; ?>"/> px
-      <?php if ( !BWG()->is_pro ) { ?>
-        <p class="description" style="background-color: #e0e0e0; border: 1px solid #c3c3c3; border-radius: 2px; color: #666666; padding: 2px;"><?php echo BWG()->free_msg; ?></p>
-      <?php } ?>
+		  <input class="widefat" style="width: 25%;" id="<?php echo $id_filmstrip_height; ?>" name="<?php echo $name_filmstrip_height; ?>" type="text" value="<?php echo $instance['filmstrip_height']; ?>"/> px
 		</p>
 		<p>
 		  <label for="<?php echo $id_interval; ?>"><?php _e('Time interval:', 'photo-gallery'); ?></label><br>
@@ -145,7 +141,7 @@ class WidgetSlideshowView_bwg {
 		</p>
 		<p>
 		  <label for="<?php echo $id_theme_id; ?>"><?php _e('Themes:', 'photo-gallery'); ?></label><br>
-		  <select <?php echo ( !BWG()->is_pro && get_option("wd_bwg_theme_version")) ? 'disabled="disabled"' : ''; ?> name="<?php echo $name_theme_id; ?>" id="<?php echo $id_theme_id; ?>" class="widefat">
+		  <select name="<?php echo $name_theme_id; ?>" id="<?php echo $id_theme_id; ?>" class="widefat">
 			<?php
 			foreach ($theme_rows as $theme_row) {
 			  ?>
@@ -154,10 +150,7 @@ class WidgetSlideshowView_bwg {
 			}
 			?>
 		  </select>
-      <?php if ( !BWG()->is_pro && get_option("wd_bwg_theme_version") ) { ?>
-        <p class="description" style="background-color: #e0e0e0; border: 1px solid #c3c3c3; border-radius: 2px; color: #666666; padding: 2px;"><?php echo BWG()->free_msg; ?></p>
-      <?php } ?>
-		</p> 
+		</p>
 		<?php
 	}
 }

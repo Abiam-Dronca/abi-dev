@@ -108,15 +108,9 @@ class BWGControllerSite {
         $params['show_sort_images'] = FALSE;
         $params['show_tag_box'] = FALSE;
         $params['gallery_id'] = 0;
-        if ($params['gallery_view_type'] == 'slideshow') {
-          $params['gallery_type'] = 'slideshow';
-        } elseif ($params['gallery_view_type'] == 'image_browser') {
-          $params['gallery_type'] = 'image_browser';
+
+        if ($params['gallery_view_type'] == 'image_browser') {
           $params['pagination_default_style'] = 1;
-        } elseif ($params['gallery_view_type'] == 'blog_style') {
-          $params['gallery_type'] = 'blog_style';
-        } elseif ($params['gallery_view_type'] == 'carousel') {
-          $params['gallery_type'] = 'carousel';
         }
         if ( $params['gallery_type'] == 'album_compact_preview' && isset($params['compuct_album_image_thumb_width']) ) { // Compact album view.
           $params['image_enable_page'] = $params['compuct_album_enable_page'];
@@ -202,6 +196,8 @@ class BWGControllerSite {
           $params['slideshow_music_url'] = BWG()->options->slideshow_audio_url;
           $params['slideshow_effect_duration'] = BWG()->options->slideshow_effect_duration;
           $params['slideshow_gallery_download'] = BWG()->options->slideshow_gallery_download;
+          $params['slideshow_thumbnails_count'] = BWG()->options->slideshow_thumbnails_count;
+          $params['slideshow_filmstrip_type'] = BWG()->options->slideshow_filmstrip_type  ;
           $params['image_column_number'] = 0;
           $params['images_per_page'] = 0;
         }
@@ -312,6 +308,9 @@ class BWGControllerSite {
       $params['album_gallery_id'] = 0;
       $params['container_id'] = 'bwg_' . $params['gallery_type'] . '_' . $bwg;
       $params['cur_alb_gal_id'] = 0;
+      if (  WDWLibrary::get("album_gallery_id_".$bwg, '') != 0 && WDWLibrary::get("type_".$bwg, '') == 'gallery' ) {
+        $params['gallery_id'] = WDWLibrary::get("album_gallery_id_".$bwg);
+      }
       $gallery_row = $this->model->get_gallery_row_data($params['gallery_id']);
 
       if (!empty($gallery_row) && isset($gallery_row->published) && $gallery_row->published == 0) {
@@ -333,6 +332,9 @@ class BWGControllerSite {
         $params['load_more_image_count'] = 1;
       }
       if ($params['gallery_type'] == 'blog_style') {
+        if ( !BWG()->is_pro ) {
+          $params['popup_enable_comment'] = FALSE;
+        }
         $params['image_enable_page'] = $params['blog_style_enable_page'];
         $params['images_per_page'] = $params['blog_style_images_per_page'];
         $params['load_more_image_count'] = (isset($params['blog_style_load_more_image_count']) && ($params['image_enable_page'] == 2)) ? $params['blog_style_load_more_image_count'] : $params['images_per_page'];

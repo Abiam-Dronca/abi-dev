@@ -15,140 +15,6 @@ class ThemesView_bwg extends AdminView_bwg {
    * @param $params
    */
   public function display( $params = array() ) {
-      ?>
-      <div class="wrap">
-      <?php
-      if ( !BWG()->is_pro && get_option("wd_bwg_theme_version") ) {
-        wp_enqueue_style( BWG()->prefix . '_gallery-upgrade');
-        WDWLibrary::ask_question();
-      ?>
-        <div class="gallery_upgrade_main">
-          <div class="gallery_upgrade_wrapper">
-            <div class="gallery_info">
-              <h2 class="gallery_info-text"><?php echo __('Photo Gallery Themes',  BWG()->prefix) ?></h2>
-              <div class="gallery_info-question_mark">
-                <a href="https://help.10web.io/hc/en-us/articles/360016082231-Editing-Photo-Gallery-Themes?utm_source=photo_gallery&utm_medium=free_plugin">
-                  <img src="<?php  echo BWG()->plugin_url . '/images/Question_mark_upgrade.svg'?>" alt="">
-                </a>
-              </div>
-            </div>
-            <div class="gallery_upgrade-head">
-              <div class="gallery_upgrade-head-content">
-                <div class="gallery_upgrade-head-content-heading">
-                  <h2>
-                    <?php echo __('Build Fully Customized Gallery Views', 'photo-gallery'); ?>
-                  </h2>
-                </div>
-                <div class="gallery_upgrade-head-content-text">
-                  <p>
-                    <?php echo __('Unlimited options to completely customize every detail. ', 'photo-gallery'); ?>
-                    <br class="break_768">
-                    <?php echo __(' Use default dark and light themes, or
-                    create new from scratch.', 'photo-gallery'); ?>
-                  </p>
-                </div>
-                <div class="gallery_upgrade-head-content-buttons">
-                  <div class="button-upgrade">
-                    <a href="https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin">
-                      <input type="button" value="<?php echo __('UPGRADE TO PREMIUM', 'photo-gallery'); ?>">
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="gallery_upgrade-head-media">
-                <div class="gallery_upgrade-head-media-picture">
-                </div>
-              </div>
-            </div>
-            <?php
-            $data = array(
-              'thumbnails' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Thumbnails_upgrade.svg',
-                'class' => 'thumb',
-                'heading' => 'Thumbnails',
-                'description' => 'Fully customizable thumbnails. Incorporate animation, transparency, borders, and more',
-              ),
-              'pagination' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Pagination_upgrade.svg',
-                'class' => 'pagination',
-                'heading' => 'Pagination',
-                'description' => 'Set the positioning and how your images load in a variety of gallery views and group gallery
-                      views',
-              ),
-              'font' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Font_upgrade.svg',
-                'class' => 'font',
-                'heading' => 'Font',
-                'description' => 'Choose your font type from the existing library or from Google fonts',
-              ),
-              'control_buttons' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Control buttons_upgrade.svg',
-                'class' => 'control',
-                'heading' => 'Control buttons',
-                'description' => 'Customize the control button type, size, color and more, for Lightbox, Slideshow, and Carousel
-                      views',
-              ),
-              'color' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Color_upgrade.svg',
-                'class' => 'color',
-                'heading' => 'Color',
-                'description' => 'Modify and create custom colors of any item of your gallery',
-              ),
-              'filmstrip' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Filmstrip_upgrade.svg',
-                'class' => 'filmstrip',
-                'heading' => 'Filmstrip',
-                'description' => 'Customize film strip style, position, color, and placement',
-              ),
-              'lightbox' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Lightbox_upgrade.svg',
-                'class' => 'lightbox',
-                'heading' => 'Lightbox',
-                'description' => 'Fully customizable lightbox allows for the creation of a unique viewing experience',
-              ),
-              'alignment' => array(
-                'picture_url' => BWG()->plugin_url . '/images/Alignment_upgrade.svg',
-                'class' => 'alignment',
-                'heading' => 'Alignment',
-                'description' => 'Set custom alignment of images, titles, descriptions, and more',
-              ),
-              'flex-empty-item' => array(
-								 'picture_url' => '',
-								 'class' => '',
-								 'heading' => '',
-								 'description' => '',
-							),
-            );
-            ?>
-            <div class="gallery_upgrade-content">
-              <div class="gallery_upgrade-content-features">
-                <?php foreach ( $data as $item ) {
-                  ?>
-                  <div class="gallery_feature">
-                    <div class="gallery_feature-image">
-                      <img class="<?php echo $item['class']; ?>" src="<?php echo $item['picture_url']; ?>" alt="">
-                    </div>
-                    <div class="gallery_feature-heading">
-                      <h3>
-                        <?php echo __($item['heading'], 'photo-gallery'); ?>
-                      </h3>
-                    </div>
-                    <div class="gallery_feature-text">
-                      <p>
-                        <?php echo __($item['description'], 'photo-gallery'); ?>
-                      </p>
-                    </div>
-                  </div>
-                  <?php
-                } ?>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <?php
-      return;
-    }
     ob_start();
     echo $this->body($params);
     // Pass the content to form.
@@ -194,6 +60,7 @@ class ThemesView_bwg extends AdminView_bwg {
       echo $this->pagination($page_url, $total, $items_per_page);
       ?>
     </div>
+    <?php echo $this->booster_top_banner(); ?>
     <table class="adminlist table table-striped wp-list-table widefat fixed pages">
       <thead>
       <tr>
@@ -345,12 +212,11 @@ class ThemesView_bwg extends AdminView_bwg {
 			<div class="wd-page-title wd-header">
 				<h1 class="wp-heading-inline"><?php _e('Theme title', 'photo-gallery'); ?></h1>
 				<input type="text" id="name" name="name" value="<?php echo !empty( $row->name ) ? $row->name : ''; ?>" class="spider_text_input bwg_requried">
-        <?php if ( BWG()->is_pro || get_option("wd_bwg_theme_version") ) { ?>
         <div class="bwg-page-actions">
 					<button class="tw-button-primary button-large" onclick="if (spider_check_required('name', 'Title')) {return false;}; spider_set_input_value('task', 'save')">
 					<?php echo !empty($row->name) ? __('Update', 'photo-gallery') :  __('Save', 'photo-gallery'); ?>
 					</button>
-					<?php if( $id ) { ?>
+					<?php if ( $id ) { ?>
 					<input title="<?php _e('Reset to default theme', 'photo-gallery'); ?>"
 						class="tw-button-secondary preview-button button-large wd-btn-reset" type="submit"
 						onclick="if (confirm('<?php echo addslashes(__('Do you want to reset to default?', 'photo-gallery')); ?>')) {
@@ -361,7 +227,6 @@ class ThemesView_bwg extends AdminView_bwg {
 						value="<?php echo __('Reset', 'photo-gallery'); ?>"/>
 					<?php } ?>
 				</div>
-        <?php } ?>
 			</div>
 			<div class="bwg-clear"></div>
 		</div>

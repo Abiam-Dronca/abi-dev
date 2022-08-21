@@ -12,7 +12,7 @@ class WidgetView_bwg {
 		extract($args);
 		$title = (!empty($instance['title']) ? $instance['title'] : "");
 		$type  = (!empty($instance['type']) ? $instance['type'] : "gallery");
-		$view_type = (!empty($instance['view_type']) && BWG()->is_pro ? $instance['view_type'] : "thumbnails");
+		$view_type = (!empty($instance['view_type']) ? $instance['view_type'] : "thumbnails");
 		$gallery_id = (!empty($instance['gallery_id']) ? $instance['gallery_id'] : 0);
 		$album_id = (!empty($instance['album_id']) ? $instance['album_id'] : 0);
 		$theme_id = (!empty($instance['theme_id']) ? $instance['theme_id'] : 0);
@@ -134,11 +134,9 @@ class WidgetView_bwg {
 		</p>
 		<p id="view_type_container" style="display: <?php echo $instance['type'] != 'album' ? 'block' : 'none'; ?>;">
 		  <label for="<?php echo $id_view_type; ?>"><?php _e('Gallery Type:', 'photo-gallery'); ?></label><br>
-		  <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="radio" name="<?php echo $name_view_type; ?>" id="<?php echo $id_view_type . "_1"; ?>" value="thumbnails" class="sel_thumbnail_gallery"  <?php if (isset($instance['view_type']) && $instance['view_type'] == "thumbnails") echo 'checked="checked"';  ?> /><label for="<?php echo $id_view_type . "_1"; ?>"><?php _e('Thumbnail', 'photo-gallery'); ?></label><br>
-		  <input <?php echo BWG()->is_pro ? '' : 'disabled="disabled"'; ?> type="radio" name="<?php echo $name_view_type; ?>" id="<?php echo $id_view_type . "_2"; ?>" value="masonry" class="sel_masonry_gallery"  <?php if (isset($instance['view_type']) && $instance['view_type'] == "masonry") echo 'checked="checked"'; ?> /><label for="<?php echo $id_view_type . "_2"; ?>"><?php _e('Masonry', 'photo-gallery'); ?></label>
-      <?php if ( !BWG()->is_pro ) { ?>
+		  <input type="radio" name="<?php echo $name_view_type; ?>" id="<?php echo $id_view_type . "_1"; ?>" value="thumbnails" class="sel_thumbnail_gallery"  <?php if (isset($instance['view_type']) && $instance['view_type'] == "thumbnails") echo 'checked="checked"';  ?> /><label for="<?php echo $id_view_type . "_1"; ?>"><?php _e('Thumbnail', 'photo-gallery'); ?></label><br>
+		  <input type="radio" name="<?php echo $name_view_type; ?>" id="<?php echo $id_view_type . "_2"; ?>" value="masonry" class="sel_masonry_gallery"  <?php if (isset($instance['view_type']) && $instance['view_type'] == "masonry") echo 'checked="checked"'; ?> /><label for="<?php echo $id_view_type . "_2"; ?>"><?php _e('Masonry', 'photo-gallery'); ?></label>
       <p class="description" style="display: <?php echo $instance['type'] != 'album' ? 'block' : 'none'; ?>; background-color: #e0e0e0; border: 1px solid #c3c3c3; border-radius: 2px; color: #666666; padding: 2px;"><?php echo BWG()->free_msg; ?></p>
-      <?php } ?>
 		</p>
 		<p id="p_albums" style="display:<?php echo ($instance['type'] == "album") ? "" : "none" ?>;">
 		  <label for="<?php echo $id_album_id; ?>"><?php _e('Gallery Groups:', 'photo-gallery'); ?></label><br>

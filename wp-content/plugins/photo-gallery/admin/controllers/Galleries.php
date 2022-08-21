@@ -371,6 +371,9 @@ class GalleriesController_bwg {
     $params['facebook_post_gallery'] = (!$params['instagram_post_gallery']) ? ($params['row']->gallery_type == 'facebook_post' ? TRUE : FALSE) : FALSE;
     $params['gallery_type'] = ($params['row']->gallery_type == 'instagram' || $params['row']->gallery_type == 'instagram_post') ? 'instagram' : (($params['row']->gallery_type == 'facebook_post' || $params['row']->gallery_type == 'facebook') ? 'facebook' : $params['row']->gallery_type);
 
+    $params['booster_is_active'] = ( is_plugin_active('tenweb-speed-optimizer/tenweb_speed_optimizer.php') ) ? TRUE : FALSE;
+    $params['booster_page_url'] = add_query_arg(array( 'page' => 'speed_' . BWG()->prefix ), admin_url('admin.php'));
+
     // Image display params.
     $params['actions'] = WDWLibrary::image_actions( $params['gallery_type'] );
     $params['page_url'] = $params['form_action'];

@@ -604,6 +604,8 @@ function spider_ajax_save( form_id, tr_group, is_last_ajax, content_message_id )
       jQuery( '#task' ).html( str );
       var str = jQuery( data ).find( '#current_id' ).html();
       jQuery( '#current_id' ).html( str );
+      var str = jQuery( data ).find( '.bwg-optimize-btn' ).html();
+      jQuery( '.bwg-optimize-btn' ).html( str );
 
       if ( ajax_task != '' ) {
         jQuery( ".ajax-msg" ).removeClass( "wd-hide" );

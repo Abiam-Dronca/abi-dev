@@ -1332,18 +1332,18 @@ class WDWLibrary {
     $filter_tags_name = self::get($tag_input_name, '', 'esc_sql', 'REQUEST');
 
     if ( $filter_tags_name ) {
+      $join .= ' LEFT JOIN (SELECT GROUP_CONCAT(tag_id order by tag_id SEPARATOR ",") AS tags_combined, image_id FROM  ' . $wpdb->prefix . 'bwg_image_tag' . ($gallery_id ?  $wpdb->prepare(' WHERE gallery_id=%d', $gallery_id) : '') . ' GROUP BY image_id) AS tags ON image.id=tags.image_id';
       if ( !BWG()->options->tags_filter_and_or ) {
         // To find images which have at least one from tags filtered by.
         $compare_sign = "|";
+        $where .= ' AND CONCAT(",", tags.tags_combined, ",") REGEXP ",(' . implode( $compare_sign, $filter_tags_name ) . ')," ';
       }
       else {
         // To find images which have all tags filtered by.
-        // For this case there is need to sort tags by ascending to compare with comma.
-        sort($filter_tags_name);
-        $compare_sign = ",";
+        foreach ( $filter_tags_name as $filter_tag_name ) {
+          $where .= ' AND tags.tags_combined REGEXP "' . $filter_tag_name . '" ';
+        }
       }
-      $join .= ' LEFT JOIN (SELECT GROUP_CONCAT(tag_id order by tag_id SEPARATOR ",") AS tags_combined, image_id FROM  ' . $wpdb->prefix . 'bwg_image_tag' . ($gallery_id ?  $wpdb->prepare(' WHERE gallery_id=%d', $gallery_id) : '') . ' GROUP BY image_id) AS tags ON image.id=tags.image_id';
-      $where .= ' AND CONCAT(",", tags.tags_combined, ",") REGEXP ",(' . implode( $compare_sign, $filter_tags_name ) . ')," ';
     }
 
     $join .= ' LEFT JOIN '. $wpdb->prefix .'bwg_gallery as gallery ON gallery.id = image.gallery_id';
@@ -2111,7 +2111,7 @@ class WDWLibrary {
         $defaults['masonry_hor_ver'] = self::get_option_value('masonry_hor_ver', 'masonry_hor_ver', 'masonry', $use_option_defaults, $params);
         $defaults['show_masonry_thumb_description'] = self::get_option_value('show_masonry_thumb_description', 'show_masonry_thumb_description', 'show_masonry_thumb_description', $use_option_defaults, $params);
         $defaults['thumb_width'] = self::get_option_value('masonry_thumb_size', 'thumb_width', 'masonry_thumb_size', $use_option_defaults, $params);
-        $defaults['thumb_height'] = self::get_option_value('thumb_height', 'thumb_height', 'thumb_height', $use_option_defaults, $params);
+        $defaults['thumb_height'] = self::get_option_value('thumb_height', 'thumb_height', 'masonry_thumb_size', $use_option_defaults, $params);
         $defaults['image_column_number'] = abs(intval(self::get_option_value('masonry_image_column_number', 'image_column_number', 'masonry_image_column_number', $use_option_defaults, $params)));
         $defaults['image_enable_page'] = self::get_option_value('masonry_image_enable_page', 'image_enable_page', 'masonry_image_enable_page', $use_option_defaults, $params);
         $defaults['images_per_page'] = abs(intval(self::get_option_value('masonry_images_per_page', 'images_per_page', 'masonry_images_per_page', $use_option_defaults, $params)));
@@ -2325,7 +2325,9 @@ class WDWLibrary {
 	  }
 	  break;
     }
-    return array_merge($params, $defaults);
+    $data = array_merge($params, $defaults);
+
+    return $data;
   }
 
   /**
@@ -2438,9 +2440,8 @@ class WDWLibrary {
     add_action('create_bwg_tag', array('WDWLibrary', 'update_bwg_tag'), 10, 2);
     // Delete bwg_tag.
     add_action('delete_bwg_tag', array('WDWLibrary', 'delete_bwg_tag'), 10, 3);
-
     if ('bwg_tag' == self::get('taxonomy')) {
-      //add_action( 'admin_notices', array( 'WDWLibrary', 'topbar' ) );
+      // add_action( 'admin_notices', array( 'WDWLibrary', 'topbar' ) );
     }
   }
 
@@ -3027,28 +3028,6 @@ class WDWLibrary {
   }
 
   /**
-   * Generate top bar user guide section.
-   *
-   * @return string top bar user guide section html.
-   */
-  public static function topbar_upgrade_ask_question() {
-    $support_forum_link = 'https://wordpress.org/support/plugin/photo-gallery/#new-post';
-    $premium_link = BWG()->plugin_link . BWG()->utm_source;
-    wp_enqueue_style(BWG()->prefix . '-roboto');
-    wp_enqueue_style(BWG()->prefix . '-pricing');
-    ob_start();
-    ?>
-      <div class="wd-list-view-header-free-right">
-        <p class="upgrade-header"><?php _e('Unleash the full benefits & ', 'photo-gallery'); ?></p>
-        <p class="upgrade-text"><?php _e('features of the Premium Plugin', 'photo-gallery'); ?></p>
-        <a class="upgrade-button" href="<?php echo esc_url($premium_link); ?>" target="_blank"><?php _e( 'Upgrade Now', BWG()->prefix ); ?></a>
-      </div>
-      <a class="wd-list-view-ask-question" href="<?php echo esc_url($support_forum_link); ?>" target="_blank"><?php _e('Ask a question', 'photo-gallery'); ?></a>
-    <?php
-    echo ob_get_clean();
-  }
-
-  /**
    * Generate ask question static fixed button.
    *
    * @return string ask question html.
@@ -3062,7 +3041,6 @@ class WDWLibrary {
     echo ob_get_clean();
   }
 
-  // TODO. This function should be replaced with WP functionality in another version. At the moment it is not.
   /**
    *  Get privacy_policy_url
    *
@@ -3443,5 +3421,16 @@ class WDWLibrary {
 
     return number_format($number, $decimals, $decPoint, $thousandsSep);
   }
-}
 
+  /**
+   * Get images count.
+   *
+   * @return int
+   */
+  public static function get_gallery_images_count() {
+    global $wpdb;
+    $row = $wpdb->get_col( 'SELECT id AS qty FROM `' . $wpdb->prefix . 'bwg_image`' );
+
+    return intval(count($row));
+  }
+}

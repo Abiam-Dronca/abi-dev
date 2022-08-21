@@ -98,7 +98,7 @@ class BWGViewAlbum_compact_preview extends BWGViewSite {
         ?>
         <div class="bwg-item">
           <a class="bwg-a <?php echo $from !== "widget" ? 'bwg-album ' : ''; ?>bwg_album_<?php echo esc_attr($bwg); ?>"
-             <?php echo esc_html(( ($enable_seo || $enable_dynamic_url)) && $from !== "widget" ? "href='" . esc_url($href) . "'" : ""); ?>
+             <?php echo ( (esc_html($enable_seo) || esc_html($enable_dynamic_url)) && $from !== "widget" ? "href='" . esc_url($href) . "'" : ""); ?>
              <?php echo esc_html($from) === "widget" ? 'href="' . esc_url($row->permalink) . '"' : ''; ?>
              data-container_id="<?php echo esc_attr($params['container_id']); ?>"
              data-def_type="<?php echo esc_attr($row->def_type); ?>"
@@ -395,7 +395,7 @@ class BWGViewAlbum_compact_preview extends BWGViewSite {
 
       $theme_row->thumb_title_shadow = $theme_row->album_compact_title_shadow;
       $theme_row->mosaic_thumb_title_shadow = $theme_row->album_compact_title_shadow;
-      if ( !in_array( $params['gallery_type'], array('slideshow', 'image_browser', 'blog_style', 'carousel') ) ) {
+      if ( !in_array( $params['gallery_view_type'], array('slideshow', 'image_browser', 'blog_style', 'carousel') ) ) {
 				echo $this->gallery_view->inline_styles($bwg, $theme_row, $params);
 	  	}
     }

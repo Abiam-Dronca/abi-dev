@@ -19,9 +19,9 @@ public function display($params = array(), $bwg = 0, $ajax = FALSE) {
     $enable_slideshow_shuffle = $params['enable_slideshow_shuffle'];
     $enable_slideshow_ctrl = $params['enable_slideshow_ctrl'];
 
-    $enable_slideshow_filmstrip = ( BWG()->is_pro && !empty($params['enable_slideshow_filmstrip']) ) ? 1 : 0;
-    $slideshow_filmstrip_type = BWG()->is_pro ? $params['slideshow_filmstrip_type'] : 0;
-    $slideshow_thumbnails_count = BWG()->is_pro ? $params['slideshow_thumbnails_count'] : 0;
+    $enable_slideshow_filmstrip = !empty($params['enable_slideshow_filmstrip']) ? 1 : 0;
+    $slideshow_filmstrip_type = $params['slideshow_filmstrip_type'];
+    $slideshow_thumbnails_count = $params['slideshow_thumbnails_count'];
     // This option 'enable_slideshow_filmstrip' has been removed and is being used with the new option 'slideshow_filmstrip_type'.
     if ( $enable_slideshow_filmstrip || ( $slideshow_filmstrip_type == 1 ) ) {
       $slideshow_filmstrip_type = 1;

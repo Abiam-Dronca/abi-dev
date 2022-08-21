@@ -25,25 +25,22 @@ class BWGViewGalleryBox {
     if ( $shortcode ) {
       $data = WDWLibrary::parse_tagtext_to_array($shortcode);
     }
+    /* For Preview section - get selected 'gallery_type' from URL */
+    $gallery_type = WDWLibrary::get('bwg_gallery_type', '', 'sanitize_text_field');
+    if ( !empty($gallery_type) ) {
+      $data['gallery_type'] = basename(stripslashes($gallery_type));
+    }
     $params = WDWLibrary::get_shortcode_option_params( $data );
     $params['sort_by'] = WDWLibrary::get('sort_by', 'RAND()', 'sanitize_text_field', 'GET');
     $params['order_by'] = WDWLibrary::get('order_by', 'asc', 'sanitize_text_field', 'GET');
     $params['order_by'] = ($params['order_by'] == 'desc') ? 'desc' : 'asc';
     $params['watermark_position'] = explode('-', $params['watermark_position']);
     if ( !BWG()->is_pro ) {
-      $params['popup_enable_filmstrip'] = FALSE;
       $params['open_comment'] = FALSE;
       $params['popup_enable_comment'] = FALSE;
-      $params['popup_enable_facebook'] = FALSE;
-      $params['popup_enable_twitter'] = FALSE;
-      $params['popup_enable_ecommerce'] = FALSE;
-      $params['popup_enable_pinterest'] = FALSE;
-      $params['popup_enable_tumblr'] = FALSE;
       $params['popup_enable_email'] = FALSE;
       $params['popup_enable_captcha'] = FALSE;
       $params['comment_moderation'] = FALSE;
-      $params['enable_addthis'] = FALSE;
-      $params['addthis_profile_id'] = FALSE;
     }
     $image_right_click =  isset(BWG()->options->image_right_click) ? BWG()->options->image_right_click : 0;
     require_once BWG()->plugin_dir . "/frontend/models/model.php";
@@ -159,8 +156,7 @@ class BWGViewGalleryBox {
     }
     $lightbox_bg_transparent = (isset($theme_row->lightbox_bg_transparent)) ? $theme_row->lightbox_bg_transparent : 100;
     $lightbox_bg_color = WDWLibrary::spider_hex2rgb($theme_row->lightbox_bg_color);
-
-    if (BWG()->is_pro && $params['enable_addthis'] && $params['addthis_profile_id']) {
+    if ( $params['enable_addthis'] && $params['addthis_profile_id'] ) {
       ?>
       <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?php echo esc_html($params['addthis_profile_id']); ?>" async="async"></script>
       <?php
@@ -759,7 +755,7 @@ class BWGViewGalleryBox {
       }
       ?>
       <div id="bwg_image_container" class="bwg_image_container">
-        <?php if (BWG()->is_pro && $params['enable_addthis'] && $params['addthis_profile_id']) { ?>
+        <?php if ( $params['enable_addthis'] && $params['addthis_profile_id'] ) { ?>
           <div class="bwg_addThis addthis_inline_share_toolbox"></div>
           <?php
         }
@@ -1348,7 +1344,7 @@ class BWGViewGalleryBox {
       'bwg_image_effect'                      => $params['popup_effect'],
       'enable_image_filmstrip'                => $params['popup_enable_filmstrip'],
       'gallery_id'                            => $gallery_id,
-      'site_url'                              => BWG()->upload_url,
+      'site_url'                              => esc_url(BWG()->upload_url),
       'lightbox_comment_width'                => $theme_row->lightbox_comment_width,
       'watermark_width'                       => $params['watermark_width'],
       'image_width'                           => $params['popup_width'],

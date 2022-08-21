@@ -376,7 +376,7 @@ class BWGViewAlbum_extended_preview extends BWGViewSite {
       $params['mosaic_hor_ver'] = $params['extended_album_mosaic_hor_ver'];
       $params['resizable_mosaic'] = $params['extended_album_resizable_mosaic'];
       $params['mosaic_total_width'] = $params['extended_album_mosaic_total_width'];
-	  if ( !in_array( $params['gallery_type'], array('slideshow', 'image_browser', 'blog_style', 'carousel') ) ) {
+	  if ( !in_array( $params['gallery_view_type'], array('slideshow', 'image_browser', 'blog_style', 'carousel') ) ) {
 		echo $this->gallery_view->inline_styles($bwg, $theme_row, $params);
 	  }
     }

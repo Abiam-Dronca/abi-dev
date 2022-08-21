@@ -86,14 +86,16 @@ class BWGViewSite {
             }
         </style>';
     }
+    $params['gallery_view_type'] = isset($params['gallery_view_type']) ? $params['gallery_view_type'] : $params['gallery_type'];
     ?>
 
     <div id="bwg_container1_<?php echo esc_attr($bwg); ?>"
-         class="bwg_container bwg_thumbnail bwg_<?php echo esc_attr($params['gallery_type']); ?>"
+         class="bwg_container bwg_thumbnail bwg_<?php echo esc_attr($params['gallery_type']); ?> <?php echo $params['gallery_type'] != $params['gallery_view_type'] ? 'bwg_'.esc_attr($params['gallery_view_type']) : ''; ?>"
          data-right-click-protection="<?php echo esc_attr(BWG()->options->image_right_click); ?>"
          data-bwg="<?php echo esc_attr($bwg); ?>"
          data-scroll="<?php echo esc_attr($params['need_scroll']); ?>"
          data-gallery-type="<?php echo esc_attr($params['gallery_type']); ?>"
+         data-gallery-view-type="<?php echo esc_attr($params['gallery_view_type']); ?>"
          data-current-url="<?php echo esc_url(addslashes(urldecode($params_array['current_url']))); ?>"
          data-lightbox-url="<?php echo esc_url(addslashes(add_query_arg($params_array, admin_url('admin-ajax.php')))); ?>"
          data-gallery-id="<?php echo esc_attr($params_array['gallery_id']); ?>"
@@ -1015,7 +1017,7 @@ class BWGViewSite {
   }
 
   public function http_strip_query_param( $url, $param ) {
-    $pieces = parse_url($url);
+    $pieces = parse_url( html_entity_decode($url) );
     if ( !$pieces['query'] ) {
       return $url;
     }

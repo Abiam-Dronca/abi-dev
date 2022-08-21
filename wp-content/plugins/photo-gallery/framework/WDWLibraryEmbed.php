@@ -223,7 +223,7 @@ class WDWLibraryEmbed {
 
         return json_encode($embedData);
       }
-      $result = $oembed->fetch( $provider, $url);
+      $result = $oembed->fetch( $provider, $url, array('width' => BWG()->options->upload_thumb_width, 'height' => BWG()->options->upload_thumb_height));
       /*no data fetched for a known provider*/
       if ( !$result ) {
         return json_encode(array( "error", "please enter " . $host . " correct single media URL" ));

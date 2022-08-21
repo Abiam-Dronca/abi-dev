@@ -85,7 +85,7 @@ class AdminView_bwg {
     }
     ob_start();
     ?>
-    <div class="wd-list-view-header<?php echo !BWG()->is_pro ? ' bwg-page-header-free' : ''?>">
+    <div class="wd-list-view-header">
       <div class="wd-list-view-header-left">
         <div class="wd-page-title <?php echo $title_class; ?>">
           <h1 class="wd-heading-inline"><?php echo $title; ?>
@@ -112,17 +112,12 @@ class AdminView_bwg {
           if ( $how_to_button ) {
             require BWG()->plugin_dir . '/framework/howto/howto.php';
           }
-          if( $buttons ){
+          if ( $buttons ) {
             echo $this->buttons($buttons, FALSE);
           }
           ?>
         </div>
       </div>
-      <?php
-      if (!BWG()->is_pro && $popup_window ) {
-        WDWLibrary::topbar_upgrade_ask_question();
-      }
-      ?>
     </div>
     <?php
     return ob_get_clean();
@@ -388,6 +383,29 @@ class AdminView_bwg {
       </div>
       <?php
     }
+
+    return ob_get_clean();
+  }
+
+  /**
+   * Booster top banner.
+   *
+   * @param array $params
+   *
+   * @return false|string
+   */
+  protected function booster_top_banner( $params = array() ) {
+    $class_name = ucfirst('speed');
+    $class_controller = $class_name . 'Controller_' . BWG()->prefix;
+    // load speed file.
+    foreach( array('controllers', 'models', 'views') as $folder) {
+      $file = BWG()->plugin_dir . '/admin/' . $folder . '/' . $class_name . '.php';
+      require_once( $file );
+    }
+    ob_start();
+
+    $controller = new $class_controller();
+    $controller->top_banner();
 
     return ob_get_clean();
   }

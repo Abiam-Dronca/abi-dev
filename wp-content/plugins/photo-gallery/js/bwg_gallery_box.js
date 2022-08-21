@@ -59,7 +59,7 @@ function gallery_box_ready() {
     }
   });
 
-  if ( gallery_box_data['is_pro'] == true && gallery_box_data['enable_addthis'] == 1 && gallery_box_data['addthis_profile_id'] ) {
+  if ( gallery_box_data['enable_addthis'] == 1 && gallery_box_data['addthis_profile_id'] ) {
     addthis_share = {
       url: gallery_box_data['share_url']
     }
@@ -126,22 +126,20 @@ function gallery_box_ready() {
   var bwg_popup_current_height = gallery_box_data['image_height'];
 
   /* jQuery(document).ready(function () { */
-  if ( gallery_box_data['is_pro'] == true ) {
-    if ( gallery_box_data['enable_addthis'] == 1 && gallery_box_data['addthis_profile_id'] ) {
-      jQuery(".at4-share-outer").show();
-    }
-    /* Increase image hit counter.*/
-    spider_set_input_value('rate_ajax_task', 'save_hit_count');
-    spider_rate_ajax_save('bwg_rate_form');
-    var tempdata = gallery_box_data['data'];
-    var current_image_key = gallery_box_data['current_image_key'];
+  if ( gallery_box_data['enable_addthis'] == 1 && gallery_box_data['addthis_profile_id'] ) {
+    jQuery(".at4-share-outer").show();
+  }
+  /* Increase image hit counter.*/
+  spider_set_input_value('rate_ajax_task', 'save_hit_count');
+  spider_rate_ajax_save('bwg_rate_form');
+  var tempdata = gallery_box_data['data'];
+  var current_image_key = gallery_box_data['current_image_key'];
 
-    jQuery(".bwg_image_hits span").html(++tempdata[current_image_key]["hit_count"]);
-    var bwg_hash = window.location.hash;
-    if ( !bwg_hash || bwg_hash.indexOf("bwg") == "-1" ) {
-      location.replace("#bwg"+gallery_box_data['gallery_id']+"/"+gallery_box_data['current_image_id']);
-      history.replaceState(undefined, undefined, "#bwg"+gallery_box_data['gallery_id']+"/"+gallery_box_data['current_image_id']);
-    }
+  jQuery(".bwg_image_hits span").html(++tempdata[current_image_key]["hit_count"]);
+  var bwg_hash = window.location.hash;
+  if ( !bwg_hash || bwg_hash.indexOf("bwg") == "-1" ) {
+    location.replace("#bwg"+gallery_box_data['gallery_id']+"/"+gallery_box_data['current_image_id']);
+    history.replaceState(undefined, undefined, "#bwg"+gallery_box_data['gallery_id']+"/"+gallery_box_data['current_image_id']);
   }
   if (gallery_box_data['image_right_click'] == 1) {
     /* Disable right click.*/
@@ -840,9 +838,7 @@ function spider_destroypopup(duration) {
     viewportmeta.content = 'width=device-width, initial-scale=1';
   }
   var scrrr = jQuery(document).scrollTop();
-  if ( bwg_objectsL10n.is_pro ) {
-    history.pushState(history.state, null, window.location.origin + window.location.pathname + window.location.search);
-  }
+  history.pushState(history.state, null, window.location.origin + window.location.pathname + window.location.search);
   jQuery(document).scrollTop(scrrr);
   if ( typeof gallery_box_data['bwg_playInterval'] != "undefined" ) {
     clearInterval(gallery_box_data['bwg_playInterval']);
@@ -1181,7 +1177,7 @@ function bwg_gallery_box( image_id, bwg_container, openEcommerce, gallery_id ) {
     open_comment = '&open_comment=1';
   }
   var bwg_random_seed = jQuery("#bwg_random_seed_"+bwg).val();
-  spider_createpopup(bwg_lightbox_url + '&bwg_random_seed='+bwg_random_seed+'&image_id=' + image_id + "&filter_tag=" + filterTags + ecommerce + open_comment + '&filter_search_name=' + filtersearchname + filtersortby, bwg, bwg_container.data('popup-width'), bwg_container.data('popup-height'), 1, 'testpopup', 5, bwg_container.data('buttons-position'));
+  spider_createpopup(bwg_lightbox_url + '&bwg_gallery_type=' + bwg_container.data('gallery-type') + '&bwg_random_seed='+bwg_random_seed+'&image_id=' + image_id + "&filter_tag=" + filterTags + ecommerce + open_comment + '&filter_search_name=' + filtersearchname + filtersortby, bwg, bwg_container.data('popup-width'), bwg_container.data('popup-height'), 1, 'testpopup', 5, bwg_container.data('buttons-position'));
 }
 
 function bwg_change_image_lightbox(current_key, key, data, from_effect) {
@@ -1300,12 +1296,10 @@ function bwg_change_image_lightbox(current_key, key, data, from_effect) {
         bwg_current_filmstrip_pos = key * (jQuery(".bwg_filmstrip_thumbnail").height() + 2 + 2 * gallery_box_data['lightbox_filmstrip_thumb_border_width']);
       }
       gallery_box_data['bwg_current_key'] = key;
-      if ( bwg_objectsL10n.is_pro ) {
-        /* Change hash.*/
-        /*window.location.hash = "bwg"+gallery_box_data['gallery_id'] +"/" + data[key]["id"];*/
-        location.replace("#bwg" + gallery_box_data['gallery_id'] + "/" + data[key]["id"]);
-        history.replaceState(undefined, undefined, "#bwg" + gallery_box_data['gallery_id'] + "/" + data[key]["id"]);
-      }
+      /* Change hash.*/
+      /*window.location.hash = "bwg"+gallery_box_data['gallery_id'] +"/" + data[key]["id"];*/
+      location.replace("#bwg" + gallery_box_data['gallery_id'] + "/" + data[key]["id"]);
+      history.replaceState(undefined, undefined, "#bwg" + gallery_box_data['gallery_id'] + "/" + data[key]["id"]);
       jQuery("#bwg_rate_form input[name='image_id']").val(data[key]["id"]);
       /* Increase image hit counter.*/
       spider_set_input_value('rate_ajax_task', 'save_hit_count');
