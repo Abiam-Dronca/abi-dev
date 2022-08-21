@@ -509,9 +509,17 @@ class KadenceImporter extends Component {
 				} else if ( control.state.installCustomizer ) {
 					control.setState( { progress: 'customizer' } );
 					newData.append( 'action', 'kadence_import_customizer_data' );
+					newData.append( 'builder', control.state.starterSettings['builderType'] );
+					newData.append( 'selected', control.state.activeTemplate );
+					newData.append( 'palette', control.state.colorPalette );
+					newData.append( 'font', control.state.fontPair );
 					newData.append( 'wp_customize', 'on' );
 				} else {
 					control.setState( { progress: 'widgets' } );
+					newData.append( 'builder', control.state.starterSettings['builderType'] );
+					newData.append( 'selected', control.state.activeTemplate );
+					newData.append( 'palette', control.state.colorPalette );
+					newData.append( 'font', control.state.fontPair );
 					newData.append( 'action', 'kadence_after_import_data' );
 				}
 				control.runAjax( newData );
@@ -996,7 +1004,8 @@ class KadenceImporter extends Component {
 									{ ! this.state.isFetching && (
 										<PanelBody
 											title={ __( 'Advanced Settings', 'kadence-blocks' ) }
-											initialOpen={ false }
+											initialOpen={ this.state.settingOpen }
+											onToggle={ value => ( this.state.settingOpen ? this.setState( { settingOpen: false } ) : this.setState( { settingOpen: true } ) ) }
 										>
 											<ToggleControl
 												label={ __( 'Import Customizer Settings', 'kadence-starter-templates' ) }

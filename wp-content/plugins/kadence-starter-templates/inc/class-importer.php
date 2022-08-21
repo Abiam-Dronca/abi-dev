@@ -147,7 +147,7 @@ class Importer {
 	 *
 	 * @param string $import_file_path Path to the import file.
 	 */
-	public function import_content( $import_file_path, $single_page = false, $page_meta = '' ) {
+	public function import_content( $import_file_path, $single_page = false, $page_meta = '', $elementor = false ) {
 		$this->microtime = microtime( true );
 
 		// Increase PHP max execution time. Just in case, even though the AJAX calls are only 25 sec long.
@@ -168,15 +168,20 @@ class Importer {
 			remove_filter( 'wxr_importer.pre_process.post', array( $astra_site_instance, 'pre_process_post' ), 10 );
 		}
 		if ( $single_page ) {
-			// Set the importing author to the current user and Import images.
-			add_filter( 'wxr_importer.pre_process.post', array( $this, 'check_for_content_images' ), 10, 4 );
+			if ( ! $elementor ) {
+				// Set the importing author to the current user and Import images.
+				add_filter( 'wxr_importer.pre_process.post', array( $this, 'check_for_content_images' ), 10, 4 );
+			}
 			//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
-			add_action( 'wxr_importer.processed.post', array( $this, 'process_elementor' ), 10, 5 );
+			if ( $elementor ) {
+				add_action( 'wxr_importer.processed.post', array( $this, 'process_elementor' ), 10, 5 );
+			}
 			if ( $page_meta && $page_meta === 'clear' ) {
 				add_action( 'wxr_importer.processed.post', array( $this, 'process_single_page_clean_meta' ), 10, 5 );
 			}
 		} else {
 			add_filter( 'wxr_importer.pre_process.post_meta', array( $this, 'process_elementor_images' ), 10, 2 );
+			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_stop_woo_pages' ), 9, 4 );
 			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
 				//add_filter( 'wp_import_post_data_processed', array( $this, 'process_kadence_block_css_post' ), 10, 2 );
 			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_internal_links' ), 11, 4 );
@@ -340,6 +345,34 @@ class Importer {
 				)
 			);
 		}
+	}
+	/**
+	 * Process Stop Woo Pages
+	 *
+	 * @param int $post_id New post ID.
+	 * @param array $data Raw data imported for the post.
+	 * @param array $meta Raw meta data, already processed by {@see process_post_meta}.
+	 * @param array $comments Raw comment data, already processed by {@see process_comments}.
+	 * @param array $terms Raw term data, already processed.
+	 */
+	public function process_stop_woo_pages( $data, $meta, $comments, $terms ) {
+		if ( $data['post_type'] === 'page' ) {
+			if ( apply_filters( 'stop_importing_woo_pages', false ) ) {
+				$woopages = array(
+					'woocommerce_shop_page_id'      => 'shop',
+					'woocommerce_cart_page_id'      => 'cart',
+					'woocommerce_checkout_page_id'  => 'checkout',
+					'woocommerce_myaccount_page_id' => 'my-account',
+				);
+				foreach ( $woopages as $woo_page_option => $woo_page_slug ) {
+					if ( get_option( $woo_page_option ) && $data['post_name'] == $woo_page_slug ) {
+						$data = array();
+						break;
+					}
+				}
+			}
+		}
+		return $data;
 	}
 	/**
 	 * Process Kadence Block CSS
@@ -571,15 +604,6 @@ class Importer {
 
 		if ( isset( $data['post_content'] ) && ! empty( $data['post_content'] ) ) {
 
-			$meta_data = wp_list_pluck( $meta, 'key' );
-
-			if ( in_array( '_elementor_data', $meta_data, true ) ) {
-				$data['post_content'] = '';
-			}
-		}
-
-		if ( isset( $data['post_content'] ) && ! empty( $data['post_content'] ) ) {
-
 			$images = $this->find_all_image_urls( stripslashes( $data['post_content'] ) );
 			if ( count( $images ) == 0 ) {
 				return $data;
@@ -766,8 +790,10 @@ class Importer {
 
 		// Set importing author to the current user.
 		// Fixes the [WARNING] Could not find the author for ... log warning messages.
-		$current_user_obj    = wp_get_current_user();
-		$data['post_author'] = $current_user_obj->user_login;
+		if ( isset( $data['post_author'] ) ) {
+			$current_user_obj    = wp_get_current_user();
+			$data['post_author'] = $current_user_obj->user_login;
+		}
 
 		return $data;
 	}

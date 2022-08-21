@@ -102,7 +102,6 @@ class CustomizerImporter {
 		}
 
 		$data = unserialize( $raw );
-
 		// Data checks.
 		if ( 'array' != gettype( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
 			return new \WP_Error(
@@ -131,11 +130,13 @@ class CustomizerImporter {
 			if ( ! class_exists( 'Kadence_Starter_Templates\CustomizerOption' ) ) {
 				require_once KADENCE_STARTER_TEMPLATES_PATH . 'inc/class-customizer-option.php';
 			}
-
 			foreach ( $data['options'] as $option_key => $option_value ) {
 				if ( 'kadence_global_palette' === $option_key ) {
 					$palette = json_decode( $option_value, 'true' );
-					update_option( 'kadence_global_palette', json_encode( $palette ) );
+					$info = update_option( 'kadence_global_palette', json_encode( $palette ) );
+					if ( ! $info ) {
+						$info = add_option( 'kadence_global_palette', json_encode( $palette ) );
+					}
 				} else {
 					$option = new CustomizerOption( $wp_customize, $option_key, array(
 						'default'    => '',
