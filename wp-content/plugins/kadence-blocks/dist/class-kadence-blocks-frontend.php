@@ -8911,6 +8911,7 @@ class Kadence_Blocks_Frontend {
 		}
 		if ( ! empty( $attr['sticky'] ) && true === $attr['sticky'] ) {
 			$css->set_selector( '#wrapper.site' );
+			$css->add_property( 'overflow', 'visible' );
 			$css->add_property( 'overflow', 'clip' );
 			if ( ! empty( $attr['stickyOffset'][0] ) ) {
 				$css->set_selector( '.kadence-column' . $unique_id );
