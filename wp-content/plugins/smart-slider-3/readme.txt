@@ -4,7 +4,7 @@ Tags: slider, wordpress slider, image slider, layer slider, responsive slider, s
 Donate link: https://sites.fastspring.com/nextend/product/smartslider3donate
 Requires at least: 4.9
 Tested up to: 6.0
-Stable tag: 3.5.1.7
+Stable tag: 3.5.1.9
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -208,6 +208,16 @@ Of course! Smart Slider use protocol relative urls which works fine on http:// a
 9. Layer slider with layers styles. Made with FREE version.
 
 == Changelog ==
+
+= 3.5.1.9 - 18. August 2022 =
+* Feature: Improved notice when the Autoplay is used on a single slide to avoid confusion. 
+* Feature: u tag is now allowed in text layer. 
+* Fix: PHP 8.1. compatibility fixes.
+* Fix: Allow data protocol when Jetpack is active to avoid it removing the arrows and other base64 images.
+* Fix: Major overhaul of the way the plugin deals with options. This should fix a some bugs and provide improved security.
+* Other: Spanish translation updated. Thanks, Rodrigo! 
+* Other: Dutch translation updated. Thanks, Frank! 
+* Other: PHP related conflicts were renamed at the Debug Information to more accurately reflect the cause of the conflict. 
 
 = 3.5.1.7 - 26. May 2022 =
 * Fix: Major overhaul of the way the plugin deals with options. This should fix a some bugs and provide improved security. To enhance security the "JavaScript callbacks" option was removed. If you need to write custom codes to manipulate the slider [follow this guide](https://smartslider.helpscoutdocs.com/article/2089-how-to-write-your-own-javascript-code) to learn how. 

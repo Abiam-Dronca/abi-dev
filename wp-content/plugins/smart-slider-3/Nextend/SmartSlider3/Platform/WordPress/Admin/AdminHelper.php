@@ -7,7 +7,6 @@ namespace Nextend\SmartSlider3\Platform\WordPress\Admin;
 use Nextend\Framework\PageFlow;
 use Nextend\Framework\Sanitize;
 use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
-use Nextend\SmartSlider3\Application\Model\ModelLicense;
 use Nextend\SmartSlider3\Application\Model\ModelSliders;
 use Nextend\SmartSlider3\Platform\SmartSlider3Platform;
 use Nextend\SmartSlider3\Platform\WordPress\HelperTinyMCE;
@@ -126,7 +125,7 @@ class AdminHelper {
                 $documentationUrl = 'https://smartslider.helpscoutdocs.com/article/1983-how-to-give-access-to-smart-slider-for-non-admin-users#wordpress';
             }
 
-            wp_die(sprintf('<div class="error">%s</div>', wpautop(sprintf('Smart Slider allows you to place many things on your slider, so only users with the %s capability can have access to it. You do not have this capability and only %s.', '<i>unfiltered_html</i>', sprintf('<a href="%s" target="_blank">%s</a>', $documentationUrl, 'the administrator of your website can grant it to you')))));
+            wp_die(sprintf('<div class="error"><p>%s</p></div>', sprintf('Smart Slider allows you to place many things on your slider, so only users with the %s capability can have access to it. You do not have this capability and only %s.', '<i>unfiltered_html</i>', sprintf('<a href="%s" target="_blank">%s</a>', esc_url($documentationUrl), 'the administrator of your website can grant it to you'))));
         }
     }
 
@@ -180,7 +179,7 @@ class AdminHelper {
 
     public function action_admin_head_network_update() {
 
-        echo '<style type="text/css">#adminmenu .toplevel_page_' . NEXTEND_SMARTSLIDER_3_URL_PATH . '{display: none;}</style>';
+        echo '<style type="text/css">#adminmenu .toplevel_page_' . esc_html(NEXTEND_SMARTSLIDER_3_URL_PATH) . '{display: none;}</style>';
     }
 
     public function display_network_update() {
