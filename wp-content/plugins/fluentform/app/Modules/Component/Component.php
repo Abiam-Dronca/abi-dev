@@ -110,7 +110,15 @@ class Component
             [],
             FLUENTFORM_VERSION
         );
-
+    
+        wp_register_script(
+            'form-save-progress',
+            $app->publicUrl('js/form-save-progress.js'),
+            ['jquery'],
+            FLUENTFORM_VERSION,
+            true
+        );
+       
         do_action('fluentform_scripts_registered');
 
         $this->maybeLoadFluentFormStyles();
@@ -554,7 +562,7 @@ class Component
                 'itemSelectText' => __('Press to select', 'fluentform'),
                 'maxItemText'    => __('Only %%maxItemCount%% options can be added', 'fluentform'),
             ],
-            'jquery_mask_vars' => [
+            'input_mask_vars' => [
 	            'clearIfNotMatch' => false,
             ]
         ));

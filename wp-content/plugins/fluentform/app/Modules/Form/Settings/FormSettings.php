@@ -95,8 +95,45 @@ class FormSettings
         $formId = intval($this->request->get('form_id'));
         $form = new Form($this->app);
         $formSettings = \json_decode($this->request->get('formSettings'), true);
+    
+        $sanitizerMap = [
+            'redirectTo'                 => 'sanitize_text_field',
+            'redirectMessage'            => 'fluentform_sanitize_html',
+            'messageToShow'              => 'fluentform_sanitize_html',
+            'customPage'                 => 'sanitize_text_field',
+            'samePageFormBehavior'       => 'sanitize_text_field',
+            'customUrl'                  => 'sanitize_url',
+            'enabled'                    => 'rest_sanitize_boolean',
+            'numberOfEntries'            => 'intval',
+            'period'                     => 'intval',
+            'limitReachedMsg'            => 'sanitize_text_field',
+            'start'                      => 'sanitize_text_field',
+            'end'                        => 'sanitize_text_field',
+            'pendingMsg'                 => 'sanitize_text_field',
+            'expiredMsg'                 => 'sanitize_text_field',
+            'requireLoginMsg'            => 'sanitize_text_field',
+            'message'                    => 'sanitize_text_field',
+            'labelPlacement'             => 'sanitize_text_field',
+            'helpMessagePlacement'       => 'sanitize_text_field',
+            'errorMessagePlacement'      => 'sanitize_text_field',
+            'asteriskPlacement'          => 'sanitize_text_field',
+            'delete_entry_on_submission' => 'sanitize_text_field',
+            'id'                         => 'intval',
+            'showLabel'                  => 'rest_sanitize_boolean',
+            'showCount'                  => 'rest_sanitize_boolean',
+            'status'                     => 'rest_sanitize_boolean',
+            'type'                       => 'sanitize_text_field',
+            'field'                      => 'sanitize_text_field',
+            'operator'                   => 'sanitize_text_field',
+            'value'                      => 'sanitize_text_field',
+            'error_message'              => 'sanitize_text_field',
+            'validation_type'            => 'sanitize_text_field',
+        ];
+        $formSettings = $this->sanitizeData($formSettings, $sanitizerMap);
+    
         $advancedValidationSettings = \json_decode($this->request->get('advancedValidationSettings'), true);
-
+        $advancedValidationSettings = $this->sanitizeData($advancedValidationSettings, $sanitizerMap);
+        
         Validator::validate(
             'confirmations',
             ArrayHelper::get($formSettings, 'confirmation', [])
@@ -108,8 +145,8 @@ class FormSettings
         $deleteAfterXDaysStatus = ArrayHelper::get($formSettings, 'delete_after_x_days');
         $deleteDaysCount = ArrayHelper::get($formSettings, 'auto_delete_days');
         $deleteOnSubmission = ArrayHelper::get($formSettings, 'delete_entry_on_submission');
-
-        if($deleteOnSubmission != 'yes' && $deleteDaysCount && $deleteAfterXDaysStatus == 'yes') {
+    
+        if ($deleteOnSubmission != 'yes' && $deleteDaysCount && $deleteAfterXDaysStatus == 'yes') {
             // We have to set meta values
             $form->updateMeta($formId, 'auto_delete_days', intval($deleteDaysCount));
         } else {
@@ -145,7 +182,29 @@ class FormSettings
         } else {
             Validator::validate($key, $valueArray);
         }
-
+        $sanitizerMap = [
+            'name'      => 'sanitize_text_field',
+            'field'     => 'sanitize_text_field',
+            'email'     => 'sanitize_text_field',
+            'operator'  => 'sanitize_text_field',
+            'value'     => 'sanitize_text_field',
+            'fromName'  => 'sanitize_text_field',
+            'fromEmail' => 'sanitize_text_field',
+            'replyTo'   => 'sanitize_text_field',
+            'bcc'       => 'sanitize_text_field',
+            'subject'   => 'sanitize_text_field',
+            'message'   => 'wp_kses_post',
+            'status'    => 'rest_sanitize_boolean',
+            'enabled'   => 'rest_sanitize_boolean',
+            'type'      => 'sanitize_text_field',
+            'url'       => 'sanitize_url',
+            'webhook'   => 'sanitize_url',
+            'textTitle' => 'sanitize_text_field',
+        ];
+        
+        $valueArray = $this->sanitizeData($valueArray, $sanitizerMap);
+        $value = json_encode($valueArray);
+        
         $data = [
             'meta_key' => $key,
             'value' => $value,
@@ -186,5 +245,17 @@ class FormSettings
         $this->settingsQuery->where('id', $id)->delete();
 
         wp_send_json([], 200);
+    }
+    
+    /**
+     * @param $formSettings
+     * @return array
+     */
+    private function sanitizeData($settings, $sanitizerMap)
+    {
+        if (current_user_can('unfiltered_html') || apply_filters('fluent_form_disable_fields_sanitize', false)) {
+            return $settings;
+        }
+        return fluentform_backend_sanitizer($settings, $sanitizerMap);
     }
 }

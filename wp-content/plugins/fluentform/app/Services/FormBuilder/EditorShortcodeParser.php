@@ -75,15 +75,15 @@ class EditorShortcodeParser
                 return static::parseQueryParam($handler);
             } elseif (strpos($handler, 'random_string.') !== false) {
                 return static::parseRandomString($handler);
-            } else if (strpos($handler, 'user.') !== false) {
+            } elseif (strpos($handler, 'user.') !== false) {
                 $value = self::parseUserProperties($handler);
                 if (is_array($value) || is_object($value)) {
                     return '';
                 }
                 return $value;
-            } else if (strpos($handler, 'date.') !== false) {
+            } elseif (strpos($handler, 'date.') !== false) {
                 return self::parseDate($handler);
-            } else if (strpos($handler, 'embed_post.meta.') !== false) {
+            } elseif (strpos($handler, 'embed_post.meta.') !== false) {
                 $key = substr(str_replace(['{', '}'], '', $value), 16);
                 global $post;
                 if ($post) {
@@ -93,12 +93,12 @@ class EditorShortcodeParser
                     }
                 }
                 return '';
-            } else if (strpos($handler, 'embed_post.') !== false) {
+            } elseif (strpos($handler, 'embed_post.') !== false) {
                 return self::parsePostProperties($handler, $form);
-            } else if (strpos($handler, 'cookie.') !== false) {
+            } elseif (strpos($handler, 'cookie.') !== false) {
                 $scookieProperty = substr($handler, strlen('cookie.'));
                 return ArrayHelper::get($_COOKIE, $scookieProperty);
-            } else if (strpos($handler, 'dynamic.') !== false) {
+            } elseif (strpos($handler, 'dynamic.') !== false) {
                 $dynamicKey = substr($handler, strlen('dynamic.'));
                 // maybe has fallback value
                 $dynamicKey = explode('|', $dynamicKey);
@@ -115,10 +115,21 @@ class EditorShortcodeParser
 
                 return '<span class="ff_dynamic_value" data-ref="' . $ref . '" data-fallback="' . $fallBack . '">' . $fallBack . '</span>';
             } else {
-                // This can be the css
-                $handlerValue = apply_filters('fluentform_editor_shortcode_callback_' . $handler, '{' . $handler . '}', $form);
-                // In not found then return the original please
-                $filteredValue = $handlerValue;
+
+                // if it's multi line then just return
+                if (strpos($handler, PHP_EOL) !== false) { // most probably it's a css
+                    return '{'.$handler.'}';
+                }
+
+                $handlerArray = explode('.', $handler);
+
+                if (count($handlerArray) > 1) {
+                    // it's a grouped handler
+                    $group = array_shift($handlerArray);
+                    return apply_filters('fluentform_editor_shortcode_callback_group_' . $group, '{' . $handler . '}', $form, $handlerArray);
+                }
+                
+                return apply_filters('fluentform_editor_shortcode_callback_' . $handler, '{' . $handler . '}', $form);
             }
         }
 
@@ -198,7 +209,7 @@ class EditorShortcodeParser
                 }
             }
             return '';
-        } else if (strpos($key, 'meta.') !== false) {
+        } elseif (strpos($key, 'meta.') !== false) {
             $metaKey = substr($key, strlen('meta.'));
             $postId = $post->ID;
             $data = get_post_meta($postId, $metaKey, true);
@@ -206,7 +217,7 @@ class EditorShortcodeParser
                 return $data;
             }
             return '';
-        } else if (strpos($key, 'acf.') !== false) {
+        } elseif (strpos($key, 'acf.') !== false) {
             $metaKey = substr($key, strlen('acf.'));
             $postId = $post->ID;
             if (function_exists('get_field')) {
@@ -300,7 +311,7 @@ class EditorShortcodeParser
      * @return string
      */
     public static function parseQueryParam($value)
-    {	        
+    {
         $exploded = explode('.', $value);
         $param = array_pop($exploded);
         if (!isset($_REQUEST[$param])) {
@@ -321,9 +332,8 @@ class EditorShortcodeParser
      */
     public static function parseRandomString($value)
     {
-        
-        $exploded = explode ('.',$value);
+        $exploded = explode('.', $value);
         $prefix =  array_pop($exploded) ;
-        return $prefix.uniqid () ;
+        return $prefix.uniqid() ;
     }
 }

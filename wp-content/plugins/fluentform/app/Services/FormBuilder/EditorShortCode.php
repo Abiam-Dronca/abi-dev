@@ -4,7 +4,7 @@ namespace FluentForm\App\Services\FormBuilder;
 
 use FluentForm\App\Modules\Form\FormFieldsParser;
 
-class EditorShortcode
+class EditorShortCode
 {
     public static function getGeneralShortCodes()
     {
@@ -38,9 +38,11 @@ class EditorShortcode
     {
         $form = static::getForm($form);
         $formFields = FormFieldsParser::getShortCodeInputs(
-            $form, [
-            'admin_label', 'attributes', 'options'
-        ]);
+            $form,
+            [
+                'admin_label', 'attributes', 'options'
+            ]
+        );
 
         $formShortCodes = [
             'shortcodes' => [],

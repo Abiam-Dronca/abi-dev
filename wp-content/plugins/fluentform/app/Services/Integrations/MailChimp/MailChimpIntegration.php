@@ -31,7 +31,9 @@ class MailChimpIntegration extends IntegrationManager
         $this->registerAdminHooks();
         
         add_action('wp_ajax_fluentform_mailchimp_interest_groups', array($this, 'fetchInterestGroups'));
-
+    
+        add_filter('fluentform_save_integration_value_mailchimp', array($this, 'sanitizeSettings'), 10, 3);
+        
 //        add_filter('fluentform_notifying_async_mailchimp', '__return_false');
     }
 
@@ -450,6 +452,28 @@ class MailChimpIntegration extends IntegrationManager
             ];
         }
         return $formattedLists;
+    }
+    
+    public function sanitizeSettings($integration, $integrationId, $formId)
+    {
+        if (current_user_can('unfiltered_html') || apply_filters('fluent_form_disable_fields_sanitize', false)) {
+            return $integration;
+        }
+        $sanitizeMap = [
+            'status'                 => 'rest_sanitize_boolean',
+            'enabled'                => 'rest_sanitize_boolean',
+            'type'                   => 'sanitize_text_field',
+            'list_id'                => 'sanitize_text_field',
+            'list_name'              => 'sanitize_text_field',
+            'name'                   => 'sanitize_text_field',
+            'tags'                   => 'sanitize_text_field',
+            'tag_ids_selection_type' => 'sanitize_text_field',
+            'fieldEmailAddress'      => 'sanitize_text_field',
+            'doubleOptIn'            => 'rest_sanitize_bolean',
+            'resubscribe'            => 'rest_sanitize_bolean',
+            'note'                   => 'sanitize_text_field',
+        ];
+        return fluentform_backend_sanitizer($integration, $sanitizeMap);
     }
 
 

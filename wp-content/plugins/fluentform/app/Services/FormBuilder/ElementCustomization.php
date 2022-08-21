@@ -637,8 +637,13 @@ $element_customization_settings = array(
                 'label' => __('Custom', 'fluentform'),
             ),
         ),
-        
-    )
+    ),
+    'container_width' => array(
+        'template' => 'containerWidth',
+        'label' => __('Column Width %', 'fluentform'),
+        'help_text' => __('Set the width of the columns. The width cannot be below 10%.', 'fluentform'),
+        'width_limitation_msg' => __('The width cannot be below 10%', 'fluentform')
+    ),
 );
 
 

@@ -5,7 +5,7 @@ namespace FluentForm\App\Modules\Form;
 use FluentForm\App;
 use FluentForm\App\Modules\Acl\Acl;
 use FluentForm\Framework\Foundation\Application;
-use FluentForm\App\Services\FormBuilder\EditorShortcode;
+use FluentForm\App\Services\FormBuilder\EditorShortCode;
 use FluentForm\Framework\Helpers\ArrayHelper;
 
 class Inputs
@@ -32,7 +32,7 @@ class Inputs
         $formId = $this->request->get('formId');
 
         $form = wpFluent()->table('fluentform_forms')->find($formId);
-		
+        
         $fields = FormFieldsParser::getShortCodeInputs($form, [
             'admin_label', 'attributes', 'options'
         ]);
@@ -76,11 +76,11 @@ class Inputs
     {
         foreach ($fields as $index => $field) {
             $element = ArrayHelper::get($field, 'element');
-            if($element == 'select_country') {
+            if ($element == 'select_country') {
                 $fields[$index]['options'] = App::load(
                     App::appPath('Services/FormBuilder/CountryNames.php')
                 );
-            } else if($element == 'gdpr-agreement' || $element == 'terms_and_condition') {
+            } elseif ($element == 'gdpr-agreement' || $element == 'terms_and_condition') {
                 $fields[$index]['options'] = array('on' => 'Checked');
             }
         }

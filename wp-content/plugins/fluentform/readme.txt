@@ -2,9 +2,9 @@
 Contributors: techjewel,adreastrian,heera,wpmanageninja
 Tags: contact form, contact forms, wp forms, forms, form builder, contact form builder, fluent forms
 Requires at least: 4.5
-Tested up to: 6.0
+Tested up to: 6.0.1
 Requires PHP: 5.6
-Stable tag: 4.3.9
+Stable tag: 4.3.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,6 +363,18 @@ The entire source code is <a href="https://github.com/fluentform/fluentform">ava
 12. Asset Loading Comparison with Other Plugins
 
 == Changelog ==
+
+= 4.3.11 (Date: August 12, 2022) =
+- Adds reset button for Resizable Container
+- Adds Step Form options to Form Filtering
+- Improves Container Resizable feature
+
+= 4.3.10 (Date: August 04, 2022) =
+- Adds Forms type filter
+- Improves data sanitization
+- Improves email summary
+- Improves Resizeable Container
+- Fixes Conversational Form issue with Elementor popup
 
 = 4.3.9 (Date: July 04, 2022) =
 - Adds Resizeable Container Width
