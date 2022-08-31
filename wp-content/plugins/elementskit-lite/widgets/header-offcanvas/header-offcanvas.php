@@ -270,7 +270,7 @@ class ElementsKit_Widget_Header_Offcanvas extends Widget_Base
                         '{{WRAPPER}} .ekit_navSidebar-button svg'   => 'max-width: {{SIZE}}{{UNIT}};',
                     ],
                     'condition' => [
-                        'ekit_offcanvas_menu_type' => [ 'text', 'icon_with_text' ],
+                        'ekit_offcanvas_menu_type!' => [ 'text' ],
                     ]
                 ]
             );

@@ -1455,7 +1455,7 @@ class ElementsKit_Widget_Testimonial extends Widget_Base {
 	    $this->add_group_control(
 		    Group_Control_Typography::get_type(), [
 			    'name'		 => 'ekit_testimonial_designation_typography',
-			    'selector'	 => '{{WRAPPER}} .elementskit-single-testimonial-slider .elementskit-author-des',
+			    'selector'	 => '{{WRAPPER}} .elementskit-profile-info .elementskit-author-des',
 		    ]
 		);
 
@@ -1641,6 +1641,9 @@ class ElementsKit_Widget_Testimonial extends Widget_Base {
 						'unit' => 'px',
 						'size' => 70,
 					],
+					'selectors' => [
+						'{{WRAPPER}} .elementskit-commentor-bio .elementskit-commentor-image > img' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					],
 					'condition' => [
 						'ekit_testimonial_style' => ['style4', 'style5', 'style6']
 					]
@@ -1770,6 +1773,15 @@ class ElementsKit_Widget_Testimonial extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'ekit_testimonial_client_dot_border',
+				'label' => esc_html__( 'Border', 'elementskit-lite' ),
+				'selector' => '{{WRAPPER}} .elementskit-testimonial-slider .slick-dots li button',
+			]
+		);
+
 		$this->add_responsive_control(
 			'ekit_testimonial_client_dot_border_radius',
 			[
@@ -1877,6 +1889,15 @@ class ElementsKit_Widget_Testimonial extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .elementskit-testimonial-slider .slick-dots li.slick-active button' => 'height: {{SIZE}}{{UNIT}};',
 				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' => 'ekit_testimonial_client_dot_active_border',
+				'label' => esc_html__( 'Border', 'elementskit-lite' ),
+				'selector' => '{{WRAPPER}} .elementskit-testimonial-slider .slick-dots li.slick-active button',
 			]
 		);
 

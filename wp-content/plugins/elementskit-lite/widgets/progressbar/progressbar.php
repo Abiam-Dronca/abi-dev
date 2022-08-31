@@ -104,6 +104,21 @@ class ElementsKit_Widget_Progressbar extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'ekit_progressbar_percentage_show',
+            [
+                'label' => esc_html__('Hide Percentage Number? ', 'elementskit-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'no',
+                'return_value' => 'none',
+                'label_on' => esc_html__( 'Yes', 'elementskit-lite' ),
+                'label_off' => esc_html__( 'No', 'elementskit-lite' ),
+                'selectors' => [
+                    '{{WRAPPER}} .skillbar-group .number-percentage-wraper' => 'display: {{VALUE}};',
+                ],
+            ]
+        );
+
         $this->add_responsive_control(
             'ekit_progressbar_data_duration',
             [
@@ -312,16 +327,36 @@ class ElementsKit_Widget_Progressbar extends Widget_Base {
                 ],
             ]
         );
+
         $this->add_group_control(
             Group_Control_Typography::get_type(), [
                 'name'       => 'ekit_progressbar_title_typography',
                 'selector'   => '{{WRAPPER}} .skillbar-group .skill-title',
             ]
         );
+
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(), [
                 'name'       => 'ekit_progressbar_title_shadow',
                 'selector'   => '{{WRAPPER}} .skillbar-group .skill-title',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'ekit_progressbar_margin_bottom',
+            [
+                'type'          => Controls_Manager::SLIDER,
+                'label'         => esc_html__( 'Margin Bottom', 'elementskit-lite' ),
+                'size_units'    => ['px'],
+                'range'  => [
+                    'px' => [
+                        'min'   => 1,
+                        'max'   => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .skill-bar-content' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                ],
             ]
         );
 

@@ -453,12 +453,13 @@ class ElementsKit_Widget_Accordion extends Widget_Base {
                 'range'			 => [
                     'px' => [
                         'min'	 => -30,
+                        'max'   => 100,
                         'step'	 => 1,
                     ],
                 ],
                 'size_units'	 => ['px'],
                 'selectors'		 => [
-                    '{{WRAPPER}} .elementskit-accordion .elementskit-card-header>.elementskit-btn-link'	=> 'margin-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .elementskit-accordion .elementskit-card:not(:last-child)'	=> 'margin-bottom: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );

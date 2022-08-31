@@ -4,7 +4,7 @@ Contributors: Ataurr, wpmet, emranio, aion11
 Tags: elementor addons, mega menu builder, header footer builder, elementor widgets, Accordion tab, elementor modules, page builder addons, elementor addon, elementor widget, addons
 Requires at least: 5.0
 Tested up to: 6.0
-Stable tag: 2.6.3
+Stable tag: 2.7.0
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -412,10 +412,6 @@ Do you want to integrate the Facebook Messenger chat-head to any of your web pag
 Start using the Facebook Messenger module chat-head by providing the Page ID, choosing any color, logged in user greeting, and logged out user greeting. You can also show your visitors a dialogue box if you wish to. However, make sure that your domain is whitelisted on the page you’re linking to.
 
 
-
-
-
-
 Learn [How to Install and Use ElementsKit](https://wpmet.com/doc/how-to-purchase-and-activate-elementskit-pro-license/#1-toc-title)
 
 
@@ -460,17 +456,27 @@ If you like using ShopEngine WooCommerce Builder, then consider checking out our
 [GetGenie Ai](https://wordpress.org/plugins/getgenie)  – AI-powered Content & SEO Assistant for Your Website.
 
 
-
-
 Visit  [wpmet](https://wpmet.com/)  to learn more about how to get the best of WordPress with  [Tutorial, Tips & Tricks](https://wpmet.com/blog)!
 
 
-
-
-
-
-
 == Changelog ==
+Version: 2.7.0 (2022-08-24)
+Added: Mega menu ajax load for better performance
+Added: Icon for Image box and Image swap widget
+Added: Hover color for Heading Widget
+Added: Spacing control between text and bar in Progress Bar widget 
+Added: Hiding percentage number control in Progress Bar widget
+Fixed: Image size can't be changed and no border option for dot's in Testimonial widget
+Fixed: Background overlay during hamburger flyout menu not open
+Fixed: Header offCanvas icon size can't be changed
+Fixed: Typography not working for client description in Testimonial widget
+Fixed: Margin bottom control doesn't work properly in Accordion widget
+Fixed: Phone call is not sending in Team widget
+Fixed: Apostrophe on the Label Name field of Widget builder causing Fatal Error
+Fixed: Compatibility with php v8.0 of Widget builder
+Fixed: Content padding issue in Team widget
+Tweaked: Dual button transparent hover not working
+
 Version: 2.6.3 (2022-07-17)
 Added: Nav menu widget border controls for menu items
 Added: Control for Header Offcanvas wrapper padding

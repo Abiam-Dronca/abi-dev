@@ -468,6 +468,12 @@ class Widget_List extends \ElementsKit_Lite\Core\Config_List {
 					'package'         => 'pro-disabled',
 					'widget-category' => 'general', // General
 				),
+				'image-hover-effect' => array(
+					'slug'            => 'image-hover-effect',
+					'title'           => 'Image Hover Effect',
+					'package'         => 'pro-disabled',
+					'widget-category' => 'general', // General
+				),
 			)
 		);
 	}

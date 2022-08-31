@@ -430,10 +430,20 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 
 		$this->add_responsive_control(
 			'ekit_heading_title_color', [
-				'label'		 =>esc_html__( 'Title primary color', 'elementskit-lite' ),
+				'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
 				'type'		 => Controls_Manager::COLOR,
 				'selectors'	 => [
 					'{{WRAPPER}} .elementskit-section-title-wraper .elementskit-section-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'ekit_heading_title_color_hover', [
+				'label'		 =>esc_html__( 'Hover Color', 'elementskit-lite' ),
+				'type'		 => Controls_Manager::COLOR,
+				'selectors'	 => [
+					'{{WRAPPER}} .elementskit-section-title-wraper .elementskit-section-title:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -601,7 +611,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 
 		$this->add_responsive_control(
 			'ekit_heading_focused_title_color', [
-				'label'		 =>esc_html__( 'Title primary color', 'elementskit-lite' ),
+				'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
 				'type'		 => Controls_Manager::COLOR,
 				'default' => '#000000',
 				'selectors'	 => [
@@ -609,12 +619,25 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				],
 			]
 		);
+
+		$this->add_responsive_control(
+			'ekit_heading_focused_title_color_hover', [
+				'label'		 =>esc_html__( 'Hover Color', 'elementskit-lite' ),
+				'type'		 => Controls_Manager::COLOR,
+				'default' => '#000000',
+				'selectors'	 => [
+					'{{WRAPPER}} .elementskit-section-title-wraper .elementskit-section-title:hover > span' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(), [
 			'name'		 => 'ekit_heading_focused_title_typography',
 			'selector'	 => '{{WRAPPER}} .elementskit-section-title-wraper .elementskit-section-title > span',
 			]
 		);
+
 		$this->add_responsive_control(
 			'ekit_heading_title_text_decoration_color', [
 				'label'		 =>esc_html__( 'Text decoration color', 'elementskit-lite' ),
@@ -624,6 +647,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				],
 			]
 		);
+
 		$this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
@@ -632,6 +656,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 
             ]
         );
+
 		$this->add_responsive_control(
 			'ekit_heading_focused_title_secondary_spacing',
 			[
@@ -643,6 +668,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				],
 			]
 		);
+
 		$this->add_control(
 			'ekit_heading_use_focused_title_bg', [
 				'label'			 =>esc_html__( 'Use background color on text', 'elementskit-lite' ),
@@ -655,6 +681,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				],
 			]
 		);
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             array(
@@ -668,6 +695,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				],
             )
 		);
+
 		$this->add_control(
 			'ekit_heading_focused_title_secondary_border_radius',
 			[
@@ -683,6 +711,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				],
 			]
 		);
+
 		$this->add_control(
 			'ekit_heading_use_title_text_fill', [
 				'label'			 =>esc_html__( 'Use text fill', 'elementskit-lite' ),
@@ -696,6 +725,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				]
 			]
 		);
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             array(
@@ -709,6 +739,7 @@ class ElementsKit_Widget_Heading extends Widget_Base {
 				],
             )
         );
+
 		$this->end_controls_section();
 
 		//Sub title Style Section

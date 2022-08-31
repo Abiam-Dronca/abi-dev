@@ -69,6 +69,9 @@ class Plugin {
 		// Compatibility issues
 		Compatibility\Conflicts\Init::instance();
 
+		// Show forms sub menu page
+		\Wpmet\Libs\Forms::instance();
+
 		$is_pro_active = in_array( 'elementskit/elementskit.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) );
 		
 		if ( is_admin() && Libs\Framework\Classes\Utils::instance()->get_settings( 'ekit_user_consent_for_banner', 'yes' ) == 'yes' ) {

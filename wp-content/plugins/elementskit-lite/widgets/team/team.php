@@ -690,6 +690,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors' => [
                     '{{WRAPPER}} .profile-body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .ekit-wid-con .profile-square-v .profile-card .profile-body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -2468,7 +2469,7 @@ class ElementsKit_Widget_Team extends Widget_Base {
 								<?php if ( $ekit_team_phone || $ekit_team_email ) { ?>
 									<ul class="ekit-team-modal-list">
 										<?php if ( $ekit_team_phone ): ?>
-											<li><strong><?php esc_html_e( 'Phone', 'elementskit-lite' ); ?>:</strong><a href="tel:<?php echo esc_attr( urlencode($ekit_team_phone) ); ?>"><?php echo esc_html( $ekit_team_phone ); ?></a></li>
+											<li><strong><?php esc_html_e( 'Phone', 'elementskit-lite' ); ?>:</strong><a href="tel:<?php echo esc_attr( $ekit_team_phone ); ?>"><?php echo esc_html( $ekit_team_phone ); ?></a></li>
 										<?php endif; ?>
 
 										<?php if ( $ekit_team_email ): ?>
