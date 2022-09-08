@@ -11,7 +11,7 @@ class ElementorWidget
     public function __construct($app)
     {
         $this->app = $app;
-        add_action( 'elementor/widgets/register', array($this, 'init_widgets') );
+        add_action( 'elementor/widgets/widgets_registered', array($this, 'init_widgets') );
     }
 
 
@@ -23,7 +23,7 @@ class ElementorWidget
 
         if ( file_exists( FLUENTFORM_DIR_PATH.'app/Modules/Widgets/FluentFormWidget.php' ) ) {
             require_once FLUENTFORM_DIR_PATH.'app/Modules/Widgets/FluentFormWidget.php';
-            $widgets_manager->register( new FluentFormWidget() );
+            $widgets_manager->register_widget_type( new FluentFormWidget() );
         }
     }
 

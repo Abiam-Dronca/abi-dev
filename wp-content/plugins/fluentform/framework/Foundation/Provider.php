@@ -12,7 +12,7 @@ abstract class Provider
 
 	/**
 	 * Build the instance
-	 * @param \FluentForm\Framework\Foundation\Application $app
+	 * @param \Framework\Foundation\Application $app
 	 */
 	public function __construct(Application $app)
 	{

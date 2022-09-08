@@ -607,7 +607,7 @@ class FormHandler
         $response = [
             'form_id' => $formId,
             'serial_number' => $serialNumber,
-            'response' => json_encode($this->formData, JSON_UNESCAPED_UNICODE),
+            'response' => json_encode($this->formData),
             'source_url' => site_url(Arr::get($formData, '_wp_http_referer')),
             'user_id' => get_current_user_id(),
             'browser' => $browser->getBrowser(),

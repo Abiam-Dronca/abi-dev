@@ -890,6 +890,7 @@ class Predefined extends Form
         } else {
             $predefinedForm = ArrayHelper::get($this->getPredefinedForms(), $predefined);
         }
+
         if ($predefinedForm) {
             $predefinedForm = json_decode($predefinedForm['json'], true)[0];
             $returnData = $this->createForm($predefinedForm, $predefined);
@@ -907,22 +908,20 @@ class Predefined extends Form
         $this->request->merge([
             'title' => $this->request->get('title', $predefinedForm['title'])
         ]);
-    
+
         if (isset($predefinedForm['form_fields'])) {
             $this->formFields = json_encode($predefinedForm['form_fields']);
-        } else {
-            if (isset($predefinedForm['form'])) {
-                $this->formFields = json_encode($predefinedForm['form']);
-            }
+        } else if (isset($predefinedForm['form'])) {
+            $this->formFields = json_encode($predefinedForm['form']);
         }
-        //take global default setting when creating new form
-        $defaultSettings = (new \FluentForm\App\Modules\Form\Form(wpFluentForm()))->getFormsDefaultSettings();
-        $this->defaultSettings = apply_filters('fluentform_create_default_settings', $defaultSettings);
-    
-        $predefinedForm['metas'][] = [
-            'meta_key' => 'formSettings',
-            'value'    => json_encode($this->defaultSettings)
-        ];
+
+        if (isset($predefinedForm['formSettings'])) {
+            $this->defaultSettings = apply_filters('fluentform_create_default_settings', $predefinedForm['formSettings']);
+            $predefinedForm['metas'][] = [
+                'meta_key' => 'formSettings',
+                'value' => json_encode($this->defaultSettings)
+            ];
+        }
 
         if (isset($predefinedForm['notifications'])) {
             $this->defaultNotifications = $predefinedForm['notifications'];

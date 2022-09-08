@@ -43,7 +43,7 @@ class EditorShortcodeParser
         'browser.platform' => 'parseBrowserProperties',
 
         'get.param_name'           => 'parseQueryParam',
-        'random_string.param_name' => 'parseRandomString'
+        'random_string.param_name' =>  'parseRandomString'
     ];
 
     /**
@@ -71,28 +71,19 @@ class EditorShortcodeParser
                     [__CLASS__, static::$handlers[$handler]],
                     ['{' . $handler . '}', $form]
                 );
-            }
-
-            if (strpos($handler, 'get.') !== false) {
+            } elseif (strpos($handler, 'get.') !== false) {
                 return static::parseQueryParam($handler);
-            }
-            if (strpos($handler, 'random_string.') !== false) {
+            } elseif (strpos($handler, 'random_string.') !== false) {
                 return static::parseRandomString($handler);
-            }
-
-            if (strpos($handler, 'user.') !== false) {
+            } elseif (strpos($handler, 'user.') !== false) {
                 $value = self::parseUserProperties($handler);
                 if (is_array($value) || is_object($value)) {
                     return '';
                 }
                 return $value;
-            }
-
-            if (strpos($handler, 'date.') !== false) {
+            } elseif (strpos($handler, 'date.') !== false) {
                 return self::parseDate($handler);
-            }
-
-            if (strpos($handler, 'embed_post.meta.') !== false) {
+            } elseif (strpos($handler, 'embed_post.meta.') !== false) {
                 $key = substr(str_replace(['{', '}'], '', $value), 16);
                 global $post;
                 if ($post) {
@@ -102,18 +93,12 @@ class EditorShortcodeParser
                     }
                 }
                 return '';
-            }
-
-            if (strpos($handler, 'embed_post.') !== false) {
+            } elseif (strpos($handler, 'embed_post.') !== false) {
                 return self::parsePostProperties($handler, $form);
-            }
-
-            if (strpos($handler, 'cookie.') !== false) {
+            } elseif (strpos($handler, 'cookie.') !== false) {
                 $scookieProperty = substr($handler, strlen('cookie.'));
                 return ArrayHelper::get($_COOKIE, $scookieProperty);
-            }
-
-            if (strpos($handler, 'dynamic.') !== false) {
+            } elseif (strpos($handler, 'dynamic.') !== false) {
                 $dynamicKey = substr($handler, strlen('dynamic.'));
                 // maybe has fallback value
                 $dynamicKey = explode('|', $dynamicKey);
@@ -129,22 +114,23 @@ class EditorShortcodeParser
                 }
 
                 return '<span class="ff_dynamic_value" data-ref="' . $ref . '" data-fallback="' . $fallBack . '">' . $fallBack . '</span>';
+            } else {
+
+                // if it's multi line then just return
+                if (strpos($handler, PHP_EOL) !== false) { // most probably it's a css
+                    return '{'.$handler.'}';
+                }
+
+                $handlerArray = explode('.', $handler);
+
+                if (count($handlerArray) > 1) {
+                    // it's a grouped handler
+                    $group = array_shift($handlerArray);
+                    return apply_filters('fluentform_editor_shortcode_callback_group_' . $group, '{' . $handler . '}', $form, $handlerArray);
+                }
+                
+                return apply_filters('fluentform_editor_shortcode_callback_' . $handler, '{' . $handler . '}', $form);
             }
-
-            // if it's multi line then just return
-            if (strpos($handler, PHP_EOL) !== false) { // most probably it's a css
-                return '{' . $handler . '}';
-            }
-
-            $handlerArray = explode('.', $handler);
-
-            if (count($handlerArray) > 1) {
-                // it's a grouped handler
-                $group = array_shift($handlerArray);
-                return apply_filters('fluentform_editor_shortcode_callback_group_' . $group, '{' . $handler . '}', $form, $handlerArray);
-            }
-
-            return apply_filters('fluentform_editor_shortcode_callback_' . $handler, '{' . $handler . '}', $form);
         }
 
         return $filteredValue;
@@ -161,7 +147,7 @@ class EditorShortcodeParser
             return preg_split(
                 '/{(.*?)}/',
                 $value,
-                -1,
+                null,
                 PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
             );
         }
@@ -337,7 +323,7 @@ class EditorShortcodeParser
         }
         return sanitize_textarea_field($value);
     }
-
+    
     /**
      * Generate random a string with prefix
      *
@@ -347,7 +333,7 @@ class EditorShortcodeParser
     public static function parseRandomString($value)
     {
         $exploded = explode('.', $value);
-        $prefix = array_pop($exploded);
-        return $prefix . uniqid();
+        $prefix =  array_pop($exploded) ;
+        return $prefix.uniqid() ;
     }
 }

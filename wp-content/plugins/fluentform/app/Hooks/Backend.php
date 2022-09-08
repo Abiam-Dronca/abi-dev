@@ -269,12 +269,10 @@ add_action('fluentform_loading_editor_assets', function ($form) {
         if (!isset($item['settings']['container_width'])) {
             $item['settings']['container_width'] = '';
         }
-    
-        $shouldSetWidth = !empty($item['columns']) && (!isset($item['columns'][0]['width']) || !$item['columns'][0]['width']);
-    
-        if ($shouldSetWidth) {
-            $perColumn = round(100 / count($item['columns']), 2);
         
+        if (!isset($item['columns'][0]['width']) || !$item['columns'][0]['width']) {
+            $perColumn = round(100 / count($item['columns']), 2);
+
             foreach ($item['columns'] as &$column) {
                 $column['width'] = $perColumn;
             }
@@ -341,19 +339,7 @@ add_action('fluentform_loading_editor_assets', function ($form) {
 
         return $item;
     });
-    
-    add_filter('fluentform_editor_init_element_recaptcha', function ($item, $form) {
-        $item['attributes']['name'] = 'g-recaptcha-response';
-        return $item;
-    }, 10, 2);
-    
-    add_filter('fluentform_editor_init_element_hcaptcha', function ($item, $form) {
-        $item['attributes']['name'] = 'h-captcha-response';
-        return $item;
-    }, 10, 2);
-    
 }, 10);
-
 
 
 add_filter('fluentform_addons_extra_menu', function ($menus) {

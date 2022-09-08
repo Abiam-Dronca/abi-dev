@@ -313,7 +313,7 @@ class Component
                 'with_trashed'       => 'no', // yes | no
                 'substract_from'     => 0, // [fluentform_info id="2" info="submission_count" substract_from="20"]
                 'hide_on_zero'       => 'no',
-                'payment_status'     => 'all', // it can be all / specific payment status
+                'payment_status'     => 'paid', // it can be all / specific payment status
                 'currency_formatted' => 'yes',
                 'date_format'        => ''
             ), $atts);
@@ -379,7 +379,7 @@ class Component
                 global $wpdb;
                 $countQuery = wpFluent()
                     ->table('fluentform_submissions')
-                    ->select(wpFluent()->raw('SUM(payment_total) as payment_total'))
+                    ->select(wpFluent()->raw('SUM(total_paid) as payment_total'))
                     ->where('form_id', $formId);
 
                 if ($atts['status'] != 'trashed' && $atts['with_trashed'] == 'no') {
@@ -515,9 +515,6 @@ class Component
 
 
         if ($atts['type'] == 'conversational') {
-            ob_start();
-                $this->addInlineVars();
-            ob_clean();
             return (new \FluentForm\App\Services\FluentConversational\Classes\Form())->renderShortcode($form);
         }
 
@@ -925,7 +922,7 @@ class Component
                         const elements = document.getElementsByClassName('ffc_conv_form');
                         if (elements.length) {
                             let jsEvent = new CustomEvent('ff-elm-conv-form-event', {
-                                detail: elements
+                                detail: elements[0]
                             });
                             document.dispatchEvent(jsEvent);
                         }

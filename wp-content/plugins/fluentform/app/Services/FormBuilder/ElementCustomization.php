@@ -344,7 +344,7 @@ $element_customization_settings = array(
     'value' => array(
         'template' => 'inputValue',
         'label' => __('Default Value', 'fluentform'),
-        'help_text' => __('If you would like to pre-populate the value of a field, enter it here.', 'fluentform'). ' <a target="_blank" rel="noopener" href="https://wpmanageninja.com/docs/fluent-form/miscellaneous/form-editor-smart-codes/">View All the smartcodes here</a>',
+        'help_text' => __('If you would like to pre-populate the value of a field, enter it here.', 'fluentform'),
     ),
     'dynamic_default_value' => array(
         'template' => 'inputValue',
@@ -641,8 +641,8 @@ $element_customization_settings = array(
     'container_width' => array(
         'template' => 'containerWidth',
         'label' => __('Column Width %', 'fluentform'),
-        'help_text' => __('Set the width of the columns. The minimum column width is 10%.', 'fluentform'),
-        'width_limitation_msg' => __('The minimum column width is 10%', 'fluentform')
+        'help_text' => __('Set the width of the columns. The width cannot be below 10%.', 'fluentform'),
+        'width_limitation_msg' => __('The width cannot be below 10%', 'fluentform')
     ),
 );
 

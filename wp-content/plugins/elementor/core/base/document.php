@@ -264,7 +264,7 @@ abstract class Document extends Controls_Stack {
 	/**
 	 * @return null|Lock_Behavior
 	 */
-	public static function get_lock_behavior_v2() {
+	public function get_lock_behavior() {
 		return null;
 	}
 
