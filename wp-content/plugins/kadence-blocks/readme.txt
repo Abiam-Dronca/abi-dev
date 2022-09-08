@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, page builder, google fonts, dual buttons, svg icons, ed
 Donate link: https://www.kadencewp.com/about-us/
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 2.4.13
+Stable tag: 2.4.14
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,19 @@ Install the plugin into the `/wp-content/plugins/` folder, and activate it.
 6. Editor Width settings inside Gutenberg
 
 == Changelog ==
+
+= 2.4.14 =
+Release Date: September 6th, 2022
+* Update: Border radius control for tab content.
+* Update: Allow negative margin in icon block.
+* Update: Anchor generation to use remove_accents.
+* Fix: Possible issue with sections showing broken.
+* Fix: Issue with advanced text field and reveal animation.
+* Fix: Issue with show more and adding buttons into the content.
+* Fix: Issue with table of contents and apostrophe.
+* Fix: Show more height for tablet, mobile.
+* Fix: Issue with fullwidth show less button in show more block.
+* Fix: Responsive settings for divider height.
 
 = 2.4.13 =
 Release Date: July 29th, 2022

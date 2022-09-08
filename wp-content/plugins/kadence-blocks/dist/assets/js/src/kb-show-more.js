@@ -13,12 +13,12 @@
 			}
 			for ( let n = 0; n < window.kadenceShowMore.cache.length; n++ ) {
 				// Initialize listener
-				window.kadenceShowMore.cache[n].querySelector( '.wp-block-kadence-advancedbtn > .kt-btn-wrap:first-child a' ).addEventListener( 'click', function( e ) {
+				window.kadenceShowMore.cache[n].querySelector( '.wp-block-kadence-advancedbtn.kb-show-more-buttons > .kt-btn-wrap:first-child a' ).addEventListener( 'click', function( e ) {
 					e.preventDefault();
 					window.kadenceShowMore.cache[n].classList.add('kb-smc-open');
 					return false;
 				});
-				window.kadenceShowMore.cache[n].querySelector( '.wp-block-kadence-advancedbtn > .kt-btn-wrap:last-child a' ).addEventListener( 'click', function( e ) {
+				window.kadenceShowMore.cache[n].querySelector( '.wp-block-kadence-advancedbtn.kb-show-more-buttons > .kt-btn-wrap:last-child a' ).addEventListener( 'click', function( e ) {
 					e.preventDefault();
 					window.kadenceShowMore.cache[n].classList.remove('kb-smc-open');
 					return false;
