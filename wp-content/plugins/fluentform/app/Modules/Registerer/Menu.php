@@ -988,13 +988,13 @@ class Menu
         return apply_filters('fluentform/admin_i18n', $i18n);
     }
     
-    private function usedNameAttributes(int $formId)
+    private function usedNameAttributes($formId)
     {
         return wpFluent()->table('fluentform_entry_details')
             ->select(['field_name'])
             ->where('form_id', $formId)
             ->orderBy('submission_id', 'desc')
-            ->groupBy( 'field_name')
+            ->groupBy('field_name')
             ->get();
     }
 }

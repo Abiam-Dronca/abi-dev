@@ -369,6 +369,19 @@ class Form
                         $existingSettings['tc_dis_agree_text'] = __('I don\'t accept', 'fluentform');
                         $field['settings'] = $existingSettings;
                     }
+                    //adding required settings for captcha in conversational form
+                    if ($element == 'hcaptcha' || $element == 'recaptcha') {
+                        $existingSettings = $field['settings'];
+                        if (empty($existingSettings['validation_rules'])) {
+                            $existingSettings['validation_rules'] = [
+                                'required' => [
+                                    'value'   => true,
+                                    'message' => __('This field is required', 'fluentform'),
+                                ],
+                            ];
+                        }
+                        $field['settings'] = $existingSettings;
+                    }
     
                     $elements[$groupType][] = $field;
                 }

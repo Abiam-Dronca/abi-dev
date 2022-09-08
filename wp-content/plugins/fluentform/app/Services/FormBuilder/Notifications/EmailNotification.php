@@ -18,7 +18,7 @@ class EmailNotification
 
     /**
      * Biuld the instance of this class
-     * @param FluentForm\Framework\Foundation\Application $app
+     * @param \FluentForm\Framework\Foundation\Application $app
      * @return $this
      */
     public function __construct(Application $app)

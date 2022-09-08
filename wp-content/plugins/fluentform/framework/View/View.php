@@ -9,7 +9,7 @@ class View
 {
 	/**
 	 * The Application (Framework)
-	 * @var FluentForm\Framework\Foundation\Application
+	 * @var \FluentForm\Framework\Foundation\Application
 	 */
 	protected $app;
 
@@ -40,7 +40,7 @@ class View
 
 	/**
 	 * Make an instance of the the class
-	 * @param FluentForm\Framework\Foundation\Application $app
+	 * @param \FluentForm\Framework\Foundation\Application $app
 	 */
 	public function __construct($app)
 	{
@@ -182,7 +182,7 @@ class View
 	/**
 	 * Register view composer calbacks for specific view
 	 * @param  string $viewName
-	 * @param  closure $callback
+	 * @param  \closure $callback
 	 * @return void
 	 */
 	public function composer($viewName, $callback)

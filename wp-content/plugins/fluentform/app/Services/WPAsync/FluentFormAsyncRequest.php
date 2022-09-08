@@ -29,13 +29,13 @@ class FluentFormAsyncRequest
 
     /**
      * $app Instance of Application/Framework
-     * @var FluentForm\Framework\Foundation\Application
+     * @var \FluentForm\Framework\Foundation\Application
      */
     protected $app = null;
 
     /**
      * Construct the Object
-     * @param FluentForm\Framework\Foundation\Application $app
+     * @param \FluentForm\Framework\Foundation\Application $app
      */
     public function __construct(Application $app)
     {

@@ -336,6 +336,8 @@ class ShortCodeParser
             }
             $html .= '</tbody></table>';
             return apply_filters('fluentform_all_data_shortcode_html', $html, $formFields, $inputLabels, $response);
+        } elseif ($key === 'http_referer') {
+            return wp_get_referer();
         } elseif (strpos($key, 'pdf.download_link.') === 0) {
             return apply_filters('fluentform_shortcode_parser_callback_pdf.download_link.public', $key, self::getInstance());
         }
@@ -349,7 +351,6 @@ class ShortCodeParser
                 return $handlerValue;
             }
         }
-
         // This fallback actually
         $handlerValue = apply_filters('fluentform_shortcode_parser_callback_' . $key, '{' . $key . '}', self::getInstance());
 

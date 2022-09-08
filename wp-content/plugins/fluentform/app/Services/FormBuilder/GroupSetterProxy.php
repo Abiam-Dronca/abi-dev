@@ -11,8 +11,7 @@ class GroupSetterProxy
 	protected $group = null;
 
 	/**
-	 * FluentForm\App\Services\FormBuilder\Components
-	 * @var object
+	 * @var \FluentForm\App\Services\FormBuilder\Components
 	 */
 	protected $collection = null;
 
@@ -26,7 +25,7 @@ class GroupSetterProxy
 	 * Dynamic call method
 	 * @param  string $method
 	 * @param  array $params
-	 * @return FluentForm\App\Services\FormBuilder\Components
+	 * @return \FluentForm\App\Services\FormBuilder\Components
 	 */
 	public function __call($method, $params)
 	{
