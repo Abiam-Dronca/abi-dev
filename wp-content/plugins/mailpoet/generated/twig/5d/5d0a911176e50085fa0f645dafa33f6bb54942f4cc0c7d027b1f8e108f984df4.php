@@ -191,7 +191,7 @@ jQuery('#adminmenu #toplevel_page_mailpoet-newsletters')
         echo ";
   var mailpoet_deactivate_subscriber_after_inactive_days = ";
         // line 78
-        echo \MailPoetVendor\twig_escape_filter($this->env, ($context["deactivate_subscriber_after_inactive_days"] ?? null), "html", null, true);
+        echo json_encode(($context["deactivate_subscriber_after_inactive_days"] ?? null));
         echo ";
 
   // Premium status
