@@ -4,7 +4,7 @@ Tags: contact form, contact forms, wp forms, forms, form builder, contact form b
 Requires at least: 4.5
 Tested up to: 6.0.1
 Requires PHP: 5.6
-Stable tag: 4.3.11
+Stable tag: 4.3.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,6 +363,20 @@ The entire source code is <a href="https://github.com/fluentform/fluentform">ava
 12. Asset Loading Comparison with Other Plugins
 
 == Changelog ==
+
+= 4.3.12 (Date: September 01, 2022) =
+- Adds manual control for Container width
+- Improves PHP 8 compatibility
+- Improves field deletion UX
+- Improves Conversational Forms Captcha
+- Fixes Global Default settings not being applied
+- Fixes form submission search for accented characters
+- Fixes Captcha Label placement
+- Fixes http_referer shortcode
+- Fixes URL field issue
+- Fixes additional shortcode Entry Count
+- Fixes Conversational form auto validation message issue
+- Fixes Conversational form long "Custom HTML Field" issue
 
 = 4.3.11 (Date: August 12, 2022) =
 - Adds reset button for Resizable Container

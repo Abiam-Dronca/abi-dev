@@ -1188,7 +1188,7 @@ $defaultElements = array(
         'recaptcha' => array(
             'index' => 2,
             'element' => 'recaptcha',
-            'attributes' => array('name' => 'recaptcha'),
+            'attributes' => array('name' => 'g-recaptcha-response'),
             'settings' => array(
                 'label' => '',
                 'label_placement' => '',
@@ -1204,7 +1204,7 @@ $defaultElements = array(
         'hcaptcha' => array(
             'index' => 2,
             'element' => 'hcaptcha',
-            'attributes' => array('name' => 'hcaptcha'),
+            'attributes' => array('name' => 'h-captcha-response'),
             'settings' => array(
                 'label' => '',
                 'label_placement' => '',
