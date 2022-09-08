@@ -568,7 +568,6 @@ class GalleriesModel_bwg {
     global $wpdb;
     $id = WDWLibrary::get('current_id', 0, 'intval', 'POST');
     $name = WDWLibrary::get('name');
-    $name = htmlentities($name, ENT_QUOTES);
     $name = WDWLibrary::get_unique_value('bwg_gallery', 'name', $name, $id);
     $slug = WDWLibrary::get('slug');
     $slug = empty($slug) ? $name : $slug;
@@ -1182,9 +1181,9 @@ class GalleriesModel_bwg {
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
     }
-    $where = 1;
+    $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
     if ( $gallery_id ) {
-      $where = ' `gallery_id` = %d';
+      $where .= ' AND `gallery_id` = %d';
       $prepareArgs[] = $gallery_id;
       if ( $image_id ) {
         $where .= ' AND `id` = %d';
@@ -1310,11 +1309,10 @@ class GalleriesModel_bwg {
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
     }
-    //$where = ( ($gallery_id) ? ' `gallery_id` = ' . $gallery_id . ( $image_id ? ' AND `id` = ' . $image_id : '' ) : 1 );
-    $where = 1;
     $prepareArgs = array();
+    $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
     if ( $gallery_id ) {
-      $where = ' `gallery_id` = %d';
+      $where .= ' AND `gallery_id` = %d';
       $prepareArgs[] = $gallery_id;
       if ( $image_id ) {
         $where .= ' AND `id` = %d';
@@ -1380,7 +1378,8 @@ class GalleriesModel_bwg {
     }
     $image_width = WDWLibrary::get('image_width', 1600, 'intval');
     $image_height = WDWLibrary::get('image_height', 1200, 'intval');
-    $where = ' gallery_id=%d';
+    $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
+    $where .= ' AND gallery_id=%d';
     $prepareArgs = array( $gallery_id );
     if ( !$all ) {
       $where .= ' AND id=%d';

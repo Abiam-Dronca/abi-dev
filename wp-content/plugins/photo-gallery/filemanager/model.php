@@ -287,7 +287,8 @@ class FilemanagerModel {
           $file['copyright'] = !empty($exif['copyright']) ? $exif['copyright'] : '';
           $file['tags'] = !empty($exif['tags']) ? $exif['tags'] : '';
           $file['date_modified'] = date("Y-m-d H:i:s", filemtime($item));
-          $file['author'] = !empty($wpdb->get_var("SELECT `author` FROM `" . $wpdb->prefix . "bwg_file_paths` WHERE `name` = '$name'")) ? $wpdb->get_var("SELECT `author` FROM `" . $wpdb->prefix . "bwg_file_paths` WHERE `name` = '$name'") : 1;
+          $author = $wpdb->prepare($wpdb->get_var("SELECT `author` FROM `" . $wpdb->prefix . "bwg_file_paths` WHERE `name` = '%s'"), $name);
+          $file['author'] = !empty($author) ? $author : 1;
           $files[] = $file;
         }
       }

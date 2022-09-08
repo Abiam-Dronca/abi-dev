@@ -1412,8 +1412,9 @@ class WDWLibrary {
     if ( $options->built_in_watermark_type != 'none' ) {
       $prepareArgs = array();
       $modified_date_prepare_args = array();
+      $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
       if ( $gallery_id ) {
-          $where = ' `gallery_id`=%d';
+        $where .= ' AND `gallery_id` = %d';
           $prepareArgs[] = $gallery_id;
           $modified_date_prepare_args[] = $gallery_id;
           if ( $image_id ) {
@@ -1424,9 +1425,6 @@ class WDWLibrary {
         if ( !empty($excludeIds) ) {
           $where .= ' AND `id` NOT IN (' . self::escape_array($excludeIds) . ')';
         }
-      }
-      else {
-          $where = 1;
       }
       //$where = (($gallery_id) ? ' `gallery_id`=' . $gallery_id . ($image_id ? ' AND `id`=' . $image_id : '') : 1);
       $search = WDWLibrary::get( 's', '' );
@@ -1663,17 +1661,14 @@ class WDWLibrary {
     global $wpdb;
     $prepareArgs = array();
     $modified_date_prepare_args = array();
-    $where = ($gallery_id) ? ' `gallery_id` = ' . $gallery_id : 1;
+    $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
     if ( $gallery_id ) {
-      $where = ' `gallery_id` = %d';
+      $where .= ' AND `gallery_id` = %d';
       $prepareArgs[] = $gallery_id;
       $modified_date_prepare_args[] = $gallery_id;
       if ( !empty($excludeIds) ) {
         $where .= ' AND `id` NOT IN (' . self::escape_array($excludeIds) . ')';
       }
-    }
-    else {
-      $where = 1;
     }
     $search = WDWLibrary::get('s', '');
     if ( $search ) {

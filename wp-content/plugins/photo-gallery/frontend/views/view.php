@@ -730,8 +730,8 @@ class BWGViewSite {
 				border-style: <?php echo esc_html($theme_row->page_nav_border_style); ?>;
 				border-width: <?php echo esc_html($theme_row->page_nav_border_width); ?>px;
 				border-color: #<?php echo esc_html($theme_row->page_nav_border_color); ?>;
-				background-color: #<?php echo esc_html($theme_row->page_nav_button_bg_color); ?>;
-				opacity: <?php echo number_format($theme_row->page_nav_button_bg_transparent / 100, 2, ".", ""); ?>;
+				<?php $rgb_page_nav_button_bg_color = WDWLibrary::spider_hex2rgb($theme_row->page_nav_button_bg_color); ?>
+				background-color: rgba(<?php echo esc_html($rgb_page_nav_button_bg_color['red']); ?>, <?php echo esc_html($rgb_page_nav_button_bg_color['green']); ?>, <?php echo esc_html($rgb_page_nav_button_bg_color['blue']); ?>, <?php echo esc_html(number_format($theme_row->page_nav_button_bg_transparent / 100, 2, ".", "")); ?>);
 				box-shadow: <?php echo esc_html($theme_row->page_nav_box_shadow); ?>;
 				<?php echo ($theme_row->page_nav_button_transition) ? 'transition: all 0.3s ease 0s;-webkit-transition: all 0.3s ease 0s;' : ''; ?>
       }

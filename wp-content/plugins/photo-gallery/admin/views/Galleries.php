@@ -239,7 +239,7 @@ class GalleriesView_bwg extends AdminView_bwg {
       <div class="wd-page-title wd-header wd-list-view-header-left">
         <div>
           <h1 class="wp-heading-inline bwg-heading"><?php _e('Gallery title', 'photo-gallery'); ?></h1>
-          <input type="text" id="name" name="name" class="bwg_requried" value="<?php echo !empty($row->name) ? $row->name : ''; ?>">
+          <input type="text" id="name" name="name" class="bwg_requried" value="<?php echo !empty($row->name) ? esc_html($row->name) : ''; ?>">
         </div>
         <div class="bwg-page-actions">
 					<button class="tw-button-primary button-large" onclick="if (spider_check_required('name', 'Title') || bwg_check_instagram_gallery_input('<?php echo BWG()->options->instagram_access_token ?>') ) {return false;};

@@ -3,7 +3,7 @@
  * Plugin Name: Photo Gallery
  * Plugin URI: https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin
  * Description: This plugin is a fully responsive gallery plugin with advanced functionality.  It allows having different image galleries for your posts and pages. You can create unlimited number of galleries, combine them into albums, and provide descriptions and tags.
- * Version: 1.7.3
+ * Version: 1.7.4
  * Author: Photo Gallery Team
  * Author URI: https://10web.io/plugins/?utm_source=photo_gallery&utm_medium=free_plugin
  * Text Domain: photo-gallery
@@ -90,7 +90,8 @@ final class BWG {
    */
   public static function get_abspath() {
     $dirpath = defined( 'WP_CONTENT_DIR' ) ? WP_CONTENT_DIR : ABSPATH;
-    $array = explode( "wp-content", $dirpath );
+    $folder_name = defined( 'WP_CONTENT_FOLDERNAME' ) ? WP_CONTENT_FOLDERNAME : "wp-content";
+    $array = explode( $folder_name, $dirpath );
     if( isset( $array[0] ) && $array[0] != "" ) {
       return $array[0];
     }
@@ -106,8 +107,8 @@ final class BWG {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_url = $this->plugin_url;
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.7.3';
-    $this->db_version = '1.7.3';
+    $this->plugin_version = '1.7.4';
+    $this->db_version = '1.7.4';
     $this->prefix = 'bwg';
     $this->nicename = __('Photo Gallery', 'photo-gallery');
     require_once($this->plugin_dir . '/framework/WDWLibrary.php');
@@ -2085,13 +2086,14 @@ final class BWG {
    * @param $wp_admin_bar
    */
   public function admin_bar_menu( $wp_admin_bar ) {
-    $current_url = urlencode((is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-
     global $post;
+    if (!isset($post)) {
+      return;
+    }
     $args = array(
       'page' => 'speed_' . $this->prefix,
-      'current_url' => $current_url,
-      'status' => $post->post_status == 'publish' ? 1 : 0,
+      'current_url' => urlencode((is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']),
+      'status' => isset($post->post_status) && $post->post_status == 'publish' ? 1 : 0,
     );
     $speed_page = add_query_arg( $args, admin_url('admin.php'));
 

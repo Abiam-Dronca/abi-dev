@@ -1481,6 +1481,10 @@ function bwg_thumbnail_mosaic_logic( container ) {
     }
     else {
       var thumbnail_width = thumb_width;
+      var container_width = jQuery(".bwg_container").width();
+      if ( typeof container_width !== 'undefined' && container_width < thumb_width ) {
+        thumbnail_width = container_width;
+      }
     }
     /* Initialize.*/
     var mosaic_pics = jQuery(".bwg_mosaic_thumb_" + bwg);

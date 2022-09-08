@@ -3,7 +3,7 @@ Contributors: webdorado,wdsupport,photogallerysupport,10web
 Tags: gallery, photo gallery, image gallery, responsive gallery, wordpress gallery plugin, photo albums, gallery slider, gallery lightbox, wordpress photo gallery plugin, fullscreen gallery, watermarking, video gallery
 Requires at least: 4.6
 Tested up to: 6.0
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -272,6 +272,14 @@ Choose whether to display random or the first/last specific number of images.
 **Theme.** Choose the theme, which will be applied to the gallery/album.
 
 == Changelog ==
+
+= 1.7.4 =
+* Fixed: Uploading images with changed wp_content directory from config.
+* Fixed: Gallery titles get broken UTF-8 chars.
+* Fixed: Mosaic view responsiveness with large thumbnails.
+* Fixed: Pagination buttons with transparent background.
+* Fixed: Do not call bulk action for embed.
+* Fixed: Prevent potential security issues and phishing with sharing links.
 
 = 1.7.3 =
 * Improved: Grab the embed media thumbnail depends on Generated thumbnail dimensions.

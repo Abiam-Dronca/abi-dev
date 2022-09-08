@@ -256,9 +256,13 @@ class SpeedController_bwg {
     /* 0-not installed, 1-installed but not active, 2-active */
     $booster_plugin_status = 0;
     if ( !is_wp_error( $installed ) && $installed ) {
-
       $activate = activate_plugin( $plugin_slug );
 
+      // To change 10Web Booster plugins status on Dashboard.
+      if (class_exists('\Tenweb_Authorization\Helper')
+        && method_exists('\Tenweb_Authorization\Helper', "check_site_state") ) {
+        \Tenweb_Authorization\Helper::check_site_state(true);
+      }
       /* Function activate_plugin return null when activate is success and false when not */
       if ( is_null($activate) ) {
         update_option('bwg_speed', array( 'booster_plugin_status' => 2 ), 1);
@@ -269,7 +273,6 @@ class SpeedController_bwg {
         $booster_plugin_status = 1;
       }
     }
-
     echo json_encode( array(
                         'booster_plugin_status' => esc_html($booster_plugin_status),
                         'booster_is_connected' => esc_html($this->booster_is_connected),
@@ -459,7 +462,7 @@ class SpeedController_bwg {
 
     $post_id = url_to_postid($url);
     $home_url = get_home_url();
-    if ( ($post_id === 0 || get_post_status ( $post_id ) != 'publish') && rtrim($url, "/") != rtrim($home_url, "/") ) {
+    if ( $post_id !== 0 && get_post_status( $post_id ) != 'publish' && rtrim($url, "/") != rtrim($home_url, "/") ) {
       echo json_encode( array('error' => 1, 'msg' => esc_html__('This page is not public. Please publish the page to check the score.',  'photo-gallery')) );
       die;
     }

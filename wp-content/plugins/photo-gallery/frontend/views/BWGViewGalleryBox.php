@@ -606,13 +606,11 @@ class BWGViewGalleryBox {
 
       $image_resolution = explode(' x ', $image_row->resolution);
       if (is_array($image_resolution) && count($image_resolution) == 2) {
-        $instagram_post_width = $image_resolution[0];
-        $instagram_post_height = explode(' ', $image_resolution[1]);
-        $instagram_post_height = $instagram_post_height[0];
+        // Separate image width/height uses for embeds.
+        $data[$key]["image_width"] = (int) $image_resolution[0];
+        $data[$key]["image_height"] = (int) $image_resolution[1];
       }
 
-      $data[$key]["image_width"] = $instagram_post_width;
-      $data[$key]["image_height"] = $instagram_post_height;
       $data[$key]["pure_image_url"] = $image_row->pure_image_url;
       $data[$key]["pure_thumb_url"] = $image_row->pure_thumb_url;
       $data[$key]["image_url"] = $image_row->image_url;
@@ -796,30 +794,33 @@ class BWGViewGalleryBox {
             <?php }
             $is_embed = preg_match('/EMBED/', $current_filetype) == 1 ? TRUE : FALSE;
             $share_image_url = str_replace(array('%252F', '%25252F'), '%2F', urlencode( $is_embed ? $current_thumb_url : BWG()->upload_url . rawurlencode($current_image_url)));
+            /* Added:
+              noopener - to prevent the opening page to gain any kind of access to the original page.
+              noreferrer - to prevent passing the referrer information to the target website by removing the referral info from the HTTP header.*/
             if ($params['popup_enable_facebook']) {
               ?>
-              <a id="bwg_facebook_a" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>">
+              <a rel="noopener noreferrer" id="bwg_facebook_a" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>" class="bwg-icon-facebook-square bwg_ctrl_btn bwg_facebook"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_twitter']) {
               ?>
-              <a id="bwg_twitter_a" href="https://twitter.com/intent/tweet?url=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>">
+              <a rel="noopener noreferrer" id="bwg_twitter_a" href="https://twitter.com/intent/tweet?url=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>" class="bwg-icon-twitter-square bwg_ctrl_btn bwg_twitter"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_pinterest']) {
               ?>
-              <a id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode(urlencode($share_url)); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>">
+              <a rel="noopener noreferrer" id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode(urlencode($share_url)); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>" class="bwg-icon-pinterest-square bwg_ctrl_btn bwg_pinterest"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_tumblr']) {
               ?>
-              <a id="bwg_tumblr_a" href="https://www.tumblr.com/share/photo?source=<?php echo $share_image_url; ?>&caption=<?php echo urlencode($current_image_alt); ?>&clickthru=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>">
+              <a rel="noopener noreferrer" id="bwg_tumblr_a" href="https://www.tumblr.com/share/photo?source=<?php echo $share_image_url; ?>&caption=<?php echo urlencode($current_image_alt); ?>&clickthru=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>" class="bwg-icon-tumblr-square bwg_ctrl_btn bwg_tumblr"></i>
               </a>
               <?php
