@@ -48,7 +48,7 @@ class WorkflowsPutEndpoint extends Endpoint {
     ];
   }
 
-  private function buildWorkflow(Workflow $workflow): array {
+  protected function buildWorkflow(Workflow $workflow): array {
     return [
       'id' => $workflow->getId(),
       'name' => $workflow->getName(),

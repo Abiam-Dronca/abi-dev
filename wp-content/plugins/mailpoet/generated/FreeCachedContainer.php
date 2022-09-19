@@ -120,6 +120,7 @@ class FreeCachedContainer extends Container
             'MailPoet\\Automation\\Engine\\WordPress' => 'getWordPressService',
             'MailPoet\\Automation\\Integrations\\Core\\Actions\\DelayAction' => 'getDelayActionService',
             'MailPoet\\Automation\\Integrations\\Core\\CoreIntegration' => 'getCoreIntegrationService',
+            'MailPoet\\Automation\\Integrations\\Core\\Triggers\\EmptyTrigger' => 'getEmptyTriggerService',
             'MailPoet\\Automation\\Integrations\\MailPoet\\Actions\\SendEmailAction' => 'getSendEmailActionService',
             'MailPoet\\Automation\\Integrations\\MailPoet\\MailPoetIntegration' => 'getMailPoetIntegrationService',
             'MailPoet\\Automation\\Integrations\\MailPoet\\Subjects\\SegmentSubject' => 'getSegmentSubjectService',
@@ -861,7 +862,7 @@ class FreeCachedContainer extends Container
      */
     protected function getAutomationEditorService()
     {
-        return $this->services['MailPoet\\AdminPages\\Pages\\AutomationEditor'] = new \MailPoet\AdminPages\Pages\AutomationEditor(($this->services['MailPoet\\Automation\\Engine\\Storage\\WorkflowStorage'] ?? ($this->services['MailPoet\\Automation\\Engine\\Storage\\WorkflowStorage'] = new \MailPoet\Automation\Engine\Storage\WorkflowStorage())), ($this->services['MailPoet\\AdminPages\\PageRenderer'] ?? $this->getPageRendererService()), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
+        return $this->services['MailPoet\\AdminPages\\Pages\\AutomationEditor'] = new \MailPoet\AdminPages\Pages\AutomationEditor(($this->services['MailPoet\\Automation\\Engine\\Storage\\WorkflowStorage'] ?? ($this->services['MailPoet\\Automation\\Engine\\Storage\\WorkflowStorage'] = new \MailPoet\Automation\Engine\Storage\WorkflowStorage())), ($this->services['MailPoet\\AdminPages\\PageRenderer'] ?? $this->getPageRendererService()), ($this->services['MailPoet\\Automation\\Engine\\Registry'] ?? $this->getRegistryService()), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
     }
 
     /**
@@ -1371,7 +1372,17 @@ class FreeCachedContainer extends Container
      */
     protected function getCoreIntegrationService()
     {
-        return $this->services['MailPoet\\Automation\\Integrations\\Core\\CoreIntegration'] = new \MailPoet\Automation\Integrations\Core\CoreIntegration(($this->services['MailPoet\\Automation\\Integrations\\Core\\Actions\\DelayAction'] ?? $this->getDelayActionService()));
+        return $this->services['MailPoet\\Automation\\Integrations\\Core\\CoreIntegration'] = new \MailPoet\Automation\Integrations\Core\CoreIntegration(($this->services['MailPoet\\Automation\\Integrations\\Core\\Actions\\DelayAction'] ?? $this->getDelayActionService()), ($this->services['MailPoet\\Automation\\Integrations\\Core\\Triggers\\EmptyTrigger'] ?? ($this->services['MailPoet\\Automation\\Integrations\\Core\\Triggers\\EmptyTrigger'] = new \MailPoet\Automation\Integrations\Core\Triggers\EmptyTrigger())));
+    }
+
+    /**
+     * Gets the public 'MailPoet\Automation\Integrations\Core\Triggers\EmptyTrigger' shared autowired service.
+     *
+     * @return \MailPoet\Automation\Integrations\Core\Triggers\EmptyTrigger
+     */
+    protected function getEmptyTriggerService()
+    {
+        return $this->services['MailPoet\\Automation\\Integrations\\Core\\Triggers\\EmptyTrigger'] = new \MailPoet\Automation\Integrations\Core\Triggers\EmptyTrigger();
     }
 
     /**
@@ -2659,7 +2670,7 @@ class FreeCachedContainer extends Container
      */
     protected function getScheduledTasksRepositoryService()
     {
-        return $this->services['MailPoet\\Newsletter\\Sending\\ScheduledTasksRepository'] = new \MailPoet\Newsletter\Sending\ScheduledTasksRepository(($this->services['MailPoetVendor\\Doctrine\\ORM\\EntityManager'] ?? $this->getEntityManagerService()));
+        return $this->services['MailPoet\\Newsletter\\Sending\\ScheduledTasksRepository'] = new \MailPoet\Newsletter\Sending\ScheduledTasksRepository(($this->services['MailPoetVendor\\Doctrine\\ORM\\EntityManager'] ?? $this->getEntityManagerService()), ($this->services['MailPoet\\WP\\Functions'] ?? ($this->services['MailPoet\\WP\\Functions'] = new \MailPoet\WP\Functions())));
     }
 
     /**
