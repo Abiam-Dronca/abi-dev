@@ -18,10 +18,7 @@ class PSRCacheItem implements CacheItemInterface {
   /** @var bool */
   private $isHit;
 
-  public function __construct(
-    string $key,
-    bool $isHit
-  ) {
+  public function __construct(string $key, bool $isHit) {
     $this->key = $key;
     $this->isHit = $isHit;
   }

@@ -132,7 +132,6 @@ class SendEmailAction implements Action {
     }
 
     $email = $this->getEmailForStep($step);
-    $email->setStatus(NewsletterEntity::STATUS_ACTIVE);
     $email->setSubject($args['subject'] ?? '');
     $email->setPreheader($args['preheader'] ?? '');
     $email->setSenderName($args['sender_name'] ?? '');

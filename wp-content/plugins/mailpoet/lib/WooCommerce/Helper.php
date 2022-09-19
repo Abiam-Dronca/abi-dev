@@ -23,18 +23,6 @@ class Helper {
     return true;
   }
 
-  public function isWooCommerceCustomOrdersTableEnabled(): bool {
-    if (
-      $this->isWooCommerceActive()
-      && method_exists('\Automattic\WooCommerce\Utilities\OrderUtil', 'custom_orders_table_usage_is_enabled')
-      && \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled()
-    ) {
-      return true;
-    }
-
-    return false;
-  }
-
   public function WC() {
     return WC();
   }
@@ -49,10 +37,6 @@ class Helper {
 
   public function wcGetOrders(array $args) {
     return wc_get_orders($args);
-  }
-
-  public function wcCreateOrder(array $args) {
-    return wc_create_order($args);
   }
 
   public function wcPrice($price, array $args = []) {

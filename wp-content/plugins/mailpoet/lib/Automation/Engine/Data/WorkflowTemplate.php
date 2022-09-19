@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 namespace MailPoet\Automation\Engine\Data;
 
@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\RuntimeException;
 
-class WorkflowTemplate {
-
+class WorkflowTemplate
+{
 
   public const CATEGORY_WELCOME = 1;
   public const CATEGORY_ABANDONED_CART = 2;
@@ -33,13 +33,8 @@ class WorkflowTemplate {
   /** @var Workflow */
   private $workflow;
 
-  public function __construct(
-    string $slug,
-    int $category,
-    string $description,
-    Workflow $workflow
-  ) {
-    if (!in_array($category, self::ALL_CATEGORIES)) {
+  public function __construct(string $slug, int $category, string $description, Workflow $workflow) {
+    if (! in_array($category, self::ALL_CATEGORIES)) {
       throw new RuntimeException("$category is not a valid category.");
     }
     $this->slug = $slug;
@@ -48,27 +43,27 @@ class WorkflowTemplate {
     $this->workflow = $workflow;
   }
 
-  public function getSlug(): string {
+  public function getSlug() : string {
     return $this->slug;
   }
 
-  public function getName(): string {
+  public function getName() : string {
     return $this->workflow->getName();
   }
 
-  public function getCategory(): int {
+  public function getCategory() : int {
     return $this->category;
   }
 
-  public function getDescription(): string {
+  public function getDescription() : string {
     return $this->description;
   }
 
-  public function getWorkflow(): Workflow {
+  public function getWorkflow() : Workflow {
     return $this->workflow;
   }
 
-  public function toArray(): array {
+  public function toArray() : array {
     return [
       'slug' => $this->getSlug(),
       'name' => $this->getName(),

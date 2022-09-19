@@ -46,8 +46,7 @@ class Migrator {
         steps longtext,
         created_at timestamp NOT NULL,
         updated_at timestamp NOT NULL,
-        PRIMARY KEY (id),
-        INDEX (workflow_id)
+        PRIMARY KEY (id)
       );
     ");
 

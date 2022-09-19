@@ -14,6 +14,7 @@ use MailPoet\Entities\SegmentEntity;
 use MailPoet\InvalidStateException;
 use MailPoet\Logging\LoggerFactory;
 use MailPoet\Models\Newsletter;
+use MailPoet\Models\ScheduledTask;
 use MailPoet\Models\Subscriber;
 use MailPoet\Models\SubscriberSegment;
 use MailPoet\Newsletter\NewslettersRepository;
@@ -116,8 +117,6 @@ class Scheduler {
         $this->processScheduledAutomaticEmail($newsletter, $queue);
       } elseif ($newsletter->type === NewsletterEntity::TYPE_RE_ENGAGEMENT) {
         $this->processReEngagementEmail($queue);
-      } elseif ($newsletter->type === NewsletterEntity::TYPE_AUTOMATION) {
-        $this->processScheduledAutomationEmail($queue);
       }
       $this->cronHelper->enforceExecutionLimit($timer);
     }
@@ -228,22 +227,6 @@ class Scheduler {
       if ($this->verifySubscriber($subscriber, $queue) === false) {
         return false;
       }
-    }
-
-    $queue->status = null;
-    $queue->save();
-    return true;
-  }
-
-  public function processScheduledAutomationEmail($queue): bool {
-    $subscribers = $queue->getSubscribers();
-    $subscriber = (!empty($subscribers) && is_array($subscribers)) ? Subscriber::findOne($subscribers[0]) : null;
-    if (!$subscriber) {
-      $queue->delete();
-      return false;
-    }
-    if (!$this->verifySubscriber($subscriber, $queue)) {
-      return false;
     }
 
     $queue->status = null;
@@ -387,7 +370,7 @@ class Scheduler {
     $ids = array_map(function ($queue) {
       return $queue->taskId;
     }, $scheduledQueues);
-    $this->scheduledTasksRepository->touchAllByIds($ids);
+    ScheduledTask::touchAllByIds($ids);
   }
 
   public static function getScheduledQueues() {

@@ -13,9 +13,7 @@ class EmojiEncodingListener {
   /** @var Emoji */
   private $emoji;
 
-  public function __construct(
-    Emoji $emoji
-  ) {
+  public function __construct(Emoji $emoji) {
     $this->emoji = $emoji;
   }
 

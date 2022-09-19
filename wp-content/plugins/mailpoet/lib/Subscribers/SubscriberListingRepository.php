@@ -263,7 +263,9 @@ class SubscriberListingRepository extends ListingRepository {
     $queryBuilder
       ->select('s')
       ->from(SegmentEntity::class, 's');
-    if ($group !== 'trash') {
+    if ($group === 'trash') {
+      $queryBuilder->andWhere('s.deletedAt IS NOT NULL');
+    } else {
       $queryBuilder->andWhere('s.deletedAt IS NULL');
     }
 
@@ -286,13 +288,9 @@ class SubscriberListingRepository extends ListingRepository {
       } else {
         $count = $this->subscribersCountsController->getSegmentStatisticsCount($segment);
       }
-      $subscribersCount = (float)$count[$key];
-      // filter segments without subscribers
-      if (!$subscribersCount) {
-        continue;
-      }
+
       $segmentList[] = [
-        'label' => sprintf('%s (%s)', $segment->getName(), number_format($subscribersCount)),
+        'label' => sprintf('%s (%s)', $segment->getName(), number_format((float)$count[$key])),
         'value' => $segment->getId(),
       ];
     }
