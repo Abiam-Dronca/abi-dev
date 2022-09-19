@@ -20,9 +20,8 @@ class QM_Collector_Languages extends QM_Collector {
 
 		parent::set_up();
 
-		add_filter( 'load_textdomain_mofile', array( $this, 'log_file_load' ), 9999, 2 );
+		add_filter( 'override_load_textdomain', array( $this, 'log_file_load' ), 9999, 3 );
 		add_filter( 'load_script_translation_file', array( $this, 'log_script_file_load' ), 9999, 3 );
-		add_filter( 'init', array( $this, 'collect_locale_data' ), 9999 );
 
 	}
 
@@ -30,29 +29,10 @@ class QM_Collector_Languages extends QM_Collector {
 	 * @return void
 	 */
 	public function tear_down() {
-		remove_filter( 'load_textdomain_mofile', array( $this, 'log_file_load' ), 9999 );
+		remove_filter( 'override_load_textdomain', array( $this, 'log_file_load' ), 9999 );
 		remove_filter( 'load_script_translation_file', array( $this, 'log_script_file_load' ), 9999 );
-		remove_filter( 'init', array( $this, 'collect_locale_data' ), 9999 );
 
 		parent::tear_down();
-	}
-
-	/**
-	 * @return void
-	 */
-	public function collect_locale_data() {
-		$this->data['locale'] = get_locale();
-		$this->data['user_locale'] = function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
-		$this->data['determined_locale'] = function_exists( 'determine_locale' ) ? determine_locale() : get_locale();
-		$this->data['language_attributes'] = get_language_attributes();
-
-		if ( function_exists( '\Inpsyde\MultilingualPress\siteLanguageTag' ) ) {
-			$this->data['mlp_language'] = \Inpsyde\MultilingualPress\siteLanguageTag();
-		}
-
-		if ( function_exists( 'pll_current_language' ) ) {
-			$this->data['pll_language'] = pll_current_language();
-		}
 	}
 
 	/**
@@ -73,7 +53,6 @@ class QM_Collector_Languages extends QM_Collector {
 			'determine_locale',
 			'gettext',
 			'gettext_with_context',
-			'language_attributes',
 			'load_script_textdomain_relative_path',
 			'load_script_translation_file',
 			'load_script_translations',
@@ -116,15 +95,13 @@ class QM_Collector_Languages extends QM_Collector {
 			return;
 		}
 
-		$this->data['total_size'] = 0;
-
+		$this->data['locale'] = get_locale();
+		$this->data['user_locale'] = function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
 		ksort( $this->data['languages'] );
 
 		foreach ( $this->data['languages'] as & $mofiles ) {
 			foreach ( $mofiles as & $mofile ) {
-				if ( $mofile['found'] ) {
-					$this->data['total_size'] += $mofile['found'];
-				}
+				$mofile['found_formatted'] = $mofile['found'] ? size_format( $mofile['found'] ) : '';
 			}
 		}
 	}
@@ -132,17 +109,14 @@ class QM_Collector_Languages extends QM_Collector {
 	/**
 	 * Store log data.
 	 *
-	 * @param string $mofile Path to the MO file.
-	 * @param string $domain Text domain.
-	 * @return string
+	 * @param bool   $override Whether to override the text domain. Default false.
+	 * @param string $domain   Text domain. Unique identifier for retrieving translated strings.
+	 * @param string $mofile   Path to the MO file.
+	 * @return bool
 	 */
-	public function log_file_load( $mofile, $domain ) {
+	public function log_file_load( $override, $domain, $mofile ) {
 		if ( 'query-monitor' === $domain && self::hide_qm() ) {
-			return $mofile;
-		}
-
-		if ( isset( $this->data['languages'][ $domain ][ $mofile ] ) ) {
-			return $mofile;
+			return $override;
 		}
 
 		$trace = new QM_Backtrace( array(
@@ -161,7 +135,7 @@ class QM_Collector_Languages extends QM_Collector {
 
 		$found = file_exists( $mofile ) ? filesize( $mofile ) : false;
 
-		$this->data['languages'][ $domain ][ $mofile ] = array(
+		$this->data['languages'][ $domain ][] = array(
 			'caller' => $trace->get_caller(),
 			'domain' => $domain,
 			'file' => $mofile,
@@ -170,7 +144,7 @@ class QM_Collector_Languages extends QM_Collector {
 			'type' => 'gettext',
 		);
 
-		return $mofile;
+		return $override;
 
 	}
 
