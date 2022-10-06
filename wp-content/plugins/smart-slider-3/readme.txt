@@ -2,9 +2,9 @@
 Contributors: nextendweb
 Tags: slider, wordpress slider, image slider, layer slider, responsive slider, slideshow, fullwidth slider, post slider, horizontal slider, vertical slider, photo slider, video slider
 Donate link: https://sites.fastspring.com/nextend/product/smartslider3donate
-Requires at least: 4.9
-Tested up to: 6.0
-Stable tag: 3.5.1.9
+Requires at least: 5.0
+Tested up to: 6.1
+Stable tag: 3.5.1.11
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -209,7 +209,24 @@ Of course! Smart Slider use protocol relative urls which works fine on http:// a
 
 == Changelog ==
 
-= 3.5.1.9 - 18. August 2022 =
+= 3.5.1.11 - 03. October 2022 =
+* Feature: Notice, when NONCE_SALT constant is not defined. 
+* Feature: YouTube layer will support YouTube shorts URLs too. 
+* Feature: The Export at the Bulk Actions will no longer create a zip file when only one slider is exported. 
+* Feature: Notice when the Autoplay is enabled in a slider that contains a single slide.
+* Fix: Improved security during slider import
+* Fix: Analyze and Repair now fix auto_increment issues within the slider's tables. 
+* Fix: Split by words advanced generator function caused PHP error, when the length of the word was shorter than the start value. 
+* Fix: Better specify Functions.php location to avoid problems in certain cases. 
+* Fix: Finish autoplay did not stop at last slide, when carousel was turned off. 
+* Fix: Improved check for minimum system requirements. 
+* Fix: Save Fonts Locally option at Google fonts didn't work. 
+* Fix: ?ver query string added to the CSS file the Save Fonts Locally option generates. 
+* Other: The minimum WordPress version Smart Slider requires is now 5.0. (WordPress 6.x is supported, too.) 
+* Other: The Spanish translation is updated. Thanks, Rodrigo! 
+
+
+= 3.5.1.9 - 19. August 2022 =
 * Feature: Improved notice when the Autoplay is used on a single slide to avoid confusion. 
 * Feature: u tag is now allowed in text layer. 
 * Fix: PHP 8.1. compatibility fixes.

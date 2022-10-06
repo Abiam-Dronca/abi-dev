@@ -14,7 +14,7 @@ class HttpClient {
     }
 
     public static function get($url, $options = array()) {
-        $request = wp_remote_get($url);
+        $request = wp_remote_get($url, array('user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36'));
         if (is_wp_error($request)) {
             foreach ($request->get_error_messages() as $errorMessage) {
                 Notification::error($errorMessage);
