@@ -6,10 +6,12 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Automation\Engine\Data\Step;
+use MailPoet\Automation\Engine\Data\StepRunArgs;
 use MailPoet\Automation\Engine\Data\Workflow;
-use MailPoet\Automation\Engine\Data\WorkflowRun;
 use MailPoet\Automation\Engine\Workflows\Action;
 use MailPoet\Automation\Engine\Workflows\Subject;
+use MailPoet\Automation\Integrations\MailPoet\Payloads\SegmentPayload;
+use MailPoet\Automation\Integrations\MailPoet\Payloads\SubscriberPayload;
 use MailPoet\Automation\Integrations\MailPoet\Subjects\SegmentSubject;
 use MailPoet\Automation\Integrations\MailPoet\Subjects\SubscriberSubject;
 use MailPoet\Entities\NewsletterEntity;
@@ -75,6 +77,13 @@ class SendEmailAction implements Action {
     ]);
   }
 
+  public function getSubjectKeys(): array {
+    return [
+      'mailpoet:segment',
+      'mailpoet:subscriber',
+    ];
+  }
+
   public function isValid(array $subjects, Step $step, Workflow $workflow): bool {
     try {
       $this->getEmailForStep($step);
@@ -92,30 +101,34 @@ class SendEmailAction implements Action {
     return count($segmentSubjects) === 1 && count($subscriberSubjects) === 1;
   }
 
-  public function run(Workflow $workflow, WorkflowRun $workflowRun, Step $step): void {
-    $newsletter = $this->getEmailForStep($step);
-    $subscriberSubject = $workflowRun->requireSingleSubject(SubscriberSubject::class);
-    $subscriber = $subscriberSubject->getSubscriber();
+  public function run(StepRunArgs $args): void {
+    $newsletter = $this->getEmailForStep($args->getStep());
+    $segmentId = $args->getSinglePayloadByClass(SegmentPayload::class)->getId();
+    $subscriberId = $args->getSinglePayloadByClass(SubscriberPayload::class)->getId();
 
-    if ($subscriber->getStatus() !== SubscriberEntity::STATUS_SUBSCRIBED) {
-      throw InvalidStateException::create()->withMessage(sprintf("Cannot schedule a newsletter for subscriber ID '%s' because their status is '%s'.", $subscriber->getId(), $subscriber->getStatus()));
-    }
-
-    $segmentSubject = $workflowRun->requireSingleSubject(SegmentSubject::class);
-    $segmentId = $segmentSubject->getSegment()->getId();
     $subscriberSegment = $this->subscriberSegmentRepository->findOneBy([
-      'subscriber' => $subscriber,
+      'subscriber' => $subscriberId,
       'segment' => $segmentId,
       'status' => SubscriberEntity::STATUS_SUBSCRIBED,
     ]);
 
-    if ($subscriberSegment === null) {
-      throw InvalidStateException::create()->withMessage(sprintf("Subscriber ID '%s' is not subscribed to segment ID '%s'.", $subscriber->getId(), $segmentId));
+    if (!$subscriberSegment) {
+      throw InvalidStateException::create()->withMessage(sprintf("Subscriber ID '%s' is not subscribed to segment ID '%s'.", $subscriberId, $segmentId));
     }
 
-    $previouslyScheduledNotification = $this->scheduledTasksRepository->findByNewsletterAndSubscriberId($newsletter, (int)$subscriber->getId());
+    $subscriber = $subscriberSegment->getSubscriber();
+    if (!$subscriber) {
+      throw InvalidStateException::create();
+    }
+
+    $subscriberStatus = $subscriber->getStatus();
+    if ($subscriberStatus !== SubscriberEntity::STATUS_SUBSCRIBED) {
+      throw InvalidStateException::create()->withMessage(sprintf("Cannot schedule a newsletter for subscriber ID '%s' because their status is '%s'.", $subscriberId, $subscriberStatus));
+    }
+
+    $previouslyScheduledNotification = $this->scheduledTasksRepository->findByNewsletterAndSubscriberId($newsletter, $subscriberId);
     if (!empty($previouslyScheduledNotification)) {
-      throw InvalidStateException::create()->withMessage(sprintf("Subscriber ID '%s' was already scheduled to receive newsletter ID '%s'.", $subscriber->getId(), $newsletter->getId()));
+      throw InvalidStateException::create()->withMessage(sprintf("Subscriber ID '%s' was already scheduled to receive newsletter ID '%s'.", $subscriberId, $newsletter->getId()));
     }
 
     try {
@@ -132,6 +145,7 @@ class SendEmailAction implements Action {
     }
 
     $email = $this->getEmailForStep($step);
+    $email->setStatus(NewsletterEntity::STATUS_ACTIVE);
     $email->setSubject($args['subject'] ?? '');
     $email->setPreheader($args['preheader'] ?? '');
     $email->setSenderName($args['sender_name'] ?? '');

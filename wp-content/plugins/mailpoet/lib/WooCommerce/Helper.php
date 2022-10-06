@@ -23,6 +23,18 @@ class Helper {
     return true;
   }
 
+  public function isWooCommerceCustomOrdersTableEnabled(): bool {
+    if (
+      $this->isWooCommerceActive()
+      && method_exists('\Automattic\WooCommerce\Utilities\OrderUtil', 'custom_orders_table_usage_is_enabled')
+      && \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled()
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
   public function WC() {
     return WC();
   }
@@ -37,6 +49,10 @@ class Helper {
 
   public function wcGetOrders(array $args) {
     return wc_get_orders($args);
+  }
+
+  public function wcCreateOrder(array $args) {
+    return wc_create_order($args);
   }
 
   public function wcPrice($price, array $args = []) {
@@ -67,13 +83,16 @@ class Helper {
     return wc_hex_is_light($color);
   }
 
-  public function getOrdersCountCreatedBefore($dateTime) {
-    global $wpdb;
-    $result = $wpdb->get_var($wpdb->prepare("
-        SELECT DISTINCT count(p.ID) FROM {$wpdb->prefix}posts as p
-        WHERE p.post_type = 'shop_order' AND p.post_date < %s
-    ", $dateTime));
-    return (int)$result;
+  public function getOrdersCountCreatedBefore(string $dateTime): int {
+    $ordersCount = $this->wcGetOrders([
+      'status' => 'all',
+      'type' => 'shop_order',
+      'date_created' => '<' . $dateTime,
+      'limit' => 1,
+      'paginate' => true,
+    ])->total;
+
+    return $ordersCount;
   }
 
   public function getRawPrice($price, array $args = []) {

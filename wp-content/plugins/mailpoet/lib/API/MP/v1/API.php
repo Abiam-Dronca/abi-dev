@@ -6,7 +6,6 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Config\Changelog;
-use MailPoet\Models\Subscriber;
 
 /**
  * API used by other plugins
@@ -85,12 +84,7 @@ class API {
   }
 
   public function getSubscriber($subscriberEmail) {
-    $subscriber = Subscriber::findOne($subscriberEmail);
-    // throw exception when subscriber does not exist
-    if (!$subscriber) {
-      throw new APIException(__('This subscriber does not exist.', 'mailpoet'), APIException::SUBSCRIBER_NOT_EXISTS);
-    }
-    return $subscriber->withCustomFields()->withSubscriptions()->asArray();
+    return $this->subscribers->getSubscriber($subscriberEmail);
   }
 
   public function isSetupComplete() {

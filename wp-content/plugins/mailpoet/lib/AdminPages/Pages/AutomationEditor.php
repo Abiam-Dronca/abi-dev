@@ -7,9 +7,12 @@ if (!defined('ABSPATH')) exit;
 
 use DateTimeImmutable;
 use MailPoet\AdminPages\PageRenderer;
+use MailPoet\Automation\Engine\Data\NextStep;
 use MailPoet\Automation\Engine\Data\Step;
 use MailPoet\Automation\Engine\Data\Workflow;
+use MailPoet\Automation\Engine\Registry;
 use MailPoet\Automation\Engine\Storage\WorkflowStorage;
+use MailPoet\Segments\SegmentsRepository;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoet\WP\Notice as WPNotice;
 
@@ -20,16 +23,26 @@ class AutomationEditor {
   /** @var PageRenderer */
   private $pageRenderer;
 
+  /** @var Registry */
+  private $registry;
+
+  /** @var SegmentsRepository  */
+  private $segmentsRepository;
+
   /** @var WPFunctions */
   private $wp;
 
   public function __construct(
     WorkflowStorage $workflowStorage,
     PageRenderer $pageRenderer,
+    Registry $registry,
+    SegmentsRepository $segmentsRepository,
     WPFunctions $wp
   ) {
     $this->workflowStorage = $workflowStorage;
     $this->pageRenderer = $pageRenderer;
+    $this->registry = $registry;
+    $this->segmentsRepository = $segmentsRepository;
     $this->wp = $wp;
   }
 
@@ -47,14 +60,39 @@ class AutomationEditor {
       return;
     }
 
+    if ($workflow->getStatus() === Workflow::STATUS_TRASH) {
+      $this->wp->wpSafeRedirect($this->wp->adminUrl('admin.php?page=mailpoet-automation&status=trash'));
+      exit();
+    }
+
+    $segments = [];
+    foreach ($this->segmentsRepository->findAll() as $segment) {
+      $segments[] = ['id' => $segment->getId(), 'name' => $segment->getName(), 'type' => $segment->getType()];
+    }
+    $roles = new \WP_Roles();
     $this->pageRenderer->displayPage('automation/editor.html', [
+      'context' => $this->buildContext(),
       'workflow' => $this->buildWorkflow($workflow),
       'sub_menu' => 'mailpoet-automation',
       'api' => [
         'root' => rtrim($this->wp->escUrlRaw($this->wp->restUrl()), '/'),
         'nonce' => $this->wp->wpCreateNonce('wp_rest'),
       ],
+      'user_roles' => $roles->get_names(),
+      'segments' => $segments,
     ]);
+  }
+
+  private function buildContext(): array {
+    $steps = [];
+    foreach ($this->registry->getSteps() as $key => $step) {
+      $steps[$key] = [
+        'key' => $step->getKey(),
+        'name' => $step->getName(),
+        'args_schema' => $step->getArgsSchema()->toArray(),
+      ];
+    }
+    return ['steps' => $steps];
   }
 
   private function buildWorkflow(Workflow $workflow): array {
@@ -74,8 +112,10 @@ class AutomationEditor {
           'id' => $step->getId(),
           'type' => $step->getType(),
           'key' => $step->getKey(),
-          'next_step_id' => $step->getNextStepId(),
-          'args' => $step->getArgs() ?: new \stdClass(),
+          'args' => $step->getArgs(),
+          'next_steps' => array_map(function (NextStep $nextStep) {
+            return $nextStep->toArray();
+          }, $step->getNextSteps()),
         ];
       }, $workflow->getSteps()),
     ];

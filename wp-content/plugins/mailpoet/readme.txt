@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 3.96.1
+Stable tag: 3.100.0
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -11,6 +11,14 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Send beautiful newsletters from WordPress. Collect subscribers with signup forms, automate your emails for WooCommerce, blog post notifications & more
 
 == Description ==
+
+= Get ready for Black Friday with 40% off MailPoet plans =
+
+Save 40% on all annual plans until 2 pm UTC, October 7. Terms & conditions apply.
+
+[Shop Now](https://account.mailpoet.com/?billing=yearly&ref=sale-october-2022-wporg&utm_source=WP&utm_medium=repotext&utm_campaign=mp_prebfcm)
+
+= What is MailPoet? =
 
 Use MailPoet to create, send, manage, and grow your email marketing campaigns – all without leaving your WordPress dashboard.
 
@@ -218,6 +226,34 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.100.0 - 2022-10-03 =
+* Added: tagging subscribers when signed up via a form;
+* Improved: linux cron error message;
+* Fixed: paid MailPoet plan is offered in onboarding instead of a free MailPoet plan.
+
+= 3.99.1 - 2022-09-29 =
+* Fix issue with post notifications in MailPoet 3.99.
+
+= 3.99.0 - 2022-09-27 =
+* Added: any email address from a sender domain is automatically allowed for sending (MailPoet Sending Service only);
+* Fixed: some post notifications may fail to send.
+
+= 3.98.1 - 2022-09-21 =
+* Improved: minor changes and fixes.
+
+= 3.98.0 - 2022-09-19 =
+* Added: filter subscribers by clicking on tag badge;
+* Added: tag imported subscribers;
+* Improved: error handling on the send email page;
+* Fixed: possible memory issue on the segments page.
+
+= 3.97.0 - 2022-09-12 =
+* Improved: added a link to start domain authentication when required;
+* Improved: domain and email verification process;
+* Changed: we are dropping number 3 from the plugin name, so from now on, "MailPoet 3" becomes just "MailPoet";
+* Fixed: lists not available when filtering trashed subscribers;
+* Fixed: broken translations when typography quotes changed.
 
 = 3.96.1 - 2022-08-31 =
 * Fixed: the settings page renders blank in some cases.

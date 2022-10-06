@@ -15,9 +15,11 @@ use MailPoet\Config\ServicesChecker;
 use MailPoet\Cron\Workers\KeyCheck\PremiumKeyCheck;
 use MailPoet\Cron\Workers\KeyCheck\SendingServiceKeyCheck;
 use MailPoet\Mailer\MailerLog;
+use MailPoet\Services\AuthorizedSenderDomainController;
 use MailPoet\Services\Bridge;
 use MailPoet\Services\CongratulatoryMssEmailController;
 use MailPoet\Settings\SettingsController;
+use MailPoet\Util\Helpers;
 use MailPoet\WP\DateTime;
 use MailPoet\WP\Functions as WPFunctions;
 
@@ -49,6 +51,9 @@ class Services extends APIEndpoint {
   /** @var WPFunctions */
   private $wp;
 
+  /** @var AuthorizedSenderDomainController */
+  private $senderDomainController;
+
   public $permissions = [
     'global' => AccessControl::PERMISSION_MANAGE_SETTINGS,
   ];
@@ -61,7 +66,8 @@ class Services extends APIEndpoint {
     PremiumKeyCheck $premiumWorker,
     ServicesChecker $servicesChecker,
     CongratulatoryMssEmailController $congratulatoryMssEmailController,
-    WPFunctions $wp
+    WPFunctions $wp,
+    AuthorizedSenderDomainController $senderDomainController
   ) {
     $this->bridge = $bridge;
     $this->settings = $settings;
@@ -72,6 +78,7 @@ class Services extends APIEndpoint {
     $this->servicesChecker = $servicesChecker;
     $this->congratulatoryMssEmailController = $congratulatoryMssEmailController;
     $this->wp = $wp;
+    $this->senderDomainController = $senderDomainController;
   }
 
   public function checkMSSKey($data = []) {
@@ -235,18 +242,26 @@ class Services extends APIEndpoint {
       return $this->createBadRequest(__('MailPoet Sending Service is not active.', 'mailpoet'));
     }
 
-    $authorizedEmails = $this->bridge->getAuthorizedEmailAddresses();
-    if (!$authorizedEmails) {
-      return $this->createBadRequest(__('No FROM email addresses are authorized.', 'mailpoet'));
-    }
-
     $fromEmail = $this->settings->get('sender.address');
     if (!$fromEmail) {
       return $this->createBadRequest(__('Sender email address is not set.', 'mailpoet'));
     }
-    if (!in_array($fromEmail, $authorizedEmails, true)) {
-      // translators: %s is the email address, which is not authorized.
-      return $this->createBadRequest(sprintf(__("Sender email address '%s' is not authorized.", 'mailpoet'), $fromEmail));
+
+    $verifiedDomains = $this->senderDomainController->getVerifiedSenderDomainsIgnoringCache();
+
+    $emailDomain = Helpers::extractEmailDomain($fromEmail);
+
+    if (!$this->isItemInArray($emailDomain, $verifiedDomains)) {
+      $authorizedEmails = $this->bridge->getAuthorizedEmailAddresses();
+
+      if (!$authorizedEmails) {
+        return $this->createBadRequest(__('No FROM email addresses are authorized.', 'mailpoet'));
+      }
+
+      if (!$this->isItemInArray($fromEmail, $authorizedEmails)) {
+        // translators: %s is the email address, which is not authorized.
+        return $this->createBadRequest(sprintf(__("Sender email address '%s' is not authorized.", 'mailpoet'), $fromEmail));
+      }
     }
 
     try {
@@ -260,6 +275,10 @@ class Services extends APIEndpoint {
     return $this->successResponse([
       'email_address' => $fromEmail,
     ]);
+  }
+
+  private function isItemInArray($item, $array): bool {
+    return in_array($item, $array, true);
   }
 
   private function getErrorDescriptionByCode($code) {

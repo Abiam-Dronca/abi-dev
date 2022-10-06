@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use DateTimeImmutable;
+use MailPoet\Automation\Engine\Exceptions\InvalidStateException;
 use MailPoet\Automation\Engine\Utils\Json;
 
 class Workflow {
@@ -20,10 +21,10 @@ class Workflow {
     self::STATUS_TRASH,
   ];
 
-  /** @var int */
+  /** @var int|null */
   private $id;
 
-  /** @var int */
+  /** @var int|null */
   private $versionId;
 
   /** @var string */
@@ -47,7 +48,7 @@ class Workflow {
   /** @var array<string, Step> */
   private $steps;
 
-  /** @param Step[] $steps */
+  /** @param array<string, Step> $steps */
   public function __construct(
     string $name,
     array $steps,
@@ -56,18 +57,10 @@ class Workflow {
     int $versionId = null
   ) {
     $this->name = $name;
-    $this->steps = [];
+    $this->steps = $steps;
     $this->author = $author;
-    foreach ($steps as $step) {
-      $this->steps[$step->getId()] = $step;
-    }
-
-    if ($id) {
-      $this->id = $id;
-    }
-    if ($versionId) {
-      $this->versionId = $versionId;
-    }
+    $this->id = $id;
+    $this->versionId = $versionId;
 
     $now = new DateTimeImmutable();
     $this->createdAt = $now;
@@ -75,10 +68,16 @@ class Workflow {
   }
 
   public function getId(): int {
+    if (!$this->id) {
+      throw InvalidStateException::create()->withMessage('No workflow ID was set');
+    }
     return $this->id;
   }
 
   public function getVersionId(): int {
+    if (!$this->versionId) {
+      throw InvalidStateException::create()->withMessage('No workflow version ID was set');
+    }
     return $this->versionId;
   }
 
@@ -159,6 +158,7 @@ class Workflow {
 
   public function toArray(): array {
     return [
+      'id' => $this->id,
       'name' => $this->name,
       'status' => $this->status,
       'author' => $this->author->ID,
@@ -189,7 +189,9 @@ class Workflow {
     // TODO: validation
     $workflow = new self(
       $data['name'],
-      self::parseSteps(Json::decode($data['steps'])),
+      array_map(function (array $stepData): Step {
+        return Step::fromArray($stepData);
+      }, Json::decode($data['steps'])),
       new \WP_User((int)$data['author'])
     );
     $workflow->id = (int)$data['id'];
@@ -199,19 +201,5 @@ class Workflow {
     $workflow->updatedAt = new DateTimeImmutable($data['updated_at']);
     $workflow->activatedAt = $data['activated_at'] !== null ? new DateTimeImmutable($data['activated_at']) : null;
     return $workflow;
-  }
-
-  private static function parseSteps(array $data): array {
-    $steps = [];
-    foreach ($data as $step) {
-      $steps[] = new Step(
-        $step['id'],
-        $step['type'],
-        $step['key'],
-        $step['next_step_id'] ?? null,
-        $step['args'] ?? []
-      );
-    }
-    return $steps;
   }
 }

@@ -407,8 +407,8 @@ class NewslettersRepository extends Repository {
   /**
    * @return NewsletterEntity[]
    */
-  public function findSendigNotificationHistoryWithPausedTask(NewsletterEntity $newsletter): array {
-    $result = $this->entityManager->createQueryBuilder()
+  public function findSendingNotificationHistoryWithoutPausedTask(NewsletterEntity $newsletter): array {
+    return $this->entityManager->createQueryBuilder()
       ->select('n')
       ->from(NewsletterEntity::class, 'n')
       ->join('n.queues', 'q')
@@ -416,13 +416,13 @@ class NewslettersRepository extends Repository {
       ->where('n.parent = :parent')
       ->andWhere('n.type = :type')
       ->andWhere('n.status = :status')
+      ->andWhere('n.deletedAt IS NULL')
       ->andWhere('t.status != :taskStatus')
       ->setParameter('parent', $newsletter)
       ->setParameter('type', NewsletterEntity::TYPE_NOTIFICATION_HISTORY)
       ->setParameter('status', NewsletterEntity::STATUS_SENDING)
       ->setParameter('taskStatus', ScheduledTaskEntity::STATUS_PAUSED)
-      ->getQuery()->execute();
-    return $result;
+      ->getQuery()->getResult();
   }
 
   /**
@@ -431,7 +431,7 @@ class NewslettersRepository extends Repository {
    */
   public function getStandardNewsletterList(): array {
     return $this->entityManager->createQueryBuilder()
-      ->select('n')
+      ->select('PARTIAL n.{id,subject,sentAt}')
       ->addSelect('CASE WHEN n.sentAt IS NULL THEN 1 ELSE 0 END as HIDDEN sent_at_is_null')
       ->from(NewsletterEntity::class, 'n')
       ->where('n.type = :typeStandard')

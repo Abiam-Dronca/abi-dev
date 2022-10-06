@@ -5,7 +5,9 @@ namespace MailPoet\Automation\Engine;
 if (!defined('ABSPATH')) exit;
 
 
+use MailPoet\Automation\Engine\Control\RootStep;
 use MailPoet\Automation\Engine\Workflows\Action;
+use MailPoet\Automation\Engine\Workflows\Payload;
 use MailPoet\Automation\Engine\Workflows\Step;
 use MailPoet\Automation\Engine\Workflows\Subject;
 use MailPoet\Automation\Engine\Workflows\Trigger;
@@ -14,7 +16,7 @@ class Registry {
   /** @var array<string, Step> */
   private $steps = [];
 
-  /** @var array<string, Subject> */
+  /** @var array<string, Subject<Payload>> */
   private $subjects = [];
 
   /** @var array<string, Trigger> */
@@ -27,11 +29,14 @@ class Registry {
   private $wordPress;
 
   public function __construct(
+    RootStep $rootStep,
     WordPress $wordPress
   ) {
     $this->wordPress = $wordPress;
+    $this->steps[$rootStep->getKey()] = $rootStep;
   }
 
+  /** @param Subject<Payload> $subject */
   public function addSubject(Subject $subject): void {
     $key = $subject->getKey();
     if (isset($this->subjects[$key])) {
@@ -40,11 +45,12 @@ class Registry {
     $this->subjects[$key] = $subject;
   }
 
+  /** @return Subject<Payload>|null */
   public function getSubject(string $key): ?Subject {
     return $this->subjects[$key] ?? null;
   }
 
-  /** @return array<string, Subject> */
+  /** @return array<string, Subject<Payload>> */
   public function getSubjects(): array {
     return $this->subjects;
   }

@@ -22,27 +22,20 @@ class UpdateStepsController {
 
   public function updateSteps(Workflow $workflow, array $data): Workflow {
     $steps = [];
-    foreach ($data as $stepData) {
-      $step = $this->processStep($stepData);
-      $steps[$step->getId()] = $step;
+    foreach ($data as $index => $stepData) {
+      $step = $this->processStep($stepData, $workflow->getStep($stepData['id']));
+      $steps[$index] = $step;
     }
     $workflow->setSteps($steps);
     return $workflow;
   }
 
-  private function processStep(array $data): Step {
+  private function processStep(array $data, ?Step $existingStep): Step {
     $key = $data['key'];
     $step = $this->registry->getStep($key);
-    if (!$step) {
+    if (!$step && $existingStep && $data !== $existingStep->toArray()) {
       throw Exceptions::workflowStepNotFound($key);
     }
-
-    return new Step(
-      $data['id'],
-      $data['type'],
-      $data['key'],
-      $data['next_step_id'] ?? null,
-      $data['args'] ?? null
-    );
+    return Step::fromArray($data);
   }
 }

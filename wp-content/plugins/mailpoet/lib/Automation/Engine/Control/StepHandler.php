@@ -8,13 +8,20 @@ if (!defined('ABSPATH')) exit;
 use Exception;
 use MailPoet\Automation\Engine\Control\Steps\ActionStepRunner;
 use MailPoet\Automation\Engine\Data\Step;
+use MailPoet\Automation\Engine\Data\StepRunArgs;
+use MailPoet\Automation\Engine\Data\SubjectEntry;
 use MailPoet\Automation\Engine\Data\WorkflowRun;
+use MailPoet\Automation\Engine\Data\WorkflowRunLog;
 use MailPoet\Automation\Engine\Exceptions;
 use MailPoet\Automation\Engine\Exceptions\InvalidStateException;
 use MailPoet\Automation\Engine\Hooks;
+use MailPoet\Automation\Engine\Storage\WorkflowRunLogStorage;
 use MailPoet\Automation\Engine\Storage\WorkflowRunStorage;
 use MailPoet\Automation\Engine\Storage\WorkflowStorage;
 use MailPoet\Automation\Engine\WordPress;
+use MailPoet\Automation\Engine\Workflows\Action;
+use MailPoet\Automation\Engine\Workflows\Payload;
+use MailPoet\Automation\Engine\Workflows\Subject;
 use Throwable;
 
 class StepHandler {
@@ -23,6 +30,9 @@ class StepHandler {
 
   /** @var ActionStepRunner */
   private $actionStepRunner;
+
+  /** @var SubjectLoader */
+  private $subjectLoader;
 
   /** @var WordPress */
   private $wordPress;
@@ -36,17 +46,29 @@ class StepHandler {
   /** @var array<string, StepRunner> */
   private $stepRunners;
 
+  /** @var WorkflowRunLogStorage */
+  private $workflowRunLogStorage;
+
+  /** @var Hooks */
+  private $hooks;
+
   public function __construct(
     ActionScheduler $actionScheduler,
     ActionStepRunner $actionStepRunner,
+    Hooks $hooks,
+    SubjectLoader $subjectLoader,
     WordPress $wordPress,
     WorkflowRunStorage $workflowRunStorage,
+    WorkflowRunLogStorage $workflowRunLogStorage,
     WorkflowStorage $workflowStorage
   ) {
     $this->actionScheduler = $actionScheduler;
     $this->actionStepRunner = $actionStepRunner;
+    $this->hooks = $hooks;
+    $this->subjectLoader = $subjectLoader;
     $this->wordPress = $wordPress;
     $this->workflowRunStorage = $workflowRunStorage;
+    $this->workflowRunLogStorage = $workflowRunLogStorage;
     $this->workflowStorage = $workflowStorage;
   }
 
@@ -111,15 +133,34 @@ class StepHandler {
 
     $stepType = $step->getType();
     if (isset($this->stepRunners[$stepType])) {
-      $this->stepRunners[$stepType]->run($step, $workflow, $workflowRun);
+      $log = new WorkflowRunLog($workflowRun->getId(), $step->getId());
+      try {
+        $requiredSubjects = $step instanceof Action ? $step->getSubjectKeys() : [];
+        $subjectEntries = $this->getSubjectEntries($workflowRun, $requiredSubjects);
+        $args = new StepRunArgs($workflow, $workflowRun, $step, $subjectEntries);
+        $this->stepRunners[$stepType]->run($args);
+        $log->markCompletedSuccessfully();
+      } catch (Throwable $e) {
+        $log->markFailed();
+        $log->setError($e);
+        throw $e;
+      } finally {
+        try {
+          $this->hooks->doWorkflowStepAfterRun($log);
+        } catch (Throwable $e) {
+          // Ignore integration errors
+        }
+        $this->workflowRunLogStorage->createWorkflowRunLog($log);
+      }
     } else {
       throw new InvalidStateException();
     }
 
+    $nextStep = $step->getNextSteps()[0] ?? null;
     $nextStepArgs = [
       [
         'workflow_run_id' => $workflowRunId,
-        'step_id' => $step->getNextStepId(),
+        'step_id' => $nextStep ? $nextStep->getId() : null,
       ],
     ];
 
@@ -129,14 +170,33 @@ class StepHandler {
     }
 
     // no need to schedule a new step if the next step is null, complete the run
-    if (empty($nextStepArgs[0]['step_id'])) {
+    if (!$nextStep) {
       $this->workflowRunStorage->updateStatus($workflowRunId, WorkflowRun::STATUS_COMPLETE);
       return;
     }
 
     // enqueue next step
     $this->actionScheduler->enqueue(Hooks::WORKFLOW_STEP, $nextStepArgs);
-
     // TODO: allow long-running steps (that are not done here yet)
+  }
+
+  /** @return SubjectEntry<Subject<Payload>>[] */
+  private function getSubjectEntries(WorkflowRun $workflowRun, array $requiredSubjectKeys): array {
+    $subjectDataMap = [];
+    foreach ($workflowRun->getSubjects() as $data) {
+      $subjectDataMap[$data->getKey()] = array_merge($subjectDataMap[$data->getKey()] ?? [], [$data]);
+    }
+
+    $subjectEntries = [];
+    foreach ($requiredSubjectKeys as $key) {
+      $subjectData = $subjectDataMap[$key] ?? null;
+      if (!$subjectData) {
+        throw Exceptions::subjectDataNotFound($key, $workflowRun->getId());
+      }
+      foreach ($subjectData as $data) {
+        $subjectEntries[] = $this->subjectLoader->getSubjectEntry($data);
+      }
+    }
+    return $subjectEntries;
   }
 }

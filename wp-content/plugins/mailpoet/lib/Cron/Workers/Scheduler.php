@@ -23,6 +23,7 @@ use MailPoet\Newsletter\Scheduler\Scheduler as NewsletterScheduler;
 use MailPoet\Newsletter\Scheduler\WelcomeScheduler;
 use MailPoet\Newsletter\Segment\NewsletterSegmentRepository;
 use MailPoet\Newsletter\Sending\ScheduledTasksRepository;
+use MailPoet\Newsletter\Sending\SendingQueuesRepository;
 use MailPoet\Segments\SegmentsRepository;
 use MailPoet\Segments\SubscribersFinder;
 use MailPoet\Tasks\Sending as SendingTask;
@@ -57,6 +58,9 @@ class Scheduler {
   /** @var NewsletterSegmentRepository */
   private $newsletterSegmentRepository;
 
+  /** @var SendingQueuesRepository */
+  private $sendingQueuesRepository;
+
   /** @var WPFunctions */
   private $wp;
 
@@ -75,6 +79,7 @@ class Scheduler {
     NewslettersRepository $newslettersRepository,
     SegmentsRepository $segmentsRepository,
     NewsletterSegmentRepository $newsletterSegmentRepository,
+    SendingQueuesRepository $sendingQueuesRepository,
     WPFunctions $wp,
     Security $security,
     NewsletterScheduler $scheduler
@@ -87,6 +92,7 @@ class Scheduler {
     $this->newslettersRepository = $newslettersRepository;
     $this->segmentsRepository = $segmentsRepository;
     $this->newsletterSegmentRepository = $newsletterSegmentRepository;
+    $this->sendingQueuesRepository = $sendingQueuesRepository;
     $this->wp = $wp;
     $this->security = $security;
     $this->scheduler = $scheduler;
@@ -98,9 +104,20 @@ class Scheduler {
     // abort if execution limit is reached
     $this->cronHelper->enforceExecutionLimit($timer);
 
-    $scheduledQueues = self::getScheduledQueues();
-    if (!count($scheduledQueues)) return false;
-    $this->updateTasks($scheduledQueues);
+    $scheduledTasks = $this->getScheduledSendingTasks();
+    if (!count($scheduledTasks)) return false;
+
+    // To prevent big changes we convert ScheduledTaskEntity to old model
+    $scheduledQueues = [];
+    foreach ($scheduledTasks as $scheduledTask) {
+      $task = ScheduledTask::findOne($scheduledTask->getId());
+      if (!$task) continue;
+      $scheduledQueue = SendingTask::createFromScheduledTask($task);
+      if (!$scheduledQueue) continue;
+      $scheduledQueues[] = $scheduledQueue;
+    }
+
+    $this->updateTasks($scheduledTasks);
     foreach ($scheduledQueues as $i => $queue) {
       $newsletter = Newsletter::findOneWithOptions($queue->newsletterId);
       if (!$newsletter || $newsletter->deletedAt !== null) {
@@ -117,6 +134,8 @@ class Scheduler {
         $this->processScheduledAutomaticEmail($newsletter, $queue);
       } elseif ($newsletter->type === NewsletterEntity::TYPE_RE_ENGAGEMENT) {
         $this->processReEngagementEmail($queue);
+      } elseif ($newsletter->type === NewsletterEntity::TYPE_AUTOMATION) {
+        $this->processScheduledAutomationEmail($queue);
       }
       $this->cronHelper->enforceExecutionLimit($timer);
     }
@@ -177,21 +196,32 @@ class Scheduler {
     if (empty($subscribersCount)) {
       $this->loggerFactory->getLogger(LoggerFactory::TOPIC_POST_NOTIFICATIONS)->info(
         'post notification no subscribers',
-        ['newsletter_id' => $newsletter->id, 'task_id' => $queue->taskId]
+        ['newsletter_id' => $newsletter->id, 'task_id' => $queue->taskId, 'segment_ids' => $segments]
       );
       return $this->deleteQueueOrUpdateNextRunDate($queue, $newsletter);
     }
 
     // create a duplicate newsletter that acts as a history record
-    $notificationHistory = $this->createPostNotificationHistory($newsletterEntity);
+    try {
+      $notificationHistory = $this->createPostNotificationHistory($newsletterEntity);
+    } catch (\Exception $exception) {
+      $this->loggerFactory->getLogger(LoggerFactory::TOPIC_POST_NOTIFICATIONS)->error(
+        'creating post notification history failed',
+        ['newsletter_id' => $newsletter->id, 'task_id' => $queue->taskId, 'error' => $exception->getMessage()]
+      );
+      return false;
+    }
 
     // queue newsletter for delivery
     $queue->newsletterId = (int)$notificationHistory->getId();
     $queue->updateCount();
     $queue->status = null;
     $queue->save();
-    // update notification status
-    $notificationHistory->setStatus(Newsletter::STATUS_SENDING);
+
+    // Because there is mixed usage of the old and new model, we want to be sure about the correct state
+    $this->newslettersRepository->refresh($notificationHistory);
+    $this->sendingQueuesRepository->refresh($queue->getSendingQueueEntity());
+
     $this->loggerFactory->getLogger(LoggerFactory::TOPIC_POST_NOTIFICATIONS)->info(
       'post notification set status to sending',
       ['newsletter_id' => $newsletter->id, 'task_id' => $queue->taskId]
@@ -227,6 +257,22 @@ class Scheduler {
       if ($this->verifySubscriber($subscriber, $queue) === false) {
         return false;
       }
+    }
+
+    $queue->status = null;
+    $queue->save();
+    return true;
+  }
+
+  public function processScheduledAutomationEmail($queue): bool {
+    $subscribers = $queue->getSubscribers();
+    $subscriber = (!empty($subscribers) && is_array($subscribers)) ? Subscriber::findOne($subscribers[0]) : null;
+    if (!$subscriber) {
+      $queue->delete();
+      return false;
+    }
+    if (!$this->verifySubscriber($subscriber, $queue)) {
+      return false;
     }
 
     $queue->status = null;
@@ -366,14 +412,21 @@ class Scheduler {
     return $notificationHistory;
   }
 
-  private function updateTasks(array $scheduledQueues) {
-    $ids = array_map(function ($queue) {
-      return $queue->taskId;
-    }, $scheduledQueues);
-    ScheduledTask::touchAllByIds($ids);
+  /**
+   * @param ScheduledTaskEntity[] $scheduledTasks
+   */
+  private function updateTasks(array $scheduledTasks): void {
+    $ids = array_map(function (ScheduledTaskEntity $scheduledTask): ?int {
+      return $scheduledTask->getId();
+    }, $scheduledTasks);
+    $ids = array_filter($ids);
+    $this->scheduledTasksRepository->touchAllByIds($ids);
   }
 
-  public static function getScheduledQueues() {
-    return SendingTask::getScheduledQueues(self::TASK_BATCH_SIZE);
+  /**
+   * @return ScheduledTaskEntity[]
+   */
+  public function getScheduledSendingTasks(): array {
+    return $this->scheduledTasksRepository->findScheduledSendingTasks(self::TASK_BATCH_SIZE);
   }
 }
