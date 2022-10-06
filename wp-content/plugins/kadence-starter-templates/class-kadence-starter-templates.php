@@ -106,6 +106,13 @@ class Starter_Templates {
 	private $override_fonts;
 
 	/**
+	 * Import Shop/Cart/Checkout Pages.
+	 *
+	 * @var boolean
+	 */
+	private $ss = false;
+
+	/**
 	 * The paths of the actual import files to be used in the import.
 	 *
 	 * @var array
@@ -189,7 +196,7 @@ class Starter_Templates {
 			define( 'KADENCE_STARTER_TEMPLATES_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 		}
 		if ( ! defined( 'KADENCE_STARTER_TEMPLATES_VERSION' ) ) {
-			define( 'KADENCE_STARTER_TEMPLATES_VERSION', '1.2.15' );
+			define( 'KADENCE_STARTER_TEMPLATES_VERSION', '1.2.16' );
 		}
 	}
 
@@ -1393,6 +1400,9 @@ class Starter_Templates {
 					if ( 'woocommerce' === $base && empty( get_option( 'woocommerce_db_version' ) ) ) {
 						update_option( 'woocommerce_db_version', '4.0' );
 					}
+					if ( 'woocommerce' === $base && ( 'notactive' === $state || 'installed' === $state ) ) {
+						$this->ss = true;
+					}
 					if ( 'unknown' === $src ) {
 						$check_api = plugins_api(
 							'plugin_information',
@@ -2068,9 +2078,9 @@ class Starter_Templates {
 				wp_send_json( esc_html__( 'No import files specified!', 'kadence-starter-templates' ) );
 			}
 		}
-		if ( class_exists( 'woocommerce' ) && isset( $this->import_files[ $this->selected_index ]['ecommerce'] ) && $this->import_files[ $this->selected_index ]['ecommerce'] ) {
-			add_filter( 'stop_importing_woo_pages', '__return_true' );
-		}
+		// if ( class_exists( 'woocommerce' ) && isset( $this->import_files[ $this->selected_index ]['ecommerce'] ) && $this->import_files[ $this->selected_index ]['ecommerce'] && ! $this->import_woo_pages ) {
+		// 	add_filter( 'stop_importing_woo_pages', '__return_true' );
+		// }
 		// If elementor make sure the defaults are off.
 		if ( isset( $this->import_files[ $this->selected_index ]['type'] ) && 'elementor' === $this->import_files[ $this->selected_index ]['type'] ) {
 			update_option( 'elementor_disable_color_schemes', 'yes' );
@@ -2105,6 +2115,20 @@ class Starter_Templates {
 				wp_delete_post( $sample_page->ID, true ); // Sample Page.
 			}
 			wp_delete_comment( 1, true ); // WordPress comment.
+			/**
+			 * Clean up default woocommerce.
+			 */
+			$woopages = array(
+				'woocommerce_shop_page_id'      => 'shop',
+				'woocommerce_cart_page_id'      => 'cart',
+				'woocommerce_checkout_page_id'  => 'checkout',
+				'woocommerce_myaccount_page_id' => 'my-account',
+			);
+			foreach ( $woopages as $woo_page_option => $woo_page_slug ) {
+				if ( get_option( $woo_page_option ) ) {
+					wp_delete_post( get_option( $woo_page_option ), true );
+				}
+			}
 			// Move All active widgets into inactive.
 			$sidebars = wp_get_sidebars_widgets();
 			if ( is_array( $sidebars ) ) {

@@ -3,7 +3,7 @@ Contributors: britner
 Tags: templates, gutenberg
 Requires at least: 5.2
 Tested up to: 6.0
-Stable tag: 1.2.15
+Stable tag: 1.2.16
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ Absolutely not.
 
 
 == Changelog ==
+
+= 1.2.16 =
+* Fix: Issue with woocommerce page styles.
 
 = 1.2.15 =
 * Fix: Issue with single page imports.
