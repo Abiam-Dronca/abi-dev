@@ -3422,10 +3422,135 @@ class WDWLibrary {
    *
    * @return int
    */
+  public static function get_images_total_count() {
+    global $wpdb;
+   $count = $wpdb->get_var( "SELECT COUNT(id) FROM `" . $wpdb->prefix . "bwg_file_paths`" );
+
+    return intval($count);
+  }
+
+  /**
+   * Get images count.
+   *
+   * @return int
+   */
   public static function get_gallery_images_count() {
     global $wpdb;
     $row = $wpdb->get_col( 'SELECT id AS qty FROM `' . $wpdb->prefix . 'bwg_image`' );
 
     return intval(count($row));
   }
+
+  /**
+   * Convert all images sizes to bytes.
+   *
+   * @return integer total amount by bytes
+   */
+  public static function get_images_total_size() {
+    global $wpdb;
+    $sizes = $wpdb->get_col('Select `size` FROM `' . $wpdb->prefix . 'bwg_image` WHERE  `size`<>""');
+    if ( !empty($sizes) ) {
+      $sizes = array_sum(array_map('WDWLibrary::convertToBytes', $sizes));
+    } else {
+      $sizes = 0;
+    }
+    return $sizes;
+  }
+
+  /**
+   * Convert B, KM, MB, GB, TB, PB to bytes.
+   *
+   * @param string $from
+   *
+   * @return array|float|int|string|string[]|null
+   */
+  public static function convertToBytes( $from ) {
+    $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+    $number = substr($from, 0, -2);
+    $suffix = strtoupper(substr($from, -2));
+    if ( is_numeric(substr($suffix, 0, 1)) ) {
+      return preg_replace('/[^\d]/', '', $from);
+    }
+    $flipped = array_flip($units);
+
+    if ( !isset($flipped[$suffix]) ) {
+      return NULL;
+    }
+
+    return floatval($number) * (1024 ** $flipped[$suffix]);
+  }
+
+  /**
+   * Convert bytes to B, KM, MB, GB, TB, PB.
+   *
+   * @param $bytes
+   * @param $precision
+   *
+   * @return string
+   */
+  public static function formatBytes($bytes, $precision = 2) {
+    $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+
+    $bytes = max($bytes, 0);
+    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+    $pow = min($pow, count($units) - 1);
+
+    $bytes /= pow(1024, $pow);
+
+    return round($bytes, $precision) . ' ' . $units[$pow];
+  }
+
+  /**
+   * Convert all images sizes to bytes.
+   *
+   * @param $bytes
+   * @param $precision
+   *
+   * @return integer
+  */
+  public static function get_gallery_images_total_bytes() {
+    global $wpdb;
+    $sizes = $wpdb->get_col('Select `size` FROM `' . $wpdb->prefix . 'bwg_image` WHERE  `size`<>""');
+    if ( !empty($sizes) ) {
+        $sizes = array_sum(array_map('WDWLibrary::convertToBytes', $sizes));
+    } else {
+        $sizes = 0;
+    }
+    return $sizes;
+
+  }
+
+  /**
+   * Get Booster statsu data.
+   *
+   * @return array
+   */
+  public static function get_booster_data() {
+    $data = array(
+      'subscription_id' => get_transient('tenweb_subscription_id'),
+      'booster_plugin_status' => 0,
+      'booster_is_connected' => FALSE,
+      'tenweb_is_paid' => FALSE,
+    );
+
+    $booster_plugin_status = get_option('bwg_speed');
+    if ( !empty($booster_plugin_status)
+      && isset($booster_plugin_status['booster_plugin_status']) ) {
+      $data['booster_plugin_status'] = $booster_plugin_status['booster_plugin_status'];
+    }
+
+    if ( ( defined('TENWEB_CONNECTED_SPEED') &&
+        class_exists('\Tenweb_Authorization\Login') &&
+        \Tenweb_Authorization\Login::get_instance()->check_logged_in() &&
+        \Tenweb_Authorization\Login::get_instance()->get_connection_type() == TENWEB_CONNECTED_SPEED ) ||
+      ( defined('TENWEB_SO_HOSTED_ON_10WEB') && TENWEB_SO_HOSTED_ON_10WEB ) ) {
+      // booster is connectd part.
+      $data['booster_is_connected'] = TRUE;
+      // 10Web is paid.
+      $data['tenweb_is_paid'] = (method_exists('\TenWebOptimizer\OptimizerUtils', 'is_paid_user') && TenWebOptimizer\OptimizerUtils::is_paid_user()) ? TRUE : FALSE;
+    }
+
+    return $data;
+  }
 }
+

@@ -72,30 +72,17 @@ class SpeedController_bwg {
   }
 
   /**
-   * Set values to $booster_plugin_status, $booster_is_connected, $tenweb_is_paid
-  */
+   * Set the data for Booster.
+   *
+   * @return void
+   */
   public function set_booster_data() {
-    $this->subscription_id = get_transient('tenweb_subscription_id');
-
-    $booster_plugin_status = get_option('bwg_speed');
-    if ( !empty($booster_plugin_status)
-      && isset($booster_plugin_status['booster_plugin_status']) ) {
-      $this->booster_plugin_status = $booster_plugin_status['booster_plugin_status'];
-    }
-
-    if ( ( defined('TENWEB_CONNECTED_SPEED') &&
-      class_exists('\Tenweb_Authorization\Login') &&
-      \Tenweb_Authorization\Login::get_instance()->check_logged_in() &&
-      \Tenweb_Authorization\Login::get_instance()->get_connection_type() == TENWEB_CONNECTED_SPEED ) ||
-      ( defined('TENWEB_SO_HOSTED_ON_10WEB') && TENWEB_SO_HOSTED_ON_10WEB ) ) {
-        // booster is connectd part.
-        $this->booster_is_connected = TRUE;
-        // tenweb is paid part.
-        $this->tenweb_is_paid = (method_exists('\TenWebOptimizer\OptimizerUtils', 'is_paid_user') && TenWebOptimizer\OptimizerUtils::is_paid_user()) ? TRUE : FALSE;
-    }
-
+    $data = WDWLibrary::get_booster_data();
+    $this->subscription_id = $data['subscription_id'];
+    $this->booster_plugin_status = $data['booster_plugin_status'];
+    $this->booster_is_connected = $data['booster_is_connected'];
+    $this->tenweb_is_paid = $data['tenweb_is_paid'];
   }
-
 
   /**
    * Function is checking every time plugin status in wp with options and update option if somethin changed
@@ -158,8 +145,146 @@ class SpeedController_bwg {
   }
 
   /**
-   * Display.
+   * Get pages compressed from endpoint
    */
+  public function get_pages_compressed() {
+    $workspace_id = 0;
+    $domain_id = 0;
+    if ( defined('TENWEBIO_MANAGER_PREFIX') ) {
+      $workspace_id = (int) get_site_option(TENWEBIO_MANAGER_PREFIX . '_workspace_id', 0);
+      $domain_id = (int) get_option(TENWEBIO_MANAGER_PREFIX . '_domain_id', 0);
+    }
+
+    $return_empty_data = array('pages' => array(),
+      'total_compressed_images' => 0,
+      'total_not_compressed_images_size' => '0 B',
+      'total_not_compressed_images_count' => 0
+    );
+
+    if ( $workspace_id == 0 || $domain_id == 0 ) {
+      return $return_empty_data;
+    }
+    $url = '';
+    if ( defined('TENWEBIO_API_URL') ) {
+      $url = TENWEBIO_API_URL . "/compress/workspaces/" . $workspace_id . "/domains/" . $domain_id."/stat";
+    }
+
+    $access_token = get_site_option('tenweb_access_token');
+
+    $args = array(
+      'timeout'     => 120,
+      'headers'     => array(
+        "accept" => "application/x.10weboptimizer.v3+json",
+        "authorization" => "Bearer " . $access_token,
+      ),
+    );
+    $response = wp_remote_get($url, $args);
+    $return_data = $return_empty_data;
+    if ( is_array($response) && !is_wp_error($response) ) {
+      $body = json_decode( $response['body'], 1 );
+      if ( isset($body['status']) && $body['status'] == 200 ) {
+        $data = $body['data'];
+        $total_size = isset($data['not_compressed']['total_size']) ? $data['not_compressed']['total_size'] : 0;
+        $total_not_compressed_images_size = WDWLibrary::formatBytes($total_size);
+        $total_not_compressed_images_count = intval($data['not_compressed']['full']+$data['not_compressed']['thumbs']+$data['not_compressed']['other']);
+        $pages_compressed = $data['pages_compressed'];
+        $total_compressed_images = 0;
+
+
+        $two_optimized_pages = \TenWebOptimizer\OptimizerUtils::getCriticalPages();
+
+        /* Add new key permalink to $pages_compressed array */
+        foreach ( $pages_compressed as $key => $compressed ) {
+          $total_compressed_images += $compressed['images_count'];
+          $page_id = $compressed['page_id'];
+          if( $page_id == 'front_page' ) {
+            $permalink = get_home_url();;
+          } else {
+            $permalink = get_permalink( $page_id );
+          }
+          if(substr($permalink, -1) == '/') {
+            $permalink = substr($permalink, 0, -1);
+          }
+          $pages_compressed[$key]['permalink'] = $permalink;
+          unset($two_optimized_pages[$page_id]);
+        }
+
+        $i = 0;
+        /* Adding new pages which are optimized but haven't images and endpoint doesn't have that pages in response */
+        foreach ( $two_optimized_pages as $page_id => $val ) {
+          $pages_compressed_temp[$i]['page_id'] = $page_id;
+          $pages_compressed_temp[$i]['images_count'] = 0;
+          $pages_compressed_temp[$i]['permalink'] = $val['url'];
+          $i++;
+        }
+        if ( !empty($pages_compressed_temp) ) {
+          $pages_compressed = array_merge($pages_compressed, $pages_compressed_temp);
+        }
+
+
+        $home_url = get_home_url();
+        $home_compressed = false;
+        foreach ( $pages_compressed as $key => $page ) {
+          $permalink = $page['permalink'];
+
+          if(substr($permalink, -1) != '/') {
+            $permalink = $permalink.'/';
+          }
+          if(substr($home_url, -1) != '/') {
+            $home_url = $home_url.'/';
+          }
+          if ( $permalink == $home_url ) {
+            $home_compressed = true;
+            $temp_data[0] = $pages_compressed[$key];
+            $temp_data[0]['permalink'] = 'Homepage';
+            unset($pages_compressed[$key]);
+            continue;
+          }
+        }
+
+        if ( $home_compressed ) {
+          $pages_compressed = array_merge( $temp_data, $pages_compressed );
+        }
+
+        $return_data['pages'] = $pages_compressed;
+        $return_data['total_compressed_images'] = $total_compressed_images;
+        $return_data['total_not_compressed_images_size'] = $total_not_compressed_images_size;
+        $return_data['total_not_compressed_images_count'] = $total_not_compressed_images_count;
+      }
+      if ( $total_compressed_images != 0 || $total_not_compressed_images_size != 0 ) {
+        update_option("bwg_optimized_pages", $return_data);
+      } else {
+        /* in case of returned data is 0 just get from db last data or run PG functionality to get count/size */
+        $data = get_option("bwg_optimized_pages");
+        if( !empty( $return_data ) ) {
+          $return_data = $data;
+        } else {
+          $images_total_size = get_option('bwg_images_total_size');
+          if ( !empty($images_total_size) ) {
+            $return_data['total_not_compressed_images_size'] = $images_total_size;
+            $return_data['total_not_compressed_images_count'] = $this->get_optimize_media_count();
+          }
+        }
+      }
+    } else {
+      /* if getting error from endpoint try to get data from DB */
+      $data = get_option("bwg_optimized_pages");
+      if( !empty( $return_data ) ) {
+        $return_data = $data;
+      } else {
+        $images_total_size = get_option('bwg_images_total_size');
+        if ( !empty($images_total_size) ) {
+          $return_data['total_not_compressed_images_size'] = $images_total_size;
+          $return_data['total_not_compressed_images_count'] = $this->get_optimize_media_count();
+        }
+      }
+    }
+    return $return_data;
+  }
+
+  /**
+   * Display.
+  */
   public function display() {
     $params = array();
     $params['booster_plugin_status'] = $this->booster_plugin_status;
@@ -167,30 +292,35 @@ class SpeedController_bwg {
     $media_count = $this->get_optimize_media_count();
     $params['media_count'] = $media_count;
 
-    $params['page_url'] = WDWLibrary::get('current_url', '', 'sanitize_url');
     $params['page_is_public'] = WDWLibrary::get('status', '');
 
     $bwg_speed_score = get_option('bwg_speed_score');
-    if ( !empty($bwg_speed_score) ) {
-      $data = array(
-        'url' => $bwg_speed_score['last']['url'],
-        'desktop_score' => $bwg_speed_score[$bwg_speed_score['last']['url']]['desktop_score'],
-        'desktop_loading_time' => $bwg_speed_score[$bwg_speed_score['last']['url']]['desktop_loading_time'],
-        'mobile_score' => $bwg_speed_score[$bwg_speed_score['last']['url']]['mobile_score'],
-        'mobile_loading_time' => $bwg_speed_score[$bwg_speed_score['last']['url']]['mobile_loading_time'],
-        'last_analyzed_time' => $bwg_speed_score[$bwg_speed_score['last']['url']]['last_analyzed_time'],
-      );
+    $data = array(
+      'url' => get_home_url(),
+      'desktop_score' => 0,
+      'desktop_loading_time' => 0,
+      'mobile_score' => 0,
+      'mobile_loading_time' => 0,
+      'last_analyzed_time' => '',
+    );
+    if ( !empty($bwg_speed_score) && !empty($bwg_speed_score['last']) && !empty($bwg_speed_score['last']['url']) ) {
+      $last_url = $bwg_speed_score['last']['url'];
+      if ( !empty($bwg_speed_score[$last_url]['desktop_score'])
+        && !empty($bwg_speed_score[$last_url]['desktop_loading_time'])
+        && !empty($bwg_speed_score[$last_url]['mobile_score'])
+        && !empty($bwg_speed_score[$last_url]['mobile_loading_time'])
+        && !empty($bwg_speed_score[$last_url]['last_analyzed_time']) ) {
+        $data = array(
+          'url' => $last_url,
+          'desktop_score' => $bwg_speed_score[$last_url]['desktop_score'],
+          'desktop_loading_time' => $bwg_speed_score[$last_url]['desktop_loading_time'],
+          'mobile_score' => $bwg_speed_score[$last_url]['mobile_score'],
+          'mobile_loading_time' => $bwg_speed_score[$last_url]['mobile_loading_time'],
+          'last_analyzed_time' => $bwg_speed_score[$last_url]['last_analyzed_time'],
+        );
+      }
     }
-    else {
-      $data = array(
-        'url' => get_home_url(),
-        'desktop_score' => 0,
-        'desktop_loading_time' => 0,
-        'mobile_score' => 0,
-        'mobile_loading_time' => 0,
-        'last_analyzed_time' => '',
-      );
-    }
+
     $params['bwg_speed_score'] = $data;
     $two_domain_id = get_site_option('tenweb_domain_id');
     $params['dashboard_booster_url'] = '';
@@ -201,8 +331,68 @@ class SpeedController_bwg {
     $params['booster_is_connected'] = $this->booster_is_connected;
     $params['tenweb_is_paid'] = $this->tenweb_is_paid;
     $params['subscription_id'] = $this->subscription_id;
+    $images_total_size = get_option('bwg_images_total_size');
+    if( empty($images_total_size) ) {
+      $images_total_size = 0;
+    }
+    $params['images_total_size'] = $images_total_size;
+    $params['two_domain_id'] = get_site_option('tenweb_domain_id');
+    if ( $params['booster_is_connected'] && !$params['tenweb_is_paid'] ) {
+      $params['pages_compressed'] = $this->get_pages_compressed();
+    }
 
     $this->view->display($params);
+  }
+
+   /*
+   * Get Total size of all images ajax action
+   * */
+  public function get_total_size_of_images() {
+    $bwg_images_total_size = get_option('bwg_images_total_size');
+    if ( !empty($bwg_images_total_size) ) {
+      return $bwg_images_total_size;
+    }
+    $allowed_types = array('image/jpeg','image/jpg','image/png','image/gif','image/webp','image/svg','image/png');
+
+    $args = array(
+      'post_type' => 'attachment',
+      'numberposts' => -1,
+      'post_status' => null,
+      'post_parent' => null, // any parent
+    );
+    $attachments = get_posts($args);
+    if ($attachments) {
+      $total = 0;
+      foreach ($attachments as $post) {
+        if ( !in_array($post->post_mime_type, $allowed_types) ) {
+          continue;
+        }
+
+        $meta = wp_get_attachment_metadata( $post->ID );
+        if ( isset($meta['filesize']) ) {
+          $filesize = $meta['filesize'];
+        } else {
+          $path = get_attached_file($post->ID);
+          if ( !file_exists($path) ) {
+            continue;
+          }
+          $filesize = filesize($path);
+        }
+        $total += $filesize;
+      }
+    }
+
+    global $wpdb;
+    $sizes = $wpdb->get_col('Select `size` FROM `' . $wpdb->prefix . 'bwg_image` WHERE  `size`<>""');
+    if ( !empty($sizes) ) {
+      $sizes = array_map('WDWLibrary::convertToBytes', $sizes);
+      $sizes = WDWLibrary::formatBytes( array_sum($sizes) + $total );
+    } else {
+      $sizes = WDWLibrary::formatBytes( $total );
+    }
+    update_option('bwg_images_total_size', $sizes, 1);
+    echo json_encode(array("size" => $sizes));
+    die;
   }
 
   /**
@@ -277,7 +467,7 @@ class SpeedController_bwg {
                         'booster_plugin_status' => esc_html($booster_plugin_status),
                         'booster_is_connected' => esc_html($this->booster_is_connected),
                         'subscription_id' => esc_html($this->subscription_id),
-                        ) );
+                      ) );
     die;
   }
 
@@ -287,7 +477,7 @@ class SpeedController_bwg {
    * @param string $slug plugin's slug
    *
    * @return bool
-   */
+  */
   public function is_plugin_installed( $slug ) {
     if ( ! function_exists( 'get_plugins' ) ) {
       require_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -307,7 +497,7 @@ class SpeedController_bwg {
    * @param $plugin_zip string which is url of the plugin zip
    *
    * @return bool
-   */
+  */
   public function install_plugin( $plugin_zip = '' ) {
     include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
     wp_cache_flush();
@@ -324,7 +514,7 @@ class SpeedController_bwg {
    * @param array  $file_types
    *
    * @return array
-   */
+  */
   public function get_optimize_media_count() {
     global $wpdb;
     $allowed_types = array('image/jpeg','image/jpg','image/png','image/gif','image/webp','image/svg');
@@ -343,7 +533,7 @@ class SpeedController_bwg {
     $row = $wpdb->get_row( 'SELECT count(id) AS qty FROM `' . $wpdb->prefix . 'bwg_file_paths` WHERE is_dir = 0' );
     $count = intval($count_attachment) + intval($row->qty);
 
-    return ($count > 100 ? '100+' : $count);
+    return $count;
   }
 
   /**
@@ -387,11 +577,11 @@ class SpeedController_bwg {
 
     if ( isset($result['status']) && isset($result['data']['magic_data']) && $result['status'] == "ok" ) {
         $args = array();
-        if( isset($result['data']['magic_data']) ) {
+        if ( isset($result['data']['magic_data']) ) {
           $magic_data = $result['data']['magic_data'];
           $args = array('magic_data' => $magic_data);
         }
-        if( class_exists('\TenWebOptimizer\OptimizerUtils') ) {
+        if ( class_exists('\TenWebOptimizer\OptimizerUtils') ) {
             $two_connect_link = \TenWebOptimizer\OptimizerUtils::get_tenweb_connection_link('login', $args);
             echo json_encode(array( 'status' => 'success', 'booster_connect_url' => $two_connect_link ));
         } else {
@@ -415,7 +605,7 @@ class SpeedController_bwg {
    * Connect to dashboard.
    *
    * @return void
-   */
+  */
   public function connect_to_dashboard() {
     $speed_ajax_nonce = WDWLibrary::get('speed_ajax_nonce');
     if ( !wp_verify_nonce($speed_ajax_nonce, 'speed_ajax_nonce') ){
@@ -517,6 +707,11 @@ class SpeedController_bwg {
       'url' => $url
     );
     update_option('bwg_speed_score', $data, 1);
+
+    $bwg_hompage_optimized = get_option('bwg_hompage_optimized');
+    if ( rtrim($url, "/") == rtrim($home_url, "/") && !empty($bwg_hompage_optimized) && $bwg_hompage_optimized == 1 ) {
+      update_option('bwg_hompage_optimized', 2);
+    }
     ob_clean();
     echo json_encode(array(
                        'desktop_score' => esc_html($score['desktop']),
@@ -535,7 +730,7 @@ class SpeedController_bwg {
    * @param $strategy string parameter which get desktop or mobile
    *
    * @return array
-  */
+   */
   public function bwg_google_speed_cron( $page_url, $strategy,  $key = 'AIzaSyCQmF4ZSbZB8prjxci3GWVK4UWc-Yv7vbw') {
     $url = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=" . $page_url . "&key=".$key;
     $url = ( $strategy == "mobile" ) ? $url . "&strategy=mobile" : $url;

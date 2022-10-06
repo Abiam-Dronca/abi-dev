@@ -402,6 +402,10 @@ class GalleriesController_bwg {
     $params['message'] = $message;
     $params['total'] = $this->model->image_total($id, $params);
     $params['rows'] = $this->model->get_image_rows_data($id, $params);
+    // Get the Booster status to show the banner.
+    $data = WDWLibrary::get_booster_data();
+    // Get the total size of the images in gallery to show banner. Do not show banner if Booster is connected.
+    $params['total_size'] = $data['booster_is_connected'] ? 0 : $this->model->get_images_total_size($id);
     $params['pager'] = 0;
     $params['facebook_embed'] = $this->get_facebook_embed();
 

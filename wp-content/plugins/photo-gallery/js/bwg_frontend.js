@@ -11,104 +11,15 @@ var bwg_params_ib = [];
 /* Carousel params */
 var bwg_params_carousel = [];
 
-function bwg_draw_score_circle( data ) {
-  var d = data.desktop_score;
-  var m = data.mobile_score;
-  var color_desktop = d <= 49 ? "rgb(253, 60, 49)" : (d >= 90 ? "rgb(12, 206, 107)" : "rgb(255, 164, 0)");
-  var color_mobile = m <= 49 ? "rgb(253, 60, 49)" : (m >= 90 ? "rgb(12, 206, 107)" : "rgb(255, 164, 0)");
-  var bg_color_desktop = d <= 49 ? "rgb(253, 60, 49, 0.1)" : (d >= 90 ? "rgb(12, 206, 107, 0.1)" : "rgb(255, 164, 0, 0.1)");
-  var bg_color_mobile = m <= 49 ? "rgb(253, 60, 49, 0.1)" : (m >= 90 ? "rgb(12, 206, 107, 0.1)" : "rgb(255, 164, 0, 0.1)");
-
-  jQuery('.bwg-score-circle').each(function () {
-    var _this = this;
-    var val = data.desktop_score / 100;
-    var num = d;
-    var color = color_desktop;
-    var bg_color = bg_color_desktop;
-    if (jQuery(this).data("id") === "mobile") {
-      val = data.mobile_score / 100;
-      num = m;
-      color = color_mobile;
-      bg_color = bg_color_mobile;
-    }
-    jQuery(_this).circleProgress({
-      value: val,
-      size: 44,
-      startAngle: -Math.PI / 4 * 2,
-      lineCap: 'round',
-      emptyFill: "rgba(255, 255, 255, 0)",
-      thickness: 4,
-      fill: {
-        color: color
-      }
-    }).on('circle-animation-progress', function (event, progress) {
-      jQuery(this).find('.bwg-score-circle-animated').html(Math.round(parseFloat(num) * progress)).css({"color": color});
-      jQuery(this).find('canvas').html(Math.round(parseFloat(num) * progress)).css({"background": bg_color});
-    });
-  });
-  jQuery('.bwg-load-time-mobile').html(data.mobile_loading_time);
-  jQuery('.bwg-load-time-desktop').html(data.desktop_loading_time);
-  jQuery('.bwg-last-analyzed-time').html(data.last_analyzed_time);
-}
-
 jQuery(function () {
-
   if ( isMobile ) {
     jQuery(".bwg-container.bwg-standard-thumbnails .bwg-title1, .bwg-container.bwg-masonry-thumbnails .bwg-title1, .bwg-mosaic-thumbnails").css("opacity","1");
     jQuery(".bwg-zoom-effect .bwg-zoom-effect-overlay, .bwg-zoom-effect-overlay > span").css({"opacity":1,"background-color":"unset"});
   }
 
-  var admin_bar_booster_top_button = jQuery("#wp-admin-bar-booster-top-button");
-
   if (jQuery(".bwg-container").length) {
-    // Show the check score button only on pages with gallery in it.
-    admin_bar_booster_top_button.removeClass("hidden");
-  }
-
-    /* Show/hide booster container under the button */
-    admin_bar_booster_top_button.hover(function () {
-      jQuery("#wp-admin-bar-booster-wrap").removeClass("hidden");
-    }, function () {
-      jQuery("#wp-admin-bar-booster-wrap").addClass("hidden");
-    });
-
-
-  var reanalyze_href = jQuery('#wp-admin-bar-booster-top-button .ab-item').attr('href');
-  var html = '<div class="bwg-score-info">' +
-    '<div class="bwg-score-container">' +
-    '<div class="bwg-score-mobile">' +
-    '<div class="bwg-score-circle" data-thickness="6" data-id="mobile">' +
-    '<span class="bwg-score-circle-animated">47</span>' +
-    '</div>' +
-    '<div class="bwg-score-text">' +
-    '<span class="bwg-score-text--name">Mobile Score</span>' +
-    '<span class="bwg-load-text--time">Load Time: <span class="bwg-load-time-mobile"></span></span>' +
-    '</div>' +
-    '</div>' +
-    '<div class="bwg-score-desktop">' +
-    '<div class="bwg-score-circle" data-thickness="6" data-id="desktop">' +
-    '<span class="bwg-score-circle-animated">82</span>' +
-    '</div>' +
-    '<div class="bwg-score-text">' +
-    '<span class="bwg-score-text--name">Desktop Score</span>' +
-    '<span class="bwg-load-text--time">Load Time: <span class="bwg-load-time-desktop"></span></span>' +
-    '</div>' +
-    '</div>' +
-    '</div>' +
-    '<div class="bwg-reanalyze-container">' +
-    '<div class="bwg-last-analyzed">' +
-    '<p>Last analyzed:</p>' +
-    '<p class="bwg-last-analyzed-time"></p>' +
-    '</div>' +
-    '<div class="bwg-reanalyze-button">' +
-    '<a href="' + reanalyze_href + '" target="_blank">Reanalyze</a>';
-  '</div>' +
-  '</div>' +
-  '</div>';
-
-  if (typeof bwg_objectsL10n.page_speed !== "undefined" && bwg_objectsL10n.page_speed !== "") {
-    jQuery("#wp-admin-bar-booster-top-button").append('<div id="wp-admin-bar-booster-wrap" class="hidden">' + html + '</div>');
-    bwg_draw_score_circle(JSON.parse(bwg_objectsL10n.page_speed));
+    /* Show the "Optimize images" button only on pages with gallery in it.*/
+    jQuery("#wp-admin-bar-booster-top-button").removeClass("hidden");
   }
 });
 

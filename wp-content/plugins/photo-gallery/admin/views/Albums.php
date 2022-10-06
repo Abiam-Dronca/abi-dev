@@ -53,7 +53,6 @@ class AlbumsView_bwg extends AdminView_bwg {
 			echo $this->pagination($params['page_url'], $params['total'], $params['items_per_page']);
 		?>
 		</div>
-    <?php echo $this->booster_top_banner(); ?>
 		<table class="images_table adminlist table table-striped wp-list-table widefat fixed pages media bwg-gallery-lists">
 			<thead class="alternate">
 				<td id="cb" class="column-cb check-column">

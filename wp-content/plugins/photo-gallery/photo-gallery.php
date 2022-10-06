@@ -3,7 +3,7 @@
  * Plugin Name: Photo Gallery
  * Plugin URI: https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin
  * Description: This plugin is a fully responsive gallery plugin with advanced functionality.  It allows having different image galleries for your posts and pages. You can create unlimited number of galleries, combine them into albums, and provide descriptions and tags.
- * Version: 1.7.4
+ * Version: 1.7.6
  * Author: Photo Gallery Team
  * Author URI: https://10web.io/plugins/?utm_source=photo_gallery&utm_medium=free_plugin
  * Text Domain: photo-gallery
@@ -107,8 +107,8 @@ final class BWG {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_url = $this->plugin_url;
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.7.4';
-    $this->db_version = '1.7.4';
+    $this->plugin_version = '1.7.6';
+    $this->db_version = '1.7.6';
     $this->prefix = 'bwg';
     $this->nicename = __('Photo Gallery', 'photo-gallery');
     require_once($this->plugin_dir . '/framework/WDWLibrary.php');
@@ -421,6 +421,16 @@ final class BWG {
     if ( !is_admin() ) {
       add_action('admin_bar_menu', array( $this, 'admin_bar_menu' ), 100);
     }
+    add_action('bwg_hompage_optimized', array( $this, 'bwg_hompage_optimized' ) );
+  }
+
+  /**
+   * Run from booster plugin using hook and update status of home page that already optimized.
+   * 1 - optimized but score not updated in gallery DB
+   * 2 - optimized and score recounted
+  */
+  public function bwg_hompage_optimized() {
+    update_option('bwg_hompage_optimized', 1);
   }
 
   /**
@@ -506,7 +516,17 @@ final class BWG {
     add_submenu_page($parent_slug, __('Global Settings', 'photo-gallery'), __('Global Settings', 'photo-gallery'), $settings_permission, 'options_' . $this->prefix, array($this , 'admin_pages'));
 
     if ( !$this->is_appsumo_subscription() ) {
-      add_submenu_page($parent_slug, __('Speed Optimization', 'photo-gallery'), __('Speed Optimization', 'photo-gallery'), 'manage_options', 'speed_' . $this->prefix, array(
+      add_submenu_page($parent_slug,
+          __('Speed & Image Optimization', 'photo-gallery'),
+          __('Speed & Image Optimization' . sprintf('<span class="bwg_submenu_so_icon"
+                    style="width: 6px;
+                            height: 6px;
+                            background-color: #22B339;
+                            display: inline-block;
+                            border-radius: 20px;
+                            margin-left: 3px;
+                            margin-bottom: 1px;"></span>'), 'photo-gallery'),
+          'manage_options', 'speed_' . $this->prefix, array(
         $this,
         'admin_pages'
       ));
@@ -750,10 +770,20 @@ final class BWG {
   }
 
   public function check_home_speed_status() {
+    $bwg_hompage_optimized = get_option('bwg_hompage_optimized');
+    /* Case when hompage optimized but score not updated */
+    if ( !empty($bwg_hompage_optimized) && $bwg_hompage_optimized == 1 ) {
+      return 0;
+    }
     $bwg_speed_score = get_option('bwg_speed_score');
-    if( !empty($bwg_speed_score) && isset($bwg_speed_score['last']['url']) ) {
+    if ( !empty($bwg_speed_score) && isset($bwg_speed_score['last']) && isset($bwg_speed_score['last']['url']) ) {
       $url = $bwg_speed_score['last']['url'];
-      return array('desktop_score' => $bwg_speed_score[$url]['desktop_score'], 'mobile_score' => $bwg_speed_score[$url]['mobile_score']);
+      if ( isset($bwg_speed_score[$url]) && $bwg_speed_score[$url]['desktop_score'] && $bwg_speed_score[$url]['mobile_score'] ) {
+        return array(
+          'desktop_score' => $bwg_speed_score[$url]['desktop_score'],
+          'mobile_score' => $bwg_speed_score[$url]['mobile_score'],
+        );
+      }
     }
     return 0;
   }
@@ -2090,16 +2120,18 @@ final class BWG {
     if (!isset($post)) {
       return;
     }
+    $data = WDWLibrary::get_booster_data();
+    if ($data['booster_is_connected']) {
+      return;
+    }
     $args = array(
       'page' => 'speed_' . $this->prefix,
-      'current_url' => urlencode((is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']),
-      'status' => isset($post->post_status) && $post->post_status == 'publish' ? 1 : 0,
     );
     $speed_page = add_query_arg( $args, admin_url('admin.php'));
 
     $wp_admin_bar->add_menu(array(
                               'id' => 'booster-top-button',
-                              'title' => __('Check PageSpeed score', 'photo-gallery'),
+                              'title' => __('Optimize Images', 'photo-gallery'),
                               'href' => $speed_page,
                               'meta' => array(
                                 'target' => '_blank',

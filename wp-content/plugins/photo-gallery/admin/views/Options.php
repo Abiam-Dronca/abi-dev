@@ -76,7 +76,6 @@ class OptionsView_bwg extends AdminView_bwg {
       )
     );
     ?>
-    <?php echo $this->booster_top_banner(); ?>
     <div class="bwg_tabs">
       <div id="search_in_tablet">
         <div id="div_search_in_options_tablets">

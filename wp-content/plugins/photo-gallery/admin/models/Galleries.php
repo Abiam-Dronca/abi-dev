@@ -327,6 +327,25 @@ class GalleriesModel_bwg {
   }
 
   /**
+   * Count the images total size in the gallery.
+   *
+   * @param $gallery_id
+   *
+   * @return void
+   */
+  public function get_images_total_size( $gallery_id ) {
+    global $wpdb;
+    $sizes = $wpdb->get_col($wpdb->prepare('Select `size` FROM `' . $wpdb->prefix . 'bwg_image` WHERE `gallery_id` = %d AND `size`<>""', $gallery_id));
+
+    if ( empty($sizes) ) {
+      return;
+    }
+    $sizes = array_map('WDWLibrary::convertToBytes', $sizes);
+
+    return WDWLibrary::formatBytes(array_sum($sizes));
+  }
+
+  /**
    * Get images rows data or total count.
    *
    * @param      $gallery_id
@@ -337,7 +356,6 @@ class GalleriesModel_bwg {
    */
   public function get_image_rows_data( $gallery_id, $params, $total = FALSE ) {
     global $wpdb;
-    $rows = array();
     $order = $params['order'];
     $orderby = $params['orderby'];
     $page_per = $params['items_per_page'];

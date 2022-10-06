@@ -17,14 +17,6 @@ jQuery(function () {
     }
   });
 
-  /* Case when redirected from frontend and need to count score 1-public, 0-private, ''-not from frontend */
-  if( jQuery(".bwg-analyze-input").data('page-public') !== '' ) {
-    analize_input_change();
-    if (jQuery(".bwg-analyze-input").data('page-public') === 1) {
-      jQuery(".bwg-analyze-input-button").trigger("click");
-    }
-  }
-
   jQuery(document).on('change', '.bwg-analyze-input', function () {
     analize_input_change();
   });
@@ -46,7 +38,27 @@ jQuery(function () {
     jQuery(".bwg-optimize-now-tooltip").addClass("bwg-hidden");
   });
 
+  get_total_size_of_images();
 });
+
+/* Count total size of images */
+function get_total_size_of_images() {
+  jQuery.ajax( {
+    url: ajaxurl,
+    type: "POST",
+    data: {
+      action: "speed_bwg",
+      task: "get_total_size_of_images",
+      speed_ajax_nonce: bwg_speed.speed_ajax_nonce
+    },
+    success: function ( result ) {
+      if( isValidJSONString(result) ) {
+        var data = JSON.parse(result);
+        jQuery(".bwg-total_size_value").text(data.size);
+      }
+    },
+  });
+}
 
 function analize_input_change() {
   var bwg_analyze_input = jQuery(".bwg-analyze-input");
@@ -148,32 +160,28 @@ function sign_up_dashboard( that ) {
     return false;
   }
 
-  var email_input = jQuery(".bwg-sign-up-input");
+  var email_input = jQuery(that).parent().parent().find(".bwg-sign-up-input");
 
   jQuery(".bwg-error-msg").remove();
   email_input.removeClass("bwg-input-error");
   jQuery(that).addClass('bwg-disable-link');
   jQuery(that).html('<div class="speed-loader-blue"></div>');
 
-
   var email = email_input.val();
-  if( email === '' ) {
-    email_input.after('<p class="bwg-error-msg">'+bwg_speed.empty_email+'</p>');
+  if (email === '') {
+    email_input.after('<p class="bwg-error-msg">' + bwg_speed.empty_email + '</p>');
     email_input.addClass("bwg-input-error");
     jQuery(that).text(bwg_speed.sign_up);
     jQuery(that).removeClass('bwg-disable-link');
-
     return;
   }
-  if( !isEmail(email) ) {
-    email_input.after('<p class="bwg-error-msg">'+bwg_speed.wrong_email+'</p>');
+  if (!isEmail(email)) {
+    email_input.after('<p class="bwg-error-msg">' + bwg_speed.wrong_email + '</p>');
     email_input.addClass("bwg-input-error");
     jQuery(that).text(bwg_speed.sign_up);
     jQuery(that).removeClass('bwg-disable-link');
-
     return;
   }
-
   jQuery.ajax( {
     url: ajaxurl,
     type: "POST",
@@ -183,24 +191,25 @@ function sign_up_dashboard( that ) {
       bwg_email: email,
       speed_ajax_nonce: bwg_speed.speed_ajax_nonce
     },
-    success: function ( result ) {
-      if( !isValidJSONString(result) ) {
+    success: function (result) {
+      if (!isValidJSONString(result)) {
         jQuery(that).text(bwg_speed.sign_up);
         jQuery(that).removeClass('bwg-disable-link');
         email_input.after('<p class="bwg-error-msg">' + bwg_speed.something_wrong + '</p>');
         return;
       }
       var data = JSON.parse(result);
-      if ( data['status'] === 'success' ) {
-          window.location.href = data['booster_connect_url'];
-      } else {
-          jQuery(that).text(bwg_speed.sign_up);
-          jQuery(that).removeClass('bwg-disable-link');
-          email_input.after('<p class="bwg-error-msg">' + bwg_speed.something_wrong + '</p>');
-          return;
+      if (data['status'] === 'success') {
+        window.location.href = data['booster_connect_url'];
+      }
+      else {
+        jQuery(that).text(bwg_speed.sign_up);
+        jQuery(that).removeClass('bwg-disable-link');
+        email_input.after('<p class="bwg-error-msg">' + bwg_speed.something_wrong + '</p>');
+        return;
       }
     },
-    error: function ( xhr ) {
+    error: function (xhr) {
       jQuery(that).text(bwg_speed.sign_up);
       jQuery(that).removeClass('bwg-disable-link');
       email_input.after('<p class="bwg-error-msg">' + bwg_speed.something_wrong + '</p>');
@@ -428,3 +437,11 @@ function isValidJSONString(str) {
   }
   return true;
 }
+
+var bwg_leaving_popup = false;
+
+jQuery(".bwg-speed-body").parents(".wrap").mouseleave(function () {
+  if (bwg_leaving_popup == false && jQuery(".bwg-sign-up-input").is(":visible")) {
+    jQuery(".bwg-popup-overlay").removeClass("bwg-hidden");
+  }
+});

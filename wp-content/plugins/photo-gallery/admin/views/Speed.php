@@ -20,6 +20,25 @@ class SpeedView_bwg extends AdminView_bwg {
   public function display( $params = array() ) {
     ?>
     <div class="wrap">
+      <?php
+      $data = array(
+        'title' => __('Image optimization is not active',  'photo-gallery'),
+        'description' => __('Complete the sign up process to optimize your images for better website performance.', 'photo-gallery'),
+        'html' => '<input type="email" class="bwg-sign-up-input" placeholder="Email address" />',
+        'button1' => array(
+          'title' => __('Sign up',  'photo-gallery'),
+          'action' => 'onclick=\'sign_up_dashboard( this );\'',
+          'class' => 'bwg-primary',
+        ),
+        'html2' => sprintf(__('By signing up, you agree to 10Web’s. %s and %s', 'photo-gallery'),
+             '<a href="https://10web.io/terms-of-service/" target="_blank">' . __('Terms of Services',  'photo-gallery') . '</a>',
+             '<a href="https://10web.io/privacy-policy/" target="_blank">' . __('Privacy Policy',  'photo-gallery') . '</a>'),
+        'dismiss' => array(
+          'action' => 'onclick=\'bwg_leaving_popup = true; jQuery(".bwg-popup-overlay").addClass("bwg-hidden");\'',
+        ),
+      );
+      echo $this->popup($data);
+      ?>
       <div class="bwg-speed-header">
         <?php
         if ( $params['booster_plugin_status'] !== 2 ) {
@@ -44,10 +63,19 @@ class SpeedView_bwg extends AdminView_bwg {
       </div>
       <div class="bwg-speed-body">
         <div class="bwg-speed-body-container">
-          <p class="bwg-section-title"><?php esc_html_e('PageSpeed score', 'photo-gallery'); ?></p>
-          <p class="bwg-description"><?php esc_html_e('Start optimization by analyzing your website score.', 'photo-gallery') ?></p>
+          <?php
+          if ( $params['booster_is_connected'] && !$params['tenweb_is_paid'] ) {
+            $this->optimizer_on_free_connected($params);
+          } elseif ( $params['booster_is_connected'] && $params['tenweb_is_paid'] ) {
+              $this->optimizer_on_pro($params['dashboard_booster_url']);
+          } else {
+            $this->optimizer_on_free_not_connected($params);
+          }
+          ?>
+          <p class="bwg-section-title"><?php esc_html_e('PageSpeed optimization', 'photo-gallery'); ?></p>
+          <p class="bwg-description"><?php esc_html_e('Speed up your website and increase PageSpeed score by optimizing all images.', 'photo-gallery') ?></p>
           <div class="bwg-analyze-input-container">
-              <input type="url" class="bwg-analyze-input <?php esc_attr_e( ( $params['page_is_public'] === 0 ) ? 'bwg-analyze-input-error' : ''); ?>" placeholder="<?php esc_html_e('Page URL', 'photo-gallery') ?>" value="<?php echo esc_html($params['page_url']); ?>" data-page-public=<?php esc_attr_e( $params['page_is_public'] ); ?>>
+              <input type="url" class="bwg-analyze-input <?php esc_attr_e( ( $params['page_is_public'] === 0 ) ? 'bwg-analyze-input-error' : ''); ?>" placeholder="<?php esc_html_e('Page URL', 'photo-gallery') ?>" value="">
               <?php if ( $params['page_is_public'] === 0 ) { ?>
                 <p class="bwg-error-msg"><?php esc_html_e('This page is not public. Please publish the page to check the score.', 'photo-gallery'); ?></p>
               <?php } ?>
@@ -94,16 +122,6 @@ class SpeedView_bwg extends AdminView_bwg {
               </div>
             </div>
           </div>
-
-          <?php
-          if ( $params['booster_is_connected'] && !$params['tenweb_is_paid'] ) {
-              $this->optimizer_on_free($params['dashboard_booster_url']);
-          } elseif ( $params['booster_is_connected'] && $params['tenweb_is_paid'] ) {
-              $this->optimizer_on_pro($params['dashboard_booster_url']);
-          } else {
-              $this->optimizer_pending( $params );
-          }
-          ?>
       </div>
     </div>
   <?php
@@ -133,27 +151,32 @@ class SpeedView_bwg extends AdminView_bwg {
   }
 
   /**
-  * Optimizer section view when images not optimized and optimizer not active
-  *
-  * @param array $params
+   * Optimizer section view when booster connected and free version
+   *
+   * @param string $url dashboard booster url
   */
-  public function optimizer_pending( $params = array() ) {
+  public function optimizer_on_free_not_connected( $params ) {
     ?>
-      <div class="bwg-analyze-img_optimizer-container bwg-optimize_pending">
-        <div>
-          <p class="bwg-section-title"><?php esc_html_e('Image optimizer',  'photo-gallery') ?></p>
-          <p class="bwg-header-description"><?php esc_html_e('Compress images without compromising the quality.',  'photo-gallery') ?></p>
+      <div class="bwg-img_optimizer-container bwg-img_optimizer-not-container">
+        <div class="bwg-img_optimizer-left">
+          <span class="bwg-not-optimized-info"><?php esc_html_e('Not Optimized',  'photo-gallery') ?></span>
+          <h5><?php echo esc_html($params['media_count']); ?><span> <?php echo _n('image', 'images', $params['media_count'], 'photo-gallery'); ?></span></h5>
           <ul>
             <li><?php esc_html_e('Optimize all uploaded images',  'photo-gallery') ?></li>
             <li><?php esc_html_e('Serve Images in WebP format',  'photo-gallery') ?></li>
             <li><?php esc_html_e('Speed up website and reduce load time',  'photo-gallery') ?></li>
           </ul>
-          <div class="bwg-optimize-now-tooltip bwg-hidden"><?php esc_html_e('Installing 10Web Booster and signing up are required for image optimization.',  'photo-gallery'); ?></div>
-          <a class="bwg-optimize-now-button bwg-disable-link"><?php esc_html_e('Optimize Now',  'photo-gallery') ?></a>
         </div>
-        <div class="bwg-img-count-container">
-          <h5><?php echo esc_html($params['media_count']); ?><span>/<?php echo _n('image', 'images', $params['media_count'], 'photo-gallery'); ?></span></h5>
-          <p><?php esc_html_e('Ready for Optimization',  'photo-gallery'); ?></p>
+        <div class="bwg-img_optimizer-right">
+          <div class="bwg-img_optimizer-button-container">
+            <div class="bwg-img_optimizer-info">
+              <p class="bwg-section-description"><?php esc_html_e('Reduce image size by up to 40% without compromising the quality.',  'photo-gallery') ?></p>
+
+              <p class="bwg-total_size"><?php esc_html_e('Total size:',  'photo-gallery') ?></p>
+              <p class="bwg-total_size_value"><?php echo esc_html($params['images_total_size']) ?></p>
+            </div>
+              <a class="bwg-img_optimize-now-button"><?php echo __('Optimize Now',  'photo-gallery'); ?></a>
+          </div>
         </div>
       </div>
     <?php
@@ -164,19 +187,72 @@ class SpeedView_bwg extends AdminView_bwg {
    *
    * @param string $url dashboard booster url
   */
-  public function optimizer_on_free( $url ) {
+  public function optimizer_on_free_connected( $params ) {
+    $compressed_count = intval(count($params['pages_compressed']['pages']));
     ?>
-      <div class="bwg-analyze-img_optimizer-container bwg-optimize_on">
-        <div>
-          <p class="bwg-section-title"><?php esc_html_e('Image optimizer is on',  'photo-gallery') ?></p>
-          <p class="bwg-header-description"><?php esc_html_e('Add pages with images you’d like to optimize.',  'photo-gallery') ?></p>
-          <ul>
-            <li><span></span><?php esc_html_e('Specify the most image-heavy pages.',  'photo-gallery') ?></li>
-            <li><span></span><?php esc_html_e('Optimize pages with photo galleries',  'photo-gallery') ?></li>
-          </ul>
+      <div class="bwg-img_optimizer-container">
+        <div class="bwg-img_optimizer-left">
+          <span class="bwg-optimized-info"><?php esc_html_e('Optimized for free',  'photo-gallery') ?></span>
+          <h5><?php echo esc_html($params['pages_compressed']['total_compressed_images']); ?><span> <?php echo _n('image', 'images', $params['media_count'], 'photo-gallery'); ?></span></h5>
+          <p class="bwg-section-description"><?php esc_html_e('Image optimization is performed only on 6 pages included in Free plan.',  'photo-gallery') ?></p>
+
+          <div class="bwg-line_info_container">
+            <span><?php esc_html_e('Optimized pages',  'photo-gallery') ?></span>
+            <span><?php echo $compressed_count; esc_html_e(' of 6',  'photo-gallery')?></span>
+          </div>
+          <div class="bwg-line_container"><span class="bwg-size_<?php echo esc_attr($compressed_count); ?>"></span></div>
+          <div class="bwg-section-bottom">
+          <?php
+          $pages = $params['pages_compressed']['pages'];
+          $hompage = false;
+          if ( !empty($pages) ) {
+            foreach ( $pages as $page ) {
+              if ( $page['permalink'] == 'Homepage' ) {
+                  $hompage = true;
+                  $path = $page['permalink'];
+              } else {
+                  $path = parse_url($page['permalink']);
+                  $path["path"] = rtrim($path["path"] , "/");
+                  $explode = explode("/", $path["path"]);
+
+                  if ( count($explode) > 1 ) {
+                    $path = '.../' . end($explode);
+                  } else {
+                    $path = '...' . $path['path'];
+                  }
+              }
+              $image_count_text = '';
+              if ( intval($page['images_count']) != 0 ) {
+                $image_count_text = intval($page['images_count']).' '.esc_html__(' images',  'photo-gallery');
+              }
+              ?>
+              <div class="bwg-most-image-cont">
+                <div class="bwg-most-image-cont-path <?php echo $hompage ? 'bwg-hompage-path' : ''; ?>"><?php echo esc_html($path); ?></div>
+                <div class="bwg-most-image-cont-img-count bwg-optimized"><?php echo esc_html($image_count_text) ?></div>
+              </div>
+              <?php
+            }
+          }
+          ?>
+          </div>
         </div>
-        <div class="bwg-optimize_on-button-cont">
-          <a href="<?php echo esc_url($url)?>" target="_blank" class="bwg-optimize-add-pages"><?php esc_html_e('Add pages',  'photo-gallery') ?></a>
+        <div class="bwg-img_optimizer-right">
+          <span class="bwg-not-optimized-info"><?php esc_html_e('Not Optimized',  'photo-gallery') ?></span>
+
+          <h5><?php echo esc_html($params['pages_compressed']['total_not_compressed_images_count']); ?><span> <?php echo _n('image', 'images', $params['pages_compressed']['total_not_compressed_images_count'], 'photo-gallery'); ?></span></h5>
+          <ul>
+            <li><?php esc_html_e('Specify the most image-heavy pages',  'photo-gallery') ?></li>
+            <li><?php esc_html_e('Optimize pages with photo galleries',  'photo-gallery') ?></li>
+          </ul>
+
+          <p><?php esc_html_e('Add pages with images you’d like to optimize.',  'photo-gallery') ?></p>
+          <div class="bwg-img_optimizer-button-container">
+            <div class="bwg-img_optimizer-info">
+              <p><?php esc_html_e('Total size:',  'photo-gallery') ?></p>
+              <p><?php echo esc_html($params['pages_compressed']['total_not_compressed_images_size']) ?></p>
+            </div>
+              <a class="bwg-img_add_pages_button" target="_blank" href="https://my.10web.io/websites/<?php echo $params['two_domain_id']; ?>/booster/frontend"><?php echo __('Add pages',  'photo-gallery'); ?></a>
+          </div>
         </div>
       </div>
     <?php
@@ -195,7 +271,7 @@ class SpeedView_bwg extends AdminView_bwg {
     <div class="bwg-booster-top-banner <?php echo esc_attr( (($booster_is_active) ? 'bwg-booster-active' : '') ); ?>">
       <?php if ( ! $booster_is_active ) { ?>
         <p class="bwg-booster-top-banner-wrapper-note">
-          <span class="bwg-booster-top-banner-wrapper-note--text"><?php esc_html_e('Heavy images negatively affect your website load time and PageSpeed score.', 'photo-gallery'); ?></span>
+          <span class="bwg-booster-top-banner-wrapper-note--text"><?php esc_html_e('Heavy images negatively affect your website load time and PageSpeed optimization.', 'photo-gallery'); ?></span>
         </p>
       <?php } ?>
       <div class="bwg-booster-top-banner-wrapper">
@@ -208,7 +284,7 @@ class SpeedView_bwg extends AdminView_bwg {
             else {
               $single = __('%s image can be optimized', 'photo-gallery');
 		          $plural = __('%s images can be optimized', 'photo-gallery');
-              echo wp_sprintf( _n($single, $plural, $media_count, 'photo-gallery'), $media_count );
+              echo wp_sprintf( _n($single, $plural, intval($media_count), 'photo-gallery'), $media_count );
             }
           ?>
           </p>
@@ -218,7 +294,7 @@ class SpeedView_bwg extends AdminView_bwg {
               esc_html_e('Automatically optimize the entire website with all images.', 'photo-gallery');
             }
             else {
-              esc_html_e('Improve PageSpeed score by optimizing your website.', 'photo-gallery');
+              esc_html_e('Improve PageSpeed optimization by optimizing your website.', 'photo-gallery');
             }
           ?>
           </p>
@@ -257,8 +333,21 @@ class SpeedView_bwg extends AdminView_bwg {
   ?>
     <div class="bwg-booster-container bwg-sign_up-booster-container <?php echo esc_html($booster_plugin_status != 2) ? 'bwg-hidden' : ''; ?>">
       <p class="bwg-section-title"><?php esc_html_e('10Web Booster plugin is installed!',  'photo-gallery') ?></p>
-      <p class="bwg-description"><?php esc_html_e('Sign up to activate 10Web Booster on your website and start optimization process.',  'photo-gallery') ?></p>
-      <p class="bwg-description"><?php esc_html_e('Optimization will start automatically after the sign up.',  'photo-gallery') ?></p>
+      <p class="bwg-description"><?php esc_html_e('Use 10Web Website Booster to optimize all website images and boost PageSpeed score.',  'photo-gallery') ?></p>
+      <ul class="bwg-install-booster-steps">
+        <li class="bwg_so_check_active">
+            <?php esc_html_e('Install 10Web Booster',  'photo-gallery') ?>
+            <span><?php esc_html_e('Activate plugin on the website',  'photo-gallery') ?></span>
+        </li>
+        <li>
+            <?php esc_html_e('Sign up and connect',  'photo-gallery') ?>
+            <span><?php esc_html_e('Start the optimization process',  'photo-gallery') ?></span>
+        </li>
+        <li>
+            <?php esc_html_e('Optimize all images',  'photo-gallery') ?>
+            <span><?php esc_html_e('Speed up the entire website',  'photo-gallery') ?></span>
+        </li>
+      </ul>
       <input type="email" class="bwg-sign-up-input" placeholder="Email address">
       <div class="bwg-sign-up-dashboard-button-container">
         <a class="bwg-booster-button bwg-sign-up-dashboard-button"><?php esc_html_e('Sign up', 'photo-gallery'); ?></a>
@@ -275,13 +364,14 @@ class SpeedView_bwg extends AdminView_bwg {
   }
 
   /**
-   * htnl content for case when booster plugin installed but user didn't sign up
+   * html content for case when booster plugin installed but user didn't sign up
    *
    * @param arrar $params status->2-active, 1-installed, 0-not installed, booster url
   */
   public function connected_booster_view( $params = array() ) {
   ?>
-    <div class="bwg-connected-booster-container <?php echo esc_html($params['booster_plugin_status'] != 2) ? 'bwg-hidden' : ''; ?>">
+    <div class="bwg-connected-booster-container <?php echo esc_html($params['booster_plugin_status'] != 2) ? 'bwg-hidden' : '';
+    echo !$params['tenweb_is_paid'] ? ' bwg-is-free': '';?>">
       <div class="bwg-connected-booster-content">
         <div class="bwg-connected-booster-done-cont">
           <?php esc_html_e('Site is connected',  'photo-gallery') ?>
@@ -289,6 +379,23 @@ class SpeedView_bwg extends AdminView_bwg {
         <p class="bwg-section-title"><?php esc_html_e('10Web Booster is active',  'photo-gallery') ?></p>
         <p class="bwg-header-description"><?php esc_html_e('Our plugin is now optimizing your website.',  'photo-gallery') ?></p>
         <p class="bwg-header-description"><?php esc_html_e('Manage optimization settings from the 10Web dashboard.',  'photo-gallery') ?></p>
+        <?php
+            if ( !$params['tenweb_is_paid'] ) { ?>
+                <ul class="bwg-install-booster-steps">
+                    <li class="bwg_so_check_active">
+                        <?php esc_html_e('Install 10Web Booster',  'photo-gallery') ?>
+                        <span><?php esc_html_e('Activate plugin on the website',  'photo-gallery') ?></span>
+                    </li>
+                    <li class="bwg_so_check_active">
+                        <?php esc_html_e('Sign up and connect',  'photo-gallery') ?>
+                        <span><?php esc_html_e('Start the optimization process',  'photo-gallery') ?></span>
+                    </li>
+                    <li>
+                        <?php esc_html_e('Optimize all images',  'photo-gallery') ?>
+                        <span><a href="https://my.10web.io/upgrade-plan" target="_blank"><?php esc_html_e('Upgrade to Booster Pro',  'photo-gallery') ?></a></span>
+                    </li>
+                </ul>
+        <?php } ?>
       </div>
       <div class="button-container">
         <a href="<?php echo esc_url($params['dashboard_booster_url']); ?>" target="_blank" class="bwg-manage-booster"><?php esc_html_e('Manage',  'photo-gallery'); ?></a>
@@ -298,7 +405,7 @@ class SpeedView_bwg extends AdminView_bwg {
   }
 
   /**
-   * htnl content for case when booster plugin didn't installed
+   * html content for case when booster plugin didn't installed
    *
    * @param int $booster_plugin_status 2-active, 1-installed, 0-not installed
   */
@@ -307,17 +414,26 @@ class SpeedView_bwg extends AdminView_bwg {
     <div class="bwg-install-booster-container">
       <p class="bwg-section-title"><?php esc_html_e('10Web Booster',  'photo-gallery') ?></p>
       <p class="bwg-header-description"><?php esc_html_e('Use 10Web Website Booster to optimize all website images and boost PageSpeed score.',  'photo-gallery') ?></p>
-      <ul>
-        <li><span></span><?php esc_html_e('Get a 90+ PageSpeed score',  'photo-gallery') ?></li>
-        <li><span></span><?php esc_html_e('Auto-optimize all uploaded images',  'photo-gallery') ?></li>
-        <li><span></span><?php esc_html_e('Speed up website and reduce load time',  'photo-gallery') ?></li>
-        <li><span></span><?php esc_html_e('Pass Core Web Vitals',  'photo-gallery') ?></li>
+      <ul class="bwg-install-booster-steps">
+        <li class="<?php echo esc_html($booster_plugin_status >= 0) ? 'bwg_so_check_active' : '';?>">
+            <?php esc_html_e('Install 10Web Booster',  'photo-gallery') ?>
+            <span><?php esc_html_e('Activate plugin on the website',  'photo-gallery') ?></span>
+        </li>
+        <li>
+            <?php esc_html_e('Sign up and connect',  'photo-gallery') ?>
+            <span><?php esc_html_e('Start the optimization process',  'photo-gallery') ?></span>
+        </li>
+        <li>
+            <?php esc_html_e('Optimize all images',  'photo-gallery') ?>
+            <span><?php esc_html_e('Speed up the entire website',  'photo-gallery') ?></span>
+        </li>
       </ul>
-      <div class="button-container">
-        <a class="bwg-install-booster"><?php echo esc_html($booster_plugin_status === 0) ? __('Install 10Web Booster plugin',  'photo-gallery') :  __('Activate 10Web Booster plugin',  'photo-gallery'); ?></a>
-        <p><?php esc_html_e('Installing from WordPress repository',  'photo-gallery') ?></p>
+      <div class="bwg-button-container-parent">
+          <div class="button-container">
+          <a class="bwg-install-booster"><?php echo esc_html($booster_plugin_status === 0) ? __('Install 10Web Booster plugin',  'photo-gallery') :  __('Activate 10Web Booster plugin',  'photo-gallery'); ?></a>
+          <p><?php esc_html_e('Installing from WordPress repository',  'photo-gallery') ?></p>
+          </div>
       </div>
     </div>
-    <?php
-  }
+  <?php }
 }
