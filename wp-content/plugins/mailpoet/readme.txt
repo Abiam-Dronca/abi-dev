@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 3.100.0
+Stable tag: 3.100.2
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -11,14 +11,6 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Send beautiful newsletters from WordPress. Collect subscribers with signup forms, automate your emails for WooCommerce, blog post notifications & more
 
 == Description ==
-
-= Get ready for Black Friday with 40% off MailPoet plans =
-
-Save 40% on all annual plans until 2 pm UTC, October 7. Terms & conditions apply.
-
-[Shop Now](https://account.mailpoet.com/?billing=yearly&ref=sale-october-2022-wporg&utm_source=WP&utm_medium=repotext&utm_campaign=mp_prebfcm)
-
-= What is MailPoet? =
 
 Use MailPoet to create, send, manage, and grow your email marketing campaigns – all without leaving your WordPress dashboard.
 
@@ -226,6 +218,12 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.100.2 - 2022-10-10 =
+* Fixed: scheduled newsletters not sending.
+
+= 3.100.1 - 2022-10-06 =
+* Fixed: In some instances the sending stuck because the EntityManager was closed.
 
 = 3.100.0 - 2022-10-03 =
 * Added: tagging subscribers when signed up via a form;

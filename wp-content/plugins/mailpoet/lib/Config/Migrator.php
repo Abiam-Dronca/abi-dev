@@ -221,7 +221,7 @@ class Migrator {
     $attributes = [
       'id int(11) unsigned NOT NULL AUTO_INCREMENT,',
       'task_id int(11) unsigned NOT NULL,',
-      'newsletter_id int(11) unsigned NOT NULL,',
+      'newsletter_id int(11) unsigned NULL,',
       'newsletter_rendered_body longtext,',
       'newsletter_rendered_subject varchar(250) NULL DEFAULT NULL,',
       'subscribers longtext,',

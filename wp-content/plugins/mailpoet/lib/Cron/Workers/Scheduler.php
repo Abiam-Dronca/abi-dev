@@ -145,6 +145,7 @@ class Scheduler {
     $subscribers = $queue->getSubscribers();
     if (empty($subscribers[0])) {
       $queue->delete();
+      $this->updateScheduledTaskEntity($queue, true);
       return false;
     }
     $subscriberId = (int)$subscribers[0];
@@ -161,6 +162,7 @@ class Scheduler {
     }
     $queue->status = null;
     $queue->save();
+    $this->updateScheduledTaskEntity($queue);
     return true;
   }
 
@@ -217,6 +219,7 @@ class Scheduler {
     $queue->updateCount();
     $queue->status = null;
     $queue->save();
+    $this->updateScheduledTaskEntity($queue);
 
     // Because there is mixed usage of the old and new model, we want to be sure about the correct state
     $this->newslettersRepository->refresh($notificationHistory);
@@ -235,13 +238,13 @@ class Scheduler {
       if ($segment instanceof SegmentEntity) {
         $taskModel = $queue->task();
         $taskEntity = $this->scheduledTasksRepository->findOneById($taskModel->id);
-
         if ($taskEntity instanceof ScheduledTaskEntity) {
           $result = $this->subscribersFinder->addSubscribersToTaskFromSegments($taskEntity, [(int)$segment->getId()]);
         }
 
         if (empty($result)) {
           $queue->delete();
+          $this->updateScheduledTaskEntity($queue, true);
           return false;
         }
       }
@@ -252,6 +255,7 @@ class Scheduler {
         false;
       if (!$subscriber) {
         $queue->delete();
+        $this->updateScheduledTaskEntity($queue, true);
         return false;
       }
       if ($this->verifySubscriber($subscriber, $queue) === false) {
@@ -261,6 +265,7 @@ class Scheduler {
 
     $queue->status = null;
     $queue->save();
+    $this->updateScheduledTaskEntity($queue);
     return true;
   }
 
@@ -269,6 +274,7 @@ class Scheduler {
     $subscriber = (!empty($subscribers) && is_array($subscribers)) ? Subscriber::findOne($subscribers[0]) : null;
     if (!$subscriber) {
       $queue->delete();
+      $this->updateScheduledTaskEntity($queue, true);
       return false;
     }
     if (!$this->verifySubscriber($subscriber, $queue)) {
@@ -277,12 +283,14 @@ class Scheduler {
 
     $queue->status = null;
     $queue->save();
+    $this->updateScheduledTaskEntity($queue);
     return true;
   }
 
   public function processScheduledStandardNewsletter($newsletter, SendingTask $task) {
     $newsletterEntity = $this->newslettersRepository->findOneById($newsletter->id);
 
+    $taskEntity = null;
     if ($newsletterEntity instanceof NewsletterEntity) {
       $segments = $newsletterEntity->getSegmentIds();
       $taskModel = $task->task();
@@ -299,12 +307,15 @@ class Scheduler {
     $task->save();
     // update newsletter status
     $newsletter->setStatus(Newsletter::STATUS_SENDING);
+    $newsletterEntity && $this->newslettersRepository->refresh($newsletterEntity);
+    $this->updateScheduledTaskEntity($task);
     return true;
   }
 
   private function processReEngagementEmail($queue) {
     $queue->status = null;
     $queue->save();
+    $this->updateScheduledTaskEntity($queue);
     return true;
   }
 
@@ -365,16 +376,31 @@ class Scheduler {
   public function deleteQueueOrUpdateNextRunDate($queue, $newsletter) {
     if ($newsletter->intervalType === PostNotificationScheduler::INTERVAL_IMMEDIATELY) {
       $queue->delete();
+      $this->updateScheduledTaskEntity($queue, true);
       return;
     } else {
       $nextRunDate = $this->scheduler->getNextRunDate($newsletter->schedule);
       if (!$nextRunDate) {
         $queue->delete();
+        $this->updateScheduledTaskEntity($queue, true);
         return;
       }
       $queue->scheduledAt = $nextRunDate;
       $queue->save();
+      $this->updateScheduledTaskEntity($queue);
     }
+  }
+
+  private function updateScheduledTaskEntity(SendingTask $queue, bool $hasBeenDeleted = false) {
+    $taskModel = $queue->task();
+    if (!$taskModel instanceof ScheduledTask) {
+      return;
+    }
+    $taskEntity = $this->scheduledTasksRepository->findOneById($taskModel->id);
+    if (!$taskEntity instanceof ScheduledTaskEntity) {
+      return;
+    }
+    $hasBeenDeleted ? $this->scheduledTasksRepository->detach($taskEntity) : $this->scheduledTasksRepository->refresh($taskEntity);
   }
 
   public function createPostNotificationHistory(NewsletterEntity $newsletter): NewsletterEntity {

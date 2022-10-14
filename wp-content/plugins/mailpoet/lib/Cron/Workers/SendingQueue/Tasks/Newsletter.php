@@ -117,7 +117,7 @@ class Newsletter {
     return $newsletter;
   }
 
-  public function preProcessNewsletter(\MailPoet\Models\Newsletter $newsletter, Sending $sendingTask) {
+  public function preProcessNewsletter(NewsletterEntity $newsletter, Sending $sendingTask) {
     // return the newsletter if it was previously rendered
     /** @phpstan-ignore-next-line - SendingQueue::getNewsletterRenderedBody() is called inside Sending using __call(). Sending will be refactored soon to stop using Paris models. */
     if (!is_null($sendingTask->getNewsletterRenderedBody())) {
@@ -127,57 +127,67 @@ class Newsletter {
     }
     $this->loggerFactory->getLogger(LoggerFactory::TOPIC_NEWSLETTERS)->info(
       'pre-processing newsletter',
-      ['newsletter_id' => $newsletter->id, 'task_id' => $sendingTask->taskId]
+      ['newsletter_id' => $newsletter->getId(), 'task_id' => $sendingTask->taskId]
     );
-    $newsletterEntity = $this->newslettersRepository->findOneById($newsletter->id);
-    if (!$newsletterEntity) return false;
+
     // if tracking is enabled, do additional processing
     if ($this->trackingEnabled) {
       // hook to the newsletter post-processing filter and add tracking image
       $this->trackingImageInserted = OpenTracking::addTrackingImage();
       // render newsletter
-      $renderedNewsletter = $this->renderer->render($newsletterEntity, $sendingTask);
+      $renderedNewsletter = $this->renderer->render($newsletter, $sendingTask);
       $renderedNewsletter = $this->wp->applyFilters(
-        'mailpoet_sending_newsletter_render_after',
+        'mailpoet_sending_newsletter_render_after_pre_process',
         $renderedNewsletter,
         $newsletter
       );
-      $renderedNewsletter = $this->gaTracking->applyGATracking($renderedNewsletter, $newsletterEntity);
+      $renderedNewsletter = $this->gaTracking->applyGATracking($renderedNewsletter, $newsletter);
       // hash and save all links
-      $renderedNewsletter = $this->linksTask->process($renderedNewsletter, $newsletterEntity, $sendingTask);
+      $renderedNewsletter = $this->linksTask->process($renderedNewsletter, $newsletter, $sendingTask);
     } else {
       // render newsletter
-      $renderedNewsletter = $this->renderer->render($newsletterEntity, $sendingTask);
+      $renderedNewsletter = $this->renderer->render($newsletter, $sendingTask);
       $renderedNewsletter = $this->wp->applyFilters(
-        'mailpoet_sending_newsletter_render_after',
+        'mailpoet_sending_newsletter_render_after_pre_process',
         $renderedNewsletter,
         $newsletter
       );
-      $renderedNewsletter = $this->gaTracking->applyGATracking($renderedNewsletter, $newsletterEntity);
+      $renderedNewsletter = $this->gaTracking->applyGATracking($renderedNewsletter, $newsletter);
     }
+
+    // This deprecated notice can be removed after 2023-03-23
+    if ($this->wp->hasFilter('mailpoet_sending_newsletter_render_after')) {
+      $this->wp->deprecatedHook(
+        'mailpoet_sending_newsletter_render_after',
+        '3.98.1',
+        'mailpoet_sending_newsletter_render_after_pre_process',
+        __('Please note that mailpoet_sending_newsletter_render_after no longer runs and that the list of parameters of the new filter is different.', 'mailpoet')
+      );
+    }
+
     // check if this is a post notification and if it contains at least 1 ALC post
     if (
-      $newsletter->type === NewsletterEntity::TYPE_NOTIFICATION_HISTORY &&
+      $newsletter->getType() === NewsletterEntity::TYPE_NOTIFICATION_HISTORY &&
       $this->postsTask->getAlcPostsCount($renderedNewsletter, $newsletter) === 0
     ) {
       // delete notification history record since it will never be sent
       $this->loggerFactory->getLogger(LoggerFactory::TOPIC_POST_NOTIFICATIONS)->info(
         'no posts in post notification, deleting it',
-        ['newsletter_id' => $newsletter->id, 'task_id' => $sendingTask->taskId]
+        ['newsletter_id' => $newsletter->getId(), 'task_id' => $sendingTask->taskId]
       );
-      $this->newslettersRepository->bulkDelete([(int)$newsletter->id]);
+      $this->newslettersRepository->bulkDelete([(int)$newsletter->getId()]);
       return false;
     }
     // extract and save newsletter posts
-    $this->postsTask->extractAndSave($renderedNewsletter, $newsletterEntity);
+    $this->postsTask->extractAndSave($renderedNewsletter, $newsletter);
 
     $sendingQueueEntity = $sendingTask->getSendingQueueEntity();
 
     // update queue with the rendered and pre-processed newsletter
     $sendingTask->newsletterRenderedSubject = ShortcodesTask::process(
-      $newsletter->subject,
+      $newsletter->getSubject(),
       $renderedNewsletter['html'],
-      $newsletterEntity,
+      $newsletter,
       null,
       $sendingQueueEntity
     );

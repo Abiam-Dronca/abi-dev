@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the MailPoet package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MailPoet 3.100.0\n"
+"Project-Id-Version: MailPoet 3.100.2\n"
 "Report-Msgid-Bugs-To: http://support.mailpoet.com/\n"
-"POT-Creation-Date: 2022-10-03 14:00:12+00:00\n"
+"POT-Creation-Date: 2022-10-10 16:15:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -178,7 +178,7 @@ msgstr ""
 msgid "This form does not exist."
 msgstr ""
 
-#: lib/API/JSON/v1/Forms.php:108 lib/API/JSON/v1/Newsletters.php:170
+#: lib/API/JSON/v1/Forms.php:108 lib/API/JSON/v1/Newsletters.php:172
 msgid "You need to specify a status."
 msgstr ""
 
@@ -215,27 +215,27 @@ msgid "This template does not exist."
 msgstr ""
 
 #: lib/API/JSON/v1/Newsletters.php:123 lib/API/JSON/v1/Newsletters.php:140
-#: lib/API/JSON/v1/Newsletters.php:183 lib/API/JSON/v1/Newsletters.php:242
-#: lib/API/JSON/v1/Newsletters.php:258 lib/API/JSON/v1/Newsletters.php:272
-#: lib/API/JSON/v1/Newsletters.php:289 lib/API/JSON/v1/Newsletters.php:304
-#: lib/API/JSON/v1/Newsletters.php:327
+#: lib/API/JSON/v1/Newsletters.php:185 lib/API/JSON/v1/Newsletters.php:244
+#: lib/API/JSON/v1/Newsletters.php:260 lib/API/JSON/v1/Newsletters.php:274
+#: lib/API/JSON/v1/Newsletters.php:291 lib/API/JSON/v1/Newsletters.php:306
+#: lib/API/JSON/v1/Newsletters.php:329
 msgid "This email does not exist."
 msgstr ""
 
-#: lib/API/JSON/v1/Newsletters.php:176 lib/API/JSON/v1/SendingQueue.php:90
+#: lib/API/JSON/v1/Newsletters.php:178 lib/API/JSON/v1/SendingQueue.php:90
 #: lib/API/JSON/v1/SendingQueue.php:223
 msgid "Subscribers limit reached."
 msgstr ""
 
-#: lib/API/JSON/v1/Newsletters.php:202
+#: lib/API/JSON/v1/Newsletters.php:204
 msgid "This email has incorrect state."
 msgstr ""
 
-#: lib/API/JSON/v1/Newsletters.php:297
+#: lib/API/JSON/v1/Newsletters.php:299
 msgid "Newsletter data is missing."
 msgstr ""
 
-#: lib/API/JSON/v1/Newsletters.php:320
+#: lib/API/JSON/v1/Newsletters.php:322
 msgid "Please specify receiver information."
 msgstr ""
 
@@ -2510,11 +2510,15 @@ msgstr ""
 msgid "Your sending queue data is being migrated to allow better performance, sending is paused while the migration is in progress and will resume automatically upon completion. This may take a few minutes."
 msgstr ""
 
-#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:184
+#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:161
+msgid "Please note that mailpoet_sending_newsletter_render_after no longer runs and that the list of parameters of the new filter is different."
+msgstr ""
+
+#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:194
 msgid "No subject"
 msgstr ""
 
-#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:264
+#: lib/Cron/Workers/SendingQueue/Tasks/Newsletter.php:274
 msgid "There was an error processing your newsletter during sending. If possible, please contact us and report this issue."
 msgstr ""
 
