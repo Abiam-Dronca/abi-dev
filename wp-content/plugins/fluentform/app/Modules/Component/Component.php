@@ -179,77 +179,203 @@ class Component
     {
         $isReCaptchaDisabled = !get_option('_fluentform_reCaptcha_keys_status', false);
         $isHCaptchaDisabled = !get_option('_fluentform_hCaptcha_keys_status', false);
+        $isTurnstileDisabled = !get_option('_fluentform_turnstile_keys_status', false);
 
         $disabled = array(
             'recaptcha'   => array(
-                'contentComponent' => 'recaptcha',
-                'disabled'         => $isReCaptchaDisabled
+                'disabled'         => $isReCaptchaDisabled,
+                'title'            => __('reCaptcha', 'fluentform'),
+                'description'      => __('Please enter a valid API key on FluentForms->Settings->reCaptcha', 'fluentform'),
+                'hidePro'          => true
             ),
             'hcaptcha'   => array(
-                'contentComponent' => 'hcaptcha',
-                'disabled'         => $isHCaptchaDisabled
+                'disabled'         => $isHCaptchaDisabled,
+                'title'            => __('hCaptcha', 'fluentform'),
+                'description'      => __('Please enter a valid API key on FluentForms->Settings->hCaptcha', 'fluentform'),
+                'hidePro'          => true
+            ),
+            'turnstile'   => array(
+                'disabled'         => $isTurnstileDisabled,
+                'title'            => __('Turnstile', 'fluentform'),
+                'description'      => __('Please enter a valid API key on FluentForms->Settings->Turnstile', 'fluentform'),
+                'hidePro'          => true
             ),
             'input_image' => array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Image Upload', 'fluentform'),
+                'description'      => __('Image Upload is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/Yb3FSoZl9Zg'
             ),
             'input_file'  => array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('File Upload', 'fluentform'),
+                'description'      => __('File Upload is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/bXbTbNPM_4k'
             ),
             'shortcode'   => array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Shortcode', 'fluentform'),
+                'description'      => __('Shortcode is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/op3mEQxX1MM'
             ),
             'action_hook' => array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Action Hook', 'fluentform'),
+                'description'      => __('Action Hook is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Action Hook.png'),
+                'video'            => ''
             ),
             'form_step'   => array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Form Step', 'fluentform'),
+                'description'      => __('Form Step is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/VQTWnM6BbRU'
             )
         );
 
         if (!defined('FLUENTFORMPRO')) {
             $disabled['ratings'] = array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Ratings', 'fluentform'),
+                'description'      => __('Ratings is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/YGdkNspMaEs'
             );
             $disabled['tabular_grid'] = array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Checkable Grid', 'fluentform'),
+                'description'      => __('Checkable Grid is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/ayI3TzXXANA'
+            );
+            $disabled['chained_select'] = array(
+                'disabled' => true,
+                'title'            => __('Chained Select Field', 'fluentform'),
+                'description'      => __('Chained Select Field is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Chained Select Field.png'),
+                'video'            => ''
             );
             $disabled['phone'] = array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => 'Phone Field',
+                'description'      => __('Phone Field is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Phone Field.png'),
+                'video'            => ''
             );
-
+            $disabled['rich_text_input'] = array(
+                'disabled' => true,
+                'title'            => __('Rich Text Input', 'fluentform'),
+                'description'      => __('Rich Text Input is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Rich Text Input.png'),
+                'video'            => ''
+            );
+            $disabled['save_progress_button'] = array(
+                'disabled' => true,
+                'title'            => __('Save & Resume', 'fluentform'),
+                'description'      => __('Save & Resume is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Save Progress Button.png'),
+                'video'            => ''
+            );
+            $disabled['cpt_selection'] = array(
+                'disabled' => true,
+                'title'            => __('Post/CPT Selection', 'fluentform'),
+                'description'      => __('Post/CPT Selection is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Post_CPT Selection.png'),
+                'video'            => ''
+            );
+            $disabled['quiz_score'] = array(
+                'disabled' => true,
+                'title'            => __('Quiz Score', 'fluentform'),
+                'description'      => __('Quiz Score is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/bPjDXR0y_Oo'
+            );
             $disabled['net_promoter_score'] = array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Net Promoter Score', 'fluentform'),
+                'description'      => __('Net Promoter Score is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Net Promoter Score.png'),
+                'video'            => ''
             );
-
             $disabled['repeater_field'] = array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Repeat Field', 'fluentform'),
+                'description'      => __('Repeat Field is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/BXo9Sk-OLnQ'
             );
-
             $disabled['rangeslider'] = array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Range Slider', 'fluentform'),
+                'description'      => __('Range Slider is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => '',
+                'video'            => 'https://www.youtube.com/embed/RaY2VcPWk6I'
             );
-
             $disabled['color-picker'] = array(
-                'disabled' => true
+                'disabled' => true,
+                'title'            => __('Color Picker', 'fluentform'),
+                'description'      => __('Color Picker is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Color Picker.png'),
+                'video'            => ''
             );
-
             $disabled['multi_payment_component'] = array(
                 'disabled'   => true,
-                'is_payment' => true
+                'is_payment' => true,
+                'title'            => __('Payment Field', 'fluentform'),
+                'description'      => __('Payment Field is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Payment Field.png'),
+                'video'            => ''
             );
             $disabled['custom_payment_component'] = array(
                 'disabled'   => true,
-                'is_payment' => true
+                'is_payment' => true,
+                'title'            => 'Custom Payment Amount',
+                'description'      => __('Custom Payment Amount is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Custom Payment Amount.png'),
+                'video'            => ''
             );
-
+            $disabled['subscription_payment_component'] = array(
+                'disabled'   => true,
+                'is_payment' => true,
+                'title'            => __('Subscription Field', 'fluentform'),
+                'description'      => __('Subscription Field is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Subscription Field.png'),
+                'video'            => ''
+            );
             $disabled['item_quantity_component'] = array(
                 'disabled'   => true,
-                'is_payment' => true
+                'is_payment' => true,
+                'title'            => __('Item Quantity', 'fluentform'),
+                'description'      => __('Item Quantity is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Item Quantity.png'),
+                'video'            => ''
             );
-
             $disabled['payment_method'] = array(
                 'disabled'   => true,
-                'is_payment' => true
+                'is_payment' => true,
+                'title'            => __('Payment Method', 'fluentform'),
+                'description'      => __('Payment Method is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Payment Method.png'),
+                'video'            => ''
+            );
+            $disabled['payment_summary_component'] = array(
+                'disabled'   => true,
+                'is_payment' => true,
+                'title'            => __('Payment Summary', 'fluentform'),
+                'description'      => __('Payment Summary is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Payment Summary.png'),
+                'video'            => ''
+            );
+            $disabled['payment_coupon'] = array(
+                'disabled' => true,
+                'title'            => __('Coupon', 'fluentform'),
+                'description'      => __('Coupon is not available with the free version. Please upgrade to pro to get all the advanced features.', 'fluentform'),
+                'image'            => $this->app->publicUrl('img/pro-fields/Coupon.png'),
+                'video'            => ''
             );
         }
         return $this->app->applyFilters('fluentform_disabled_components', $disabled);
@@ -515,9 +641,7 @@ class Component
 
 
         if ($atts['type'] == 'conversational') {
-            ob_start();
-                $this->addInlineVars();
-            ob_clean();
+            $this->addInlineVars();
             return (new \FluentForm\App\Services\FluentConversational\Classes\Form())->renderShortcode($form);
         }
 
@@ -680,6 +804,7 @@ class Component
             'DateTime@compile'      => ['fluentform_render_item_input_date'],
             'Recaptcha@compile'     => ['fluentform_render_item_recaptcha'],
             'Hcaptcha@compile'     => ['fluentform_render_item_hcaptcha'],
+            'Turnstile@compile'     => ['fluentform_render_item_turnstile'],
             'Container@compile'     => ['fluentform_render_item_container'],
             'CustomHtml@compile'    => ['fluentform_render_item_custom_html'],
             'SectionBreak@compile'  => ['fluentform_render_item_section_break'],

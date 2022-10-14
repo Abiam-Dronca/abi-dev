@@ -13,7 +13,7 @@ class Str
      */
     public static function startsWith($haystack, $needles)
     {
-        if(is_array($haystack)) {
+        if (is_array($haystack)) {
             $haystack = implode(' ', $haystack);
         }
 
@@ -35,9 +35,10 @@ class Str
      */
     public static function endsWith($haystack, $needles)
     {
-        if(is_array($haystack)) {
+        if (is_array($haystack)) {
             $haystack = implode(' ', $haystack);
         }
+        
         foreach ((array) $needles as $needle) {
             if (substr($haystack, - strlen($needle)) === (string) $needle) {
                 return true;
@@ -56,7 +57,7 @@ class Str
      */
     public static function contains($haystack, $needles)
     {
-        if(is_array($haystack)) {
+        if (is_array($haystack)) {
             $haystack = implode(' ', $haystack);
         }
 

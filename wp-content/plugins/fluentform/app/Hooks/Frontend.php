@@ -46,11 +46,19 @@ add_filter('fluentform_rendering_form', function ($form) {
             "name" => "hcaptcha",
         ],
     ];
+    $turnstile = [
+        "element"    => "turnstile",
+        "attributes" => [
+            "name" => "turnstile",
+        ],
+    ];
     
     if ($type == 'recaptcha') {
         $captcha = $reCaptcha;
     } elseif ($type == 'hcaptcha') {
         $captcha = $hCaptcha;
+    } elseif ($type == 'turnstile') {
+        $captcha = $turnstile;
     }
     
     // place recaptcha below custom submit button

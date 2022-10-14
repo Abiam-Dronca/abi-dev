@@ -8,6 +8,7 @@ use FluentForm\App\Modules\Activator;
 use FluentForm\App\Modules\Entries\Entries;
 use FluentForm\App\Modules\ReCaptcha\ReCaptcha;
 use FluentForm\App\Modules\HCaptcha\HCaptcha;
+use FluentForm\App\Modules\Turnstile\Turnstile;
 use FluentForm\App\Services\Browser\Browser;
 use FluentForm\App\Services\FormBuilder\ShortCodeParser;
 use FluentForm\Framework\Foundation\Application;
@@ -302,6 +303,7 @@ class FormHandler
 
         $this->validateReCaptcha();
         $this->validateHCaptcha();
+        $this->validateTurnstile();
 
         foreach ($fields as $fieldName => $field) {
             if(isset($this->formData[$fieldName])) {
@@ -472,6 +474,30 @@ class FormHandler
                     'errors' => [
                         'h-captcha-response' => [
                             __('hCaptcha verification failed, please try again.', 'fluentform')
+                        ]
+                    ]
+                ], 422);
+            }
+        }
+    }
+
+    /**
+     * Validate turnstile.
+     */
+    private function validateTurnstile()
+    {
+        $autoInclude = apply_filters('ff_has_auto_turnstile', false);
+        if (FormFieldsParser::hasElement($this->form, 'turnstile') || $autoInclude) {
+            $keys = get_option('_fluentform_turnstile_details');
+            $token = Arr::get($this->formData, 'cf-turnstile-response');
+
+            $isValid = Turnstile::validate($token, $keys['secretKey']);
+
+            if (!$isValid) {
+                wp_send_json([
+                    'errors' => [
+                        'cf-turnstile-response' => [
+                            __('Turnstile verification failed, please try again.', 'fluentform')
                         ]
                     ]
                 ], 422);

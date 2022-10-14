@@ -351,6 +351,11 @@ add_action('fluentform_loading_editor_assets', function ($form) {
         $item['attributes']['name'] = 'h-captcha-response';
         return $item;
     }, 10, 2);
+
+    add_filter('fluentform_editor_init_element_turnstile', function ($item, $form) {
+        $item['attributes']['name'] = 'cf-turnstile-response';
+        return $item;
+    }, 10, 2);
     
 }, 10);
 
@@ -399,6 +404,10 @@ $autoIncludeRecaptcha = [
     [
         'type'=>'recaptcha',
         'is_disabled'=>!get_option('_fluentform_reCaptcha_keys_status', false)
+    ],
+    [
+        'type'=>'turnstile',
+        'is_disabled'=>!get_option('_fluentform_turnstile_keys_status', false)
     ],
 ];
 

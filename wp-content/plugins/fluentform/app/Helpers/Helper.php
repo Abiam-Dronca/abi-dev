@@ -6,13 +6,13 @@ use FluentForm\Framework\Helpers\ArrayHelper;
 
 class Helper
 {
-    static $tabIndex = 0;
+    public static $tabIndex = 0;
 
-    static $formInstance = 0;
+    public static $formInstance = 0;
 
-    static $loadedForms = [];
+    public static $loadedForms = [];
 
-    static $tabIndexStatus = 'na';
+    public static $tabIndexStatus = 'na';
 
     /**
      * Sanitize form inputs recursively.
@@ -33,7 +33,7 @@ class Helper
             foreach ($input as $key => &$value) {
                 $attribute = $attribute ? $attribute . '[' . $key . ']' : $key;
 
-                $value = Helper::sanitizer($value, $attribute, $fields);
+                $value = static::sanitizer($value, $attribute, $fields);
 
                 $attribute = null;
             }
@@ -63,7 +63,6 @@ class Helper
         }
 
         return $baseUrl;
-
     }
 
     public static function getHtmlElementClass($value1, $value2, $class = 'active', $default = '')
@@ -224,7 +223,6 @@ class Helper
                 'created_at'  => current_time('mysql'),
                 'updated_at'  => current_time('mysql')
             ]);
-
     }
 
     public static function isEntryAutoDeleteEnabled($formId)
@@ -316,7 +314,6 @@ class Helper
 
     public static function getShortCodeIds($content, $tag = 'fluentform', $selector = 'id')
     {
-
         if (false === strpos($content, '[')) {
             return [];
         }
@@ -517,7 +514,7 @@ class Helper
     {
         if ($type == 'conversational') {
             return self::getConversionUrl($formId);
-        } else if ($type == 'classic') {
+        } elseif ($type == 'classic') {
             return site_url('?fluent_forms_pages=1&design_mode=1&preview_id=' . $formId) . '#ff_preview';
         } else {
             if (self::isConversionForm($formId)) {
@@ -545,7 +542,7 @@ class Helper
         $meta = self::getFormMeta($formId, 'ffc_form_settings_meta', []);
         $key = ArrayHelper::get($meta, 'share_key', '');
         $paramKey = apply_filters('fluentform_conversational_url_slug', 'fluent-form');
-        if($paramKey == 'form') {
+        if ($paramKey == 'form') {
             $paramKey = 'fluent-form';
         }
         if ($key) {
@@ -553,7 +550,7 @@ class Helper
         }
         return site_url('?'.$paramKey.'=' . $formId);
     }
-    
+
     public static function fileUploadLocations()
     {
         $locations = array(
@@ -566,11 +563,10 @@ class Helper
                 'label' => __('Media Library', 'fluentform'),
             ),
         );
-        
+
         return apply_filters('fluentform_file_upload_options', $locations);
-        
     }
-    
+
     private function unreadCount($formId)
     {
         return wpFluent()->table('fluentform_submissions')
@@ -599,5 +595,49 @@ class Helper
         }
 
         return $forms;
+    }
+
+    public static function replaceBrTag($content, $with = '')
+    {
+        if (is_array($content)) {
+            foreach ($content as $key => $value) {
+                $content[$key] = static::replaceBrTag($value, $with);
+            }
+        } elseif (static::hasBrTag($content)) {
+            $content = str_replace('<br />', $with, $content);
+        }
+
+        return $content;
+    }
+
+    public static function hasBrTag($content)
+    {
+        return is_string($content) && strpos($content, '<br />') !== false;
+    }
+
+    public static function sanitizeForCSV($content)
+    {
+        $formulas = ['=', '-', '+', '@', "\t", "\r"];
+
+        if (Str::startsWith($content, $formulas)) {
+            $content = "'" . $content;
+        }
+
+        return $content;
+    }
+
+    public static function getForm($id)
+    {
+        return wpFluent()->table('fluentform_forms')->where('id', $id)->first();
+    }
+
+    public static function shouldHidePassword($formId)
+    {
+        return apply_filters('fluentform_truncate_password_values', true, $formId) && 
+        (
+            (defined('FLUENTFORM_RENDERING_ENTRIES') && FLUENTFORM_RENDERING_ENTRIES) || 
+            (defined('FLUENTFORM_RENDERING_ENTRY') && FLUENTFORM_RENDERING_ENTRY) ||
+            (defined('FLUENTFORM_EXPORTING_ENTRIES') && FLUENTFORM_EXPORTING_ENTRIES)
+        );
     }
 }

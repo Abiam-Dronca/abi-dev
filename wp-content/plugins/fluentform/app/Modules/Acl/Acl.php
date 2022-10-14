@@ -233,7 +233,7 @@ class Acl
                 'depends' => []
             ],
             'fluentform_full_access' => [
-                'title'   => __('Full Access', 'fluent-crm'),
+                'title'   => __('Full Access', 'fluentform'),
                 'depends' => []
             ],
         ];

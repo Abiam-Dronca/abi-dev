@@ -211,6 +211,11 @@ function fluentform_upgrade_url()
     return 'https://fluentforms.com/pricing/?utm_source=plugin&utm_medium=wp_install&utm_campaign=ff_upgrade&theme_style=' . fluentform_get_active_theme_slug();
 }
 
+function fluentform_integrations_url()
+{
+    return 'https://fluentforms.com/integration/?utm_source=plugin&utm_medium=wp_install&utm_campaign=ff_upgrade&theme_style=' . fluentform_get_active_theme_slug();
+}
+
 function fluentFormApi($module = 'forms')
 {
     if ($module == 'forms') {

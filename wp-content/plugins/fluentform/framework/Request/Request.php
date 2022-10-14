@@ -147,7 +147,7 @@ class Request
            $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
        }
 
-       if(isset($_SERVER['HTTP_CLIENT_IP'])) {
+       if (isset($_SERVER['HTTP_CLIENT_IP'])) {
            $ip = @$_SERVER['HTTP_CLIENT_IP'];
            if (filter_var($ip, FILTER_VALIDATE_IP)) {
                return $ip;

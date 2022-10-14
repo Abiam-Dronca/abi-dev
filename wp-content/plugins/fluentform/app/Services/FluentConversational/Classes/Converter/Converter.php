@@ -46,7 +46,9 @@ class Converter
 					'media_x_position' => 50,
 					'media_y_position' => 50
 				]),
-				'conditional_logics' => self::parseConditionalLogic($field)
+				'conditional_logics' => self::parseConditionalLogic($field),
+                'calculation_settings' => ArrayHelper::get($field, 'settings.calculation_settings'),
+                'calc_value_status' => ArrayHelper::get($field, 'settings.calc_value_status', false),
 			];
 
             if ($answer = self::setDefaultValue(ArrayHelper::get($field, 'attributes.value'), $field, $form)) {
@@ -143,6 +145,8 @@ class Converter
 				$question['max'] = ArrayHelper::get($field, 'settings.validation_rules.max.value');
 				$question['min'] = is_numeric($question['min']) ? $question['min'] : null;
 				$question['max'] = is_numeric($question['max']) ? $question['max'] : null;
+                $question['calc_value_status'] = true;
+                do_action('ff_rendering_calculation_form', $form, $field);
 			} elseif (in_array($field['element'], ['terms_and_condition', 'gdpr_agreement'])) {
 				$question['options'] = [
 					[
@@ -248,6 +252,7 @@ class Converter
 				}
 
 				$question['is_payment_field'] = true;
+				$question['calc_value_status'] = true;
 			} elseif ($field['element'] === 'subscription_payment_component') {
 				$question['is_payment_field'] = true;
 				$question['is_subscription_field'] = true;
@@ -307,6 +312,8 @@ class Converter
 				$question['max'] = is_numeric($question['max']) ? $question['max'] : null;
 
 				$question['is_payment_field'] = true;
+                $question['calc_value_status'] = true;
+                do_action('ff_rendering_calculation_form', $form, $field);
 			} elseif ($field['element'] === 'item_quantity_component') {
 				$question['type'] = $allowedFields['input_number'];
 				$question['targetProduct'] = $field['settings']['target_product'];
@@ -409,7 +416,6 @@ class Converter
 				$form->submit_button = $field;
 			}
 		}
-        
 		$form->questions = $questions;
 
 		$form->image_preloads = $imagePreloads;

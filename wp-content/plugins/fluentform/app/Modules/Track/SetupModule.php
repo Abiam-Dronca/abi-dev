@@ -31,7 +31,7 @@ class SetupModule
         return [
             'is_installed'     => defined('FLUENTMAIL'),
             'config_url' => admin_url('options-general.php?page=fluent-mail#/'),
-            'message'   => __('FluentSMTP plugin has been installed and activated successfully', 'fluent-crm')
+            'message'   => __('FluentSMTP plugin has been installed and activated successfully', 'fluentform')
         ];
     }
 

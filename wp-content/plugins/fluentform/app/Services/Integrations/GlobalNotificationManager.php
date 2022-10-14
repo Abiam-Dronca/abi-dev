@@ -149,7 +149,7 @@ class GlobalNotificationManager
                         ->where('id', $entryId)
                         ->first();
 
-        if(!$submission) {
+        if (!$submission) {
             return;
         }
 
@@ -157,14 +157,13 @@ class GlobalNotificationManager
 
         $replaced = false;
         foreach ($passwordKeys as $passwordKey) {
-            if(!empty($responseInputs[$passwordKey])) {
-                $originalPassword = $responseInputs[$passwordKey];
-                $responseInputs[$passwordKey] = str_repeat("*", strlen($originalPassword)).' '. __('(truncated)', 'fluentform');
+            if (!empty($responseInputs[$passwordKey])) {
+                $responseInputs[$passwordKey] = str_repeat("*", 6).' '. __('(truncated)', 'fluentform');
                 $replaced = true;
             }
         }
 
-        if($replaced) {
+        if ($replaced) {
             wpFluent()->table('fluentform_submissions')
                 ->where('id', $entryId)
                 ->update([

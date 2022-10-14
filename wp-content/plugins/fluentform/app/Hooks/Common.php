@@ -1,5 +1,6 @@
 <?php
 
+use FluentForm\App\Helpers\Helper;
 use FluentForm\App\Modules\Component\Component;
 
 /**
@@ -13,7 +14,7 @@ use FluentForm\App\Modules\Component\Component;
 
 add_action('save_post', function ($post_id) {
     if (isset($_POST['post_content'])) {
-        $post_content = $_POST['post_content'];
+        $post_content = wp_kses_post(wp_unslash($_POST['post_content']));
     } else {
         $post = get_post($post_id);
         $post_content = $post->post_content;
@@ -165,6 +166,14 @@ $app->addFilter('fluentform_response_render_tabular_grid', function ($response, 
 $app->addFilter('fluentform_response_render_input_name', function ($response) {
     return \FluentForm\App\Modules\Form\FormDataParser::formatName($response);
 }, 10, 1);
+
+$app->addFilter('fluentform_response_render_input_password', function ($value, $field, $formId) {
+    if (Helper::shouldHidePassword($formId)) {
+        $value = str_repeat("*", 6) . ' ' . __('(truncated)', 'fluentform');
+    }
+
+    return $value;
+}, 10, 3);
 
 $app->addFilter('fluentform_filter_insert_data', function ($data) {
     $settings = get_option('_fluentform_global_form_settings', false);
@@ -357,7 +366,7 @@ add_action('ff_integration_action_result', function ($feed, $status, $note = '')
 }, 10, 3);
 
 add_action('fluentform_global_notify_completed', function ($insertId, $form) use ($app) {
-    if (strpos($form->form_fields, '"element":"input_password"') && apply_filters('fluentform_truncate_password_values', true, $form)) {
+    if (strpos($form->form_fields, '"element":"input_password"') && apply_filters('fluentform_truncate_password_values', true, $form->id)) {
         // we have password
         (new \FluentForm\App\Services\Integrations\GlobalNotificationManager($app))->cleanUpPassword($insertId, $form);
     }

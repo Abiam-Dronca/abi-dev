@@ -29,7 +29,7 @@ class CustomSubmitButton extends BaseFieldManager
     function getComponent()
     {
         return [
-            'index'          => 15,
+            'index'          => 12,
             'element'        => $this->key,
             'attributes'     => [
                 'class' => '',

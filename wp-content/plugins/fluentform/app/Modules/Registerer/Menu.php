@@ -223,7 +223,8 @@ class Menu
         wp_localize_script('fluent_forms_global', 'fluent_forms_global_var', [
         	'fluent_forms_admin_nonce' => wp_create_nonce('fluent_forms_admin_nonce'),
 	        'ajaxurl' => admin_url('admin-ajax.php'),
-            'admin_i18n'=> $this->getAdminI18n(),
+            'admin_i18n' => TranslationString::getAdminI18n(),
+            'payments_str' => TranslationString::getPaymentsI18n(),
             'permissions' => Acl::getCurrentUserPermissions()
         ]);
 
@@ -618,7 +619,13 @@ class Menu
             'ace_path_url' => $this->app->publicUrl('libs/ace'),
             'is_conversion_form' => Helper::isConversionForm($form_id),
             'has_fluent_smtp' => defined('FLUENTMAIL'),
-            'fluent_smtp_url' => admin_url('admin.php?page=fluent_forms_smtp')
+            'fluent_smtp_url' => admin_url('admin.php?page=fluent_forms_smtp'),
+            'form_settings_str' => TranslationString::getSettingsI18n(),
+            'integrationsResource' => [
+                'asset_url'   => $this->app->publicUrl('img/integrations.png'),
+                'list_url'    => fluentform_integrations_url(),
+                'instruction' => __("Fluent Forms Pro has tons of integrations to take your forms to the next level. From payment gateways to quiz building, SMS notifications to email marketing - you'll get integrations for various purposes. Even if you don't find your favorite tools, you can integrate them easily with Zapier.", 'fluentform')
+            ]
         ));
 
         View::render('admin.form.settings', array(
@@ -758,8 +765,8 @@ class Menu
                 $this->app->appPath('Services/FormBuilder/ValidationRuleSettings.php')
             ),
 
+            'form_editor_str' => TranslationString::getEditorI18n(),
             'element_search_tags' => $searchTags,
-
             'element_settings_placement' => $elementPlacements,
             'all_forms_url' => admin_url('admin.php?page=fluent_forms'),
             'has_payment_features' => !defined('FLUENTFORMPRO'),
@@ -808,6 +815,11 @@ class Menu
             'title' => 'hCaptcha',
         ];
 
+        $components['Turnstile'] = [
+            'hash' => 'turnstile',
+            'title' => 'Turnstile (Beta)',
+        ];
+
         View::render('admin.settings.index', [
             'components' => $components,
             'currentComponent' => $currentComponent
@@ -826,6 +838,7 @@ class Menu
             'forms' => $forms,
             'upgrade_url' => fluentform_upgrade_url(),
             'hasPro' => defined('FLUENTFORMPRO'),
+            'transfer_str' => TranslationString::getTransferModuleI18n()
         ]);
 
         View::render('admin.transfer.index');
@@ -833,10 +846,10 @@ class Menu
 
     public function addPreviewButton($formId)
     {
-        $previewText = __('Preview & Design', 'fluent-form');
+        $previewText = __('Preview & Design', 'fluentform');
         $previewUrl = Helper::getPreviewUrl($formId);
         if($isConversational = Helper::isConversionForm($formId)) {
-            $previewText = __('Preview', 'fluent-form');
+            $previewText = __('Preview', 'fluentform');
         }
 
         echo '<a target="_blank" class="el-button el-button--small" href="' . esc_url($previewUrl) . '">'.esc_attr($previewText).'</a>';
@@ -910,84 +923,6 @@ class Menu
         ]);
     }
 
-    private function getAdminI18n()
-    {
-        $i18n = array(
-            'All Forms' => __('All Forms', 'fluentform'),
-            'Add a New Form' => __('Add a New Form', 'fluentform'),
-            'Conversational Form' => __('Conversational Form', 'fluentform'),
-            'Create Conversational Form' => __('Create Conversational Form', 'fluentform'),
-            'ID' => __('ID', 'fluentform'),
-            'Title' => __('Title', 'fluentform'),
-            'Edit' => __('Edit', 'fluentform'),
-            'Settings' => __('Settings', 'fluentform'),
-            'Entries' => __('Entries', 'fluentform'),
-            'Conversational Preview' => __('Conversational Preview', 'fluentform'),
-            'Preview' => __('Preview', 'fluentform'),
-            'Duplicate' => __('Duplicate', 'fluentform'),
-            'Delete' => __('Delete', 'fluentform'),
-            'Short Code' => __('Short Code', 'fluentform'),
-            'Conversion' => __('Conversion', 'fluentform'),
-            'Views' => __('Views', 'fluentform'),
-            'Search Forms' => __('Search Forms', 'fluentform'),
-            'Search' => __('Search', 'fluentform'),
-            'Click Here to Create Your First Form' => __('Click Here to Create Your First Form', 'fluentform'),
-            'Check the video intro' => __('Check the video intro', 'fluentform'),
-            'All Form Entries' => __('All Form Entries', 'fluentform'),
-            'Browser' => __('Browser', 'fluentform'),
-            'Date' => __('Date', 'fluentform'),
-            'Hide Chart' => __('Hide Chart', 'fluentform'),
-            'Show Chart' => __('Show Chart', 'fluentform'),
-            'All' => __('All', 'fluentform'),
-            'Unread Only' => __('Unread Only', 'fluentform'),
-            'Read Only' => __('Read Only', 'fluentform'),
-            'Submission ID' => __('Submission ID', 'fluentform'),
-            'Form' => __('Form', 'fluentform'),
-            'Status' => __('Status', 'fluentform'),
-            'Read' => __('Read', 'fluentform'),
-            'Unread' => __('Unread', 'fluentform'),
-            'ago' => __('ago', 'fluentform'),
-            'Click to copy shortcode' => __('Click to copy shortcode', 'fluentform'),
-            'Back to Entries' => __('Back to Entries', 'fluentform'),
-            'Previous' => __('Previous', 'fluentform'),
-            'Next' => __('Next', 'fluentform'),
-            'Entry Details' => __('Entry Details', 'fluentform'),
-            'Form Entry Data' => __('Form Entry Data', 'fluentform'),
-            'Remove from Favorites' => __('Remove from Favorites', 'fluentform'),
-            'Mark as Favorite' => __('Mark as Favorite', 'fluentform'),
-            'Submission Info' => __('Submission Info', 'fluentform'),
-            'Entity ID' => __('Entity ID', 'fluentform'),
-            'User IP' => __('User IP', 'fluentform'),
-            'Device' => __('Device', 'fluentform'),
-            'User' => __('User', 'fluentform'),
-            'Guest' => __('Guest', 'fluentform'),
-            'Submitted On' => __('Submitted On', 'fluentform'),
-            'Change status to' => __('Change status to', 'fluentform'),
-            'Show empty fields' => __('Show empty fields', 'fluentform'),
-            'Submission Notes' => __('Submission Notes', 'fluentform'),
-            'Please Provide Note Content' => __('Please Provide Note Content', 'fluentform'),
-            'No Notes found' => __('No Notes found', 'fluentform'),
-            'All Types' => __('All Types', 'fluentform'),
-            'Export' => __('Export', 'fluentform'),
-            'Export as' => __('Export as', 'fluentform'),
-            'Advanced Filter' => __('Advanced Filter', 'fluentform'),
-            'Filter By Date Range' => __('Filter By Date Range', 'fluentform'),
-            'Favorites Entries only' => __('Favorites Entries only', 'fluentform'),
-            'Amount' => __('Amount', 'fluentform'),
-            'Actions' => __('Actions', 'fluentform'),
-            'Submitted at' => __('Submitted at', 'fluentform'),
-            'Submission Logs' => __('Submission Logs', 'fluentform'),
-            'General' => __('General', 'fluentform'),
-            'API Calls' => __('API Calls', 'fluentform'),
-            'No Logs found' => __('No Logs found', 'fluentform'),
-            'Submission Notes' => __('Submission Notes', 'fluentform'),
-            'Add Note' => __('Add Note', 'fluentform'),
-            'No Notes found' => __('No Notes found', 'fluentform'),
-            );
-
-        return apply_filters('fluentform/admin_i18n', $i18n);
-    }
-    
     private function usedNameAttributes($formId)
     {
         return wpFluent()->table('fluentform_entry_details')

@@ -947,7 +947,7 @@ $defaultElements = array(
             ),
         ),
         'custom_html' => array(
-            'index' => 20,
+            'index' => 17,
             'element' => 'custom_html',
             'attributes' => array(),
             'settings' => array(
@@ -1072,7 +1072,7 @@ $defaultElements = array(
             ),
         ),
         'input_password' => array(
-            'index' => 12,
+            'index' => 11,
             'element' => 'input_password',
             'attributes' => array(
                 'type' => 'password',
@@ -1202,7 +1202,7 @@ $defaultElements = array(
             ),
         ),
         'hcaptcha' => array(
-            'index' => 2,
+            'index' => 3,
             'element' => 'hcaptcha',
             'attributes' => array('name' => 'h-captcha-response'),
             'settings' => array(
@@ -1215,6 +1215,22 @@ $defaultElements = array(
                 'icon_class' => 'ff-edit-recaptha',
                 'why_disabled_modal' => 'hcaptcha',
                 'template' => 'hcaptcha',
+            ),
+        ),
+        'turnstile' => array(
+            'index' => 3,
+            'element' => 'turnstile',
+            'attributes' => array('name' => 'cf-turnstile-response'),
+            'settings' => array(
+                'label' => '',
+                'label_placement' => '',
+                'validation_rules' => array(),
+            ),
+            'editor_options' => array(
+                'title' => __('Turnstile', 'fluentform'),
+                'icon_class' => 'ff-edit-recaptha',
+                'why_disabled_modal' => 'turnstile',
+                'template' => 'turnstile',
             ),
         ),
         'shortcode' => array(
@@ -1377,68 +1393,134 @@ $defaultElements = array(
 
 if (!defined('FLUENTFORMPRO')) {
     $defaultElements['general']['phone'] = [
-        'index' => 15,
+        'index' => 17,
         'element' => 'phone',
         'attributes' => [],
         'settings' => [],
         'editor_options' => [
-            'title' => 'Phone Field',
+            'title' => __('Phone Field', 'fluentform'),
             'icon_class' => 'el-icon-phone-outline',
             'template' => 'inputText'
         ],
     ];
-
     $defaultElements['advanced']['net_promoter_score'] = [
-        'index' => 19,
+        'index' => 14,
         'element' => 'net_promoter_score',
         'attributes' => array(),
         'settings' => array(),
         'options' => array(),
         'editor_options' => array(
-            'title' => 'Net Promoter Score',
+            'title' => __('Net Promoter Score', 'fluentform'),
             'icon_class' => 'ff-edit-rating',
             'template' => 'net_promoter',
         )
     ];
-
-    $defaultElements['advanced']['repeater_field'] = [
+    $defaultElements['advanced']['quiz_score'] = [
         'index' => 19,
+        'element' => 'quiz_score',
+        'attributes' => array(),
+        'settings' => array(),
+        'options' => array(),
+        'editor_options' => array(
+            'title'      => __('Quiz Score', 'fluentform'),
+            'icon_class' => 'el-icon-postcard',
+            'template'   => 'inputHidden'
+        ),
+    ];
+    $defaultElements['advanced']['cpt_selection'] = [
+        'index' => 18,
+        'element' => 'cpt_selection',
+        'attributes' => array(),
+        'settings' => array(),
+        'options' => array(),
+        'editor_options' => array(
+            'title'      => __('Post/CPT Selection', 'fluentform'),
+            'icon_class' => 'ff-edit-dropdown',
+            'element'    => 'select',
+            'template'   => 'select'
+        )
+    ];
+    $defaultElements['advanced']['save_progress_button'] = [
+        'index' => 20,
+        'element' => 'save_progress_button',
+        'attributes' => array(),
+        'settings' => array(),
+        'options' => array(),
+        'editor_options' => [
+            'title'      => __('Save & Resume', 'fluentform'),
+            'icon_class' => 'dashicons dashicons-arrow-right-alt',
+            'template'   => 'customButton'
+        ],
+    ];
+    $defaultElements['advanced']['rich_text_input'] = [
+        'index' => 19,
+        'element' => 'rich_text_input',
+        'attributes' => array(),
+        'settings' => array(),
+        'options' => array(),
+        'editor_options' => [
+            'title'      => __('Rich Text Input', 'fluentform'),
+            'icon_class' => 'ff-edit-textarea',
+            'template'   => 'inputTextarea'
+        ],
+    ];
+    $defaultElements['advanced']['chained_select'] = [
+        'index' => 15,
+        'element' => 'chained_select',
+        'attributes' => array(),
+        'settings' => array(),
+        'options' => array(),
+        'editor_options' => [
+            'title'      => __('Chained Select Field', 'fluentform'),
+            'icon_class' => 'ff-edit-link',
+            'template'   => 'chainedSelect'
+        ],
+    ];
+    $defaultElements['advanced']['repeater_field'] = [
+        'index' => 17,
         'element' => 'repeater_field',
         'attributes' => array(),
         'settings' => array(),
         'options' => array(),
         'editor_options' => array(
-            'title' => 'Repeat Field',
+            'title' => __('Repeat Field', 'fluentform'),
             'icon_class' => 'ff-edit-repeat',
             'template' => 'fieldsRepeatSettings'
         )
     ];
-
     $defaultElements['advanced']['rangeslider'] = [
-        'index' => 15,
+        'index' => 13,
         'element' => 'rangeslider',
         'attributes' => [],
         'settings' => [],
         'editor_options' => [
-            'title' => 'Range Slider',
+            'title' => __('Range Slider', 'fluentform'),
             'icon_class' => 'dashicons dashicons-leftright',
             'template' => 'inputSlider'
         ],
     ];
-
-
     $defaultElements['advanced']['color-picker'] = [
-        'index' => 15,
+        'index' => 16,
         'element' => 'color-picker',
         'attributes' => [],
         'settings' => [],
         'editor_options' => [
-            'title' => 'Color Picker',
+            'title' => __('Color Picker', 'fluentform'),
             'icon_class' => 'ff-edit-tint',
             'template' => 'inputText'
         ],
     ];
-
+    $defaultElements['advanced']['custom_submit_button'] = [
+        'index' => 12,
+        'element' => 'custom_submit_button',
+        'attributes' => [],
+        'settings' => [],
+        'editor_options' => [
+            'title'      => __('Custom Submit Button', 'fluentform'),
+            'icon_class' => 'dashicons dashicons-arrow-right-alt',
+            'template'   => 'customButton'
+        ],
+    ];
     $defaultElements['payments'] = array(
         'multi_payment_component' => [
             'index' => 6,
@@ -1451,6 +1533,18 @@ if (!defined('FLUENTFORMPRO')) {
                 'element' => 'input-radio',
                 'template' => 'inputMultiPayment'
             ),
+        ],
+        'subscription_payment_component' => [
+            'index' => 6,
+            'element' => 'subscription_payment_component',
+            'attributes' => [],
+            'settings' => [],
+            'editor_options' => array(
+                'title'      => __('Subscription Field', 'fluentform'),
+                'icon_class' => 'ff-edit-shopping-cart',
+                'element'    => 'input-radio',
+                'template'   => 'inputSubscriptionPayment'
+            )
         ],
         'custom_payment_component' => [
             'index' => 6,
@@ -1480,11 +1574,33 @@ if (!defined('FLUENTFORMPRO')) {
             'attributes' => [],
             'settings' => [],
             'editor_options' => array(
-                'title' => 'Payment Method Field',
+                'title' => __('Payment Method Field', 'fluentform'),
                 'icon_class' => 'ff-edit-credit-card',
                 'template' => 'inputPaymentMethods'
             ),
-        ]
+        ],
+        'payment_summary_component' => [
+            'index' => 6,
+            'element' => 'payment_summary_component',
+            'attributes' => [],
+            'settings' => [],
+            'editor_options' => array(
+                'title' => __('Payment Summary', 'fluentform'),
+                'icon_class' => 'ff-edit-html',
+                'template' => 'customHTML'
+            ),
+        ],
+        'payment_coupon' => [
+            'index' => 6,
+            'element' => 'payment_coupon',
+            'attributes' => [],
+            'settings' => [],
+            'editor_options' => array(
+                'title' => __('Coupon', 'fluentform'),
+                'icon_class' => 'el-icon-postcard',
+                'template' => 'inputText'
+            ),
+        ],
     );
 }
 

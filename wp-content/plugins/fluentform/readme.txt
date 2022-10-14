@@ -4,7 +4,7 @@ Tags: contact form, contact forms, wp forms, forms, form builder, contact form b
 Requires at least: 4.5
 Tested up to: 6.0.1
 Requires PHP: 5.6
-Stable tag: 4.3.12
+Stable tag: 4.3.15
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -363,6 +363,25 @@ The entire source code is <a href="https://github.com/fluentform/fluentform">ava
 12. Asset Loading Comparison with Other Plugins
 
 == Changelog ==
+
+= 4.3.15 (Date: October 10, 2022) =
+- Fixes conditional support
+
+= 4.3.14 (Date: October 08, 2022) =
+- Fixes calculation module
+
+= 4.3.13 (Date: October 07, 2022) =
+- Adds Cloudflare Turnstile
+- Adds full admin side translations
+- Improves entry page styles
+- Improves label placement settings
+- Improves Slack integration for Checkable Grid
+- Improves Password truncate module
+- Improves AJAX calls
+- Fixes CSV export issue
+- Fixes multiple success message issue
+- Fixes conditional logics for Containers
+- Fixes long file names issue for file upload
 
 = 4.3.12 (Date: September 01, 2022) =
 - Adds manual control for Container width

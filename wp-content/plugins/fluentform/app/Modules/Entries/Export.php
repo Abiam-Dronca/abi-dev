@@ -6,6 +6,7 @@ use FluentForm\App\Modules\Form\FormDataParser;
 use FluentForm\App\Modules\Form\FormFieldsParser;
 use FluentForm\Framework\Foundation\Application;
 use FluentForm\Framework\Helpers\ArrayHelper as Arr;
+use FluentForm\App\Helpers\Helper;
 
 class Export
 {
@@ -43,6 +44,10 @@ class Export
      */
     public function index()
     {
+        if (!defined('FLUENTFORM_EXPORTING_ENTRIES')) {
+            define('FLUENTFORM_EXPORTING_ENTRIES', true);
+        }
+
         $formId = intval($this->request->get('form_id'));
 
         $form = wpFluent()->table('fluentform_forms')->find($formId);
@@ -77,13 +82,15 @@ class Export
             $submission->response = json_decode($submission->response, true);
             $temp = [];
             foreach ($inputLabels as $field => $label) {
-                $temp[] = trim(
+                $content = trim(
                     wp_strip_all_tags(
                         FormDataParser::formatValue(
                             Arr::get($submission->user_inputs, $field)
                         )
                     )
                 );
+
+                $temp[] = Helper::sanitizeForCSV($content);
             }
 
             if ($form->has_payment && $this->tableName == 'fluentform_submissions') {

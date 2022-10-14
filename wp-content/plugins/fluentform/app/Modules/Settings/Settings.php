@@ -6,6 +6,7 @@ use FluentForm\Framework\Request\Request;
 use FluentForm\Framework\Helpers\ArrayHelper;
 use FluentForm\App\Modules\ReCaptcha\ReCaptcha;
 use FluentForm\App\Modules\HCaptcha\HCaptcha;
+use FluentForm\App\Modules\Turnstile\Turnstile;
 use FluentForm\App\Services\Integrations\MailChimp\MailChimp;
 
 /**
@@ -57,6 +58,7 @@ class Settings
         $allowedMethods = [
             'storeReCaptcha',
             'storeHCaptcha',
+            'storeTurnstile',
             'storeSaveGlobalLayoutSettings',
             'storeMailChimpSettings',
             'storeEmailSummarySettings'
@@ -188,6 +190,72 @@ class Settings
 
             if ($status) {
                 $message = __('Your hCaptcha details are already valid, So no need to save again.', 'fluentform');
+            }
+        }
+
+        wp_send_json_error([
+            'message' => $message,
+            'status'  => $status
+        ], 400);
+    }
+
+    public function storeTurnstile()
+    {
+        $data = $this->request->get('turnstile');
+
+        if ($data == 'clear-settings') {
+            delete_option('_fluentform_turnstile_details');
+
+            update_option('_fluentform_turnstile_keys_status', false, 'no');
+
+            wp_send_json_success([
+                'message' => __('Your Turnstile settings are deleted.', 'fluentform'),
+                'status'  => false
+            ], 200);
+        }
+
+        $token = ArrayHelper::get($data, 'token');
+        $secretKey = ArrayHelper::get($data, 'secretKey');
+
+        // If token is not empty meaning user verified their captcha.
+        if ($token) {
+            // Validate the turnstile response.
+            $status = Turnstile::validate($token, $secretKey);
+
+            // turnstile is valid. So proceed to store.
+            if ($status) {
+                // Prepare captcha data.
+                $captchaData = [
+                    'siteKey'   => sanitize_text_field(ArrayHelper::get($data, 'siteKey')),
+                    'secretKey' => sanitize_text_field($secretKey),
+                    'token' => $token
+                ];
+
+                // Update the turnstile details with siteKey & secretKey.
+                update_option('_fluentform_turnstile_details', $captchaData, 'no');
+
+                // Update the turnstile validation status.
+                update_option('_fluentform_turnstile_keys_status', $status, 'no');
+
+                // Send success response letting the user know that
+                // that the turnstile is valid and saved properly.
+                wp_send_json_success([
+                    'message' => __('Your Turnstile is valid and saved.', 'fluentform'),
+                    'status'  => $status
+                ], 200);
+            } else {
+                // turnstile is not valid.
+                $message = __('Sorry, Your Turnstile is not valid. Please try again', 'fluentform');
+            }
+        } else {
+            // The token is empty, so the user didn't verify their captcha.
+            $message = __('Please validate your Turnstile first and then hit save.', 'fluentform');
+
+            // Get the already stored reCaptcha status.
+            $status = get_option('_fluentform_turnstile_keys_status');
+
+            if ($status) {
+                $message = __('Your Turnstile details are already valid. So no need to save again.', 'fluentform');
             }
         }
 
