@@ -752,7 +752,7 @@ class BWGViewGalleryBox {
       <?php
       }
       ?>
-      <div id="bwg_image_container" class="bwg_image_container">
+      <div id="bwg_image_container" class="bwg_image_container" data-action="<?php echo esc_url($popup_url); ?>">
         <?php if ( $params['enable_addthis'] && $params['addthis_profile_id'] ) { ?>
           <div class="bwg_addThis addthis_inline_share_toolbox"></div>
           <?php
@@ -760,7 +760,7 @@ class BWGViewGalleryBox {
         echo $this->loading();
         $share_url = '';
         ?>
-      <div class="bwg_btn_container <?php echo !$params['popup_enable_ctrl_btn'] ? 'bwg_no_ctrl_btn' : '' ?>">
+        <div class="bwg_btn_container <?php echo !$params['popup_enable_ctrl_btn'] ? 'bwg_no_ctrl_btn' : '' ?>">
         <div class="bwg_ctrl_btn_container">
 					<?php
           if ($params['show_image_counts']) {
@@ -861,7 +861,7 @@ class BWGViewGalleryBox {
         <?php
         }
         ?>
-      </div>
+        </div>
         <div class="bwg_image_info_container1">
           <div class="bwg_image_info_container2">
             <span class="bwg_image_info_spun">
@@ -876,11 +876,13 @@ class BWGViewGalleryBox {
           <div class="bwg_image_hit_container2">
             <span class="bwg_image_hit_spun">
               <div class="bwg_image_hit">
-                <div class="bwg_image_hits"><?php echo __('Hits: ', 'photo-gallery'); ?><span><?php echo $current_image_hit_count; ?></span></div>
+                <div class="bwg_image_hits"><?php echo __('Hits: ', 'photo-gallery'); ?><span><?php echo intval($current_image_hit_count); ?></span></div>
               </div>
             </span>
           </div>
         </div>
+        <input id="rate_ajax_task" name="ajax_task" type="hidden" value="" />
+        <input id="rate_image_id" name="image_id" type="hidden" value="<?php echo esc_attr($image_id); ?>" />
         <?php
         if ( $params['popup_enable_rate'] ) {
           $data_rated = array(
@@ -896,13 +898,11 @@ class BWGViewGalleryBox {
               <span class="bwg_image_rate_spun">
                 <span class="bwg_image_rate">
                   <span class="bwg_image_rate_disabled"></span>
-                  <form id="bwg_rate_form" method="post" action="<?php echo $popup_url; ?>">
+                  <div id="bwg_rate_form">
                     <span id="bwg_star" class="bwg_star" data-score="<?php echo $current_avg_rating; ?>"></span>
                     <span id="bwg_rated" data-params='<?php echo $data_rated; ?>' class="bwg_rated"><?php echo __('Rated.', 'photo-gallery'); ?></span>
                     <span id="bwg_hint" class="bwg_hint"></span>
-                    <input id="rate_ajax_task" name="ajax_task" type="hidden" value="" />
-                    <input id="rate_image_id" name="image_id" type="hidden" value="<?php echo $image_id; ?>" />
-                  </form>
+                  </div>
                 </span>
               </span>
             </div>

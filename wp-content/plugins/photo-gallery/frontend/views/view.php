@@ -14,8 +14,10 @@ class BWGViewSite {
       if ( $embed_instagram_post || ( isset($params['gallery_row']->gallery_type)
         && in_array($params['gallery_row']->gallery_type, array( 'instagram', 'instagram_post' )) ) ) {
         if ( !wp_script_is('instagram-embed', 'done') ) {
-          wp_print_scripts('instagram-embed');
+          wp_register_script( 'instagram-embed', 'https://www.instagram.com/embed.js' );
+          wp_print_scripts( 'instagram-embed' );
         }
+
       }
     }
     if ( !WDWLibrary::elementor_is_active() && BWG()->options->use_inline_stiles_and_scripts ) {
@@ -291,12 +293,8 @@ class BWGViewSite {
   }
 
   public function loading($bwg = 0, $image_enable_page = 0, $gallery_type = '' ) {
-    $load_type_class = "bwg_loading_div_1";
-    if ( ($image_enable_page == 2 || $image_enable_page == 3) ) {
-      $load_type_class = "bwg_load_more_ajax_loading";
-    }
-     ?>
-    <div id="ajax_loading_<?php echo esc_attr($bwg); ?>" class="<?php echo esc_attr($load_type_class); ?>">
+    ?>
+    <div id="ajax_loading_<?php echo esc_attr($bwg); ?>" class="bwg_loading_div_1">
       <div class="bwg_loading_div_2">
         <div class="bwg_loading_div_3">
           <div id="loading_div_<?php echo esc_attr($bwg); ?>" class="bwg_spider_ajax_loading">

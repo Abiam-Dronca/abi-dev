@@ -3,7 +3,7 @@
  * Plugin Name: Photo Gallery
  * Plugin URI: https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin
  * Description: This plugin is a fully responsive gallery plugin with advanced functionality.  It allows having different image galleries for your posts and pages. You can create unlimited number of galleries, combine them into albums, and provide descriptions and tags.
- * Version: 1.7.6
+ * Version: 1.8.0
  * Author: Photo Gallery Team
  * Author URI: https://10web.io/plugins/?utm_source=photo_gallery&utm_medium=free_plugin
  * Text Domain: photo-gallery
@@ -107,8 +107,8 @@ final class BWG {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_url = $this->plugin_url;
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.7.6';
-    $this->db_version = '1.7.6';
+    $this->plugin_version = '1.8.0';
+    $this->db_version = '1.8.0';
     $this->prefix = 'bwg';
     $this->nicename = __('Photo Gallery', 'photo-gallery');
     require_once($this->plugin_dir . '/framework/WDWLibrary.php');
@@ -214,7 +214,6 @@ final class BWG {
 
     add_filter('cron_schedules', array( $this, 'autoupdate_interval' ));
     add_action('bwg_schedule_event_hook', array( $this, 'social_galleries' ));
-
 	  // Check add-ons versions.
     if ( $this->is_pro ) {
       add_action('admin_notices', array($this, 'check_addons_compatibility'));
@@ -1455,7 +1454,6 @@ final class BWG {
         array_push($required_styles, $this->prefix . '_googlefonts');
       }
     }
-    wp_register_script('instagram-embed', 'https://www.instagram.com/embed.js', $required_scripts, '', $in_footer);
     wp_register_script('sumoselect', BWG()->front_url . '/js/jquery.sumoselect.min.js', $required_scripts, '3.4.6', $in_footer);
     wp_register_style('sumoselect', BWG()->front_url . '/css/sumoselect.min.css', array(), '3.4.6');
 
@@ -1963,6 +1961,11 @@ final class BWG {
       foreach ( $instagram_galleries as $gallery ) {
         array_push($response, WDWLibraryEmbed::refresh_social_gallery($gallery));
       }
+    }
+
+    $instagram_embeds =  WDWLibraryEmbed::bwg_get_instagram_embeds();
+    if ( !empty( $instagram_embeds ) ) {
+      WDWLibraryEmbed::bwg_refresh_instagram_embed( $instagram_embeds );
     }
   }
 

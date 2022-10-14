@@ -1305,6 +1305,9 @@ class GalleriesModel_bwg {
       if ( $resolution_thumb != '' ) {
         WDWLibrary::update_thumb_dimansions($resolution_thumb, "id = $image_data->id");
       }
+
+      // Update the rotated image resolution.
+      WDWLibrary::update_image_resolution($height_rotate, $width_rotate, $image_data->id);
     }
     WDWLibrary::update_image_modified_date($where, $prepareArgs);
 
@@ -1425,7 +1428,7 @@ class GalleriesModel_bwg {
         $thumb_filename = BWG()->upload_dir . $image->thumb_url;
         $original_filename = str_replace('/thumb/', '/.original/', $thumb_filename);
         if ( WDWLibrary::repair_image_original($original_filename) ) {
-          $resize_status = WDWLibrary::resize_image($original_filename, $file_path, $image_width, $image_height);
+          $resize_status = WDWLibrary::resize_image($original_filename, $file_path, $image_width, $image_height, $image->id);
         }
       }
     }

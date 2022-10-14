@@ -289,7 +289,8 @@ class WDWLibrary {
     }
     if ($message) {
       ob_start();
-      ?><div class="<?php echo esc_html($type); ?> inline">
+      ?>
+      <div class="<?php echo esc_html($type); ?> inline">
       <p>
         <strong><?php echo esc_html($message); ?></strong>
       </p>
@@ -1519,7 +1520,6 @@ class WDWLibrary {
         $left = ($width - $watermark_sizes['width']) / 2;
         break;
     }
-    @ini_set('memory_limit', '-1');
     if ( $type == 2 ) {
       $image = imagecreatefromjpeg($original_filename);
       imagettftext($image, $watermark_font_size, 0, $left, $top, $watermark_color, $watermark_font, $watermark_text);
@@ -1552,7 +1552,6 @@ class WDWLibrary {
     }
     imagedestroy($image);
     imagedestroy($watermark_image);
-    @ini_restore('memory_limit');
     return TRUE;
   }
 
@@ -1561,8 +1560,6 @@ class WDWLibrary {
       $original_filename = htmlspecialchars_decode($original_filename, ENT_COMPAT | ENT_QUOTES);
       $dest_filename = htmlspecialchars_decode($dest_filename, ENT_COMPAT | ENT_QUOTES);
       $watermark_url = htmlspecialchars_decode($watermark_url, ENT_COMPAT | ENT_QUOTES);
-
-      @ini_set('memory_limit', '-1');
       $image_path = pathinfo($original_filename, PATHINFO_EXTENSION);
       /* Return false if image type is svg */
       if( empty($original_filename) ||  empty($watermark_url) || (!empty($original_filename) && $image_path === 'svg') ) {
@@ -1651,7 +1648,6 @@ class WDWLibrary {
       }
       imagedestroy($image);
       imagedestroy($watermark_image);
-      @ini_restore('memory_limit');
     }
   }
 
@@ -1796,12 +1792,27 @@ class WDWLibrary {
 
   public static function update_thumb_dimansions( $resolution_thumb, $where ) {
     global $wpdb;
-    $update = $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `resolution_thumb` = "%s"  WHERE ' . $where, $resolution_thumb));
+    $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `resolution_thumb` = "%s"  WHERE ' . $where, $resolution_thumb));
   }
 
-  public static function resize_image($source, $destination, $max_width, $max_height) {
-    $image = wp_get_image_editor( $source );
-    if ( !is_wp_error( $image ) ) {
+  /**
+   * Update the specified image resolution.
+   *
+   * @param $width
+   * @param $height
+   * @param $id
+   *
+   * @return void
+   */
+  public static function update_image_resolution( $width, $height, $id ) {
+    $resolution = intval($width) . ' x ' . intval($height) . ' px';
+    global $wpdb;
+    $wpdb->query($wpdb->prepare('UPDATE `' . $wpdb->prefix . 'bwg_image` SET `resolution` = "%s"  WHERE `id` = %d', $resolution, $id));
+  }
+
+  public static function resize_image( $source, $destination, $max_width, $max_height, $image_id = 0 ) {
+    $image = wp_get_image_editor($source);
+    if ( !is_wp_error($image) ) {
       $image_size = $image->get_size();
       $img_width = $image_size[ 'width' ];
       $img_height = $image_size[ 'height' ];
@@ -1811,7 +1822,12 @@ class WDWLibrary {
           if(self::detect_thumb($destination)) {
             self::$thumb_dimansions = intval($img_width)."x".intval($img_height);
           }
-          return copy( $source, $destination );
+          // Update the resized image resolution.
+          if ( $image_id ) {
+            self::update_image_resolution($img_width, $img_height, $image_id);
+          }
+
+          return copy($source, $destination);
         }
         return true;
       }
@@ -1821,9 +1837,15 @@ class WDWLibrary {
         if(self::detect_thumb($destination)) {
           self::$thumb_dimansions = intval($new_width)."x".intval($new_height);
         }
-        $image->set_quality( BWG()->options->image_quality );
-        $image->resize( $new_width, $new_height, false );
-        $saved = $image->save( $destination );
+        $image->set_quality(BWG()->options->image_quality);
+        $image->resize($new_width, $new_height);
+        $image->maybe_exif_rotate();
+        $saved = $image->save($destination);
+        // Update the resized image resolution.
+        if ( $image_id ) {
+          self::update_image_resolution($new_width, $new_height, $image_id);
+        }
+
         return !is_wp_error($saved);
       }
     }
@@ -3424,7 +3446,7 @@ class WDWLibrary {
    */
   public static function get_images_total_count() {
     global $wpdb;
-   $count = $wpdb->get_var( "SELECT COUNT(id) FROM `" . $wpdb->prefix . "bwg_file_paths`" );
+    $count = $wpdb->get_var("SELECT COUNT(id) FROM `" . $wpdb->prefix . "bwg_file_paths`");
 
     return intval($count);
   }
@@ -3436,7 +3458,7 @@ class WDWLibrary {
    */
   public static function get_gallery_images_count() {
     global $wpdb;
-    $row = $wpdb->get_col( 'SELECT id AS qty FROM `' . $wpdb->prefix . 'bwg_image`' );
+    $row = $wpdb->get_col('SELECT id AS qty FROM `' . $wpdb->prefix . 'bwg_image`');
 
     return intval(count($row));
   }
@@ -3451,9 +3473,11 @@ class WDWLibrary {
     $sizes = $wpdb->get_col('Select `size` FROM `' . $wpdb->prefix . 'bwg_image` WHERE  `size`<>""');
     if ( !empty($sizes) ) {
       $sizes = array_sum(array_map('WDWLibrary::convertToBytes', $sizes));
-    } else {
+    }
+    else {
       $sizes = 0;
     }
+
     return $sizes;
   }
 
@@ -3465,7 +3489,7 @@ class WDWLibrary {
    * @return array|float|int|string|string[]|null
    */
   public static function convertToBytes( $from ) {
-    $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+    $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB' );
     $number = substr($from, 0, -2);
     $suffix = strtoupper(substr($from, -2));
     if ( is_numeric(substr($suffix, 0, 1)) ) {
@@ -3488,13 +3512,11 @@ class WDWLibrary {
    *
    * @return string
    */
-  public static function formatBytes($bytes, $precision = 2) {
-    $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
-
+  public static function formatBytes( $bytes, $precision = 2 ) {
+    $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB' );
     $bytes = max($bytes, 0);
     $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
     $pow = min($pow, count($units) - 1);
-
     $bytes /= pow(1024, $pow);
 
     return round($bytes, $precision) . ' ' . $units[$pow];
@@ -3532,18 +3554,11 @@ class WDWLibrary {
       'booster_is_connected' => FALSE,
       'tenweb_is_paid' => FALSE,
     );
-
     $booster_plugin_status = get_option('bwg_speed');
-    if ( !empty($booster_plugin_status)
-      && isset($booster_plugin_status['booster_plugin_status']) ) {
+    if ( !empty($booster_plugin_status) && isset($booster_plugin_status['booster_plugin_status']) ) {
       $data['booster_plugin_status'] = $booster_plugin_status['booster_plugin_status'];
     }
-
-    if ( ( defined('TENWEB_CONNECTED_SPEED') &&
-        class_exists('\Tenweb_Authorization\Login') &&
-        \Tenweb_Authorization\Login::get_instance()->check_logged_in() &&
-        \Tenweb_Authorization\Login::get_instance()->get_connection_type() == TENWEB_CONNECTED_SPEED ) ||
-      ( defined('TENWEB_SO_HOSTED_ON_10WEB') && TENWEB_SO_HOSTED_ON_10WEB ) ) {
+    if ( (defined('TENWEB_CONNECTED_SPEED') && class_exists('\Tenweb_Authorization\Login') && \Tenweb_Authorization\Login::get_instance()->check_logged_in() && \Tenweb_Authorization\Login::get_instance()->get_connection_type() == TENWEB_CONNECTED_SPEED) || (defined('TENWEB_SO_HOSTED_ON_10WEB') && TENWEB_SO_HOSTED_ON_10WEB) ) {
       // booster is connectd part.
       $data['booster_is_connected'] = TRUE;
       // 10Web is paid.
@@ -3551,6 +3566,13 @@ class WDWLibrary {
     }
 
     return $data;
+  }
+
+  public static function media_name_clean( $string = '' )  {
+    $code_entities_match = array(' ','%','&','+','^');
+    $code_entities_replace = array('_','','','','');
+    $string = str_replace($code_entities_match, $code_entities_replace, $string);
+    return $string;
   }
 }
 

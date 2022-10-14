@@ -122,7 +122,6 @@ class EditimageView_bwg {
                                    ), admin_url('admin-ajax.php'));
     }
     $image_data->image_url = WDWLibrary::image_url_version($image_data->image_url, $modified_date);
-    @ini_set('memory_limit', '-1');
     $exp_filename = explode("?", $filename);
     list( $width_orig, $height_orig, $type_orig ) = getimagesize($exp_filename[0]);
     if ( $task == 'crop' ) {
@@ -189,8 +188,7 @@ class EditimageView_bwg {
       $updated_image = WDWLibrary::update_image_modified_date( $where );
       $image_data->image_url = WDWLibrary::image_url_version($image_data->image_url, $updated_image['modified_date']);
     }
-    @ini_restore('memory_limit');
-	 // Register and include styles and scripts.
+	  // Register and include styles and scripts.
     BWG()->register_admin_scripts();
     wp_print_styles(BWG()->prefix . '_tables');
     wp_print_scripts(BWG()->prefix . '_admin');
@@ -472,7 +470,6 @@ class EditimageView_bwg {
                                    ), admin_url('admin-ajax.php'));
     }
     $image_data->image_url = WDWLibrary::image_url_version($image_data->image_url, $modified_date);
-    @ini_set('memory_limit', '-1');
     list($width_rotate, $height_rotate, $type_rotate) = getimagesize($filename);
     if ( $edit_type == '270' || $edit_type == '90' ) {
       if ( $type_rotate == 2 ) {
@@ -824,7 +821,6 @@ class EditimageView_bwg {
         $message = WDWLibrary::message_id(31);
       }
     }
-    @ini_restore('memory_limit');
     if ( !empty($edit_type) ) {
       $resolution_thumb = WDWLibrary::get_thumb_size( $image_data->thumb_url );
       if ( $resolution_thumb != '' ) {

@@ -414,7 +414,7 @@ class bwg_upl {
     // into different directories or replacing hidden system files.
     // Also remove control characters and spaces (\x00..\x20) around the filename:
     $name = trim(stripslashes($name), ".\x00..\x20");
-    $name = $this->media_name_clean($name);
+    $name = WDWLibrary::media_name_clean($name);
     $tempname = explode(".", $name);
     if ( $tempname[0] == '' ) {
       $tempname[0] = 'unnamed-file';
@@ -440,72 +440,10 @@ class bwg_upl {
     // Handle form data, e.g. $_REQUEST['description'][$index]
   }
 
-  protected function orient_image( $file ) {
-    if ( !function_exists('exif_read_data') ) {
-      return FALSE;
-    }
-    $path = isset($file->path) ? $file->path : "/";
-    $file_path = BWG()->upload_dir . $path . $file->name;
-    $exif = @exif_read_data($file_path);
-    if ( $exif === FALSE ) {
-      return;
-    }
-
-    if ( !empty($exif) && !empty($exif['ExposureProgram']) && $exif['ExposureProgram'] == 7 ) {
-      /* 7 for portrait. */
-      if ( isset($exif['Orientation']) && $exif['Orientation'] == 6 ) {
-        return;
-      }
-      $rotate = 270;
-    }
-    else {
-      /* 8 for landscape. */
-      if ( isset($exif['Orientation']) && $exif['Orientation'] == 1 ) {
-        return;
-      }
-      $rotate = 0;
-    }
-    @ini_set('memory_limit', '-1');
-    if ( strpos($file->type, 'jp') !== FALSE ) {
-      $source = imagecreatefromjpeg($file_path);
-      $image = @imagerotate($source, $rotate, 0);
-      imagejpeg($source, $file_path);
-      imagedestroy($source);
-      imagedestroy($image);
-    }
-    elseif ( strpos($file->type, 'png') !== FALSE ) {
-      $source = imagecreatefrompng($file_path);
-      imagealphablending($source, FALSE);
-      imagesavealpha($source, TRUE);
-      $image = imagerotate($source, $rotate, imageColorAllocateAlpha($source, 0, 0, 0, 127));
-      imagealphablending($image, FALSE);
-      imagesavealpha($image, TRUE);
-      imagepng($image, $file_path, BWG()->options->png_quality);
-      imagedestroy($source);
-      imagedestroy($image);
-    }
-    elseif ( strpos($file->type, 'gif') !== FALSE ) {
-      $source = imagecreatefromgif($file_path);
-      imagealphablending($source, FALSE);
-      imagesavealpha($source, TRUE);
-      $image = imagerotate($source, $rotate, imageColorAllocateAlpha($source, 0, 0, 0, 127));
-      imagealphablending($image, FALSE);
-      imagesavealpha($image, TRUE);
-      imagegif($image, $file_path, BWG()->options->png_quality);
-      imagedestroy($source);
-      imagedestroy($image);
-    }
-    @ini_restore('memory_limit');
-  }
-
   protected function handle_image_file( $file_path, $file ) {
     $failed_versions = array();
     foreach ( $this->options['image_versions'] as $version => $options ) {
       if ( $this->create_scaled_image($file->name, $version, $options) ) {
-        if ( $version === '' && $this->options['orient_image'] ) {
-          // Rotate only base size image (not thumb and original).
-          $this->orient_image($file);
-        }
         if ( !empty($version) ) {
           $file->{$version . '_url'} = $this->get_download_url($file, $version);
         }
@@ -668,7 +606,7 @@ class bwg_upl {
     $file_type_array = explode('.', $name);
     $type = strtolower(end($file_type_array));
     $file = new stdClass();
-    $name = $this->media_name_clean($name);
+    $name = WDWLibrary::media_name_clean($name);
     if ( WDWLibrary::allowed_upload_types($type) ) {
       $file->dir = $this->get_upload_path();
       $file->error = FALSE;
@@ -706,8 +644,8 @@ class bwg_upl {
       // Additional information.
       $file->path = '/' . $this->options['media_library_folder'];
       $file->filetype = $type;
-      $file->filename = str_replace('.' . $file->filetype, '', $this->media_name_clean($file->name));
-      $file->alt = $this->media_name_clean($file->filename);
+      $file->filename = str_replace('.' . $file->filetype, '', WDWLibrary::media_name_clean($file->name));
+      $file->alt = WDWLibrary::media_name_clean($file->filename);
       $file->reliative_url = $this->options['upload_url'] . '/' . $this->options['media_library_folder'] . $file->name;
       $file->url = '/' . $this->options['media_library_folder'] . $file->name;
       $file->thumb = $this->options['upload_url'] . '/' . $this->options['media_library_folder'] . 'thumb/' . $file->name;
@@ -739,7 +677,7 @@ class bwg_upl {
         $file->iso = isset($meta['iso']) ? $meta['iso'] : "";
         $file->orientation = isset($meta['orientation']) ? $meta['orientation'] : "";
         $file->copyright = isset($meta['copyright']) ? $meta['copyright'] : "";
-        $file->alt = $this->media_name_clean($meta['title'] ? $meta['title'] : $file->filename);
+        $file->alt = WDWLibrary::media_name_clean($meta['title'] ? $meta['title'] : $file->filename);
         $file->tags = isset($meta['tags']) ? $meta['tags'] : "";
       }
     }
@@ -1176,13 +1114,6 @@ class bwg_upl {
     }
     return $value;
 
-  }
-
-  private function media_name_clean( $string = '' )  {
-    $code_entities_match = array(' ','%','&','+','^');
-    $code_entities_replace = array('_','','','','');
-    $string = str_replace($code_entities_match, $code_entities_replace, $string);
-    return $string;
   }
 }
 

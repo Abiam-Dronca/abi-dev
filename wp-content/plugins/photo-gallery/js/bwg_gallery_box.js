@@ -953,12 +953,13 @@ function spider_ajax_save(form_id) {
 /* Submit rating. */
 function spider_rate_ajax_save(form_id, rate) {
   var post_data = {};
-  post_data["image_id"] = jQuery("#" + form_id + " input[name='image_id']").val();
+  post_data["image_id"] = jQuery("#rate_image_id").val();
   post_data["rate"] = (typeof rate != "undefined") ? rate : jQuery("#" + form_id + " input[name='score']").val();
   post_data["ajax_task"] = jQuery("#rate_ajax_task").val();
+  var action_url = jQuery("#bwg_image_container").data("action");
   return jQuery.ajax({
     type: "POST",
-    url:   jQuery('#' + form_id).attr('action'),
+    url:  action_url,
     data: post_data,
     success: function (data) {
       var str = jQuery(data).find('#' + form_id).html();
@@ -1181,7 +1182,7 @@ function bwg_gallery_box( image_id, bwg_container, openEcommerce, gallery_id ) {
 }
 
 function bwg_change_image_lightbox(current_key, key, data, from_effect) {
-  jQuery("#bwg_rate_form input[name='image_id']").val(data[key]["id"]);
+  jQuery("#rate_image_id").val(data[key]["id"]);
   bwg_current_key = gallery_box_data['bwg_current_key'];
   /* var bwg_image_info_pos = jQuery(".bwg_ctrl_btn_container").height(); */
   if ( gallery_box_data['data'][key]['alt'] == '' && gallery_box_data['data'][key]['description'] == '' ) {
@@ -1300,7 +1301,7 @@ function bwg_change_image_lightbox(current_key, key, data, from_effect) {
       /*window.location.hash = "bwg"+gallery_box_data['gallery_id'] +"/" + data[key]["id"];*/
       location.replace("#bwg" + gallery_box_data['gallery_id'] + "/" + data[key]["id"]);
       history.replaceState(undefined, undefined, "#bwg" + gallery_box_data['gallery_id'] + "/" + data[key]["id"]);
-      jQuery("#bwg_rate_form input[name='image_id']").val(data[key]["id"]);
+      jQuery("#rate_image_id").val(data[key]["id"]);
       /* Increase image hit counter.*/
       spider_set_input_value('rate_ajax_task', 'save_hit_count');
       spider_rate_ajax_save('bwg_rate_form');

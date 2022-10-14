@@ -275,6 +275,7 @@ class FilemanagerController {
     $file_name = str_replace('../', '', $file_name);
 
     $file_new_name = (isset($_REQUEST['file_new_name']) ? stripslashes(WDWLibrary::get('file_new_name','','sanitize_text_field','REQUEST')) : '');
+    $file_new_name = WDWLibrary::media_name_clean($file_new_name);
     $file_new_name = htmlspecialchars_decode($file_new_name, ENT_COMPAT | ENT_QUOTES);
     $file_new_name = $this->esc_dir($file_new_name);
 

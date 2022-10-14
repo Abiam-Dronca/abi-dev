@@ -4387,3 +4387,7 @@ bwg-gallery-ul {
   width: 132px;
   margin-right: 10px;
 }
+
+#bwg_shortcode_form {
+  padding: 0;
+}
