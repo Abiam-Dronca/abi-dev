@@ -42,7 +42,7 @@ class Notice {
     if ($showErrorTitle) {
       $message = sprintf(
         "<b>%s </b> %s",
-        __('MailPoet Error:', 'mailpoet'),
+        WPFunctions::get()->__('MailPoet Error:', 'mailpoet'),
         $message
       );
     }

@@ -11,12 +11,10 @@ use MailPoet\Doctrine\Validator\ValidationException;
 use MailPoet\Entities\StatisticsUnsubscribeEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
-use MailPoet\Entities\SubscriberTagEntity;
 use MailPoet\Newsletter\Scheduler\WelcomeScheduler;
 use MailPoet\Segments\SegmentsRepository;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Statistics\Track\Unsubscribes;
-use MailPoet\Tags\TagRepository;
 use MailPoet\Util\Security;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
@@ -43,12 +41,6 @@ class SubscriberSaveController {
   /** @var SubscriberSegmentRepository */
   private $subscriberSegmentRepository;
 
-  /** @var SubscriberTagRepository */
-  private $subscriberTagRepository;
-
-  /** @var TagRepository */
-  private $tagRepository;
-
   /** @var Unsubscribes */
   private $unsubscribesTracker;
 
@@ -66,8 +58,6 @@ class SubscriberSaveController {
     SubscriberCustomFieldRepository $subscriberCustomFieldRepository,
     SubscribersRepository $subscribersRepository,
     SubscriberSegmentRepository $subscriberSegmentRepository,
-    SubscriberTagRepository $subscriberTagRepository,
-    TagRepository $tagRepository,
     Unsubscribes $unsubscribesTracker,
     WelcomeScheduler $welcomeScheduler,
     WPFunctions $wp
@@ -79,11 +69,9 @@ class SubscriberSaveController {
     $this->subscriberSegmentRepository = $subscriberSegmentRepository;
     $this->subscribersRepository = $subscribersRepository;
     $this->subscriberCustomFieldRepository = $subscriberCustomFieldRepository;
-    $this->tagRepository = $tagRepository;
     $this->unsubscribesTracker = $unsubscribesTracker;
     $this->welcomeScheduler = $welcomeScheduler;
     $this->wp = $wp;
-    $this->subscriberTagRepository = $subscriberTagRepository;
   }
 
   public function filterOutReservedColumns(array $subscriberData): array {
@@ -122,10 +110,6 @@ class SubscriberSaveController {
     $data['segments'] = array_merge($data['segments'], $this->getNonDefaultSubscribedSegments($data));
     $newSegments = $this->findNewSegments($data);
 
-    if (empty($data['tags'])) {
-      $data['tags'] = [];
-    }
-
     $oldSubscriber = $this->findSubscriber($data);
     $oldStatus = $oldSubscriber ? $oldSubscriber->getStatus() : null;
     if (
@@ -150,7 +134,6 @@ class SubscriberSaveController {
     $subscriber = $this->createOrUpdate($data, $oldSubscriber);
 
     $this->updateCustomFields($data, $subscriber);
-    $this->updateTags($data, $subscriber);
 
     $segments = isset($data['segments']) ? $this->findSegments($data['segments']) : null;
     // check for status change
@@ -249,8 +232,7 @@ class SubscriberSaveController {
   private function verifyEmailIsUnique(string $email): void {
     $existingSubscriber = $this->subscribersRepository->findOneBy(['email' => $email]);
     if ($existingSubscriber) {
-      // translators: %s is email address which already exists.
-      $exceptionMessage = sprintf(__('A subscriber with E-mail "%s" already exists.', 'mailpoet'), $email);
+      $exceptionMessage = __(sprintf('A subscriber with E-mail "%s" already exists.', $email), 'mailpoet');
       throw new ConflictException($exceptionMessage);
     }
   }
@@ -297,25 +279,5 @@ class SubscriberSaveController {
     foreach ($customFields as $customField) {
       $this->subscriberCustomFieldRepository->createOrUpdate($subscriber, $customField, $customFieldsMap[$customField->getId()]);
     }
-  }
-
-  private function updateTags(array $data, SubscriberEntity $subscriber): void {
-    foreach ($subscriber->getSubscriberTags() as $subscriberTag) {
-      $tag = $subscriberTag->getTag();
-      if (!$tag || !in_array($tag->getName(), $data['tags'], true)) {
-        $subscriber->getSubscriberTags()->removeElement($subscriberTag);
-      }
-    }
-
-    foreach ($data['tags'] as $tagName) {
-      $tag = $this->tagRepository->createOrUpdate(['name' => $tagName]);
-      $subscriberTag = $subscriber->getSubscriberTag($tag);
-      if (!$subscriberTag) {
-        $subscriberTag = new SubscriberTagEntity($tag, $subscriber);
-        $subscriber->getSubscriberTags()->add($subscriberTag);
-        $this->subscriberTagRepository->persist($subscriberTag);
-      }
-    }
-    $this->subscriberTagRepository->flush();
   }
 }

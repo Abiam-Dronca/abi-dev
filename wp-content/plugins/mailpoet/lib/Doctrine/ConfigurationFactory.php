@@ -23,10 +23,7 @@ class ConfigurationFactory {
   /** @var AnnotationReaderProvider */
   private $annotationReaderProvider;
 
-  public function __construct(
-    AnnotationReaderProvider $annotationReaderProvider,
-    $isDevMode = null
-  ) {
+  public function __construct(AnnotationReaderProvider $annotationReaderProvider, $isDevMode = null) {
     $this->isDevMode = $isDevMode === null ? WP_DEBUG : $isDevMode;
     $this->annotationReaderProvider = $annotationReaderProvider;
   }

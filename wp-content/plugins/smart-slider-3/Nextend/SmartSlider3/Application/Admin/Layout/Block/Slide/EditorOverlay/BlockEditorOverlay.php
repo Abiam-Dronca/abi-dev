@@ -2,7 +2,6 @@
 
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\EditorOverlay;
 
-use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\AbstractBlock;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\BlockBreadCrumb\BlockBreadCrumb;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\TopBarMain\TopBarMainEditor\BlockTopBarMainEditor;
@@ -97,7 +96,7 @@ class BlockEditorOverlay extends AbstractBlock {
     }
 
     public function displayBlockLayerWindow() {
-        echo wp_kses($this->contentLayerWindow, Sanitize::$adminFormTags);
+        echo $this->contentLayerWindow;
     }
 
 }

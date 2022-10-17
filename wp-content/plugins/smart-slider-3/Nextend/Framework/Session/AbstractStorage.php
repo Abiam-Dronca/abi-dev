@@ -3,7 +3,6 @@
 namespace Nextend\Framework\Session;
 
 use Nextend\Framework\Plugin;
-use Nextend\Framework\Request\Request;
 
 abstract class AbstractStorage {
 
@@ -20,13 +19,12 @@ abstract class AbstractStorage {
     public function __construct($userIdentifier) {
 
         $this->register();
-        $cookie = Request::$COOKIE->getCmd('nextendsession');
-        if ($cookie === '' || substr($cookie, 0, 2) != 'n2' || !preg_match('/^[a-f0-9]{32}$/', substr($cookie, 2))) {
+        if (!isset($_COOKIE['nextendsession']) || substr($_COOKIE['nextendsession'], 0, 2) != 'n2' || !preg_match('/^[a-f0-9]{32}$/', substr($_COOKIE['nextendsession'], 2))) {
             $this->hash = 'n2' . md5(self::$salt . $userIdentifier);
-            setcookie('nextendsession', $this->hash, time() + self::$expire, Request::$SERVER->getVar('HTTP_HOST'));
-            Request::$COOKIE->set('nextendsession', $this->hash);
+            setcookie('nextendsession', $this->hash, time() + self::$expire, $_SERVER["HTTP_HOST"]);
+            $_COOKIE['nextendsession'] = $this->hash;
         } else {
-            $this->hash = $cookie;
+            $this->hash = $_COOKIE['nextendsession'];
         }
 
         $this->load();

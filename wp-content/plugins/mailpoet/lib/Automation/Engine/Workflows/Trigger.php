@@ -5,10 +5,10 @@ namespace MailPoet\Automation\Engine\Workflows;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Data\StepRunArgs;
+interface Trigger {
+  public function getKey(): string;
 
-interface Trigger extends Step {
+  public function getName(): string;
+
   public function registerHooks(): void;
-
-  public function isTriggeredBy(StepRunArgs $args): bool;
 }

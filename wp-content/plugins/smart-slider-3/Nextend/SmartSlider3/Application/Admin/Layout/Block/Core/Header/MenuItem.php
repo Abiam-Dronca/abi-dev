@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\Header;
 
 
-use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\Html;
 
 class MenuItem {
@@ -40,7 +39,7 @@ class MenuItem {
     }
 
     public function display() {
-        echo wp_kses($this->getHtml(), Sanitize::$adminTemplateTags);
+        echo $this->getHtml();
     }
 
     /**

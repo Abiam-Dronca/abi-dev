@@ -7,7 +7,6 @@ use Nextend\Framework\Api;
 use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Notification\Notification;
 use Nextend\Framework\Platform\Platform;
-use Nextend\Framework\Request\Request;
 use Nextend\Framework\Url\Url;
 use Nextend\Framework\Url\UrlHelper;
 use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
@@ -15,15 +14,15 @@ use Nextend\SmartSlider3\Application\Model\ModelLicense;
 
 class SmartSlider3Info {
 
-    public static $version = '3.5.1.11';
+    public static $version = '3.5.1.7';
 
     public static $channel = 'stable';
 
-    public static $revision = 'f0b633e7a94052a70133276e2ed8de7715ca6ecb';
+    public static $revision = '6da043836534827654088675078f4dcfd1ded6e7';
 
-    public static $revisionShort = 'f0b633e7';
+    public static $revisionShort = '6da04383';
 
-    public static $branch = 'release-3.5.1.11';
+    public static $branch = 'release-3.5.1.7';
 
     public static $completeVersion;
 
@@ -115,13 +114,13 @@ class SmartSlider3Info {
     public static function getDomain() {
         $domain = parse_url(Url::getSiteUri(), PHP_URL_HOST);
         if (empty($domain)) {
-            if (Request::$SERVER->getVar('HTTP_HOST') !== null) {
+            if (isset($_SERVER['HTTP_HOST'])) {
 
-                $domain = Request::$SERVER->getVar('HTTP_HOST');
+                $domain = $_SERVER['HTTP_HOST'];
             }
-            if (empty($domain) && Request::$SERVER->getVar('SERVER_NAME') !== null) {
+            if (empty($domain) && isset($_SERVER['SERVER_NAME'])) {
 
-                $domain = Request::$SERVER->getVar('SERVER_NAME');
+                $domain = $_SERVER['SERVER_NAME'];
             }
         }
 
@@ -157,10 +156,10 @@ class SmartSlider3Info {
                 Notification::error('Your license has <a href="https://smartslider.helpscoutdocs.com/article/1718-activation#nopackage" target="_blank">expired</a>! Get new one: <a href="https://smartslider3.com/pricing" target="_blank">smartslider3.com</a>.');
                 break;
             case 'DOMAIN_REGISTER_FAILED':
-                Notification::error('Smart Slider 3 Pro license is not registered on the current website. Please activate this website by following <a href="https://smartslider.helpscoutdocs.com/article/1718-activation" target="_blank">the license activation documentation</a>.');
+                Notification::error('Smart Slider 3 Pro license is not registered on the current domain. Please activate this domain by following <a href="https://smartslider.helpscoutdocs.com/article/1718-activation" target="_blank">the license activation documentation</a>.');
                 break;
             case 'LICENSE_INVALID':
-                Notification::error('Smart Slider 3 Pro license is not registered on the current website. Please activate this website by following <a href="https://smartslider.helpscoutdocs.com/article/1718-activation" target="_blank">the license activation documentation</a>.');
+                Notification::error('Smart Slider 3 Pro license is not registered on the current domain. Please activate this domain by following <a href="https://smartslider.helpscoutdocs.com/article/1718-activation" target="_blank">the license activation documentation</a>.');
                 ModelLicense::getInstance()
                             ->setKey('');
 

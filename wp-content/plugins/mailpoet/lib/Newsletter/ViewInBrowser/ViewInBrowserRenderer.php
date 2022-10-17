@@ -81,8 +81,8 @@ class ViewInBrowserRenderer {
     }
     $this->prepareShortcodes(
       $newsletter,
-      $subscriber,
-      $queue,
+      $subscriber ?: false,
+      $queue ?: false,
       $wpUserPreview
     );
     $renderedNewsletter = $this->shortcodes->replace($newsletterBody);
@@ -96,15 +96,19 @@ class ViewInBrowserRenderer {
     return $renderedNewsletter;
   }
 
-  private function prepareShortcodes(
-    NewsletterEntity $newsletter,
-    ?SubscriberEntity $subscriber,
-    ?SendingQueueEntity $queue,
-    bool $wpUserPreview
-  ) {
-    $this->shortcodes->setQueue($queue);
-    $this->shortcodes->setNewsletter($newsletter);
+  private function prepareShortcodes($newsletter, $subscriber, $queue, $wpUserPreview) {
+    if ($queue instanceof SendingQueueEntity) {
+      $this->shortcodes->setQueue($queue);
+    }
+
+    if ($newsletter instanceof NewsletterEntity) {
+      $this->shortcodes->setNewsletter($newsletter);
+    }
+
     $this->shortcodes->setWpUserPreview($wpUserPreview);
-    $this->shortcodes->setSubscriber($subscriber);
+
+    if ($subscriber instanceof SubscriberEntity) {
+      $this->shortcodes->setSubscriber($subscriber);
+    }
   }
 }

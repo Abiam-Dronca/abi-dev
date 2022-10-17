@@ -17,11 +17,6 @@ class Jetpack {
                 $this,
                 'action_assets_manager_started'
             ));
-
-            add_filter('kses_allowed_protocols', array(
-                $this,
-                'kses_allowed_protocols'
-            ), 10, 1);
         }
     }
 
@@ -40,11 +35,5 @@ class Jetpack {
         }
 
         return $val;
-    }
-
-    public function kses_allowed_protocols($protocols) {
-        $protocols[] = 'data';
-
-        return $protocols;
     }
 }

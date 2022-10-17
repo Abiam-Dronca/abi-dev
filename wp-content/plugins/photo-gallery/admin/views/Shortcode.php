@@ -83,6 +83,9 @@ class ShortcodeView_bwg extends AdminView_bwg {
                 </label>
                 <input type="radio" class="gallery_type_radio" id="thumbnails_masonry" name="gallery_type" value="thumbnails_masonry" />
                 <label class="gallery_type_label" for="thumbnails_masonry"><?php echo __('Masonry', 'photo-gallery'); ?></label>
+                <?php if ( !BWG()->is_pro ) { ?>
+                  <span class="pro_btn">Premium</span>
+                <?php } ?>
               </div>
             </span>
             <span class="gallery_type bwg-thumbnails_mosaic" onClick="bwg_gallery_type('thumbnails_mosaic')" data-img-url="<?php echo BWG()->plugin_url . '/images/upgrade_to_pro_mosaic.png'; ?>" data-title="Mosaic" data-demo-link="https://demo.10web.io/photo-gallery/mosaic/?utm_source=photo_gallery&utm_medium=free_plugin">
@@ -92,6 +95,9 @@ class ShortcodeView_bwg extends AdminView_bwg {
                   <img class="view_type_img_active" src="<?php echo BWG()->plugin_url . '/images/thumbnails_mosaic_active.svg'; ?>" />
                 </label>
                 <input type="radio" class="gallery_type_radio" id="thumbnails_mosaic" name="gallery_type" value="thumbnails_mosaic" /><label class="gallery_type_label" for="thumbnails_mosaic"><?php echo __('Mosaic', 'photo-gallery'); ?></label>
+                <?php if ( !BWG()->is_pro ) { ?>
+                  <span class="pro_btn">Premium</span>
+                <?php } ?>
               </div>
             </span>
             <span class="gallery_type bwg-slideshow" onClick="bwg_gallery_type('slideshow')">
@@ -119,6 +125,9 @@ class ShortcodeView_bwg extends AdminView_bwg {
                   <img class="view_type_img_active" src="<?php echo BWG()->plugin_url . '/images/blog_style_active.svg'; ?>" />
                 </label>
                 <input type="radio" class="gallery_type_radio" id="blog_style" name="gallery_type" value="blog_style" /><label class="gallery_type_label" for="blog_style"><?php echo __('Blog Style', 'photo-gallery'); ?></label>
+                <?php if ( !BWG()->is_pro ) { ?>
+                  <span class="pro_btn">Premium</span>
+                <?php } ?>
               </div>
             </span>
             <span class="gallery_type bwg-carousel" onClick="bwg_gallery_type('carousel')" data-img-url="<?php echo BWG()->plugin_url . '/images/upgrade_to_pro_carousel.png'; ?>" data-title="Carousel" data-demo-link="https://demo.10web.io/photo-gallery/carousel/?utm_source=photo_gallery&utm_medium=free_plugin">
@@ -155,7 +164,7 @@ class ShortcodeView_bwg extends AdminView_bwg {
                     <li class="gallery-type-li" data-value="<?php echo $key; ?>">
                       <img src="<?php echo BWG()->plugin_url . '/images/' . $key . '.svg'; ?>">
                       <span><?php echo $gallery_type_name; ?> </span>
-                      <?php if ( !BWG()->is_pro && $key == 'carousel') { ?>
+                      <?php if ( !BWG()->is_pro && ( $key == 'thumbnails_masonry' || $key == 'thumbnails_mosaic' || $key == 'blog_style' || $key == 'carousel' )) { ?>
                         <span class="pro_btn">Premium</span>
                       <?php } ?>
                     </li>
@@ -185,6 +194,9 @@ class ShortcodeView_bwg extends AdminView_bwg {
                   <img class="view_type_img_active" src="<?php echo BWG()->plugin_url . '/images/album_masonry_preview_active.svg'; ?>" />
                 </label>
                 <input type="radio" class="album_type_radio" id="album_masonry_preview" name="gallery_type" value="album_masonry_preview" /><label class="album_type_label" for="album_masonry_preview"><?php echo __('Masonry', 'photo-gallery'); ?></label>
+                <?php if ( !BWG()->is_pro ) { ?>
+                  <span class="pro_btn">Premium</span>
+                <?php } ?>
               </div>
             </span>
             <span class="gallery_type bwg-album_extended_preview" onClick="bwg_gallery_type('album_extended_preview')">
@@ -218,6 +230,9 @@ class ShortcodeView_bwg extends AdminView_bwg {
                     <li class="gallery-type-li" data-value="<?php echo $key; ?>">
                       <img src="<?php echo BWG()->plugin_url . '/images/' . $key . '.svg'; ?>">
                       <span><?php echo $album_type_name; ?> </span>
+                      <?php if ( !BWG()->is_pro && ( $key == 'album_masonry_preview' ) ) { ?>
+                        <span class="pro_btn">Premium</span>
+                      <?php } ?>
                     </li>
                     <?php
                   }
@@ -230,7 +245,7 @@ class ShortcodeView_bwg extends AdminView_bwg {
         <?php
         if ( !BWG()->is_pro ) {
           ?>
-          <div class="wd-box-content wd-width-100 wd-free-msg bwg-upgrade-view" style="display: none;">
+          <div class="wd-box-content wd-width-100 wd-free-msg bwg-upgrade-view">
             <div class="upgrade-to-pro-text">
               <p class="upgrade-to-pro-title"></p>
               <p class="upgrade-to-pro-desc">
@@ -494,7 +509,15 @@ class ShortcodeView_bwg extends AdminView_bwg {
             <div class="media-toolbar-primary search-form">
               <button class="button media-button button-primary button-large media-button-insert button-hero" type="button" id="insert" name="insert" <?php if($params['elementor_callback']) { ?> data-callback="elementor" <?php } ?> onClick="bwg_insert_shortcode('');"><?php _e('Insert into post', 'photo-gallery'); ?></button>
             </div>
-          </div>
+            <!--  @TODO. needed to remove after dicessing with design team-->
+<!--            --><?php //if ( !BWG()->is_pro ) { ?>
+<!--              <div class="media-toolbar-primary search-form" style="float: left;">-->
+<!--            <span class="media-button button-large">-->
+<!--              <a id="bwg_pro_version_link" class="bwg_link_shortcode" target="_blank" href="https://demo.10web.io/photo-gallery/--><?php //echo BWG()->utm_source; ?><!--">--><?php //_e('Please see ', 'photo-gallery') ?><!--<span id="bwg_pro_version">--><?php //_e('Thumbnails', 'photo-gallery') ?><!--</span> --><?php //_e('View in Premium version', 'photo-gallery') ?><!--</a>-->
+<!--            </span>-->
+<!--              </div>-->
+<!--            --><?php //} ?>
+<!--          </div>-->
         </div>
         <?php
       }

@@ -42,11 +42,30 @@ class GlobalNotificationManager
             do_action('fluentform_global_notify_completed', $insertId, $form);
             return;
         }
-        
+
         // Now we have to filter the feeds which are enabled
-        $enabledFeeds = $this->getEnabledFeeds($feeds, $formData, $insertId);
-    
-        if (!$enabledFeeds) {
+        $enabledFeeds = [];
+        foreach ($feeds as $feed) {
+            $parsedValue = json_decode($feed->value, true);
+            if ($parsedValue && ArrayHelper::isTrue($parsedValue, 'enabled')) {
+                // Now check if conditions matched or not
+                $isConditionMatched = $this->checkCondition($parsedValue, $formData, $insertId);
+                if ($isConditionMatched) {
+                    $item = [
+                        'id'       => $feed->id,
+                        'meta_key' => $feed->meta_key,
+                        'settings' => $parsedValue
+                    ];
+                    if($feed->meta_key == 'user_registration_feeds') {
+                        array_unshift($enabledFeeds , $item);
+                    } else {
+                        $enabledFeeds[] = $item;
+                    }
+                }
+            }
+        }
+
+        if(!$enabledFeeds) {
             do_action('fluentform_global_notify_completed', $insertId, $form);
             return;
         }
@@ -63,13 +82,7 @@ class GlobalNotificationManager
             if (!$entry) {
                 $entry = $this->getEntry($insertId, $form);
             }
-            // skip emails which will be sent on payment form submit otherwise email is sent after payment success
-            if (!!$form->has_payment && ($feed['meta_key'] == 'notifications')) {
-                if ((ArrayHelper::get($feed, 'settings.feed_trigger_event') == 'payment_form_submit')) {
-                    continue;
-                }
-            }
-    
+
             // It's sync
             $processedValues = $feed['settings'];
             unset($processedValues['conditionals']);
@@ -120,7 +133,7 @@ class GlobalNotificationManager
         return ConditionAssesor::evaluate($parsedValue, $formData);
     }
 
-    public function getEntry($id, $form)
+    private function getEntry($id, $form)
     {
         $submission = wpFluent()->table('fluentform_submissions')->find($id);
         $formInputs = FormFieldsParser::getEntryInputs($form, ['admin_label', 'raw']);
@@ -149,7 +162,7 @@ class GlobalNotificationManager
                         ->where('id', $entryId)
                         ->first();
 
-        if (!$submission) {
+        if(!$submission) {
             return;
         }
 
@@ -157,49 +170,19 @@ class GlobalNotificationManager
 
         $replaced = false;
         foreach ($passwordKeys as $passwordKey) {
-            if (!empty($responseInputs[$passwordKey])) {
-                $responseInputs[$passwordKey] = str_repeat("*", 6).' '. __('(truncated)', 'fluentform');
+            if(!empty($responseInputs[$passwordKey])) {
+                $originalPassword = $responseInputs[$passwordKey];
+                $responseInputs[$passwordKey] = str_repeat("*", strlen($originalPassword)).' '. __('(truncated)', 'fluentform');
                 $replaced = true;
             }
         }
 
-        if ($replaced) {
+        if($replaced) {
             wpFluent()->table('fluentform_submissions')
                 ->where('id', $entryId)
                 ->update([
                     'response' => \json_encode($responseInputs)
                 ]);
         }
-    }
-    
-    /**
-     * @param $feeds
-     * @param $formData
-     * @param $insertId
-     * @return array
-     */
-    public function getEnabledFeeds($feeds, $formData, $insertId)
-    {
-        $enabledFeeds = [];
-        foreach ($feeds as $feed) {
-            $parsedValue = json_decode($feed->value, true);
-            if ($parsedValue && ArrayHelper::isTrue($parsedValue, 'enabled')) {
-                // Now check if conditions matched or not
-                $isConditionMatched = $this->checkCondition($parsedValue, $formData, $insertId);
-                if ($isConditionMatched) {
-                    $item = [
-                        'id'       => $feed->id,
-                        'meta_key' => $feed->meta_key,
-                        'settings' => $parsedValue
-                    ];
-                    if ($feed->meta_key == 'user_registration_feeds') {
-                        array_unshift($enabledFeeds, $item);
-                    } else {
-                        $enabledFeeds[] = $item;
-                    }
-                }
-            }
-        }
-        return $enabledFeeds;
     }
 }

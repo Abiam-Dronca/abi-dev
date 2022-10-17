@@ -7,7 +7,6 @@ class GalleriesView_bwg extends AdminView_bwg {
 
   public function __construct() {
     wp_enqueue_script(BWG()->prefix . '_jquery.ui.touch-punch.min');
-    wp_enqueue_script(BWG()->prefix . '_speed');
     parent::__construct();
   }
 
@@ -196,12 +195,12 @@ class GalleriesView_bwg extends AdminView_bwg {
 				'preview_url' => add_query_arg('bwg-preview-type', 'thumbnails', $params['preview_action']),
 			),
 			'thumbnails_masonry' 	=> array(
-				'title' => __('Masonry', 'photo-gallery'),
-				'preview_url' => add_query_arg('bwg-preview-type', 'thumbnails_masonry', $params['preview_action']),
+				'title' => __('Masonry', 'photo-gallery') . (!BWG()->is_pro ? '<span class="pro_btn">' . __('Premium', 'photo-gallery') . '</span>' : ''),
+				'preview_url' => !BWG()->is_pro ? $demo_url_for_free : add_query_arg('bwg-preview-type', 'thumbnails_masonry', $params['preview_action']),
 		  ),
 			'thumbnails_mosaic' 	=> array(
-				'title' => __('Mosaic', 'photo-gallery'),
-				'preview_url' => add_query_arg('bwg-preview-type', 'thumbnails_mosaic', $params['preview_action']),
+				'title' => __('Mosaic', 'photo-gallery') . (!BWG()->is_pro ? '<span class="pro_btn">' . __('Premium', 'photo-gallery') . '</span>' : ''),
+				'preview_url' => !BWG()->is_pro ? $demo_url_for_free.'mosaic' : add_query_arg('bwg-preview-type', 'thumbnails_mosaic', $params['preview_action']),
 		  ),
 			'slideshow' 	=> array(
 				'title' => __('Slideshow', 'photo-gallery'),
@@ -212,8 +211,8 @@ class GalleriesView_bwg extends AdminView_bwg {
 				'preview_url' => add_query_arg('bwg-preview-type', 'image_browser', $params['preview_action']),
 		  ),
 			'blog_style' 	=> array(
-				'title' => __('Blog Style', 'photo-gallery'),
-				'preview_url' => add_query_arg('bwg-preview-type', 'blog_style', $params['preview_action']),
+				'title' => __('Blog Style', 'photo-gallery') . (!BWG()->is_pro ? '<span class="pro_btn">' . __('Premium', 'photo-gallery') . '</span>' : ''),
+				'preview_url' => !BWG()->is_pro ? $demo_url_for_free.'blog-style' : add_query_arg('bwg-preview-type', 'blog_style', $params['preview_action']),
 		  ),
 			'carousel' 	=> array(
 				'title' => __('Carousel', 'photo-gallery') . (!BWG()->is_pro ? '<span class="pro_btn">' . __('Premium', 'photo-gallery') . '</span>' : ''),
@@ -234,11 +233,11 @@ class GalleriesView_bwg extends AdminView_bwg {
       ?>
     </div>
     <div id="message_div" class="wd_updated" style="display: none;"></div>
-    <div class="bwg-page-header wd-list-view-header">
+    <div class="bwg-page-header wd-list-view-header<?php echo !BWG()->is_pro ? ' bwg-page-header-free' : ''?>">
       <div class="wd-page-title wd-header wd-list-view-header-left">
         <div>
           <h1 class="wp-heading-inline bwg-heading"><?php _e('Gallery title', 'photo-gallery'); ?></h1>
-          <input type="text" id="name" name="name" class="bwg_requried" value="<?php echo !empty($row->name) ? esc_html($row->name) : ''; ?>">
+          <input type="text" id="name" name="name" class="bwg_requried" value="<?php echo !empty($row->name) ? $row->name : ''; ?>">
         </div>
         <div class="bwg-page-actions">
 					<button class="tw-button-primary button-large" onclick="if (spider_check_required('name', 'Title') || bwg_check_instagram_gallery_input('<?php echo BWG()->options->instagram_access_token ?>') ) {return false;};
@@ -272,6 +271,11 @@ class GalleriesView_bwg extends AdminView_bwg {
 					?>
         </div>
       </div>
+        <?php
+        if (!BWG()->is_pro) {
+          WDWLibrary::topbar_upgrade_ask_question();
+        }
+        ?>
       <div class="bwg-clear"></div>
     </div>
     <div class="wd-table meta-box-sortables">
@@ -336,8 +340,8 @@ class GalleriesView_bwg extends AdminView_bwg {
                     </div>
                     <div class="wd-group">
                       <label class="wd-label" for="slug"><?php _e('Slug', 'photo-gallery'); ?></label>
-                      <input type="text" id="slug" name="slug" value="<?php echo urldecode($row->slug); ?>" size="39" />
-                      <input type="hidden" id="old_slug" name="old_slug" value="<?php echo urldecode($row->slug); ?>" size="39" />
+                      <input type="text" id="slug" name="slug" value="<?php echo $row->slug; ?>" size="39" />
+                      <input type="hidden" id="old_slug" name="old_slug" value="<?php echo $row->slug; ?>" size="39" />
                     </div>
                     <div class="wd-group">
                       <label class="wd-label" for="description"><?php _e('Description', 'photo-gallery'); ?></label>
@@ -438,34 +442,8 @@ class GalleriesView_bwg extends AdminView_bwg {
     <?php
   }
 
-  public function total_size_banner($total_size) {
-    ?>
-    <div class="bwg-total-size-banner-cont">
-      <?php
-      if ($total_size) {
-        ?>
-      <div class="bwg-total-size-banner">
-        <div>
-          <span class="bwg-total-size-banner-note">
-            <b><?php echo sprintf(__("Total size: %s", 'photo-gallery'), $total_size); ?></b>
-            <?php esc_html_e('Heavy images negatively affect your website loading time and user experience. Optimize images to get better performance.', 'photo-gallery'); ?>
-          </span>
-        </div>
-        <div>
-          <a href="<?php echo esc_url(add_query_arg(array( 'page' => 'speed_' . BWG()->prefix ), admin_url('admin.php'))); ?>" class="bwg-total-size-banner-button">
-            <?php esc_html_e('Optimize now', 'photo-gallery'); ?>
-          </a>
-        </div>
-      </div>
-        <?php
-      }
-      ?>
-    </div>
-    <?php
-  }
-
   public function image_display( $params = array() ) {
-    if ( $params['row'] ) {
+    if( $params['row'] ) {
       $is_google_photos = ($params['row']->gallery_type == 'google_photos') ? TRUE : FALSE;
     }
     $ids_string = '';
@@ -485,10 +463,13 @@ class GalleriesView_bwg extends AdminView_bwg {
         var bwg_ajax_url_nonce = "<?php echo wp_nonce_url(admin_url('admin-ajax.php'), '', 'bwg_nonce'); ?>";
       </script>
       <input id="show_add_embed" class="button button-secondary button-large" title="<?php _e('Embed Media', 'photo-gallery'); ?>" style="<?php if ( $params['gallery_type'] != '' ) { echo 'display:none'; } ?>" type="button" onclick="jQuery('.opacity_add_embed').show(); jQuery('#add_embed_help').hide(); return false;" value="<?php _e('Embed Media', 'photo-gallery'); ?>" />
-      <input id="show_bulk_embed" class="button button-secondary button-large" title="<?php _e('Social Bulk Embed', 'photo-gallery'); ?>" style="<?php if ( $params['gallery_type'] != '' ) { echo 'display:none'; } ?>" type="button" onclick="jQuery('.opacity_bulk_embed').show(); return false;" value="<?php _e('Social Bulk Embed', 'photo-gallery'); ?>" />
+      <input id="show_bulk_embed" class="button button-secondary button-large" title="<?php _e('Social Bulk Embed', 'photo-gallery'); ?>" style="<?php if ( $params['gallery_type'] != '' ) { echo 'display:none'; } ?>" type="button" onclick="<?php echo (!BWG()->is_pro ? 'alert(\'' . addslashes(__('This option is available in Premium version', 'photo-gallery')) . '\');' : 'jQuery(\'.opacity_bulk_embed\').show();'); ?> return false;" value="<?php _e('Social Bulk Embed', 'photo-gallery'); ?>" />
+      <?php
+      if ( is_plugin_active('image-optimizer-wd/io-wd.php') && !empty($params['rows']) ) {
+        ?><a href="<?php echo add_query_arg(array('page' => 'iowd_settings', 'target' => 'wd_gallery'), admin_url('admin.php')); ?>" class="button button-primary button-large" target="_blank"><?php _e("Optimize Images", 'photo-gallery'); ?></a><?php
+      }
+      ?>
     </div>
-    <div class="clear"></div>
-    <?php $this->total_size_banner($params['total_size']); ?>
     <div class="clear"></div>
     <div class="opacity_image_alt opacity_image_description opacity_image_redirect opacity_resize_image opacity_add_embed opacity_image_desc opacity_bulk_embed bwg_opacity_media"
          onclick="
@@ -780,54 +761,30 @@ class GalleriesView_bwg extends AdminView_bwg {
             <th class="col_num"><?php echo $temp ? 'tempnum' : ++$i; ?></th>
             <td class="column-primary column-title" data-colname="<?php _e('Filename', 'photo-gallery'); ?>">
               <strong class="has-media-icon">
-                  <span class="bwg-media-icon">
-                    <span class="media-icon image-icon">
-                      <img id="image_thumb_<?php echo $row->id; ?>"
-                           class="preview-image gallery_image_thumb <?php echo $temp ? '' : 'bwg_no_border' ?>"
-                          <?php echo $temp ? 'tempthumb_src=""' : ''; ?>
-                           data-embed="<?php echo $is_embed; ?>"
-                           data-instagram="<?php echo $is_instagram; ?>"
-                           data-type="<?php echo $row->filetype; ?>"
-                           data-src="<?php echo $temp ? '' : $image_url ?>"
-                           title="<?php echo $row->filename; ?>"
-                           alt="<?php echo $row->filename; ?>"/>
-
-                    </span>
-                    <?php
-                    if ( isset($row->size) && $row->size ) {
-                      ?>
-                    <span class="bwg-total-size">
-                      <span><?php echo sprintf(__("Total size: %s", 'photo-gallery'), '<b>' . $row->size . '</b>'); ?></span>
-                      <a
-                        href="<?php echo(BWG()->is_demo ? 'javascript:alert(\'' . addslashes(__('This option is disabled in demo.', 'photo-gallery')) . '\');' : $params['booster_page_url']); ?>">
-                        <?php _e('Optimize now', 'photo-gallery'); ?>
-                      </a>
-                    </span>
-                      <?php
-                    }
-                    ?>
+                <?php if ( !$is_oembed_instagram_post ) { ?>
+                  <a class="thickbox thickbox-preview" onclick="jQuery('#loading_div').show();" href="<?php echo $image_link; ?>">
+                <?php } ?>
+                  <span class="media-icon image-icon">
+                    <img id="image_thumb_<?php echo $row->id; ?>" class="preview-image gallery_image_thumb <?php echo $temp ? '' : 'bwg_no_border' ?>"
+                        <?php echo $temp ? 'tempthumb_src=""' : ''; ?>
+                         data-embed="<?php echo $is_embed; ?>"
+                         data-instagram="<?php echo $is_instagram; ?>"
+                         data-type="<?php echo $row->filetype; ?>"
+                         data-src="<?php echo $temp ? '' : $image_url ?>"
+                         title="<?php echo $row->filename; ?>"
+                         alt="<?php echo $row->filename; ?>"/>
                   </span>
-                  <?php if (!$is_oembed_instagram_post) { ?>
-                  <a class="thickbox thickbox-preview" onclick="jQuery('#loading_div').show();"
-                     href="<?php echo $image_link; ?>">
-                    <?php } ?>
-                    <?php echo $row->filename; ?><?php if (!$is_oembed_instagram_post) { ?>
-                  </a>
-                  <?php } ?>
+                  <?php echo $row->filename; ?>
                   <i class="wd-info dashicons dashicons-info" data-id="wd-info-<?php echo $row->id; ?>"></i>
                   <div id="wd-info-<?php echo $row->id; ?>" class="wd-hide">
                     <p><?php echo __("Date", 'photo-gallery') . ': ' . ($temp ? $row->date : date("d F Y, H:i", strtotime($row->date))); ?></p>
                     <p><?php echo __("Resolution", 'photo-gallery') . ': ' . $row->resolution; ?></p>
-                    <?php
-                    if (isset($row->size) && $row->size) {
-                      ?>
                     <p><?php echo __("Size", 'photo-gallery') . ': ' . $row->size; ?></p>
-                      <?php
-                    }
-                    ?>
                     <p><?php echo __("Type", 'photo-gallery') . ': ' . $row->filetype; ?></p>
                   </div>
-
+                <?php if ( !$is_oembed_instagram_post ) { ?>
+                  </a>
+                <?php } ?>
                 <?php if ( !$row->published ) { ?>
                   — <span class="post-state"><?php _e('Unpublished', 'photo-gallery'); ?></span>
                 <?php } ?>

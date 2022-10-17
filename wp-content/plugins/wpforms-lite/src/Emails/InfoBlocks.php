@@ -45,27 +45,21 @@ class InfoBlocks {
 	 */
 	public function fetch_all() {
 
-		$info = [];
+		$info = array();
 
-		$res = wp_remote_get(
-			self::SOURCE_URL,
-			[
-				'timeout'    => 10,
-				'user-agent' => wpforms_get_default_user_agent(),
-			]
-		);
+		$res = \wp_remote_get( self::SOURCE_URL );
 
-		if ( is_wp_error( $res ) ) {
+		if ( \is_wp_error( $res ) ) {
 			return $info;
 		}
 
-		$body = wp_remote_retrieve_body( $res );
+		$body = \wp_remote_retrieve_body( $res );
 
 		if ( empty( $body ) ) {
 			return $info;
 		}
 
-		$body = json_decode( $body, true );
+		$body = \json_decode( $body, true );
 
 		return $this->verify_fetched( $body );
 	}

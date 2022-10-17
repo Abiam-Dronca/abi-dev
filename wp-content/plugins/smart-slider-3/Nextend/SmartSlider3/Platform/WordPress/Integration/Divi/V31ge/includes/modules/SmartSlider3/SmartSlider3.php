@@ -38,12 +38,10 @@ class ET_Builder_Module_SmartSlider3 extends ET_Builder_Module {
 
             <?php
             $path = ApplicationTypeFrontend::getAssetsPath() . '/dist/iframe.min.js';
-            add_filter('js_escape', 'Nextend\Framework\Sanitize::esc_js_filter', 10, 2);
             if (file_exists($path)) {
-                echo esc_js(file_get_contents($path));
+                echo file_get_contents($path);
             } else {
             }
-            remove_filter('js_escape', 'Nextend\Framework\Sanitize::esc_js_filter', 10);
             ?>
         </script>
         <?php

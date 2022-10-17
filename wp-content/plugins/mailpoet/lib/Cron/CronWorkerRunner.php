@@ -6,7 +6,6 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Entities\ScheduledTaskEntity;
-use MailPoet\Logging\LoggerFactory;
 use MailPoet\Newsletter\Sending\ScheduledTasksRepository;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
@@ -31,22 +30,17 @@ class CronWorkerRunner {
   /** @var ScheduledTasksRepository */
   private $scheduledTasksRepository;
 
-  /** @var LoggerFactory  */
-  private $loggerFactory;
-
   public function __construct(
     CronHelper $cronHelper,
     CronWorkerScheduler $cronWorkerScheduler,
     WPFunctions $wp,
-    ScheduledTasksRepository $scheduledTasksRepository,
-    LoggerFactory $loggerFactory
+    ScheduledTasksRepository $scheduledTasksRepository
   ) {
     $this->timer = microtime(true);
     $this->cronHelper = $cronHelper;
     $this->cronWorkerScheduler = $cronWorkerScheduler;
     $this->wp = $wp;
     $this->scheduledTasksRepository = $scheduledTasksRepository;
-    $this->loggerFactory = $loggerFactory;
   }
 
   public function run(CronWorkerInterface $worker) {
@@ -81,10 +75,6 @@ class CronWorkerRunner {
       }
     } catch (\Exception $e) {
       if (isset($task) && $task && $e->getCode() !== CronHelper::DAEMON_EXECUTION_LIMIT_REACHED) {
-        /**
-         * ToDo: Use \LoggerFactory::TOPIC_CRON as logger topic, once it is available
-         */
-        $this->loggerFactory->getLogger()->error($e->getMessage(), ['error' => $e]);
         $this->cronWorkerScheduler->rescheduleProgressively($task);
       }
       throw $e;

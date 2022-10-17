@@ -98,10 +98,6 @@ class Fields extends Education\Builder\Fields {
 
 		$atts['data']['utm-content'] = ! empty( $field['name_en'] ) ? $field['name_en'] : '';
 
-		if ( ! empty( $field['class'] ) && $field['class'] === 'education-modal' ) {
-			$atts['class'][] = 'wpforms-not-available';
-		}
-
 		if ( empty( $field['addon'] ) ) {
 			return $atts;
 		}

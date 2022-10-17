@@ -4,7 +4,6 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\Admin;
 
 use Nextend\Framework\Notification\Notification;
 use Nextend\Framework\Plugin;
-use Nextend\Framework\Sanitize;
 use Nextend\SmartSlider3\Settings;
 use Nextend\SmartSlider3\SmartSlider3Info;
 
@@ -15,13 +14,13 @@ use Nextend\SmartSlider3\SmartSlider3Info;
 
     <div <?php $this->renderAttributes(); ?>>
         <div class="n2_admin__header">
-            <?php echo wp_kses($this->getHeader(), Sanitize::$adminTemplateTags); ?>
+            <?php echo $this->getHeader(); ?>
         </div>
         <div class="n2_admin__content">
-            <?php echo wp_kses($this->getSubNavigation(), Sanitize::$adminTemplateTags); ?>
+            <?php echo $this->getSubNavigation(); ?>
             <?php $this->displayTopBar(); ?>
 
-            <?php $this->displayContent(); ?>
+            <?php echo $this->displayContent(); ?>
         </div>
         <?php
         Plugin::doAction('afterApplicationContent');

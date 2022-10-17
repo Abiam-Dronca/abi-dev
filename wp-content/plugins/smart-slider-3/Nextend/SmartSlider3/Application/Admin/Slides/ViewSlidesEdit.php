@@ -47,7 +47,7 @@ class ViewSlidesEdit extends AbstractView {
     protected $frontendSlider;
 
     /**
-     * @var string contains already escaped data
+     * @var string
      */
     protected $renderedSlider;
 

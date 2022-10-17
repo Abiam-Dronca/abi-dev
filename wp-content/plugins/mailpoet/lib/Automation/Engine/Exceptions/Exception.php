@@ -5,14 +5,12 @@ namespace MailPoet\Automation\Engine\Exceptions;
 if (!defined('ABSPATH')) exit;
 
 
-use Exception as PhpException;
-use MailPoet\API\REST\Exception as RestException;
 use Throwable;
 
 /**
  * Frames all MailPoet Automation exceptions ("$e instanceof MailPoet\Automation\Exception").
  */
-abstract class Exception extends PhpException implements RestException {
+abstract class Exception extends \Exception {
   /** @var int */
   protected $statusCode = 500;
 

@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Models\Newsletter;
+use MailPoet\Models\Subscriber;
 
 class MetaInfo {
   public function getSendingTestMetaInfo() {
@@ -37,8 +38,8 @@ class MetaInfo {
     return $this->makeMetaInfo('new_subscriber_notification', 'unknown', 'administrator');
   }
 
-  public function getNewsletterMetaInfo($newsletter, SubscriberEntity $subscriber) {
-    $type = $newsletter->type ?? 'unknown';
+  public function getNewsletterMetaInfo($newsletter, Subscriber $subscriber) {
+    $type = 'unknown';
     switch ($newsletter->type) {
       case Newsletter::TYPE_AUTOMATIC:
         $group = isset($newsletter->options['group']) ? $newsletter->options['group'] : 'unknown';
@@ -56,7 +57,7 @@ class MetaInfo {
         $type = 'post_notification';
         break;
     }
-    return $this->makeMetaInfo($type, $subscriber->getStatus(), $subscriber->getSource());
+    return $this->makeMetaInfo($type, $subscriber->status, $subscriber->source);
   }
 
   private function makeMetaInfo($emailType, $subscriberStatus, $subscriberSource) {

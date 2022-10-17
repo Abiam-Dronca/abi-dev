@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Util\Helpers;
+use MailPoet\WP\Functions as WPFunctions;
 
 class MailChimp {
   private const API_BASE_URI = 'https://user:%s@%s.api.mailchimp.com/3.0/';
@@ -136,19 +137,19 @@ class MailChimp {
    * @throws \Exception
    */
   public function throwException(string $error): void {
-    $errorMessage = __('Unknown MailChimp error.', 'mailpoet');
+    $errorMessage = WPFunctions::get()->__('Unknown MailChimp error.', 'mailpoet');
     switch ($error) {
       case 'API':
-        $errorMessage = __('Invalid API Key.', 'mailpoet');
+        $errorMessage = WPFunctions::get()->__('Invalid API Key.', 'mailpoet');
         break;
       case 'size':
-        $errorMessage = __('The information received from MailChimp is too large for processing. Please limit the number of lists!', 'mailpoet');
+        $errorMessage = WPFunctions::get()->__('The information received from MailChimp is too large for processing. Please limit the number of lists!', 'mailpoet');
         break;
       case 'subscribers':
-        $errorMessage = __('Did not find any active subscribers.', 'mailpoet');
+        $errorMessage = WPFunctions::get()->__('Did not find any active subscribers.', 'mailpoet');
         break;
       case 'lists':
-        $errorMessage = __('Did not find any valid lists.', 'mailpoet');
+        $errorMessage = WPFunctions::get()->__('Did not find any valid lists.', 'mailpoet');
         break;
     }
     throw new \Exception($errorMessage);

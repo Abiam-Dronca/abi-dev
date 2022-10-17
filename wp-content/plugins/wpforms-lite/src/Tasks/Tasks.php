@@ -110,6 +110,7 @@ class Tasks {
 			AsyncRequestTask::class,
 		];
 
+		// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
 		/**
 		 * Filters the task class list to initialize.
 		 *
@@ -118,6 +119,7 @@ class Tasks {
 		 * @param array $tasks Task class list.
 		 */
 		return apply_filters( 'wpforms_tasks_get_tasks', $tasks );
+		// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 	}
 
 	/**

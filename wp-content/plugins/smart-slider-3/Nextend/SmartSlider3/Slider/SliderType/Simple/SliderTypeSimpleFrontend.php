@@ -54,35 +54,31 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
 
         $this->initBackgroundAnimation();
 
-        echo wp_kses($this->openSliderElement(), Sanitize::$basicTags);
+        echo $this->openSliderElement();
 
         ob_start();
 
         $slides = $this->slider->getSlides();
         ?>
 
-        <div class="n2-ss-slider-1 n2_ss__touch_element n2-ow"<?php echo empty($sliderCSS) ? '' : ' style="' . esc_attr($sliderCSS) . '"'; ?>>
+        <div class="n2-ss-slider-1 n2_ss__touch_element n2-ow"<?php echo empty($sliderCSS) ? '' : ' style="' . Sanitize::esc_attr($sliderCSS) . '"'; ?>>
             <div class="n2-ss-slider-2 n2-ow">
                 <?php
-                echo wp_kses($this->getBackgroundVideo($params), Sanitize::$videoTags);
+                echo $this->getBackgroundVideo($params);
                 ?>
                 <?php if ($this->backgroundAnimation): ?>
                     <div class="n2-ss-background-animation n2-ow"></div>
                 <?php endif; ?>
-                <div class="n2-ss-slider-3 n2-ow"<?php echo empty($slideCSS) ? '' : ' style="' . esc_attr($slideCSS) . '"'; ?>>
+                <div class="n2-ss-slider-3 n2-ow"<?php echo empty($slideCSS) ? '' : ' style="' . $slideCSS . '"'; ?>>
 
                     <?php
+                    echo $this->slider->staticHtml;
 
-                    // PHPCS - Content already escaped
-                    echo $this->slider->staticHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-                    echo wp_kses(Html::openTag('div', array('class' => 'n2-ss-slide-backgrounds n2-ow-all')), Sanitize::$basicTags);
+                    echo Html::openTag('div', array('class' => 'n2-ss-slide-backgrounds n2-ow-all'));
                     foreach ($slides as $slide) {
-
-                        // PHPCS - Content already escaped
-                        echo $slide->background; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo $slide->background;
                     }
-                    echo wp_kses(Html::closeTag('div'), Sanitize::$basicTags);
+                    echo Html::closeTag('div');
                     ?>
                     <div class="n2-ss-slider-4 n2-ow">
                         <?php
@@ -91,10 +87,9 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
                         foreach ($slides as $slide) {
                             $slide->finalize();
 
-                            // PHPCS - Content already escaped
-                            echo Html::tag('div', Html::mergeAttributes($slide->attributes, $slide->linkAttributes, array( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                                                                                                           'class' => 'n2-ss-slide n2-ow ' . $slide->classes,
-                                                                                                                           'style' => $slide->style
+                            echo Html::tag('div', Html::mergeAttributes($slide->attributes, $slide->linkAttributes, array(
+                                'class' => 'n2-ss-slide n2-ow ' . $slide->classes,
+                                'style' => $slide->style
                             )), $slide->getHTML());
                         }
                         ?>
@@ -106,11 +101,9 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
             </div>
         </div>
         <?php
+        echo $this->widgets->wrapSlider(ob_get_clean());
 
-        // PHPCS - Content already escaped
-        echo $this->widgets->wrapSlider(ob_get_clean()); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-        echo wp_kses($this->closeSliderElement(), Sanitize::$basicTags);
+        echo $this->closeSliderElement();
 
         $this->javaScriptProperties['mainanimation'] = array(
             'type'                       => $params->get('animation'),

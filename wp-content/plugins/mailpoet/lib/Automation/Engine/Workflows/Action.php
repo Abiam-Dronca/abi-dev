@@ -5,12 +5,12 @@ namespace MailPoet\Automation\Engine\Workflows;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Data\Step as StepData;
-use MailPoet\Automation\Engine\Data\StepRunArgs;
-use MailPoet\Automation\Engine\Data\Workflow;
+interface Action {
+  public function getKey(): string;
 
-interface Action extends Step {
-  public function isValid(array $subjects, StepData $step, Workflow $workflow): bool;
+  public function getName(): string;
 
-  public function run(StepRunArgs $args): void;
+  public function isValid(array $subjects, Step $step, Workflow $workflow): bool;
+
+  public function run(Workflow $workflow, WorkflowRun $workflowRun, Step $step): void;
 }

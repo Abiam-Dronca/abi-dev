@@ -75,20 +75,20 @@ class FirstPurchase {
   public function getEventDetails() {
     return [
       'slug' => self::SLUG,
-      'title' => __('First Purchase', 'mailpoet'),
-      'description' => __('Let MailPoet send an email to customers who make their first purchase.', 'mailpoet'),
-      'listingScheduleDisplayText' => __('Email sent when a customer makes their first purchase.', 'mailpoet'),
+      'title' => WPFunctions::get()->__('First Purchase', 'mailpoet'),
+      'description' => WPFunctions::get()->__('Let MailPoet send an email to customers who make their first purchase.', 'mailpoet'),
+      'listingScheduleDisplayText' => WPFunctions::get()->__('Email sent when a customer makes their first purchase.', 'mailpoet'),
       'badge' => [
-        'text' => __('Must-have', 'mailpoet'),
+        'text' => WPFunctions::get()->__('Must-have', 'mailpoet'),
         'style' => 'red',
       ],
       'shortcodes' => [
         [
-          'text' => __('Order amount', 'mailpoet'),
+          'text' => WPFunctions::get()->__('Order amount', 'mailpoet'),
           'shortcode' => self::ORDER_TOTAL_SHORTCODE,
         ],
         [
-          'text' => __('Order date', 'mailpoet'),
+          'text' => WPFunctions::get()->__('Order date', 'mailpoet'),
           'shortcode' => self::ORDER_DATE_SHORTCODE,
         ],
       ],
@@ -204,18 +204,15 @@ class FirstPurchase {
     return $this->getGuestCustomerOrderCountByEmail($customerEmail);
   }
 
-  private function getGuestCustomerOrderCountByEmail(string $customerEmail): int {
-    $ordersCount = $this->helper->wcGetOrders(
-      [
-        'status' => 'all',
-        'type' => 'shop_order',
-        'billing_email' => $customerEmail,
-        'limit' => 1,
-        'return' => 'ids',
-        'paginate' => true,
-      ]
-    )->total;
-
-    return $ordersCount;
+  private function getGuestCustomerOrderCountByEmail($customerEmail) {
+    global $wpdb;
+    $count = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*)
+        FROM $wpdb->posts as posts
+        LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id
+        WHERE   meta.meta_key = '_billing_email'
+        AND     posts.post_type = 'shop_order'
+        AND     meta_value = %s
+    ", $customerEmail));
+    return (int)$count;
   }
 }

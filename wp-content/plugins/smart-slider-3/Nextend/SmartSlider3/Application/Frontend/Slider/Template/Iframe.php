@@ -3,7 +3,7 @@
 namespace Nextend\SmartSlider3\Application\Frontend\Slider;
 
 use Nextend\Framework\Asset\AssetManager;
-use Nextend\Framework\Request\Request;
+use Nextend\Framework\Sanitize;
 use Nextend\SmartSlider3\Settings;
 use Nextend\WordPress\OutputBuffer;
 
@@ -31,7 +31,7 @@ use Nextend\WordPress\OutputBuffer;
     /**
      * In page builder -> editors, we must force sliders to be visible on every device.
      */
-    if (Request::$GET->getInt('iseditor')):
+    if (isset($_GET['iseditor']) && $_GET['iseditor']):
         ?>
         <script>
             window.ssOverrideHideOn = {
@@ -53,30 +53,23 @@ use Nextend\WordPress\OutputBuffer;
     $handlers = ob_list_handlers();
     if (!in_array(OutputBuffer::class . '::outputCallback', $handlers)) {
         if (class_exists('\\Nextend\\Framework\\Asset\\AssetManager', false)) {
-
-            // PHPCS - Content already escaped
-            echo AssetManager::getCSS(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-            // PHPCS - Content already escaped
-            echo AssetManager::getJs(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo AssetManager::getCSS();
+            echo AssetManager::getJs();
         }
     }
 
-    $externals = esc_attr(Settings::get('external-css-files'));
+    $externals = Sanitize::esc_attr(Settings::get('external-css-files'));
     if (!empty($externals)) {
         $externals = explode("\n", $externals);
         foreach ($externals as $external) {
-            echo "<link rel='stylesheet' href='" . esc_url($external) . "' type='text/css' media='all' />";
+            echo "<link rel='stylesheet' href='" . $external . "' type='text/css' media='all' />";
         }
     }
     ?>
 </head>
 <body>
 <?php
-
-
-// PHPCS - Content already escaped
-echo $this->getSliderHTML(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo $this->getSliderHTML();
 ?>
 <script>
 

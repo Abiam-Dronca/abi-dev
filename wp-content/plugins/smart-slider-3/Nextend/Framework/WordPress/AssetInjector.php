@@ -163,7 +163,7 @@ class AssetInjector {
     public function injectCSSComment() {
         static $once;
         if (!$once) {
-            echo wp_kses(self::$cssComment, array());
+            echo self::$cssComment;
             $once = true;
         }
     }

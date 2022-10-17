@@ -40,18 +40,7 @@ function as_unschedule_action( $hook, $args = array(), $group = '' ) {
  }
  $action_id = ActionScheduler::store()->query_action( $params );
  if ( $action_id ) {
- try {
  ActionScheduler::store()->cancel_action( $action_id );
- } catch ( Exception $exception ) {
- ActionScheduler::logger()->log(
- $action_id,
- sprintf(
- __( 'Caught exception while cancelling action: %s', 'action-scheduler' ),
- esc_attr( $hook )
- )
- );
- $action_id = null;
- }
  }
  return $action_id;
 }
@@ -152,7 +141,7 @@ function as_get_datetime_object( $date_string = null, $timezone = 'UTC' ) {
  } elseif ( is_numeric( $date_string ) ) {
  $date = new ActionScheduler_DateTime( '@' . $date_string, new DateTimeZone( $timezone ) );
  } else {
- $date = new ActionScheduler_DateTime( null === $date_string ? 'now' : $date_string, new DateTimeZone( $timezone ) );
+ $date = new ActionScheduler_DateTime( $date_string, new DateTimeZone( $timezone ) );
  }
  return $date;
 }

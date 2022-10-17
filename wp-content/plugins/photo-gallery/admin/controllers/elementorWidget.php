@@ -57,7 +57,7 @@ class BWGElementor extends \Elementor\Widget_Base {
   /**
    * Register widget controls.
    */
-  protected function register_controls() {
+  protected function _register_controls() {
 
     if($this->get_id() !== null){
       $settings = $this->get_settings();

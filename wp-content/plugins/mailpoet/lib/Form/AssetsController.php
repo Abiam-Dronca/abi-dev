@@ -23,11 +23,7 @@ class AssetsController {
 
   const RECAPTCHA_API_URL = 'https://www.google.com/recaptcha/api.js?render=explicit';
 
-  public function __construct(
-    WPFunctions $wp,
-    BasicRenderer $renderer,
-    SettingsController $settings
-  ) {
+  public function __construct(WPFunctions $wp, BasicRenderer $renderer, SettingsController $settings) {
     $this->wp = $wp;
     $this->renderer = $renderer;
     $this->settings = $settings;
@@ -41,7 +37,7 @@ class AssetsController {
     ob_start();
     $captcha = $this->settings->get('captcha');
     if (!empty($captcha['type']) && Captcha::isReCaptcha($captcha['type'])) {
-      echo '<script src="' . esc_attr(self::RECAPTCHA_API_URL) . '" async defer></script>';
+      echo '<script src="' . self::RECAPTCHA_API_URL . '" async defer></script>';
     }
 
     $this->wp->wpPrintScripts('jquery');
@@ -94,7 +90,7 @@ class AssetsController {
       'is_rtl' => (function_exists('is_rtl') ? (bool)is_rtl() : false),
     ]);
 
-    $ajaxFailedErrorMessage = __('An error has happened while performing a request, please try again later.', 'mailpoet');
+    $ajaxFailedErrorMessage = $this->wp->__('An error has happened while performing a request, please try again later.');
 
     $inlineScript = <<<EOL
 function initMailpoetTranslation() {

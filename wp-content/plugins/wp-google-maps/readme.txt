@@ -5,16 +5,16 @@ Tags: google maps, maps, map, map markers, google map, google maps plugin, wp go
 Requires at least: 3.5
 Tested up to: 6.0
 Requires PHP: 5.3
-Stable tag: 9.0.12
+Stable tag: 9.0.5
 License: GPLv2
 
 The easiest to use Google maps plugin! Create a custom Google map, store locator or map widget with high quality markers containing categories, descriptions, images and links.
 
 == Description ==
 
-The easiest to use Google Maps and Open Layers Map Plugin (including a Map Block)!
+The easiest to use Google Maps and Open Layers Map plugin!
 
-Add a customized Google map, map block or Store Locator to your WordPress posts and/or pages quickly and easily with the supplied shortcode. No fuss. No iFrames and super easy to use! Perfect for contact page maps, routes, maps showing delivery areas and any other use you can think of!
+Add a customized Google map, map widget or Store Locator to your WordPress posts and/or pages quickly and easily with the supplied shortcode. No fuss. No iFrames and super easy to use! Perfect for contact page maps, routes, maps showing delivery areas and any other use you can think of!
 
 While the free version of WP Go Maps allows you to create a Google map with as many markers as you like, the Pro version allows you to do so much more! 
 
@@ -240,56 +240,9 @@ Please update your WP Go Maps version to 6.3.15 to ensure you are using the late
 
 == Changelog ==
 
-= 9.0.12 - 2022-10-13 =
-* Fixed issue where minified library files were being loaded when in developer mode only
-* Fixed issue with CRUD class KSES processing
-* Updated Atlas Novus install ratio probability calculations to use a larger sample range
-
-= 9.0.11 - 2022-09-20  =
-* Added various supports for Pro add-on settings
-* Fixed issue with country code module where it was using TLD instead of ISO 3166-1 alpha-2 
-* Updated internal engine controller to make use of mt_rand() instead of rand(), to improve probability factoring
-* Updated da_DK translation file (Internal Adjustment)
-
-= 9.0.10 - 2022-08-24 =
-* Fixed issue where "I agree" GDPR button would not be translated once global settings are saved
-* Fixed issue with Nominatim query params, where some restrictions would not be respected
-* Fixed issue where combined file was preferred over minified file when the servers archive class would extract slower than expected. Introduces delta tolerance 
-* Updated Atlas Novus install ratio to increase the amount of users who receive the new user interface temporarily (Ratio: 70%)
-* Tested Borlabs Cookie integration, found to be fully functional after in depth discussion with their team
-
-= 9.0.9 - 2022-08-11 =
-* Added Atlas Novus tag to plugin website link
-* Removed internal build swap notice, for the time being
-
-= 9.0.8 - 2022-08-03 =
-* Added installer links to API key fields in settings area, to improve API key creation process for returning users
-* Updated all base PO files, source information updated for future improvements
-* Updated branding assets
-
-= 9.0.7 - 2022-07-27 =
-* Added button styling to primary installer skip button, to make this option more clear to new users 
-* Added installer auto skip system, which will delay the first time setup flow by 1 day automatically for new users
-* Added intelli-panel system to editor, which opens the feature editor if a map does not have any of the specified feature type (Atlas Novus)
-* Added map editor tour system (beta), which leads the user through the first time marker creation process (Atlas Novus)
-* Fixed issue where gallery setting hint was being shown in basic only, incorrectly
-
-= 9.0.6 - 2022-07-14 =
-* Added option to dynamically refactor single quote SQL queries within our core. This solves issues in environments where single quote statements are not supported, such as WP Engine
-* Fixed issue where OpenLayers canvas would scale incorrectly on retina displays 
-* Fixed issue where OpenLayers canvas would inherit theme max width values, which could lead to misplacement of markers 
-* Fixed issue where separated Store Locator search would run even when no request is passed, causing a focus on address field
-* Fixed issue where Store locator was initializing on the first element broadly matched, this could lead to issues when using add-on
-* Fixed issue where DataTables reload would be called early and cause an error to be thrown
-* Fixed issue in 'isModernComponentStyleAllowed' method which did not account for Atlas Novus build
-* Fixed issue where Reflection exception would not be handled gracefully where no class name is present (Thanks to Amit Tal)
-* Updated Atlas Novus install ratio to reduce the amount of users who receive the new user interface temporarily (Ratio: 30%)
-* Updated DataTables bundles to 1.12.1 (Excl. Styles)
-* Updated DataTables Responsive bundles to 2.3.0
-
 = 9.0.5 - 2022-07-06 =
 * Added 'is-fullscreen' class to maps when they enter fullscreen mode, adding control over styling
-* Improved underlying canvas handling on retina displays with OpenLayers
+* Improved underlyig canvas handling on retina displays with OpenLayers
 * Fixed issue where fullscreen height on Safari, with OpenLayers would not be respected
 * Removed calls to $.isNumeric and replaced them with WPGMZA.isNumeric counterpart
 * Removed $.bind calls and replaced them with standard $.on event listeners
@@ -632,6 +585,5 @@ Please update your WP Go Maps version to 6.3.15 to ensure you are using the late
 
 
 For more, please view the WP Go Maps site
-
 
 

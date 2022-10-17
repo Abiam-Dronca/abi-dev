@@ -19,16 +19,17 @@ use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\NewsletterLinkEntity;
 use MailPoet\Entities\NewsletterTemplateEntity;
 use MailPoet\Entities\ScheduledTaskEntity;
-use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SendingQueueEntity;
 use MailPoet\Entities\StatisticsFormEntity;
-use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\UserFlagEntity;
 use MailPoet\Form\FormsRepository;
 use MailPoet\Mailer\MailerLog;
-use MailPoet\Newsletter\Sending\ScheduledTasksRepository;
+use MailPoet\Models\Newsletter;
+use MailPoet\Models\ScheduledTask;
+use MailPoet\Models\Segment;
+use MailPoet\Models\SendingQueue;
+use MailPoet\Models\Subscriber;
 use MailPoet\Referrals\ReferralDetector;
-use MailPoet\Segments\SegmentsRepository;
 use MailPoet\Segments\WP;
 use MailPoet\Services\Bridge;
 use MailPoet\Settings\Pages;
@@ -63,10 +64,6 @@ class Populator {
   private $wpSegment;
   /** @var EntityManager */
   private $entityManager;
-  /** @var ScheduledTasksRepository */
-  private $scheduledTasksRepository;
-  /** @var SegmentsRepository */
-  private $segmentsRepository;
 
   public function __construct(
     SettingsController $settings,
@@ -75,9 +72,7 @@ class Populator {
     ReferralDetector $referralDetector,
     FormsRepository $formsRepository,
     EntityManager $entityManager,
-    WP $wpSegment,
-    ScheduledTasksRepository $scheduledTasksRepository,
-    SegmentsRepository $segmentsRepository
+    WP $wpSegment
   ) {
     $this->settings = $settings;
     $this->wp = $wp;
@@ -169,8 +164,6 @@ class Populator {
     ];
     $this->formsRepository = $formsRepository;
     $this->entityManager = $entityManager;
-    $this->scheduledTasksRepository = $scheduledTasksRepository;
-    $this->segmentsRepository = $segmentsRepository;
   }
 
   public function up() {
@@ -203,7 +196,6 @@ class Populator {
     $this->moveNewsletterTemplatesThumbnailData();
     $this->scheduleNewsletterTemplateThumbnails();
     $this->updateToUnifiedTrackingSettings();
-    $this->fixNotificationHistoryRecordsStuckAtSending();
   }
 
   private function createMailPoetPage() {
@@ -249,12 +241,8 @@ class Populator {
     }
 
     // set default sender info based on current user
-    $currentUserName = $currentUser->display_name ?: ''; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
-    // parse current user name if an email is used
-    $senderName = explode('@', $currentUserName);
-    $senderName = reset($senderName);
     $defaultSender = [
-      'name' => $senderName,
+      'name' => $currentUser->display_name ?: '', // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
       'address' => $currentUser->user_email ?: '', // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
     ];
     $savedSender = $this->settings->fetch('sender', []);
@@ -317,8 +305,8 @@ class Populator {
     }
 
     $woocommerceOptinOnCheckout = $this->settings->fetch('woocommerce.optin_on_checkout');
-    $legacyLabelText = _x('Yes, I would like to be added to your mailing list', "default email opt-in message displayed on checkout page for ecommerce websites", 'mailpoet');
-    $currentLabelText = _x('I would like to receive exclusive emails with discounts and product information', "default email opt-in message displayed on checkout page for ecommerce websites", 'mailpoet');
+    $legacyLabelText = $this->wp->_x('Yes, I would like to be added to your mailing list', "default email opt-in message displayed on checkout page for ecommerce websites", 'mailpoet');
+    $currentLabelText = $this->wp->_x('I would like to receive exclusive emails with discounts and product information', "default email opt-in message displayed on checkout page for ecommerce websites", 'mailpoet');
     if (empty($woocommerceOptinOnCheckout)) {
       $this->settings->set('woocommerce.optin_on_checkout', [
         'enabled' => empty($settingsDbVersion), // enable on new installs only
@@ -329,6 +317,12 @@ class Populator {
     }
     // reset mailer log
     MailerLog::resetMailerLog();
+
+    $thirdPartyScriptsEnabled = $this->settings->get('3rd_party_libs');
+    if (is_null($thirdPartyScriptsEnabled)) {
+      // keep loading 3rd party libraries for existing users so the functionality is not broken
+      $this->settings->set('3rd_party_libs.enabled', '1');
+    }
   }
 
   private function createDefaultUsersFlags() {
@@ -370,29 +364,25 @@ class Populator {
 
   private function createDefaultSegment() {
     // WP Users segment
-    $this->segmentsRepository->getWPUsersSegment();
+    Segment::getWPSegment();
     // WooCommerce customers segment
-    $this->segmentsRepository->getWooCommerceSegment();
+    Segment::getWooCommerceSegment();
 
     // Synchronize WP Users
     $this->wpSegment->synchronizeUsers();
 
     // Default segment
-    $defaultSegment = $this->segmentsRepository->findOneBy(
-      ['type' => 'default'],
-      ['id' => 'ASC']
-    );
-
-    if (!$defaultSegment instanceof SegmentEntity) {
-      $defaultSegment = new SegmentEntity(
-        __('Newsletter mailing list', 'mailpoet'),
-        SegmentEntity::TYPE_DEFAULT,
-        __('This list is automatically created when you install MailPoet.', 'mailpoet')
-      );
-      $this->segmentsRepository->persist($defaultSegment);
-      $this->segmentsRepository->flush();
+    $defaultSegment = Segment::where('type', 'default')->orderByAsc('id')->limit(1)->findOne();
+    if (!$defaultSegment instanceof Segment) {
+      $defaultSegment = Segment::create();
+      $newList = [
+        'name' => $this->wp->__('Newsletter mailing list', 'mailpoet'),
+        'description' =>
+          $this->wp->__('This list is automatically created when you install MailPoet.', 'mailpoet'),
+      ];
+      $defaultSegment->hydrate($newList);
+      $defaultSegment->save();
     }
-
     return $defaultSegment;
   }
 
@@ -486,14 +476,7 @@ class Populator {
         'name' => 'afterTimeType',
         'newsletter_type' => NewsletterEntity::TYPE_RE_ENGAGEMENT,
       ],
-      [
-        'name' => 'workflowId',
-        'newsletter_type' => NewsletterEntity::TYPE_AUTOMATION,
-      ],
-      [
-        'name' => 'workflowStepId',
-        'newsletter_type' => NewsletterEntity::TYPE_AUTOMATION,
-      ],
+
     ];
 
     return [
@@ -608,24 +591,20 @@ class Populator {
 
   private function createSourceForSubscribers() {
     $statisticsFormTable = $this->entityManager->getClassMetadata(StatisticsFormEntity::class)->getTableName();
-    $subscriberTable = $this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName();
-
-    $this->entityManager->getConnection()->executeStatement(
-      ' UPDATE LOW_PRIORITY `' . $subscriberTable . '` subscriber ' .
+    Subscriber::rawExecute(
+      ' UPDATE LOW_PRIORITY `' . Subscriber::$_table . '` subscriber ' .
       ' JOIN `' . $statisticsFormTable . '` stats ON stats.subscriber_id=subscriber.id ' .
       ' SET `source` = "' . Source::FORM . '"' .
       ' WHERE `source` = "' . Source::UNKNOWN . '"'
     );
-
-    $this->entityManager->getConnection()->executeStatement(
-      'UPDATE LOW_PRIORITY `' . $subscriberTable . '`' .
+    Subscriber::rawExecute(
+      'UPDATE LOW_PRIORITY `' . Subscriber::$_table . '`' .
       ' SET `source` = "' . Source::WORDPRESS_USER . '"' .
       ' WHERE `source` = "' . Source::UNKNOWN . '"' .
       ' AND `wp_user_id` IS NOT NULL'
     );
-
-    $this->entityManager->getConnection()->executeStatement(
-      'UPDATE LOW_PRIORITY `' . $subscriberTable . '`' .
+    Subscriber::rawExecute(
+      'UPDATE LOW_PRIORITY `' . Subscriber::$_table . '`' .
       ' SET `source` = "' . Source::WOOCOMMERCE_USER . '"' .
       ' WHERE `source` = "' . Source::UNKNOWN . '"' .
       ' AND `is_woocommerce_user` = 1'
@@ -638,9 +617,7 @@ class Populator {
     if (version_compare((string)$this->settings->get('db_version', '3.26.1'), '3.26.0', '>')) {
       return false;
     }
-    $scheduledTaskTable = $this->entityManager->getClassMetadata(ScheduledTaskEntity::class)->getTableName();
-    $sendingQueueTable = $this->entityManager->getClassMetadata(SendingQueueEntity::class)->getTableName();
-    $tables = [$scheduledTaskTable, $sendingQueueTable];
+    $tables = [ScheduledTask::$_table, SendingQueue::$_table];
     foreach ($tables as $table) {
       $wpdb->query("UPDATE `" . esc_sql($table) . "` SET meta = NULL WHERE meta = 'null'");
     }
@@ -679,10 +656,10 @@ class Populator {
     if (version_compare((string)$this->settings->get('db_version', '3.42.1'), '3.42.0', '>')) {
       return false;
     }
-    $table = esc_sql($this->entityManager->getClassMetadata(SubscriberEntity::class)->getTableName());
+    $table = esc_sql(Subscriber::$_table);
     $query = $wpdb->prepare(
       "UPDATE `{$table}` SET last_subscribed_at = GREATEST(COALESCE(confirmed_at, 0), COALESCE(created_at, 0)) WHERE status != %s AND last_subscribed_at IS NULL;",
-      SubscriberEntity::STATUS_UNCONFIRMED
+      Subscriber::STATUS_UNCONFIRMED
     );
     $wpdb->query($query);
     return true;
@@ -703,28 +680,20 @@ class Populator {
   }
 
   private function scheduleTask($type, $datetime, $priority = null) {
-    $task = $this->scheduledTasksRepository->findOneBy(
-      [
-        'type' => $type,
-        'status' => [ScheduledTaskEntity::STATUS_SCHEDULED, null],
-      ]
-    );
-
+    $task = ScheduledTask::where('type', $type)
+      ->whereRaw('(status = ? OR status IS NULL)', [ScheduledTask::STATUS_SCHEDULED])
+      ->findOne();
     if ($task) {
       return true;
     }
-
-    $task = new ScheduledTaskEntity();
-    $task->setType($type);
-    $task->setStatus(ScheduledTaskEntity::STATUS_SCHEDULED);
-    $task->setScheduledAt($datetime);
-
+    $task = ScheduledTask::create();
+    $task->type = $type;
     if ($priority !== null) {
-      $task->setPriority($priority);
+      $task->priority = $priority;
     }
-
-    $this->scheduledTasksRepository->persist($task);
-    $this->scheduledTasksRepository->flush();
+    $task->status = ScheduledTask::STATUS_SCHEDULED;
+    $task->scheduledAt = $datetime;
+    $task->save();
   }
 
   private function enableStatsNotificationsForAutomatedEmails() {
@@ -920,7 +889,7 @@ class Populator {
       )
     );
     if ($premiumTableExists) {
-      $table = esc_sql($this->entityManager->getClassMetadata(NewsletterEntity::class)->getTableName());
+      $table = esc_sql(Newsletter::$_table);
       $query = "
         UPDATE
           `{$table}` as n
@@ -985,33 +954,5 @@ class Populator {
       $trackingLevel = $emailTracking ? TrackingConfig::LEVEL_PARTIAL : TrackingConfig::LEVEL_BASIC;
     }
     $this->settings->set('tracking.level', $trackingLevel);
-  }
-
-  private function fixNotificationHistoryRecordsStuckAtSending() {
-    // perform once for versions below or equal to 3.99.0
-    if (version_compare((string)$this->settings->get('db_version', '3.99.1'), '3.99.0', '>')) {
-      return false;
-    }
-
-    $newsletters = $this->entityManager->getClassMetadata(NewsletterEntity::class)->getTableName();
-    $queues = $this->entityManager->getClassMetadata(SendingQueueEntity::class)->getTableName();
-    $tasks = $this->entityManager->getClassMetadata(ScheduledTaskEntity::class)->getTableName();
-
-    $this->entityManager->getConnection()->executeStatement("
-      UPDATE {$newsletters} n
-      JOIN {$queues} q ON n.id = q.newsletter_id
-      JOIN {$tasks} t ON q.task_id = t.id
-      SET n.status = :sentStatus
-      WHERE n.type = :type
-      AND n.status = :sendingStatus
-      AND t.status = :taskStatus
-    ", [
-      'type' => NewsletterEntity::TYPE_NOTIFICATION_HISTORY,
-      'sendingStatus' => NewsletterEntity::STATUS_SENDING,
-      'sentStatus' => NewsletterEntity::STATUS_SENT,
-      'taskStatus' => ScheduledTaskEntity::STATUS_COMPLETED,
-    ]);
-
-    return true;
   }
 }

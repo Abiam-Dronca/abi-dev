@@ -182,8 +182,7 @@ class ExportSlider {
                 PageFlow::cleanOutputBuffers();
                 header('Content-disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($this->backup->slider['title'] . '.ss3'));
                 header('Content-type: application/zip');
-                // PHPCS - contains binary zip data, so nothing to escape
-                echo $zip->file(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $zip->file();
                 PageFlow::exitApplication();
             } else {
                 $file   = $this->sliderId . '-' . preg_replace('/[^a-zA-Z0-9_-]/', '', $this->backup->slider['title']) . '.ss3';
@@ -349,8 +348,7 @@ class ExportSlider {
         PageFlow::cleanOutputBuffers();
         header('Content-disposition: attachment; filename*=UTF-8\'\'' . rawurlencode($slider['title'] . '.zip'));
         header('Content-type: application/zip');
-        // PHPCS - contains binary zip data, so nothing to escape
-        echo $zip->file(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo $zip->file();
 
         Platform::setIsAdmin(false); // Restore admin area
 

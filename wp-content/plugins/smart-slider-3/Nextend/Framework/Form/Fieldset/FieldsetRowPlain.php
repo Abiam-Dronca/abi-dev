@@ -5,16 +5,15 @@ namespace Nextend\Framework\Form\Fieldset;
 
 
 use Nextend\Framework\Form\AbstractField;
-use Nextend\Framework\Sanitize;
 
 class FieldsetRowPlain extends FieldsetRow {
 
     public function renderContainer() {
-        echo '<div class="n2_form__table_row_plain" data-field="table-row-plain-' . esc_attr($this->name) . '">';
+        echo '<div class="n2_form__table_row_plain" data-field="table-row-plain-' . $this->name . '">';
 
         $element = $this->first;
         while ($element) {
-            echo wp_kses($this->decorateElement($element), Sanitize::$adminFormTags);
+            echo $this->decorateElement($element);
 
             $element = $element->getNext();
         }

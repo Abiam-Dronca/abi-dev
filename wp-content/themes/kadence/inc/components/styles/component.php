@@ -1289,7 +1289,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->add_property( '--global-content-edge-padding', $css->render_range( kadence()->option( 'content_edge_spacing' ), 'desktop' ) );
 		$css->add_property( '--global-calc-content-width', 'calc(' . kadence()->sub_option( 'content_width', 'size' ) . kadence()->sub_option( 'content_width', 'unit' ) . ' - var(--global-content-edge-padding) - var(--global-content-edge-padding) )' );
 		$css->add_property( '--scrollbar-offset', '0px' );
-		$css->add_property( '--global-vw', 'calc(100vw - (100vw - 100%))' );
 		if ( class_exists( '\Elementor\Plugin' ) ) {
 			$css->set_selector( ':root body.kadence-elementor-colors' );
 			$css->add_property( '--e-global-color-kadence1', 'var(--global-palette1)' );

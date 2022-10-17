@@ -82,7 +82,7 @@ abstract class UpgradeBase {
 			update_option( $class::STATUS, $class::START );
 		}
 
-		// Class Tasks does not exist at this point, so we have to add an action on init.
+		// CLass Tasks does not exist at this point, so we have to add an action on init.
 		add_action(
 			'init',
 			function () use ( $class ) {

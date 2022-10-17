@@ -80,7 +80,7 @@ class Capabilities {
     members_register_cap_group(
       self::MEMBERS_CAP_GROUP_NAME,
       [
-        'label' => __('MailPoet', 'mailpoet'),
+        'label' => WPFunctions::get()->__('MailPoet', 'mailpoet'),
         'caps' => [],
         'icon' => 'mailpoet-icon-logo',
         'priority' => 30,

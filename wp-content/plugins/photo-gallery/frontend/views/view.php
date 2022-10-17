@@ -14,10 +14,8 @@ class BWGViewSite {
       if ( $embed_instagram_post || ( isset($params['gallery_row']->gallery_type)
         && in_array($params['gallery_row']->gallery_type, array( 'instagram', 'instagram_post' )) ) ) {
         if ( !wp_script_is('instagram-embed', 'done') ) {
-          wp_register_script( 'instagram-embed', 'https://www.instagram.com/embed.js' );
-          wp_print_scripts( 'instagram-embed' );
+          wp_print_scripts('instagram-embed');
         }
-
       }
     }
     if ( !WDWLibrary::elementor_is_active() && BWG()->options->use_inline_stiles_and_scripts ) {
@@ -88,16 +86,14 @@ class BWGViewSite {
             }
         </style>';
     }
-    $params['gallery_view_type'] = isset($params['gallery_view_type']) ? $params['gallery_view_type'] : $params['gallery_type'];
     ?>
 
     <div id="bwg_container1_<?php echo esc_attr($bwg); ?>"
-         class="bwg_container bwg_thumbnail bwg_<?php echo esc_attr($params['gallery_type']); ?> <?php echo $params['gallery_type'] != $params['gallery_view_type'] ? 'bwg_'.esc_attr($params['gallery_view_type']) : ''; ?>"
+         class="bwg_container bwg_thumbnail bwg_<?php echo esc_attr($params['gallery_type']); ?>"
          data-right-click-protection="<?php echo esc_attr(BWG()->options->image_right_click); ?>"
          data-bwg="<?php echo esc_attr($bwg); ?>"
          data-scroll="<?php echo esc_attr($params['need_scroll']); ?>"
          data-gallery-type="<?php echo esc_attr($params['gallery_type']); ?>"
-         data-gallery-view-type="<?php echo esc_attr($params['gallery_view_type']); ?>"
          data-current-url="<?php echo esc_url(addslashes(urldecode($params_array['current_url']))); ?>"
          data-lightbox-url="<?php echo esc_url(addslashes(add_query_arg($params_array, admin_url('admin-ajax.php')))); ?>"
          data-gallery-id="<?php echo esc_attr($params_array['gallery_id']); ?>"
@@ -293,8 +289,12 @@ class BWGViewSite {
   }
 
   public function loading($bwg = 0, $image_enable_page = 0, $gallery_type = '' ) {
-    ?>
-    <div id="ajax_loading_<?php echo esc_attr($bwg); ?>" class="bwg_loading_div_1">
+    $load_type_class = "bwg_loading_div_1";
+    if ( ($image_enable_page == 2 || $image_enable_page == 3) ) {
+      $load_type_class = "bwg_load_more_ajax_loading";
+    }
+     ?>
+    <div id="ajax_loading_<?php echo esc_attr($bwg); ?>" class="<?php echo esc_attr($load_type_class); ?>">
       <div class="bwg_loading_div_2">
         <div class="bwg_loading_div_3">
           <div id="loading_div_<?php echo esc_attr($bwg); ?>" class="bwg_spider_ajax_loading">
@@ -728,8 +728,8 @@ class BWGViewSite {
 				border-style: <?php echo esc_html($theme_row->page_nav_border_style); ?>;
 				border-width: <?php echo esc_html($theme_row->page_nav_border_width); ?>px;
 				border-color: #<?php echo esc_html($theme_row->page_nav_border_color); ?>;
-				<?php $rgb_page_nav_button_bg_color = WDWLibrary::spider_hex2rgb($theme_row->page_nav_button_bg_color); ?>
-				background-color: rgba(<?php echo esc_html($rgb_page_nav_button_bg_color['red']); ?>, <?php echo esc_html($rgb_page_nav_button_bg_color['green']); ?>, <?php echo esc_html($rgb_page_nav_button_bg_color['blue']); ?>, <?php echo esc_html(number_format($theme_row->page_nav_button_bg_transparent / 100, 2, ".", "")); ?>);
+				background-color: #<?php echo esc_html($theme_row->page_nav_button_bg_color); ?>;
+				opacity: <?php echo number_format($theme_row->page_nav_button_bg_transparent / 100, 2, ".", ""); ?>;
 				box-shadow: <?php echo esc_html($theme_row->page_nav_box_shadow); ?>;
 				<?php echo ($theme_row->page_nav_button_transition) ? 'transition: all 0.3s ease 0s;-webkit-transition: all 0.3s ease 0s;' : ''; ?>
       }
@@ -1015,7 +1015,7 @@ class BWGViewSite {
   }
 
   public function http_strip_query_param( $url, $param ) {
-    $pieces = parse_url( html_entity_decode($url) );
+    $pieces = parse_url($url);
     if ( !$pieces['query'] ) {
       return $url;
     }

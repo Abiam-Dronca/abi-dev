@@ -85,7 +85,7 @@ class AdminView_bwg {
     }
     ob_start();
     ?>
-    <div class="wd-list-view-header">
+    <div class="wd-list-view-header<?php echo !BWG()->is_pro ? ' bwg-page-header-free' : ''?>">
       <div class="wd-list-view-header-left">
         <div class="wd-page-title <?php echo $title_class; ?>">
           <h1 class="wd-heading-inline"><?php echo $title; ?>
@@ -112,12 +112,17 @@ class AdminView_bwg {
           if ( $how_to_button ) {
             require BWG()->plugin_dir . '/framework/howto/howto.php';
           }
-          if ( $buttons ) {
+          if( $buttons ){
             echo $this->buttons($buttons, FALSE);
           }
           ?>
         </div>
       </div>
+      <?php
+      if (!BWG()->is_pro && $popup_window ) {
+        WDWLibrary::topbar_upgrade_ask_question();
+      }
+      ?>
     </div>
     <?php
     return ob_get_clean();
@@ -384,65 +389,6 @@ class AdminView_bwg {
       <?php
     }
 
-    return ob_get_clean();
-  }
-
-  /**
-   * @param $params
-   *
-   * @return false|string
-   */
-  protected function popup($params) {
-    ob_start();
-    ?>
-    <div class="bwg-hidden bwg-popup-overlay">
-      <?php
-      if (isset($params['dismiss'])) {
-        ?>
-      <div class="bwg-popup-dismiss" <?php echo $params['dismiss']['action']; ?>></div>
-        <?php
-      }
-      ?>
-      <div class="bwg-popup">
-        <div class="bwg-popup-content">
-          <div class="bwg-popup-title"><?php echo esc_html($params['title']); ?></div>
-          <div class="bwg-popup-description"><?php echo esc_html($params['description']); ?></div>
-          <?php
-          if (isset($params['html'])) {
-            ?>
-            <div class="bwg-html"><?php echo ($params['html']); ?></div>
-            <?php
-          }
-          ?>
-        </div>
-        <?php
-        if (isset($params['button1']) || isset($params['button2'])) {
-          ?>
-        <div class="bwg-popup-button">
-          <?php
-          if (isset($params['button1'])) {
-            ?>
-          <a <?php echo $params['button1']['action']; ?> class="wd-float-left <?php echo esc_html($params['button1']['class']); ?>"><?php echo esc_html($params['button1']['title']); ?></a>
-            <?php
-          }
-          if (isset($params['button2'])) {
-            ?>
-            <a <?php echo $params['button2']['action']; ?> class="wd-float-right <?php echo esc_html($params['button2']['class']); ?>"><?php echo esc_html($params['button2']['title']); ?></a>
-            <?php
-          }
-          if (isset($params['html2'])) {
-            ?>
-            <span class="bwg-html"><?php echo ($params['html2']); ?></span>
-            <?php
-          }
-          ?>
-        </div>
-          <?php
-        }
-        ?>
-      </div>
-    </div>
-    <?php
     return ob_get_clean();
   }
 }

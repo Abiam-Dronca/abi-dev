@@ -24,6 +24,9 @@ class Changelog {
   /** @var Url */
   private $urlHelper;
 
+  /** @var MP2Migrator */
+  private $mp2Migrator;
+
   /** @var TrackingConfig */
   private $trackingConfig;
 
@@ -32,12 +35,14 @@ class Changelog {
     WPFunctions $wp,
     Helper $wooCommerceHelper,
     Url $urlHelper,
+    MP2Migrator $mp2Migrator,
     TrackingConfig $trackingConfig
   ) {
     $this->wooCommerceHelper = $wooCommerceHelper;
     $this->settings = $settings;
     $this->wp = $wp;
     $this->urlHelper = $urlHelper;
+    $this->mp2Migrator = $mp2Migrator;
     $this->trackingConfig = $trackingConfig;
   }
 
@@ -69,6 +74,7 @@ class Changelog {
 
   public function check() {
     $version = $this->settings->get('version');
+    $this->checkMp2Migration();
     if ($version === null) {
       $this->setupNewInstallation();
       $this->checkWelcomeWizard();
@@ -99,6 +105,34 @@ class Changelog {
       && $this->trackingConfig->isEmailTrackingEnabled()
       && $this->wooCommerceHelper->isWooCommerceActive()
       && $this->wp->currentUserCan('administrator');
+  }
+
+  public function isMp2MigrationInProgress() {
+    return $this->mp2Migrator->isMigrationStartedAndNotCompleted();
+  }
+
+  public function shouldShowMp2Migration() {
+    return $this->settings->get('version') === null && $this->mp2Migrator->isMigrationNeeded();
+  }
+
+  private function checkMp2Migration() {
+    if (
+      !isset($_GET['page']) ||
+      !in_array(
+      sanitize_text_field(wp_unslash($_GET['page'])),
+      [
+        'mailpoet-migration',
+        'mailpoet-settings',
+      ]
+      ) && $this->isMp2MigrationInProgress()
+    ) {
+      // Force the redirection if the migration has started but is not completed
+      $this->terminateWithRedirect($this->wp->adminUrl('admin.php?page=mailpoet-migration'));
+    }
+
+    if ($this->shouldShowMp2Migration()) {
+      $this->terminateWithRedirect($this->wp->adminUrl('admin.php?page=mailpoet-migration'));
+    }
   }
 
   private function setupNewInstallation() {

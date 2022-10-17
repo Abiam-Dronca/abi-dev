@@ -103,7 +103,7 @@ registerBlockType( 'wpforms/form-selector', {
 			jsx.push(
 				<Fragment
 					key="wpforms-gutenberg-form-selector-fragment-block-preview">
-					<img src={ wpforms_gutenberg_form_selector.block_preview_url } style={{ width: '100%' }}/>
+					<img src={ wpforms_gutenberg_form_selector.block_preview_url }/>
 				</Fragment>
 			);
 		} else {

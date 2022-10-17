@@ -222,7 +222,6 @@ class WP {
     $this->updateFirstNameIfMissing();
     $this->insertUsersToSegment();
     $this->removeOrphanedSubscribers();
-    $this->subscribersRepository->invalidateTotalSubscribersCache();
 
     return true;
   }

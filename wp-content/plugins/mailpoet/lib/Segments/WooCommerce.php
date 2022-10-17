@@ -151,7 +151,7 @@ class WooCommerce {
       $status = SubscriberEntity::STATUS_SUBSCRIBED;
     }
 
-    $email = $this->insertSubscriberFromOrder($wcOrder, $status);
+    $email = $this->insertSubscriberFromOrder($orderId, $status);
 
     if (empty($email)) {
       return;
@@ -191,7 +191,6 @@ class WooCommerce {
       $this->updateGlobalStatus();
     }
 
-    $this->subscribersRepository->invalidateTotalSubscribersCache();
     return $lastCheckedOrderId;
   }
 
@@ -243,10 +242,17 @@ class WooCommerce {
     ", ['capabilities' => $wpdb->prefix . 'capabilities', 'source' => Source::WOOCOMMERCE_USER]);
   }
 
-  private function insertSubscriberFromOrder(\WC_Order $wcOrder, string $status): ?string {
+  private function insertSubscriberFromOrder(int $orderId, string $status): ?string {
+    global $wpdb;
     $validator = new ModelValidator();
 
-    $email = $wcOrder->get_billing_email();
+    $email = $this->connection->executeQuery("
+      SELECT wppm.meta_value AS email
+      FROM `{$wpdb->posts}` wpp
+      JOIN `{$wpdb->postmeta}` wppm ON wpp.ID = wppm.post_id AND wppm.meta_key = '_billing_email' AND wppm.meta_value != ''
+      WHERE wpp.post_type = 'shop_order'
+      AND wpp.ID = :orderId
+    ", ['orderId' => $orderId])->fetchOne();
 
     if (!$email || !$validator->validateEmail($email)) {
       return null;
@@ -272,22 +278,14 @@ class WooCommerce {
       'highestOrderId' => \PDO::PARAM_INT,
     ];
 
-    if ($this->woocommerceHelper->isWooCommerceCustomOrdersTableEnabled()) {
-      $ordersTable = $this->woocommerceHelper->getOrdersTableName();
-      $query = "SELECT id AS order_id, billing_email AS email
-        FROM `{$ordersTable}`
-        WHERE type = 'shop_order' AND billing_email != '' AND (id > :lowestOrderId AND id <= :highestOrderId)
-        ORDER BY id";
-    } else {
-      $query = "SELECT wpp.id AS order_id, wppm.meta_value AS email
-        FROM `{$wpdb->posts}` wpp
-        JOIN `{$wpdb->postmeta}` wppm ON wpp.ID = wppm.post_id AND wppm.meta_key = '_billing_email' AND wppm.meta_value != ''
-        WHERE wpp.post_type = 'shop_order'
-        AND (wpp.ID > :lowestOrderId AND wpp.ID <= :highestOrderId)
-        ORDER BY wpp.id";
-    }
-
-    $result = $this->connection->executeQuery($query, $parameters, $parametersType)->fetchAllAssociative();
+    $result = $this->connection->executeQuery("
+      SELECT wpp.id AS order_id, wppm.meta_value AS email
+      FROM `{$wpdb->posts}` wpp
+      JOIN `{$wpdb->postmeta}` wppm ON wpp.ID = wppm.post_id AND wppm.meta_key = '_billing_email' AND wppm.meta_value != ''
+      WHERE wpp.post_type = 'shop_order'
+      AND (wpp.ID > :lowestOrderId AND wpp.ID <= :highestOrderId)
+      ORDER BY wpp.id
+    ", $parameters, $parametersType)->fetchAllAssociative();
 
     $processedOrders = [];
     foreach ($result as $item) {
@@ -456,20 +454,13 @@ class WooCommerce {
     // Insert WC customer IDs to a temporary table for left join to use an index
     $tmpTableName = Env::$dbPrefix . 'tmp_wc_ids';
     // Registered users with orders
-    if ($this->woocommerceHelper->isWooCommerceCustomOrdersTableEnabled()) {
-      $ordersTable = $this->woocommerceHelper->getOrdersTableName();
-      $registeredCustomersSubQuery = "SELECT DISTINCT customer_id AS id FROM `{$ordersTable}` WHERE type = 'shop_order'";
-    } else {
-      $registeredCustomersSubQuery = "SELECT DISTINCT wppm.meta_value AS id FROM {$wpdb->postmeta} wppm
-        JOIN {$wpdb->posts} wpp ON wppm.post_id = wpp.ID
-        AND wpp.post_type = 'shop_order'
-        WHERE wppm.meta_key = '_customer_user'";
-    }
-
     $this->connection->executeQuery("
       CREATE TEMPORARY TABLE {$tmpTableName}
         (`id` int(11) unsigned NOT NULL, UNIQUE(`id`)) AS
-      {$registeredCustomersSubQuery}
+      SELECT DISTINCT wppm.meta_value AS id FROM {$wpdb->postmeta} wppm
+        JOIN {$wpdb->posts} wpp ON wppm.post_id = wpp.ID
+        AND wpp.post_type = 'shop_order'
+        WHERE wppm.meta_key = '_customer_user'
     ");
     // Registered users with a customer role
     $this->connection->executeQuery("
@@ -507,20 +498,13 @@ class WooCommerce {
       $collation = "COLLATE $this->wpPostmetaValueCollation";
     }
 
-    if ($this->woocommerceHelper->isWooCommerceCustomOrdersTableEnabled()) {
-      $ordersTable = $this->woocommerceHelper->getOrdersTableName();
-      $guestCustomersSubQuery = "SELECT DISTINCT billing_email AS email FROM `{$ordersTable}` WHERE type = 'shop_order'";
-    } else {
-      $guestCustomersSubQuery = "SELECT DISTINCT wppm.meta_value AS email FROM {$wpdb->postmeta} wppm
-        JOIN {$wpdb->posts} wpp ON wppm.post_id = wpp.ID
-        AND wpp.post_type = 'shop_order'
-        WHERE wppm.meta_key = '_billing_email'";
-    }
-
     $this->connection->executeQuery("
       CREATE TEMPORARY TABLE {$tmpTableName}
         (`email` varchar(150) NOT NULL, UNIQUE(`email`)) {$collation}
-      {$guestCustomersSubQuery}
+      SELECT DISTINCT wppm.meta_value AS email FROM {$wpdb->postmeta} wppm
+        JOIN {$wpdb->posts} wpp ON wppm.post_id = wpp.ID
+        AND wpp.post_type = 'shop_order'
+        WHERE wppm.meta_key = '_billing_email'
     ");
 
     // Remove WC list guest users which aren't WC customers anymore

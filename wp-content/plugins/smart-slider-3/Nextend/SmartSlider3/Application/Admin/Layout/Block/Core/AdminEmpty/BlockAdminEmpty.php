@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\AdminEmpty;
 
 
-use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\AbstractBlock;
 use Nextend\Framework\View\AbstractLayout;
 use Nextend\Framework\View\Html;
@@ -46,9 +45,9 @@ class BlockAdminEmpty extends AbstractBlock {
 
     public function renderAttributes() {
 
-        echo wp_kses(Html::renderAttributes($this->attributes + array(
+        echo Html::renderAttributes($this->attributes + array(
                 'id'    => $this->id,
                 'class' => implode(' ', $this->classes)
-            )), Sanitize::$adminTemplateTags);
+            ));
     }
 }

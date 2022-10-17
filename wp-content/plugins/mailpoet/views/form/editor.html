@@ -38,7 +38,6 @@
   var mailpoet_tutorial_url = '<%= cdn_url('form-editor/tutorial.mp4') %>';
   var mailpoet_is_administrator = <%= is_administrator ? 'true' : 'false' %>;
   var mailpoet_form_edit_url = "<%= admin_url('admin.php?page=mailpoet-form-editor&id=') %>";
-  var mailpoet_tags = <%= json_encode(subscriber_tags) %>;
   <% endautoescape %>
 </script>
 
@@ -55,12 +54,11 @@
   'form': __('Form'),
   'formSettings': _x('Settings', 'A settings section heading'),
   'formSettingsStyles': __('Styles'),
-  'formSettingsColor': __('Color'),
-  'formSettingsStylesBackground': __('Background'),
+  'formSettingsStylesBackgroundColor': __('Background Color'),
   'formSettingsStylesBackgroundImage': __('Background Image'),
   'formSettingsStylesSelectImage': __('Select Image…'),
   'formSettingsStylesFontSize': __('Font Size'),
-  'formSettingsStylesFont': __('Font'),
+  'formSettingsStylesFontColor': __('Font Color'),
   'formSettingsStylesFontColorInherit': __('Inherit from theme'),
   'formSettingsInheritStyleFromTheme': __('Inherit style from theme'),
   'formSettingsDisplayFullWidth': _x('Display Fullwidth', 'A label for checkbox in form style settings'),
@@ -73,7 +71,7 @@
   'formSettingsAlignmentLeft': _x('left', 'An alignment value for form editor'),
   'formSettingsAlignmentCenter': _x('center', 'An alignment value for form editor'),
   'formSettingsAlignmentRight': _x('right', 'An alignment value for form editor'),
-  'formSettingsBorder': _x('Border', 'A label for checkbox in form style settings'),
+  'formSettingsBorderColor': _x('Border Color', 'A label for checkbox in form style settings'),
   'formSettingsApplyToAll': __('Apply styles to all inputs'),
   'formSettingsWidth': _x('Form width', 'A label for form width settings'),
   'customFieldSettings': _x('Custom field settings', 'A settings section heading'),
@@ -204,10 +202,9 @@
   'blockDividerStyleDotted': _x('Dotted', 'Setting in the divider block'),
   'blockDividerDividerHeight': _x('Divider Height', 'Settings in the divider block'),
   'blockDividerDividerWidth': _x('Divider Width', 'Settings in the divider block'),
-  'blockDividerBackground': _x('Background', 'Settings in the divider block'),
-  'validationMessageColor': _x('Message Color', 'heading above the settings'),
-  'successValidationColorTitle': _x('Success', 'A label for the success message color'),
-  'errorValidationColorTitle': _x('Error', 'A label for the error message color'),
+  'blockDividerColor': _x('Color', 'Settings in the divider block'),
+  'successValidationColorTitle': _x('Success Message Color', 'heading above the settings'),
+  'errorValidationColorTitle': _x('Error Message Color', 'heading above the settings'),
   'formPreviewDesktop': _x('Desktop', 'Desktop browser preview mode'),
   'formPreviewMobile': _x('Mobile', 'Mobile browser preview mode'),
   'formPreviewOthersDisclaimer': __('Psssst. We try our best to show you what the widget might look like, but better check the final result on your website.'),
@@ -216,7 +213,6 @@
   'tutorialHeading': __('A video tour of the form editor'),
   'noName': _x('no name', 'fallback for forms without a name in a form list'),
   'saveFormFirst': __('Please save the form first!'),
-  'addNewTag': __('Add New Tag'),
 }) %>
 <% endblock %>
 

@@ -174,7 +174,6 @@ class NewsletterSaveController {
     $duplicate->setUpdatedAt($createdAt);
     $duplicate->setDeletedAt(null);
 
-    // translators: %s is the subject of the mail which has been copied.
     $duplicate->setSubject(sprintf(__('Copy of %s', 'mailpoet'), $newsletter->getSubject()));
     // generate new unsubscribe token
     $duplicate->setUnsubscribeToken($this->security->generateUnsubscribeTokenByEntity($duplicate));
@@ -406,7 +405,7 @@ class NewsletterSaveController {
       $queueModel->newsletterRenderedBody = null;
 
       $newsletterQueueTask = new NewsletterQueueTask();
-      $newsletterQueueTask->preProcessNewsletter($newsletter, $queueModel);
+      $newsletterQueueTask->preProcessNewsletter($newsletterModel, $queueModel);
 
       // 'preProcessNewsletter' modifies queue by old model - let's reload it
       $this->entityManager->refresh($queue);

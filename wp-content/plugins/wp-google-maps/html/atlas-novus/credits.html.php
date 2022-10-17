@@ -168,7 +168,6 @@
 			<li title="Stability Improvements | GitHub: @KZeni">Kurt Zenisek</li>
 
 			<!-- Issue Reporters -->
-			<li title="Issue Reporter | GitHub: @AmitT">Amit Tal</li>
 			<li title="Issue Reporter | GitHub: @Gismo1337">Sebastian Richter</li>
 			<li title="Issue Reporter | GitHub: @dmitriyKharlashin">Dmitriy Kharlashin</li>
 			<li title="Issue Reporter | GitHub: @MikeNGarrett">Mike Garrett</li>
@@ -240,7 +239,7 @@
 	<hr>
 
 	<h2><?php _e("Ready to get started?", "wp-google-maps"); ?></h2>                
-    <a class="wpgmza-button" href="<?php echo admin_url('admin.php?page=wp-google-maps-menu&amp;action=installer&amp;autoskip=true'); ?>">
+    <a class="wpgmza-button" href="<?php echo admin_url('admin.php?page=wp-google-maps-menu&amp;action=installer'); ?>">
         <?php echo __("Let's get started","wp-google-maps"); ?>
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
     </a>

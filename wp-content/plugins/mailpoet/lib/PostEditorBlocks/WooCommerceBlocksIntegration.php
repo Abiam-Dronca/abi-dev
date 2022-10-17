@@ -12,6 +12,7 @@ use Automattic\WooCommerce\StoreApi\Schemas\ExtendSchema;
 use Automattic\WooCommerce\StoreApi\StoreApi;
 use MailPoet\Config\Env;
 use MailPoet\Entities\SubscriberEntity;
+use MailPoet\Models\Subscriber;
 use MailPoet\Segments\WooCommerce as WooSegment;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Subscribers\SubscribersRepository;
@@ -156,6 +157,12 @@ class WooCommerceBlocksIntegration {
       return null;
     }
 
-    $this->woocommerceSubscription->handleSubscriberOptin($subscriber, $checkoutOptinEnabled, $checkoutOptin);
+    // We temporarily need to fetch old model
+    $subscriberOldModel = Subscriber::findOne($subscriber->getId());
+    if (!$subscriberOldModel) {
+      return null;
+    }
+
+    $this->woocommerceSubscription->handleSubscriberOptin($subscriberOldModel, $checkoutOptinEnabled, $checkoutOptin);
   }
 }

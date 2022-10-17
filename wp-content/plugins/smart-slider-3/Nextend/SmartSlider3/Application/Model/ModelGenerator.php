@@ -193,15 +193,21 @@ class ModelGenerator extends AbstractModelTable {
 
             case 'youtube':
                 $slideBuilder->set(array(
-                    'title'                  => "{title}",
-                    'description'            => '{description}',
-                    'thumbnail'              => "{thumbnail}",
-                    'backgroundColor'        => "ffffff00",
-                    'background-type'        => 'color',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
+                    'title'           => "{title}",
+                    'description'     => '{description}',
+                    'href'            => '{url}',
+                    'thumbnail'       => "{thumbnail}",
+                    'backgroundColor' => "ffffff00",
+                    'background-type' => 'color',
                 ));
-                
-                $youtube = new BuilderComponentLayer($slideBuilder->content, 'youtube');
+
+                $youtube = new BuilderComponentLayer($slideBuilder, 'youtube');
+                $youtube->set(array(
+                    'desktopportraitwidth'  => '100%',
+                    'desktopportraitheight' => '100%',
+                    'desktopportraitalign'  => 'left',
+                    'desktopportraitvalign' => 'top'
+                ));
                 $youtube->item->set(array(
                     "youtubeurl" => "{video_url}",
                 ));
@@ -209,32 +215,26 @@ class ModelGenerator extends AbstractModelTable {
 
             case 'vimeo':
                 $slideBuilder->set(array(
-                    'title'                  => "{title}",
-                    'description'            => '{description}',
-                    'thumbnail'              => "{image200x150/1}",
-                    'backgroundColor'        => "ffffff00",
-                    'background-type'        => 'color',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
+                    'title'           => "{title}",
+                    'description'     => '{description}',
+                    'href'            => '{url}',
+                    'thumbnail'       => "{image200x150/1}",
+                    'backgroundColor' => "ffffff00",
+                    'background-type' => 'color',
                 ));
 
-                $vimeo = new BuilderComponentLayer($slideBuilder->content, 'vimeo');
+                $vimeo = new BuilderComponentLayer($slideBuilder, 'vimeo');
+                $vimeo->set(array(
+                    'desktopportraitwidth'  => '100%',
+                    'desktopportraitheight' => '100%',
+                    'desktopportraitalign'  => 'left',
+                    'desktopportraitvalign' => 'top'
+                ));
                 $vimeo->item->set(array(
                     "vimeourl" => "{url}",
                     'image'    => '{image}'
                 ));
 
-                break;
-
-            case 'video_mp4':
-                $slideBuilder->set(array(
-                    'title'                  => "{name}",
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
-                ));
-
-                $video = new BuilderComponentLayer($slideBuilder->content, 'video');
-                $video->item->set(array(
-                    "video_mp4" => "{video}",
-                ));
                 break;
 
             case 'social_post':
@@ -316,6 +316,7 @@ class ModelGenerator extends AbstractModelTable {
                     'heading' => '{title}',
                     'font'    => Base64::encode('{"data":[{"extra":"","color":"ffffffff","size":"36||px","tshadow":"0|*|0|*|0|*|000000ff","afont":"Roboto,Arial","lineheight":"1.5","bold":0,"italic":0,"underline":0,"align":"inherit","letterspacing":"normal","wordspacing":"normal","texttransform":"none"},{"extra":""}]}')
                 ));
+                break;
                 break;
 
             case 'text_generator':

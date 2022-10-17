@@ -46,11 +46,11 @@ class DashboardWidgetModule
                 </li>
             <?php endforeach; ?>
         </ul>
-        <?php if ( !defined('FLUENTCRM') && !defined('FLUENTFORMPRO') ) : ?>
+        <?php if ( !defined('ENHANCED_BLOCKS_VERSION') && !defined('FLUENTFORMPRO') ) : ?>
             <div class="ff_recommended_plugin">
-                Recommended Plugin: <b>FluentCRM - Email Marketing Automation For WordPress</b> <br />
-                <a href="<?php echo $this->getInstallUrl('fluent-crm'); ?>">Install</a>
-                | <a target="_blank" rel="noopener" href="https://wordpress.org/plugins/fluent-crm/">Learn More</a>
+                Recommended Plugin: <b>Enhanced Blocks – Page Builder Blocks for Gutenberg</b> <br />
+                <a href="<?php echo $this->getInstallUrl('enhanced-blocks'); ?>">Install</a>
+                | <a target="_blank" rel="noopener" href="https://wordpress.org/plugins/enhanced-blocks/">Learn More</a>
             </div>
         <?php endif; ?>
         <style>

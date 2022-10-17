@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Entities\ScheduledTaskEntity;
 use MailPoet\Segments\WooCommerce as WooCommerceSegment;
 use MailPoet\WooCommerce\Helper as WooCommerceHelper;
+use MailPoetVendor\Doctrine\DBAL\Connection;
 
 class WooCommerceSync extends SimpleWorker {
   const TASK_TYPE = 'woocommerce_sync';
@@ -21,12 +22,17 @@ class WooCommerceSync extends SimpleWorker {
   /** @var WooCommerceHelper */
   private $woocommerceHelper;
 
+  /** @var Connection */
+  private $connection;
+
   public function __construct(
     WooCommerceSegment $woocommerceSegment,
-    WooCommerceHelper $woocommerceHelper
+    WooCommerceHelper $woocommerceHelper,
+    Connection $connection
   ) {
     $this->woocommerceSegment = $woocommerceSegment;
     $this->woocommerceHelper = $woocommerceHelper;
+    $this->connection = $connection;
     parent::__construct();
   }
 
@@ -58,17 +64,11 @@ class WooCommerceSync extends SimpleWorker {
   }
 
   private function getHighestOrderId(): int {
-    $orders = $this->woocommerceHelper->wcGetOrders(
-      [
-        'status' => 'all',
-        'type' => 'shop_order',
-        'limit' => 1,
-        'orderby' => 'ID',
-        'order' => 'DESC',
-        'return' => 'ids',
-      ]
-    );
-
-    return (!empty($orders)) ? $orders[0] : 0;
+    global $wpdb;
+    return (int)$this->connection->fetchOne("
+      SELECT MAX(wpp.ID)
+      FROM {$wpdb->posts} wpp
+      WHERE wpp.post_type = 'shop_order'
+    ");
   }
 }

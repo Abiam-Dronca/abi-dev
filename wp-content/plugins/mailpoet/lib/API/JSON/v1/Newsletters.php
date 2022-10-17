@@ -159,9 +159,7 @@ class Newsletters extends APIEndpoint {
   public function save($data = []) {
     $data = $this->wp->applyFilters('mailpoet_api_newsletters_save_before', $data);
     $newsletter = $this->newsletterSaveController->save($data);
-    $response = $this->newslettersResponseBuilder->build($newsletter, [
-      NewslettersResponseBuilder::RELATION_SEGMENTS,
-    ]);
+    $response = $this->newslettersResponseBuilder->build($newsletter);
     $previewUrl = $this->getViewInBrowserUrl($newsletter);
     $response = $this->wp->applyFilters('mailpoet_api_newsletters_save_after', $response);
     return $this->successResponse($response, ['preview_url' => $previewUrl]);
@@ -404,7 +402,13 @@ class Newsletters extends APIEndpoint {
 
   private function getViewInBrowserUrl(NewsletterEntity $newsletter): string {
     $this->fixMissingHash([$newsletter]); // Fix for MAILPOET-3275. Remove after May 2021
-    $url = $this->newsletterUrl->getViewInBrowserUrl($newsletter);
+    $url = $this->newsletterUrl->getViewInBrowserUrl(
+      (object)[
+        'id' => $newsletter->getId(),
+        'hash' => $newsletter->getHash(),
+      ]
+    );
+
     // strip protocol to avoid mix content error
     return preg_replace('/^https?:/i', '', $url);
   }

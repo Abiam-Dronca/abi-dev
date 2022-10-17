@@ -6,19 +6,18 @@ namespace Nextend\Framework\Form\Fieldset;
 
 use Nextend\Framework\Form\AbstractField;
 use Nextend\Framework\Form\AbstractFieldset;
-use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\Html;
 
 class FieldsetVisualSet extends AbstractFieldset {
 
     public function renderContainer() {
-        echo '<div class="n2_form__visual_set" data-field="visual-set-' . esc_attr($this->name) . '">';
+        echo '<div class="n2_form__visual_set" data-field="visual-set-' . $this->name . '">';
 
-        echo "<div class='n2_form__visual_set_label'>" . esc_html($this->label) . '</div>';
+        echo "<div class='n2_form__visual_set_label'>" . $this->label . '</div>';
 
         $element = $this->first;
         while ($element) {
-            echo wp_kses($this->decorateElement($element), Sanitize::$adminFormTags);
+            echo $this->decorateElement($element);
 
             $element = $element->getNext();
         }
@@ -39,10 +38,10 @@ class FieldsetVisualSet extends AbstractFieldset {
             $element->getRowClass()
         );
 
-        echo wp_kses(Html::openTag('div', array(
+        echo Html::openTag('div', array(
                 'class'      => implode(' ', array_filter($classes)),
                 'data-field' => $element->getID()
-            ) + $element->getRowAttributes()), Sanitize::$adminFormTags);
+            ) + $element->getRowAttributes());
 
         $element->displayElement();
 

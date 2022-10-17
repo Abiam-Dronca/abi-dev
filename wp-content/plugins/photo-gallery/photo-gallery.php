@@ -3,7 +3,7 @@
  * Plugin Name: Photo Gallery
  * Plugin URI: https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin
  * Description: This plugin is a fully responsive gallery plugin with advanced functionality.  It allows having different image galleries for your posts and pages. You can create unlimited number of galleries, combine them into albums, and provide descriptions and tags.
- * Version: 1.8.0
+ * Version: 1.6.10
  * Author: Photo Gallery Team
  * Author URI: https://10web.io/plugins/?utm_source=photo_gallery&utm_medium=free_plugin
  * Text Domain: photo-gallery
@@ -90,8 +90,7 @@ final class BWG {
    */
   public static function get_abspath() {
     $dirpath = defined( 'WP_CONTENT_DIR' ) ? WP_CONTENT_DIR : ABSPATH;
-    $folder_name = defined( 'WP_CONTENT_FOLDERNAME' ) ? WP_CONTENT_FOLDERNAME : "wp-content";
-    $array = explode( $folder_name, $dirpath );
+    $array = explode( "wp-content", $dirpath );
     if( isset( $array[0] ) && $array[0] != "" ) {
       return $array[0];
     }
@@ -107,8 +106,8 @@ final class BWG {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_url = $this->plugin_url;
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.8.0';
-    $this->db_version = '1.8.0';
+    $this->plugin_version = '1.6.10';
+    $this->db_version = '1.6.10';
     $this->prefix = 'bwg';
     $this->nicename = __('Photo Gallery', 'photo-gallery');
     require_once($this->plugin_dir . '/framework/WDWLibrary.php');
@@ -126,7 +125,7 @@ final class BWG {
       $this->upload_url = preg_replace('/uploads(.+)photo-gallery/', 'uploads/photo-gallery', $this->upload_url);
     }
 
-    $this->free_msg = sprintf(__('This option is available in %s', 'photo-gallery'), '<a target="_blank" href="' . esc_url($this->plugin_link . $this->utm_source) . '">' . __('Premium version', 'photo-gallery') . '</a>');
+    $this->free_msg = __('This option is available in Premium version', 'photo-gallery');
   }
 
   /**
@@ -144,12 +143,14 @@ final class BWG {
     add_action('wp_ajax_nopriv_GalleryBox', array($this, 'frontend_ajax'));
     add_action('wp_ajax_bwg_captcha', array($this, 'bwg_captcha'));
     add_action('wp_ajax_nopriv_bwg_captcha', array($this, 'bwg_captcha'));
-    add_action('wp_ajax_Share', array( $this, 'frontend_ajax' ));
-    add_action('wp_ajax_nopriv_Share', array( $this, 'frontend_ajax' ));
-    add_action('wp_ajax_view_facebook_post', array($this, 'bwg_add_embed_ajax'));
-    add_action('wp_ajax_nopriv_view_facebook_post', array($this, 'bwg_add_embed_ajax'));
-    add_action('wp_ajax_nopriv_download_gallery', array($this, 'frontend_ajax'));
-    add_action('wp_ajax_download_gallery', array($this, 'frontend_ajax'));
+    if ( $this->is_pro ) {
+      add_action('wp_ajax_Share', array( $this, 'frontend_ajax' ));
+      add_action('wp_ajax_nopriv_Share', array( $this, 'frontend_ajax' ));
+      add_action('wp_ajax_view_facebook_post', array($this, 'bwg_add_embed_ajax'));
+      add_action('wp_ajax_nopriv_view_facebook_post', array($this, 'bwg_add_embed_ajax'));
+      add_action('wp_ajax_nopriv_download_gallery', array($this, 'frontend_ajax'));
+      add_action('wp_ajax_download_gallery', array($this, 'frontend_ajax'));
+    }
 
     // Admin AJAX actions.
     add_action('wp_ajax_galleries_' . $this->prefix , array($this, 'admin_ajax'));
@@ -161,9 +162,10 @@ final class BWG {
     add_action('wp_ajax_editimage_' . $this->prefix, array($this, 'admin_ajax'));
     add_action('wp_ajax_addTags_' . $this->prefix, array($this, 'admin_ajax'));
     add_action('wp_ajax_options_' . $this->prefix, array($this, 'admin_ajax'));
-    add_action('wp_ajax_addInstagramGallery', array( $this, 'bwg_add_embed_ajax' ));
-    add_action('wp_ajax_addFacebookGallery', array( $this, 'bwg_add_embed_ajax' ));
-    add_action('wp_ajax_speed_' . $this->prefix, array($this, 'admin_ajax'));
+    if( $this->is_pro ) {
+      add_action('wp_ajax_addInstagramGallery', array( $this, 'bwg_add_embed_ajax' ));
+      add_action('wp_ajax_addFacebookGallery', array( $this, 'bwg_add_embed_ajax' ));
+    }
 
     if ( !is_admin() ) {
       add_shortcode('Best_Wordpress_Gallery', array($this, 'shortcode'));
@@ -208,12 +210,17 @@ final class BWG {
     add_filter('set-screen-option', array($this, 'set_option_comments'), 10, 3);
     add_filter('set-screen-option', array($this, 'set_option_rates'), 10, 3);
 
-    add_filter('single_template', array( $this, 'share_template' ));
+    if ( $this->is_pro ) {
+      add_filter('single_template', array( $this, 'share_template' ));
+    }
 
     add_filter('widget_tag_cloud_args', array($this, 'tag_cloud_widget_args'));
 
-    add_filter('cron_schedules', array( $this, 'autoupdate_interval' ));
-    add_action('bwg_schedule_event_hook', array( $this, 'social_galleries' ));
+    if ( $this->is_pro ) {
+      add_filter('cron_schedules', array( $this, 'autoupdate_interval' ));
+      add_action('bwg_schedule_event_hook', array( $this, 'social_galleries' ));
+    }
+
 	  // Check add-ons versions.
     if ( $this->is_pro ) {
       add_action('admin_notices', array($this, 'check_addons_compatibility'));
@@ -272,19 +279,6 @@ final class BWG {
     }
     /* Change the default image editors. */
     add_filter('wp_image_editors', array( $this, 'bwg_change_image_editors_library'), 9, 1);
-  }
-
-  /*
-   * Count google page speed score for home page
-   * */
-  public function count_homapage_speed() {
-    require_once($this->plugin_dir . '/admin/controllers/Speed.php');
-    // Checking page class.
-    if ( !class_exists('SpeedController_bwg') ) {
-      return FALSE;
-    }
-    $controller = new SpeedController_bwg();
-    $controller->count_homapage_speed();
   }
 
   /**
@@ -417,19 +411,6 @@ final class BWG {
     $this->overview();
 	  add_action('init', array($this, 'language_load'));
     add_action('init', array($this, 'create_post_types'));
-    if ( !is_admin() ) {
-      add_action('admin_bar_menu', array( $this, 'admin_bar_menu' ), 100);
-    }
-    add_action('bwg_hompage_optimized', array( $this, 'bwg_hompage_optimized' ) );
-  }
-
-  /**
-   * Run from booster plugin using hook and update status of home page that already optimized.
-   * 1 - optimized but score not updated in gallery DB
-   * 2 - optimized and score recounted
-  */
-  public function bwg_hompage_optimized() {
-    update_option('bwg_hompage_optimized', 1);
   }
 
   /**
@@ -514,31 +495,19 @@ final class BWG {
 
     add_submenu_page($parent_slug, __('Global Settings', 'photo-gallery'), __('Global Settings', 'photo-gallery'), $settings_permission, 'options_' . $this->prefix, array($this , 'admin_pages'));
 
-    if ( !$this->is_appsumo_subscription() ) {
-      add_submenu_page($parent_slug,
-          __('Speed & Image Optimization', 'photo-gallery'),
-          __('Speed & Image Optimization' . sprintf('<span class="bwg_submenu_so_icon"
-                    style="width: 6px;
-                            height: 6px;
-                            background-color: #22B339;
-                            display: inline-block;
-                            border-radius: 20px;
-                            margin-left: 3px;
-                            margin-bottom: 1px;"></span>'), 'photo-gallery'),
-          'manage_options', 'speed_' . $this->prefix, array(
-        $this,
-        'admin_pages'
-      ));
-    }
     $themes_page = add_submenu_page($parent_slug, __('Themes', 'photo-gallery'), __('Themes', 'photo-gallery'), $themes_permission, 'themes_' . $this->prefix, array($this , 'admin_pages'));
     add_action('load-' . $themes_page, array($this, 'themes_per_page_option'));
 
-    if ( $this->is_pro ) {
+    if( $this->is_pro ) {
       $comments_page = add_submenu_page($parent_slug, __('Comments', 'photo-gallery'), __('Comments', 'photo-gallery'), 'manage_options', 'comments_' . $this->prefix, array($this , 'admin_pages'));
       add_action('load-' . $comments_page, array($this, 'comments_per_page_option'));
 
       $rates_page = add_submenu_page($parent_slug, __('Ratings', 'photo-gallery'), __('Ratings', 'photo-gallery'), 'manage_options', 'ratings_' . $this->prefix, array($this , 'admin_pages'));
       add_action('load-' . $rates_page, array($this, 'rates_per_page_option'));
+    }
+    else {
+      // Temporary deactivated.
+      // add_submenu_page($parent_slug, __('Premium Version', 'photo-gallery'), __('Premium Version', 'photo-gallery'), 'manage_options', 'licensing_' . $this->prefix, array($this , 'admin_pages'));
     }
 
     do_action('bwg_add_submenu_item', $parent_slug);
@@ -560,20 +529,6 @@ final class BWG {
     }
   }
 
-  /* Check if subscription agreement from appsumo or 10WebX_ltd */
-  public function is_appsumo_subscription() {
-    $user_info = get_option('tenweb_user_info');
-
-    if ( !empty($user_info) && !empty($user_info['agreement_info']) && !empty($user_info['agreement_info']->subscription_category) ) {
-      $agreement_info = $user_info['agreement_info'];
-      $subscription_cat = $agreement_info->subscription_category;
-      if ( $subscription_cat == 'appsumo' || $subscription_cat == '10WebX_ltd' ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /**
    * Admin pages.
    */
@@ -582,7 +537,6 @@ final class BWG {
       'galleries_' . $this->prefix,
       'albums_' . $this->prefix,
       'options_' . $this->prefix,
-      'speed_' . $this->prefix,
       'themes_' . $this->prefix,
       'comments_' . $this->prefix,
       'ratings_' . $this->prefix,
@@ -657,34 +611,14 @@ final class BWG {
       'media-views', // media uploader styles
       'wp-auth-check', // check all
     );
-    wp_register_style($this->prefix . '_fontselect', $this->plugin_url . '/js/fontselect/fontselect.min.css', $required_styles, '1.0.0');
-    array_push($required_styles, $this->prefix . '_fontselect');
-    wp_register_script($this->prefix . '_fontselect', $this->plugin_url . '/js/fontselect/fontselect.min.js', $required_scripts, '1.0.0');
+    if ( $this->is_pro ) {
+      wp_register_style($this->prefix . '_fontselect', $this->plugin_url . '/js/fontselect/fontselect.min.css', $required_styles, '1.0.0');
+      array_push($required_styles, $this->prefix . '_fontselect');
+      wp_register_script($this->prefix . '_fontselect', $this->plugin_url . '/js/fontselect/fontselect.min.js', $required_scripts, '1.0.0');
+    }
     wp_register_style($this->prefix . '_tables', $this->plugin_url . '/css/bwg_tables.css', $required_styles, $this->plugin_version);
     wp_register_style($this->prefix . '_gallery-upgrade', $this->plugin_url . '/css/gallery-upgrade.css', $required_styles, $this->plugin_version);
 
-    wp_register_script($this->prefix . '_speed_circle', $this->plugin_url . '/js/circle-progress.js', $required_scripts, $this->plugin_version);
-    wp_register_style($this->prefix . '_speed', $this->plugin_url . '/css/bwg_speed.css', $required_styles, $this->plugin_version);
-    wp_register_script($this->prefix . '_speed', $this->plugin_url . '/js/bwg_speed.js', $required_scripts, $this->plugin_version);
-    wp_localize_script($this->prefix . '_speed', 'bwg_speed', array(
-      'install_button_text' => __('Install 10Web Booster plugin', 'photo-gallery'),
-      'activate_button_text' => __('Activate 10Web Booster plugin', 'photo-gallery'),
-      'loading_url' => $this->plugin_url."/images//ajax_loader.png",
-      'wrong_email' => __('Please enter a valid email address.', 'photo-gallery'),
-      'empty_email' => __('Email field should not be empty.', 'photo-gallery'),
-      'wrong_domain_url' => __('Please enter a URL from your domain.', 'photo-gallery'),
-      'wrong_url' => __('Please enter correct URL.', 'photo-gallery'),
-      'enter_page_url' => __('Please enter a Page URL.', 'photo-gallery'),
-      'page_is_not_public' => __('This page is not public. Please publish the page to check the score.', 'photo-gallery'),
-      'sign_up' => __('Sign up', 'photo-gallery'),
-      'connect' => __('Connect', 'photo-gallery'),
-      'home_url' => get_home_url(),
-      'home_speed_status' => $this->check_home_speed_status(),
-      'analyze_button_text' => __('Analyze', 'photo-gallery'),
-      'something_wrong' => __('Something went wrong, please try again', 'photo-gallery'),
-      'speed_ajax_nonce' => wp_create_nonce('speed_ajax_nonce'),
-      'dashboard_login' => __('An account with your email is already registered. <a href="#">Login to continue</a>.', 'photo-gallery' ),
-    ));
     wp_register_script($this->prefix . '_admin', $this->plugin_url . '/js/bwg.js', $required_scripts, $this->plugin_version);
     wp_localize_script($this->prefix . '_admin', 'bwg', array(
       'delete_confirmation' => __('Do you want to delete selected items?', 'photo-gallery'),
@@ -766,25 +700,6 @@ final class BWG {
     if ( !$this->is_pro && !empty($current_screen->id) && $current_screen->id == "toplevel_page_bwg_subscribe" ) {
       wp_enqueue_style($this->prefix . '_subscribe', $this->plugin_url . '/css/bwg_subscribe.css', array(), $this->plugin_version);
     }
-  }
-
-  public function check_home_speed_status() {
-    $bwg_hompage_optimized = get_option('bwg_hompage_optimized');
-    /* Case when hompage optimized but score not updated */
-    if ( !empty($bwg_hompage_optimized) && $bwg_hompage_optimized == 1 ) {
-      return 0;
-    }
-    $bwg_speed_score = get_option('bwg_speed_score');
-    if ( !empty($bwg_speed_score) && isset($bwg_speed_score['last']) && isset($bwg_speed_score['last']['url']) ) {
-      $url = $bwg_speed_score['last']['url'];
-      if ( isset($bwg_speed_score[$url]) && $bwg_speed_score[$url]['desktop_score'] && $bwg_speed_score[$url]['mobile_score'] ) {
-        return array(
-          'desktop_score' => $bwg_speed_score[$url]['desktop_score'],
-          'mobile_score' => $bwg_speed_score[$url]['mobile_score'],
-        );
-      }
-    }
-    return 0;
   }
 
   /**
@@ -953,8 +868,9 @@ final class BWG {
   }
   // TODO: move
   public function bwg_add_embed_ajax() {
+    $permissions = $this->is_pro ? BWG()->options->permissions : 'manage_options';
     if (function_exists('current_user_can')) {
-      if (!current_user_can(BWG()->options->permissions)) {
+      if (!current_user_can($permissions)) {
         die('Access Denied');
       }
     }
@@ -1038,7 +954,6 @@ final class BWG {
       'shortcode_' . $this->prefix,
       'editimage_' . $this->prefix,
       'options_' . $this->prefix,
-      'speed_' . $this->prefix,
     );
     if ( !empty($page) && in_array($page, $allowed_pages) ) {
       $page = WDWLibrary::clean_page_prefix($page);
@@ -1251,8 +1166,10 @@ final class BWG {
    * Activate.
    */
   public function activate() {
-    delete_transient('bwg_update_check');
-    wp_schedule_event(time(), 'bwg_autoupdate_interval', 'bwg_schedule_event_hook');
+    if ( $this->is_pro ) {
+      delete_transient('bwg_update_check');
+      wp_schedule_event(time(), 'bwg_autoupdate_interval', 'bwg_schedule_event_hook');
+    }
     $version = get_option('wd_bwg_version');
     $new_version = $this->db_version;
     if ($version && version_compare($version, $new_version, '<')) {
@@ -1267,11 +1184,17 @@ final class BWG {
       update_user_meta(get_current_user_id(),'bwg_photo_gallery', '1');
       add_option("wd_bwg_version", $new_version, '', 'no');
       add_option("wd_bwg_initial_version", $new_version, '', 'no');
+      if ( !$this->is_pro ) {
+        add_option("wd_bwg_theme_version", '1.0.0', '', 'no');
+      }
     }
     else {
       require_once $this->plugin_dir . "/insert.php";
       BWGInsert::tables();
       add_option("wd_bwg_version", $new_version, '', 'no');
+      if ( !$this->is_pro ) {
+        add_option("wd_bwg_theme_version", '1.0.0', '', 'no');
+      }
     }
     $this->create_post_types();
     // Using this insted of flush_rewrite_rule() for better performance with multisite.
@@ -1454,6 +1377,7 @@ final class BWG {
         array_push($required_styles, $this->prefix . '_googlefonts');
       }
     }
+    wp_register_script('instagram-embed', 'https://www.instagram.com/embed.js', $required_scripts, '', $in_footer);
     wp_register_script('sumoselect', BWG()->front_url . '/js/jquery.sumoselect.min.js', $required_scripts, '3.4.6', $in_footer);
     wp_register_style('sumoselect', BWG()->front_url . '/css/sumoselect.min.css', array(), '3.4.6');
 
@@ -1465,7 +1389,7 @@ final class BWG {
     wp_register_style('mCustomScrollbar', BWG()->front_url . '/css/jquery.mCustomScrollbar.min.css', array(), '3.1.5');
     wp_register_script('jquery-fullscreen', BWG()->front_url . '/js/jquery.fullscreen.min.js', $required_scripts, '0.6.0', $in_footer);
     wp_register_script($this->prefix . '_lazyload', BWG()->front_url . '/js/jquery.lazy.min.js', $required_scripts, $version, $in_footer);
-    wp_register_script($this->prefix . '_circle', BWG()->front_url . '/js/circle-progress.js', $required_scripts, '1.2.2', $in_footer);
+
     array_push($required_scripts,
                'sumoselect',
                'jquery-mobile',
@@ -1504,13 +1428,6 @@ final class BWG {
     wp_register_style($this->prefix . '_frontend', $style_file, $required_styles, $version);
     wp_register_script($this->prefix . '_frontend', $script_file, $required_scripts, $version, $in_footer);
 
-    if ( !function_exists('is_plugin_active') ) {
-      include_once(ABSPATH . 'wp-admin/includes/plugin.php');
-    }
-    if ( is_plugin_active('tenweb-speed-optimizer/tenweb_speed_optimizer.php') ) {
-      wp_enqueue_script($this->prefix . '_circle');
-    }
-
     if( BWG()->options->lazyload_images ) {
       wp_enqueue_script($this->prefix . '_lazyload');
     }
@@ -1520,8 +1437,6 @@ final class BWG {
       wp_enqueue_script($this->prefix . '_frontend');
     }
 
-    $current_url = urlencode((is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    $bwg_speed_score = get_option('bwg_speed_score');
     wp_localize_script($this->prefix . '_frontend', 'bwg_objectsL10n', array(
 	    'bwg_field_required'  => __('field is required.', 'photo-gallery'),
       'bwg_mail_validation' => __('This is not a valid email address.', 'photo-gallery'),
@@ -1558,11 +1473,7 @@ final class BWG {
       'front_ajax' => BWG()->options->front_ajax,
       'bwg_tag_see_all' => __('see all tags', 'photo-gallery'),
       'bwg_tag_see_less' => __('see less tags', 'photo-gallery'),
-      'page_speed'  => isset($bwg_speed_score[urldecode($current_url)]) ? json_encode($bwg_speed_score[urldecode($current_url)]) : false,
     ));
-
-    wp_register_script($this->prefix . '_speed_circle', $this->plugin_url . '/js/circle-progress.js', $required_scripts, $this->plugin_version);
-    wp_enqueue_script($this->prefix . '_speed_circle');
   }
 
   /**
@@ -1897,15 +1808,17 @@ final class BWG {
     );
     register_post_type( 'bwg_tag', $args );
 
-    $args = array(
-      'label' => 'Gallery Share',
-      'public' => FALSE,
-      'publicly_queryable' => TRUE,
-      'exclude_from_search' => TRUE,
-      /*'query_var'          => 'share',
-      'rewrite'            => array('slug' => 'share'),*/
-    );
-    register_post_type('bwg_share', $args);
+    if ( $this->is_pro ) {
+      $args = array(
+        'label' => 'Gallery Share',
+        'public' => FALSE,
+        'publicly_queryable' => TRUE,
+        'exclude_from_search' => TRUE,
+        /*'query_var'          => 'share',
+        'rewrite'            => array('slug' => 'share'),*/
+      );
+      register_post_type('bwg_share', $args);
+    }
 
     WDWLibrary::register_custom_taxonomies();
   }
@@ -1961,11 +1874,6 @@ final class BWG {
       foreach ( $instagram_galleries as $gallery ) {
         array_push($response, WDWLibraryEmbed::refresh_social_gallery($gallery));
       }
-    }
-
-    $instagram_embeds =  WDWLibraryEmbed::bwg_get_instagram_embeds();
-    if ( !empty( $instagram_embeds ) ) {
-      WDWLibraryEmbed::bwg_refresh_instagram_embed( $instagram_embeds );
     }
   }
 
@@ -2111,36 +2019,6 @@ final class BWG {
    * */
   function bwg_change_image_editors_library() {
     return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
-  }
-
-  /**
-   * Admin bar menu.
-   *
-   * @param $wp_admin_bar
-   */
-  public function admin_bar_menu( $wp_admin_bar ) {
-    global $post;
-    if (!isset($post)) {
-      return;
-    }
-    $data = WDWLibrary::get_booster_data();
-    if ($data['booster_is_connected']) {
-      return;
-    }
-    $args = array(
-      'page' => 'speed_' . $this->prefix,
-    );
-    $speed_page = add_query_arg( $args, admin_url('admin.php'));
-
-    $wp_admin_bar->add_menu(array(
-                              'id' => 'booster-top-button',
-                              'title' => __('Optimize Images', 'photo-gallery'),
-                              'href' => $speed_page,
-                              'meta' => array(
-                                'target' => '_blank',
-                                'class' => 'hidden'
-                              ),
-                            ));
   }
 }
 

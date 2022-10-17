@@ -145,7 +145,7 @@ class TrackModule
 	{
 		return array(
 			'name' => 'track_data_notice',
-			'title' => __( 'Want to make Fluent Forms better with just one click?', 'fluentform' ),
+			'title' => __( 'Want to make Fluent Forms better with just one click?', 'ninja-forms' ),
 			'message' => 'We will collect a few server data if you permit us. It will help us troubleshoot any inconveniences you may face while using FluentForm, and guide us to add better features according to your usage. NO FORM SUBMISSION DATA WILL BE COLLECTED.<br/><input checked type="checkbox" id="ff-optin-send-email"> You can also send me Fluent Forms tips and tricks occasionally',
 			'links' => array(
 				array(

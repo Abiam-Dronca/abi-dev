@@ -1,4 +1,5 @@
-/*! elementor - v3.7.8 - 02-10-2022 */
+/*! elementor - v3.6.7 - 03-07-2022 */
+"use strict";
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["frontend"],{
 
 /***/ "../assets/dev/js/frontend/documents-manager.js":
@@ -7,7 +8,6 @@
   \******************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -80,7 +80,6 @@ exports["default"] = _default;
   \**************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -224,7 +223,7 @@ module.exports = function ($) {
   };
 
   this.getHandlers = function (handlerName) {
-    elementorDevTools.deprecation.deprecated('getHandlers', '3.1.0', 'elementorFrontend.elementsHandler.getHandler');
+    elementorCommon.helpers.softDeprecated('getHandlers', '3.1.0', 'elementorFrontend.elementsHandler.getHandler');
 
     if (handlerName) {
       return this.getHandler(handlerName);
@@ -269,7 +268,6 @@ module.exports = function ($) {
   \*********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -321,7 +319,7 @@ class Frontend extends elementorModules.ViewModule {
     this.config.legacyMode = {
       get elementWrappers() {
         if (elementorFrontend.isEditMode()) {
-          window.top.elementorDevTools.deprecation.deprecated('elementorFrontend.config.legacyMode.elementWrappers', '3.1.0', 'elementorFrontend.config.experimentalFeatures.e_dom_optimization');
+          elementorCommon.helpers.hardDeprecated('elementorFrontend.config.legacyMode.elementWrappers', '3.1.0', 'elementorFrontend.config.experimentalFeatures.e_dom_optimization');
         }
 
         return !elementorFrontend.config.experimentalFeatures.e_dom_optimization;
@@ -334,7 +332,7 @@ class Frontend extends elementorModules.ViewModule {
 
   get Module() {
     if (this.isEditMode()) {
-      parent.elementorDevTools.deprecation.deprecated('elementorFrontend.Module', '2.5.0', 'elementorModules.frontend.handlers.Base');
+      parent.elementorCommon.helpers.hardDeprecated('elementorFrontend.Module', '2.5.0', 'elementorModules.frontend.handlers.Base');
     }
 
     return elementorModules.frontend.handlers.Base;
@@ -390,7 +388,7 @@ class Frontend extends elementorModules.ViewModule {
 
   getGeneralSettings(settingName) {
     if (this.isEditMode()) {
-      parent.elementorDevTools.deprecation.deprecated('getGeneralSettings', '3.0.0', 'getKitSettings and remove the `elementor_` prefix');
+      parent.elementorCommon.helpers.softDeprecated('getGeneralSettings', '3.0.0', 'getKitSettings and remove the `elementor_` prefix');
     }
 
     return this.getKitSettings(`elementor_${settingName}`);
@@ -486,8 +484,7 @@ class Frontend extends elementorModules.ViewModule {
       swiper: _swiper.default,
       environment: _environment.default,
       assetsLoader: new _assetsLoader.default(),
-      escapeHTML: _utils.escapeHTML,
-      events: _events.default
+      escapeHTML: _utils.escapeHTML
     }; // TODO: BC since 2.4.0
 
     this.modules = {
@@ -674,7 +671,6 @@ if (!elementorFrontend.isEditMode()) {
   \******************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -877,7 +873,6 @@ exports["default"] = BackgroundSlideshow;
   \**************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1171,7 +1166,6 @@ exports["default"] = BackgroundVideo;
   \********************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -1196,7 +1190,6 @@ exports["default"] = _default;
   \****************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -1219,7 +1212,6 @@ exports["default"] = _default;
   \*****************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1237,7 +1229,6 @@ exports["default"] = _default;
   \****************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1317,7 +1308,6 @@ exports["default"] = _default;
   \**********************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1404,7 +1394,6 @@ exports["default"] = HandlesPosition;
   \************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1518,7 +1507,6 @@ exports["default"] = Shapes;
   \***********************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1610,7 +1598,6 @@ exports["default"] = StretchedSection;
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _utils = __webpack_require__(/*! ./utils */ "../assets/dev/js/frontend/utils/utils.js");
@@ -1677,7 +1664,7 @@ module.exports = elementorModules.ViewModule.extend({
     }
 
     event.preventDefault();
-    scrollTop = elementorFrontend.hooks.applyFilters('frontend/handlers/menu_anchor/scroll_top_distance', scrollTop); // On scroll animation start: remove scroll-snap.
+    scrollTop = elementorFrontend.hooks.applyFilters('frontend/handlers/menu_anchor/scroll_top_distance', scrollTop); // on scroll animation start: remove scroll-snap.
 
     if ((0, _utils.isScrollSnapActive)()) {
       elementorFrontend.elements.$body.css('scroll-snap-type', 'none');
@@ -1686,7 +1673,7 @@ module.exports = elementorModules.ViewModule.extend({
     this.elements.$scrollable.animate({
       scrollTop
     }, this.getSettings('scrollDuration'), 'linear', () => {
-      // On scroll animation complete: add scroll-snap back.
+      // on scroll animation complete: add scroll-snap back.
       if ((0, _utils.isScrollSnapActive)()) {
         elementorFrontend.elements.$body.css('scroll-snap-type', '');
       }
@@ -1707,7 +1694,6 @@ module.exports = elementorModules.ViewModule.extend({
   \********************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1773,7 +1759,6 @@ AssetsLoader.assets = {
   \********************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1888,7 +1873,6 @@ exports["default"] = LightboxManager;
   \*************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -1976,17 +1960,14 @@ exports["default"] = Swiper;
 /*!******************************************************!*\
   !*** ../assets/dev/js/frontend/utils/url-actions.js ***!
   \******************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-
-__webpack_require__(/*! core-js/modules/web.dom-exception.stack.js */ "../node_modules/core-js/modules/web.dom-exception.stack.js");
 
 class _default extends elementorModules.ViewModule {
   getDefaultSettings() {
@@ -2094,7 +2075,6 @@ exports["default"] = _default;
   \************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -2132,7 +2112,6 @@ exports.isScrollSnapActive = isScrollSnapActive;
   \****************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -2199,7 +2178,6 @@ exports["default"] = BaseLoader;
   \*****************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -2247,7 +2225,6 @@ exports["default"] = VimeoLoader;
   \*******************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -2288,7 +2265,6 @@ exports["default"] = YoutubeLoader;
   \***************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 /* eslint-disable camelcase */
@@ -2302,7 +2278,6 @@ __webpack_require__.p = elementorFrontendConfig.urls.assets + 'js/';
   \*********************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -2499,7 +2474,6 @@ exports["default"] = Breakpoints;
   \****************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -2554,7 +2528,6 @@ exports["default"] = _default;
   \***************************************/
 /***/ ((module) => {
 
-"use strict";
 
 /**
  * Handles managing all events for whatever you plug it into. Priorities for hooks are based on lowest to highest in
@@ -2741,7 +2714,7 @@ var EventManager = function () {
 
 
   function
-    /* Action, arg1, arg2, ... */
+    /* action, arg1, arg2, ... */
   doAction() {
     var args = slice.call(arguments);
     var action = args.shift();
@@ -2793,7 +2766,7 @@ var EventManager = function () {
 
 
   function
-    /* Filter, filtered arg, arg2, ... */
+    /* filter, filtered arg, arg2, ... */
   applyFilters() {
     var args = slice.call(arguments);
     var filter = args.shift();
@@ -2831,7 +2804,7 @@ var EventManager = function () {
     removeAction,
     doAction,
     addAction
-  }; // Return all of the publicly available methods
+  }; // return all of the publicly available methods
 
   return MethodsAvailable;
 };
@@ -2846,7 +2819,6 @@ module.exports = EventManager;
   \*****************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -2869,7 +2841,7 @@ isSafari = /^((?!chrome|android).)*safari/i.test(userAgent) || /constructor/i.te
 })(!window.safari || typeof safari !== 'undefined' && safari.pushNotification),
       // Internet Explorer 6-11
 isIE = /Trident|MSIE/.test(userAgent) && (
-/* @cc_on!@*/
+/*@cc_on!@*/
  false || !!document.documentMode),
       // Edge 20+
 isEdge = !isIE && !!window.StyleMedia || matchUserAgent('Edg'),
@@ -2903,7 +2875,6 @@ exports["default"] = _default;
   \*************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -3003,7 +2974,6 @@ exports["default"] = _default;
   \********************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({
@@ -3020,140 +2990,6 @@ class _default extends elementorModules.Module {
 }
 
 exports["default"] = _default;
-
-/***/ }),
-
-/***/ "../node_modules/core-js/internals/an-instance.js":
-/*!********************************************************!*\
-  !*** ../node_modules/core-js/internals/an-instance.js ***!
-  \********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var isPrototypeOf = __webpack_require__(/*! ../internals/object-is-prototype-of */ "../node_modules/core-js/internals/object-is-prototype-of.js");
-
-var $TypeError = TypeError;
-
-module.exports = function (it, Prototype) {
-  if (isPrototypeOf(Prototype, it)) return it;
-  throw $TypeError('Incorrect invocation');
-};
-
-
-/***/ }),
-
-/***/ "../node_modules/core-js/internals/dom-exception-constants.js":
-/*!********************************************************************!*\
-  !*** ../node_modules/core-js/internals/dom-exception-constants.js ***!
-  \********************************************************************/
-/***/ ((module) => {
-
-module.exports = {
-  IndexSizeError: { s: 'INDEX_SIZE_ERR', c: 1, m: 1 },
-  DOMStringSizeError: { s: 'DOMSTRING_SIZE_ERR', c: 2, m: 0 },
-  HierarchyRequestError: { s: 'HIERARCHY_REQUEST_ERR', c: 3, m: 1 },
-  WrongDocumentError: { s: 'WRONG_DOCUMENT_ERR', c: 4, m: 1 },
-  InvalidCharacterError: { s: 'INVALID_CHARACTER_ERR', c: 5, m: 1 },
-  NoDataAllowedError: { s: 'NO_DATA_ALLOWED_ERR', c: 6, m: 0 },
-  NoModificationAllowedError: { s: 'NO_MODIFICATION_ALLOWED_ERR', c: 7, m: 1 },
-  NotFoundError: { s: 'NOT_FOUND_ERR', c: 8, m: 1 },
-  NotSupportedError: { s: 'NOT_SUPPORTED_ERR', c: 9, m: 1 },
-  InUseAttributeError: { s: 'INUSE_ATTRIBUTE_ERR', c: 10, m: 1 },
-  InvalidStateError: { s: 'INVALID_STATE_ERR', c: 11, m: 1 },
-  SyntaxError: { s: 'SYNTAX_ERR', c: 12, m: 1 },
-  InvalidModificationError: { s: 'INVALID_MODIFICATION_ERR', c: 13, m: 1 },
-  NamespaceError: { s: 'NAMESPACE_ERR', c: 14, m: 1 },
-  InvalidAccessError: { s: 'INVALID_ACCESS_ERR', c: 15, m: 1 },
-  ValidationError: { s: 'VALIDATION_ERR', c: 16, m: 0 },
-  TypeMismatchError: { s: 'TYPE_MISMATCH_ERR', c: 17, m: 1 },
-  SecurityError: { s: 'SECURITY_ERR', c: 18, m: 1 },
-  NetworkError: { s: 'NETWORK_ERR', c: 19, m: 1 },
-  AbortError: { s: 'ABORT_ERR', c: 20, m: 1 },
-  URLMismatchError: { s: 'URL_MISMATCH_ERR', c: 21, m: 1 },
-  QuotaExceededError: { s: 'QUOTA_EXCEEDED_ERR', c: 22, m: 1 },
-  TimeoutError: { s: 'TIMEOUT_ERR', c: 23, m: 1 },
-  InvalidNodeTypeError: { s: 'INVALID_NODE_TYPE_ERR', c: 24, m: 1 },
-  DataCloneError: { s: 'DATA_CLONE_ERR', c: 25, m: 1 }
-};
-
-
-/***/ }),
-
-/***/ "../node_modules/core-js/modules/web.dom-exception.stack.js":
-/*!******************************************************************!*\
-  !*** ../node_modules/core-js/modules/web.dom-exception.stack.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var $ = __webpack_require__(/*! ../internals/export */ "../node_modules/core-js/internals/export.js");
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
-var getBuiltIn = __webpack_require__(/*! ../internals/get-built-in */ "../node_modules/core-js/internals/get-built-in.js");
-var createPropertyDescriptor = __webpack_require__(/*! ../internals/create-property-descriptor */ "../node_modules/core-js/internals/create-property-descriptor.js");
-var defineProperty = (__webpack_require__(/*! ../internals/object-define-property */ "../node_modules/core-js/internals/object-define-property.js").f);
-var hasOwn = __webpack_require__(/*! ../internals/has-own-property */ "../node_modules/core-js/internals/has-own-property.js");
-var anInstance = __webpack_require__(/*! ../internals/an-instance */ "../node_modules/core-js/internals/an-instance.js");
-var inheritIfRequired = __webpack_require__(/*! ../internals/inherit-if-required */ "../node_modules/core-js/internals/inherit-if-required.js");
-var normalizeStringArgument = __webpack_require__(/*! ../internals/normalize-string-argument */ "../node_modules/core-js/internals/normalize-string-argument.js");
-var DOMExceptionConstants = __webpack_require__(/*! ../internals/dom-exception-constants */ "../node_modules/core-js/internals/dom-exception-constants.js");
-var clearErrorStack = __webpack_require__(/*! ../internals/clear-error-stack */ "../node_modules/core-js/internals/clear-error-stack.js");
-var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "../node_modules/core-js/internals/descriptors.js");
-var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "../node_modules/core-js/internals/is-pure.js");
-
-var DOM_EXCEPTION = 'DOMException';
-var Error = getBuiltIn('Error');
-var NativeDOMException = getBuiltIn(DOM_EXCEPTION);
-
-var $DOMException = function DOMException() {
-  anInstance(this, DOMExceptionPrototype);
-  var argumentsLength = arguments.length;
-  var message = normalizeStringArgument(argumentsLength < 1 ? undefined : arguments[0]);
-  var name = normalizeStringArgument(argumentsLength < 2 ? undefined : arguments[1], 'Error');
-  var that = new NativeDOMException(message, name);
-  var error = Error(message);
-  error.name = DOM_EXCEPTION;
-  defineProperty(that, 'stack', createPropertyDescriptor(1, clearErrorStack(error.stack, 1)));
-  inheritIfRequired(that, this, $DOMException);
-  return that;
-};
-
-var DOMExceptionPrototype = $DOMException.prototype = NativeDOMException.prototype;
-
-var ERROR_HAS_STACK = 'stack' in Error(DOM_EXCEPTION);
-var DOM_EXCEPTION_HAS_STACK = 'stack' in new NativeDOMException(1, 2);
-
-// eslint-disable-next-line es-x/no-object-getownpropertydescriptor -- safe
-var descriptor = NativeDOMException && DESCRIPTORS && Object.getOwnPropertyDescriptor(global, DOM_EXCEPTION);
-
-// Bun ~ 0.1.1 DOMException have incorrect descriptor and we can't redefine it
-// https://github.com/Jarred-Sumner/bun/issues/399
-var BUGGY_DESCRIPTOR = !!descriptor && !(descriptor.writable && descriptor.configurable);
-
-var FORCED_CONSTRUCTOR = ERROR_HAS_STACK && !BUGGY_DESCRIPTOR && !DOM_EXCEPTION_HAS_STACK;
-
-// `DOMException` constructor patch for `.stack` where it's required
-// https://webidl.spec.whatwg.org/#es-DOMException-specialness
-$({ global: true, constructor: true, forced: IS_PURE || FORCED_CONSTRUCTOR }, { // TODO: fix export logic
-  DOMException: FORCED_CONSTRUCTOR ? $DOMException : NativeDOMException
-});
-
-var PolyfilledDOMException = getBuiltIn(DOM_EXCEPTION);
-var PolyfilledDOMExceptionPrototype = PolyfilledDOMException.prototype;
-
-if (PolyfilledDOMExceptionPrototype.constructor !== PolyfilledDOMException) {
-  if (!IS_PURE) {
-    defineProperty(PolyfilledDOMExceptionPrototype, 'constructor', createPropertyDescriptor(1, PolyfilledDOMException));
-  }
-
-  for (var key in DOMExceptionConstants) if (hasOwn(DOMExceptionConstants, key)) {
-    var constant = DOMExceptionConstants[key];
-    var constantName = constant.s;
-    if (!hasOwn(PolyfilledDOMException, constantName)) {
-      defineProperty(PolyfilledDOMException, constantName, createPropertyDescriptor(6, constant.c));
-    }
-  }
-}
-
 
 /***/ })
 

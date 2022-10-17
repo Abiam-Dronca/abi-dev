@@ -8,7 +8,6 @@ use Nextend\Framework\Misc\HttpClient;
 class CacheGoogleFont extends AbstractCache {
 
     protected $_storageEngine = 'filesystem';
-    private $fontExtension;
 
     public function __construct() {
         parent::__construct('googlefonts', true);
@@ -43,27 +42,20 @@ class CacheGoogleFont extends AbstractCache {
             }
 
             if ($extension === 'css') {
-                $fontExtensions = array(
-                    'woff2',
-                    'ttf'
-                );
+                $cssContent = preg_replace_callback('/url\(["\']?(.*?\.woff2)["\']?\)/i', function ($matches) {
 
-                foreach ($fontExtensions as $this->fontExtension) {
-                    $cssContent = preg_replace_callback('/url\(["\']?(.*?\.' . $this->fontExtension . ')["\']?\)/i', function ($matches) {
+                    $url = $matches[1];
 
-                        $url = $matches[1];
+                    $cache = new CacheGoogleFont();
 
-                        $cache = new CacheGoogleFont();
+                    $path = $cache->makeCache($url, 'woff2');
 
-                        $path = $cache->makeCache($url, $this->fontExtension);
+                    if ($path) {
+                        $url = Filesystem::pathToAbsoluteURL($path);
+                    }
 
-                        if ($path) {
-                            $url = Filesystem::pathToAbsoluteURL($path);
-                        }
-
-                        return 'url(' . $url . ')';
-                    }, $cssContent);
-                }
+                    return 'url(' . $url . ')';
+                }, $cssContent);
             }
 
             $this->set($fileNameWithExtension, $cssContent);

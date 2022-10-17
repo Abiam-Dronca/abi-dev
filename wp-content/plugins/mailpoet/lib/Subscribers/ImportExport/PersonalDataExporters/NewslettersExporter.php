@@ -5,12 +5,11 @@ namespace MailPoet\Subscribers\ImportExport\PersonalDataExporters;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Entities\SubscriberEntity;
-use MailPoet\Newsletter\NewslettersRepository;
-use MailPoet\Newsletter\Statistics\NewsletterStatisticsRepository;
+use MailPoet\Models\Newsletter;
+use MailPoet\Models\StatisticsNewsletters;
+use MailPoet\Models\Subscriber;
 use MailPoet\Newsletter\Url as NewsletterUrl;
-use MailPoet\Subscribers\SubscribersRepository;
-use MailPoet\WP\DateTime;
+use MailPoet\WP\Functions as WPFunctions;
 
 class NewslettersExporter {
 
@@ -19,45 +18,29 @@ class NewslettersExporter {
   /** @var NewsletterUrl */
   private $newsletterUrl;
 
-  /*** @var SubscribersRepository */
-  private $subscribersRepository;
-
-  /*** @var NewslettersRepository */
-  private $newslettersRepository;
-
-  /*** @var NewsletterStatisticsRepository */
-  private $newsletterStatisticsRepository;
-
   public function __construct(
-    NewsletterUrl $newsletterUrl,
-    SubscribersRepository $subscribersRepository,
-    NewslettersRepository $newslettersRepository,
-    NewsletterStatisticsRepository $newsletterStatisticsRepository
+    NewsletterUrl $newsletterUrl
   ) {
     $this->newsletterUrl = $newsletterUrl;
-    $this->subscribersRepository = $subscribersRepository;
-    $this->newslettersRepository = $newslettersRepository;
-    $this->newsletterStatisticsRepository = $newsletterStatisticsRepository;
   }
 
   public function export($email, $page = 1) {
-    $data = $this->exportSubscriber($this->subscribersRepository->findOneBy(['email' => trim($email)]), $page);
+    $data = $this->exportSubscriber(Subscriber::findOne(trim($email)), $page);
     return [
       'data' => $data,
       'done' => count($data) < self::LIMIT,
     ];
   }
 
-  private function exportSubscriber(?SubscriberEntity $subscriber, $page) {
+  private function exportSubscriber($subscriber, $page) {
     if (!$subscriber) return [];
 
     $result = [];
 
-    $statistics = $this->newsletterStatisticsRepository->getAllForSubscriber(
-      $subscriber,
-      self::LIMIT,
-      self::LIMIT * ($page - 1)
-    );
+    $statistics = StatisticsNewsletters::getAllForSubscriber($subscriber)
+      ->limit(self::LIMIT)
+      ->offset(self::LIMIT * ($page - 1))
+      ->findArray();
 
     $newsletters = $this->loadNewsletters($statistics);
 
@@ -71,33 +54,31 @@ class NewslettersExporter {
   private function exportNewsletter($statisticsRow, $newsletters, $subscriber) {
     $newsletterData = [];
     $newsletterData[] = [
-      'name' => __('Email subject', 'mailpoet'),
+      'name' => WPFunctions::get()->__('Email subject', 'mailpoet'),
       'value' => $statisticsRow['newsletter_rendered_subject'],
     ];
     $newsletterData[] = [
-      'name' => __('Sent at', 'mailpoet'),
-      'value' => $statisticsRow['sent_at']
-        ? $statisticsRow['sent_at']->format(DateTime::DEFAULT_DATE_TIME_FORMAT)
-        : '',
+      'name' => WPFunctions::get()->__('Sent at', 'mailpoet'),
+      'value' => $statisticsRow['sent_at'],
     ];
-    if (!empty($statisticsRow['opened_at'])) {
+    if (isset($statisticsRow['opened_at'])) {
       $newsletterData[] = [
-        'name' => __('Opened', 'mailpoet'),
+        'name' => WPFunctions::get()->__('Opened', 'mailpoet'),
         'value' => 'Yes',
       ];
       $newsletterData[] = [
-        'name' => __('Opened at', 'mailpoet'),
-        'value' => $statisticsRow['opened_at']->format(DateTime::DEFAULT_DATE_TIME_FORMAT),
+        'name' => WPFunctions::get()->__('Opened at', 'mailpoet'),
+        'value' => $statisticsRow['opened_at'],
       ];
     } else {
       $newsletterData[] = [
-        'name' => __('Opened', 'mailpoet'),
-        'value' => __('No', 'mailpoet'),
+        'name' => WPFunctions::get()->__('Opened', 'mailpoet'),
+        'value' => WPFunctions::get()->__('No', 'mailpoet'),
       ];
     }
     if (isset($newsletters[$statisticsRow['newsletter_id']])) {
       $newsletterData[] = [
-        'name' => __('Email preview', 'mailpoet'),
+        'name' => WPFunctions::get()->__('Email preview', 'mailpoet'),
         'value' => $this->newsletterUrl->getViewInBrowserUrl(
           $newsletters[$statisticsRow['newsletter_id']],
           $subscriber
@@ -106,7 +87,7 @@ class NewslettersExporter {
     }
     return [
       'group_id' => 'mailpoet-newsletters',
-      'group_label' => __('MailPoet Emails Sent', 'mailpoet'),
+      'group_label' => WPFunctions::get()->__('MailPoet Emails Sent', 'mailpoet'),
       'item_id' => 'newsletter-' . $statisticsRow['newsletter_id'],
       'data' => $newsletterData,
     ];
@@ -119,11 +100,11 @@ class NewslettersExporter {
 
     if (empty($newsletterIds)) return [];
 
-    $newsletters = $this->newslettersRepository->findBy(['id' => $newsletterIds]);
+    $newsletters = Newsletter::whereIn('id', $newsletterIds)->findMany();
 
     $result = [];
     foreach ($newsletters as $newsletter) {
-      $result[$newsletter->getId()] = $newsletter;
+      $result[$newsletter->id()] = $newsletter;
     }
     return $result;
   }

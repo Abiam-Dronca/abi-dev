@@ -4,8 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Helper;
 
 
-use Nextend\Framework\Sanitize;
-
 class MenuItem {
 
     protected $html = '';
@@ -26,6 +24,6 @@ class MenuItem {
     }
 
     public function display() {
-        echo wp_kses($this->html, Sanitize::$adminTemplateTags);
+        echo $this->html;
     }
 }

@@ -18,8 +18,8 @@ class TemplatesCache extends \WPForms\Helpers\CacheBase {
 	 */
 	protected function allow_load() {
 
-		// Load for certain places only.
-		$allow = wp_doing_ajax() || wpforms_is_admin_page( 'builder' ) || wpforms_is_admin_page( 'templates' );
+		// Load only in the Form Builder.
+		$allow = wp_doing_ajax() || wpforms_is_admin_page( 'builder' );
 
 		/**
 		 * Whether to load this class.
@@ -28,7 +28,7 @@ class TemplatesCache extends \WPForms\Helpers\CacheBase {
 		 *
 		 * @param bool $allow True or false.
 		 */
-		return (bool) apply_filters( 'wpforms_admin_builder_templatescache_allow_load', $allow ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
+		return (bool) apply_filters( 'wpforms_admin_builder_templatescache_allow_load', $allow );
 	}
 
 	/**

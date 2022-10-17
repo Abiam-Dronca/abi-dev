@@ -5,10 +5,12 @@ namespace MailPoet\Automation\Engine\Control\Steps;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Control\StepRunner;
-use MailPoet\Automation\Engine\Data\StepRunArgs;
 use MailPoet\Automation\Engine\Exceptions\InvalidStateException;
 use MailPoet\Automation\Engine\Registry;
+use MailPoet\Automation\Engine\Workflows\Step;
+use MailPoet\Automation\Engine\Workflows\StepRunner;
+use MailPoet\Automation\Engine\Workflows\Workflow;
+use MailPoet\Automation\Engine\Workflows\WorkflowRun;
 
 class ActionStepRunner implements StepRunner {
   /** @var Registry */
@@ -20,14 +22,14 @@ class ActionStepRunner implements StepRunner {
     $this->registry = $registry;
   }
 
-  public function run(StepRunArgs $args): void {
-    $action = $this->registry->getAction($args->getStep()->getKey());
+  public function run(Step $step, Workflow $workflow, WorkflowRun $workflowRun): void {
+    $action = $this->registry->getAction($step->getKey());
     if (!$action) {
       throw new InvalidStateException();
     }
-    if (!$action->isValid($args->getWorkflowRun()->getSubjects(), $args->getStep(), $args->getWorkflow())) {
+    if (!$action->isValid($workflowRun->getSubjects(), $step, $workflow)) {
       throw new InvalidStateException();
     }
-    $action->run($args);
+    $action->run($workflow, $workflowRun, $step);
   }
 }

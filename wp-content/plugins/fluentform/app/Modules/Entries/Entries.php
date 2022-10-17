@@ -5,7 +5,6 @@ namespace FluentForm\App\Modules\Entries;
 use FluentForm\App\Helpers\Helper;
 use FluentForm\App\Modules\Form\FormDataParser;
 use FluentForm\App\Modules\Form\FormFieldsParser;
-use FluentForm\App\Modules\Registerer\TranslationString;
 use FluentForm\Framework\Helpers\ArrayHelper;
 use FluentForm\View;
 
@@ -192,8 +191,7 @@ class Entries extends EntryQuery
             'available_countries' => $app->load(
                 $app->appPath('Services/FormBuilder/CountryNames.php')
             ),
-            'upgrade_url'         => fluentform_upgrade_url(),
-            'form_entries_str'    => TranslationString::getEntriesI18n(),
+            'upgrade_url'         => fluentform_upgrade_url()
         ], $form);
 
         wp_localize_script(
@@ -393,10 +391,6 @@ class Entries extends EntryQuery
 
     public function getEntry()
     {
-        if (!defined('FLUENTFORM_RENDERING_ENTRY')) {
-            define('FLUENTFORM_RENDERING_ENTRY', true);
-        }
-        
         $entryData = $this->_getEntry();
 
         $entryData['widgets'] = apply_filters('fluentform_single_entry_widgets', [], $entryData);
@@ -716,7 +710,6 @@ class Entries extends EntryQuery
             '_wp_http_referer',
             'g-recaptcha-response',
             'h-captcha-response',
-            'cf-turnstile-response',
             '__stripe_payment_method_id',
             '__ff_all_applied_coupons',
             '__entry_intermediate_hash'
@@ -880,7 +873,7 @@ class Entries extends EntryQuery
         do_action('fluentform_submission_user_changed', $submission, $user);
 
         wp_send_json_success([
-            'message' => __('Selected user has been successfully assigned to this submission', 'fluentform'),
+            'message' => __('Selected user has been successfully assigned to this submission', 'fuentform'),
             'user'    => [
                 'name'      => $user->display_name,
                 'email'     => $user->user_email,

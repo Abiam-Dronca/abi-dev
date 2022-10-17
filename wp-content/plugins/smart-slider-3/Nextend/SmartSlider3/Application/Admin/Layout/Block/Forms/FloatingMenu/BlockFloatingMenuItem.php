@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\FloatingMenu;
 
 
-use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\AbstractBlock;
 use Nextend\Framework\View\Html;
 
@@ -34,7 +33,7 @@ class BlockFloatingMenuItem extends AbstractBlock {
         }
         $label .= '<div class="n2_floating_menu__item_label">' . $this->label . '</div>';
 
-        echo wp_kses(Html::link($label, $this->url, $this->attributes + array('class' => implode(' ', $this->getClasses()))), Sanitize::$adminTemplateTags);
+        echo Html::link($label, $this->url, $this->attributes + array('class' => implode(' ', $this->getClasses())));
     }
 
     /**

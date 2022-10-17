@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Entities\DynamicSegmentFilterData;
 use MailPoet\Entities\DynamicSegmentFilterEntity;
 use MailPoet\Entities\SegmentEntity;
-use MailPoet\Segments\DynamicSegments\Filters\SubscriberTag;
 use MailPoet\Util\License\Features\Subscribers as SubscribersFeature;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Doctrine\Common\Collections\Collection;
@@ -45,14 +44,6 @@ class SegmentDependencyValidator {
     DynamicSegmentFilterData::TYPE_WOOCOMMERCE_SUBSCRIPTION => [
       self::WOOCOMMERCE_SUBSCRIPTIONS_PLUGIN,
       self::WOOCOMMERCE_PLUGIN,
-    ],
-  ];
-
-  private const REQUIRED_PLUGINS_BY_TYPE_AND_ACTION = [
-    DynamicSegmentFilterData::TYPE_USER_ROLE => [
-      SubscriberTag::TYPE => [
-        self::MAILPOET_PREMIUM_PLUGIN,
-      ],
     ],
   ];
 
@@ -105,10 +96,7 @@ class SegmentDependencyValidator {
   }
 
   public function getMissingPluginsByFilter(DynamicSegmentFilterEntity $dynamicSegmentFilter): array {
-    $config = $this->getRequiredPluginsConfig(
-      $dynamicSegmentFilter->getFilterData()->getFilterType() ?? '',
-      $dynamicSegmentFilter->getFilterData()->getAction()
-    );
+    $config = $this->getRequiredPluginsConfig($dynamicSegmentFilter->getFilterData()->getFilterType() ?? '');
     return $this->getMissingPlugins($config);
   }
 
@@ -117,15 +105,11 @@ class SegmentDependencyValidator {
     return empty($this->getMissingPlugins($config));
   }
 
-  private function getRequiredPluginsConfig(string $type, ?string $action = null): array {
-    $requiredPlugins = [];
+  private function getRequiredPluginsConfig(string $type): array {
     if (isset(self::REQUIRED_PLUGINS_BY_TYPE[$type])) {
-      $requiredPlugins = self::REQUIRED_PLUGINS_BY_TYPE[$type];
+      return self::REQUIRED_PLUGINS_BY_TYPE[$type];
     }
-    if (isset(self::REQUIRED_PLUGINS_BY_TYPE_AND_ACTION[$type][$action])) {
-      $requiredPlugins = array_merge($requiredPlugins, self::REQUIRED_PLUGINS_BY_TYPE_AND_ACTION[$type][$action]);
-    }
-    return $requiredPlugins;
+    return [];
   }
 
   private function getMissingPlugins(array $config): array {
@@ -145,7 +129,7 @@ class SegmentDependencyValidator {
       && (!$this->subscribersFeature->hasValidPremiumKey() || $this->subscribersFeature->check())
     ) {
       return [
-        'message' => __('Your current MailPoet plan does not support advanced segments. Please [link]upgrade to a MailPoet Premium plan[/link] to reactivate this segment.', 'mailpoet'),
+        'message' => $this->wp->__('Your current MailPoet plan does not support advanced segments. Please [link]upgrade to a MailPoet Premium plan[/link] to reactivate this segment.', 'mailpoet'),
         'link' => 'https://account.mailpoet.com',
       ];
     }

@@ -24,7 +24,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 
 		/**
 		 * Internal cache storage, do not use it directly, but app.cache.{(get|set|delete|clear)()} instead.
-		 * Key is the provider slug, value is a Map, that will have its own key as a connection id (or not).
+		 * Key is the provider slug, value is a Map, that will have it's own key as a connection id (or not).
 		 *
 		 * @since 1.4.7
 		 *
@@ -40,7 +40,6 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		 * @type {Object.<string, *>}
 		 */
 		config: {
-
 			/**
 			 * List of default templates that should be compiled.
 			 *
@@ -50,8 +49,8 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 			 */
 			templates: [
 				'wpforms-providers-builder-content-connection-fields',
-				'wpforms-providers-builder-content-connection-conditionals',
-			],
+				'wpforms-providers-builder-content-connection-conditionals'
+			]
 		},
 
 		/**
@@ -186,7 +185,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 							$lock.val( 0 );
 						}
 					} );
-			},
+			}
 		},
 
 		/**
@@ -221,7 +220,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 
 			/**
 			 * Get the value from cache by key and an ID.
-			 * Useful when Object is stored under key, and we need specific value.
+			 * Useful when Object is stored under key and we need specific value.
 			 *
 			 * @since 1.4.7
 			 * @since 1.5.9 Added a new parameter - provider.
@@ -333,7 +332,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 			 *
 			 * @param {string} provider Current provider slug.
 			 * @param {string} key Intended to be a string, but can be everything that Map supports as a key.
-			 * @param {string} id ID for a value that should be deleted from a certain key.
+			 * @param {string} id ID for a value that should be delete from a certain key.
 			 *
 			 * @returns {Map} All the cache for the provider. IE11 returns 'undefined' for an undefined reason.
 			 */
@@ -375,7 +374,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 				}
 
 				__private.cache[ provider ].clear();
-			},
+			}
 		},
 
 		/**
@@ -439,17 +438,15 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 					// Do the actual required fields check.
 					$( this ).find( 'input.wpforms-required, select.wpforms-required, textarea.wpforms-required' ).each( function() {
 
-						const $this = $( this ),
-							value = $this.val();
+						var value = $( this ).val();
 
-						if ( _.isEmpty( value ) && ! $this.closest( '.wpforms-builder-provider-connection-block' ).hasClass( 'wpforms-hidden' ) ) {
+						if ( _.isEmpty( value ) ) {
 							$( this ).addClass( 'wpforms-error' );
 							isRequiredEmpty = true;
 
-							return;
+						} else {
+							$( this ).removeClass( 'wpforms-error' );
 						}
-
-						$( this ).removeClass( 'wpforms-error' );
 					} );
 
 					// Notify user.
@@ -501,7 +498,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		 *
 		 * @since 1.6.1.2
 		 *
-		 * @param {object} $connections jQuery selector for active connections.
+		 * @param {object} $connections jQuery selector for active conenctions.
 		 */
 		updateMapSelects: function( $connections ) {
 
@@ -595,7 +592,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		ui: {
 
 			/**
-			 * Process UI related actions/events: click, change etc. - that are triggered from UI.
+			 * Process UI related actions/events: click, change etc - that are triggered from UI.
 			 *
 			 * @since 1.4.7
 			 */
@@ -694,7 +691,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 
 			/**
 			 * Add a connection to a page.
-			 * This is a multistep process, where the 1st step is always the same for all providers.
+			 * This is a multi-step process, where the 1st step is always the same for all providers.
 			 *
 			 * @since 1.4.7
 			 * @since 1.5.9 Added a new parameter - provider.
@@ -881,7 +878,8 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 
 							app.getProviderHolder( account.provider ).trigger( 'accountAddModal.contentLoaded', [ modal ] );
 						},
-						onOpenBefore: function() { // Before the modal is displayed.
+						// Before the modal is displayed.
+						onOpenBefore: function() {
 
 							var modal = this;
 
@@ -891,7 +889,8 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 
 							app.getProviderHolder( account.provider ).trigger( 'accountAddModal.onOpenBefore', [ modal ] );
 						},
-						onClose: function() { // Before the modal is hidden.
+						// Before the modal is hidden.
+						onClose: function() {
 
 							// If an account was configured successfully - show a modal with adding a new connection.
 							if ( true === app.ui.account.isConfigured( account.provider ) ) {

@@ -27,12 +27,16 @@ class Scheduler {
     $this->newslettersRepository = $newslettersRepository;
   }
 
-  /**
-   * @return string|false
-   */
   public function getNextRunDate($schedule, $fromTimestamp = false) {
-    $nextRunDateTime = $this->getNextRunDateTime($schedule, $fromTimestamp);
-    return $nextRunDateTime ? $nextRunDateTime->format('Y-m-d H:i:s') : $nextRunDateTime;
+    $fromTimestamp = ($fromTimestamp) ? $fromTimestamp : $this->wp->currentTime('timestamp');
+    try {
+      $schedule = \Cron\CronExpression::factory($schedule);
+      $nextRunDate = $schedule->getNextRunDate(Carbon::createFromTimestamp($fromTimestamp))
+        ->format('Y-m-d H:i:s');
+    } catch (\Exception $e) {
+      $nextRunDate = false;
+    }
+    return $nextRunDate;
   }
 
   public function getPreviousRunDate($schedule, $fromTimestamp = false) {
@@ -79,19 +83,5 @@ class Scheduler {
 
   public function formatDatetimeString($datetimeString) {
     return Carbon::parse($datetimeString)->format('Y-m-d H:i:s');
-  }
-
-  /**
-   * @return \DateTime|false
-   */
-  public function getNextRunDateTime($schedule, $fromTimestamp = false) {
-    $fromTimestamp = $fromTimestamp ?: $this->wp->currentTime('timestamp');
-    try {
-      $schedule = \Cron\CronExpression::factory($schedule);
-      $nextRunDate = $schedule->getNextRunDate(Carbon::createFromTimestamp($fromTimestamp));
-    } catch (\Exception $e) {
-      $nextRunDate = false;
-    }
-    return $nextRunDate;
   }
 }

@@ -66,12 +66,10 @@ class Form
         $forms = fluentFormApi('forms')->forms([
             'search' => $this->request->get('search'),
             'status' => $this->request->get('status'),
-            'filter_by' => $this->request->get('filter_by', 'all'),
-            'date_range' => $this->request->get('date_range', []),
             'sort_column' => $this->request->get('sort_column', 'id'),
-            'sort_by'     => $this->request->get('sort_by', 'DESC'),
-            'per_page'    => $this->request->get('per_page', 10),
-            'page'        => $this->request->get('page', 1),
+            'sort_by' => $this->request->get('sort_by', 'DESC'),
+            'per_page' => $this->request->get('per_page', 10),
+            'page' => $this->request->get('page', 1),
         ]);
 
         wp_send_json($forms, 200);
@@ -92,9 +90,9 @@ class Form
         $now = current_time('mysql');
 
         $insertData = [
-            'title'      => $title,
-            'type'       => $type,
-            'status'     => $status,
+            'title' => $title,
+            'type' => $type,
+            'status' => $status,
             'created_by' => $createdBy,
             'created_at' => $now,
             'updated_at' => $now
@@ -104,7 +102,7 @@ class Form
             $insertData['form_fields'] = $this->formFields;
         }
 
-        if ($this->hasPayment) {
+        if($this->hasPayment) {
             $insertData['has_payment'] = $this->hasPayment;
         }
 
@@ -115,15 +113,15 @@ class Form
             'title' => $title . ' (#' . $formId . ')'
         ));
 
-        if ($this->metas && is_array($this->metas)) {
+        if($this->metas && is_array($this->metas)) {
             foreach ($this->metas as $meta) {
                 $meta['value'] = trim(preg_replace('/\s+/', ' ', $meta['value']));
 
                 wpFluent()->table('fluentform_form_meta')
                     ->insert(array(
-                        'form_id'  => $formId,
+                        'form_id' => $formId,
                         'meta_key' => $meta['meta_key'],
-                        'value'    => $meta['value']
+                        'value' => $meta['value']
                     ));
             }
         } else {
@@ -134,17 +132,17 @@ class Form
 
             wpFluent()->table('fluentform_form_meta')
                 ->insert(array(
-                    'form_id'  => $formId,
+                    'form_id' => $formId,
                     'meta_key' => 'formSettings',
-                    'value'    => json_encode($defaultSettings)
+                    'value' => json_encode($defaultSettings)
                 ));
 
             if ($this->defaultNotifications) {
                 wpFluent()->table('fluentform_form_meta')
                     ->insert(array(
-                        'form_id'  => $formId,
+                        'form_id' => $formId,
                         'meta_key' => 'notifications',
-                        'value'    => json_encode($this->defaultNotifications)
+                        'value' => json_encode($this->defaultNotifications)
                     ));
             }
         }
@@ -152,12 +150,12 @@ class Form
         do_action('fluentform_inserted_new_form', $formId, $insertData);
 
         $data = array(
-            'formId'       => $formId,
+            'formId' => $formId,
             'redirect_url' => admin_url('admin.php?page=fluent_forms&form_id=' . $formId . '&route=editor'),
-            'message'      => __('Successfully created a form.', 'fluentform')
+            'message' => __('Successfully created a form.', 'fluentform')
         );
 
-        if ($returnJSON) {
+        if($returnJSON) {
             wp_send_json_success($data, 200);
         }
 
@@ -167,43 +165,43 @@ class Form
     public function getFormsDefaultSettings($formId = false)
     {
         $defaultSettings = array(
-            'confirmation'               => array(
-                'redirectTo'           => 'samePage',
-                'messageToShow'        => __('Thank you for your message. We will get in touch with you shortly', 'fluentform'),
-                'customPage'           => null,
+            'confirmation' => array(
+                'redirectTo' => 'samePage',
+                'messageToShow' => __('Thank you for your message. We will get in touch with you shortly', 'fluentform'),
+                'customPage' => null,
                 'samePageFormBehavior' => 'hide_form',
-                'customUrl'            => null
+                'customUrl' => null
             ),
-            'restrictions'               => array(
+            'restrictions' => array(
                 'limitNumberOfEntries' => array(
-                    'enabled'         => false,
+                    'enabled' => false,
                     'numberOfEntries' => null,
-                    'period'          => 'total',
+                    'period' => 'total',
                     'limitReachedMsg' => 'Maximum number of entries exceeded.'
                 ),
-                'scheduleForm'         => array(
-                    'enabled'      => false,
-                    'start'        => null,
-                    'end'          => null,
+                'scheduleForm' => array(
+                    'enabled' => false,
+                    'start' => null,
+                    'end' => null,
                     'selectedDays' => null,
-                    'pendingMsg'   => __("Form submission is not started yet.", 'fluentform'),
-                    'expiredMsg'   => __("Form submission is now closed.", 'fluentform')
+                    'pendingMsg' => __("Form submission is not started yet.", 'fluentform'),
+                    'expiredMsg' => __("Form submission is now closed.", 'fluentform')
                 ),
-                'requireLogin'         => array(
-                    'enabled'         => false,
+                'requireLogin' => array(
+                    'enabled' => false,
                     'requireLoginMsg' => 'You must be logged in to submit the form.',
                 ),
-                'denyEmptySubmission'  => [
+                'denyEmptySubmission' => [
                     'enabled' => false,
                     'message' => __('Sorry, you cannot submit an empty form. Let\'s hear what you wanna say.', 'fluentform'),
                 ]
             ),
-            'layout'                     => array(
-                'labelPlacement'        => 'top',
-                'helpMessagePlacement'  => 'with_label',
+            'layout' => array(
+                'labelPlacement' => 'top',
+                'helpMessagePlacement' => 'with_label',
                 'errorMessagePlacement' => 'inline',
-                'cssClassName'          => '',
-                'asteriskPlacement'     => 'asterisk-right'
+                'cssClassName' => '',
+                'asteriskPlacement' => 'asterisk-right'
             ),
             'delete_entry_on_submission' => 'no'
         );
@@ -226,22 +224,22 @@ class Form
     public function getAdvancedValidationSettings($formId)
     {
         $settings = [
-            'status'          => false,
-            'type'            => 'all',
-            'conditions'      => [
+            'status' => false,
+            'type' => 'all',
+            'conditions' => [
                 [
-                    'field'    => '',
+                    'field' => '',
                     'operator' => '=',
-                    'value'    => ''
+                    'value' => ''
                 ]
             ],
-            'error_message'   => '',
+            'error_message' => '',
             'validation_type' => 'fail_on_condition_met'
         ];
 
         $metaSettings = $this->getMeta($formId, 'advancedValidationSettings', true);
 
-        if ($metaSettings && is_array($metaSettings)) {
+        if($metaSettings && is_array($metaSettings)) {
             $settings = wp_parse_args($metaSettings, $settings);
         }
 
@@ -255,7 +253,7 @@ class Form
             ->where('meta_key', $metaKey)
             ->first();
         if ($settingsMeta) {
-            if ($isJson) {
+            if($isJson) {
                 return \json_decode($settingsMeta->value, true);
             } else {
                 return $settingsMeta->value;
@@ -271,11 +269,11 @@ class Form
             ->where('meta_key', $metaKey)
             ->first();
 
-        if (is_array($metaValue) || is_object($metaValue)) {
+        if(is_array($metaValue) || is_object($metaValue)) {
             $metaValue = \json_encode($metaValue);
         }
 
-        if ($exist) {
+        if($exist) {
             return wpFluent()->table('fluentform_form_meta')
                 ->where('id', $exist->id)
                 ->update([
@@ -284,9 +282,9 @@ class Form
         }
 
         return wpFluent()->table('fluentform_form_meta')->insert([
-            'form_id'  => $formId,
+            'form_id' => $formId,
             'meta_key' => $metaKey,
-            'value'    => $metaValue
+            'value' => $metaValue
         ]);
     }
 
@@ -332,15 +330,14 @@ class Form
         $this->validate();
 
         $data = [
-            'title'      => $title,
-            'status'     => $status,
+            'title' => $title,
+            'status' => $status,
             'updated_at' => current_time('mysql')
         ];
 
 
         if ($formFields = $this->request->get('formFields')) {
             $formFields = apply_filters('fluentform_form_fields_update', $formFields, $formId);
-            $formFields = $this->sanitizeFields($formFields);
             $data['form_fields'] = $formFields;
         }
 
@@ -352,14 +349,14 @@ class Form
             $this->model->where('id', $formId)->update([
                 'has_payment' => 1
             ]);
-        } elseif ($form->has_payment) {
+        } else if ($form->has_payment) {
             $this->model->where('id', $formId)->update([
                 'has_payment' => 0
             ]);
         }
 
         $emailInputs = FormFieldsParser::getElement($form, ['input_email'], ['element', 'attributes']);
-        if ($emailInputs) {
+        if($emailInputs) {
             $emailInput = array_shift($emailInputs);
             $emailInputName = ArrayHelper::get($emailInput, 'attributes.name');
             $this->updateMeta($formId, '_primary_email_field', $emailInputName);
@@ -371,106 +368,6 @@ class Form
             'message' => __('The form is successfully updated.', 'fluentform')
         ], 200);
     }
-
-
-    private function sanitizeFields($formFields)
-    {
-        if (current_user_can('unfiltered_html') || apply_filters('fluent_form_disable_fields_sanitize', false)) {
-            return $formFields;
-        }
-
-        $fieldsArray = json_decode($formFields, true);
-
-        if (isset($fieldsArray['submitButton'])) {
-            $fieldsArray['submitButton']['settings']['button_ui']['text'] = fluentform_sanitize_html($fieldsArray['submitButton']['settings']['button_ui']['text']);
-            if (!empty($fieldsArray['submitButton']['settings']['button_ui']['img_url'])) {
-                $fieldsArray['submitButton']['settings']['button_ui']['img_url'] = sanitize_url($fieldsArray['submitButton']['settings']['button_ui']['img_url']);
-            }
-        }
-
-        $fieldsArray['fields'] = $this->sanitizeFieldMaps($fieldsArray['fields']);
-
-        return json_encode($fieldsArray);
-    }
-
-    private function sanitizeFieldMaps($fields)
-    {
-        if (!is_array($fields)) {
-            return $fields;
-        }
-        
-        $attributesMap = [
-            'name'        => 'sanitize_key',
-            'value'       => 'sanitize_textarea_field',
-            'id'          => 'sanitize_key',
-            'class'       => 'sanitize_text_field',
-            'placeholder' => 'sanitize_text_field'
-        ];
-        $attributesKeys = array_keys($attributesMap);
-        $settingsMap = [
-            'container_class'           => 'sanitize_text_field',
-            'label'                     => 'wp_kses_post',
-            'label_placement'           => 'sanitize_text_field',
-            'help_message'              => 'wp_kses_post',
-            'admin_field_label'         => 'sanitize_text_field',
-            'prefix_label'              => 'sanitize_text_field',
-            'suffix_label'              => 'sanitize_text_field',
-            'unique_validation_message' => 'sanitize_text_field',
-            'advanced_options'          => 'fluentform_options_sanitize',
-            'html_codes'                => 'fluentform_sanitize_html'
-        ];
-        $settingsKeys = array_keys($settingsMap);
-        $stylePrefMap = [
-            'layout' => 'sanitize_key',
-            'media' => 'sanitize_url',
-            'alt_text' => 'sanitize_text_field'
-        ];
-        $stylePrefKeys = array_keys($stylePrefMap);
-
-        foreach ($fields as $fieldIndex => $field) {
-            $element = ArrayHelper::get($field, 'element');
-
-            if ($element == 'container') {
-                $columns = $field['columns'];
-                foreach ($columns as $columnIndex => $column) {
-                    $fields[$fieldIndex]['columns'][$columnIndex]['fields'] = $this->sanitizeFieldMaps($column['fields']);
-                }
-                return $fields;
-            }
-
-            /*
-             * Handle Name or address fields
-             */
-            if (!empty($field['fields'])) {
-                $fields[$fieldIndex]['fields'] = $this->sanitizeFieldMaps($field['fields']);
-                return $fields;
-            }
-
-            if (!empty($field['attributes'])) {
-                $attributes = array_filter(\FluentForm\Framework\Helpers\ArrayHelper::only($field['attributes'], $attributesKeys));
-                foreach ($attributes as $key => $value) {
-                    $fields[$fieldIndex]['attributes'][$key] = call_user_func($attributesMap[$key], $value);
-                }
-            }
-
-            if (!empty($field['settings'])) {
-                $settings = array_filter(\FluentForm\Framework\Helpers\ArrayHelper::only($field['settings'], $settingsKeys));
-                foreach ($settings as $key => $value) {
-                    $fields[$fieldIndex]['settings'][$key] = call_user_func($settingsMap[$key], $value);
-                }
-            }
-
-            if (!empty($field['style_pref'])) {
-                $settings = array_filter(\FluentForm\Framework\Helpers\ArrayHelper::only($field['style_pref'], $stylePrefKeys));
-                foreach ($settings as $key => $value) {
-                    $fields[$fieldIndex]['style_pref'][$key] = call_user_func($stylePrefMap[$key], $value);
-                }
-            }
-        }
-
-        return $fields;
-    }
-
 
     /**
      * Delete a from from database
@@ -487,7 +384,7 @@ class Form
 
         wp_send_json([
             'message' => __('Successfully deleted the form.', 'fluentform'),
-            'errors'  => $maybeErrors
+            'errors' => $maybeErrors
         ], 200);
     }
 
@@ -531,6 +428,7 @@ class Form
                     ->where('form_id', $formId)
                     ->delete();
             } catch (\Exception $exception) {
+
             }
         }
         $errors = ob_get_clean();
@@ -548,16 +446,16 @@ class Form
         $form = $this->model->where('id', $formId)->first();
 
         $data = array(
-            'title'               => $form->title,
-            'status'              => $form->status,
+            'title' => $form->title,
+            'status' => $form->status,
             'appearance_settings' => $form->appearance_settings,
-            'form_fields'         => $form->form_fields,
-            'type'                => $form->type,
-            'has_payment'         => $form->has_payment,
-            'conditions'          => $form->conditions,
-            'created_by'          => get_current_user_id(),
-            'created_at'          => current_time('mysql'),
-            'updated_at'          => current_time('mysql')
+            'form_fields' => $form->form_fields,
+            'type' => $form->type,
+            'has_payment' => $form->has_payment,
+            'conditions' => $form->conditions,
+            'created_by' => get_current_user_id(),
+            'created_at' => current_time('mysql'),
+            'updated_at' => current_time('mysql')
         );
 
         $newFormId = $this->model->insert($data);
@@ -578,14 +476,15 @@ class Form
         $extras = [];
 
         foreach ($formMetas as $meta) {
-            if ($meta->meta_key == 'notifications' || $meta->meta_key == '_pdf_feeds') {
+
+            if ($meta->meta_key == 'notifications' || $meta->meta_key == '_pdf_feeds'){
                 $extras[$meta->meta_key][] = $meta;
                 continue;
             }
             $metaData = [
                 'meta_key' => $meta->meta_key,
-                'value'    => $meta->value,
-                'form_id'  => $newFormId
+                'value' => $meta->value,
+                'form_id' => $newFormId
             ];
 
             wpFluent()->table('fluentform_form_meta')->insert($metaData);
@@ -597,8 +496,8 @@ class Form
             foreach ($extras['notifications'] as $notify) {
                 $notifyData = [
                     'meta_key' => $notify->meta_key,
-                    'value'    => $notify->value,
-                    'form_id'  => $newFormId
+                    'value' => $notify->value,
+                    'form_id' => $newFormId
                 ];
                 wpFluent()->table('fluentform_form_meta')->insert($notifyData);
             }
@@ -607,8 +506,8 @@ class Form
         do_action('flentform_form_duplicated', $newFormId);
 
         wp_send_json([
-            'message'  => __('Form has been successfully duplicated.', 'fluentform'),
-            'form_id'  => $newFormId,
+            'message' => __('Form has been successfully duplicated.', 'fluentform'),
+            'form_id' => $newFormId,
             'redirect' => admin_url('admin.php?page=fluent_forms&route=editor&form_id=' . $newFormId)
         ], 200);
     }
@@ -620,12 +519,12 @@ class Form
     private function validate()
     {
         $fields = $this->request->get('formFields');
-        if ($fields) {
+        if($fields) {
             $duplicates = Helper::getDuplicateFieldNames($fields);
-            if ($duplicates) {
+            if($duplicates){
                 $duplicateString = implode(', ', $duplicates);
                 wp_send_json([
-                    'title' => sprintf(__('Name attribute %s has duplicate value.', 'fluentform'), $duplicateString)
+                    'title' => sprintf( __( 'Name attribute %s has duplicate value.', 'fluentform' ), $duplicateString )
                 ], 422);
             }
         }
@@ -699,8 +598,8 @@ class Form
             foreach ($extras['_pdf_feeds'] as $pdf_feed) {
                 $pdfData = [
                     'meta_key' => $pdf_feed->meta_key,
-                    'value'    => $pdf_feed->value,
-                    'form_id'  => $newFormId
+                    'value' => $pdf_feed->value,
+                    'form_id' => $newFormId
                 ];
                 $pdfFeedMap[$pdf_feed->id] = wpFluent()->table('fluentform_form_meta')->insert($pdfData);
             }
@@ -719,6 +618,7 @@ class Form
         foreach ($extras['notifications'] as $key => $notification) {
             $notificationValue = json_decode($notification->value);
             $pdf_attachments = [];
+    
             if (isset($notificationValue->pdf_attachments) && count($notificationValue->pdf_attachments)) {
                 foreach ($notificationValue->pdf_attachments as $attachment) {
                     $pdf_attachments[] = json_encode($pdfFeedMap[$attachment]);
@@ -731,4 +631,5 @@ class Form
         }
         return $extras;
     }
+
 }

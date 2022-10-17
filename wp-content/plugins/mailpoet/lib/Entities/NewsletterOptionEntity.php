@@ -56,17 +56,6 @@ class NewsletterOptionEntity {
   }
 
   /**
-   * @return string|null
-   */
-  public function getName() {
-    $optionField = $this->getOptionField();
-    if ($optionField === null) {
-      return null;
-    }
-    return $optionField->getName();
-  }
-
-  /**
    * @param string|null $value
    */
   public function setValue($value) {

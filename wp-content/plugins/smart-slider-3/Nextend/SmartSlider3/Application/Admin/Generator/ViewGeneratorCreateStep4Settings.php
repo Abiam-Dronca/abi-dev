@@ -150,7 +150,8 @@ class ViewGeneratorCreateStep4Settings extends AbstractView {
 
         $generatorModel = new ModelGenerator($this);
         $generatorModel->renderFields($form->getContainer());
-        $form->render();
+
+        echo $form->render();
     }
 
 }

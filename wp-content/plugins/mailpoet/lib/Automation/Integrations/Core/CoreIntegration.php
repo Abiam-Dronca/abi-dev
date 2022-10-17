@@ -7,19 +7,19 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Automation\Engine\Integration;
 use MailPoet\Automation\Engine\Registry;
-use MailPoet\Automation\Integrations\Core\Actions\DelayAction;
+use MailPoet\Automation\Integrations\Core\Actions\WaitAction;
 
 class CoreIntegration implements Integration {
-  /** @var DelayAction */
-  private $delayAction;
+  /** @var WaitAction */
+  private $waitAction;
 
   public function __construct(
-    DelayAction $delayAction
+    WaitAction $waitAction
   ) {
-    $this->delayAction = $delayAction;
+    $this->waitAction = $waitAction;
   }
 
   public function register(Registry $registry): void {
-    $registry->addAction($this->delayAction);
+    $registry->addAction($this->waitAction);
   }
 }

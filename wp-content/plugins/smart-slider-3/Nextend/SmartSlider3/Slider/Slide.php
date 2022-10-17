@@ -37,12 +37,7 @@ class Slide extends AbstractRenderableOwner {
 
     protected $title = '', $description = '', $thumbnail = '';
 
-    public $parameters;
-
-    /**
-     * @var string contains escaped html data
-     */
-    public $background = '';
+    public $parameters, $background = '';
 
     protected $html = '';
 
@@ -383,7 +378,7 @@ class Slide extends AbstractRenderableOwner {
                     'class'   => 'n2-ss-slide-thumbnail'
                 ));
 
-                $this->html .= Html::image($this->sliderObject->features->optimize->optimizeThumbnail($thumbnail), esc_attr($this->getThumbnailAltDynamic()), $attributes);
+                $this->html .= Html::image($this->sliderObject->features->optimize->optimizeThumbnail($thumbnail), Sanitize::esc_attr($this->getThumbnailAltDynamic()), $attributes);
             }
         }
 
@@ -430,9 +425,6 @@ class Slide extends AbstractRenderableOwner {
         return $this->parameters->get('mobilelandscape', 1);
     }
 
-    /**
-     * @return string contains escaped html data
-     */
     public function getHTML() {
         return $this->html;
     }
@@ -591,16 +583,12 @@ class Slide extends AbstractRenderableOwner {
 
     private function _splitbywords($s, $start, $length) {
 
-        $len = intval(Str::strlen($s));
-        if ($len > $start) {
-            $posStart = max(0, $start == 0 ? 0 : Str::strpos($s, ' ', $start));
-            $posEnd   = max(0, $length > $len ? $len : Str::strpos($s, ' ', $length));
-            if ($posEnd == 0 && $length <= $len) $posEnd = $len;
+        $len      = Str::strlen($s);
+        $posStart = max(0, $start == 0 ? 0 : Str::strpos($s, ' ', $start));
+        $posEnd   = max(0, $length > $len ? $len : Str::strpos($s, ' ', $length));
+        if ($posEnd == 0 && $length <= $len) $posEnd = $len;
 
-            return Str::substr($s, $posStart, $posEnd);
-        } else {
-            return '';
-        }
+        return Str::substr($s, $posStart, $posEnd);
     }
 
     private function _findimage($s, $index) {

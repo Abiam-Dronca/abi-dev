@@ -199,7 +199,7 @@
                                         );
                                         $generateText = apply_filters('fluentform_email_summary_body_text', $generateText, $submissions);
                                         ?>
-                                        <?php echo wp_kses_post($generateText); ?> .
+                                        <?php echo esc_html($generateText); ?> .
                                     </td>
                                 </tr>
                             </table>
@@ -225,7 +225,7 @@
                                 $footerText = apply_filters('fluentform_email_summary_footer_text', $generateText);
                                 ?>
                                 <p>
-                                    <?php echo wp_kses_post($footerText); ?>
+                                    <?php echo esc_html($footerText); ?>
                                 </p>
                             </td>
                         </tr>

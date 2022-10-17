@@ -39,9 +39,8 @@ class ControllerAjaxSlides extends AdminAjaxController {
 
         $response = array();
 
-        $file = Request::$FILES->getVar('slide');
-        if (Settings::get('slide-as-file', 0) && $file !== null) {
-            $slide = Filesystem::readFile($file['tmp_name']);
+        if (Settings::get('slide-as-file', 0) && isset($_FILES['slide'])) {
+            $slide = Filesystem::readFile($_FILES['slide']['tmp_name']);
         } else {
             $slide = Request::$REQUEST->getVar('slide');
         }

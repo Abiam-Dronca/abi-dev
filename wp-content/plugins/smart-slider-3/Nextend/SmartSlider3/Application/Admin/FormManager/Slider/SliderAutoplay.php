@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\FormManager\Slider;
 
 use Nextend\Framework\Form\Container\ContainerTable;
-use Nextend\Framework\Form\Element\Message\Warning;
 use Nextend\Framework\Form\Element\OnOff;
 use Nextend\Framework\Form\Element\Select;
 use Nextend\Framework\Form\Element\Text\Number;
@@ -58,8 +57,7 @@ class SliderAutoplay extends AbstractSliderTab {
             'relatedFieldsOn'  => array(
                 'table-rows-autoplay',
                 'table-widget-autoplay',
-                'table-widget-indicator',
-                'autoplay-single-slide-notice'
+                'table-widget-indicator'
             )
         ));
 

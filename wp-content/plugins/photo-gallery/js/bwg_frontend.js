@@ -10,19 +10,6 @@ var bwg_params = [];
 var bwg_params_ib = [];
 /* Carousel params */
 var bwg_params_carousel = [];
-
-jQuery(function () {
-  if ( isMobile ) {
-    jQuery(".bwg-container.bwg-standard-thumbnails .bwg-title1, .bwg-container.bwg-masonry-thumbnails .bwg-title1, .bwg-mosaic-thumbnails").css("opacity","1");
-    jQuery(".bwg-zoom-effect .bwg-zoom-effect-overlay, .bwg-zoom-effect-overlay > span").css({"opacity":1,"background-color":"unset"});
-  }
-
-  if (jQuery(".bwg-container").length) {
-    /* Show the "Optimize images" button only on pages with gallery in it.*/
-    jQuery("#wp-admin-bar-booster-top-button").removeClass("hidden");
-  }
-});
-
 jQuery(function () {
   /**
    * @param {boolean} isAll   do you need to stop all slideshows?.
@@ -308,12 +295,8 @@ function bwg_blog_style_resize() {
       jQuery(this).height(jQuery(this).width() * 0.5625);
     });
     jQuery('.bwg_embed_frame_instapost_'+bwg).each(function (e) {
-        jQuery(this).width(jQuery(this).parent().width());
-        var height = (jQuery(this).width() - 16) * jQuery(this).attr('data-height') / jQuery(this).attr('data-width') + 96;
-        jQuery(this).height(height);
-        jQuery(this).find('iframe[id^="instagram-embed-"]').css({
-          'max-height': height + 'px',
-        });
+      jQuery(this).width(jQuery(this).parent().width());
+      jQuery(this).height((jQuery(this).width() - 16) * jQuery(this).attr('data-height') / jQuery(this).attr('data-width') + 96);
     });
   })
 }
@@ -337,11 +320,7 @@ function bwg_blog_style_onload() {
       jQuery(this).width(jQuery(this).parents('.bwg_blog_style_image_' + bwg).width());
       /* 16 is 2*padding inside iframe */
       /* 96 is 2*padding(top) + 1*padding(bottom) + 40(footer) + 32(header) */
-      var height = (jQuery(this).width() - 16) * jQuery(this).attr('data-height') / jQuery(this).attr('data-width') + 96;
-      jQuery(this).height(height);
-      jQuery(this).find('iframe[id^="instagram-embed-"]').css({
-        'max-height': height + 'px',
-      });
+      jQuery(this).height((jQuery(this).width() - 16) * jQuery(this).attr('data-height') / jQuery(this).attr('data-width') + 96);
     });
 
     bwg_container_loaded(bwg);
@@ -354,10 +333,6 @@ function bwg_blog_style_onload() {
 function bwg_blog_style_ready(container) {
   var bwg = container.data('bwg');
   bwg_container_loaded( bwg );
-  if ( typeof instgrm !== 'undefined' && typeof instgrm.Embeds !== 'undefined' ) {
-    instgrm.Embeds.process();
-  }
-
   var bwg_touch_flag = false;
   container.find('.bwg_lightbox_' + bwg).on('click', function () {
     var image_id = jQuery(this).attr('data-image-id');
@@ -459,18 +434,6 @@ function bwg_carousel_ready(bwg) {
   bwg_params_carousel[bwg]['bwg_currentCenterNum'] = 1;
   bwg_params_carousel[bwg]['bwg_currentlyMoving'] = false;
   bwg_params_carousel[bwg]['data'] = [];
-
-  if ( typeof instgrm !== 'undefined' && typeof instgrm.Embeds !== 'undefined' ) {
-    var instagram_embed = jQuery('.bwg_embed_frame_' + bwg);
-    var embed_max_height = instagram_embed.data('height');
-    instagram_embed.css({ 'display': 'none' });
-    instgrm.Embeds.process();
-    jQuery('.bwg_embed_frame_' + bwg + ' #instagram-embed-' + bwg ).css({
-      'max-height': embed_max_height + 'px',
-    });
-    instagram_embed.css({ 'display': 'inline-block' });
-  }
-
 
   jQuery("#spider_carousel_left-ico_" + bwg).on("click", function (event) {
     bwg_params_carousel[bwg]['carousel'].prev();
@@ -896,28 +859,6 @@ function bwg_slideshow_ready( bwg ) {
       });
       instagram_embed.css({ 'display': 'inline-block' });
     }
-
-    /* Set max height to instagram embed iframe */
-    if ( jQuery('.elementor-editor-active .bwg_embed_frame_' + bwg).length > 0 ) {
-      checkIframeLoaded();
-      function checkIframeLoaded() {
-        // Get a handle to the iframe element
-        var iframe = jQuery(document).find('.bwg_embed_frame_' + bwg+' iframe');
-
-        // Check if loading is complete
-        if (  iframe.length  > 0 ) {
-          var instagram_embed = jQuery('.bwg_embed_frame_' + bwg);
-          var embed_max_height = instagram_embed.data('height');
-          iframe.css({
-            'max-height': embed_max_height + 'px',
-          });
-          return;
-        }
-
-        // If we are here, it is not loaded. Set things up so we check   the status again in 100 milliseconds
-        window.setTimeout(checkIframeLoaded, 500);
-      }
-    }
   }
 }
 
@@ -938,9 +879,6 @@ function bwg_image_browser_ready(container) {
   /* For ImageBrowser */
   var bwg = container.data('bwg');
   bwg_container_loaded( bwg );
-  if ( typeof instgrm !== 'undefined' && typeof instgrm.Embeds !== 'undefined' ) {
-    instgrm.Embeds.process();
-  }
   if (jQuery('.image_browser_images_conteiner_' + bwg).length) {
     bwg_params_ib[bwg] = JSON.parse(jQuery('.image_browser_images_conteiner_' + bwg).attr('data-params'));
     setTimeout(function () {
@@ -1441,10 +1379,6 @@ function bwg_thumbnail_mosaic_logic( container ) {
     }
     else {
       var thumbnail_width = thumb_width;
-      var container_width = jQuery(".bwg_container").width();
-      if ( typeof container_width !== 'undefined' && container_width < thumb_width ) {
-        thumbnail_width = container_width;
-      }
     }
     /* Initialize.*/
     var mosaic_pics = jQuery(".bwg_mosaic_thumb_" + bwg);
@@ -1456,12 +1390,6 @@ function bwg_thumbnail_mosaic_logic( container ) {
       if(thumb_w == '' || thumb_h == '' || typeof thumb_w === 'undefined' || typeof thumb_h === 'undefined') {
         thumb_w = mosaic_pics.get(index).naturalWidth;
         thumb_h = mosaic_pics.get(index).naturalHeight;
-        if ( thumb_h === 0 || thumb_h === '' ) {
-          thumb_h = thumbnail_width;
-        }
-        if ( thumb_w === 0 || thumb_w === '' ) {
-          thumb_w = thumbnail_width;
-        }
       }
       mosaic_pics.eq(index).css({ cssText: 'width:' + thumbnail_width +'px !important; height:' + (thumb_h * thumbnail_width / thumb_w) + 'px !important;' });
     });
@@ -1875,10 +1803,10 @@ function bwg_document_ready(container) {
   jQuery('.search_tags').on('sumo:opened', function () {
     var cont_height = jQuery(this).parents('.bwg_container').height();
     var wd_error = jQuery(this).parents('.bwg_container').find('.wd_error').length;
-    var select = jQuery(this).parent('.SumoSelect').find('.optWrapper>.options');
+    var select = jQuery(this).parents('.bwg_container').find('.SumoSelect>.optWrapper>.options');
     if( typeof select !== 'undefined' ) {
       var sumoHeight = select.height();
-      if ( sumoHeight > (cont_height - 50) ) {
+      if ( sumoHeight > (cont_height - 50) && !wd_error ) {
         select.css('max-height', (cont_height - 50));
       }
     } 
@@ -2045,19 +1973,9 @@ function bwg_ajax(form_id, current_view, id, album_gallery_id, cur_album_id, typ
     window.location.href = current_url;
     return;
   }
-
-  /* The loading container should be small on clicking load more button,
-   but should cover whole container on entering gallery group.*/
-  if ( load_more ) {
-    jQuery(".bwg_loading_div_1").addClass("bwg_load_more_ajax_loading").removeClass("bwg_loading_div_1");
-    jQuery(".bwg_load_more_ajax_loading").css({top: jQuery('#bwg_container1_' + bwg).height() - jQuery(".bwg_load_more_ajax_loading").height() });
-  }
-  else {
-    jQuery(".bwg_load_more_ajax_loading").addClass("bwg_loading_div_1").removeClass("bwg_load_more_ajax_loading").removeAttr("style");
-  }
   /* Show loading.*/
   jQuery("#ajax_loading_" + current_view).removeClass('bwg-hidden');
-
+  jQuery(".bwg_load_more_ajax_loading").css({top: jQuery('#bwg_container1_' + bwg).height() - jQuery(".bwg_load_more_ajax_loading").height() });
   /* Disable scroll to prevent bugs with load more.*/
   if (typeof bwg_scroll_load_action === "function") {
     jQuery(window).off("scroll", bwg_scroll_load_action);
@@ -2163,19 +2081,9 @@ function bwg_ajax(form_id, current_view, id, album_gallery_id, cur_album_id, typ
     bwg_tags_array_data = hiddenInputForTagsID;
   }
   post_data["bwg_tag_id_" + id] = bwg_tags_array_data;
-
-  /* The loading container should be small on clicking load more button,
-   but should cover whole container on entering gallery group.*/
-  if ( load_more ) {
-    jQuery(".bwg_loading_div_1").addClass("bwg_load_more_ajax_loading").removeClass("bwg_loading_div_1");
-    jQuery(".bwg_load_more_ajax_loading").css({top: jQuery('#bwg_container1_' + bwg).height() - jQuery(".bwg_load_more_ajax_loading").height()});
-  }
-  else {
-    jQuery(".bwg_load_more_ajax_loading").addClass("bwg_loading_div_1").removeClass("bwg_load_more_ajax_loading").removeAttr("style");
-  }
   /* Loading.*/
   jQuery("#ajax_loading_" + current_view).removeClass('bwg-hidden');
-
+  jQuery(".bwg_load_more_ajax_loading").css({top: jQuery('#bwg_container1_' + bwg).height() - jQuery(".bwg_load_more_ajax_loading").height()});
   jQuery.ajax({
     type: 'POST',
     url: ajax_url,
@@ -2246,13 +2154,10 @@ function bwg_ajax(form_id, current_view, id, album_gallery_id, cur_album_id, typ
       }
       /* For all views. */
       bwg_document_ready(jQuery("#bwg_container1_" + current_view));
-      var gallery_view_type = jQuery("#bwg_container1_" + current_view).data('gallery-view-type');
+      var gallery_type = jQuery("#bwg_container1_" + current_view).data('gallery-type');
       if ( !jQuery("#bwg_container1_" + current_view + " .bwg-album-thumbnails").length ) {
-        switch ( gallery_view_type ) {
+        switch ( gallery_type ) {
           case "thumbnails":
-          case "thumbnail":
-          case "masonry":
-          case "mosaic":
           case "thumbnails_masonry":
           case "album_compact_preview":
           case "album_masonry_preview":
@@ -3711,6 +3616,7 @@ function bwg_change_image_slideshow(current_key, key, data, from_effect, bwg) {
     arrow_filmstrip_right.css({'display': display_value});
     arrow_filmstrip_right_disabled.css({'display': 'none'});
   }
+
   if ( typeof data[key] != 'undefined' && data[key].filetype == 'EMBED_OEMBED_INSTAGRAM_POST' ) {
     /* Uses Instagram oEmbed data to create iframe tag. */
     if ( typeof instgrm !== 'undefined' && typeof instgrm.Embeds !== 'undefined' ) {
@@ -3871,27 +3777,6 @@ function bwg_popup_resize_slidshow( bwg ) {
     if ( bwg_params[bwg]['slideshow_filmstrip_type'] == 2 ) {
       bwg_resize_slideshow_filmstrip_fix_count({ 'bwg': bwg, 'params': bwg_params[bwg], 'parent_width': parent_width });
     }
-    /* Slideshow filmstrip type is None. */
-    if ( bwg_params[bwg]['slideshow_filmstrip_type'] == 0 ) {
-      jQuery(".bwg_slideshow_image_wrap_" + bwg).css({
-        width: (parent_width),
-        height: ((parent_width) * bwg_params[bwg]['image_height'] / bwg_params[bwg]['image_width'])
-      });
-      jQuery(".bwg_slideshow_image_container_" + bwg).css({
-        width: (parent_width - (bwg_params[bwg]['filmstrip_direction'] == 'horizontal' ? 0 : bwg_params[bwg]['slideshow_filmstrip_width'])),
-        height: ((parent_width) * bwg_params[bwg]['image_height'] / bwg_params[bwg]['image_width'] - (bwg_params[bwg]['filmstrip_direction'] == 'horizontal' ? bwg_params[bwg]['slideshow_filmstrip_height'] : 0))
-      });
-      jQuery(".bwg_slideshow_image_" + bwg).css({
-        cssText: "max-width: " + (parent_width - (bwg_params[bwg]['filmstrip_direction'] == 'horizontal' ? 0 : bwg_params[bwg]['slideshow_filmstrip_width'])) + "px !important; max-height: " + (parent_width * (bwg_params[bwg]['image_height'] / bwg_params[bwg]['image_width']) - (bwg_params[bwg]['filmstrip_direction'] == 'horizontal' ? bwg_params[bwg]['slideshow_filmstrip_height'] : 0) - 1) + "px !important;"
-      });
-      jQuery(".bwg_embed_frame_" + bwg + ", .bwg_slideshow_embed_" + bwg).css({
-        'max-width':  parent_width + 'px',
-        'max-height': (parent_width * (bwg_params[bwg]['image_height'] / bwg_params[bwg]['image_width']) - (bwg_params[bwg]['filmstrip_direction'] == 'horizontal' ? bwg_params[bwg]['slideshow_filmstrip_height'] : 0) - 1) + 'px'
-      });
-      jQuery(".bwg_embed_frame_" + bwg).attr('data-width', parent_width);
-      jQuery(".bwg_embed_frame_" + bwg).attr('data-height', (parent_width * (bwg_params[bwg]['image_height'] / bwg_params[bwg]['image_width']) - (bwg_params[bwg]['filmstrip_direction'] == 'horizontal' ? bwg_params[bwg]['slideshow_filmstrip_height'] : 0) - 1));
-    }
-
     jQuery(".bwg_slideshow_dots_container_" + bwg).css({ width: parent_width });
     jQuery("#bwg_slideshow_play_pause-ico_" + bwg).css({ fontSize: (parent_width * (bwg_params[bwg]['slideshow_play_pause_btn_size'] / bwg_params[bwg]['image_width'])) });
     jQuery(".bwg_slideshow_watermark_image_" + bwg).css({
@@ -3902,11 +3787,6 @@ function bwg_popup_resize_slidshow( bwg ) {
     jQuery(".bwg_slideshow_title_text_" + bwg).css({ fontSize: ((parent_width) * 2 * bwg_params[bwg]['slideshow_title_font_size'] / bwg_params[bwg]['image_width']) });
     jQuery(".bwg_slideshow_description_text_" + bwg).css({ fontSize: ((parent_width) * 2 * bwg_params[bwg]['slideshow_description_font_size'] / bwg_params[bwg]['image_width']) });
   }
-  var bwg_slide_container = jQuery(".bwg_slide_container_" + bwg)
-  var cur_width = bwg_slide_container.width();
-  var cur_height = bwg_slide_container.height();
-  jQuery(".bwg_popup_embed").css({"width":cur_width + "px", "height":cur_height + "px"});
-
   if ( data[parseInt(jQuery("#bwg_current_image_key_" + bwg).val())]["is_embed_video"] ) {
     jQuery("#bwg_slideshow_play_pause_" + bwg).css({ display: 'none' });
   }
@@ -4038,11 +3918,7 @@ function bwg_image_browser( bwg ) {
   }
   /* 16 is 2*padding inside iframe */
   /* 96 is 2*padding(top) + 1*padding(bottom) + 40(footer) + 32(header) */
-  var height = (jQuery('.bwg_embed_frame_instapost_' + bwg).width() - 16) * jQuery('.bwg_embed_frame_instapost_' + bwg).attr('data-height') / jQuery('.bwg_embed_frame_instapost_' + bwg).attr('data-width') + 96;
-  jQuery('.bwg_embed_frame_instapost_' + bwg).height(height);
-  jQuery('.inner_instagram_iframe_bwg_embed_frame_instapost_' + bwg).find('iframe[id^="instagram-embed-"]').css({
-    'max-height': height + 'px',
-  });
+  jQuery('.bwg_embed_frame_instapost_' + bwg).height((jQuery('.bwg_embed_frame_instapost_' + bwg).width() - 16) * jQuery('.bwg_embed_frame_instapost_' + bwg).attr('data-height') / jQuery('.bwg_embed_frame_instapost_' + bwg).attr('data-width') + 96);
 
   var bwg_image_browser_width = jQuery('.image_browser_images_' + bwg).width();
   if (bwg_image_browser_width <= 108) {

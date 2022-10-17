@@ -2,7 +2,6 @@
 
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\AddLayer;
 
-use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\FreeNeedMore\BlockFreeNeedMore;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButtonIconCode;
@@ -44,7 +43,7 @@ use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButton
                     <i class="ssi_24 ssi_24--layers"></i>
                 </div>
                 <div class="n2_add_layer__more_tab_button_label">
-                    <?php n2_e('Layers'); ?>
+                    <?php echo n2_('Layers'); ?>
                 </div>
             </div>
             <div class="n2_add_layer__more_tab_button" data-related-tab="library">
@@ -52,7 +51,7 @@ use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButton
                     <i class="ssi_24 ssi_24--smart"></i>
                 </div>
                 <div class="n2_add_layer__more_tab_button_label">
-                    <?php n2_e('Library'); ?>
+                    <?php echo n2_('Library'); ?>
                 </div>
             </div>
         </div>
@@ -63,25 +62,25 @@ use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButton
                     ?>
                     <div class="n2_add_layer_group">
                         <div class="n2_add_layer_group__label">
-                            <?php echo esc_html($groupLabel); ?>
+                            <?php echo $groupLabel; ?>
                         </div>
                         <div class="n2_add_layer_group__content">
                             <?php
                             foreach ($boxes as $box):
-                                echo wp_kses(Html::openTag('div', array(
+                                echo Html::openTag('div', array(
                                         'class' => 'n2_add_layer_box'
-                                    ) + $box['attributes']), Sanitize::$adminTemplateTags);
+                                    ) + $box['attributes']);
                                 ?>
                                 <div class="n2_add_layer_box__icon">
-                                    <i class="<?php echo esc_attr($box['icon']) ?>"></i>
+                                    <i class="<?php echo $box['icon'] ?>"></i>
                                 </div>
                                 <div class="n2_add_layer_box__label_wrap">
                                     <div class="n2_add_layer_box__label">
-                                        <?php echo esc_html($box['label']); ?>
+                                        <?php echo $box['label']; ?>
                                     </div>
                                 </div>
                                 <?php
-                                echo wp_kses(Html::closeTag('div'), Sanitize::$basicTags);
+                                echo Html::closeTag('div');
                             endforeach;
                             ?>
                         </div>

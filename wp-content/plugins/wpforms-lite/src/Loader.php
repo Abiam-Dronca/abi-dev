@@ -68,11 +68,6 @@ class Loader {
 		];
 
 		$this->classes[] = [
-			'name' => 'Forms\Akismet',
-			'id'   => 'akismet',
-		];
-
-		$this->classes[] = [
 			'name' => 'Forms\Submission',
 			'id'   => 'submission',
 			'hook' => false,
@@ -125,10 +120,6 @@ class Loader {
 			[
 				'name' => 'Admin\Entries\Edit',
 				'id'   => 'entries_edit',
-				'hook' => 'admin_init',
-			],
-			[
-				'name' => 'Admin\Pages\Templates',
 				'hook' => 'admin_init',
 			],
 			[
@@ -237,12 +228,6 @@ class Loader {
 			[
 				'name' => 'Admin\Builder\Templates',
 				'id'   => 'builder_templates',
-			],
-			[
-				'name' => 'Admin\Builder\Notifications\Advanced\Settings',
-			],
-			[
-				'name' => 'Admin\Builder\Notifications\Advanced\EntryCsvAttachment',
 			]
 		);
 	}
@@ -378,7 +363,6 @@ class Loader {
 			'Builder\DidYouKnow',
 			'Builder\Geolocation',
 			'Builder\Confirmations',
-			'Builder\Notifications',
 			'Admin\DidYouKnow',
 			'Admin\Settings\Integrations',
 			'Admin\Settings\Geolocation',

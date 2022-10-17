@@ -47,7 +47,6 @@ class FormDataParser
     public static function parseData($response, $fields, $formId, $isHtml = false)
     {
         $trans = [];
-        
         foreach ($fields as $field_key => $field) {
             if (isset($response->{$field_key})) {
                 $value = apply_filters(

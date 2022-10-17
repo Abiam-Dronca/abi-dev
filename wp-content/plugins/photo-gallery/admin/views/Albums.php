@@ -180,8 +180,8 @@ class AlbumsView_bwg extends AdminView_bwg {
         'preview_url' => add_query_arg('bwg-preview-type', 'album_compact_preview', $params['preview_action']),
       ),
       'album_masonry_preview' => array(
-        'title' => __('Masonry', 'photo-gallery'),
-        'preview_url' => add_query_arg('bwg-preview-type', 'album_masonry_preview', $params['preview_action']),
+        'title' => __('Masonry', 'photo-gallery') . (!BWG()->is_pro ? '<span class="pro_btn">' . __('Premium', 'photo-gallery') . '</span>' : ''),
+        'preview_url' => !BWG()->is_pro ? $demo_url_for_free : add_query_arg('bwg-preview-type', 'album_masonry_preview', $params['preview_action']),
       ),
       'album_extended_preview' => array(
         'title' => __('Extended', 'photo-gallery'),
@@ -189,7 +189,7 @@ class AlbumsView_bwg extends AdminView_bwg {
       ),
     );
     ?>
-    <div class="bwg-page-header wd-list-view-header">
+    <div class="bwg-page-header wd-list-view-header<?php echo !BWG()->is_pro ? ' bwg-page-header-free' : ''?>">
       <div class="wd-page-title wd-header wd-list-view-header-left">
         <div>
           <h1 class="wp-heading-inline bwg-heading"><?php _e('Gallery Group Title', 'photo-gallery'); ?></h1>
@@ -223,6 +223,10 @@ class AlbumsView_bwg extends AdminView_bwg {
           ?>
         </div>
       </div>
+        <?php
+        if (!BWG()->is_pro) {
+          WDWLibrary::topbar_upgrade_ask_question();
+        }?>
       <div class="bwg-clear"></div>
     </div>
     <div class="wd-table meta-box-sortables">
@@ -282,8 +286,8 @@ class AlbumsView_bwg extends AdminView_bwg {
                     </div>
                     <div class="wd-group">
                       <label class="wd-label" for="slug"><?php _e('Slug', 'photo-gallery'); ?></label>
-                      <input type="text" id="slug" name="slug" value="<?php echo urldecode($row->slug); ?>">
-                      <input type="hidden" id="old_slug" name="old_slug" value="<?php echo urldecode($row->slug); ?>">
+                      <input type="text" id="slug" name="slug" value="<?php echo esc_attr($row->slug); ?>">
+                      <input type="hidden" id="old_slug" name="old_slug" value="<?php echo esc_attr($row->slug); ?>">
                     </div>
                     <div class="wd-group">
                       <label class="wd-label" for="description"><?php _e('Description', 'photo-gallery'); ?> </label>

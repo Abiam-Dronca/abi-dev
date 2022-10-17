@@ -14,8 +14,7 @@ class Submission
             'search'     => '',
             'form_ids'   => [],
             'sort_type'  => 'DESC',
-            'entry_type' => 'all',
-            'user_id' => false
+            'entry_type' => 'all'
         ]);
 
         $offset = $args['per_page'] * ($args['page'] - 1);
@@ -42,10 +41,6 @@ class Submission
                     ->orWhere('status', 'LIKE', "%{$searchString}%")
                     ->orWhere('created_at', 'LIKE', "%{$searchString}%");
             });
-        }
-
-        if($args['user_id']) {
-            $entryQuery->where('user_id', (int) $args['user_id']);
         }
 
         $count = $entryQuery->count();

@@ -107,10 +107,11 @@ class Helpers {
 			'forms'      => '',
 		);
 		$downloader = new Downloader();
+
 		// ----- Set content file path -----
 		// Check if 'content' is not defined. That would mean a local file.
 		if ( empty( $import_file_info['content'] ) ) {
-			if ( isset( $import_file_info['local_content'] ) && file_exists( $import_file_info['local_content'] ) ) {
+			if ( file_exists( $import_file_info['local_content'] ) ) {
 				$downloaded_files['content'] = $import_file_info['local_content'];
 			}
 		} else {

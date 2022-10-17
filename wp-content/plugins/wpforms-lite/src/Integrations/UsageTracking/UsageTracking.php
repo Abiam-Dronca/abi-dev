@@ -2,7 +2,6 @@
 
 namespace WPForms\Integrations\UsageTracking;
 
-use WPForms\Admin\Builder\Templates;
 use WPForms\Integrations\IntegrationInterface;
 
 /**
@@ -277,8 +276,7 @@ class UsageTracking implements IntegrationInterface {
 			$data[ $key ] = $value;
 		}
 
-		// Add favorite templates to the settings array.
-		return array_merge( $data, $this->get_favorite_templates() );
+		return $data;
 	}
 
 	/**
@@ -608,27 +606,5 @@ class UsageTracking implements IntegrationInterface {
 			},
 			$forms
 		);
-	}
-
-	/**
-	 * Get the favorite templates.
-	 *
-	 * @since 1.7.7
-	 *
-	 * @return array
-	 */
-	private function get_favorite_templates() {
-
-		$settings  = [];
-		$templates = (array) get_option( Templates::FAVORITE_TEMPLATES_OPTION, [] );
-
-		foreach ( $templates as $user_templates ) {
-			foreach ( $user_templates as $template => $v ) {
-				$name              = 'fav_templates_' . str_replace( '-', '_', $template );
-				$settings[ $name ] = empty( $settings[ $name ] ) ? 1 : ++ $settings[ $name ];
-			}
-		}
-
-		return $settings;
 	}
 }

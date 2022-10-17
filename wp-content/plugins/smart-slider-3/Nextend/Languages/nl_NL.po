@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-05-24 09:10+0200\n"
-"PO-Revision-Date: 2022-06-16 18:16+0200\n"
+"POT-Creation-Date: 2022-05-13 07:44+0200\n"
+"PO-Revision-Date: 2022-05-17 14:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: nl_BE\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: ;n2_;n2_e;n2_n:1,2;n2_en:1,2;n2_x:1,2c;n2_ex:1,2c\n"
@@ -182,14 +182,12 @@ msgid "You can load Google Fonts on the frontend."
 msgstr "U kunt Google Fonts in de frontend inladen."
 
 msgid "Save fonts locally"
-msgstr "Sla fonts lokaal op"
+msgstr ""
 
 msgid ""
 "You can store the used Google Fonts on your server. This way all Google "
 "Fonts will load from your own domain."
 msgstr ""
-"U kunt de gebruikte Google Fonts op uw server opslaan. Op die manier zullen "
-"alle Google Fonts laden vanuit uw eigen domein."
 
 msgid "Backend"
 msgstr "Backend"
@@ -973,7 +971,8 @@ msgstr "Hoogte"
 msgid "Below %s pixels."
 msgstr "Onder %s pixels."
 
-#, javascript-format
+#, fuzzy, javascript-format
+#| msgid "Boven %s pixels."
 msgid "Above %s pixels."
 msgstr "Boven %s pixels."
 
@@ -1053,6 +1052,11 @@ msgstr ""
 msgid "Create a New Project"
 msgstr "Maak een nieuw project"
 
+#, fuzzy
+#| msgid ""
+#| "Start a new project from scratch and build exactly what youâ€™ve "
+#| "imagined. You can easily customize every pixels and create anything with "
+#| "layers."
 msgid ""
 "Start a new project from scratch and build exactly what you’ve imagined. You "
 "can easily customize every pixels and create anything with layers."
@@ -1210,17 +1214,25 @@ msgstr "Max breedte"
 msgid "Margin"
 msgstr "Marge"
 
+#, fuzzy
+#| msgid "Top"
 msgid "top"
-msgstr "bovenaan"
+msgstr "Bovenaan"
 
+#, fuzzy
+#| msgid "Light"
 msgid "right"
-msgstr "rechts"
+msgstr "Licht"
 
+#, fuzzy
+#| msgid "Bottom"
 msgid "bottom"
-msgstr "onderaan"
+msgstr "Onderkant"
 
+#, fuzzy
+#| msgid "To left"
 msgid "left"
-msgstr "links"
+msgstr "Naar links"
 
 msgid "Animations"
 msgstr "Animaties"
@@ -1485,8 +1497,10 @@ msgstr "U kunt eigen CSS classes aan de container van de slider toevoegen."
 msgid "JavaScript callbacks"
 msgstr "JavaScript callbacks"
 
+#, fuzzy
+#| msgid "Main animation start"
 msgid "Loading animation waiting time"
-msgstr "Inladen animatie wachttijd"
+msgstr "Start hoofdanimatie"
 
 msgid "Post IDs"
 msgstr "Post IDs"
@@ -2127,16 +2141,18 @@ msgstr "Ik vond het geweldig"
 msgid "Why upgrade to Smart Slider 3 Pro?"
 msgstr "Waarom upgraden naar Smart Slider 3 Pro?"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "120+ slider templates"
 msgid "%d+ slider templates"
-msgstr "%d+ slider templates"
+msgstr "120+ slider templates"
 
 msgid "Full slide library access"
 msgstr "Volledige toegang tot slide bibliotheek"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "20 new layers"
 msgid "%d new layers"
-msgstr "%d nieuwe lagen"
+msgstr "20 nieuwe lagen"
 
 msgid "Extra advanced options"
 msgstr "Extra geavanceerde opties"
@@ -2601,8 +2617,10 @@ msgstr "Slide twee"
 msgid "Drop images here"
 msgstr "Laat afbeeldingen hier vallen"
 
+#, fuzzy
+#| msgid "New project"
 msgid "Search Project"
-msgstr "Zoek project"
+msgstr "Nieuw project"
 
 msgid "View trash"
 msgstr "Bekijk prullenbak"
@@ -2628,28 +2646,32 @@ msgstr "Oudste eerst"
 msgid "Export"
 msgstr "Exporteren"
 
+#, fuzzy
+#| msgid "Showcase"
 msgid "Show"
-msgstr "Tonen"
+msgstr "Etalage"
 
 #, php-format
 msgid "Showing %s to %s of %s projects"
-msgstr "%s tot %s van de %s projecten worden getoond"
+msgstr ""
 
+#, fuzzy
+#| msgid "New project"
 msgid "No projects to show"
-msgstr "Geen projecten om te tonen"
+msgstr "Nieuw project"
 
 msgid "New project"
 msgstr "Nieuw project"
 
 msgid "Sorry we couldn’t find any matches"
-msgstr "Sorry, we vonden geen overeenkomsten"
+msgstr ""
 
 msgid "Please try searching with another term."
-msgstr "Probeer eens te zoeken met een ander trefwoord."
+msgstr ""
 
 #, php-format
 msgid "Showing %s results for %s."
-msgstr "Tonen van %s resultaten voor %s."
+msgstr ""
 
 msgid "Module"
 msgstr "Module"
@@ -4870,23 +4892,26 @@ msgstr "Pirouette"
 msgid "Sparkling"
 msgstr "Glinsterend"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Curve 1"
 msgid "Curve %d"
-msgstr "Curve %d"
+msgstr "Curve 1"
 
 msgid "Curves"
 msgstr "Curves"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Fan 1"
 msgid "Fan %d"
-msgstr "Ventilator %d"
+msgstr "Ventilator 1"
 
 msgid "Hills"
 msgstr "Bergen"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Incline 1"
 msgid "Incline %d"
-msgstr "Helling %d"
+msgstr "Helling 1"
 
 msgid "Inverse arrow"
 msgstr "Omgekeerde pijl"
@@ -4897,28 +4922,32 @@ msgstr "Rechthoek"
 msgid "Slopes"
 msgstr "Hellingen"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Tilt 1"
 msgid "Tilt %d"
-msgstr "Kantelen %d"
+msgstr "Kantelen 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Triangle 1"
 msgid "Triangle %d"
-msgstr "Driehoek %d"
+msgstr "Driehoek 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Wave 1"
 msgid "Wave %d"
-msgstr "Golf %d"
+msgstr "Golf 1"
 
 msgid "Waves"
 msgstr "Golven"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Columns"
 msgid "Columns %d"
-msgstr "Kolommen %d"
+msgstr "Kolommen"
 
 #, php-format
 msgid "Paper %d"
-msgstr "Papier %d"
+msgstr ""
 
 msgid "2 Colors"
 msgstr "2 kleuren"
@@ -4938,16 +4967,21 @@ msgstr "Het geheim is leeeg. Geef die waarde ook in!"
 msgid "The App ID is empty. Please insert that value too!"
 msgstr "Het App ID is leeg. Geef die waarde ook in!"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid ""
+#| "%1$s allows HTTPS Redirect URIs only! You must move your site to HTTPS in "
+#| "order to use this generator! - %2$s How to get SSL for my WordPress site? "
+#| "%3$s"
 msgid ""
 "%1$s allows HTTPS Redirect URIs only! You must move your site to HTTPS in "
 "order to use this generator!"
 msgstr ""
 "%1$s laat alleen HTTPS doorverwijzing URIs toe! U moet uw site naar HTTPS "
-"verplaatsen om deze generator te gebruiken!"
+"verplaatsen om deze generator te gebruiken! - %2$s Hoe verkrijg ik SSL voor "
+"mijn WordPress site? %3$s"
 
 msgid "How to get SSL for my website?"
-msgstr "Hoe get SSL voor mijn website verkrijgen?"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -5080,8 +5114,10 @@ msgstr "Video's in map"
 msgid "Source folder"
 msgstr "Bronmap"
 
+#, fuzzy
+#| msgid "Slide name and description"
 msgid "Filename based exclusion"
-msgstr "Op bestandsnaam gebaseerde uitsluiting"
+msgstr "Slide naam en beschrijving"
 
 msgid "Remove resized images"
 msgstr "Verwijder herschaalde afbeeldingen"
@@ -5099,26 +5135,20 @@ msgstr ""
 "afbeelding gaat, alleen in een kleiner formaat."
 
 msgid "Filename has to contain"
-msgstr "Bestandsnaam moet bevatten"
+msgstr ""
 
 msgid ""
 "Only those images will be asked down, which have the given texts within "
 "their filenames. You can write down multiple texts separated by comma."
 msgstr ""
-"Alleen die afbeeldingen die de gegeven tekst in hun bestandsnaam hebben "
-"zullen opgevraagd worden. U mag meerdere teksten neerschrijven, gescheiden "
-"door komma's."
 
 msgid "Filename cannot contain"
-msgstr "Bestandsnaam mag niet bevatten"
+msgstr ""
 
 msgid ""
 "Only those images will be asked down, which don't have the given texts "
 "within their filenames. You can write down multiple texts separated by comma."
 msgstr ""
-"Alleen die afbeeldingen die de gegeven tekst niet in hun bestandsnaam hebben "
-"zullen opgevraagd worden. U mag meerdere teksten neerschrijven, gescheiden "
-"door komma's."
 
 msgid "Filename"
 msgstr "Bestandsnaam"
@@ -5144,38 +5174,45 @@ msgstr ""
 "te navigeren vanaf hier:"
 
 msgid "The App ID and the Secret is empty!"
-msgstr "Het App ID en het geheim zijn leeg!"
+msgstr ""
 
 msgid "The token will expire at:"
-msgstr "Het token zal vervallen op:"
+msgstr ""
 
 msgid "Access token was not returned.Please check the credentials!"
 msgstr ""
-"Het toegangstoken werd niet teruggegeven. Controleer uw aanmeldgegevens!"
 
+#, fuzzy
+#| msgid "The token expired. Please request new token! "
 msgid "The token expired. Please request new token!"
-msgstr "Het token is vervallen. Gelieve een nieuw token aan te vragen!"
+msgstr "Het token is vervallen. Gelieve een nieuw token aan te vragen! "
 
+#, fuzzy
+#| msgid "The token expired. Please request new token! "
 msgid "The token will expire in two days! Please refresh the token!"
-msgstr "Het token zal binnen twee dagen vervallen. Gelieve het te vernieuwen!"
+msgstr "Het token is vervallen. Gelieve een nieuw token aan te vragen! "
 
+#, fuzzy
+#| msgid "Request token"
 msgid "Refresh Token"
-msgstr "Vernieuw token"
+msgstr "Request token"
 
 msgid "Refresh"
-msgstr "Vernieuwen"
+msgstr ""
 
+#, fuzzy
+#| msgid "Sorting method"
 msgid "Album loading method"
-msgstr "Album laadmethode"
+msgstr "Sorteermethode"
 
 msgid "Load first images only"
-msgstr "Laad alleen de eerste afbeeldingen"
+msgstr ""
 
 msgid "Load album images separately"
-msgstr "Album afbeeldingen apart inladen"
+msgstr ""
 
 msgid "Load Album images as record data"
-msgstr "Laad album afbeeldingen als record data"
+msgstr ""
 
 msgid "JSON from url"
 msgstr "JSON van URL"
@@ -5222,8 +5259,10 @@ msgstr ""
 msgid "Images"
 msgstr "Afbeeldingen"
 
+#, fuzzy
+#| msgid "Offset value"
 msgid "Offset hours"
-msgstr "Compensatie uren"
+msgstr "Compensatie waarde"
 
 msgid "Timezone offset in hours. For example: +2 or -7."
 msgstr "Tijdzone compensatie in uur. Bijvoorbeeld: +2 of -7."
@@ -5529,11 +5568,13 @@ msgstr "Herhalende evenementen"
 msgid "Date language"
 msgstr "Datum taal"
 
+#, fuzzy
+#| msgid "Replace variables"
 msgid "Date variable offset"
-msgstr "Datumvariabele compensatie"
+msgstr "Vervang variabelen"
 
 msgid "Date filter offset"
-msgstr "Datumfilter compensatie"
+msgstr ""
 
 msgid "Status"
 msgstr "Status"
@@ -5713,8 +5754,10 @@ msgstr "Submenu limiet"
 msgid "No limit"
 msgstr "Geen limiet"
 
+#, fuzzy
+#| msgid "Include subcategories"
 msgid "Hide empty categories"
-msgstr "Verberg lege categorieën"
+msgstr "Inclusief subcategorieën"
 
 msgid "Yes"
 msgstr "Ja"
@@ -5908,14 +5951,12 @@ msgid "Vertical pendulum 3D"
 msgstr "Verticale slinger 3D"
 
 msgid "We are Passionate About"
-msgstr "We zijn gepassioneerd door"
+msgstr ""
 
 msgid ""
 "Amazing Food\n"
 "Great Hospitality"
 msgstr ""
-"Geweldig eten\n"
-"Warme gastvrijheid"
 
 msgid "Before text"
 msgstr "Voor de tekst"
@@ -6121,8 +6162,10 @@ msgstr "Pre"
 msgid "Animation duration"
 msgstr "Animatie duur"
 
+#, fuzzy
+#| msgid "Counter"
 msgid "Countdown"
-msgstr "Aftellen"
+msgstr "Teller"
 
 msgid "Days"
 msgstr "Dag"
@@ -6133,99 +6176,120 @@ msgstr "Minuut"
 msgid "Seconds"
 msgstr "Secundair"
 
+#, fuzzy
+#| msgid "First slide changed."
 msgid "Use slide schedule"
-msgstr "Gebruik slide planning"
+msgstr "Eerste slide veranderd."
 
+#, fuzzy
+#| msgid "You can use this alias in the slider's shortcode."
 msgid "You can use the \"Unpublished on\" date of the slide itself."
-msgstr "U kunt de \"Depubliceer op\" datum van de slide zelf gebruiken."
+msgstr "U kunt dit alias in de snelcode van de slider gebruiken."
 
 msgid "Use Slide Schedule"
-msgstr "Gebruik slide planning"
+msgstr ""
 
 msgid "Go to Slide → Content tab and set the Unpublish on date for the slide."
 msgstr ""
-"Ga naar de Slide → Content tab en stel de Depubliceer op datum optie in voor "
-"de slide."
 
 msgid ""
 "Displays the days, hours, minutes and seconds texts under the counter "
 "numbers. To display the labels in your own language, translate the texts in "
 "the language files."
 msgstr ""
-"Toont de dagen, uren, minuten en seconden teksten onder de tellergetallen. "
-"Om de labels in uw eigen taal te tonen kunt u de teksten vertalen in de "
-"taalbestanden."
 
 msgid "Gap"
-msgstr "Leemte"
+msgstr ""
 
+#, fuzzy
+#| msgid "Creates space between the columns"
 msgid "Creates vertical and horizontal distance between the counter elements."
-msgstr "Maakt verticale en horizontale afstand tussen de teller elementen."
+msgstr "Maakt ruimte tussen de kolommen"
 
+#, fuzzy
+#| msgid "Tablet text"
 msgid "Tablet style"
-msgstr "Tablet stijl"
+msgstr "Tablet tekst"
 
 msgid "Set custom Gap and Column for tablet."
-msgstr "Stel een aangepaste leemte en kolom in voor tablets."
+msgstr ""
 
+#, fuzzy
+#| msgid "Mobile text"
 msgid "Mobile style"
-msgstr "Mobieltjes stijl"
+msgstr "Tekst mobieltjes"
 
 msgid "Set custom Gap and Column for mobile."
-msgstr "Stel een aangepaste leemte en kolom in voor mobieltjes."
+msgstr ""
 
+#, fuzzy
+#| msgid "Actions"
 msgid "Action when ends"
-msgstr "Actie aan het einde"
+msgstr "Acties"
 
+#, fuzzy
+#| msgid "Form action"
 msgid "No action"
-msgstr "Geen actie"
+msgstr "Formulier actie"
 
+#, fuzzy
+#| msgid "Child layers"
 msgid "Hide layer"
-msgstr "Verberg laag"
+msgstr "Onderliggende lagen"
 
 msgid "Redirect to URL"
-msgstr "Doorverwijzen naar URL"
+msgstr ""
 
 msgid "Choose what happens after the counter reached zero."
-msgstr "Kies wat er gebeurt als de teller nul bereikt."
+msgstr ""
 
+#, fuzzy
+#| msgid "The image is empty"
 msgid "This page is"
-msgstr "Deze pagina is"
+msgstr "De afbeelding is leeg"
 
 msgid "Amazing"
-msgstr "Verbazingwekkend"
+msgstr ""
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Circle 1"
 msgid "Circle %d"
-msgstr "Circel %d"
+msgstr "Circel 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Curly 1"
 msgid "Curly %d"
-msgstr "Gekruld %d"
+msgstr "Gekruld 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Highlight 1"
 msgid "Highlight %d"
-msgstr "Accentuering %d"
+msgstr "Accentuering 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Line Through 1"
 msgid "Line Through %d"
-msgstr "Doorhaling %d"
+msgstr "Doorhaling 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Rectangle 1"
 msgid "Rectangle %d"
-msgstr "Rechthoek %d"
+msgstr "Rechthoek 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Underline 1"
 msgid "Underline %d"
-msgstr "Onderlijn %d"
+msgstr "Onderlijn 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Underline double 1"
 msgid "Underline double %d"
-msgstr "Onderlijn dubbel %d"
+msgstr "Onderlijn dubbel 1"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "ZigZag 1"
 msgid "ZigZag %d"
-msgstr "ZigZag %d"
+msgstr "ZigZag 1"
 
 msgid "Highlighted text"
 msgstr "Geaccentueerde tekst"
@@ -6243,7 +6307,7 @@ msgid "HTML"
 msgstr "HTML"
 
 msgid "Empty element"
-msgstr "Leeg element"
+msgstr ""
 
 msgid ""
 "Please note that <b>we do not support</b> the HTML layer and the 3rd party "
@@ -6376,23 +6440,24 @@ msgstr ""
 "heeft vaak code aanpassingen nodig die u zelf moet aanbrengen. We raden dus "
 "aan deze laag alleen te gebruiken als u een ontwikkelaar bent!"
 
+#, fuzzy
+#| msgid "iframe url"
 msgid "Iframe url"
-msgstr "Iframe url"
+msgstr "iframe URL"
 
 msgid "You can disable the scroll on the iframe content."
 msgstr "U kun het scrollen op de iframe inhoud deactiveren."
 
+#, fuzzy
+#| msgid "iframe title"
 msgid "Iframe title"
-msgstr "Iframe titel"
+msgstr "iframe titel"
 
 msgid "Image area"
 msgstr "Afbeeldingszone"
 
 msgid "Image box"
 msgstr "Afbeeldingsvak"
-
-msgid "Aria label"
-msgstr "Aria label"
 
 msgid ""
 "Positions the text inside the layer. Only works with left and right layout."
@@ -6924,6 +6989,9 @@ msgstr "Balk kleur"
 
 #~ msgid "ZigZag 3"
 #~ msgstr "ZigZag 3"
+
+#~ msgid "Aria label"
+#~ msgstr "Aria label"
 
 #~ msgid "iframe"
 #~ msgstr "iframe"

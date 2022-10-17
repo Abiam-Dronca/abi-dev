@@ -240,14 +240,11 @@ class Template_Database_Importer {
 		} else {
 			$site_url = '';
 		}
-		$args = apply_filters(
-			'kadence_starter_get_templates_args',
-			array(
-				'request'   => ( $this->template_type ? $this->template_type : 'blocks' ),
-				'api_email' => $this->api_email,
-				'api_key'   => $this->api_key,
-				'site_url'  => $site_url,
-			)
+		$args = array(
+			'request'   => ( $this->template_type ? $this->template_type : 'blocks' ),
+			'api_email' => $this->api_email,
+			'api_key'   => $this->api_key,
+			'site_url'  => $site_url,
 		);
 		// Get the response.
 		$api_url  = add_query_arg( $args, $this->remote_url );

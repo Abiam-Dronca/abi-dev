@@ -400,7 +400,6 @@ class Kadence_Blocks_Table_Of_Contents {
 	 * @return string The sanitized heading content for anchor link.
 	 */
 	private function convert_text_to_anchor( $content ) {
-		$content = remove_accents( $content );
 		$content = strtolower( $content );
 		$content = preg_replace( "/[^A-Za-z0-9 ]/", '', $content );
 		$content = str_replace( ' ', '-', $content );
@@ -635,12 +634,12 @@ class Kadence_Blocks_Table_Of_Contents {
 						"—",
 						"…"); 
 		$replace = array("'",
-							"'",  
-							'"', 
-							'"', 
-							'-',
-							'-',
-							'...'); 
+						 "'",  
+						 '"', 
+						 '"', 
+						 '-',
+						 '-',
+						 '...'); 
 	
 		return str_replace( $search, $replace, $string ); 
 	} 

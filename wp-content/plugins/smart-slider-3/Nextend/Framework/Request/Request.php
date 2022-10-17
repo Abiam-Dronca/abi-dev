@@ -22,21 +22,6 @@ class Request {
      */
     public static $POST;
 
-    /**
-     * @var Storage
-     */
-    public static $SERVER;
-
-    /**
-     * @var Storage
-     */
-    public static $COOKIE;
-
-    /**
-     * @var Storage
-     */
-    public static $FILES;
-
     private static $requestUri;
 
     public static $isAjax = false;
@@ -45,9 +30,6 @@ class Request {
         self::$REQUEST = new Storage($_REQUEST);
         self::$GET     = new Storage($_GET);
         self::$POST    = new Storage($_POST);
-        self::$SERVER  = new Storage($_SERVER);
-        self::$COOKIE  = new Storage($_COOKIE);
-        self::$FILES   = new Storage($_FILES, true);
     }
 
     /**

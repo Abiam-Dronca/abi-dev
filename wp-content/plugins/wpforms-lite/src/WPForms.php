@@ -159,7 +159,6 @@ namespace WPForms {
 
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-db.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/functions.php';
-			require_once WPFORMS_PLUGIN_DIR . 'includes/compat.php';
 
 			$this->includes_magic();
 
@@ -217,10 +216,12 @@ namespace WPForms {
 				]
 			);
 
-			/*
-			 * Load email subsystem.
-			 */
-			add_action( 'wpforms_loaded', [ '\WPForms\Emails\Summaries', 'get_instance' ] );
+			if ( version_compare( phpversion(), '5.5', '>=' ) ) {
+				/*
+				 * Load PHP 5.5 email subsystem.
+				 */
+				add_action( 'wpforms_loaded', [ '\WPForms\Emails\Summaries', 'get_instance' ] );
+			}
 
 			/*
 			 * Load admin components. Exclude from frontend.

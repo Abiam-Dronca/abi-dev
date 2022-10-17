@@ -5,7 +5,6 @@ namespace MailPoet\Config;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\DI\ContainerWrapper;
 use MailPoet\Subscribers\SubscriberPersonalDataEraser;
 use MailPoet\WP\Functions as WPFunctions;
 
@@ -16,8 +15,8 @@ class PersonalDataErasers {
 
   public function registerSubscriberEraser($erasers) {
     $erasers['mailpet-subscriber'] = [
-      'eraser_friendly_name' => __('MailPoet Subscribers', 'mailpoet'),
-      'callback' => [ContainerWrapper::getInstance()->get(SubscriberPersonalDataEraser::class), 'erase'],
+      'eraser_friendly_name' => WPFunctions::get()->__('MailPoet Subscribers', 'mailpoet'),
+      'callback' => [new SubscriberPersonalDataEraser(), 'erase'],
     ];
 
     return $erasers;

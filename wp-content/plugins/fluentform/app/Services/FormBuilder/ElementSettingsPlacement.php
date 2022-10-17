@@ -342,14 +342,6 @@ return array(
             'validation_rules',
         ),
     ),
-    'turnstile' => array(
-        'general' => array(
-            'label',
-            'label_placement',
-            'name',
-            'validation_rules',
-        ),
-    ),
     'custom_html' => array(
         'general' => array(
             'html_codes',
@@ -499,7 +491,7 @@ return array(
         'general' => array(
             'container_class',
             'conditional_logics',
-            'container_width',
+            'width'
         ),
         'advanced' => []
     )

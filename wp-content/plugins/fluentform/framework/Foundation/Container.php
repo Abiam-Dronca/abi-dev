@@ -310,7 +310,6 @@ class Container implements ArrayAccess
      * @param string $offset
      * @return bool
      */
-    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return $this->bound($offset);
@@ -322,7 +321,6 @@ class Container implements ArrayAccess
      * @param mixed $value
      * @return void
      */
-    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->make($offset);
@@ -334,7 +332,6 @@ class Container implements ArrayAccess
      * @param mixed $value
      * @return void
      */
-    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->bindInstance($offset, $value);
@@ -345,7 +342,6 @@ class Container implements ArrayAccess
      * @param string $offset
      * @return void
      */
-    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset(

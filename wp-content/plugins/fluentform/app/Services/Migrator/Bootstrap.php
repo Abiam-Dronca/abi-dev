@@ -92,8 +92,8 @@ class Bootstrap
     {
         \FluentForm\App\Modules\Acl\Acl::verify(['fluentform_settings_manager', 'fluentform_forms_manager']);
 
-        $fluentFormId = intval($_REQUEST['imported_fluent_form_id']);
-        $importFormId = intval($_REQUEST['source_form_id']);
+        $fluentFormId = $_REQUEST['imported_fluent_form_id'];
+        $importFormId = $_REQUEST['source_form_id'];
         $this->setImporterType();
         $this->importer->insertEntries($fluentFormId, $importFormId);
     }

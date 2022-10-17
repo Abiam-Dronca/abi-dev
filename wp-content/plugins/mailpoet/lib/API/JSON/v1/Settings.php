@@ -18,7 +18,6 @@ use MailPoet\Newsletter\NewslettersRepository;
 use MailPoet\Newsletter\Sending\ScheduledTasksRepository;
 use MailPoet\Segments\SegmentsRepository;
 use MailPoet\Services\AuthorizedEmailsController;
-use MailPoet\Services\AuthorizedSenderDomainController;
 use MailPoet\Services\Bridge;
 use MailPoet\Settings\SettingsChangeHandler;
 use MailPoet\Settings\SettingsController;
@@ -40,9 +39,6 @@ class Settings extends APIEndpoint {
 
   /** @var AuthorizedEmailsController */
   private $authorizedEmailsController;
-
-  /** @var AuthorizedSenderDomainController */
-  private $senderDomainController;
 
   /** @var TransactionalEmails */
   private $wcTransactionalEmails;
@@ -87,7 +83,6 @@ class Settings extends APIEndpoint {
     SettingsController $settings,
     Bridge $bridge,
     AuthorizedEmailsController $authorizedEmailsController,
-    AuthorizedSenderDomainController $senderDomainController,
     TransactionalEmails $wcTransactionalEmails,
     WPFunctions $wp,
     EntityManager $entityManager,
@@ -104,7 +99,6 @@ class Settings extends APIEndpoint {
     $this->settings = $settings;
     $this->bridge = $bridge;
     $this->authorizedEmailsController = $authorizedEmailsController;
-    $this->senderDomainController = $senderDomainController;
     $this->wcTransactionalEmails = $wcTransactionalEmails;
     $this->servicesChecker = $servicesChecker;
     $this->wp = $wp;
@@ -128,7 +122,7 @@ class Settings extends APIEndpoint {
       return $this->badRequest(
         [
           APIError::BAD_REQUEST =>
-            __('You have not specified any settings to be saved.', 'mailpoet'),
+            WPFunctions::get()->__('You have not specified any settings to be saved.', 'mailpoet'),
         ]);
     } else {
       $oldSettings = $this->settings->getAll();
@@ -187,7 +181,7 @@ class Settings extends APIEndpoint {
     $address = $data['address'] ?? null;
     if (!$address) {
       return $this->badRequest([
-        APIError::BAD_REQUEST => __('No email address specified.', 'mailpoet'),
+        APIError::BAD_REQUEST => WPFunctions::get()->__('No email address specified.', 'mailpoet'),
       ]);
     }
     $address = trim($address);
@@ -196,7 +190,7 @@ class Settings extends APIEndpoint {
       $this->authorizedEmailsController->setFromEmailAddress($address);
     } catch (\InvalidArgumentException $e) {
       return $this->badRequest([
-        APIError::UNAUTHORIZED => __('Can’t use this email yet! Please authorize it first.', 'mailpoet'),
+        APIError::UNAUTHORIZED => WPFunctions::get()->__('Can’t use this email yet! Please authorize it first.', 'mailpoet'),
       ]);
     }
 
@@ -204,151 +198,6 @@ class Settings extends APIEndpoint {
       MailerLog::resumeSending();
     }
     return $this->successResponse();
-  }
-
-  /**
-   * Create POST request to Bridge endpoint to add email to user email authorization list
-   */
-  public function authorizeSenderEmailAddress($data = []) {
-    $emailAddress = $data['email'] ?? null;
-
-    if (!$emailAddress) {
-      return $this->badRequest([
-        APIError::BAD_REQUEST => __('No email address specified.', 'mailpoet'),
-      ]);
-    }
-
-    $emailAddress = trim($emailAddress);
-
-    try {
-      $response = $this->authorizedEmailsController->createAuthorizedEmailAddress($emailAddress);
-    } catch (\InvalidArgumentException $e) {
-      if (
-        $e->getMessage() === AuthorizedEmailsController::AUTHORIZED_EMAIL_ERROR_ALREADY_AUTHORIZED ||
-        $e->getMessage() === AuthorizedEmailsController::AUTHORIZED_EMAIL_ERROR_PENDING_CONFIRMATION
-      ) {
-        // return true if the email is already authorized or pending confirmation
-        $response = ['status' => true];
-      } else {
-        return $this->badRequest([
-          APIError::BAD_REQUEST => $e->getMessage(),
-        ]);
-      }
-    }
-
-    return $this->successResponse($response);
-  }
-
-  public function confirmSenderEmailAddressIsAuthorized($data = []) {
-    $emailAddress = $data['email'] ?? null;
-
-    if (!$emailAddress) {
-      return $this->badRequest([
-        APIError::BAD_REQUEST => __('No email address specified.', 'mailpoet'),
-      ]);
-    }
-
-    $emailAddress = trim($emailAddress);
-
-    $response = ['isAuthorized' => $this->authorizedEmailsController->isEmailAddressAuthorized($emailAddress)];
-
-    return $this->successResponse($response);
-  }
-
-  public function checkDomainDmarcPolicy($data = []) {
-    $domain = $data['domain'] ?? null;
-
-    if (!$domain) {
-      return $this->badRequest([
-        APIError::BAD_REQUEST => __('No sender domain specified.', 'mailpoet'),
-      ]);
-    }
-
-    $domain = strtolower(trim($domain));
-
-    $response = ['isDmarcPolicyRestricted' => $this->senderDomainController->isDomainDmarcRestricted($domain)];
-
-    return $this->successResponse($response);
-  }
-
-  public function getAuthorizedSenderDomains($data = []) {
-    $domain = $data['domain'] ?? null;
-
-    if (!$domain) {
-      return $this->badRequest([
-        APIError::BAD_REQUEST => __('No sender domain specified.', 'mailpoet'),
-      ]);
-    }
-
-    $domain = strtolower(trim($domain));
-
-    $records = $this->bridge->getAuthorizedSenderDomains($domain);
-    return $this->successResponse($records);
-  }
-
-  public function createAuthorizedSenderDomain($data = []) {
-    $domain = $data['domain'] ?? null;
-
-    if (!$domain) {
-      return $this->badRequest([
-        APIError::BAD_REQUEST => __('No sender domain specified.', 'mailpoet'),
-      ]);
-    }
-
-    $domain = strtolower(trim($domain));
-
-    try {
-      $response = $this->senderDomainController->createAuthorizedSenderDomain($domain);
-    } catch (\InvalidArgumentException $e) {
-      if (
-        $e->getMessage() === AuthorizedSenderDomainController::AUTHORIZED_SENDER_DOMAIN_ERROR_ALREADY_CREATED
-      ) {
-        // domain already created
-        $response = $this->senderDomainController->getDomainRecords($domain);
-      } else {
-        return $this->badRequest([
-          APIError::BAD_REQUEST => $e->getMessage(),
-        ]);
-      }
-    }
-
-    return $this->successResponse($response);
-  }
-
-  public function verifyAuthorizedSenderDomain($data = []) {
-    $domain = $data['domain'] ?? null;
-
-    if (!$domain) {
-      return $this->badRequest([
-        APIError::BAD_REQUEST => __('No sender domain specified.', 'mailpoet'),
-      ]);
-    }
-
-    $domain = strtolower(trim($domain));
-
-    try {
-      $response = $this->senderDomainController->verifyAuthorizedSenderDomain($domain);
-    } catch (\InvalidArgumentException $e) {
-      if (
-        $e->getMessage() === AuthorizedSenderDomainController::AUTHORIZED_SENDER_DOMAIN_ERROR_ALREADY_VERIFIED
-      ) {
-        // domain already verified, we have to wrap this in the format returned by the api
-        $response = ['ok' => true, 'dns' => $this->senderDomainController->getDomainRecords($domain)];
-      } else {
-        return $this->badRequest([
-          APIError::BAD_REQUEST => $e->getMessage(),
-        ]);
-      }
-    }
-
-    if (!$response['ok']) {
-      // sender domain verification error. probably an improper setup
-      return $this->badRequest([
-        APIError::BAD_REQUEST => $response['error'] ?? __('Sender domain verification failed.', 'mailpoet'),
-      ], $response);
-    }
-
-    return $this->successResponse($response);
   }
 
   private function onSettingsChange($oldSettings, $newSettings) {
@@ -406,12 +255,7 @@ class Settings extends APIEndpoint {
       return $this->deactivateReEngagementEmails();
     } catch (\Exception $e) {
       throw new \Exception(
-        sprintf(
-          // translators: %s is the error message.
-          __('Unable to deactivate re-engagement emails: %s', 'mailpoet'),
-          $e->getMessage()
-        )
-      );
+        __('Unable to deactivate re-engagement emails: ' . $e->getMessage(), 'mailpoet'));
     }
   }
 

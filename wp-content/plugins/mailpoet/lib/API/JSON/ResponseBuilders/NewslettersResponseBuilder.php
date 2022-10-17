@@ -5,7 +5,6 @@ namespace MailPoet\API\JSON\ResponseBuilders;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Entities\DynamicSegmentFilterEntity;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SendingQueueEntity;
@@ -142,11 +141,14 @@ class NewslettersResponseBuilder {
         ? $statistics->asArray()
         : false,
       'preview_url' => $this->newsletterUrl->getViewInBrowserUrl(
-        $newsletter,
+        (object)[
+          'id' => $newsletter->getId(),
+          'hash' => $newsletter->getHash(),
+        ],
         null,
         in_array($newsletter->getStatus(), [NewsletterEntity::STATUS_SENT, NewsletterEntity::STATUS_SENDING], true)
           ? $latestQueue
-          : null
+          : false
       ),
     ];
 
@@ -207,17 +209,10 @@ class NewslettersResponseBuilder {
   }
 
   private function buildSegment(SegmentEntity $segment) {
-    $filters = $segment->getType() === SegmentEntity::TYPE_DYNAMIC ? $segment->getDynamicFilters()->toArray() : [];
     return [
       'id' => (string)$segment->getId(), // (string) for BC
       'name' => $segment->getName(),
       'type' => $segment->getType(),
-      'filters' => array_map(function(DynamicSegmentFilterEntity $filter) {
-        return [
-          'action' => $filter->getFilterData()->getAction(),
-          'type' => $filter->getFilterData()->getFilterType(),
-        ];
-      }, $filters),
       'description' => $segment->getDescription(),
       'created_at' => ($createdAt = $segment->getCreatedAt()) ? $createdAt->format(self::DATE_FORMAT) : null,
       'updated_at' => $segment->getUpdatedAt()->format(self::DATE_FORMAT),

@@ -552,8 +552,7 @@ class ScriptLoader
 			if($minified_file_exists)
 				$delta = filemtime($dir . $combined) - filemtime($dir . $minified);
 			
-			$deltaTolerance = 30;
-			if(!$minified_file_exists || $delta > $deltaTolerance)
+			if(!$minified_file_exists || $delta > 0)
 				$src = $combined;
 			
 			$scripts = array('wpgmza' => 

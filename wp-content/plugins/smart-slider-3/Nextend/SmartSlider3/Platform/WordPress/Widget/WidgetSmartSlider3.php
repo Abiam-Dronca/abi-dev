@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Platform\WordPress\Widget;
 
 
-use Nextend\Framework\Sanitize;
 use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
 use Nextend\SmartSlider3\Application\Model\ModelSliders;
 use Nextend\SmartSlider3\Platform\WordPress\HelperTinyMCE;
@@ -69,13 +68,12 @@ class WidgetSmartSlider3 extends WP_Widget {
 
             $title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 
-            echo wp_kses($args['before_widget'], Sanitize::$basicTags);
-            if (!empty($title)) echo wp_kses($args['before_title'] . $title . $args['after_title'], Sanitize::$basicTags);
+            echo $args['before_widget'];
+            if (!empty($title)) echo $args['before_title'] . $title . $args['after_title'];
 
-            // PHPCS - Content already escaped
-            echo $slider; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo $slider;
 
-            echo wp_kses($args['after_widget'], Sanitize::$basicTags);
+            echo $args['after_widget'];
         }
     }
 
@@ -131,7 +129,7 @@ class WidgetSmartSlider3 extends WP_Widget {
 
             $_title = '';
             ?>
-            <select id="<?php echo esc_attr($this->get_field_id('slider')); ?>" name="<?php echo esc_attr($this->get_field_name('slider')); ?>" class="widefat">
+            <select id="<?php echo $this->get_field_id('slider'); ?>" name="<?php echo $this->get_field_name('slider'); ?>" class="widefat">
                 <?php if (empty($choices)): ?>
                     <option value=""><?php n2_e('None'); ?></option>
                 <?php else: ?>
@@ -144,12 +142,12 @@ class WidgetSmartSlider3 extends WP_Widget {
                     foreach ($choices as $id => $choice) {
                         if (is_array($choice)) {
                             ?>
-                            <optgroup label="<?php echo esc_attr($choice['label']); ?>">
+                            <optgroup label="<?php echo $choice['label']; ?>">
                                 <?php
                                 foreach ($choice['choices'] as $_id => $_choice) {
                                     ?>
                                     <option <?php if ($_id == $value){
-                                            $_title = $_choice; ?>selected <?php } ?>value="<?php echo esc_attr($_id); ?>"><?php echo esc_html($_choice); ?></option>
+                                            $_title = $_choice; ?>selected <?php } ?>value="<?php echo $_id; ?>"><?php echo $_choice; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -158,23 +156,23 @@ class WidgetSmartSlider3 extends WP_Widget {
                         } else {
                             ?>
                             <option <?php if ($id == $value){
-                                    $_title = $choice; ?>selected <?php } ?>value="<?php echo esc_attr($id); ?>"><?php echo esc_html($choice); ?></option>
+                                    $_title = $choice; ?>selected <?php } ?>value="<?php echo $id; ?>"><?php echo $choice; ?></option>
                             <?php
                         }
                     }
                     ?>
                 <?php endif; ?>
             </select>
-            <input id="<?php echo esc_attr($this->get_field_id('temp-title')); ?>"
-                   name="<?php echo esc_attr($this->get_field_name('temp-title')); ?>" type="hidden"
-                   value="<?php echo esc_attr($_title); ?>">
+            <input id="<?php echo $this->get_field_id('temp-title'); ?>"
+                   name="<?php echo $this->get_field_name('temp-title'); ?>" type="hidden"
+                   value="<?php echo $_title; ?>">
 
         </p>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
+            <label for="<?php echo $this->get_field_id('title'); ?>">
                 Title:
-                <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
-                       name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
+                <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>"
+                       name="<?php echo $this->get_field_name('title'); ?>" type="text"
                        value="<?php echo esc_attr($title); ?>">
             </label>
         </p>

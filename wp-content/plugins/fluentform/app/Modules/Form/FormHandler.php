@@ -8,7 +8,6 @@ use FluentForm\App\Modules\Activator;
 use FluentForm\App\Modules\Entries\Entries;
 use FluentForm\App\Modules\ReCaptcha\ReCaptcha;
 use FluentForm\App\Modules\HCaptcha\HCaptcha;
-use FluentForm\App\Modules\Turnstile\Turnstile;
 use FluentForm\App\Services\Browser\Browser;
 use FluentForm\App\Services\FormBuilder\ShortCodeParser;
 use FluentForm\Framework\Foundation\Application;
@@ -303,7 +302,6 @@ class FormHandler
 
         $this->validateReCaptcha();
         $this->validateHCaptcha();
-        $this->validateTurnstile();
 
         foreach ($fields as $fieldName => $field) {
             if(isset($this->formData[$fieldName])) {
@@ -482,30 +480,6 @@ class FormHandler
     }
 
     /**
-     * Validate turnstile.
-     */
-    private function validateTurnstile()
-    {
-        $autoInclude = apply_filters('ff_has_auto_turnstile', false);
-        if (FormFieldsParser::hasElement($this->form, 'turnstile') || $autoInclude) {
-            $keys = get_option('_fluentform_turnstile_details');
-            $token = Arr::get($this->formData, 'cf-turnstile-response');
-
-            $isValid = Turnstile::validate($token, $keys['secretKey']);
-
-            if (!$isValid) {
-                wp_send_json([
-                    'errors' => [
-                        'cf-turnstile-response' => [
-                            __('Turnstile verification failed, please try again.', 'fluentform')
-                        ]
-                    ]
-                ], 422);
-            }
-        }
-    }
-
-    /**
      * Validate form data based on the form restrictions settings.
      *
      * @param $fields
@@ -633,7 +607,7 @@ class FormHandler
         $response = [
             'form_id' => $formId,
             'serial_number' => $serialNumber,
-            'response' => json_encode($this->formData, JSON_UNESCAPED_UNICODE),
+            'response' => json_encode($this->formData),
             'source_url' => site_url(Arr::get($formData, '_wp_http_referer')),
             'user_id' => get_current_user_id(),
             'browser' => $browser->getBrowser(),

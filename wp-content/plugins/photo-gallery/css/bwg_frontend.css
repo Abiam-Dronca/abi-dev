@@ -646,7 +646,6 @@ div[id^="bwg_container"] .bwg-border-box * {
   display: block;
 }
 
-#wp-admin-bar-booster-top-button #wp-admin-bar-booster-wrap.hidden,
 .hidden {
   display: none;
 }
@@ -1407,7 +1406,6 @@ div[id^="bwg_container"] .bwg-carousel {
 /* Tags, Orders, Search */
 .bwg_thumbnail.bwg_container {
   padding: 0 1px;
-  min-height: 140px;
 }
 
 .bwg_thumbnail.bwg_container .search_line.bwg-search-line-responsive {
@@ -2035,6 +2033,20 @@ body .bwg_thumbnail.bwg_container .search_line.bwg-search-line-responsive .SumoS
   }
 }
 
+/*Always show image title on mobile*/
+@media (pointer:none), (pointer:coarse) {
+
+  .bwg-container.bwg-standard-thumbnails .bwg-title1,
+  .bwg-container.bwg-masonry-thumbnails .bwg-title1,
+  .bwg-mosaic-thumbnails{
+    opacity: 1!important;
+  }
+  .bwg-zoom-effect .bwg-zoom-effect-overlay, .bwg-zoom-effect-overlay > span {
+    opacity: 1!important;
+    background-color: unset!important;
+  }
+}
+
 /*Always show image title on mobile for elementor*/
 body[data-elementor-device-mode="mobile"] .bwg-container.bwg-standard-thumbnails .bwg-title1,
 body[data-elementor-device-mode="tablet"] .bwg-container.bwg-standard-thumbnails .bwg-title1,
@@ -2530,33 +2542,4 @@ div[id^='bwg_container1_'] div[id^='bwg_container2_'] span[class^='bwg_mosaic_pl
   left: 10px;
   top: 10px;
   z-index: 9999;
-}
-
-#wp-admin-bar-booster-top-button .ab-item,
-#wp-admin-bar-booster-top-button .ab-item:hover {
-  margin: 3px 0 0 10px !important;
-  height: 26px !important;
-  background: #22B339 0% 0% no-repeat padding-box;
-  border-radius: 2px;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 24px;
-  letter-spacing: 0.1px;
-  text-align: center;
-  color: #FFFFFF !important;
-  cursor: pointer;
-}
-#wp-admin-bar-booster-top-button .ab-item:before {
-  content: '';
-  top: 4px;
-  left: 0px;
-  width: 18px;
-  height: 18px;
-  background: transparent url("images/optimize.svg") 0% 0% no-repeat padding-box !important;
-}
-
-#wpadminbar:not(.mobile) .ab-top-menu>#wp-admin-bar-booster-top-button:hover>.ab-item,
-#wp-admin-bar-booster-top-button .ab-item:hover {
-  background: #22B339 0% 0% no-repeat padding-box !important;
-  color: #FFFFFF !important;
 }

@@ -60,6 +60,7 @@ $app->addAction('fluentform_global_menu', function () use ($app) {
     if (!wp_next_scheduled($emailReportHookName)) {
         wp_schedule_event(time(), 'daily', $emailReportHookName);
     }
+
 });
 
 $app->addAction('wp_dashboard_setup', function () {
@@ -87,6 +88,14 @@ add_action('admin_init', function () {
     if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
         remove_all_actions('admin_notices');
     }
+});
+
+
+add_filter('fluentform_editor_init_element_container', function ($item) {
+    if (!isset($item['settings']['container_class'])) {
+        $item['settings']['container_class'] = '';
+    }
+    return $item;
 });
 
 add_action('enqueue_block_editor_assets', function () use ($app) {
@@ -117,6 +126,7 @@ add_action('enqueue_block_editor_assets', function () use ($app) {
         $app->publicUrl("css/fluent_gutenblock.css"),
         array('wp-edit-blocks')
     );
+
 });
 
 add_action('wp_print_scripts', function () {
@@ -137,6 +147,7 @@ add_action('wp_print_scripts', function () {
 
             $pluginUrl = plugins_url();
             foreach ($wp_scripts->queue as $script) {
+
                 if (!isset($wp_scripts->registered[$script])) {
                     continue;
                 }
@@ -151,6 +162,7 @@ add_action('wp_print_scripts', function () {
 }, 1);
 
 add_action('fluentform_loading_editor_assets', function ($form) {
+
     add_filter('fluentform_editor_init_element_input_name', function ($field) {
         if (empty($field['settings']['label_placement'])) {
             $field['settings']['label_placement'] = '';
@@ -265,21 +277,6 @@ add_action('fluentform_loading_editor_assets', function ($form) {
         if (!isset($item['settings']['conditional_logics'])) {
             $item['settings']['conditional_logics'] = [];
         }
-        
-        if (!isset($item['settings']['container_width'])) {
-            $item['settings']['container_width'] = '';
-        }
-    
-        $shouldSetWidth = !empty($item['columns']) && (!isset($item['columns'][0]['width']) || !$item['columns'][0]['width']);
-    
-        if ($shouldSetWidth) {
-            $perColumn = round(100 / count($item['columns']), 2);
-        
-            foreach ($item['columns'] as &$column) {
-                $column['width'] = $perColumn;
-            }
-        }
-        
         return $item;
     });
 
@@ -341,24 +338,8 @@ add_action('fluentform_loading_editor_assets', function ($form) {
 
         return $item;
     });
-    
-    add_filter('fluentform_editor_init_element_recaptcha', function ($item, $form) {
-        $item['attributes']['name'] = 'g-recaptcha-response';
-        return $item;
-    }, 10, 2);
-    
-    add_filter('fluentform_editor_init_element_hcaptcha', function ($item, $form) {
-        $item['attributes']['name'] = 'h-captcha-response';
-        return $item;
-    }, 10, 2);
 
-    add_filter('fluentform_editor_init_element_turnstile', function ($item, $form) {
-        $item['attributes']['name'] = 'cf-turnstile-response';
-        return $item;
-    }, 10, 2);
-    
 }, 10);
-
 
 
 add_filter('fluentform_addons_extra_menu', function ($menus) {
@@ -383,17 +364,11 @@ add_action('fluentform_addons_page_render_fluentform_pdf', function () {
 
 //Add file upload location in global settings
 add_filter('fluentform_get_global_settings_values', function ($values, $key) {
-    if (is_array($key) && in_array('_fluentform_global_form_settings', $key)) {
+    if(is_array($key) && in_array('_fluentform_global_form_settings',$key)){
         $values['file_upload_optoins'] = FluentForm\App\Helpers\Helper::fileUploadLocations();
     }
     return $values;
 }, 10, 2);
-
-add_action('ff_installed_by', function ($by) {
-    if (is_string($by) && !get_option('_ff_ins_by')) {
-        update_option('_ff_ins_by', sanitize_text_field($by), 'no');
-    }
-});
 
 //Enables recaptcha validation when autoload recaptcha enabled for all forms
 $autoIncludeRecaptcha = [
@@ -405,14 +380,10 @@ $autoIncludeRecaptcha = [
         'type'=>'recaptcha',
         'is_disabled'=>!get_option('_fluentform_reCaptcha_keys_status', false)
     ],
-    [
-        'type'=>'turnstile',
-        'is_disabled'=>!get_option('_fluentform_turnstile_keys_status', false)
-    ],
 ];
 
 foreach ($autoIncludeRecaptcha as $input) {
-    if ($input['is_disabled']) {
+    if($input['is_disabled']){
         continue;
     }
     add_filter('ff_has_auto_' . $input['type'], function () use ($input) {
@@ -426,3 +397,4 @@ foreach ($autoIncludeRecaptcha as $input) {
         return false;
     });
 }
+

@@ -947,7 +947,7 @@ $defaultElements = array(
             ),
         ),
         'custom_html' => array(
-            'index' => 17,
+            'index' => 20,
             'element' => 'custom_html',
             'attributes' => array(),
             'settings' => array(
@@ -1072,7 +1072,7 @@ $defaultElements = array(
             ),
         ),
         'input_password' => array(
-            'index' => 11,
+            'index' => 12,
             'element' => 'input_password',
             'attributes' => array(
                 'type' => 'password',
@@ -1188,7 +1188,7 @@ $defaultElements = array(
         'recaptcha' => array(
             'index' => 2,
             'element' => 'recaptcha',
-            'attributes' => array('name' => 'g-recaptcha-response'),
+            'attributes' => array('name' => 'recaptcha'),
             'settings' => array(
                 'label' => '',
                 'label_placement' => '',
@@ -1202,9 +1202,9 @@ $defaultElements = array(
             ),
         ),
         'hcaptcha' => array(
-            'index' => 3,
+            'index' => 2,
             'element' => 'hcaptcha',
-            'attributes' => array('name' => 'h-captcha-response'),
+            'attributes' => array('name' => 'hcaptcha'),
             'settings' => array(
                 'label' => '',
                 'label_placement' => '',
@@ -1215,22 +1215,6 @@ $defaultElements = array(
                 'icon_class' => 'ff-edit-recaptha',
                 'why_disabled_modal' => 'hcaptcha',
                 'template' => 'hcaptcha',
-            ),
-        ),
-        'turnstile' => array(
-            'index' => 3,
-            'element' => 'turnstile',
-            'attributes' => array('name' => 'cf-turnstile-response'),
-            'settings' => array(
-                'label' => '',
-                'label_placement' => '',
-                'validation_rules' => array(),
-            ),
-            'editor_options' => array(
-                'title' => __('Turnstile', 'fluentform'),
-                'icon_class' => 'ff-edit-recaptha',
-                'why_disabled_modal' => 'turnstile',
-                'template' => 'turnstile',
             ),
         ),
         'shortcode' => array(
@@ -1278,7 +1262,7 @@ $defaultElements = array(
                 'conditional_logics' => array()
             ),
             'columns' => array(
-                array('width'=> '', 'left'=> '', 'fields' => array())
+                array('width'=> '', 'fields' => array())
             ),
             'editor_options' =>
                 array(
@@ -1292,12 +1276,11 @@ $defaultElements = array(
             'attributes' => array(),
             'settings' => array(
                 'container_class' => '',
-                'conditional_logics' => array(),
-                'container_width' => ''
+                'conditional_logics' => array()
             ),
             'columns' => array(
-                array('width'=> 50, 'fields' => array()),
-                array('width'=> 50, 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' =>
                 array(
@@ -1312,12 +1295,12 @@ $defaultElements = array(
             'settings' => array(
                 'container_class' => '',
                 'conditional_logics' => array(),
-                'container_width' => ''
+                'width' => ''
             ),
             'columns' => array(
-                array('width' => 33.33, 'fields' => array()),
-                array('width' => 33.33, 'fields' => array()),
-                array('width' => 33.33, 'fields' => array()),
+                array('width' => '', 'fields' => array()),
+                array('width' => '', 'fields' => array()),
+                array('width' => '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Three Column Container', 'fluentform'),
@@ -1330,14 +1313,13 @@ $defaultElements = array(
             'attributes' => array(),
             'settings' => array(
                 'container_class' => '',
-                'conditional_logics' => array(),
-                'container_width' => ''
+                'conditional_logics' => array()
             ),
             'columns' => array(
-                array('width'=> 25, 'fields' => array()),
-                array('width'=> 25, 'fields' => array()),
-                array('width'=> 25, 'fields' => array()),
-                array('width'=> 25, 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Four Column Container', 'fluentform'),
@@ -1350,15 +1332,14 @@ $defaultElements = array(
             'attributes' => array(),
             'settings' => array(
                 'container_class' => '',
-                'conditional_logics' => array(),
-                'container_width' => ''
+                'conditional_logics' => array()
             ),
             'columns' => array(
-                array('width'=> 20, 'fields' => array()),
-                array('width'=> 20, 'fields' => array()),
-                array('width'=> 20, 'fields' => array()),
-                array('width'=> 20, 'fields' => array()),
-                array('width'=> 20, 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Five Column Container', 'fluentform'),
@@ -1371,16 +1352,15 @@ $defaultElements = array(
             'attributes' => array(),
             'settings' => array(
                 'container_class' => '',
-                'conditional_logics' => array(),
-                'container_width' => ''
+                'conditional_logics' => array()
             ),
             'columns' => array(
-                array('width'=> 16.67, 'fields' => array()),
-                array('width'=> 16.67, 'fields' => array()),
-                array('width'=> 16.67, 'fields' => array()),
-                array('width'=> 16.67, 'fields' => array()),
-                array('width'=> 16.67, 'fields' => array()),
-                array('width'=> 16.67, 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
+                array('width'=> '', 'fields' => array()),
             ),
             'editor_options' => array(
                 'title' => __('Six Column Container', 'fluentform'),
@@ -1393,134 +1373,68 @@ $defaultElements = array(
 
 if (!defined('FLUENTFORMPRO')) {
     $defaultElements['general']['phone'] = [
-        'index' => 17,
+        'index' => 15,
         'element' => 'phone',
         'attributes' => [],
         'settings' => [],
         'editor_options' => [
-            'title' => __('Phone Field', 'fluentform'),
+            'title' => 'Phone Field',
             'icon_class' => 'el-icon-phone-outline',
             'template' => 'inputText'
         ],
     ];
+
     $defaultElements['advanced']['net_promoter_score'] = [
-        'index' => 14,
+        'index' => 19,
         'element' => 'net_promoter_score',
         'attributes' => array(),
         'settings' => array(),
         'options' => array(),
         'editor_options' => array(
-            'title' => __('Net Promoter Score', 'fluentform'),
+            'title' => 'Net Promoter Score',
             'icon_class' => 'ff-edit-rating',
             'template' => 'net_promoter',
         )
     ];
-    $defaultElements['advanced']['quiz_score'] = [
-        'index' => 19,
-        'element' => 'quiz_score',
-        'attributes' => array(),
-        'settings' => array(),
-        'options' => array(),
-        'editor_options' => array(
-            'title'      => __('Quiz Score', 'fluentform'),
-            'icon_class' => 'el-icon-postcard',
-            'template'   => 'inputHidden'
-        ),
-    ];
-    $defaultElements['advanced']['cpt_selection'] = [
-        'index' => 18,
-        'element' => 'cpt_selection',
-        'attributes' => array(),
-        'settings' => array(),
-        'options' => array(),
-        'editor_options' => array(
-            'title'      => __('Post/CPT Selection', 'fluentform'),
-            'icon_class' => 'ff-edit-dropdown',
-            'element'    => 'select',
-            'template'   => 'select'
-        )
-    ];
-    $defaultElements['advanced']['save_progress_button'] = [
-        'index' => 20,
-        'element' => 'save_progress_button',
-        'attributes' => array(),
-        'settings' => array(),
-        'options' => array(),
-        'editor_options' => [
-            'title'      => __('Save & Resume', 'fluentform'),
-            'icon_class' => 'dashicons dashicons-arrow-right-alt',
-            'template'   => 'customButton'
-        ],
-    ];
-    $defaultElements['advanced']['rich_text_input'] = [
-        'index' => 19,
-        'element' => 'rich_text_input',
-        'attributes' => array(),
-        'settings' => array(),
-        'options' => array(),
-        'editor_options' => [
-            'title'      => __('Rich Text Input', 'fluentform'),
-            'icon_class' => 'ff-edit-textarea',
-            'template'   => 'inputTextarea'
-        ],
-    ];
-    $defaultElements['advanced']['chained_select'] = [
-        'index' => 15,
-        'element' => 'chained_select',
-        'attributes' => array(),
-        'settings' => array(),
-        'options' => array(),
-        'editor_options' => [
-            'title'      => __('Chained Select Field', 'fluentform'),
-            'icon_class' => 'ff-edit-link',
-            'template'   => 'chainedSelect'
-        ],
-    ];
+
     $defaultElements['advanced']['repeater_field'] = [
-        'index' => 17,
+        'index' => 19,
         'element' => 'repeater_field',
         'attributes' => array(),
         'settings' => array(),
         'options' => array(),
         'editor_options' => array(
-            'title' => __('Repeat Field', 'fluentform'),
+            'title' => 'Repeat Field',
             'icon_class' => 'ff-edit-repeat',
             'template' => 'fieldsRepeatSettings'
         )
     ];
+
     $defaultElements['advanced']['rangeslider'] = [
-        'index' => 13,
+        'index' => 15,
         'element' => 'rangeslider',
         'attributes' => [],
         'settings' => [],
         'editor_options' => [
-            'title' => __('Range Slider', 'fluentform'),
+            'title' => 'Range Slider',
             'icon_class' => 'dashicons dashicons-leftright',
             'template' => 'inputSlider'
         ],
     ];
+
+
     $defaultElements['advanced']['color-picker'] = [
-        'index' => 16,
+        'index' => 15,
         'element' => 'color-picker',
         'attributes' => [],
         'settings' => [],
         'editor_options' => [
-            'title' => __('Color Picker', 'fluentform'),
+            'title' => 'Color Picker',
             'icon_class' => 'ff-edit-tint',
             'template' => 'inputText'
         ],
     ];
-    $defaultElements['advanced']['custom_submit_button'] = [
-        'index' => 12,
-        'element' => 'custom_submit_button',
-        'attributes' => [],
-        'settings' => [],
-        'editor_options' => [
-            'title'      => __('Custom Submit Button', 'fluentform'),
-            'icon_class' => 'dashicons dashicons-arrow-right-alt',
-            'template'   => 'customButton'
-        ],
-    ];
+
     $defaultElements['payments'] = array(
         'multi_payment_component' => [
             'index' => 6,
@@ -1533,18 +1447,6 @@ if (!defined('FLUENTFORMPRO')) {
                 'element' => 'input-radio',
                 'template' => 'inputMultiPayment'
             ),
-        ],
-        'subscription_payment_component' => [
-            'index' => 6,
-            'element' => 'subscription_payment_component',
-            'attributes' => [],
-            'settings' => [],
-            'editor_options' => array(
-                'title'      => __('Subscription Field', 'fluentform'),
-                'icon_class' => 'ff-edit-shopping-cart',
-                'element'    => 'input-radio',
-                'template'   => 'inputSubscriptionPayment'
-            )
         ],
         'custom_payment_component' => [
             'index' => 6,
@@ -1574,33 +1476,11 @@ if (!defined('FLUENTFORMPRO')) {
             'attributes' => [],
             'settings' => [],
             'editor_options' => array(
-                'title' => __('Payment Method Field', 'fluentform'),
+                'title' => 'Payment Method Field',
                 'icon_class' => 'ff-edit-credit-card',
                 'template' => 'inputPaymentMethods'
             ),
-        ],
-        'payment_summary_component' => [
-            'index' => 6,
-            'element' => 'payment_summary_component',
-            'attributes' => [],
-            'settings' => [],
-            'editor_options' => array(
-                'title' => __('Payment Summary', 'fluentform'),
-                'icon_class' => 'ff-edit-html',
-                'template' => 'customHTML'
-            ),
-        ],
-        'payment_coupon' => [
-            'index' => 6,
-            'element' => 'payment_coupon',
-            'attributes' => [],
-            'settings' => [],
-            'editor_options' => array(
-                'title' => __('Coupon', 'fluentform'),
-                'icon_class' => 'el-icon-postcard',
-                'template' => 'inputText'
-            ),
-        ],
+        ]
     );
 }
 

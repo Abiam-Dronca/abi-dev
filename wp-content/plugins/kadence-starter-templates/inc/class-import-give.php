@@ -101,9 +101,7 @@ class Kadence_Starter_Templates_Give_Import {
 					if ( is_array( $data_value ) && isset( $data_value[0] ) ) {
 						$data_value = maybe_unserialize( $data_value[0] );
 					}
-					// error_log( print_r( $form_id, true ) );
-					// error_log( print_r( $data_key, true ) );
-					// error_log( print_r( $data_value, true ) );
+					//error_log( print_r( $data_value, true ) );
 					give_update_meta( $form_id, $data_key, $data_value, 'form' );
 				//}
 			}

@@ -5,15 +5,13 @@ namespace MailPoet\Automation\Engine\Control;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Data\StepRunArgs;
-use MailPoet\Automation\Engine\Data\Subject;
-use MailPoet\Automation\Engine\Data\WorkflowRun;
 use MailPoet\Automation\Engine\Exceptions;
 use MailPoet\Automation\Engine\Hooks;
 use MailPoet\Automation\Engine\Storage\WorkflowRunStorage;
 use MailPoet\Automation\Engine\Storage\WorkflowStorage;
 use MailPoet\Automation\Engine\WordPress;
 use MailPoet\Automation\Engine\Workflows\Trigger;
+use MailPoet\Automation\Engine\Workflows\WorkflowRun;
 
 class TriggerHandler {
   /** @var ActionScheduler */
@@ -49,7 +47,7 @@ class TriggerHandler {
     $this->wordPress->addAction(Hooks::TRIGGER, [$this, 'processTrigger'], 10, 2);
   }
 
-  /** @param Subject[] $subjects */
+  /** @param array<string, array> $subjects */
   public function processTrigger(Trigger $trigger, array $subjects): void {
     $workflows = $this->workflowStorage->getActiveWorkflowsByTrigger($trigger);
     foreach ($workflows as $workflow) {
@@ -59,22 +57,18 @@ class TriggerHandler {
       }
 
       // ensure subjects are registered and loadable
-      $subjectEntries = $this->subjectLoader->getSubjectsEntries($subjects);
-      foreach ($subjectEntries as $entry) {
-        $entry->getPayload();
+      $loadedSubjects = [];
+      foreach ($subjects as $key => $args) {
+        $loadedSubjects[] = $this->subjectLoader->loadSubject($key, $args);
       }
 
-      $workflowRun = new WorkflowRun($workflow->getId(), $workflow->getVersionId(), $trigger->getKey(), $subjects);
-      if (!$trigger->isTriggeredBy(new StepRunArgs($workflow, $workflowRun, $step, $subjectEntries))) {
-        return;
-      }
-
+      $workflowRun = new WorkflowRun($workflow->getId(), $trigger->getKey(), $loadedSubjects);
       $workflowRunId = $this->workflowRunStorage->createWorkflowRun($workflowRun);
-      $nextStep = $step->getNextSteps()[0] ?? null;
+
       $this->actionScheduler->enqueue(Hooks::WORKFLOW_STEP, [
         [
           'workflow_run_id' => $workflowRunId,
-          'step_id' => $nextStep ? $nextStep->getId() : null,
+          'step_id' => $step->getNextStepId(),
         ],
       ]);
     }

@@ -25,22 +25,25 @@ class BWGViewGalleryBox {
     if ( $shortcode ) {
       $data = WDWLibrary::parse_tagtext_to_array($shortcode);
     }
-    /* For Preview section - get selected 'gallery_type' from URL */
-    $gallery_type = WDWLibrary::get('bwg_gallery_type', '', 'sanitize_text_field');
-    if ( !empty($gallery_type) ) {
-      $data['gallery_type'] = basename(stripslashes($gallery_type));
-    }
     $params = WDWLibrary::get_shortcode_option_params( $data );
     $params['sort_by'] = WDWLibrary::get('sort_by', 'RAND()', 'sanitize_text_field', 'GET');
     $params['order_by'] = WDWLibrary::get('order_by', 'asc', 'sanitize_text_field', 'GET');
     $params['order_by'] = ($params['order_by'] == 'desc') ? 'desc' : 'asc';
     $params['watermark_position'] = explode('-', $params['watermark_position']);
     if ( !BWG()->is_pro ) {
+      $params['popup_enable_filmstrip'] = FALSE;
       $params['open_comment'] = FALSE;
       $params['popup_enable_comment'] = FALSE;
+      $params['popup_enable_facebook'] = FALSE;
+      $params['popup_enable_twitter'] = FALSE;
+      $params['popup_enable_ecommerce'] = FALSE;
+      $params['popup_enable_pinterest'] = FALSE;
+      $params['popup_enable_tumblr'] = FALSE;
       $params['popup_enable_email'] = FALSE;
       $params['popup_enable_captcha'] = FALSE;
       $params['comment_moderation'] = FALSE;
+      $params['enable_addthis'] = FALSE;
+      $params['addthis_profile_id'] = FALSE;
     }
     $image_right_click =  isset(BWG()->options->image_right_click) ? BWG()->options->image_right_click : 0;
     require_once BWG()->plugin_dir . "/frontend/models/model.php";
@@ -156,7 +159,8 @@ class BWGViewGalleryBox {
     }
     $lightbox_bg_transparent = (isset($theme_row->lightbox_bg_transparent)) ? $theme_row->lightbox_bg_transparent : 100;
     $lightbox_bg_color = WDWLibrary::spider_hex2rgb($theme_row->lightbox_bg_color);
-    if ( $params['enable_addthis'] && $params['addthis_profile_id'] ) {
+
+    if (BWG()->is_pro && $params['enable_addthis'] && $params['addthis_profile_id']) {
       ?>
       <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=<?php echo esc_html($params['addthis_profile_id']); ?>" async="async"></script>
       <?php
@@ -606,11 +610,13 @@ class BWGViewGalleryBox {
 
       $image_resolution = explode(' x ', $image_row->resolution);
       if (is_array($image_resolution) && count($image_resolution) == 2) {
-        // Separate image width/height uses for embeds.
-        $data[$key]["image_width"] = (int) $image_resolution[0];
-        $data[$key]["image_height"] = (int) $image_resolution[1];
+        $instagram_post_width = $image_resolution[0];
+        $instagram_post_height = explode(' ', $image_resolution[1]);
+        $instagram_post_height = $instagram_post_height[0];
       }
 
+      $data[$key]["image_width"] = $instagram_post_width;
+      $data[$key]["image_height"] = $instagram_post_height;
       $data[$key]["pure_image_url"] = $image_row->pure_image_url;
       $data[$key]["pure_thumb_url"] = $image_row->pure_thumb_url;
       $data[$key]["image_url"] = $image_row->image_url;
@@ -752,15 +758,15 @@ class BWGViewGalleryBox {
       <?php
       }
       ?>
-      <div id="bwg_image_container" class="bwg_image_container" data-action="<?php echo esc_url($popup_url); ?>">
-        <?php if ( $params['enable_addthis'] && $params['addthis_profile_id'] ) { ?>
+      <div id="bwg_image_container" class="bwg_image_container">
+        <?php if (BWG()->is_pro && $params['enable_addthis'] && $params['addthis_profile_id']) { ?>
           <div class="bwg_addThis addthis_inline_share_toolbox"></div>
           <?php
         }
         echo $this->loading();
         $share_url = '';
         ?>
-        <div class="bwg_btn_container <?php echo !$params['popup_enable_ctrl_btn'] ? 'bwg_no_ctrl_btn' : '' ?>">
+      <div class="bwg_btn_container <?php echo !$params['popup_enable_ctrl_btn'] ? 'bwg_no_ctrl_btn' : '' ?>">
         <div class="bwg_ctrl_btn_container">
 					<?php
           if ($params['show_image_counts']) {
@@ -794,33 +800,30 @@ class BWGViewGalleryBox {
             <?php }
             $is_embed = preg_match('/EMBED/', $current_filetype) == 1 ? TRUE : FALSE;
             $share_image_url = str_replace(array('%252F', '%25252F'), '%2F', urlencode( $is_embed ? $current_thumb_url : BWG()->upload_url . rawurlencode($current_image_url)));
-            /* Added:
-              noopener - to prevent the opening page to gain any kind of access to the original page.
-              noreferrer - to prevent passing the referrer information to the target website by removing the referral info from the HTTP header.*/
             if ($params['popup_enable_facebook']) {
               ?>
-              <a rel="noopener noreferrer" id="bwg_facebook_a" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>">
+              <a id="bwg_facebook_a" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Facebook', 'photo-gallery'); ?>" class="bwg-icon-facebook-square bwg_ctrl_btn bwg_facebook"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_twitter']) {
               ?>
-              <a rel="noopener noreferrer" id="bwg_twitter_a" href="https://twitter.com/intent/tweet?url=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>">
+              <a id="bwg_twitter_a" href="https://twitter.com/intent/tweet?url=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Twitter', 'photo-gallery'); ?>" class="bwg-icon-twitter-square bwg_ctrl_btn bwg_twitter"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_pinterest']) {
               ?>
-              <a rel="noopener noreferrer" id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode(urlencode($share_url)); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>">
+              <a id="bwg_pinterest_a" href="http://pinterest.com/pin/create/button/?s=100&url=<?php echo urlencode(urlencode($share_url)); ?>&media=<?php echo $share_image_url; ?>&description=<?php echo $current_image_alt . '%0A' . $current_image_description; ?>" target="_blank" title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Pinterest', 'photo-gallery'); ?>" class="bwg-icon-pinterest-square bwg_ctrl_btn bwg_pinterest"></i>
               </a>
               <?php
             }
             if ($params['popup_enable_tumblr']) {
               ?>
-              <a rel="noopener noreferrer" id="bwg_tumblr_a" href="https://www.tumblr.com/share/photo?source=<?php echo $share_image_url; ?>&caption=<?php echo urlencode($current_image_alt); ?>&clickthru=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>">
+              <a id="bwg_tumblr_a" href="https://www.tumblr.com/share/photo?source=<?php echo $share_image_url; ?>&caption=<?php echo urlencode($current_image_alt); ?>&clickthru=<?php echo urlencode($share_url); ?>" target="_blank" title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>">
                 <i title="<?php echo __('Share on Tumblr', 'photo-gallery'); ?>" class="bwg-icon-tumblr-square bwg_ctrl_btn bwg_tumblr"></i>
               </a>
               <?php
@@ -861,7 +864,7 @@ class BWGViewGalleryBox {
         <?php
         }
         ?>
-        </div>
+      </div>
         <div class="bwg_image_info_container1">
           <div class="bwg_image_info_container2">
             <span class="bwg_image_info_spun">
@@ -876,13 +879,11 @@ class BWGViewGalleryBox {
           <div class="bwg_image_hit_container2">
             <span class="bwg_image_hit_spun">
               <div class="bwg_image_hit">
-                <div class="bwg_image_hits"><?php echo __('Hits: ', 'photo-gallery'); ?><span><?php echo intval($current_image_hit_count); ?></span></div>
+                <div class="bwg_image_hits"><?php echo __('Hits: ', 'photo-gallery'); ?><span><?php echo $current_image_hit_count; ?></span></div>
               </div>
             </span>
           </div>
         </div>
-        <input id="rate_ajax_task" name="ajax_task" type="hidden" value="" />
-        <input id="rate_image_id" name="image_id" type="hidden" value="<?php echo esc_attr($image_id); ?>" />
         <?php
         if ( $params['popup_enable_rate'] ) {
           $data_rated = array(
@@ -898,11 +899,13 @@ class BWGViewGalleryBox {
               <span class="bwg_image_rate_spun">
                 <span class="bwg_image_rate">
                   <span class="bwg_image_rate_disabled"></span>
-                  <div id="bwg_rate_form">
+                  <form id="bwg_rate_form" method="post" action="<?php echo $popup_url; ?>">
                     <span id="bwg_star" class="bwg_star" data-score="<?php echo $current_avg_rating; ?>"></span>
                     <span id="bwg_rated" data-params='<?php echo $data_rated; ?>' class="bwg_rated"><?php echo __('Rated.', 'photo-gallery'); ?></span>
                     <span id="bwg_hint" class="bwg_hint"></span>
-                  </div>
+                    <input id="rate_ajax_task" name="ajax_task" type="hidden" value="" />
+                    <input id="rate_image_id" name="image_id" type="hidden" value="<?php echo $image_id; ?>" />
+                  </form>
                 </span>
               </span>
             </div>
@@ -1345,7 +1348,7 @@ class BWGViewGalleryBox {
       'bwg_image_effect'                      => $params['popup_effect'],
       'enable_image_filmstrip'                => $params['popup_enable_filmstrip'],
       'gallery_id'                            => $gallery_id,
-      'site_url'                              => esc_url(BWG()->upload_url),
+      'site_url'                              => BWG()->upload_url,
       'lightbox_comment_width'                => $theme_row->lightbox_comment_width,
       'watermark_width'                       => $params['watermark_width'],
       'image_width'                           => $params['popup_width'],

@@ -9,7 +9,6 @@ use Nextend\Framework\Request\Parser\WordPressRequestParser;
 class Storage {
 
     public $originalStorage;
-    public $returnOriginal;
     public $storage;
 
     /**
@@ -17,12 +16,11 @@ class Storage {
      */
     public $parserInstance;
 
-    public function __construct($data, $returnOriginal = false) {
+    public function __construct($data) {
         $this->parserInstance = new WordPressRequestParser();
 
 
         $this->originalStorage = $data;
-        $this->returnOriginal  = $returnOriginal;
         $this->storage         = array();
     }
 
@@ -31,17 +29,13 @@ class Storage {
     }
 
     protected function get($var, $default = false) {
-        if (!$this->returnOriginal) {
-            if (isset($this->storage[$var])) {
-                return $this->storage[$var];
-            } else if (isset($this->originalStorage[$var])) {
-
-                $this->storage[$var] = $this->parserInstance->parseData($this->originalStorage[$var]);
-
-                return $this->storage[$var];
-            }
+        if (isset($this->storage[$var])) {
+            return $this->storage[$var];
         } else if (isset($this->originalStorage[$var])) {
-            return $this->originalStorage[$var];
+
+            $this->storage[$var] = $this->parserInstance->parseData($this->originalStorage[$var]);
+
+            return $this->storage[$var];
         }
 
         return $default;

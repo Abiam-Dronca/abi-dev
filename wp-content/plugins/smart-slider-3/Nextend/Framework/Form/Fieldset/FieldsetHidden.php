@@ -4,7 +4,6 @@
 namespace Nextend\Framework\Form\Fieldset;
 
 use Nextend\Framework\Form\AbstractFieldset;
-use Nextend\Framework\Sanitize;
 
 class FieldsetHidden extends AbstractFieldset {
 
@@ -20,7 +19,7 @@ class FieldsetHidden extends AbstractFieldset {
 
             $element = $this->first;
             while ($element) {
-                echo wp_kses($this->decorateElement($element), Sanitize::$adminFormTags);
+                echo $this->decorateElement($element);
 
                 $element = $element->getNext();
             }

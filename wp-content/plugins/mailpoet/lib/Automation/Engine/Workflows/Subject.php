@@ -5,19 +5,13 @@ namespace MailPoet\Automation\Engine\Workflows;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Data\Subject as SubjectData;
-use MailPoet\Validator\Schema\ObjectSchema;
-
-/**
- * @template-covariant T of Payload
- */
 interface Subject {
   public function getKey(): string;
 
-  public function getName(): string;
+  /** array<SubjectField> */
+  public function getFields(): array;
 
-  public function getArgsSchema(): ObjectSchema;
+  public function load(array $args): void;
 
-  /** @return T */
-  public function getPayload(SubjectData $subjectData): Payload;
+  public function pack(): array;
 }

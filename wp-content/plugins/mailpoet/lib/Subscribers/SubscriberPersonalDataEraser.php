@@ -5,29 +5,10 @@ namespace MailPoet\Subscribers;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Entities\SubscriberEntity;
-use MailPoetVendor\Doctrine\ORM\EntityManager;
+use MailPoet\Models\Subscriber;
+use MailPoet\Models\SubscriberCustomField;
 
 class SubscriberPersonalDataEraser {
-  /** @var SubscribersRepository */
-  private $subscribersRepository;
-
-  /** @var EntityManager */
-  private $entityManager;
-
-  /** @var SubscriberCustomFieldRepository */
-  private $subscriberCustomFieldRepository;
-
-  public function __construct(
-    SubscribersRepository $subscribersRepository,
-    EntityManager $entityManager,
-    SubscriberCustomFieldRepository $subscriberCustomFieldRepository
-  ) {
-    $this->subscribersRepository = $subscribersRepository;
-    $this->entityManager = $entityManager;
-    $this->subscriberCustomFieldRepository = $subscriberCustomFieldRepository;
-  }
-
   public function erase($email) {
     if (empty($email)) {
       return [
@@ -37,11 +18,11 @@ class SubscriberPersonalDataEraser {
         'done' => true,
       ];
     }
-    $subscriber = $this->subscribersRepository->findOneBy(['email' => trim($email)]);
+    $subscriber = Subscriber::findOne(trim($email));
     $itemRemoved = false;
     $itemsRetained = true;
     if ($subscriber) {
-      $this->eraseCustomFields($subscriber);
+      $this->eraseCustomFields($subscriber->id());
       $this->anonymizeSubscriberData($subscriber);
       $itemRemoved = true;
       $itemsRetained = false;
@@ -55,24 +36,21 @@ class SubscriberPersonalDataEraser {
     ];
   }
 
-  private function eraseCustomFields(SubscriberEntity $subscriber) {
-    $customFields = $this->subscriberCustomFieldRepository->findBy(['subscriber' => $subscriber]);
+  private function eraseCustomFields($subscriberId) {
+    $customFields = SubscriberCustomField::where('subscriber_id', $subscriberId)->findMany();
     foreach ($customFields as $customField) {
-      $customField->setValue('');
-      $this->entityManager->persist($customField);
+      $customField->value = '';
+      $customField->save();
     }
-    $this->entityManager->flush();
   }
 
-  private function anonymizeSubscriberData(SubscriberEntity $subscriber) {
-    $subscriber->setEmail(sprintf('deleted-%s@site.invalid', bin2hex(random_bytes(12)))); // phpcs:ignore
-    $subscriber->setFirstName('Anonymous');
-    $subscriber->setLastName('Anonymous');
-    $subscriber->setStatus(SubscriberEntity::STATUS_UNSUBSCRIBED);
-    $subscriber->setSubscribedIp('0.0.0.0');
-    $subscriber->setConfirmedIp('0.0.0.0');
-    $subscriber->setUnconfirmedData('');
-    $this->entityManager->persist($subscriber);
-    $this->entityManager->flush();
+  private function anonymizeSubscriberData($subscriber) {
+    $subscriber->email = sprintf('deleted-%s@site.invalid', bin2hex(random_bytes(12))); // phpcs:ignore
+    $subscriber->firstName = 'Anonymous';
+    $subscriber->lastName = 'Anonymous';
+    $subscriber->status = Subscriber::STATUS_UNSUBSCRIBED;
+    $subscriber->subscribedIp = '0.0.0.0';
+    $subscriber->confirmedIp = '0.0.0.0';
+    $subscriber->save();
   }
 }

@@ -18,12 +18,10 @@ class QM_Backtrace {
 	protected static $ignore_class = array(
 		'wpdb' => true,
 		'hyperdb' => true,
-		'LudicrousDB' => true,
 		'QueryMonitor' => true,
 		'W3_Db' => true,
 		'Debug_Bar_PHP' => true,
 		'WP_Hook' => true,
-		'Altis\Cloud\DB' => true,
 	);
 
 	/**
@@ -68,6 +66,7 @@ class QM_Backtrace {
 		'get_header' => 1,
 		'get_sidebar' => 1,
 		'get_footer' => 1,
+		'get_option' => 1,
 		'update_option' => 1,
 		'get_transient' => 1,
 		'set_transient' => 1,
@@ -119,11 +118,6 @@ class QM_Backtrace {
 	protected $component = null;
 
 	/**
-	 * @var mixed[]|null
-	 */
-	protected $top_frame = null;
-
-	/**
 	 * @param array<string, mixed[]> $args
 	 * @param mixed[] $trace
 	 */
@@ -159,14 +153,6 @@ class QM_Backtrace {
 	}
 
 	/**
-	 * @param mixed[] $frame
-	 * @return void
-	 */
-	public function push_frame( array $frame ) {
-		$this->top_frame = $frame;
-	}
-
-	/**
 	 * @return array<int, string>
 	 */
 	public function get_stack() {
@@ -179,7 +165,7 @@ class QM_Backtrace {
 	}
 
 	/**
-	 * @return mixed[]|false
+	 * @return mixed[]
 	 */
 	public function get_caller() {
 
@@ -198,13 +184,8 @@ class QM_Backtrace {
 		}
 
 		$components = array();
-		$frames = $this->get_filtered_trace();
 
-		if ( $this->top_frame ) {
-			array_unshift( $frames, $this->top_frame );
-		}
-
-		foreach ( $frames as $frame ) {
+		foreach ( $this->get_filtered_trace() as $frame ) {
 			$component = self::get_frame_component( $frame );
 
 			if ( $component ) {
@@ -303,12 +284,7 @@ class QM_Backtrace {
 				$lowest['display'] = $file;
 				$lowest['id'] = $file;
 				unset( $lowest['class'], $lowest['args'], $lowest['type'] );
-
-				// When a PHP error is triggered which doesn't have a stack trace, for example a
-				// deprecated error, QM will blame itself due to its error handler. This prevents that.
-				if ( false === strpos( $file, 'query-monitor/collectors/php_errors.php' ) ) {
-					$trace[0] = $lowest;
-				}
+				$trace[0] = $lowest;
 			}
 
 			$this->filtered_trace = $trace;
@@ -390,7 +366,7 @@ class QM_Backtrace {
 			 * @param bool[] $ignore_class Array of class names to ignore. The array keys are class names to ignore,
 			 *                             the array values are whether to ignore the class or not (usually true).
 			 */
-			self::$ignore_class = apply_filters( 'qm/trace/ignore_class', self::$ignore_class );
+			self::$ignore_class = apply_filters( 'qm/trace/ignore_class',  self::$ignore_class );
 
 			/**
 			 * Filters which class methods to ignore when constructing user-facing call stacks.
@@ -410,7 +386,7 @@ class QM_Backtrace {
 			 * @param bool[] $ignore_func Array of function names to ignore. The array keys are function names to ignore,
 			 *                            the array values are whether to ignore the function or not (usually true).
 			 */
-			self::$ignore_func = apply_filters( 'qm/trace/ignore_func', self::$ignore_func );
+			self::$ignore_func = apply_filters( 'qm/trace/ignore_func',   self::$ignore_func );
 
 			/**
 			 * Filters which action and filter names to ignore when constructing user-facing call stacks.
@@ -432,7 +408,7 @@ class QM_Backtrace {
 			 *                                  array keys are function names, the array values are either integers or
 			 *                                  "dir" to specifically treat the function argument as a directory path.
 			 */
-			self::$show_args = apply_filters( 'qm/trace/show_args', self::$show_args );
+			self::$show_args = apply_filters( 'qm/trace/show_args',     self::$show_args );
 
 			self::$filtered = true;
 

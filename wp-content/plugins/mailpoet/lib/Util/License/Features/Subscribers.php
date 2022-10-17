@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) exit;
 use MailPoet\Services\Bridge;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Subscribers\SubscribersRepository;
-use MailPoet\WP\Functions as WPFunctions;
 
 class Subscribers {
   const SUBSCRIBERS_OLD_LIMIT = 2000;
@@ -22,9 +21,6 @@ class Subscribers {
   const PREMIUM_EMAIL_VOLUME_LIMIT_SETTING_KEY = 'premium.premium_key_state.data.email_volume_limit';
   const PREMIUM_EMAILS_SENT_SETTING_KEY = 'premium.premium_key_state.data.emails_sent';
   const PREMIUM_SUPPORT_SETTING_KEY = 'premium.premium_key_state.data.support_tier';
-  const SUBSCRIBERS_COUNT_CACHE_KEY = 'mailpoet_subscribers_count';
-  const SUBSCRIBERS_COUNT_CACHE_EXPIRATION_MINUTES = 60;
-  const SUBSCRIBERS_COUNT_CACHE_MIN_VALUE = 1000;
 
   /** @var SettingsController */
   private $settings;
@@ -32,20 +28,15 @@ class Subscribers {
   /** @var SubscribersRepository */
   private $subscribersRepository;
 
-  /** @var WPFunctions */
-  private $wp;
-
   public function __construct(
     SettingsController $settings,
-    SubscribersRepository $subscribersRepository,
-    WPFunctions $wp
+    SubscribersRepository $subscribersRepository
   ) {
     $this->settings = $settings;
     $this->subscribersRepository = $subscribersRepository;
-    $this->wp = $wp;
   }
 
-  public function check(): bool {
+  public function check() {
     $limit = $this->getSubscribersLimit();
     if ($limit === false) return false;
     $subscribersCount = $this->getSubscribersCount();
@@ -61,21 +52,11 @@ class Subscribers {
     return $emailsSent > $emailVolumeLimit;
   }
 
-  public function getSubscribersCount(): int {
-    $count = $this->wp->getTransient(self::SUBSCRIBERS_COUNT_CACHE_KEY);
-    if (is_numeric($count)) {
-      return (int)$count;
-    }
-    $count = $this->subscribersRepository->getTotalSubscribers();
-
-    // cache only when number of subscribers exceeds minimum value
-    if ($count > self::SUBSCRIBERS_COUNT_CACHE_MIN_VALUE) {
-      $this->wp->setTransient(self::SUBSCRIBERS_COUNT_CACHE_KEY, $count, self::SUBSCRIBERS_COUNT_CACHE_EXPIRATION_MINUTES * 60);
-    }
-    return $count;
+  public function getSubscribersCount() {
+    return $this->subscribersRepository->getTotalSubscribers();
   }
 
-  public function hasValidApiKey(): bool {
+  public function hasValidApiKey() {
     return $this->hasValidMssKey() || $this->hasValidPremiumKey();
   }
 

@@ -6,13 +6,11 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\API\JSON\API;
-use MailPoet\API\REST\API as RestApi;
 use MailPoet\AutomaticEmails\AutomaticEmails;
 use MailPoet\Automation\Engine\Engine;
 use MailPoet\Automation\Engine\Hooks as AutomationHooks;
 use MailPoet\Automation\Integrations\MailPoet\MailPoetIntegration;
 use MailPoet\Cron\CronTrigger;
-use MailPoet\Cron\DaemonActionSchedulerRunner;
 use MailPoet\Features\FeaturesController;
 use MailPoet\InvalidStateException;
 use MailPoet\PostEditorBlocks\PostEditorBlock;
@@ -40,9 +38,6 @@ class Initializer {
 
   /** @var API */
   private $api;
-
-  /** @var RestApi */
-  private $restApi;
 
   /** @var Activator */
   private $activator;
@@ -110,19 +105,12 @@ class Initializer {
   /** @var FeaturesController */
   private $featuresController;
 
-  /** @var PersonalDataExporters */
-  private $personalDataExporters;
-
-  /** @var DaemonActionSchedulerRunner */
-  private $actionSchedulerRunner;
-
   const INITIALIZED = 'MAILPOET_INITIALIZED';
 
   public function __construct(
     RendererFactory $rendererFactory,
     AccessControl $accessControl,
     API $api,
-    RestApi $restApi,
     Activator $activator,
     SettingsController $settings,
     Router\Router $router,
@@ -144,14 +132,11 @@ class Initializer {
     AssetsLoader $assetsLoader,
     Engine $automationEngine,
     MailPoetIntegration $automationMailPoetIntegration,
-    FeaturesController $featuresController,
-    PersonalDataExporters $personalDataExporters,
-    DaemonActionSchedulerRunner $actionSchedulerRunner
+    FeaturesController $featuresController
   ) {
     $this->rendererFactory = $rendererFactory;
     $this->accessControl = $accessControl;
     $this->api = $api;
-    $this->restApi = $restApi;
     $this->activator = $activator;
     $this->settings = $settings;
     $this->router = $router;
@@ -174,14 +159,9 @@ class Initializer {
     $this->automationEngine = $automationEngine;
     $this->automationMailPoetIntegration = $automationMailPoetIntegration;
     $this->featuresController = $featuresController;
-    $this->personalDataExporters = $personalDataExporters;
-    $this->actionSchedulerRunner = $actionSchedulerRunner;
   }
 
   public function init() {
-    // Initialize Action Scheduler. It needs to be called early because it hooks into `plugins_loaded`.
-    require_once __DIR__ . '/../../vendor/woocommerce/action-scheduler/action-scheduler.php';
-
     // load translations and setup translations update/download
     $this->setupLocalizer();
 
@@ -204,15 +184,6 @@ class Initializer {
       [
         $this,
         'runActivator',
-      ]
-    );
-
-    // deactivation function
-    $this->wpFunctions->registerDeactivationHook(
-      Env::$file,
-      [
-        $this,
-        'runDeactivation',
       ]
     );
 
@@ -380,7 +351,10 @@ class Initializer {
   }
 
   public function setupCronTrigger() {
-    $this->cronTrigger->init((string)php_sapi_name());
+    // setup cron trigger only outside of cli environment
+    if (php_sapi_name() !== 'cli') {
+      $this->cronTrigger->init();
+    }
   }
 
   public function setupConflictResolver() {
@@ -392,7 +366,6 @@ class Initializer {
     if (!defined(self::INITIALIZED)) return;
     try {
       $this->api->init();
-      $this->restApi->init();
       $this->router->init();
       $this->setupUserLocale();
     } catch (\Exception $e) {
@@ -417,7 +390,8 @@ class Initializer {
   }
 
   public function setupPersonalDataExporters() {
-    $this->personalDataExporters->init();
+    $exporters = new PersonalDataExporters();
+    $exporters->init();
   }
 
   public function setupPersonalDataErasers() {
@@ -459,10 +433,6 @@ class Initializer {
       )
     );
     return array_merge($tables, $mailpoetTables);
-  }
-
-  public function runDeactivation() {
-    $this->actionSchedulerRunner->deactivate();
   }
 
   private function setupWoocommerceTransactionalEmails() {

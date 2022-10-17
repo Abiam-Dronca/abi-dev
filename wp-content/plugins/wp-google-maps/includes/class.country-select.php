@@ -32,22 +32,10 @@ class CountrySelect extends DOMDocument {
 		$select->appendChild($option);
 
 		foreach(CountrySelect::$cachedJson as $country) {
-			$code = false;
-
-			if(!empty($country->alpha2Code)){
-				/* We have the alpha 2 code, which will work far more consistently */
-				$code = strtolower($country->alpha2Code);
-			} else {
-				if(!empty($country->topLevelDomain[0])){
-					/* Fallback to the TLD */
-					$code	= str_replace('.', '', $country->topLevelDomain[0]);
-				}
-			}
-			
-			if(empty($code)){
+			if(empty($country->topLevelDomain[0]))
 				continue;
-			}
 			
+			$code	= str_replace('.', '', $country->topLevelDomain[0]);
 			$name	= $country->name;
 			
 			$option = $this->createElement('option');

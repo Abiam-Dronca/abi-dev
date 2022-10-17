@@ -110,9 +110,8 @@ class ControllerAjaxBrowse extends AdminAjaxController {
             'path' => $relativePath
         );
         try {
-            $image = Request::$FILES->getVar('image');
-            if ($image['name'] !== null) {
-                $info     = pathinfo($image['name']);
+            if (isset($_FILES) && isset($_FILES['image']) && isset($_FILES['image']['name'])) {
+                $info     = pathinfo($_FILES['image']['name']);
                 $fileName = preg_replace('/[^a-zA-Z0-9_-]/', '', $info['filename']);
                 if (strlen($fileName) == 0) {
                     $fileName = '';
@@ -120,7 +119,7 @@ class ControllerAjaxBrowse extends AdminAjaxController {
 
                 $upload           = new BulletProof();
                 $file             = $upload->uploadDir($path)
-                                           ->upload($image, $fileName);
+                                           ->upload($_FILES['image'], $fileName);
                 $response['name'] = basename($file);
                 $response['url']  = ResourceTranslator::urlToResource(Filesystem::pathToAbsoluteURL($file));
 

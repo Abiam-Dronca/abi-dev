@@ -38,8 +38,8 @@ class TemplateSingleCache extends \WPForms\Helpers\CacheBase {
 	 */
 	protected function allow_load() {
 
-		// Load for certain places only.
-		$allow = wp_doing_ajax() || wpforms_is_admin_page( 'builder' ) || wpforms_is_admin_page( 'templates' );
+		// Load only in the Form Builder.
+		$allow = wp_doing_ajax() || wpforms_is_admin_page( 'builder' );
 
 		// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
 		/**
@@ -49,7 +49,7 @@ class TemplateSingleCache extends \WPForms\Helpers\CacheBase {
 		 *
 		 * @param bool $allow True or false.
 		 */
-		return (bool) apply_filters( 'wpforms_admin_builder_templatesinglecache_allow_load', $allow );
+		return apply_filters( 'wpforms_admin_builder_templatesinglecache_allow_load', $allow );
 		// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 	}
 

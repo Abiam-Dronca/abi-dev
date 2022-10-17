@@ -102,9 +102,6 @@ return array(
 	'hcaptcha'           => array(
 		'hcaptcha',
 	),
-    'turnstile'           => array(
-        'turnstile',
-    ),
 	'custom_html'         => array(
 		'custom html',
 	),

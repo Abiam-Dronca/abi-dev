@@ -9,7 +9,7 @@ class InternalEngine {
 	const LEGACY = "legacy";
 	const ATLAS_NOVUS  = "atlas-novus";
 
-	const RAND_PROB_FACTOR = 0.7;
+	const RAND_PROB_FACTOR = 0.5;
 
 	private $engine;
 	private $baseUrl;
@@ -264,7 +264,7 @@ class InternalEngine {
 	 * @return string
 	 */
 	public static function getRandomEngine(){
-		$rFact = mt_rand(0, 10) / 10;
+		$rFact = rand(1, 100) / 100;
 		if($rFact <= self::RAND_PROB_FACTOR){
 			return self::getExperimentalBuildName();
 		}

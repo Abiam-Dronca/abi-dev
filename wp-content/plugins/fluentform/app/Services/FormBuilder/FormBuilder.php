@@ -9,7 +9,7 @@ class FormBuilder
 {
     /**
      * The Applivcation instance
-     * @var \FluentForm\Framework\Foundation\Application
+     * @var Framework\Foundation\Application
      */
     protected $app = null;
 
@@ -35,7 +35,7 @@ class FormBuilder
 
     /**
      * Construct the form builder instance
-     * @param \FluentForm\Framework\Foundation\Application $app
+     * @param Framework\Foundation\Application $app
      */
     public function __construct($app)
     {

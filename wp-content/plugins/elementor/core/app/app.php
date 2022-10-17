@@ -1,9 +1,6 @@
 <?php
 namespace Elementor\Core\App;
 
-use Elementor\Core\Admin\Menu\Admin_Menu_Manager;
-use Elementor\Core\App\AdminMenuItems\Theme_Builder_Menu_Item;
-use Elementor\Icons_Manager;
 use Elementor\Modules\WebCli\Module as WebCLIModule;
 use Elementor\Core\Base\App as BaseApp;
 use Elementor\Core\Settings\Manager as SettingsManager;
@@ -37,8 +34,14 @@ class App extends BaseApp {
 		return admin_url( 'admin.php?page=' . self::PAGE_ID . '&ver=' . ELEMENTOR_VERSION );
 	}
 
-	private function register_admin_menu( Admin_Menu_Manager $admin_menu ) {
-		$admin_menu->register( static::PAGE_ID, new Theme_Builder_Menu_Item() );
+	public function register_admin_menu() {
+		add_submenu_page(
+			Source_Local::ADMIN_MENU_SLUG,
+			esc_html__( 'Theme Builder', 'elementor' ),
+			esc_html__( 'Theme Builder', 'elementor' ),
+			'manage_options',
+			self::PAGE_ID
+		);
 	}
 
 	public function fix_submenu( $menu ) {
@@ -154,7 +157,7 @@ class App extends BaseApp {
 			'elementor-icons',
 			$this->get_css_assets_url( 'elementor-icons', 'assets/lib/eicons/css/' ),
 			[],
-			Icons_Manager::ELEMENTOR_ICONS_VERSION
+			'5.15.0'
 		);
 
 		wp_register_style(
@@ -254,9 +257,7 @@ class App extends BaseApp {
 
 		$this->add_component( 'onboarding', new Modules\Onboarding\Module() );
 
-		add_action( 'elementor/admin/menu/register', function ( Admin_Menu_Manager $admin_menu ) {
-			$this->register_admin_menu( $admin_menu );
-		}, Source_Local::ADMIN_MENU_PRIORITY + 10 );
+		add_action( 'admin_menu', [ $this, 'register_admin_menu' ], 21 /* after Elementor page */ );
 
 		// Happens after WP plugin page validation.
 		add_filter( 'add_menu_classes', [ $this, 'fix_submenu' ] );

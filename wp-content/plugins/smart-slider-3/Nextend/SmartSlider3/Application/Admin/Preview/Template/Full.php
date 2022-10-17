@@ -3,6 +3,7 @@
 namespace Nextend\SmartSlider3\Application\Admin\Preview;
 
 use Nextend\Framework\Asset\Js\Js;
+use Nextend\Framework\Sanitize;
 use Nextend\SmartSlider3\Settings;
 
 /**
@@ -18,12 +19,11 @@ $externals = Settings::get('external-css-files');
 if (!empty($externals)) {
     $externals = explode("\n", $externals);
     foreach ($externals as $external) {
-        echo "<link rel='stylesheet' href='" . esc_url($external) . "' type='text/css' media='all'>";
+        echo "<link rel='stylesheet' href='" . Sanitize::esc_attr($external) . "' type='text/css' media='all'>";
     }
 }
 
-// PHPCS - Content already escaped
-echo $slider; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo $slider;
 
 
 $slidesData = $this->getSlidesData();
@@ -32,9 +32,9 @@ if (!empty($slidesData)) {
     if ($slideId > 0) {
         ?>
         <script>
-            n2ss.ready(<?php echo esc_html($this->getSliderID()); ?>, function (slider) {
+            n2ss.ready(<?php echo $this->getSliderID(); ?>, function (slider) {
                 slider.visible(function () {
-                    slider.slideToID(<?php echo esc_html($slideId); ?>);
+                    slider.slideToID(<?php echo key($slidesData); ?>);
                 });
             });
         </script>

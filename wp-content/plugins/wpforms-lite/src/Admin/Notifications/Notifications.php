@@ -84,6 +84,7 @@ class Notifications {
 
 		$access = wpforms_current_user_can( 'view_forms' ) && ! wpforms_setting( 'hide-announcements' );
 
+		// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
 		/**
 		 * Allow modifying state if a user has access.
 		 *
@@ -92,6 +93,7 @@ class Notifications {
 		 * @param bool $access True if user has access.
 		 */
 		return (bool) apply_filters( 'wpforms_admin_notifications_has_access', $access );
+		// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 	}
 
 	/**
@@ -130,13 +132,7 @@ class Notifications {
 	 */
 	public function fetch_feed() {
 
-		$response = wp_remote_get(
-			self::SOURCE_URL,
-			[
-				'timeout'    => 10,
-				'user-agent' => wpforms_get_default_user_agent(),
-			]
-		);
+		$response = wp_remote_get( self::SOURCE_URL );
 
 		if ( is_wp_error( $response ) ) {
 			return [];

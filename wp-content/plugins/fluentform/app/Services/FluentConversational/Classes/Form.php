@@ -369,19 +369,6 @@ class Form
                         $existingSettings['tc_dis_agree_text'] = __('I don\'t accept', 'fluentform');
                         $field['settings'] = $existingSettings;
                     }
-                    //adding required settings for captcha in conversational form
-                    if ($element == 'hcaptcha' || $element == 'recaptcha') {
-                        $existingSettings = $field['settings'];
-                        if (empty($existingSettings['validation_rules'])) {
-                            $existingSettings['validation_rules'] = [
-                                'required' => [
-                                    'value'   => true,
-                                    'message' => __('This field is required', 'fluentform'),
-                                ],
-                            ];
-                        }
-                        $field['settings'] = $existingSettings;
-                    }
     
                     $elements[$groupType][] = $field;
                 }
@@ -543,7 +530,6 @@ class Form
             'assetBaseUrl'             => FLUENT_CONVERSATIONAL_FORM_DIR_URL . 'public',
             'i18n'                     => $metaSettings['i18n'],
             'form_id'                  => $form->id,
-            'hasPro'                   => defined('FLUENTFORMPRO'),
             'is_inline_form'           => true,
             'design'                   => $designSettings,
             'extra_inputs'             => $this->getExtraHiddenInputs($formId),
@@ -665,7 +651,6 @@ class Form
             'assetBaseUrl'             => FLUENT_CONVERSATIONAL_FORM_DIR_URL . 'public',
             'i18n'                     => $metaSettings['i18n'],
             'design'                   => $designSettings,
-            'hasPro'                   => defined('FLUENTFORMPRO'),
             'extra_inputs'             => $this->getExtraHiddenInputs($formId),
             'uploading_txt'            => __('Uploading', 'fluentform'),
             'upload_completed_txt'     => __('100% Completed', 'fluentform'),

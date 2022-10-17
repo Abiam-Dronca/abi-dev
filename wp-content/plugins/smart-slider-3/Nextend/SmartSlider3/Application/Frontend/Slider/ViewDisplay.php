@@ -25,9 +25,7 @@ class ViewDisplay extends AbstractView {
 
         $sliderManager = new SliderManager($this, $this->sliderIDorAlias, false);
         $sliderManager->setUsage($this->usage);
-
-        // PHPCS - Content already escaped
-        echo $sliderManager->render(true); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo $sliderManager->render(true);
 
         setlocale(LC_NUMERIC, $locale);
     }

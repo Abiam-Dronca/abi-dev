@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Platform\WordPress;
 
 
-use Nextend\Framework\Request\Request;
 use Nextend\SmartSlider3\Install\Install;
 use Nextend\SmartSlider3\Install\Tables;
 use Nextend\SmartSlider3\Platform\SmartSlider3Platform;
@@ -33,7 +32,7 @@ class HelperInstall {
 
         if (get_option("n2_ss3_version") != SmartSlider3Info::$completeVersion) {
             $this->install();
-        } else if (Request::$REQUEST->getInt('repairss3') && current_user_can('manage_options') && check_admin_referer('repairss3')) {
+        } else if (isset($_REQUEST['repairss3']) && current_user_can('manage_options') && check_admin_referer('repairss3')) {
             $this->install();
 
             Tables::repair();

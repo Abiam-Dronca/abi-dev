@@ -141,12 +141,9 @@ class WPForms_Settings {
 						$value = (float) $value;
 						break;
 
+					case 'text':
 					case 'radio':
 					case 'select':
-						$value = $this->validate_field_with_options( $field, $value, $value_prev );
-						break;
-
-					case 'text':
 					default:
 						$value = sanitize_text_field( $value );
 						break;
@@ -446,11 +443,11 @@ class WPForms_Settings {
 					'type'    => 'text',
 					'default' => esc_html__( 'Field values do not match.', 'wpforms-lite' ),
 				],
-				'validation-inputmask-incomplete'  => [
-					'id'      => 'validation-inputmask-incomplete',
+				'validation-input-mask-incomplete' => [
+					'id'      => 'validation-input-mask-incomplete',
 					'name'    => esc_html__( 'Input Mask Incomplete', 'wpforms-lite' ),
 					'type'    => 'text',
-					'default' => esc_html__( 'Please fill out the field in required format.', 'wpforms-lite' ),
+					'default' => esc_html__( 'Please fill out all blanks.', 'wpforms-lite' ),
 				],
 				'validation-check-limit'           => [
 					'id'      => 'validation-check-limit',
@@ -654,28 +651,6 @@ class WPForms_Settings {
 		}
 
 		$meta->create_table();
-	}
-
-	/**
-	 * Validate radio and select fields.
-	 *
-	 * @since 1.7.5.5
-	 *
-	 * @param array $field      Field.
-	 * @param mixed $value      Value.
-	 * @param mixed $value_prev Previous value.
-	 *
-	 * @return mixed
-	 */
-	private function validate_field_with_options( $field, $value, $value_prev ) {
-
-		$value = sanitize_text_field( $value );
-
-		if ( isset( $field['options'] ) && array_key_exists( $value, $field['options'] ) ) {
-			return $value;
-		}
-
-		return isset( $field['default'] ) ? $field['default'] : $value_prev;
 	}
 }
 

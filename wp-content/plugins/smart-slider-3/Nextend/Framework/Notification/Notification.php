@@ -10,17 +10,17 @@ use Nextend\Framework\Session\Session;
 class Notification {
 
     /**
-     * @var array
+     * @var bool|array
      */
-    private static $error;
+    private static $error = false;
     /**
-     * @var array
+     * @var bool|array
      */
-    private static $success;
+    private static $success = false;
     /**
-     * @var array
+     * @var bool|array
      */
-    private static $notice;
+    private static $notice = false;
 
     private static $flushed = false;
 
@@ -34,20 +34,32 @@ class Notification {
 
 
     private static function loadSessionError() {
-        if (self::$error === null && Platform::isAdmin()) {
-            self::$error = Session::get('error', array());
+        if (self::$error === false) {
+            if (Platform::isAdmin()) {
+                self::$error = Session::get('error', array());
+            } else {
+                self::$error = array();
+            }
         }
     }
 
     private static function loadSessionSuccess() {
-        if (self::$success === null && Platform::isAdmin()) {
-            self::$success = Session::get('success', array());
+        if (self::$success === false) {
+            if (Platform::isAdmin()) {
+                self::$success = Session::get('success', array());
+            } else {
+                self::$success = array();
+            }
         }
     }
 
     private static function loadSessionNotice() {
-        if (self::$notice === null && Platform::isAdmin()) {
-            self::$notice = Session::get('notice', array());
+        if (self::$notice === false) {
+            if (Platform::isAdmin()) {
+                self::$notice = Session::get('notice', array());
+            } else {
+                self::$notice = array();
+            }
         }
     }
 
@@ -70,7 +82,7 @@ class Notification {
 
         if (Platform::isAdmin() && is_array(self::$error) && count(self::$error)) {
             foreach (self::$error as $error) {
-                echo '<div style="border: 1px solid #e90909; margin-bottom: 20px; padding: 10px 20px; max-width: 400px;">' . esc_html($error[0]) . '</div>';
+                echo '<div style="border: 1px solid red; margin-bottom: 20px; padding: 10px 20px; max-width: 400px;">' . $error[0] . '</div>';
             }
             self::$error = array();
         }

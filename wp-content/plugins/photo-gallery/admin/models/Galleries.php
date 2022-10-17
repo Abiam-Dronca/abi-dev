@@ -327,25 +327,6 @@ class GalleriesModel_bwg {
   }
 
   /**
-   * Count the images total size in the gallery.
-   *
-   * @param $gallery_id
-   *
-   * @return void
-   */
-  public function get_images_total_size( $gallery_id ) {
-    global $wpdb;
-    $sizes = $wpdb->get_col($wpdb->prepare('Select `size` FROM `' . $wpdb->prefix . 'bwg_image` WHERE `gallery_id` = %d AND `size`<>""', $gallery_id));
-
-    if ( empty($sizes) ) {
-      return;
-    }
-    $sizes = array_map('WDWLibrary::convertToBytes', $sizes);
-
-    return WDWLibrary::formatBytes(array_sum($sizes));
-  }
-
-  /**
    * Get images rows data or total count.
    *
    * @param      $gallery_id
@@ -356,6 +337,7 @@ class GalleriesModel_bwg {
    */
   public function get_image_rows_data( $gallery_id, $params, $total = FALSE ) {
     global $wpdb;
+    $rows = array();
     $order = $params['order'];
     $orderby = $params['orderby'];
     $page_per = $params['items_per_page'];
@@ -586,6 +568,7 @@ class GalleriesModel_bwg {
     global $wpdb;
     $id = WDWLibrary::get('current_id', 0, 'intval', 'POST');
     $name = WDWLibrary::get('name');
+    $name = htmlentities($name, ENT_QUOTES);
     $name = WDWLibrary::get_unique_value('bwg_gallery', 'name', $name, $id);
     $slug = WDWLibrary::get('slug');
     $slug = empty($slug) ? $name : $slug;
@@ -1199,9 +1182,9 @@ class GalleriesModel_bwg {
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
     }
-    $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
+    $where = 1;
     if ( $gallery_id ) {
-      $where .= ' AND `gallery_id` = %d';
+      $where = ' `gallery_id` = %d';
       $prepareArgs[] = $gallery_id;
       if ( $image_id ) {
         $where .= ' AND `id` = %d';
@@ -1305,9 +1288,6 @@ class GalleriesModel_bwg {
       if ( $resolution_thumb != '' ) {
         WDWLibrary::update_thumb_dimansions($resolution_thumb, "id = $image_data->id");
       }
-
-      // Update the rotated image resolution.
-      WDWLibrary::update_image_resolution($height_rotate, $width_rotate, $image_data->id);
     }
     WDWLibrary::update_image_modified_date($where, $prepareArgs);
 
@@ -1330,10 +1310,11 @@ class GalleriesModel_bwg {
     if ( $gallery_id == 0 ) {
       $gallery_id = WDWLibrary::get('current_id', 0, 'intval');
     }
+    //$where = ( ($gallery_id) ? ' `gallery_id` = ' . $gallery_id . ( $image_id ? ' AND `id` = ' . $image_id : '' ) : 1 );
+    $where = 1;
     $prepareArgs = array();
-    $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
     if ( $gallery_id ) {
-      $where .= ' AND `gallery_id` = %d';
+      $where = ' `gallery_id` = %d';
       $prepareArgs[] = $gallery_id;
       if ( $image_id ) {
         $where .= ' AND `id` = %d';
@@ -1399,8 +1380,7 @@ class GalleriesModel_bwg {
     }
     $image_width = WDWLibrary::get('image_width', 1600, 'intval');
     $image_height = WDWLibrary::get('image_height', 1200, 'intval');
-    $where = '`filetype` NOT LIKE "EMBED_OEMBED%"';
-    $where .= ' AND gallery_id=%d';
+    $where = ' gallery_id=%d';
     $prepareArgs = array( $gallery_id );
     if ( !$all ) {
       $where .= ' AND id=%d';
@@ -1428,7 +1408,7 @@ class GalleriesModel_bwg {
         $thumb_filename = BWG()->upload_dir . $image->thumb_url;
         $original_filename = str_replace('/thumb/', '/.original/', $thumb_filename);
         if ( WDWLibrary::repair_image_original($original_filename) ) {
-          $resize_status = WDWLibrary::resize_image($original_filename, $file_path, $image_width, $image_height, $image->id);
+          $resize_status = WDWLibrary::resize_image($original_filename, $file_path, $image_width, $image_height);
         }
       }
     }

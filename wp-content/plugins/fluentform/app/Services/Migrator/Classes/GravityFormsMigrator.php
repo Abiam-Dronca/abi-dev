@@ -354,7 +354,7 @@ class GravityFormsMigrator extends BaseMigrator
 
         $layoutGroupIds = array_column($fields, 'layoutGroupId');
         $cols = array_count_values($layoutGroupIds); // if inputs has more then one duplicate layoutGroupIds then it has container
-        if (intval($cols) < 2) {
+        if (max($cols) < 2) {
             return $fluentFields;
         }
 

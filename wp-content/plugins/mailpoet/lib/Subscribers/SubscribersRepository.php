@@ -10,8 +10,6 @@ use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SubscriberCustomFieldEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
-use MailPoet\Entities\SubscriberTagEntity;
-use MailPoet\Util\License\Features\Subscribers;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
 use MailPoetVendor\Carbon\CarbonImmutable;
@@ -46,7 +44,10 @@ class SubscribersRepository extends Repository {
     return SubscriberEntity::class;
   }
 
-  public function getTotalSubscribers(): int {
+  /**
+   * @return int
+   */
+  public function getTotalSubscribers() {
     $query = $this->entityManager
       ->createQueryBuilder()
       ->select('count(n.id)')
@@ -59,10 +60,6 @@ class SubscribersRepository extends Repository {
       ])
       ->getQuery();
     return (int)$query->getSingleScalarResult();
-  }
-
-  public function invalidateTotalSubscribersCache(): void {
-    $this->wp->deleteTransient(Subscribers::SUBSCRIBERS_COUNT_CACHE_KEY);
   }
 
   public function findBySegment(int $segmentId): array {
@@ -122,7 +119,6 @@ class SubscribersRepository extends Repository {
       ->setParameter('ids', $ids)
       ->getQuery()->execute();
 
-    $this->invalidateTotalSubscribersCache();
     return count($ids);
   }
 
@@ -142,7 +138,6 @@ class SubscribersRepository extends Repository {
       ->setParameter('ids', $ids)
       ->getQuery()->execute();
 
-    $this->invalidateTotalSubscribersCache();
     return count($ids);
   }
 
@@ -170,16 +165,6 @@ class SubscribersRepository extends Repository {
          AND s.`wp_user_id` IS NULL
       ", ['ids' => $ids], ['ids' => Connection::PARAM_INT_ARRAY]);
 
-      // Delete subscriber tags
-      $subscriberTagTable = $entityManager->getClassMetadata(SubscriberTagEntity::class)->getTableName();
-      $entityManager->getConnection()->executeStatement("
-         DELETE st FROM $subscriberTagTable st
-         JOIN $subscriberTable s ON s.`id` = st.`subscriber_id`
-         WHERE st.`subscriber_id` IN (:ids)
-         AND s.`is_woocommerce_user` = false
-         AND s.`wp_user_id` IS NULL
-      ", ['ids' => $ids], ['ids' => Connection::PARAM_INT_ARRAY]);
-
       $queryBuilder = $entityManager->createQueryBuilder();
       $count = $queryBuilder->delete(SubscriberEntity::class, 's')
         ->where('s.id IN (:ids)')
@@ -189,7 +174,6 @@ class SubscribersRepository extends Repository {
         ->getQuery()->execute();
     });
 
-    $this->invalidateTotalSubscribersCache();
     return $count;
   }
 
@@ -301,7 +285,6 @@ class SubscribersRepository extends Repository {
       ->setParameter('ids', $ids)
       ->getQuery()->execute();
 
-    $this->invalidateTotalSubscribersCache();
     return count($ids);
   }
 
@@ -381,15 +364,5 @@ class SubscribersRepository extends Repository {
       ->setParameter('ids', $ids)
       ->getQuery()
       ->getArrayResult();
-  }
-
-  public function getMaxSubscriberId(): int {
-    $maxSubscriberId = $this->entityManager->createQueryBuilder()
-      ->select('MAX(s.id)')
-      ->from(SubscriberEntity::class, 's')
-      ->getQuery()
-      ->getSingleScalarResult();
-
-    return is_int($maxSubscriberId) ? $maxSubscriberId : 0;
   }
 }

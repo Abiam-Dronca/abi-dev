@@ -145,8 +145,6 @@ class Core {
 			)
 		);
 
-		$strings['thanks_for_interest'] = esc_html__( 'Thanks for your interest in WPForms Pro!', 'wpforms-lite' );
-
 		return $strings;
 	}
 

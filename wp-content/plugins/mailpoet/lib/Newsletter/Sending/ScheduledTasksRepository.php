@@ -5,8 +5,6 @@ namespace MailPoet\Newsletter\Sending;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Cron\Workers\Scheduler;
-use MailPoet\Cron\Workers\SendingQueue\SendingQueue;
 use MailPoet\Doctrine\Repository;
 use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\ScheduledTaskEntity;
@@ -14,26 +12,12 @@ use MailPoet\Entities\ScheduledTaskSubscriberEntity;
 use MailPoet\Entities\SendingQueueEntity;
 use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Carbon\Carbon;
-use MailPoetVendor\Carbon\CarbonImmutable;
-use MailPoetVendor\Doctrine\DBAL\Connection;
-use MailPoetVendor\Doctrine\ORM\EntityManager;
 use MailPoetVendor\Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @extends Repository<ScheduledTaskEntity>
  */
 class ScheduledTasksRepository extends Repository {
-  /** @var WPFunctions */
-  private $wp;
-
-  public function __construct(
-    EntityManager $entityManager,
-    WPFunctions $wp
-  ) {
-    $this->wp = $wp;
-    parent::__construct($entityManager);
-  }
-
   /**
    * @param NewsletterEntity $newsletter
    * @return ScheduledTaskEntity[]
@@ -144,122 +128,6 @@ class ScheduledTasksRepository extends Repository {
     return $this->findByTypeAndStatus($type, ScheduledTaskEntity::STATUS_SCHEDULED, $limit, true);
   }
 
-  public function getCountsPerStatus(string $type = 'sending') {
-    $stats = [
-      ScheduledTaskEntity::STATUS_COMPLETED => 0,
-      ScheduledTaskEntity::STATUS_PAUSED => 0,
-      ScheduledTaskEntity::STATUS_SCHEDULED => 0,
-      ScheduledTaskEntity::VIRTUAL_STATUS_RUNNING => 0,
-    ];
-
-    $counts = $this->doctrineRepository->createQueryBuilder('st')
-      ->select('COUNT(st.id) as value')
-      ->addSelect('st.status')
-      ->where('st.deletedAt IS NULL')
-      ->andWhere('st.type = :type')
-      ->setParameter('type', $type)
-      ->addGroupBy('st.status')
-      ->getQuery()
-      ->getResult();
-
-    foreach ($counts as $count) {
-      if ($count['status'] === null) {
-        $stats[ScheduledTaskEntity::VIRTUAL_STATUS_RUNNING] = (int)$count['value'];
-        continue;
-      }
-      $stats[$count['status']] = (int)$count['value'];
-    }
-    return $stats;
-  }
-
-  /**
-   * @param string|null $type
-   * @param array $statuses
-   * @param int $limit
-   * @return array<ScheduledTaskEntity>
-   */
-  public function getLatestTasks(
-    $type = null,
-    $statuses = [
-      ScheduledTaskEntity::STATUS_COMPLETED,
-      ScheduledTaskEntity::STATUS_SCHEDULED,
-      ScheduledTaskEntity::VIRTUAL_STATUS_RUNNING,
-    ],
-    $limit = Scheduler::TASK_BATCH_SIZE
-  ) {
-
-    $tasksQuery = $this->doctrineRepository->createQueryBuilder('st')
-      ->select('st')
-      ->where('st.deletedAt IS NULL')
-      ->where('st.status IN (:statuses)');
-
-    if (in_array(ScheduledTaskEntity::VIRTUAL_STATUS_RUNNING, $statuses)) {
-      $tasksQuery = $tasksQuery->orWhere('st.status IS NULL');
-    }
-
-    if ($type) {
-      $tasksQuery = $tasksQuery->andWhere('st.type = :type')
-        ->setParameter('type', $type);
-    }
-
-    return $tasksQuery
-      ->setParameter('statuses', $statuses)
-      ->setMaxResults($limit)
-      ->getQuery()
-      ->getResult();
-  }
-
-  /**
-   * @return ScheduledTaskEntity[]
-   */
-  public function findRunningSendingTasks(?int $limit = null): array {
-    return $this->doctrineRepository->createQueryBuilder('st')
-      ->select('st')
-      ->join('st.sendingQueue', 'sq')
-      ->where('st.type = :type')
-      ->andWhere('st.status IS NULL')
-      ->andWhere('st.deletedAt IS NULL')
-      ->orderBy('st.priority', 'ASC')
-      ->addOrderBy('st.updatedAt', 'ASC')
-      ->setMaxResults($limit)
-      ->setParameter('type', SendingQueue::TASK_TYPE)
-      ->getQuery()
-      ->getResult();
-  }
-
-  public function touchAllByIds(array $ids): void {
-    $now = CarbonImmutable::createFromTimestamp((int)$this->wp->currentTime('timestamp'));
-    $this->entityManager->createQueryBuilder()
-      ->update(ScheduledTaskEntity::class, 'st')
-      ->set('st.updatedAt', ':updatedAt')
-      ->setParameter('updatedAt', $now)
-      ->where('st.id IN (:ids)')
-      ->setParameter('ids', $ids, Connection::PARAM_INT_ARRAY)
-      ->getQuery()
-      ->execute();
-  }
-
-  /**
-   * @return ScheduledTaskEntity[]
-   */
-  public function findScheduledSendingTasks(?int $limit = null): array {
-    $now = Carbon::createFromTimestamp($this->wp->currentTime('timestamp'));
-    return $this->doctrineRepository->createQueryBuilder('st')
-      ->select('st')
-      ->join('st.sendingQueue', 'sq')
-      ->where('st.deletedAt IS NULL')
-      ->andWhere('st.status = :status')
-      ->andWhere('st.scheduledAt <= :now')
-      ->andWhere('st.type = :type')
-      ->orderBy('st.updatedAt', 'ASC')
-      ->setMaxResults($limit)
-      ->setParameter('status', ScheduledTaskEntity::STATUS_SCHEDULED)
-      ->setParameter('now', $now)
-      ->setParameter('type', SendingQueue::TASK_TYPE)
-      ->getQuery()
-      ->getResult();
-  }
-
   protected function findByTypeAndStatus($type, $status, $limit = null, $future = false) {
     $queryBuilder = $this->doctrineRepository->createQueryBuilder('st')
       ->select('st')
@@ -281,7 +149,7 @@ class ScheduledTasksRepository extends Repository {
       $queryBuilder->andWhere('st.scheduledAt <= :now');
     }
 
-    $now = Carbon::createFromTimestamp($this->wp->currentTime('timestamp'));
+    $now = Carbon::createFromTimestamp(WPFunctions::get()->currentTime('timestamp'));
     $queryBuilder->setParameter('now', $now);
 
     if ($limit) {

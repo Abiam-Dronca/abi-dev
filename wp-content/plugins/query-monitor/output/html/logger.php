@@ -118,11 +118,9 @@ class QM_Output_Html_Logger extends QM_Output_Html {
 			echo '<td class="qm-nowrap">';
 
 			if ( $is_warning ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo QueryMonitor::init()->icon( 'warning' );
+				echo '<span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 			} else {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo QueryMonitor::init()->icon( 'blank' );
+				echo '<span class="dashicons" aria-hidden="true"></span>';
 			}
 
 			echo esc_html( ucfirst( $row['level'] ) );

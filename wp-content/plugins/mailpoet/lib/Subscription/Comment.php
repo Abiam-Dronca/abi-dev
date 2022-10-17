@@ -47,7 +47,7 @@ class Comment {
   private function getSubscriptionField(): string {
     $label = $this->settings->get(
       'subscribe.on_comment.label',
-      __('Yes, please add me to your mailing list.', 'mailpoet')
+      WPFunctions::get()->__('Yes, please add me to your mailing list.', 'mailpoet')
     );
 
     return '<p class="comment-form-mailpoet">

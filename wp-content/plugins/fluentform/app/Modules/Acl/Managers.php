@@ -76,7 +76,7 @@ class Managers
 
         if (!$user) {
             return $this->sendError([
-                'message' => __('Associate user could not be found', 'fluentform')
+                'message' => __('Associate user could not be found', 'fluentcampaign-pro')
             ]);
         }
 

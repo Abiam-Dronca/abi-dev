@@ -2,8 +2,6 @@
 
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\NavBar;
 
-use Nextend\Framework\Sanitize;
-
 /**
  * @var $this BlockNavBar
  */
@@ -13,8 +11,8 @@ use Nextend\Framework\Sanitize;
     <?php $this->displayBreadCrumbs(); ?>
 
     <div class="n2_nav_bar__logo">
-        <a href="<?php echo esc_url($this->getSidebarLink()); ?>" tabindex="-1">
-            <?php echo wp_kses($this->getLogo(), Sanitize::$adminTemplateTags); ?>
+        <a href="<?php echo $this->getSidebarLink(); ?>" tabindex="-1">
+            <?php echo $this->getLogo(); ?>
         </a>
     </div>
     <div class="n2_nav_bar__menu">

@@ -4,9 +4,8 @@ namespace FluentForm\App\Modules\Acl;
 
 class RoleManager
 {
-    public function getRoles()
-    {
-        if (!current_user_can('manage_options')) {
+    public function getRoles() {
+        if(!current_user_can('manage_options')) {
             wp_send_json_success(array(
                 'capability' => array(),
                 'roles'      => array()
@@ -16,10 +15,10 @@ class RoleManager
         $roles = \get_editable_roles();
         $formatted = array();
         foreach ($roles as $key => $role) {
-            if ($key == 'administrator') {
+            if($key == 'administrator') {
                 continue;
             }
-            if ($key != 'subscriber') {
+            if($key != 'subscriber') {
                 $formatted[] = array(
                     'name' => $role['name'],
                     'key'  => $key
@@ -39,23 +38,22 @@ class RoleManager
         ), 200);
     }
 
-    public function setRoles()
-    {
-        if (current_user_can('manage_options')) {
+    public function setRoles() {
+        if(current_user_can('manage_options')) {
             $capability = isset($_REQUEST['capability']) ? wp_unslash($_REQUEST['capability']) : [];
 
             foreach ($capability as $item) {
-                if (strtolower($item) == 'subscriber') {
-                    wp_send_json_error(array(
-                        'message' => __('Sorry, you can not give access to the Subscriber role.', 'fluentform')
-                    ), 423);
-                }
+            	if (strtolower($item) == 'subscriber') {
+		            wp_send_json_error(array(
+			            'message' => __('Sorry, you can not give access to the Subscriber role.', 'fluentform')
+		            ), 423);
+	            }
             }
 
             update_option('_fluentform_form_permission', $capability, 'no');
-            wp_send_json_success(array(
+            wp_send_json_success( array(
                 'message' => __('Successfully saved the role(s).', 'fluentform')
-            ), 200);
+            ), 200 );
         } else {
             wp_send_json_error(array(
                 'message' => __('Sorry, You can not update permissions. Only administrators can update permissions', 'fluentform')
@@ -67,7 +65,7 @@ class RoleManager
     {
         $availablePermissions = Acl::getPermissionSet();
         $currentCapability = $this->currentUserFormFormCapability();
-        if (!$currentCapability) {
+        if(!$currentCapability) {
             return;
         }
 
@@ -88,12 +86,12 @@ class RoleManager
         });
     }
 
-    public function currentUserFormFormCapability()
-    {
-        if (current_user_can('manage_options')) {
+    public function currentUserFormFormCapability() {
+
+        if(current_user_can('manage_options')) {
             return 'manage_options';
         }
-        if (!is_user_logged_in()) {
+        if(!is_user_logged_in()) {
             return false;
         }
 
@@ -101,14 +99,15 @@ class RoleManager
         if (is_string($capabilities)) {
             $capabilities = (array) $capabilities;
         }
-        if (!$capabilities) {
+        if(!$capabilities) {
             return;
         }
         foreach ($capabilities as $capability) {
-            if (current_user_can($capability)) {
+            if(current_user_can($capability)) {
                 return $capability;
             }
         }
         return false;
     }
+
 }

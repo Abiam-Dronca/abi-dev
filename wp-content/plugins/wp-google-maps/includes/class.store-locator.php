@@ -23,8 +23,6 @@ class StoreLocator extends Factory implements \IteratorAggregate
 		
 		$this->populateRadiusSelect();
 
-		$this->_document->querySelectorAll(".wpgmza-store-locator")->setAttribute('data-id', $this->map->id);
-
 		if($wpgmza->settings->useLegacyHTML && $wpgmza->internalEngine->isLegacy()){
 			$document = $this->_document;
 			
@@ -69,11 +67,6 @@ class StoreLocator extends Factory implements \IteratorAggregate
 			$document
 				->querySelectorAll("div.wpgmza-no-results")
 				->addClass("wpgmza-not-found-msg js-not-found-msg");
-		}
-
-		/* Location placeholder */
-		if(!empty($this->map->store_locator_location_placeholder)){
-			$this->_document->querySelectorAll("input[data-name='defaultAddress']")->setAttribute('placeholder', $this->map->store_locator_location_placeholder);
 		}
 	}
 	

@@ -12,6 +12,7 @@ use MailPoet\Config\AccessControl;
 use MailPoet\Newsletter\ApiDataSanitizer;
 use MailPoet\NewsletterTemplates\NewsletterTemplatesRepository;
 use MailPoet\NewsletterTemplates\ThumbnailSaver;
+use MailPoet\WP\Functions as WPFunctions;
 
 class NewsletterTemplates extends APIEndpoint {
   public $permissions = [
@@ -53,7 +54,7 @@ class NewsletterTemplates extends APIEndpoint {
 
     if (!$template) {
       return $this->errorResponse([
-        APIError::NOT_FOUND => __('This template does not exist.', 'mailpoet'),
+        APIError::NOT_FOUND => WPFunctions::get()->__('This template does not exist.', 'mailpoet'),
       ]);
     }
 
@@ -93,7 +94,7 @@ class NewsletterTemplates extends APIEndpoint {
 
     if (!$template) {
       return $this->errorResponse([
-        APIError::NOT_FOUND => __('This template does not exist.', 'mailpoet'),
+        APIError::NOT_FOUND => WPFunctions::get()->__('This template does not exist.', 'mailpoet'),
       ]);
     }
 

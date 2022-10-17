@@ -31,16 +31,12 @@ if ( $plugin_allow && $action === 'activate' ) {
 		data-plugin="<?php echo esc_url( $url ); ?>">
 		<i></i><?php esc_html_e( 'Install & Activate', 'wpforms-lite' ); ?>
 	</button>
-<?php
-	} else {
-	$btn_classes   = [ 'wpforms-btn', 'wpforms-btn-lg', 'wpforms-btn-orange' ];
-	$btn_classes[] = ! wpforms()->is_pro() ? 'wpforms-upgrade-modal' : '';
-?>
+<?php } else { ?>
 	<a
 		href="<?php echo esc_url( wpforms_admin_upgrade_link( 'settings-license', 'Geolocation%20Addon' ) ); ?>"
 		target="_blank"
 		rel="noopener noreferrer"
-		class="<?php echo esc_attr( implode( ' ', array_filter( $btn_classes ) ) ); ?>">
+		class="wpforms-upgrade-modal wpforms-btn wpforms-btn-lg wpforms-btn-orange">
 		<?php esc_html_e( 'Upgrade to WPForms Pro', 'wpforms-lite' ); ?>
 	</a>
 	<?php

@@ -16,7 +16,6 @@ use MailPoet\Segments\DynamicSegments\Filters\MailPoetCustomFields;
 use MailPoet\Segments\DynamicSegments\Filters\SubscriberScore;
 use MailPoet\Segments\DynamicSegments\Filters\SubscriberSegment;
 use MailPoet\Segments\DynamicSegments\Filters\SubscriberSubscribedDate;
-use MailPoet\Segments\DynamicSegments\Filters\SubscriberTag;
 use MailPoet\Segments\DynamicSegments\Filters\UserRole;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceCategory;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceCountry;
@@ -69,9 +68,6 @@ class FilterFactory {
   /** @var SubscriberSegment */
   private $subscriberSegment;
 
-  /** @var SubscriberTag */
-  private $subscriberTag;
-
   /** @var EmailActionClickAny */
   private $emailActionClickAny;
 
@@ -90,7 +86,6 @@ class FilterFactory {
     WooCommerceSubscription $wooCommerceSubscription,
     SubscriberSubscribedDate $subscriberSubscribedDate,
     SubscriberScore $subscriberScore,
-    SubscriberTag $subscriberTag,
     SubscriberSegment $subscriberSegment
   ) {
     $this->emailAction = $emailAction;
@@ -105,7 +100,6 @@ class FilterFactory {
     $this->wooCommerceTotalSpent = $wooCommerceTotalSpent;
     $this->subscriberSubscribedDate = $subscriberSubscribedDate;
     $this->subscriberScore = $subscriberScore;
-    $this->subscriberTag = $subscriberTag;
     $this->mailPoetCustomFields = $mailPoetCustomFields;
     $this->subscriberSegment = $subscriberSegment;
     $this->emailActionClickAny = $emailActionClickAny;
@@ -133,7 +127,7 @@ class FilterFactory {
 
   /**
    * @param ?string $action
-   * @return MailPoetCustomFields|SubscriberScore|SubscriberSegment|SubscriberSubscribedDate|UserRole|SubscriberTag
+   * @return MailPoetCustomFields|SubscriberScore|SubscriberSegment|SubscriberSubscribedDate|UserRole
    */
   private function userRole(?string $action) {
     if ($action === SubscriberSubscribedDate::TYPE) {
@@ -144,8 +138,6 @@ class FilterFactory {
       return $this->mailPoetCustomFields;
     } elseif ($action === SubscriberSegment::TYPE) {
       return $this->subscriberSegment;
-    } elseif ($action === SubscriberTag::TYPE) {
-      return $this->subscriberTag;
     }
     return $this->userRole;
   }

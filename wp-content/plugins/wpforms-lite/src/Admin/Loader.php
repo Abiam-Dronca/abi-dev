@@ -37,7 +37,6 @@ class Loader {
 			'DashboardWidget',
 			'FlyoutMenu',
 			'Builder\LicenseAlert',
-			'Builder\Builder',
 			'Pages\Community',
 			'Pages\SMTP',
 			'Pages\Analytics',

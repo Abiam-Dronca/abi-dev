@@ -48,13 +48,6 @@ class AdminNotices {
 		 * Gut says no, but for now this makes more sense than doing it inline
 		*/
 		if(!empty($wpgmza->settings->internal_engine)){
-			/**
-			 * This initial swap notice detracts from the first-time experience, so for the moment it has been disabled for new users 
-			 * 
-			 * Users can still swap via the settings area though
-			 */
-
-			/*
 			$this->create('switch_engines', 
 				array(
 					'link' => 'admin.php?page=wp-google-maps-menu-settings',
@@ -64,7 +57,6 @@ class AdminNotices {
 					'title' => 'switch_engines'
 				)
 			);
-			*/
 		}
 
     	/* Developer Hook (Action) - Create additional persistent notices, be mindful of conditional creation */     

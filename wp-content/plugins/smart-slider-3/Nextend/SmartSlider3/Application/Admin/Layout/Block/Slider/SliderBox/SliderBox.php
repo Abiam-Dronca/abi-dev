@@ -11,19 +11,19 @@ use Nextend\Framework\Sanitize;
 
 <div class="n2_slider_manager__box n2_slider_box<?php echo $this->isGroup() ? ' n2_slider_box--group' : ' n2_slider_box--slider'; ?>"
      data-group="<?php echo $this->isGroup() ? '1' : '0'; ?>"
-     data-title="<?php echo esc_attr($this->getSliderTitle()); ?>"
-     data-sliderid="<?php echo esc_attr($this->getSliderID()); ?>"
-     data-ordering="<?php echo esc_attr($this->getOrdering()); ?>">
+     data-title="<?php echo Sanitize::esc_attr($this->getSliderTitle()); ?>"
+     data-sliderid="<?php echo $this->getSliderID(); ?>"
+     data-ordering="<?php echo $this->getOrdering(); ?>">
 
     <?php
-    $thumbnailUrl   = esc_attr($this->getThumbnail());
+    $thumbnailUrl   = Sanitize::esc_attr($this->getThumbnail());
     $thumbnailStyle = '';
     if (!empty($thumbnailUrl)) {
         $thumbnailStyle = "background-image: url('" . $thumbnailUrl . "');";
     }
     ?>
 
-    <div class="n2_slider_box__content" style="<?php echo esc_attr($thumbnailStyle); ?>">
+    <div class="n2_slider_box__content" style="<?php echo $thumbnailStyle; ?>">
         <?php
         if ($this->isThumbnailEmpty()):
             $icon = "ssi_64 ssi_64--image";
@@ -34,7 +34,7 @@ use Nextend\Framework\Sanitize;
 
             <div class="n2_slider_box__icon">
                 <div class="n2_slider_box__icon_container">
-                    <i class="<?php echo esc_attr($icon); ?>"></i>
+                    <i class="<?php echo $icon; ?>"></i>
                 </div>
             </div>
 
@@ -43,8 +43,8 @@ use Nextend\Framework\Sanitize;
         ?>
 
         <div class="n2_slider_box__slider_overlay">
-            <a class="n2_slider_box__slider_overlay_link" href="<?php echo esc_url($this->getEditUrl()); ?>"></a>
-            <a class="n2_slider_box__slider_overlay_edit_button n2_button n2_button--small n2_button--green" href="<?php echo esc_url($this->getEditUrl()); ?>">
+            <a class="n2_slider_box__slider_overlay_link" href="<?php echo $this->getEditUrl(); ?>"></a>
+            <a class="n2_slider_box__slider_overlay_edit_button n2_button n2_button--small n2_button--green" href="<?php echo $this->getEditUrl(); ?>">
                 <?php
                 n2_e('Edit');
                 ?>
@@ -57,7 +57,7 @@ use Nextend\Framework\Sanitize;
         <div class="n2_slider_box__slider_identifiers">
             <div class="n2_slider_box__slider_identifier">
                 <?php
-                echo '#' . esc_html($this->getSliderID());
+                echo '#' . $this->getSliderID();
                 ?>
             </div>
             <?php
@@ -76,7 +76,7 @@ use Nextend\Framework\Sanitize;
                 ?>
                 <div class="n2_slider_box__slider_identifier">
                     <?php
-                    echo esc_html($this->getSliderAlias());
+                    echo $this->getSliderAlias();
                     ?>
                 </div>
             <?php
@@ -101,18 +101,18 @@ use Nextend\Framework\Sanitize;
         ?>
         <div class="n2_slider_box__footer_title">
             <?php
-            echo esc_html($this->getSliderTitle());
+            echo Sanitize::esc_html($this->getSliderTitle());
             ?>
         </div>
         <div class="n2_slider_box__footer_children_count">
             <?php
-            echo esc_html($this->getChildrenCount());
+            echo $this->getChildrenCount();
             ?>
         </div>
     </div>
-    <a class="n2_slide_box__screen_reader" href="<?php echo esc_url($this->getSimpleEditUrl()); ?>">
+    <a class="n2_slide_box__screen_reader" href="<?php echo $this->getSimpleEditUrl(); ?>">
         <?php
-        echo esc_html(n2_('Edit Slider') . ': ' . $this->getSliderTitle());
+        echo n2_('Edit Slider') . ': ' . Sanitize::esc_html($this->getSliderTitle());
         ?>
     </a>
 </div>

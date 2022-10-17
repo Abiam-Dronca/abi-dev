@@ -72,7 +72,7 @@ function wpforms_save_form() {
 	$data['settings']['form_tags'] = wp_list_pluck( $form_tags, 'label' );
 
 	// Update form data.
-	$form_id = wpforms()->get( 'form' )->update( $data['id'], $data, [ 'context' => 'save_form' ] );
+	$form_id = wpforms()->get( 'form' )->update( $data['id'], $data );
 
 	/**
 	 * Fires after updating form data.
@@ -127,33 +127,21 @@ add_action( 'wp_ajax_wpforms_save_form', 'wpforms_save_form' );
  *
  * @since 1.0.0
  */
-function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+function wpforms_new_form() {
 
+	// Run a security check.
 	check_ajax_referer( 'wpforms-builder', 'nonce' );
 
+	// Check for form name.
 	if ( empty( $_POST['title'] ) ) {
-		wp_send_json_error(
-			[
-				'error_type' => 'missing_form_title',
-				'message'    => esc_html__( 'No form name provided.', 'wpforms-lite' ),
-			]
-		);
+		die( esc_html__( 'No form name provided.', 'wpforms-lite' ) );
 	}
 
+	// Create form.
 	$form_title    = sanitize_text_field( wp_unslash( $_POST['title'] ) );
 	$form_template = empty( $_POST['template'] ) ? 'blank' : sanitize_text_field( wp_unslash( $_POST['template'] ) );
-
-	if ( ! wpforms()->get( 'builder_templates' )->is_valid_template( $form_template ) ) {
-		wp_send_json_error(
-			[
-				'error_type' => 'invalid_template',
-				'message'    => esc_html__( 'The template you selected is currently not available, but you can try again later. If you continue to have trouble, please reach out to support.', 'wpforms-lite' ),
-			]
-		);
-	}
-
-	$title_exists = get_page_by_title( $form_title, 'OBJECT', 'wpforms' );
-	$form_id      = wpforms()->get( 'form' )->add(
+	$title_exists  = get_page_by_title( $form_title, 'OBJECT', 'wpforms' );
+	$form_id       = wpforms()->form->add(
 		$form_title,
 		[],
 		[
@@ -178,12 +166,7 @@ function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexi
 	}
 
 	if ( ! $form_id ) {
-		wp_send_json_error(
-			[
-				'error_type' => 'cant_create_form',
-				'message'    => esc_html__( 'Error creating form.', 'wpforms-lite' ),
-			]
-		);
+		die( esc_html__( 'Error creating form.', 'wpforms-lite' ) );
 	}
 
 	if ( wpforms_current_user_can( 'edit_form_single', $form_id ) ) {
@@ -223,38 +206,19 @@ function wpforms_update_form_template() {
 
 	// Check for form name.
 	if ( empty( $_POST['form_id'] ) ) {
-		wp_send_json_error(
-			[
-				'error_type' => 'invalid_form_id',
-				'message'    => esc_html__( 'No form ID provided.', 'wpforms-lite' ),
-			]
-		);
+		wp_send_json_error( esc_html__( 'No form ID provided.', 'wpforms-lite' ) );
 	}
 
 	$form_id       = absint( $_POST['form_id'] );
 	$form_template = empty( $_POST['template'] ) ? 'blank' : sanitize_text_field( wp_unslash( $_POST['template'] ) );
 
-	if ( ! wpforms()->get( 'builder_templates' )->is_valid_template( $form_template ) ) {
-		wp_send_json_error(
-			[
-				'error_type' => 'invalid_template',
-				'message'    => esc_html__( 'The template you selected is currently not available, but you can try again later. If you continue to have trouble, please reach out to support.', 'wpforms-lite' ),
-			]
-		);
-	}
-
-	$data = wpforms()->get( 'form' )->get(
+	$data    = wpforms()->form->get(
 		$form_id,
 		[
 			'content_only' => true,
 		]
 	);
-
-	if ( ! empty( $_POST['title'] ) ) {
-		$data['settings']['form_title'] = sanitize_text_field( wp_unslash( $_POST['title'] ) );
-	}
-
-	$updated = (bool) wpforms()->get( 'form' )->update(
+	$updated = (bool) wpforms()->form->update(
 		$form_id,
 		$data,
 		[
@@ -277,12 +241,7 @@ function wpforms_update_form_template() {
 		);
 	}
 
-	wp_send_json_error(
-		[
-			'error_type' => 'cant_update',
-			'message'    => esc_html__( 'Error updating form template.', 'wpforms-lite' ),
-		]
-	);
+	wp_send_json_error( esc_html__( 'Error updating form template.', 'wpforms-lite' ) );
 }
 
 add_action( 'wp_ajax_wpforms_update_form_template', 'wpforms_update_form_template' );
@@ -307,15 +266,7 @@ function wpforms_builder_increase_next_field_id() {
 		wp_send_json_error();
 	}
 
-	$args = [];
-
-	// In the case of duplicating the Layout field that contains a bunch of fields,
-	// we need to set the next `field_id` to the desired value which is passed via POST argument.
-	if ( ! empty( $_POST['field_id'] ) ) {
-		$args['field_id'] = absint( $_POST['field_id'] );
-	}
-
-	wpforms()->get( 'form' )->next_field_id( absint( $_POST['form_id'] ), $args );
+	wpforms()->form->next_field_id( absint( $_POST['form_id'] ) );
 
 	wp_send_json_success();
 }
@@ -425,7 +376,7 @@ function wpforms_builder_dynamic_source() {
 		}
 
 		foreach ( $posts as $post ) {
-			$items[] = esc_html( wpforms_get_post_title( $post ) );
+			$items[] = trim( $post->post_title );
 		}
 	} elseif ( $type === 'taxonomy' ) {
 
@@ -451,12 +402,14 @@ function wpforms_builder_dynamic_source() {
 		$source_name = $tax->labels->name;
 
 		foreach ( $terms as $term ) {
-			$items[] = esc_html( wpforms_get_term_name( $term ) );
+			$items[] = trim( $term->name );
 		}
 	}
 
 	if ( empty( $items ) ) {
-		$items = [];
+		$items = [
+			esc_html__( '(empty)', 'wpforms-lite' ),
+		];
 	}
 
 	wp_send_json_success(

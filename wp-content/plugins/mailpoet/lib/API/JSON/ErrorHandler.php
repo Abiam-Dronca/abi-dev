@@ -7,14 +7,17 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Exception;
 use MailPoet\HttpAwareException;
+use MailPoet\WP\Functions as WPFunctions;
 
 class ErrorHandler {
   /** @var string[] */
   private $defaultErrors;
 
-  public function __construct() {
+  public function __construct(
+    WPFunctions $wp
+  ) {
     $this->defaultErrors = [
-      Error::UNKNOWN => __('An unknown error occurred.', 'mailpoet'),
+      Error::UNKNOWN => $wp->__('An unknown error occurred.', 'mailpoet'),
     ];
   }
 

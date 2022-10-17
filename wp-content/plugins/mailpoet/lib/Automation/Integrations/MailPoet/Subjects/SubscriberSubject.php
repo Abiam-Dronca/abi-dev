@@ -5,81 +5,55 @@ namespace MailPoet\Automation\Integrations\MailPoet\Subjects;
 if (!defined('ABSPATH')) exit;
 
 
-use MailPoet\Automation\Engine\Data\Field;
-use MailPoet\Automation\Engine\Data\Subject as SubjectData;
-use MailPoet\Automation\Engine\Workflows\Payload;
+use MailPoet\Automation\Engine\Workflows\Field;
 use MailPoet\Automation\Engine\Workflows\Subject;
-use MailPoet\Automation\Integrations\MailPoet\Payloads\SubscriberPayload;
 use MailPoet\Entities\SubscriberEntity;
+use MailPoet\InvalidStateException;
 use MailPoet\NotFoundException;
 use MailPoet\Subscribers\SubscribersRepository;
-use MailPoet\Validator\Builder;
-use MailPoet\Validator\Schema\ObjectSchema;
 
-/**
- * @implements Subject<SubscriberPayload>
- */
 class SubscriberSubject implements Subject {
   const KEY = 'mailpoet:subscriber';
 
+  /** @var Field[] */
+  private $fields;
+
   /** @var SubscribersRepository */
   private $subscribersRepository;
+
+  /** @var SubscriberEntity|null */
+  private $subscriber;
 
   public function __construct(
     SubscribersRepository $subscribersRepository
   ) {
     $this->subscribersRepository = $subscribersRepository;
-  }
 
-  public function getKey(): string {
-    return self::KEY;
-  }
-
-  public function getName(): string {
-    return __('MailPoet subscriber', 'mailpoet');
-  }
-
-  public function getArgsSchema(): ObjectSchema {
-    return Builder::object([
-      'subscriber_id' => Builder::integer()->required(),
-    ]);
-  }
-
-  public function getPayload(SubjectData $subjectData): Payload {
-    $id = $subjectData->getArgs()['subscriber_id'];
-    $subscriber = $this->subscribersRepository->findOneById($id);
-    if (!$subscriber) {
-      // translators: %d is the ID.
-      throw NotFoundException::create()->withMessage(sprintf(__("Subscriber with ID '%d' not found.", 'mailpoet'), $id));
-    }
-    return new SubscriberPayload($subscriber);
-  }
-
-  /** @return Field[] */
-  public function getFields(): array {
-    return [
-      new Field(
+    $this->fields = [
+      'id' => new Field(
         'mailpoet:subscriber:id',
         Field::TYPE_INTEGER,
         __('Subscriber ID', 'mailpoet'),
-        function (SubscriberPayload $payload) {
-          return $payload->getId();
+        function() {
+          return $this->getSubscriber()->getId();
         }
       ),
-      new Field(
+
+      'email' => new Field(
         'mailpoet:subscriber:email',
         Field::TYPE_STRING,
         __('Subscriber email', 'mailpoet'),
-        function (SubscriberPayload $payload) {
-          return $payload->getEmail();
+        function () {
+          return $this->getSubscriber()->getEmail();
         }
       ),
-      new Field(
+
+      'status' => new Field(
         'mailpoet:subscriber:status',
         Field::TYPE_ENUM,
         __('Subscriber status', 'mailpoet'),
-        function (SubscriberPayload $payload) {
-          return $payload->getStatus();
+        function () {
+          return $this->getSubscriber()->getStatus();
         },
         [
           SubscriberEntity::STATUS_SUBSCRIBED => __('Subscribed', 'mailpoet'),
@@ -90,5 +64,33 @@ class SubscriberSubject implements Subject {
         ]
       ),
     ];
+  }
+
+  public function getKey(): string {
+    return self::KEY;
+  }
+
+  public function getFields(): array {
+    return $this->fields;
+  }
+
+  public function load(array $args): void {
+    $id = $args['subscriber_id'];
+    $this->subscriber = $this->subscribersRepository->findOneById($id);
+    if (!$this->subscriber) {
+      throw NotFoundException::create()->withMessage(__(sprintf("Subscriber with ID '%s' not found.", $id), 'mailpoet'));
+    }
+  }
+
+  public function pack(): array {
+    $subscriber = $this->getSubscriber();
+    return ['subscriber_id' => $subscriber->getId()];
+  }
+
+  private function getSubscriber(): SubscriberEntity {
+    if (!$this->subscriber) {
+      throw InvalidStateException::create()->withMessage(__('Subscriber was not loaded.', 'mailpoet'));
+    }
+    return $this->subscriber;
   }
 }

@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Util\Helpers;
+use MailPoet\WP\Functions as WPFunctions;
 
 /**
  * @method static array|string getConfig($key = null, $connection_name = self::DEFAULT_CONNECTION)
@@ -243,8 +244,7 @@ class Model extends \MailPoetVendor\Sudzy\ValidModel {
             $column = $matches[1];
             $this->setError(
               sprintf(
-                // translators: %1$s is the name of the database column.
-                __('Another record already exists. Please specify a different "%1$s".', 'mailpoet'),
+                WPFunctions::get()->__('Another record already exists. Please specify a different "%1$s".', 'mailpoet'),
                 $column
               ),
               Model::DUPLICATE_RECORD

@@ -27,7 +27,6 @@ class FormSaveController {
 
   public function duplicate(FormEntity $formEntity): FormEntity {
     $duplicate = clone $formEntity;
-    // translators: %s is name of the form which has been duplicated.
     $duplicate->setName(sprintf(__('Copy of %s', 'mailpoet'), $formEntity->getName()));
 
     // reset timestamps

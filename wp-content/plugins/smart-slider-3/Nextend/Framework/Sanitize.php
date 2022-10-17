@@ -268,20 +268,6 @@ $allowedentitynames = is_array($allowedentitynames) ? $allowedentitynames : arra
 
 class Sanitize {
 
-    public static $basicTags = array();
-
-    // Tags for admin page forms with text fields, on-offs, selects, textareas, etc..
-    public static $adminFormTags = array();
-
-    // Tags for the rest of the admin page layout.
-    public static $adminTemplateTags = array();
-
-    // Tags for CSS and JS codes.
-    public static $assetTags = array();
-
-    // Tags for html videos.
-    public static $videoTags = array();
-
     private static function getCharset() {
 
         return Platform::getCharset();
@@ -650,7 +636,7 @@ class Sanitize {
 
     public static function filter_allowed_html($input, $extraTags = '') {
 
-        return self::filter_attributes_on(strip_tags($input, '<a><span><sub><sup><em><i><var><cite><b><strong><small><bdo><br><img><picture><source><u>' . $extraTags));
+        return self::filter_attributes_on(strip_tags($input, '<a><span><sub><sup><em><i><var><cite><b><strong><small><bdo><br><img><picture><source>' . $extraTags));
     }
 
     public static function remove_all_html($input) {
@@ -699,105 +685,5 @@ class Sanitize {
         }
         return '';
     
-    }
-
-    public static function set_allowed_tags() {
-        global $allowedposttags;
-
-        self::$basicTags = array_merge_recursive($allowedposttags, array(
-            'div'    => array(
-                'style' => true,
-            ),
-            'script' => array(),
-        ));
-
-        self::$adminTemplateTags = array_merge_recursive(self::$basicTags, array(
-            'svg'  => array(
-                'xmlns'  => true,
-                'width'  => true,
-                'height' => true,
-            ),
-            'path' => array(
-                'fill' => true,
-                'd'    => true,
-            ),
-            'a'    => array(
-                'tabindex' => true,
-            ),
-        ));
-
-        self::$adminFormTags = array_merge_recursive(self::$basicTags, array(
-            'input'    => array(
-                'id'           => true,
-                'name'         => true,
-                'value'        => true,
-                'type'         => true,
-                'autocomplete' => true,
-                'style'        => true,
-            ),
-            'div'      => array(
-                'aria-checked' => true,
-                'tabindex'     => true,
-            ),
-            'a'        => array(
-                'tabindex' => true,
-            ),
-            'select'   => array(
-                'id'              => true,
-                'name'            => true,
-                'aria-labelledby' => true,
-                'autocomplete'    => true,
-                'multiple'        => true,
-                'size'            => true,
-            ),
-            'option'   => array(
-                'value'    => true,
-                'selected' => true,
-            ),
-            'textarea' => array(
-                'autocomplete' => true,
-            ),
-        ));
-
-        self::$assetTags = array(
-            'style'  => array(
-                'data-related' => true,
-            ),
-            'link'   => array(
-                'rel'   => true,
-                'type'  => true,
-                'href'  => true,
-                'media' => true,
-            ),
-            'script' => array(
-                'src'   => true,
-                'defer' => true,
-                'async' => true,
-            ),
-        );
-
-        self::$videoTags = array(
-            'video'  => array(
-                'muted'              => true,
-                'loop'               => true,
-                'class'              => true,
-                'style'              => true,
-                'playsinline'        => true,
-                'webkit-playsinline' => true,
-                'data-*'             => true,
-                'preload'            => true,
-            ),
-            'source' => array(
-                'src'  => true,
-                'type' => true,
-            )
-        );
-
-    }
-
-    public static function esc_js_filter($safe_text, $text) {
-        $safe_text = wp_check_invalid_utf8($text);
-
-        return $safe_text;
     }
 }

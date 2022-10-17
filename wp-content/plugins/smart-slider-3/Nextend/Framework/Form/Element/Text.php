@@ -33,7 +33,8 @@ class Text extends AbstractField implements ContainerInterface {
         }
 
         $html = Html::openTag('div', array(
-            'class' => 'n2_field_text ' . $this->getClass()
+            'class' => 'n2_field_text ' . $this->getClass(),
+            'style' => ($this->fieldType == 'hidden' ? 'display: none;' : '')
         ));
 
         $html .= $this->pre();

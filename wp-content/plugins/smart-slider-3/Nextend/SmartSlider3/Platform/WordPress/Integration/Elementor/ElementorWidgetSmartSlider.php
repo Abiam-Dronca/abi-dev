@@ -41,9 +41,7 @@ class ElementorWidgetSmartSlider extends Widget_Base {
 
     protected function render() {
         if (Plugin::instance()->editor->is_edit_mode() || Plugin::instance()->preview->is_preview_mode()) {
-
-            // PHPCS - Content already escaped
-            echo Shortcode::renderIframe($this->get_settings('smartsliderid')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo Shortcode::renderIframe($this->get_settings('smartsliderid'));
         } else {
             $sliderIDorAlias = $this->get_settings('smartsliderid');
             if (is_numeric($sliderIDorAlias)) {
@@ -61,8 +59,6 @@ class ElementorWidgetSmartSlider extends Widget_Base {
     }
 
     protected function content_template() {
-
-        // PHPCS - Content already escaped
-        echo Shortcode::renderIframe('{{{settings.smartsliderid}}}'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo Shortcode::renderIframe('{{{settings.smartsliderid}}}');
     }
 }

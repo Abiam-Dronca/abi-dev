@@ -6,7 +6,6 @@ namespace Nextend\Framework\View;
 
 use Nextend\Framework\Pattern\GetPathTrait;
 use Nextend\Framework\Pattern\MVCHelperTrait;
-use Nextend\Framework\Sanitize;
 
 abstract class AbstractLayout {
 
@@ -47,7 +46,7 @@ abstract class AbstractLayout {
     }
 
     /**
-     * @param string $html contains already escaped data
+     * @param string $html
      */
     public function addContent($html) {
 
@@ -55,7 +54,7 @@ abstract class AbstractLayout {
     }
 
     /**
-     * @param AbstractBlock $block contains already escaped data
+     * @param AbstractBlock $block
      */
     public function addContentBlock($block) {
 
@@ -65,11 +64,9 @@ abstract class AbstractLayout {
     public function displayContent() {
         foreach ($this->contentBlocks as $content) {
             if (is_string($content)) {
-                // PHPCS - Content already escaped
-                echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo $content;
             } else if (is_array($content)) {
-                // PHPCS - Content already escaped
-                echo call_user_func_array($content[0], $content[1]); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo call_user_func_array($content[0], $content[1]);
             } else {
                 $content->display();
             }

@@ -90,11 +90,6 @@ class SliderManager {
         return $this->slider;
     }
 
-    /**
-     * @param $cache
-     *
-     * @return string contains already escaped data
-     */
     public function render($cache = false) {
         if ($this->hasError) {
             return '';

@@ -663,7 +663,7 @@ a.post-more-link {
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
 	max-width: 100vw;
-	width: var( '--global-vw', 100vw );
+	width: 100vw;
 	padding-left: 0;
     padding-right: 0;
 	clear:both;

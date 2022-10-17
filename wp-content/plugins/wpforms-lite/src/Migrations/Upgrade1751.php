@@ -12,7 +12,7 @@ namespace WPForms\Migrations;
 class Upgrade1751 extends UpgradeBase {
 
 	/**
-	 * Repeat 1.7.5 migration.
+	 * Run upgrade.
 	 *
 	 * @since 1.7.5.1
 	 *
@@ -23,6 +23,7 @@ class Upgrade1751 extends UpgradeBase {
 	 */
 	public function run() {
 
+		// Repeat 1.7.5 migration.
 		return ( new Upgrade175( $this->migrations ) )->run();
 	}
 }

@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Platform\WordPress;
 
 
-use Nextend\Framework\Request\Request;
 use Nextend\SmartSlider3\Platform\WordPress\Shortcode\Shortcode;
 use Nextend\SmartSlider3\Settings;
 
@@ -16,7 +15,7 @@ class Compatibility {
          * Fix for NextGenGallery and Divi live editor bug
          */
         add_filter('run_ngg_resource_manager', function ($ret) {
-            if (Request::$GET->getInt('n2prerender') && Request::$GET->getCmd('n2app') !== '') {
+            if (isset($_GET['n2prerender']) && isset($_GET['n2app'])) {
                 $ret = false;
             }
 
@@ -36,7 +35,7 @@ class Compatibility {
             'swup'
         );
 
-        if ((Request::$SERVER->getCmd('HTTP_X_REQUESTED_WITH') !== '' && in_array(Request::$SERVER->getCmd('HTTP_X_REQUESTED_WITH'), $xRequestedWiths)) || Request::$SERVER->getCmd('HTTP_X_BARBA') !== '') {
+        if ((isset($_SERVER['HTTP_X_REQUESTED_WITH']) && in_array($_SERVER['HTTP_X_REQUESTED_WITH'], $xRequestedWiths)) || isset($_SERVER['HTTP_X_BARBA'])) {
 
             if (intval(Settings::get('wp-ajax-iframe-slider', 0))) {
                 Shortcode::forceIframe('ajax');
@@ -64,7 +63,7 @@ class Compatibility {
         /**
          * Not sure which page builder is it...
          */
-        if (Request::$GET->getInt('pswLoad')) {
+        if (isset($_GET['pswLoad']) && $_GET['pswLoad'] == 1) {
             Shortcode::forceIframe('psw');
         }
 
@@ -82,7 +81,7 @@ class Compatibility {
          *
          * @see SSDEV-3551
          */
-        if (defined('WEGLOT_NAME') && Request::$GET->getInt('n2prerender') && Request::$GET->getCmd('n2app') !== '') {
+        if (defined('WEGLOT_NAME') && isset($_GET['n2prerender']) && isset($_GET['n2app'])) {
             add_filter('weglot_button_html', function ($button_html) {
                 return '';
             });

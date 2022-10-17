@@ -1,5 +1,4 @@
 <?php
-
 namespace FluentForm\App\Modules\Widgets;
 
 use Elementor\Widget_Base;
@@ -7,34 +6,28 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography as Scheme_Typography;
+use \Elementor\Core\Schemes\Typography as Scheme_Typography;
 use Elementor\Group_Control_Background;
-use Elementor\Core\Schemes\Color as Scheme_Color;
+use \Elementor\Core\Schemes\Color as Scheme_Color;
 use FluentForm\App\Helpers\Helper;
 
-if (! defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class FluentFormWidget extends Widget_Base
-{
-    public function get_name()
-    {
+class FluentFormWidget extends Widget_Base {
+
+    public function get_name() {
         return 'fluent-form-widget';
     }
 
-    public function get_title()
-    {
-        return __('Fluent Forms', 'fluentform');
+    public function get_title() {
+        return __( 'Fluent Forms', 'fluentform' );
     }
 
-    public function get_icon()
-    {
+    public function get_icon() {
         return 'eicon-form-horizontal';
     }
 
-    public function get_keywords()
-    {
+    public function get_keywords() {
         return [
             'fluentform',
             'fluentforms',
@@ -46,21 +39,18 @@ class FluentFormWidget extends Widget_Base
         ];
     }
 
-    public function get_categories()
-    {
+    public function get_categories() {
         return array('general');
     }
 
-    public function get_style_depends()
-    {
+    public function get_style_depends() {
         return [
             'fluent-form-styles',
             'fluentform-public-default'
         ];
     }
 
-    public function get_script_depends()
-    {
+    public function get_script_depends() {
         return [ 'fluentform-elementor'];
     }
 
@@ -85,8 +75,7 @@ class FluentFormWidget extends Widget_Base
         $this->register_errors_style_controls();
     }
 
-    protected function register_general_controls()
-    {
+    protected function register_general_controls(){
         $this->start_controls_section(
             'section_fluent_form',
             [
@@ -169,8 +158,7 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_error_controls()
-    {
+    protected function register_error_controls(){
         $this->start_controls_section(
             'section_errors',
             [
@@ -193,8 +181,7 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_title_description_style_controls()
-    {
+    protected function register_title_description_style_controls(){
         $this->start_controls_section(
             'section_form_title_style',
             [
@@ -388,8 +375,8 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_form_container_style_controls()
-    {
+    protected function register_form_container_style_controls(){
+
         $this->start_controls_section(
             'section_form_container_style',
             [
@@ -403,7 +390,7 @@ class FluentFormWidget extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'form_container_background',
-                'label' => __('Background', 'fluentform'),
+                'label' => __( 'Background', 'fluentform' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .fluentform-widget-wrapper',
             ]
@@ -527,10 +514,11 @@ class FluentFormWidget extends Widget_Base
         );
 
         $this->end_controls_section();
+
     }
 
-    protected function register_label_style_controls()
-    {
+    protected function register_label_style_controls(){
+
         $this->start_controls_section(
             'section_form_label_style',
             [
@@ -562,8 +550,8 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_input_textarea_style_controls()
-    {
+    protected function register_input_textarea_style_controls(){
+
         $this->start_controls_section(
             'section_form_fields_style',
             [
@@ -855,6 +843,7 @@ class FluentFormWidget extends Widget_Base
     }
     protected function register_terms_gdpr_style_controls()
     {
+
         $this->start_controls_section(
             'section_form_terms_gdpr_style',
             [
@@ -909,8 +898,7 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_placeholder_style_controls()
-    {
+    protected function register_placeholder_style_controls(){
         $this->start_controls_section(
             'section_placeholder_style',
             [
@@ -939,8 +927,8 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_radio_checkbox_style_controls()
-    {
+    protected function register_radio_checkbox_style_controls(){
+
         $this->start_controls_section(
             'section_form_radio_checkbox_style',
             [
@@ -1178,8 +1166,7 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_section_break_style_controls()
-    {
+    protected function register_section_break_style_controls(){
         $this->start_controls_section(
             'form_section_break_style',
             [
@@ -1323,8 +1310,8 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_checkbox_grid_style_controls()
-    {
+    protected function register_checkbox_grid_style_controls(){
+
         $this->start_controls_section(
             'section_form_checkbox_grid',
             [
@@ -1515,8 +1502,7 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_address_line_style_controls()
-    {
+    protected function register_address_line_style_controls(){
         $this->start_controls_section(
             'section_form_address_line_style',
             [
@@ -1549,8 +1535,7 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_image_upload_style_controls()
-    {
+    protected function register_image_upload_style_controls(){
         $this->start_controls_section(
             'section_form_image_upload_style',
             [
@@ -1682,9 +1667,9 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_pagination_style_controls()
-    {
-        if (defined("FLUENTFORMPRO")) {
+    protected function register_pagination_style_controls(){
+        if( defined("FLUENTFORMPRO") ) {
+
             $this->start_controls_section(
                 'section_form_pagination_style',
                 [
@@ -1704,10 +1689,10 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'show_label',
                 [
-                    'label'     => __('Show Label', 'fluentform'),
+                    'label'     => __( 'Show Label', 'fluentform' ),
                     'type'      => Controls_Manager::SWITCHER,
-                    'label_on'  => __('Show', 'fluentform'),
-                    'label_off' => __('Hide', 'fluentform'),
+                    'label_on'  => __( 'Show', 'fluentform' ),
+                    'label_off' => __( 'Hide', 'fluentform' ),
                     'return_value' => 'yes',
                     'default'   => 'yes',
                     'prefix_class'  => 'fluent-form-widget-step-header-'
@@ -1717,7 +1702,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_progressbar_label_color',
                 [
-                    'label'     => __('Label Color', 'fluentform'),
+                    'label'     => __( 'Label Color', 'fluentform' ),
                     'type'      => Controls_Manager::COLOR,
                     'scheme'    => [
                         'type'  => Scheme_Color::get_type(),
@@ -1736,7 +1721,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'form_progressbar_label_typography',
-                    'label' => __('Typography', 'fluentform'),
+                    'label' => __( 'Typography', 'fluentform' ),
                     'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                     'selector' => '{{WRAPPER}} .ff-el-progress-status',
                     'condition' => [
@@ -1748,7 +1733,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_progressbar_label_space',
                 [
-                    'label' => __('Spacing', 'fluentform'),
+                    'label' => __( 'Spacing', 'fluentform' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
@@ -1772,10 +1757,10 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'show_form_progressbar',
                 [
-                    'label'     => __('Show Progressbar', 'fluentform'),
+                    'label'     => __( 'Show Progressbar', 'fluentform' ),
                     'type'      => Controls_Manager::SWITCHER,
-                    'label_on'  => __('Show', 'fluentform'),
-                    'label_off' => __('Hide', 'fluentform'),
+                    'label_on'  => __( 'Show', 'fluentform' ),
+                    'label_off' => __( 'Hide', 'fluentform' ),
                     'return_value' => 'yes',
                     'default'   => 'yes',
                     'prefix_class'  => 'fluent-form-widget-step-progressbar-'
@@ -1798,7 +1783,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Background::get_type(),
                 [
                     'name' => 'form_progressbar_bg',
-                    'label' => __('Background', 'fluentform'),
+                    'label' => __( 'Background', 'fluentform' ),
                     'types' => [ 'classic', 'gradient' ],
                     'selector' => '{{WRAPPER}} .ff-el-progress',
                     'condition' => [
@@ -1813,7 +1798,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_progressbar_color',
                 [
-                    'label' => __('Text Color', 'fluentform'),
+                    'label' => __( 'Text Color', 'fluentform' ),
                     'type'  =>   Controls_Manager::COLOR,
                     'scheme' => [
                         'type' =>   Scheme_Color::get_type(),
@@ -1831,7 +1816,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_progressbar_height',
                 [
-                    'label' => __('Height', 'fluentform'),
+                    'label' => __( 'Height', 'fluentform' ),
                     'type' => Controls_Manager::SLIDER,
                     'size_units' => [ 'px' ],
                     'range' => [
@@ -1854,7 +1839,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Border::get_type(),
                 [
                     'name' => 'form_progressbar_border',
-                    'label' => __('Border', 'fluentform'),
+                    'label' => __( 'Border', 'fluentform' ),
                     'selector' => '{{WRAPPER}} .ff-el-progress',
                     'condition' => [
                         'show_form_progressbar'  => 'yes'
@@ -1865,7 +1850,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_progressbar_border_radius',
                 [
-                    'label' => __('Border Radius', 'fluentform'),
+                    'label' => __( 'Border Radius', 'fluentform' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
@@ -1893,7 +1878,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Background::get_type(),
                 [
                     'name' => 'form_progressbar_bg_filled',
-                    'label' => __('Background', 'fluentform'),
+                    'label' => __( 'Background', 'fluentform' ),
                     'types' => [ 'classic', 'gradient' ],
                     'selector' => '{{WRAPPER}} .ff-el-progress-bar',
                     'condition' => [
@@ -1937,7 +1922,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_pagination_button_color',
                 [
-                    'label' => __('Color', 'fluentform'),
+                    'label' => __( 'Color', 'fluentform' ),
                     'type'  =>   Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .step-nav button' => 'color: {{VALUE}};',
@@ -1949,7 +1934,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'form_pagination_button_typography',
-                    'label' => __('Typography', 'fluentform'),
+                    'label' => __( 'Typography', 'fluentform' ),
                     'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                     'selector' => '{{WRAPPER}} .step-nav button',
                 ]
@@ -1959,7 +1944,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Background::get_type(),
                 [
                     'name' => 'form_pagination_button_bg',
-                    'label' => __('Background', 'fluentform'),
+                    'label' => __( 'Background', 'fluentform' ),
                     'types' => [ 'classic', 'gradient' ],
                     'selector' => '{{WRAPPER}} .step-nav button',
                 ]
@@ -1969,7 +1954,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Border::get_type(),
                 [
                     'name' => 'form_pagination_button_border',
-                    'label' => __('Border', 'fluentform'),
+                    'label' => __( 'Border', 'fluentform' ),
                     'selector' => '{{WRAPPER}} .step-nav button',
                 ]
             );
@@ -1977,7 +1962,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_pagination_button_border_radius',
                 [
-                    'label' => __('Border Radius', 'fluentform'),
+                    'label' => __( 'Border Radius', 'fluentform' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
@@ -1989,7 +1974,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_pagination_button_padding',
                 [
-                    'label' => __('Padding', 'fluentform'),
+                    'label' => __( 'Padding', 'fluentform' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
@@ -2010,7 +1995,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_pagination_button_hover_color',
                 [
-                    'label' => __('Color', 'fluentform'),
+                    'label' => __( 'Color', 'fluentform' ),
                     'type'  =>   Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .step-nav button:hover' => 'color: {{VALUE}};',
@@ -2022,7 +2007,7 @@ class FluentFormWidget extends Widget_Base
                 Group_Control_Background::get_type(),
                 [
                     'name' => 'form_pagination_button_hover_bg',
-                    'label' => __('Background', 'fluentform'),
+                    'label' => __( 'Background', 'fluentform' ),
                     'types' => [ 'classic', 'gradient' ],
                     'selector' => '{{WRAPPER}} .step-nav button:hover',
                 ]
@@ -2031,7 +2016,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_pagination_button_border_hover_color',
                 [
-                    'label' => __('Border Color', 'fluentform'),
+                    'label' => __( 'Border Color', 'fluentform' ),
                     'type'  =>   Controls_Manager::COLOR,
                     'selectors' => [
                         '{{WRAPPER}} .step-nav button:hover' => 'border-color: {{VALUE}};',
@@ -2042,7 +2027,7 @@ class FluentFormWidget extends Widget_Base
             $this->add_control(
                 'form_pagination_button_border_hover_radius',
                 [
-                    'label' => __('Border Radius', 'fluentform'),
+                    'label' => __( 'Border Radius', 'fluentform' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'em' ],
                     'selectors' => [
@@ -2060,8 +2045,7 @@ class FluentFormWidget extends Widget_Base
         }
     }
 
-    protected function register_submit_button_style_controls()
-    {
+    protected function register_submit_button_style_controls(){
         $this->start_controls_section(
             'section_form_submit_button_style',
             [
@@ -2290,8 +2274,8 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_success_message_style_controls()
-    {
+    protected function register_success_message_style_controls(){
+
         $this->start_controls_section(
             'section_form_success_message_style',
             [
@@ -2345,8 +2329,7 @@ class FluentFormWidget extends Widget_Base
         $this->end_controls_section();
     }
 
-    protected function register_errors_style_controls()
-    {
+    protected function register_errors_style_controls(){
         $this->start_controls_section(
             'section_form_error_style',
             [
@@ -2413,8 +2396,7 @@ class FluentFormWidget extends Widget_Base
      *
      * @access protected
      */
-    protected function render()
-    {
+    protected function render() {
         $settings = $this->get_settings_for_display();
         extract($settings);
 
@@ -2428,27 +2410,27 @@ class FluentFormWidget extends Widget_Base
         );
 
 
-        if ($placeholder_switch != 'yes') {
-            $this->add_render_attribute('fluentform_widget_wrapper', 'class', 'hide-placeholder');
+        if ( $placeholder_switch != 'yes' ) {
+            $this->add_render_attribute( 'fluentform_widget_wrapper', 'class', 'hide-placeholder' );
         }
 
-        if ($labels_switch != 'yes') {
-            $this->add_render_attribute('fluentform_widget_wrapper', 'class', 'hide-fluent-form-labels');
+        if( $labels_switch != 'yes' ) {
+            $this->add_render_attribute( 'fluentform_widget_wrapper', 'class', 'hide-fluent-form-labels' );
         }
 
-        if ($error_messages == 'no') {
-            $this->add_render_attribute('fluentform_widget_wrapper', 'class', 'hide-error-message');
+        if( $error_messages == 'no' ) {
+            $this->add_render_attribute( 'fluentform_widget_wrapper', 'class', 'hide-error-message' );
         }
 
-        if ($form_custom_radio_checkbox == 'yes') {
-            $this->add_render_attribute('fluentform_widget_wrapper', 'class', 'fluentform-widget-custom-radio-checkbox');
+        if ( $form_custom_radio_checkbox == 'yes' ) {
+            $this->add_render_attribute( 'fluentform_widget_wrapper', 'class', 'fluentform-widget-custom-radio-checkbox' );
         }
 
-        if ($form_container_alignment) {
-            $this->add_render_attribute('fluentform_widget_wrapper', 'class', 'fluentform-widget-align-'.$form_container_alignment.'');
+        if ( $form_container_alignment ) {
+            $this->add_render_attribute( 'fluentform_widget_wrapper', 'class', 'fluentform-widget-align-'.$form_container_alignment.'' );
         }
 
-        if (! empty($form_list)) { ?>
+        if ( ! empty( $form_list ) ) { ?>
 
             <div <?php echo $this->get_render_attribute_string('fluentform_widget_wrapper'); ?>>
 
@@ -2484,7 +2466,6 @@ class FluentFormWidget extends Widget_Base
      *
      * @access protected
      */
-    protected function content_template()
-    {
-    }
+    protected function content_template() {}
+
 }

@@ -1,6 +1,5 @@
 <?php
 
-use WPForms\Helpers\Templates;
 use WPForms\Tasks\Actions\EntryEmailsTask;
 
 /**
@@ -421,14 +420,8 @@ class WPForms_WP_Emails {
 				->register();
 		}
 
-		/**
-		 * Hooks after the email is sent.
-		 *
-		 * @since 1.1.3
-		 *
-		 * @param WPForms_WP_Emails $this Current instance of this object.
-		 */
-		do_action( 'wpforms_email_send_after', $this ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
+		// Hooks after the email is sent.
+		do_action( 'wpforms_email_send_after', $this );
 
 		return $result;
 	}
@@ -732,14 +725,8 @@ class WPForms_WP_Emails {
 
 			// Try locating this template file by looping through the template paths.
 			foreach ( $this->get_theme_template_paths() as $template_path ) {
-				$validated_path = Templates::validate_safe_path(
-					$template_path . $template_name,
-					[ 'theme', 'plugins' ]
-				);
-
-				if ( $validated_path ) {
-					$located = $validated_path;
-
+				if ( file_exists( $template_path . $template_name ) ) {
+					$located = $template_path . $template_name;
 					break;
 				}
 			}

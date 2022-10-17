@@ -15,6 +15,6 @@ class Warning extends Message {
     }
 
     protected function fetchElement() {
-        return '<div class="' . implode(' ', $this->classes) . '">' . $this->description . '</div>';
+        echo '<div class="' . implode(' ', $this->classes) . '">' . $this->description . '</div>';
     }
 }

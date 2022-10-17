@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Mailer\MailerError;
 use MailPoet\Mailer\SubscriberError;
+use MailPoet\WP\Functions as WPFunctions;
 
 abstract class PHPMailerMapper {
   use ConnectionErrorMapperTrait;
@@ -22,8 +23,7 @@ abstract class PHPMailerMapper {
   }
 
   public function getErrorForSubscriber($subscriber) {
-    // translators: %s is the name of the method.
-    $message = sprintf(__('%s has returned an unknown error.', 'mailpoet'), $this->getMethodName());
+    $message = sprintf(WPFunctions::get()->__('%s has returned an unknown error.', 'mailpoet'), $this->getMethodName());
     $subscriberErrors = [new SubscriberError($subscriber, null)];
     return new MailerError(MailerError::OPERATION_SEND, MailerError::LEVEL_HARD, $message, null, $subscriberErrors);
   }

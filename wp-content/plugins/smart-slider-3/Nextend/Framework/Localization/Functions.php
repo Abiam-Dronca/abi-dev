@@ -2,18 +2,14 @@
 
 use Nextend\Framework\Localization\Localization;
 
-function n2_($text, $domain = 'nextend', $escape = true) {
+function n2_($text, $domain = 'nextend') {
     $translations = Localization::getTranslationsForDomain($domain);
 
-    if ($escape) {
-        return esc_html($translations->translate($text));
-    } else {
-        return $translations->translate($text);
-    }
+    return $translations->translate($text);
 }
 
 function n2_e($text, $domain = 'nextend') {
-    echo esc_html(n2_($text, $domain, false));
+    echo n2_($text, $domain);
 }
 
 function n2_n($single, $plural, $number, $domain = 'nextend') {
@@ -23,7 +19,7 @@ function n2_n($single, $plural, $number, $domain = 'nextend') {
 }
 
 function n2_en($single, $plural, $number, $domain = 'nextend') {
-    echo esc_html(n2_n($single, $plural, $number, $domain));
+    echo n2_n($single, $plural, $number, $domain);
 }
 
 function n2_x($text, $context, $domain = 'nextend') {
@@ -33,5 +29,5 @@ function n2_x($text, $context, $domain = 'nextend') {
 }
 
 function n2_ex($text, $context, $domain = 'nextend') {
-    echo esc_html(n2_x($text, $context, $domain));
+    echo n2_x($text, $context, $domain);
 }

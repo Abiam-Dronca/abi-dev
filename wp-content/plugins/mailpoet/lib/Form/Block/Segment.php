@@ -41,9 +41,7 @@ class Segment {
     $fieldName = 'data[' . $this->rendererHelper->getFieldName($block) . ']';
     $fieldValidation = $this->rendererHelper->getInputValidation($block, [], $formId);
 
-    // Add fieldset around the checkboxes
-    $html .= '<fieldset>';
-    $html .= $this->rendererHelper->renderLegend($block, $formSettings);
+    $html .= $this->rendererHelper->renderLabel($block, $formSettings);
 
     $options = (!empty($block['params']['values'])
       ? $block['params']['values']
@@ -73,9 +71,6 @@ class Segment {
     }
 
     $html .= '<span class="mailpoet_error_' . $block['id'] . ($formId ? '_' . $formId : '') . '"></span>';
-
-    // End fieldset around checkboxes
-    $html .= '</fieldset>';
 
     return $this->wrapper->render($block, $html);
   }

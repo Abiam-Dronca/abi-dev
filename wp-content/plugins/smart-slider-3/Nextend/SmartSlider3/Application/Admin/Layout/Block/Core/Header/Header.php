@@ -2,8 +2,6 @@
 
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\Header;
 
-use Nextend\Framework\Sanitize;
-
 /**
  * @var $this BlockHeader
  */
@@ -14,7 +12,7 @@ use Nextend\Framework\Sanitize;
             <div class="n2_header__heading">
                 <div class="n2_header__heading_primary">
                     <?php
-                    echo esc_html($this->getHeading());
+                    echo $this->getHeading();
                     ?>
                 </div>
                 <?php
@@ -22,7 +20,7 @@ use Nextend\Framework\Sanitize;
                     ?>
                     <div class="n2_header__heading_after">
                         <?php
-                        echo esc_html($this->getHeadingAfter());
+                        echo $this->getHeadingAfter();
                         ?>
                     </div>
                 <?php
@@ -35,7 +33,7 @@ use Nextend\Framework\Sanitize;
             ?>
             <div class="n2_header__actions">
                 <?php
-                echo wp_kses(implode('', $this->getActions()), Sanitize::$adminTemplateTags);
+                echo implode('', $this->getActions());
                 ?>
             </div>
         <?php

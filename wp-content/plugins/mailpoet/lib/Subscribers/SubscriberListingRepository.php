@@ -7,12 +7,12 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Entities\SegmentEntity;
 use MailPoet\Entities\SubscriberEntity;
-use MailPoet\Entities\TagEntity;
 use MailPoet\Listing\ListingDefinition;
 use MailPoet\Listing\ListingRepository;
 use MailPoet\Segments\DynamicSegments\FilterHandler;
 use MailPoet\Segments\SegmentSubscribersRepository;
 use MailPoet\Util\Helpers;
+use MailPoet\WP\Functions as WPFunctions;
 use MailPoetVendor\Doctrine\DBAL\Driver\Statement;
 use MailPoetVendor\Doctrine\DBAL\Query\QueryBuilder as DBALQueryBuilder;
 use MailPoetVendor\Doctrine\ORM\EntityManager;
@@ -134,24 +134,21 @@ class SubscriberListingRepository extends ListingRepository {
   }
 
   protected function applyFilters(QueryBuilder $queryBuilder, array $filters) {
-    if (isset($filters['segment'])) {
-      if ($filters['segment'] === self::FILTER_WITHOUT_LIST) {
-        $this->segmentSubscribersRepository->addConstraintsForSubscribersWithoutSegment($queryBuilder);
-      } else {
-        $segment = $this->entityManager->find(SegmentEntity::class, (int)$filters['segment']);
-        if ($segment instanceof SegmentEntity && $segment->isStatic()) {
-          $queryBuilder->join('s.subscriberSegments', 'ss', Join::WITH, 'ss.segment = :ssSegment')
-            ->setParameter('ssSegment', $segment->getId());
-        }
-      }
+    if (!isset($filters['segment'])) {
+      return;
     }
-
-    if (isset($filters['tag'])) {
-      $tag = $this->entityManager->find(TagEntity::class, (int)$filters['tag']);
-      if ($tag) {
-        $queryBuilder->join('s.subscriberTags', 'st', Join::WITH, 'st.tag = :stTag')
-          ->setParameter('stTag', $tag);
-      }
+    if ($filters['segment'] === self::FILTER_WITHOUT_LIST) {
+      $this->segmentSubscribersRepository->addConstraintsForSubscribersWithoutSegment($queryBuilder);
+      return;
+    }
+    $segment = $this->entityManager->find(SegmentEntity::class, (int)$filters['segment']);
+    if (!$segment instanceof SegmentEntity) {
+      return;
+    }
+    if ($segment->isStatic()) {
+      $queryBuilder->join('s.subscriberSegments', 'ss', Join::WITH, 'ss.segment = :ssSegment')
+        ->setParameter('ssSegment', $segment->getId());
+      return;
     }
   }
 
@@ -200,53 +197,43 @@ class SubscriberListingRepository extends ListingRepository {
     return [
       [
         'name' => 'all',
-        'label' => __('All', 'mailpoet'),
+        'label' => WPFunctions::get()->__('All', 'mailpoet'),
         'count' => $totalCount,
       ],
       [
         'name' => SubscriberEntity::STATUS_SUBSCRIBED,
-        'label' => __('Subscribed', 'mailpoet'),
+        'label' => WPFunctions::get()->__('Subscribed', 'mailpoet'),
         'count' => $groupCounts[SubscriberEntity::STATUS_SUBSCRIBED],
       ],
       [
         'name' => SubscriberEntity::STATUS_UNCONFIRMED,
-        'label' => __('Unconfirmed', 'mailpoet'),
+        'label' => WPFunctions::get()->__('Unconfirmed', 'mailpoet'),
         'count' => $groupCounts[SubscriberEntity::STATUS_UNCONFIRMED],
       ],
       [
         'name' => SubscriberEntity::STATUS_UNSUBSCRIBED,
-        'label' => __('Unsubscribed', 'mailpoet'),
+        'label' => WPFunctions::get()->__('Unsubscribed', 'mailpoet'),
         'count' => $groupCounts[SubscriberEntity::STATUS_UNSUBSCRIBED],
       ],
       [
         'name' => SubscriberEntity::STATUS_INACTIVE,
-        'label' => __('Inactive', 'mailpoet'),
+        'label' => WPFunctions::get()->__('Inactive', 'mailpoet'),
         'count' => $groupCounts[SubscriberEntity::STATUS_INACTIVE],
       ],
       [
         'name' => SubscriberEntity::STATUS_BOUNCED,
-        'label' => __('Bounced', 'mailpoet'),
+        'label' => WPFunctions::get()->__('Bounced', 'mailpoet'),
         'count' => $groupCounts[SubscriberEntity::STATUS_BOUNCED],
       ],
       [
         'name' => 'trash',
-        'label' => __('Trash', 'mailpoet'),
+        'label' => WPFunctions::get()->__('Trash', 'mailpoet'),
         'count' => $trashedCount,
       ],
     ];
   }
 
   public function getFilters(ListingDefinition $definition): array {
-    return [
-      'segment' => $this->getSegmentFilter($definition),
-      'tag' => $this->getTagsFilter($definition),
-    ];
-  }
-
-  /**
-   * @return array<array{label: string, value: string|int}>
-   */
-  private function getSegmentFilter(ListingDefinition $definition): array {
     $group = $definition->getGroup();
 
     $subscribersWithoutSegmentStats = $this->subscribersCountsController->getSubscribersWithoutSegmentStatisticsCount();
@@ -254,7 +241,6 @@ class SubscriberListingRepository extends ListingRepository {
     $subscribersWithoutSegmentCount = $subscribersWithoutSegmentStats[$key];
 
     $subscribersWithoutSegmentLabel = sprintf(
-      // translators: %s is the number of subscribers without a list.
       __('Subscribers without a list (%s)', 'mailpoet'),
       number_format((float)$subscribersWithoutSegmentCount)
     );
@@ -263,13 +249,15 @@ class SubscriberListingRepository extends ListingRepository {
     $queryBuilder
       ->select('s')
       ->from(SegmentEntity::class, 's');
-    if ($group !== 'trash') {
+    if ($group === 'trash') {
+      $queryBuilder->andWhere('s.deletedAt IS NOT NULL');
+    } else {
       $queryBuilder->andWhere('s.deletedAt IS NULL');
     }
 
     // format segment list
     $allSubscribersList = [
-      'label' => __('All Lists', 'mailpoet'),
+      'label' => WPFunctions::get()->__('All Lists', 'mailpoet'),
       'value' => '',
     ];
 
@@ -286,13 +274,9 @@ class SubscriberListingRepository extends ListingRepository {
       } else {
         $count = $this->subscribersCountsController->getSegmentStatisticsCount($segment);
       }
-      $subscribersCount = (float)$count[$key];
-      // filter segments without subscribers
-      if (!$subscribersCount) {
-        continue;
-      }
+
       $segmentList[] = [
-        'label' => sprintf('%s (%s)', $segment->getName(), number_format($subscribersCount)),
+        'label' => sprintf('%s (%s)', $segment->getName(), number_format((float)$count[$key])),
         'value' => $segment->getId(),
       ];
     }
@@ -302,34 +286,7 @@ class SubscriberListingRepository extends ListingRepository {
     });
 
     array_unshift($segmentList, $allSubscribersList, $withoutSegmentList);
-    return $segmentList;
-  }
-
-  /**
-   * @return array<int, array{label: string, value: string|int}>
-   */
-  private function getTagsFilter(ListingDefinition $definition): array {
-    $group = $definition->getGroup();
-
-    $allTagsList = [
-      'label' => __('All Tags', 'mailpoet'),
-      'value' => '',
-    ];
-
-    $status = in_array($group, ['all', 'trash']) ? null : $group;
-    $isDeleted = $group === 'trash';
-    $tagsStatistics = $this->subscribersCountsController->getTagsStatisticsCount($status, $isDeleted);
-
-    $tagsList = [];
-    foreach ($tagsStatistics as $tagStatistics) {
-      $tagsList[] = [
-        'label' => sprintf('%s (%s)', $tagStatistics['name'], number_format((float)$tagStatistics['subscribersCount'])),
-        'value' => $tagStatistics['id'],
-      ];
-    }
-
-    array_unshift($tagsList, $allTagsList);
-    return $tagsList;
+    return ['segment' => $segmentList];
   }
 
   private function getDataForDynamicSegment(ListingDefinition $definition, SegmentEntity $segment) {

@@ -46,9 +46,7 @@ class Converter
 					'media_x_position' => 50,
 					'media_y_position' => 50
 				]),
-				'conditional_logics' => self::parseConditionalLogic($field),
-                'calculation_settings' => ArrayHelper::get($field, 'settings.calculation_settings'),
-                'calc_value_status' => ArrayHelper::get($field, 'settings.calc_value_status', false),
+				'conditional_logics' => self::parseConditionalLogic($field)
 			];
 
             if ($answer = self::setDefaultValue(ArrayHelper::get($field, 'attributes.value'), $field, $form)) {
@@ -128,25 +126,20 @@ class Converter
 				$question['contentAlign'] = ArrayHelper::get($field, 'settings.align', '');
 			} elseif ($field['element'] === 'phone') {
 				if (defined('FLUENTFORMPRO')) {
-					$question['phone_settings'] = self::getPhoneFieldSettings($field, $form);
-
-					if ($question['phone_settings']['enabled']) {
-						$cssSource = FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/css/intlTelInput.min.css';
-						if (is_rtl()) {
-							$cssSource = FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/css/intlTelInput-rtl.min.css';
-						}
-						wp_enqueue_style('intlTelInput', $cssSource, [], '16.0.0');
-						wp_enqueue_script('intlTelInputUtils', FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/js/utils.js', [], '16.0.0', true);
-						wp_enqueue_script('intlTelInput', FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/js/intlTelInput.min.js', [], '16.0.0', true);
+					$cssSource = FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/css/intlTelInput.min.css';
+					if (is_rtl()) {
+						$cssSource = FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/css/intlTelInput-rtl.min.css';
 					}
+					wp_enqueue_style('intlTelInput', $cssSource, [], '16.0.0');
+					wp_enqueue_script('intlTelInputUtils', FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/js/utils.js', [], '16.0.0', true);
+					wp_enqueue_script('intlTelInput', FLUENTFORMPRO_DIR_URL . 'public/libs/intl-tel-input/js/intlTelInput.min.js', [], '16.0.0', true);
+					$question['phone_settings'] = self::getPhoneFieldSettings($field, $form);
 				}
 			} elseif ($field['element'] === 'input_number') {
 				$question['min'] = ArrayHelper::get($field, 'settings.validation_rules.min.value');
 				$question['max'] = ArrayHelper::get($field, 'settings.validation_rules.max.value');
 				$question['min'] = is_numeric($question['min']) ? $question['min'] : null;
 				$question['max'] = is_numeric($question['max']) ? $question['max'] : null;
-                $question['calc_value_status'] = true;
-                do_action('ff_rendering_calculation_form', $form, $field);
 			} elseif (in_array($field['element'], ['terms_and_condition', 'gdpr_agreement'])) {
 				$question['options'] = [
 					[
@@ -252,7 +245,6 @@ class Converter
 				}
 
 				$question['is_payment_field'] = true;
-				$question['calc_value_status'] = true;
 			} elseif ($field['element'] === 'subscription_payment_component') {
 				$question['is_payment_field'] = true;
 				$question['is_subscription_field'] = true;
@@ -312,8 +304,6 @@ class Converter
 				$question['max'] = is_numeric($question['max']) ? $question['max'] : null;
 
 				$question['is_payment_field'] = true;
-                $question['calc_value_status'] = true;
-                do_action('ff_rendering_calculation_form', $form, $field);
 			} elseif ($field['element'] === 'item_quantity_component') {
 				$question['type'] = $allowedFields['input_number'];
 				$question['targetProduct'] = $field['settings']['target_product'];
@@ -358,7 +348,6 @@ class Converter
                 }
 
 				$question['siteKey'] = $siteKey;
-				$question['answer'] = '';
 
 				$apiVersion = ArrayHelper::get($reCaptchaConfig, 'api_version', 'v2_visible');
 				$apiVersion = $apiVersion == 'v3_invisible' ? 3 : 2;
@@ -416,6 +405,7 @@ class Converter
 				$form->submit_button = $field;
 			}
 		}
+        
 		$form->questions = $questions;
 
 		$form->image_preloads = $imagePreloads;

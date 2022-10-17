@@ -10,13 +10,11 @@ class WordPress {
     return add_action($hookName, $callback, $priority, $acceptedArgs);
   }
 
-  /** @param mixed ...$arg */
-  public function doAction(string $hookName, ...$arg): void {
+  public function doAction(string $hookName, array ...$arg): void {
     do_action($hookName, ...$arg);
   }
 
-  /** @param mixed ...$args */
-  public function currentUserCan(string $capability, ...$args): bool {
+  public function currentUserCan(string $capability, array ...$args): bool {
     return current_user_can($capability, ...$args);
   }
 

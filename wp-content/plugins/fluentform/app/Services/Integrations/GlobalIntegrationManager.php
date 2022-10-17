@@ -56,7 +56,7 @@ class GlobalIntegrationManager
 
         // Someone should catch that above action and send response
         wp_send_json_error([
-            'message' => __('Sorry, no Integration found. Please make sure that latest version of Fluent Forms pro installed', 'fluentform')
+            'message' => __('Sorry, no Integration found. Please make sure that latest version of Fluent Forms pro installed', 'wpfluentform')
         ], 423);
 
     }

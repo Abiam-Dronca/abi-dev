@@ -407,8 +407,8 @@ class NewslettersRepository extends Repository {
   /**
    * @return NewsletterEntity[]
    */
-  public function findSendingNotificationHistoryWithoutPausedTask(NewsletterEntity $newsletter): array {
-    return $this->entityManager->createQueryBuilder()
+  public function findSendigNotificationHistoryWithPausedTask(NewsletterEntity $newsletter): array {
+    $result = $this->entityManager->createQueryBuilder()
       ->select('n')
       ->from(NewsletterEntity::class, 'n')
       ->join('n.queues', 'q')
@@ -416,31 +416,13 @@ class NewslettersRepository extends Repository {
       ->where('n.parent = :parent')
       ->andWhere('n.type = :type')
       ->andWhere('n.status = :status')
-      ->andWhere('n.deletedAt IS NULL')
       ->andWhere('t.status != :taskStatus')
       ->setParameter('parent', $newsletter)
       ->setParameter('type', NewsletterEntity::TYPE_NOTIFICATION_HISTORY)
       ->setParameter('status', NewsletterEntity::STATUS_SENDING)
       ->setParameter('taskStatus', ScheduledTaskEntity::STATUS_PAUSED)
-      ->getQuery()->getResult();
-  }
-
-  /**
-   * Returns standard newsletters ordered by sentAt
-   * @return NewsletterEntity[]
-   */
-  public function getStandardNewsletterList(): array {
-    return $this->entityManager->createQueryBuilder()
-      ->select('PARTIAL n.{id,subject,sentAt}')
-      ->addSelect('CASE WHEN n.sentAt IS NULL THEN 1 ELSE 0 END as HIDDEN sent_at_is_null')
-      ->from(NewsletterEntity::class, 'n')
-      ->where('n.type = :typeStandard')
-      ->andWhere('n.deletedAt IS NULL')
-      ->orderBy('sent_at_is_null', 'DESC')
-      ->addOrderBy('n.sentAt', 'DESC')
-      ->setParameter('typeStandard', NewsletterEntity::TYPE_STANDARD)
-      ->getQuery()
-      ->getResult();
+      ->getQuery()->execute();
+    return $result;
   }
 
   public function prefetchOptions(array $newsletters) {
@@ -465,42 +447,6 @@ class NewslettersRepository extends Repository {
       ->setParameter('newsletters', $newsletters)
       ->getQuery()
       ->getResult();
-  }
-
-  /**
-   * Returns a list of emails that are either scheduled standard emails
-   * or active automatic emails of the provided types.
-   *
-   * @param array $automaticEmailTypes
-   *
-   * @return array
-   */
-  public function getScheduledStandardEmailsAndActiveAutomaticEmails(array $automaticEmailTypes): array {
-    $queryBuilder = $this->entityManager->createQueryBuilder();
-
-    $newsletters = $queryBuilder
-      ->select('n')
-      ->from(NewsletterEntity::class, 'n')
-      ->orWhere(
-        $queryBuilder->expr()->andX(
-          $queryBuilder->expr()->eq('n.type', ':typeStandard'),
-          $queryBuilder->expr()->eq('n.status', ':statusScheduled')
-        )
-      )
-      ->orWhere(
-        $queryBuilder->expr()->andX(
-          $queryBuilder->expr()->in('n.type', ':automaticEmailTypes'),
-          $queryBuilder->expr()->eq('n.status', ':statusActive')
-        )
-      )
-      ->setParameter('typeStandard', NewsletterEntity::TYPE_STANDARD)
-      ->setParameter('statusScheduled', NewsletterEntity::STATUS_SCHEDULED)
-      ->setParameter('automaticEmailTypes', $automaticEmailTypes)
-      ->setParameter('statusActive', NewsletterEntity::STATUS_ACTIVE)
-      ->getQuery()
-      ->getResult();
-
-    return $newsletters;
   }
 
   private function fetchChildrenIds(array $parentIds) {

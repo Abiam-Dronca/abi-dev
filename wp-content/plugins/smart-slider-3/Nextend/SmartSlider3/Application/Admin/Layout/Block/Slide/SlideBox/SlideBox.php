@@ -2,20 +2,22 @@
 
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\SlideBox;
 
+use Nextend\Framework\Sanitize;
+
 /**
  * @var BlockSlideBox $this
  */
 ?>
 
-<div class="n2_slide_manager__box n2_slide_box <?php echo esc_attr(implode(' ', $this->getClasses())); ?>"
-     data-slideid="<?php echo esc_attr($this->getSlideId()); ?>"
-    <?php echo $this->hasGenerator() ? ' data-generator-edit="' . esc_url($this->getGeneratorAttributeUrl()) . '"' : ''; ?>>
+<div class="n2_slide_manager__box n2_slide_box <?php echo implode(' ', $this->getClasses()) ?>"
+     data-slideid="<?php echo $this->getSlideId(); ?>"
+    <?php echo $this->getGeneratorAttribute(); ?>>
 
-    <div class="n2_slide_box__content" style="background-image: url('<?php echo esc_url($this->getThumbnailOptimized()); ?>');">
+    <div class="n2_slide_box__content" style="background-image: URL('<?php echo Sanitize::esc_attr($this->getThumbnailOptimized()); ?>');">
 
         <div class="n2_slide_box__slide_overlay">
-            <a class="n2_slide_box__slide_overlay_link" href="<?php echo esc_url($this->getEditUrl()); ?>"></a>
-            <a class="n2_slide_box__slide_overlay_edit_button" href="<?php echo esc_url($this->getEditUrl()); ?>">
+            <a class="n2_slide_box__slide_overlay_link" href="<?php echo $this->getEditUrl(); ?>"></a>
+            <a class="n2_slide_box__slide_overlay_edit_button" href="<?php echo $this->getEditUrl(); ?>">
                 <?php
                 n2_e('Edit');
                 ?>
@@ -33,14 +35,14 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\SlideBox;
             <?php
             if ($this->isStaticSlide()):
                 ?>
-                <div class="n2_slide_box__details_static_slide"><?php n2_e('Static overlay'); ?></div>
+                <div class="n2_slide_box__details_static_slide"><?php echo n2_('Static overlay'); ?></div>
             <?php
             endif;
             ?>
             <?php
             if ($this->hasGenerator()):
                 ?>
-                <div class="n2_slide_box__details_generator"><?php echo esc_html($this->getGeneratorLabel()); ?></div>
+                <div class="n2_slide_box__details_generator"><?php echo $this->getGeneratorLabel(); ?></div>
             <?php
             endif;
             ?>
@@ -50,7 +52,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\SlideBox;
     <div class="n2_slide_box__footer">
         <div class="n2_slide_box__footer_title">
             <?php
-            echo esc_html($this->getSlideTitle());
+            echo Sanitize::esc_html($this->getSlideTitle());
             ?>
         </div>
 
@@ -59,7 +61,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\SlideBox;
             <?php
             $hiddenViews = $this->getHiddenDeviceText();
             ?>
-            <a class="n2_slide_box__footer_status_hidden" href="<?php echo esc_url($this->getEditUrl()); ?>" data-n2tip="<?php echo esc_attr($hiddenViews); ?>">
+            <a class="n2_slide_box__footer_status_hidden" href="<?php echo $this->getEditUrl(); ?>" data-n2tip="<?php echo $hiddenViews; ?>">
                 <i class="ssi_16 ssi_16--hide"></i>
             </a>
 
@@ -67,11 +69,11 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\SlideBox;
                 <i class="ssi_16 ssi_16--star"></i>
             </div>
 
-            <a class="n2_slide_box__footer_status_published" href="<?php echo esc_url($this->getUnPublishUrl()); ?>" data-n2tip="<?php n2_e('Published'); ?>">
+            <a class="n2_slide_box__footer_status_published" href="<?php echo $this->getUnPublishUrl(); ?>" data-n2tip="<?php n2_e('Published'); ?>">
                 <i class="ssi_16 ssi_16--filledcheck"></i>
             </a>
 
-            <a class="n2_slide_box__footer_status_unpublished" href="<?php echo esc_url($this->getPublishUrl()); ?>" data-n2tip="<?php n2_e('Unpublished'); ?>">
+            <a class="n2_slide_box__footer_status_unpublished" href="<?php echo $this->getPublishUrl(); ?>" data-n2tip="<?php n2_e('Unpublished'); ?>">
                 <i class="ssi_16 ssi_16--filledremove"></i>
             </a>
         </div>

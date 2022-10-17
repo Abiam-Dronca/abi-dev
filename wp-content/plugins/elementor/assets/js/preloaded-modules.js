@@ -1,5 +1,30 @@
-/*! elementor - v3.7.8 - 02-10-2022 */
+/*! elementor - v3.6.7 - 03-07-2022 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["preloaded-modules"],{
+
+/***/ "../node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!****************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \****************************************************************/
+/***/ ((module) => {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
 
 /***/ "../assets/dev/js/frontend/handlers/accordion.js":
 /*!*******************************************************!*\
@@ -82,7 +107,7 @@ exports["default"] = Alert;
 /*!*******************************************************!*\
   !*** ../assets/dev/js/frontend/handlers/base-tabs.js ***!
   \*******************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -91,8 +116,6 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 
 class baseTabs extends elementorModules.frontend.handlers.Base {
   getDefaultSettings() {
@@ -251,7 +274,7 @@ class baseTabs extends elementorModules.frontend.handlers.Base {
         }
       },
       keyup: event => {
-        switch (event.code) {
+        switch (event.key) {
           case 'ArrowLeft':
           case 'ArrowRight':
             this.handleKeyboardNavigation(event);
@@ -765,7 +788,7 @@ exports["default"] = Toggle;
 /*!***************************************************!*\
   !*** ../assets/dev/js/frontend/handlers/video.js ***!
   \***************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -774,8 +797,6 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
 
 class Video extends elementorModules.frontend.handlers.Base {
   getDefaultSettings() {
@@ -817,7 +838,7 @@ class Video extends elementorModules.frontend.handlers.Base {
 
   playVideo() {
     if (this.elements.$video.length) {
-      // This.youtubePlayer exists only for YouTube videos, and its play function is different.
+      // this.youtubePlayer exists only for YouTube videos, and its play function is different.
       if (this.youtubePlayer) {
         this.youtubePlayer.playVideo();
       } else {
@@ -1228,8 +1249,6 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-__webpack_require__(/*! core-js/modules/es.array.includes.js */ "../node_modules/core-js/modules/es.array.includes.js");
-
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "../node_modules/@babel/runtime/helpers/defineProperty.js"));
 
 class IconsManager {
@@ -1494,24 +1513,22 @@ module.exports = elementorModules.ViewModule.extend({
         break;
 
       case 'image':
-        {
-          const slides = [{
-            image: options.url,
-            index: 0,
-            title: options.title,
-            description: options.description,
-            hash: options.hash
-          }];
-          options.slideshow = {
-            slides,
-            swiper: {
-              loop: false,
-              pagination: false
-            }
-          };
-          self.setSlideshowContent(options.slideshow);
-          break;
-        }
+        const slides = [{
+          image: options.url,
+          index: 0,
+          title: options.title,
+          description: options.description,
+          hash: options.hash
+        }];
+        options.slideshow = {
+          slides,
+          swiper: {
+            loop: false,
+            pagination: false
+          }
+        };
+        self.setSlideshowContent(options.slideshow);
+        break;
 
       case 'slideshow':
         self.setSlideshowContent(options.slideshow);
@@ -1558,7 +1575,7 @@ module.exports = elementorModules.ViewModule.extend({
 
   setHTMLContent(html) {
     if (window.elementorCommon) {
-      elementorDevTools.deprecation.deprecated('elementorFrontend.utils.lightbox.setHTMLContent', '3.1.4');
+      elementorCommon.helpers.hardDeprecated('elementorFrontend.utils.lightbox.setHTMLContent', '3.1.4');
     }
 
     this.getModal().setMessage(html);
@@ -2482,31 +2499,6 @@ module.exports = elementorModules.ViewModule.extend({
     window.screenfull = screenfull;
   }
 })();
-
-/***/ }),
-
-/***/ "../node_modules/@babel/runtime/helpers/defineProperty.js":
-/*!****************************************************************!*\
-  !*** ../node_modules/@babel/runtime/helpers/defineProperty.js ***!
-  \****************************************************************/
-/***/ ((module) => {
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ })
 

@@ -215,13 +215,15 @@ class OptionsController_bwg {
         echo WDWLibrary::message_id(0, __('Item Succesfully Saved.', 'photo-gallery'));
       }
 
-      // Clear hook for scheduled events.
-      wp_clear_scheduled_hook('bwg_schedule_event_hook');
-      // Refresh filter according to new time interval.
-      remove_filter('cron_schedules', array( BWG(), 'autoupdate_interval' ));
-      add_filter('cron_schedules', array( BWG(), 'autoupdate_interval' ));
-      // Then add new schedule with the same hook name.
-      wp_schedule_event(time(), 'bwg_autoupdate_interval', 'bwg_schedule_event_hook');
+      if ( BWG()->is_pro ) {
+        // Clear hook for scheduled events.
+        wp_clear_scheduled_hook('bwg_schedule_event_hook');
+        // Refresh filter according to new time interval.
+        remove_filter('cron_schedules', array( BWG(), 'autoupdate_interval' ));
+        add_filter('cron_schedules', array( BWG(), 'autoupdate_interval' ));
+        // Then add new schedule with the same hook name.
+        wp_schedule_event(time(), 'bwg_autoupdate_interval', 'bwg_schedule_event_hook');
+      }
     }
   }
 

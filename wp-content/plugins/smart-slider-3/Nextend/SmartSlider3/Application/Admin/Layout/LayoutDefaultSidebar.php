@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Layout;
 
 
-use Nextend\Framework\Sanitize;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\Admin\BlockAdmin;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\ContentSidebar\BlockContentSidebar;
 
@@ -24,7 +23,7 @@ class LayoutDefaultSidebar extends AbstractLayoutMenu {
     }
 
     public function renderSidebarBlock() {
-        echo wp_kses($this->getSidebarBlock(), Sanitize::$adminTemplateTags);
+        echo $this->getSidebarBlock();
     }
 
     public function getSidebarBlock() {

@@ -81,9 +81,6 @@ class Slider extends AbstractRenderable {
      */
     public $assets;
 
-    /**
-     * @var string contains already escaped data
-     */
     public $staticHtml = '';
 
     private $sliderRow;

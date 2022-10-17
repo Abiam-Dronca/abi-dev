@@ -13,7 +13,6 @@ use MailPoet\Doctrine\EntityTraits\UpdatedAtTrait;
 use MailPoet\Util\Helpers;
 use MailPoetVendor\Doctrine\Common\Collections\ArrayCollection;
 use MailPoetVendor\Doctrine\Common\Collections\Collection;
-use MailPoetVendor\Doctrine\Common\Collections\Criteria;
 use MailPoetVendor\Doctrine\ORM\Mapping as ORM;
 use MailPoetVendor\Symfony\Component\Validator\Constraints as Assert;
 
@@ -172,16 +171,9 @@ class SubscriberEntity {
    */
   private $subscriberCustomFields;
 
-  /**
-   * @ORM\OneToMany(targetEntity="MailPoet\Entities\SubscriberTagEntity", mappedBy="subscriber", orphanRemoval=true)
-   * @var Collection<int, SubscriberTagEntity>
-   */
-  private $subscriberTags;
-
   public function __construct() {
     $this->subscriberSegments = new ArrayCollection();
     $this->subscriberCustomFields = new ArrayCollection();
-    $this->subscriberTags = new ArrayCollection();
   }
 
   /**
@@ -438,16 +430,8 @@ class SubscriberEntity {
   /**
    * @return Collection<int, SubscriberSegmentEntity>
    */
-  public function getSubscriberSegments(?string $status = null) {
-    if (!is_null($status)) {
-      $criteria = Criteria::create()
-        ->where(Criteria::expr()->eq('status', SubscriberEntity::STATUS_SUBSCRIBED));
-      $subscriberSegments = $this->subscriberSegments->matching($criteria);
-    } else {
-      $subscriberSegments = $this->subscriberSegments;
-    }
-
-    return $subscriberSegments;
+  public function getSubscriberSegments() {
+    return $this->subscriberSegments;
   }
 
   public function getSegments() {
@@ -463,20 +447,6 @@ class SubscriberEntity {
    */
   public function getSubscriberCustomFields() {
     return $this->subscriberCustomFields;
-  }
-
-  /**
-   * @return Collection<int, SubscriberTagEntity>
-   */
-  public function getSubscriberTags() {
-    return $this->subscriberTags;
-  }
-
-  public function getSubscriberTag(TagEntity $tag): ?SubscriberTagEntity {
-    $criteria = Criteria::create()
-      ->where(Criteria::expr()->eq('tag', $tag))
-      ->setMaxResults(1);
-    return $this->getSubscriberTags()->matching($criteria)->first() ?: null;
   }
 
   /**

@@ -15,7 +15,6 @@ wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.installer-page.php'
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.settings-page.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/styling/class.styling-page.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/map-edit-page/class.map-edit-page.php');
-wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/map-edit-page/class.map-editor-tour.php');
 
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . "base/classes/widget_module.class.php" );
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . "includes/compat/backwards_compat_v6.php" );
@@ -173,11 +172,6 @@ class Plugin extends Factory
 					echo '<div class="error"><p>' . __('<strong>WP Go Maps:</strong> Allowed memory size was reached whilst generating XML cache. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
 				});
 			}
-		}
-
-		if(!empty($this->settings->enable_dynamic_sql_refac_filter)){
-			/* The dynamic SQL refactor option has been enabled */
-			add_filter('query', array($this, 'dynamicQueryRefactor'), 99, 1);
 		}
 	}
 	
@@ -514,7 +508,7 @@ class Plugin extends Factory
 	 */
 	public function isUsingMinifiedScripts()
 	{
-		return !$this->isInDeveloperMode();
+		return $this->isInDeveloperMode();
 	}
 	
 	/**
@@ -849,33 +843,6 @@ class Plugin extends Factory
 		if (substr($url, -1) != "/") { $url = $url."/"; }
 
 		return $url;
-	}
-
-	/**
-	 * Dynamically refactors SQL statements to not make use of single quote statements 
-	 * 
-	 * This is helpful on environments where single quote queries are not allowed, or not supported. 
-	 * 
-	 * Known hosts: WP Engine 
-	 * 
-	 * This will only run if the option is enabled 
-	 * 
-	 * @param string $sql The query that is about to be executed 
-	 * 
-	 * @return string
-	 */
-	public function dynamicQueryRefactor($sql){
-		if(strpos($sql, 'wpgmza') !== FALSE){
-			/* This is a WPGMZA query */
-			if(strpos($sql, "REPLACE(map_width_type, '\\\\', '')") !== FALSE){
-				/* Specifically for map params, which is a big cause of the issue */
-				$sql = str_replace("'\\\\'", "''", $sql);
-			}
-			
-			/* General replacement statement */
-			$sql = str_replace("\'", "''", $sql);
-		}
-		return $sql;
 	}
 
 	public static function get_rss_feed_as_html($feed_url, $max_item_cnt = 10, $show_date = true, $show_description = true, $max_words = 0, $cache_timeout = 7200, $cache_prefix = "/tmp/rss2html-") {

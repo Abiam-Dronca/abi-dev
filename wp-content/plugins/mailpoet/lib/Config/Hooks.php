@@ -94,7 +94,6 @@ class Hooks {
     $this->setupPostNotifications();
     $this->setupWooCommerceSettings();
     $this->setupFooter();
-    $this->setupSettingsLinkInPluginPage();
   }
 
   public function initEarlyHooks() {
@@ -377,7 +376,7 @@ class Hooks {
 
   public function appendImageSize($sizes) {
     return array_merge($sizes, [
-      'mailpoet_newsletter_max' => __('MailPoet Newsletter', 'mailpoet'),
+      'mailpoet_newsletter_max' => WPFunctions::get()->__('MailPoet Newsletter', 'mailpoet'),
     ]);
   }
 
@@ -418,24 +417,5 @@ class Hooks {
 
   public function setFooter($text) {
     return '<a href="https://feedback.mailpoet.com/" rel="noopener noreferrer" target="_blank">Give feedback</a>';
-  }
-
-  public function setupSettingsLinkInPluginPage() {
-    $this->wp->addFilter(
-      'plugin_action_links_' . Env::$pluginPath,
-      [$this, 'setSettingsLinkInPluginPage']
-    );
-  }
-
-  /**
-   * @param array<string, string> $actionLinks
-   * @return array<string, string>
-   */
-  public function setSettingsLinkInPluginPage(array $actionLinks): array {
-    $customLinks = [
-      'settings' => '<a href="' . $this->wp->adminUrl('admin.php?page=mailpoet-settings') . '" aria-label="' . $this->wp->escAttr(__('View MailPoet settings', 'mailpoet')) . '">' . $this->wp->escHtml(__('Settings', 'mailpoet')) . '</a>',
-    ];
-
-    return array_merge($customLinks, $actionLinks);
   }
 }

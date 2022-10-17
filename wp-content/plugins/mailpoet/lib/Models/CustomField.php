@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\Entities\CustomFieldEntity;
 use MailPoet\Util\DateConverter;
+use MailPoet\WP\Functions as WPFunctions;
 
 /**
  * @property string $name
@@ -26,10 +27,10 @@ class CustomField extends Model {
   public function __construct() {
     parent::__construct();
     $this->addValidations('name', [
-      'required' => __('Please specify a name.', 'mailpoet'),
+      'required' => WPFunctions::get()->__('Please specify a name.', 'mailpoet'),
     ]);
     $this->addValidations('type', [
-      'required' => __('Please specify a type.', 'mailpoet'),
+      'required' => WPFunctions::get()->__('Please specify a type.', 'mailpoet'),
     ]);
   }
 

@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\Config\AccessControl;
+use MailPoet\WP\Functions as WPFunctions;
 
 abstract class Endpoint {
   const TYPE_POST = 'POST';
@@ -29,7 +30,7 @@ abstract class Endpoint {
   ) {
     if (empty($errors)) {
       $errors = [
-        Error::UNKNOWN => __('An unknown error occurred.', 'mailpoet'),
+        Error::UNKNOWN => WPFunctions::get()->__('An unknown error occurred.', 'mailpoet'),
       ];
     }
     return new ErrorResponse($errors, $meta, $status);
@@ -38,7 +39,7 @@ abstract class Endpoint {
   public function badRequest($errors = [], $meta = []) {
     if (empty($errors)) {
       $errors = [
-        Error::BAD_REQUEST => __('Invalid request parameters', 'mailpoet'),
+        Error::BAD_REQUEST => WPFunctions::get()->__('Invalid request parameters', 'mailpoet'),
       ];
     }
     return new ErrorResponse($errors, $meta, Response::STATUS_BAD_REQUEST);

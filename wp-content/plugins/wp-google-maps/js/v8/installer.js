@@ -85,8 +85,6 @@ jQuery(function($) {
 
 		this.trigger('init.installer.admin');
 		this.loadStep(this.step);
-
-		this.checkAutoSkip();
 	}
 
 	WPGMZA.extend(WPGMZA.Installer, WPGMZA.EventDispatcher);
@@ -534,13 +532,6 @@ jQuery(function($) {
 				window.location.href = self.redirectUrl;
 			}
 		});
-	}
-
-	WPGMZA.Installer.prototype.checkAutoSkip = function(){
-		/* Check if the system was flagged for auto-skip mode */
-		if( this.element.data('auto-skip')){
-			this.skip();
-		}
 	}
 
 	$(document).ready(function(event) {

@@ -389,27 +389,6 @@ class WPForms_Process {
 			return;
 		}
 
-		$akismet = wpforms()->get( 'akismet' )->validate( $this->form_data, $entry );
-
-		// If Akismet marks the entry as spam, we want to log the entry and fail silently.
-		if ( $akismet ) {
-
-			$this->errors[ $form_id ]['header'] = $akismet;
-
-			// Log the spam entry depending on log levels set.
-			wpforms_log(
-				'Spam Entry ' . uniqid(),
-				[ $akismet, $entry ],
-				[
-					'type'    => [ 'spam' ],
-					'form_id' => $this->form_data['id'],
-				]
-			);
-
-			// Fail silently.
-			return;
-		}
-
 		// Pass the form created date into the form data.
 		$this->form_data['created'] = $form->post_date;
 
@@ -446,18 +425,6 @@ class WPForms_Process {
 
 		// Success - add entry to database.
 		$this->entry_id = $this->entry_save( $this->fields, $entry, $this->form_data['id'], $this->form_data );
-
-		/**
-		 * Runs right after adding entry to the database.
-		 *
-		 * @since 1.7.7
-		 *
-		 * @param array $fields    Fields data.
-		 * @param array $entry     User submitted data.
-		 * @param array $form_data Form data.
-		 * @param int   $entry_id  Entry ID.
-		 */
-		do_action( 'wpforms_process_entry_saved', $this->fields, $entry, $this->form_data, $this->entry_id );
 
 		// Fire the logic to send notification emails.
 		$this->entry_email( $this->fields, $entry, $this->form_data, $this->entry_id, 'entry' );
@@ -819,7 +786,7 @@ class WPForms_Process {
 		$fields = apply_filters( 'wpforms_entry_email_data', $fields, $entry, $form_data );
 
 		// Backwards compatibility for notifications before v1.4.3.
-		if ( empty( $form_data['settings']['notifications'] ) && ! empty( $form_data['settings']['notification_email'] ) ) {
+		if ( empty( $form_data['settings']['notifications'] ) ) {
 			$notifications[1] = array(
 				'email'          => $form_data['settings']['notification_email'],
 				'subject'        => $form_data['settings']['notification_subject'],

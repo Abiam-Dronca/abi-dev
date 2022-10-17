@@ -885,7 +885,7 @@ abstract class WPForms_Field {
 			 */
 			case 'label':
 				$value   = ! empty( $field['label'] ) ? esc_html( $field['label'] ) : '';
-				$tooltip = ! empty( $args['tooltip'] ) ? $args['tooltip'] : esc_html__( 'Enter text for the form field label. Field labels are recommended and can be hidden in the Advanced Settings.', 'wpforms-lite' );
+				$tooltip = esc_html__( 'Enter text for the form field label. Field labels are recommended and can be hidden in the Advanced Settings.', 'wpforms-lite' );
 				$output  = $this->field_element( 'label', $field, array( 'slug' => 'label', 'value' => esc_html__( 'Label', 'wpforms-lite' ), 'tooltip' => $tooltip ), false );
 				$output .= $this->field_element( 'text',  $field, array( 'slug' => 'label', 'value' => $value ), false );
 				$output  = $this->field_element( 'row',   $field, array( 'slug' => 'label', 'content' => $output ), false );
@@ -935,7 +935,7 @@ abstract class WPForms_Field {
 			 * Field Meta (field type and ID).
 			 */
 			case 'meta':
-				_deprecated_argument( __CLASS__ . '::' . __METHOD__ . '( [ \'slug\' => \'meta\' ] )', '1.7.1 of the WPForms plugin' );
+				_deprecated_argument( __CLASS__ . '::' . __METHOD__ . '( [ \'slug\' => \'meta\' ] )', '1.7.1' );
 
 				$output = sprintf( '<label>%s</label>', esc_html__( 'Type', 'wpforms-lite' ) );
 
@@ -1355,14 +1355,11 @@ abstract class WPForms_Field {
 			 * Placeholder.
 			 */
 			case 'placeholder':
-				$class   = ! empty( $args['class'] ) ? esc_html( $args['class'] ) : '';
 				$value   = ! empty( $field['placeholder'] ) ? esc_attr( $field['placeholder'] ) : '';
 				$tooltip = esc_html__( 'Enter text for the form field placeholder.', 'wpforms-lite' );
-				// phpcs:disable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
-				$output  = $this->field_element( 'label', $field, [ 'slug' => 'placeholder', 'value' => esc_html__( 'Placeholder Text', 'wpforms-lite' ), 'tooltip' => $tooltip ], false );
-				$output .= $this->field_element( 'text',  $field, [ 'slug' => 'placeholder', 'value' => $value ], false );
-				$output  = $this->field_element( 'row',   $field, [ 'slug' => 'placeholder', 'content' => $output, 'class' => $class ], false );
-				// phpcs:enable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
+				$output  = $this->field_element( 'label', $field, array( 'slug' => 'placeholder', 'value' => esc_html__( 'Placeholder Text', 'wpforms-lite' ), 'tooltip' => $tooltip ), false );
+				$output .= $this->field_element( 'text',  $field, array( 'slug' => 'placeholder', 'value' => $value ), false );
+				$output  = $this->field_element( 'row',   $field, array( 'slug' => 'placeholder', 'content' => $output ), false );
 				break;
 
 			/*
@@ -1696,7 +1693,7 @@ abstract class WPForms_Field {
 
 							foreach ( $posts as $post ) {
 								$values[] = [
-									'label' => esc_html( wpforms_get_post_title( $post ) ),
+									'label' => $post->post_title,
 								];
 							}
 							break;
@@ -1721,11 +1718,20 @@ abstract class WPForms_Field {
 
 							foreach ( $terms as $term ) {
 								$values[] = [
-									'label' => esc_html( wpforms_get_term_name( $term ) ),
+									'label' => $term->name,
 								];
 							}
 							break;
 					}
+				}
+
+				// Notify if dynamic choices source is currently empty.
+				if ( empty( $values ) ) {
+					$values = [
+						[
+							'label' => esc_html__( '(empty)', 'wpforms-lite' ),
+						],
+					];
 				}
 
 				// Build output.
@@ -1764,10 +1770,6 @@ abstract class WPForms_Field {
 
 				// Special rules for <select>-based fields.
 				if ( $type === 'select' ) {
-					if ( empty( $values ) ) {
-						$list_class[] = 'wpforms-hidden';
-					}
-
 					$multiple    = ! empty( $field['multiple'] ) ? ' multiple' : '';
 					$placeholder = ! empty( $field['placeholder'] ) ? $field['placeholder'] : '';
 
@@ -1917,23 +1919,21 @@ abstract class WPForms_Field {
 	public function field_new() {
 
 		// Run a security check.
-		if ( ! check_ajax_referer( 'wpforms-builder', 'nonce', false ) ) {
-			wp_send_json_error( esc_html__( 'Your session expired. Please reload the builder.', 'wpforms-lite' ) );
-		}
+		check_ajax_referer( 'wpforms-builder', 'nonce' );
 
 		// Check for permissions.
 		if ( ! wpforms_current_user_can( 'edit_forms' ) ) {
-			wp_send_json_error( esc_html__( 'You are not allowed to perform this action.', 'wpforms-lite' ) );
+			die( esc_html__( 'You do not have permission.', 'wpforms-lite' ) );
 		}
 
 		// Check for form ID.
-		if ( empty( $_POST['id'] ) ) {
-			wp_send_json_error( esc_html__( 'No form ID found', 'wpforms-lite' ) );
+		if ( ! isset( $_POST['id'] ) || empty( $_POST['id'] ) ) {
+			die( esc_html__( 'No form ID found', 'wpforms-lite' ) );
 		}
 
 		// Check for field type to add.
-		if ( empty( $_POST['type'] ) ) {
-			wp_send_json_error( esc_html__( 'No field type found', 'wpforms-lite' ) );
+		if ( ! isset( $_POST['type'] ) || empty( $_POST['type'] ) ) {
+			die( esc_html__( 'No field type found', 'wpforms-lite' ) );
 		}
 
 		// Grab field data.
@@ -2188,17 +2188,12 @@ abstract class WPForms_Field {
 		$config = [
 			'removeItemButton'  => true,
 			'shouldSort'        => false,
-			// Forces the search to look for exact matches anywhere in the string.
-			'fuseOptions'       => [
-				'threshold' => 0.1,
-				'distance'  => 1000,
-			],
 			'loadingText'       => esc_html__( 'Loading...', 'wpforms-lite' ),
-			'noResultsText'     => esc_html__( 'No results found', 'wpforms-lite' ),
-			'noChoicesText'     => esc_html__( 'No choices to choose from', 'wpforms-lite' ),
-			'itemSelectText'    => esc_attr__( 'Press to select', 'wpforms-lite' ),
-			'uniqueItemText'    => esc_html__( 'Only unique values can be added', 'wpforms-lite' ),
-			'customAddItemText' => esc_html__( 'Only values matching specific conditions can be added', 'wpforms-lite' ),
+			'noResultsText'     => esc_html__( 'No results found.', 'wpforms-lite' ),
+			'noChoicesText'     => esc_html__( 'No choices to choose from.', 'wpforms-lite' ),
+			'itemSelectText'    => esc_attr__( 'Press to select.', 'wpforms-lite' ),
+			'uniqueItemText'    => esc_html__( 'Only unique values can be added.', 'wpforms-lite' ),
+			'customAddItemText' => esc_html__( 'Only values matching specific conditions can be added.', 'wpforms-lite' ),
 		];
 
 		/**

@@ -5,7 +5,7 @@
  */
 
 /*!
- * clipboard.js v2.0.11
+ * clipboard.js v2.0.10
  * https://clipboardjs.com/
  *
  * Licensed MIT © Zeno Rocha
@@ -25,7 +25,3 @@
  * @internal
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
  */
-
-//! moment.js
-
-//! moment.js locale configuration

@@ -430,46 +430,6 @@
 		flex-direction: row;
 	}
 }
-.rtl {
-	.footer-widget-area.content-align-right {
-		.footer-social-inner-wrap {
-			justify-content: flex-start;
-		}
-	}
-	.footer-widget-area.content-align-left {
-		.footer-social-inner-wrap {
-			justify-content: flex-end;
-		}
-	}
-}
-@media screen and (max-width: $tablet-minus-query) {
-	.rtl {
-		.footer-widget-area.content-tablet-align-right {
-			.footer-social-inner-wrap {
-				justify-content: flex-start;
-			}
-		}
-		.footer-widget-area.content-tablet-align-left {
-			.footer-social-inner-wrap {
-				justify-content: flex-end;
-			}
-		}
-	}
-}
-@media screen and (max-width: $phone-minus-query) {
-	.rtl {
-		.footer-widget-area.content-mobile-align-right {
-			.footer-social-inner-wrap {
-				justify-content: flex-start;
-			}
-		}
-		.footer-widget-area.content-mobile-align-left {
-			.footer-social-inner-wrap {
-				justify-content: flex-end;
-			}
-		}
-	}
-}
 // Footer Navigation.
 .footer-navigation, .footer-menu-container {
 	display: flex;

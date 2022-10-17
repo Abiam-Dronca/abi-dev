@@ -177,19 +177,7 @@ abstract class CacheBase {
 	 */
 	public function update_cache() {
 
-		$wpforms_key = 'lite';
-
-		if ( wpforms()->is_pro() ) {
-			$wpforms_key = wpforms_get_license_key();
-		}
-
-		$request = wp_remote_get(
-			add_query_arg( 'tgm-updater-key', $wpforms_key, $this->settings['remote_source'] ),
-			[
-				'timeout'    => 10,
-				'user-agent' => wpforms_get_default_user_agent(),
-			]
-		);
+		$request = wp_remote_get( $this->settings['remote_source'] );
 
 		if ( is_wp_error( $request ) ) {
 			return [];

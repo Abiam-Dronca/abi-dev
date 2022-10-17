@@ -10,7 +10,6 @@ use MailPoet\Entities\CustomFieldEntity;
 use MailPoet\Entities\SubscriberCustomFieldEntity;
 use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Entities\SubscriberSegmentEntity;
-use MailPoet\Entities\SubscriberTagEntity;
 use MailPoet\Models\ModelValidator;
 use MailPoet\Newsletter\Options\NewsletterOptionsRepository;
 use MailPoet\Segments\WP;
@@ -18,7 +17,6 @@ use MailPoet\Subscribers\ImportExport\ImportExportFactory;
 use MailPoet\Subscribers\ImportExport\ImportExportRepository;
 use MailPoet\Subscribers\Source;
 use MailPoet\Subscribers\SubscribersRepository;
-use MailPoet\Tags\TagRepository;
 use MailPoet\Util\DateConverter;
 use MailPoet\Util\Helpers;
 use MailPoet\Util\Security;
@@ -30,8 +28,6 @@ class Import {
   public $subscribersData;
   /** @var array */
   public $segmentsIds;
-  /** @var string[] */
-  public $tags;
   /** @var string */
   public $newSubscribersStatus;
   /** @var string */
@@ -71,16 +67,12 @@ class Import {
   /** @var SubscribersRepository */
   private $subscriberRepository;
 
-  /** @var TagRepository */
-  private $tagRepository;
-
   public function __construct(
     WP $wpSegment,
     CustomFieldsRepository $customFieldsRepository,
     ImportExportRepository $importExportRepository,
     NewsletterOptionsRepository $newsletterOptionsRepository,
     SubscribersRepository $subscriberRepository,
-    TagRepository $tagRepository,
     array $data
   ) {
     $this->wpSegment = $wpSegment;
@@ -88,14 +80,12 @@ class Import {
     $this->importExportRepository = $importExportRepository;
     $this->newsletterOptionsRepository = $newsletterOptionsRepository;
     $this->subscriberRepository = $subscriberRepository;
-    $this->tagRepository = $tagRepository;
     $this->validateImportData($data);
     $this->subscribersData = $this->transformSubscribersData(
       $data['subscribers'],
       $data['columns']
     );
     $this->segmentsIds = $data['segments'];
-    $this->tags = $data['tags'];
     $this->newSubscribersStatus = $data['newSubscribersStatus'];
     $this->existingSubscribersStatus = $data['existingSubscribersStatus'];
     $this->updateSubscribers = $data['updateSubscribers'];
@@ -125,7 +115,6 @@ class Import {
       'newSubscribersStatus',
       'existingSubscribersStatus',
       'updateSubscribers',
-      'tags',
     ];
     // 1. data should contain all required fields
     // 2. column names should only contain alphanumeric & underscore characters
@@ -526,8 +515,6 @@ class Import {
       }
     }
     if (empty($createdOrUpdatedSubscribers)) return null;
-
-    $this->subscriberRepository->invalidateTotalSubscribersCache();
     $createdOrUpdatedSubscribersIds = array_column($createdOrUpdatedSubscribers, 'id');
     if ($subscribersCustomFields) {
       $this->createOrUpdateCustomFields(
@@ -540,10 +527,6 @@ class Import {
     $this->addSubscribersToSegments(
       $createdOrUpdatedSubscribersIds,
       $this->segmentsIds
-    );
-    $this->addTagsToSubscribers(
-      $createdOrUpdatedSubscribersIds,
-      $this->tags
     );
     return $createdOrUpdatedSubscribers;
   }
@@ -608,9 +591,7 @@ class Import {
    * @return array
    */
   public function synchronizeWPUsers(array $wpUsers): array {
-    $users = array_map([$this->wpSegment, 'synchronizeUser'], $wpUsers);
-    $this->subscriberRepository->invalidateTotalSubscribersCache();
-    return $users;
+    return array_map([$this->wpSegment, 'synchronizeUser'], $wpUsers);
   }
 
   public function addSubscribersToSegments(array $subscribersIds, array $segmentsIds): void {
@@ -619,9 +600,9 @@ class Import {
       'segment_id',
       'created_at',
     ];
-    foreach ($segmentsIds as $segmentId) {
-      foreach (array_chunk($subscribersIds, self::DB_QUERY_CHUNK_SIZE) as $subscriberIdsChunk) {
-        $data = [];
+    foreach (array_chunk($subscribersIds, self::DB_QUERY_CHUNK_SIZE) as $subscriberIdsChunk) {
+      $data = [];
+      foreach ($segmentsIds as $segmentId) {
         $data = array_merge($data, array_map(function ($subscriberId) use ($segmentId): array {
           return [
             $subscriberId,
@@ -629,52 +610,12 @@ class Import {
             $this->createdAt,
           ];
         }, $subscriberIdsChunk));
-
-        $this->importExportRepository->insertMultiple(
-          SubscriberSegmentEntity::class,
-          $columns,
-          $data
-        );
       }
-    }
-  }
-
-  /**
-   * @param int[] $subscribersIds
-   * @param string[] $tagNames
-   */
-  public function addTagsToSubscribers(array $subscribersIds, array $tagNames): void {
-    $tagIds = [];
-    foreach ($tagNames as $tagName) {
-      $tag = $this->tagRepository->findOneBy(['name' => $tagName]);
-      if (!$tag) {
-        $tag = $this->tagRepository->createOrUpdate(['name' => $tagName]);
-      }
-      $tagIds[] = $tag->getId();
-    }
-
-    $columns = [
-      'subscriber_id',
-      'tag_id',
-      'created_at',
-    ];
-    foreach ($tagIds as $tagId) {
-      foreach (array_chunk($subscribersIds, self::DB_QUERY_CHUNK_SIZE) as $subscriberIdsChunk) {
-        $data = [];
-        $data = array_merge($data, array_map(function ($subscriberId) use ($tagId): array {
-          return [
-            $subscriberId,
-            $tagId,
-            $this->createdAt,
-          ];
-        }, $subscriberIdsChunk));
-
-        $this->importExportRepository->insertMultiple(
-          SubscriberTagEntity::class,
-          $columns,
-          $data
-        );
-      }
+      $this->importExportRepository->insertMultiple(
+        SubscriberSegmentEntity::class,
+        $columns,
+        $data
+      );
     }
   }
 }
