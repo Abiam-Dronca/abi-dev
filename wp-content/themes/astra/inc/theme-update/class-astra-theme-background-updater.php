@@ -128,6 +128,18 @@ if ( ! class_exists( 'Astra_Theme_Background_Updater' ) ) {
 				'astra_update_customizer_layout_defaults',
 				'astra_apply_modern_block_editor_v2_ui',
 			),
+			'3.9.0' => array(
+				'astra_update_single_product_breadcrumb',
+				'astra_display_cart_total_title_compatibility',
+				'astra_update_woocommerce_cart_icons',
+				'astra_legacy_customizer_maintenance',
+				'astra_apply_modern_ecommerce_setup',
+				'astra_responsive_shop_content_alignment',
+			),
+			'3.9.2' => array(
+				'astra_apply_woocommerce_show_password_icon_css',
+				'astra_shop_style_design_layout',
+			),
 		);
 
 		/**

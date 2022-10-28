@@ -890,7 +890,7 @@ function astra_apply_modern_block_editor_ui() {
 /**
  * Set flag to avoid direct reflections on live site & to maintain backward compatibility for existing users.
  *
- * Backward flag purpose - To keep strctural defaults updation by filter.
+ * Backward flag purpose - To keep structure defaults updation by filter.
  *
  * @since 3.8.3
  * @return void
@@ -924,6 +924,136 @@ function astra_apply_modern_block_editor_v2_ui() {
 		$option_updated                = true;
 	}
 	if ( $option_updated ) {
+		update_option( 'astra-settings', $theme_options );
+	}
+}
+
+/**
+ * Display Cart Total and Title compatibility.
+ *
+ * @since 3.9.0
+ * @return void
+ */
+function astra_display_cart_total_title_compatibility() {
+	$theme_options = get_option( 'astra-settings', array() );
+
+	if ( ! isset( $theme_options['woo-header-cart-label-display'] ) ) {
+		// Set the Display Cart Label toggle values with shortcodes.
+		$cart_total_status = isset( $theme_options['woo-header-cart-total-display'] ) ? $theme_options['woo-header-cart-total-display'] : true;
+		$cart_label_status = isset( $theme_options['woo-header-cart-title-display'] ) ? $theme_options['woo-header-cart-title-display'] : true;
+
+		if ( $cart_total_status && $cart_label_status ) {
+			$theme_options['woo-header-cart-label-display'] = __( 'Cart', 'astra' ) . '/{cart_total_currency_symbol}';
+		} elseif ( $cart_total_status ) {
+			$theme_options['woo-header-cart-label-display'] = '{cart_total_currency_symbol}';
+		} elseif ( $cart_label_status ) {
+			$theme_options['woo-header-cart-label-display'] = __( 'Cart', 'astra' );
+		}
+
+		update_option( 'astra-settings', $theme_options );
+	}
+}
+
+/**
+ * If old user then it keeps then default cart icon.
+ *
+ * @since 3.9.0
+ * @return void
+ */
+function astra_update_woocommerce_cart_icons() {
+	$theme_options = get_option( 'astra-settings', array() );
+
+	if ( ! isset( $theme_options['astra-woocommerce-cart-icons-flag'] ) ) {
+		$theme_options['astra-woocommerce-cart-icons-flag'] = false;
+	}
+}
+
+/**
+ * Set brder color to blank for old users for new users 'default' will take over.
+ *
+ * @since 3.9.0
+ * @return void
+ */
+function astra_legacy_customizer_maintenance() {
+	$theme_options = get_option( 'astra-settings', array() );
+	if ( ! isset( $theme_options['border-color'] ) ) {
+		$theme_options['border-color'] = '#dddddd';
+		update_option( 'astra-settings', $theme_options );
+	}
+}
+
+/**
+ * Enable single product breadcrumb to maintain backward compatibility for existing users.
+ *
+ * @since 3.9.0
+ * @return void
+ */
+function astra_update_single_product_breadcrumb() {
+	$theme_options = get_option( 'astra-settings', array() );
+	if ( isset( $theme_options['single-product-breadcrumb-disable'] ) ) {
+		$theme_options['single-product-breadcrumb-disable'] = ( true === $theme_options['single-product-breadcrumb-disable'] ) ? false : true;
+	} else {
+		$theme_options['single-product-breadcrumb-disable'] = true;
+	}
+	update_option( 'astra-settings', $theme_options );
+}
+
+/**
+ * Restrict direct changes on users end so make it filterable.
+ *
+ * @since 3.9.0
+ * @return void
+ */
+function astra_apply_modern_ecommerce_setup() {
+	$theme_options = get_option( 'astra-settings', array() );
+	if ( ! isset( $theme_options['modern-ecommerce-setup'] ) ) {
+		$theme_options['modern-ecommerce-setup'] = false;
+		update_option( 'astra-settings', $theme_options );
+	}
+}
+
+/**
+ * Migrate old user data to new responsive format layout for shop's summary box content alignment.
+ *
+ * @since 3.9.0
+ * @return void
+ */
+function astra_responsive_shop_content_alignment() {
+	$theme_options = get_option( 'astra-settings', array() );
+	if ( ! isset( $theme_options['shop-product-align-responsive'] ) && isset( $theme_options['shop-product-align'] ) ) {
+		$theme_options['shop-product-align-responsive'] = array(
+			'desktop' => $theme_options['shop-product-align'],
+			'tablet'  => $theme_options['shop-product-align'],
+			'mobile'  => $theme_options['shop-product-align'],
+		);
+		update_option( 'astra-settings', $theme_options );
+	}
+}
+
+/**
+ * Change default layout to standard for old users.
+ *
+ * @since 3.9.2
+ * @return void
+ */
+function astra_shop_style_design_layout() {
+	$theme_options = get_option( 'astra-settings', array() );
+	if ( ! isset( $theme_options['woo-shop-style-flag'] ) ) {
+		$theme_options['woo-shop-style-flag'] = true;
+		update_option( 'astra-settings', $theme_options );
+	}
+}
+
+/**
+ * Apply css for show password icon on woocommerce account page.
+ *
+ * @since 3.9.2
+ * @return void
+ */
+function astra_apply_woocommerce_show_password_icon_css() {
+	$theme_options = get_option( 'astra-settings', array() );
+	if ( ! isset( $theme_options['woo-show-password-icon'] ) ) {
+		$theme_options['woo-show-password-icon'] = false;
 		update_option( 'astra-settings', $theme_options );
 	}
 }
