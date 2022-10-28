@@ -4,13 +4,6 @@
  * Released under the MIT License.
  */
 
-/*!
- * clipboard.js v2.0.10
- * https://clipboardjs.com/
- *
- * Licensed MIT © Zeno Rocha
- */
-
 /**
  * Checks if an event is supported in the current execution environment.
  *

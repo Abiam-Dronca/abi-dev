@@ -25,7 +25,7 @@
                     <?php echo intval($form->id) .' - '. esc_attr($form->title);  ?>
                 </li>
                 <li>
-                    <a href="<?php echo admin_url('admin.php?page=fluent_forms&form_id=' . intval($form_id) . '&route=editor') ?>">Edit Fields</a>
+                    <a href="<?php echo esc_url(admin_url('admin.php?page=fluent_forms&form_id=' . intval($form_id) . '&route=editor')) ?>">Edit Fields</a>
                 </li>
             </ul>
         </div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="ff_promo_body">
                         <p><a target="_blank" href="https://wpmanageninja.com/docs/fluent-form/fluent-forms-styles/">Advanced Form styler</a> is available in Pro version of Fluent Forms.
-                            You can style every element of the forms including input fields, form container, succes / error messages and many more.</p>
+                            You can style every element of the forms including input fields, form container, success / error messages and many more.</p>
                         <h4>Other Features</h4>
                         <ul>
                             <li>Stripe & PayPal Integration</li>
@@ -64,7 +64,7 @@
                             <li>Visual Data Reporting</li>
                         </ul>
                         <p style="text-align: center">
-                            <a target="_blank" rel="nofollow" class="ff_upgrade_btn" href="<?php echo fluentform_upgrade_url(); ?>">Upgrade to Pro</a>
+                            <a target="_blank" rel="nofollow" class="ff_upgrade_btn" href="<?php echo esc_url(fluentform_upgrade_url()); ?>">Upgrade to Pro</a>
                         </p>
 
 
@@ -80,7 +80,7 @@
                         </ul>
 
                         <p style="text-align: center">
-                            <a target="_blank" rel="nofollow" class="ff_upgrade_btn" href="<?php echo fluentform_upgrade_url(); ?>">Upgrade to Pro</a>
+                            <a target="_blank" rel="nofollow" class="ff_upgrade_btn" href="<?php echo esc_url(fluentform_upgrade_url()); ?>">Upgrade to Pro</a>
                         </p>
                     </div>
                 </div>
