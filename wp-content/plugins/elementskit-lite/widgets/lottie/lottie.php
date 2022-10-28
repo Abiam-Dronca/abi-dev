@@ -11,13 +11,6 @@ class ElementsKit_Widget_Lottie extends Widget_Base {
     use \ElementsKit_Lite\Widgets\Widget_Notice;
 
     public $base;
-    
-    public function __construct( $data = [], $args = null ) {
-        parent::__construct( $data, $args );
-        
-        wp_register_script( 'lottie', Handler::get_url() . 'assets/js/lottie.min.js', null, '5.6.8', true );
-        wp_register_script( 'lottie-init', Handler::get_url() . 'assets/js/lottie.init.js', ['lottie', 'elementor-frontend'], \ElementsKit_Lite::version(), true );
-    }
 
     public function get_script_depends() {
         return ['lottie', 'lottie-init'];
@@ -40,7 +33,7 @@ class ElementsKit_Widget_Lottie extends Widget_Base {
     }
 
     public function get_help_url() {
-        return '';
+        return 'https://wpmet.com/doc/lottie-animation/';
     }
 
     protected function register_controls() {
@@ -98,6 +91,9 @@ class ElementsKit_Widget_Lottie extends Widget_Base {
                         '</a>'
                     ),
                     'type'          => \Elementor\Controls_Manager::TEXT,
+					'dynamic'       => [
+						'active' => true,
+					],
                     'placeholder'   => esc_html__( 'https://example.com/file.json', 'elementskit-lite' ),
                     'show_external' => false,
                     'condition'     => [
@@ -119,6 +115,9 @@ class ElementsKit_Widget_Lottie extends Widget_Base {
                 [
                     'show_label'    => false,
                     'type'          => \Elementor\Controls_Manager::URL,
+					'dynamic'       => [
+						'active' => true,
+					],
                     'condition'     => [
                         'ekit_lottie_link_check'    => 'yes'
                     ],

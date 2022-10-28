@@ -29,7 +29,7 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
     }
 
     public function get_help_url() {
-        return '';
+        return 'https://wpmet.com/doc/icon-box-4/';
     }
 
     protected function register_controls() {
@@ -444,6 +444,9 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
             [
                 'label' => esc_html__( 'Title', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => esc_html__( 'EXCLUSIVE', 'elementskit-lite' ),
                 'placeholder' => esc_html__( 'Type your title here', 'elementskit-lite' ),
                 'condition' => [
@@ -593,6 +596,23 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
                 'name' => 'ekit_icon_box_iocnbox_border_group',
                 'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-infobox',
+                'fields_options' => [
+					'border' => [
+						'default' => 'solid',
+					],
+                    'size_units'     => ['px'],
+					'width'  => [
+						'default' => [
+							'top'      => '1',
+							'right'    => '1',
+							'bottom'   => '1',
+							'left'     => '1',
+						],
+					],
+					'color'  => [
+						'default' => '#f5f5f5',
+                    ]
+                ]    
             ]
         );
         $this->add_responsive_control(
@@ -601,6 +621,13 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
                 'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'top'      => '5',
+                    'right'    => '5',
+                    'bottom'   => '5',
+                    'left'     => '5',
+                    'unit'     => 'px',
+                ],
                 'selectors' => [
                     '{{WRAPPER}} .elementskit-infobox' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -648,7 +675,7 @@ class ElementsKit_Widget_Icon_Box extends Widget_Base {
             [
                 'name' => 'ekit_icon_box_icon_box_border_hv_group',
                 'label' => esc_html__( 'Border', 'elementskit-lite' ),
-                'selector' => '{{WRAPPER}} .elementskit-infobox:hover',
+                'selector' => '{{WRAPPER}} .elementskit-infobox:hover',   
             ]
         );
         $this->add_responsive_control(

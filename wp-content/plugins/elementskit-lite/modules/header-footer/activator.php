@@ -32,6 +32,10 @@ class Activator {
 				new Theme_Hooks\Astra( self::template_ids() );
 				break;
 
+			case 'neve':
+				new Theme_Hooks\Neve( self::template_ids() );
+				break;
+
 			case 'generatepress':  
 			case 'generatepress-child':
 				new Theme_Hooks\Generatepress( self::template_ids() );
@@ -121,105 +125,6 @@ class Activator {
 				array(
 					'key'   => 'condition_a',
 					'value' => 'entire_site',
-				),
-			);
-			$this->get_header_footer( $filters );
-		}
-
-		// all archive
-		if ( is_archive() ) {
-			$filters = array(
-				array(
-					'key'   => 'condition_a',
-					'value' => 'archive',
-				),
-			);
-			$this->get_header_footer( $filters );
-		}
-
-		// all singular
-		if ( is_page() || is_single() || is_404() ) {
-			$filters = array(
-				array(
-					'key'   => 'condition_a',
-					'value' => 'singular',
-				),
-				array(
-					'key'   => 'condition_singular',
-					'value' => 'all',
-				),
-			);
-			$this->get_header_footer( $filters );
-		}
-		
-		// all pages, all posts, 404 page
-		if ( is_page() ) {
-			$filters = array(
-				array(
-					'key'   => 'condition_a',
-					'value' => 'singular',
-				),
-				array(
-					'key'   => 'condition_singular',
-					'value' => 'all_pages',
-				),
-			);
-			$this->get_header_footer( $filters );
-		} elseif ( is_single() ) {
-			$filters = array(
-				array(
-					'key'   => 'condition_a',
-					'value' => 'singular',
-				),
-				array(
-					'key'   => 'condition_singular',
-					'value' => 'all_posts',
-				),
-			);
-			$this->get_header_footer( $filters );
-		} elseif ( is_404() ) {
-			$filters = array(
-				array(
-					'key'   => 'condition_a',
-					'value' => 'singular',
-				),
-				array(
-					'key'   => 'condition_singular',
-					'value' => '404page',
-				),
-			);
-			$this->get_header_footer( $filters );
-		}
-
-		// singular selective
-		if ( is_page() || is_single() ) {
-			$filters = array(
-				array(
-					'key'   => 'condition_a',
-					'value' => 'singular',
-				),
-				array(
-					'key'   => 'condition_singular',
-					'value' => 'selective',
-				),
-				array(
-					'key'   => 'condition_singular_id',
-					'value' => get_the_ID(),
-				),
-			);
-			$this->get_header_footer( $filters );
-		}
-
-		// homepage
-		if ( is_home() || is_front_page() ) {
-			$filters = array(
-				array(
-					'key'   => 'condition_a',
-					'value' => 'singular',
-				),
-				array(
-					'key'   => 'condition_singular',
-					'value' => 'front_page',
 				),
 			);
 			$this->get_header_footer( $filters );

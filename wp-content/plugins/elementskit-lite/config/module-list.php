@@ -89,11 +89,6 @@ class Module_List extends \ElementsKit_Lite\Core\Config_List {
 					'package' => 'pro-disabled',
 					'title'   => 'Advanced Tooltip',
 				),
-				'form-conditional-fields' => array(
-					'slug'    => 'conditional-fields-for-elementor-pro-form',
-					'package' => 'pro-disabled',
-					'title'   => 'Conditional Fields For Elementor Pro Form',
-				),
 				'pro-form-reset-button' => array(
 					'slug'    => 'pro-form-reset-button',
 					'package' => 'pro-disabled',
@@ -104,10 +99,10 @@ class Module_List extends \ElementsKit_Lite\Core\Config_List {
 					'package' => 'pro-disabled',
 					'title'   => 'Google Sheet For Elementor Pro Form',
 				),
-				'pro-form-signature-field' => array(
-					'slug'    => 'pro-form-signature-field',
+				'masking' => array(
+					'slug'    => 'masking',
 					'package' => 'pro-disabled',
-					'title'   => 'Signature Field For Pro Form',
+					'title'   => 'Masking',
 				),
 			)
 		);
