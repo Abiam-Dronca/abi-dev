@@ -7,7 +7,7 @@ import { map } from 'lodash';
  * WordPress dependencies
  */
 
-const { __, sprintf } = wp.i18n;
+import { __, sprintf } from '@wordpress/i18n';
 
 const {
 	useCallback,

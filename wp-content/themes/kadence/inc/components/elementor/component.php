@@ -54,7 +54,6 @@ class Component implements Component_Interface {
 		// Add Scripts for elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'elementor_add_scripts' ) );
 		//add_action( 'wp_enqueue_scripts', array( $this, 'add_styles' ), 60 );
-		add_action( 'elementor/document/before_save', array( $this, 'elementor_before_save' ), 10, 2 );
 		add_action( 'elementor/document/after_save', array( $this, 'elementor_after_save' ), 10, 2 );
 		add_filter( 'body_class', array( $this, 'filter_body_classes_add_editing_class' ) );
 	}
@@ -82,11 +81,7 @@ class Component implements Component_Interface {
 
 		return $classes;
 	}
-	public function elementor_before_save( $object, $data ) {
-		//error_log( print_r( $data, true ) );
-	}
 	public function elementor_after_save( $object, $data ) {
-		//error_log( print_r( $data, true ) );
 		if ( apply_filters( 'kadence_add_global_colors_to_elementor', true ) ) {
 			// Prevent Errors.
 			if ( ! current_user_can( 'edit_theme_options' ) ) {
@@ -139,39 +134,7 @@ class Component implements Component_Interface {
 						$update_palette = true;
 					}
 				}
-				// if ( isset( $data['settings']['custom_colors'] ) && is_array( $data['settings']['custom_colors'] ) ) {
-				// 	foreach ( $data['settings']['custom_colors'] as $key => $value ) {
-				// 		if ( 'kadence1' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][0]['color'];
-				// 		}
-				// 		if ( 'kadence2' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][1]['color'];
-				// 		}
-				// 		if ( 'kadence3' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][2]['color'];
-				// 		}
-				// 		if ( 'kadence4' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][3]['color'];
-				// 		}
-				// 		if ( 'kadence5' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][4]['color'];
-				// 		}
-				// 		if ( 'kadence6' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][5]['color'];
-				// 		}
-				// 		if ( 'kadence7' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][6]['color'];
-				// 		}
-				// 		if ( 'kadence8' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][7]['color'];
-				// 		}
-				// 		if ( 'kadence9' == $value['_id'] ) {
-				// 			$data['settings']['custom_colors'][$key]['color'] = $palette[$active][8]['color'];
-				// 		}
-				// 	}
-				// }
 				$current = \Elementor\Plugin::$instance->kits_manager->get_current_settings();
-				//error_log( print_r( $current, true ) );
 				if ( $current && isset( $current['custom_colors'] ) && $update_palette ) {
 					$custom_colors = $current['custom_colors'];
 					$kadence_add = true;
@@ -209,19 +172,10 @@ class Component implements Component_Interface {
 						}
 					}
 					if ( $kadence_add ) {
-						$custom_colors = array_merge( $theme_colors, $custom_colors );
+						\Elementor\Plugin::$instance->kits_manager->update_kit_settings_based_on_option( 'custom_colors', $custom_colors );
 					}
-					//error_log( 'update?' );
-					//error_log( print_r( $custom_colors, true ) );
-					error_log( 'Is the Error Here?' );
-					\Elementor\Plugin::$instance->kits_manager->update_kit_settings_based_on_option( 'custom_colors', $custom_colors );
-					// Refresh cache.
-					//\Elementor\Plugin::instance()->files_manager->clear_cache();
-					//\Elementor\Plugin::$instance->documents->get( Plugin::$instance->kits_manager->get_active_id(), false );
 				}
 				if ( $update_palette ) {
-					// error_log( 'update?' );
-					// error_log( print_r( $palette, true ) );
 					update_option( 'kadence_global_palette', json_encode( $palette ) );
 				}
 			}

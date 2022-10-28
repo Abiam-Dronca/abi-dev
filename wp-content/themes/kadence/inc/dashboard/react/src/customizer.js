@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { Fragment } = wp.element;
 import map from 'lodash/map';
 const { withFilters, TabPanel, Panel, PanelBody, PanelRow, Button } = wp.components;
@@ -54,7 +54,6 @@ export const CustomizerLinks = () => {
 	return (
 		<Fragment>
 			<h2 className="section-header">{ __( 'Customize Your Site', 'kadence' ) }</h2>
-			{/* <h3 className="section-sub-head">{ __( 'Header Builder', 'kadence' ) }</h3> */}
 			<div className="two-col-grid">
 				{ map( headerLinks, ( link ) => {
 					return (

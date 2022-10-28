@@ -663,7 +663,7 @@ if ( window.NodeList && ! NodeList.prototype.forEach ) {
 						var isScrollingDown = currScrollTop > lastScrollTop;
 						if ( currScrollTop <= totalOffset ) {
 							activeHeader.style.transform = 'translateY(0px)';
-						} else if ( isScrollingDown ) {
+                        } else if ( isScrollingDown ) {
 							activeHeader.classList.add('item-hidden-above');
 							activeHeader.style.transform = 'translateY(' + ( Math.abs( elTopOff ) > elHeight ? -elHeight : elTopOff ) + 'px)';
 						} else {
@@ -683,12 +683,30 @@ if ( window.NodeList && ! NodeList.prototype.forEach ) {
 						parent.classList.add('child-is-fixed');
 						document.body.classList.add('header-is-fixed');
 					} else if ( window.scrollY > totalOffset ) {
-						activeHeader.style.top = offsetTop + 'px';
-						activeHeader.classList.add('item-is-fixed');
-						activeHeader.classList.add('item-is-stuck');
-						activeHeader.classList.remove('item-at-start');
-						parent.classList.add('child-is-fixed');
-						document.body.classList.add('header-is-fixed');
+						if ( 'true' === revealScroll ) {
+							if ( window.scrollY < ( elHeight + 60 ) && activeHeader.classList.contains( 'item-at-start' ) ) {
+								activeHeader.style.height = null;
+                                activeHeader.style.top = offsetTop + 'px';
+								activeHeader.classList.add('item-is-fixed');
+								activeHeader.classList.add('item-is-stuck');
+								parent.classList.add('child-is-fixed');
+								document.body.classList.add('header-is-fixed');
+							} else {
+								activeHeader.style.top = offsetTop + 'px';
+								activeHeader.classList.add('item-is-fixed');
+								activeHeader.classList.add('item-is-stuck');
+								activeHeader.classList.remove('item-at-start');
+								parent.classList.add('child-is-fixed');
+								document.body.classList.add('header-is-fixed');
+							}
+						} else {
+							activeHeader.style.top = offsetTop + 'px';
+							activeHeader.classList.add('item-is-fixed');
+							activeHeader.classList.remove('item-at-start');
+							activeHeader.classList.add('item-is-stuck');
+							parent.classList.add('child-is-fixed');
+							document.body.classList.add('header-is-fixed');
+						}
 					} else {
 						if ( activeHeader.classList.contains( 'item-is-fixed' ) ) {
 							activeHeader.classList.remove( 'item-is-fixed' );
@@ -775,20 +793,16 @@ if ( window.NodeList && ! NodeList.prototype.forEach ) {
 			var offsetSticky = window.kadence.getTopOffset( event );
 			var originalTop = Math.floor( element.getBoundingClientRect().top ) - offsetSticky;
 			window.scrollBy( { top: originalTop, left: 0, behavior: 'smooth' } );
-			var checkIfDone = setInterval( function() {
-				var atBottom = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2;
-				if ( ( originalTop >= 0 && ( ( Math.floor( element.getBoundingClientRect().top ) - offsetSticky ) <= 0 ) ) || ( originalTop < 0 && ( ( Math.floor( element.getBoundingClientRect().top ) - offsetSticky ) >= 0 ) ) || atBottom ) {
-					element.tabIndex = '-1';
-					element.focus();
-					if ( element.classList.contains( 'kt-title-item' ) ) {
-						element.firstElementChild.click();
-					}
-					if ( history ) {
-						window.history.pushState('', '', '#' + element.id );
-					}
-					clearInterval( checkIfDone );
-				}
-			}, 100 );
+			element.tabIndex = '-1';
+			element.focus({
+				preventScroll: true
+			});
+			if ( element.classList.contains( 'kt-title-item' ) ) {
+				element.firstElementChild.click();
+			}
+			if ( history ) {
+				window.history.pushState('', '', '#' + element.id );
+			}
 		},
 		anchorScrollToCheck: function( e, respond ) {
 			respond = (typeof respond !== 'undefined') ?  respond : null;

@@ -102,6 +102,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		add_action( 'wp_ajax_kadence_install_starter', array( $this, 'install_plugin_ajax_callback' ) );
 		add_action( 'wp_head', array( $this, 'action_add_pingback_header' ) );
 		add_action( 'wp_head', array( $this, 'action_add_no_js_remove_script' ), 2 );
+		add_action( 'wp_footer', array( $this, 'action_add_scrollbar_offset_script' ), 2 );
 		add_filter( 'body_class', array( $this, 'filter_body_classes_add_hfeed' ) );
 		add_filter( 'embed_defaults', array( $this, 'filter_embed_dimensions' ) );
 		add_filter( 'theme_scandir_exclusions', array( $this, 'filter_scandir_exclusions_for_optional_templates' ) );
@@ -664,6 +665,16 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		if ( ! kadence()->is_amp() ) {
 			?>
 			<script>document.documentElement.classList.remove( 'no-js' );</script>
+			<?php
+		}
+	}
+	/**
+	 * Adds a tiny script to set scrollbar offset.
+	 */
+	public function action_add_scrollbar_offset_script() {
+		if ( ! kadence()->is_amp() ) {
+			?>
+			<script>document.documentElement.style.setProperty('--scrollbar-offset', window.innerWidth - document.documentElement.clientWidth + 'px' );</script>
 			<?php
 		}
 	}

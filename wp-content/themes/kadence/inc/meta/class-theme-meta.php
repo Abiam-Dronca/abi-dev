@@ -695,8 +695,8 @@ class Theme_Meta {
 	 * Register Script for Meta options
 	 */
 	public function plugin_register() {
-		$path  = get_template_directory_uri() . '/assets/js/meta.js';
-		$asset = $this->get_asset_file( '/assets/js/meta' );
+		$path  = get_template_directory_uri() . '/assets/js/admin/meta.js';
+		$asset = $this->get_asset_file( '/assets/js/admin/meta' );
 		wp_register_script(
 			'kadence-meta',
 			$path,

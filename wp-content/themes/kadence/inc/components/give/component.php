@@ -10,6 +10,8 @@ namespace Kadence\Give;
 use Kadence\Component_Interface;
 use Kadence\Kadence_CSS;
 use function Kadence\kadence;
+use function Kadence\print_webfont_preload;
+use function Kadence\get_webfont_url;
 use function add_action;
 use function have_posts;
 use function the_post;
@@ -196,9 +198,21 @@ class Component implements Component_Interface {
 		if ( apply_filters( 'kadence_givewp_display_swap_google_fonts', true ) ) {
 			$args['display'] = 'swap';
 		}
-		$font_url = add_query_arg( apply_filters( 'kadence_theme_givewp_google_fonts_query_args', $args ), 'https://fonts.googleapis.com/css' );
-		if ( ! empty( $font_url ) ) {
-			wp_enqueue_style( 'kadence-givewp-iframe-fonts', $font_url, 'give-sequoia-template-css' ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+		$google_fonts_url = add_query_arg( apply_filters( 'kadence_theme_givewp_google_fonts_query_args', $args ), 'https://fonts.googleapis.com/css' );
+		if ( ! empty( $google_fonts_url ) ) {
+			if ( kadence()->option( 'load_fonts_local' ) ) {
+				if ( kadence()->option( 'preload_fonts_local' ) && apply_filters( 'kadence_local_fonts_preload', true ) ) {
+					print_webfont_preload( $google_fonts_url );
+				}
+				wp_enqueue_style(
+					'kadence-givewp-iframe-fonts',
+					get_webfont_url( $google_fonts_url ),
+					'give-sequoia-template-css',
+					KADENCE_VERSION
+				);
+			} else {
+				wp_enqueue_style( 'kadence-givewp-iframe-fonts', $google_fonts_url, 'give-sequoia-template-css', KADENCE_VERSION ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+			}
 		}
 	}
 	/**

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { Component } = wp.element;
 import map from 'lodash/map';
 import ColorControl from '../common/color.js';

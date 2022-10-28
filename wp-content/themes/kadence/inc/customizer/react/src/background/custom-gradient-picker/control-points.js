@@ -11,7 +11,7 @@ const {
 	Component,
 	useEffect,
 } = wp.element;
-const { __, sprintf } = wp.i18n;
+import { __, sprintf } from '@wordpress/i18n';
 const {
 	useInstanceId,
 } = wp.compose;

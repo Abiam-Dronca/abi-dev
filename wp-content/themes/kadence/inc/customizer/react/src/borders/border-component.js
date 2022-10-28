@@ -6,7 +6,7 @@ import ResponsiveControl from '../common/responsive.js';
 import ColorControl from '../common/color.js';
 import Icons from '../common/icons.js';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { ButtonGroup, Dashicon, Toolbar, ToolbarGroup, Tooltip, Button } = wp.components;
 

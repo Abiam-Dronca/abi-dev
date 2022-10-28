@@ -498,14 +498,14 @@ $settings = array(
 		'live_method'     => array(
 			array(
 				'type'     => 'css',
-				'selector' => '.site-footer .site-top-footer-wrap .site-footer-row-container-inner a:not(.button)',
+				'selector' => '.site-footer .site-top-footer-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button))',
 				'property' => 'color',
 				'pattern'  => '$',
 				'key'      => 'color',
 			),
 			array(
 				'type'     => 'css',
-				'selector' => '.site-footer .site-top-footer-wrap .site-footer-row-container-inner a:not(.button):hover',
+				'selector' => '.site-footer .site-top-footer-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button)):hover',
 				'property' => 'color',
 				'pattern'  => '$',
 				'key'      => 'hover',

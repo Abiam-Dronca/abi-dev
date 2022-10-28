@@ -150,9 +150,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Enqueue Frontend Fonts
 	 */
 	public function frontend_gfonts() {
-		if ( empty( self::$google_fonts ) ) {
-			return;
-		}
 		if ( class_exists( 'Kadence_Blocks_Frontend' ) ) {
 			$ktblocks_instance = Kadence_Blocks_Frontend::get_instance();
 			foreach ( $ktblocks_instance::$gfonts as $key => $font ) {
@@ -193,8 +190,14 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			// 		}
 			// 	}
 			// }
+			if ( empty( self::$google_fonts ) ) {
+				return;
+			}
 			$this->action_enqueue_fonts();
 		} else {
+			if ( empty( self::$google_fonts ) ) {
+				return;
+			}
 			$this->action_enqueue_fonts();
 		}
 	}
@@ -395,6 +398,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->add_property( 'left', '0px' );
 		$css->add_property( 'right', '0px' );
 		$css->add_property( 'z-index', '100' );
+		$css->set_selector( '.kadence-scrollbar-fixer.mobile-transparent-header #masthead' );
+		$css->add_property( 'right', 'var(--scrollbar-offset,0)' );
 		$css->set_selector( '.mobile-transparent-header #masthead, .mobile-transparent-header .site-top-header-wrap .site-header-row-container-inner, .mobile-transparent-header .site-main-header-wrap .site-header-row-container-inner, .mobile-transparent-header .site-bottom-header-wrap .site-header-row-container-inner' );
 		$css->add_property( 'background', 'transparent' );
 		// Mobile Header row layouts.
@@ -411,6 +416,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->add_property( 'left', '0px' );
 		$css->add_property( 'right', '0px' );
 		$css->add_property( 'z-index', '100' );
+		$css->set_selector( '.transparent-header.kadence-scrollbar-fixer #masthead' );
+		$css->add_property( 'right', 'var(--scrollbar-offset,0)' );
 		$css->set_selector( '.transparent-header #masthead, .transparent-header .site-top-header-wrap .site-header-row-container-inner, .transparent-header .site-main-header-wrap .site-header-row-container-inner, .transparent-header .site-bottom-header-wrap .site-header-row-container-inner' );
 		$css->add_property( 'background', 'transparent' );
 		$css->stop_media_query();
@@ -1128,7 +1135,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->stop_media_query();
 		$css->set_selector( '.search-toggle-open-container .search-toggle-open.search-toggle-style-bordered' );
 		$css->add_property( 'border', $css->render_border( kadence()->option( 'header_search_border' ) ) );
-		if ( kadence()->option( 'custom_logo' ) ) {
+		if ( kadence()->option( 'header_search_icon_size' ) ) {
 			$search_size = kadence()->option( 'header_search_icon_size' );
 			foreach ( array( 'desktop', 'tablet', 'mobile' ) as $device ) {
 				if ( isset( $search_size['size'] ) && isset( $search_size['size'][ $device ] ) && ! empty( $search_size['size'][ $device ] ) ) {
@@ -1288,7 +1295,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->add_property( '--global-content-narrow-width', kadence()->sub_option( 'content_narrow_width', 'size' ) . kadence()->sub_option( 'content_narrow_width', 'unit' ) );
 		$css->add_property( '--global-content-edge-padding', $css->render_range( kadence()->option( 'content_edge_spacing' ), 'desktop' ) );
 		$css->add_property( '--global-calc-content-width', 'calc(' . kadence()->sub_option( 'content_width', 'size' ) . kadence()->sub_option( 'content_width', 'unit' ) . ' - var(--global-content-edge-padding) - var(--global-content-edge-padding) )' );
-		$css->add_property( '--scrollbar-offset', '0px' );
+		//$css->add_property( '--scrollbar-offset', '0px' );
+		$css->set_selector( '.wp-site-blocks' );
+		$css->add_property( '--global-vw', 'calc( 100vw - ( 0.5 * var(--scrollbar-offset)))' );
 		if ( class_exists( '\Elementor\Plugin' ) ) {
 			$css->set_selector( ':root body.kadence-elementor-colors' );
 			$css->add_property( '--e-global-color-kadence1', 'var(--global-palette1)' );
@@ -1634,9 +1643,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->render_font( kadence()->option( 'sidebar_widget_content' ), $css );
 		$css->set_selector( '.primary-sidebar.widget-area .widget-title' );
 		$css->render_font( kadence()->option( 'sidebar_widget_title' ), $css );
-		$css->set_selector( '.primary-sidebar.widget-area .sidebar-inner-wrap a:not(.button)' );
+		$css->set_selector( '.primary-sidebar.widget-area .sidebar-inner-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button))' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'sidebar_link_colors', 'color' ) ) );
-		$css->set_selector( '.primary-sidebar.widget-area .sidebar-inner-wrap a:not(.button):hover' );
+		$css->set_selector( '.primary-sidebar.widget-area .sidebar-inner-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button)):hover' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'sidebar_link_colors', 'hover' ) ) );
 		$css->set_selector( '.primary-sidebar.widget-area' );
 		$css->render_background( kadence()->sub_option( 'sidebar_background', 'desktop' ), $css );
@@ -1771,9 +1780,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->render_font( kadence()->option( 'footer_middle_widget_content' ), $css );
 		$css->add_property( 'border-top', $css->render_border( kadence()->sub_option( 'footer_middle_top_border', 'desktop' ) ) );
 		$css->add_property( 'border-bottom', $css->render_border( kadence()->sub_option( 'footer_middle_bottom_border', 'desktop' ) ) );
-		$css->set_selector( '.site-footer .site-middle-footer-wrap .site-footer-row-container-inner a:not(.button)' );
+		$css->set_selector( '.site-footer .site-middle-footer-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button))' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_middle_link_colors', 'color' ) ) );
-		$css->set_selector( '.site-footer .site-middle-footer-wrap .site-footer-row-container-inner a:not(.button):hover' );
+		$css->set_selector( '.site-footer .site-middle-footer-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button)):hover' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_middle_link_colors', 'hover' ) ) );
 		$css->set_selector( '.site-middle-footer-inner-wrap' );
 		$css->add_property( 'min-height', $this->render_range( kadence()->option( 'footer_middle_height' ), 'desktop' ) );
@@ -1845,9 +1854,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->render_font( kadence()->option( 'footer_top_widget_content' ), $css );
 		$css->add_property( 'border-top', $css->render_border( kadence()->sub_option( 'footer_top_top_border', 'desktop' ) ) );
 		$css->add_property( 'border-bottom', $css->render_border( kadence()->sub_option( 'footer_top_bottom_border', 'desktop' ) ) );
-		$css->set_selector( '.site-footer .site-top-footer-wrap .site-footer-row-container-inner a:not(.button)' );
+		$css->set_selector( '.site-footer .site-top-footer-wrap a:not(.button):not(.wp-block-button__link):not(.wp-element-button)' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_top_link_colors', 'color' ) ) );
-		$css->set_selector( '.site-footer .site-top-footer-wrap .site-footer-row-container-inner a:not(.button):hover' );
+		$css->set_selector( '.site-footer .site-top-footer-wrap a:not(.button):not(.wp-block-button__link):not(.wp-element-button):hover' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_top_link_colors', 'hover' ) ) );
 		$css->set_selector( '.site-top-footer-inner-wrap' );
 		$css->add_property( 'min-height', $this->render_range( kadence()->option( 'footer_top_height' ), 'desktop' ) );
@@ -1919,9 +1928,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->render_font( kadence()->option( 'footer_bottom_widget_content' ), $css );
 		$css->add_property( 'border-top', $css->render_border( kadence()->sub_option( 'footer_bottom_top_border', 'desktop' ) ) );
 		$css->add_property( 'border-bottom', $css->render_border( kadence()->sub_option( 'footer_bottom_bottom_border', 'desktop' ) ) );
-		$css->set_selector( '.site-footer .site-bottom-footer-wrap .site-footer-row-container-inner a:not(.button)' );
+		$css->set_selector( '.site-footer .site-bottom-footer-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button))' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_bottom_link_colors', 'color' ) ) );
-		$css->set_selector( '.site-footer .site-bottom-footer-wrap .site-footer-row-container-inner a:not(.button):hover' );
+		$css->set_selector( '.site-footer .site-bottom-footer-wrap a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button)):hover' );
 		$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_bottom_link_colors', 'hover' ) ) );
 		$css->set_selector( '.site-bottom-footer-inner-wrap' );
 		$css->add_property( 'min-height', $this->render_range( kadence()->option( 'footer_bottom_height' ), 'desktop' ) );
@@ -1990,7 +1999,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		$css->set_selector( '.footer-social-wrap .footer-social-inner-wrap' );
 		$css->add_property( 'font-size', $this->render_size( kadence()->option( 'footer_social_icon_size' ) ) );
 		$css->add_property( 'gap', $this->render_size( kadence()->option( 'footer_social_item_spacing' ) ) );
-		$css->set_selector( '.site-footer .site-footer-wrap .site-footer-section .footer-social-wrap .social-button' );
+		$css->set_selector( '.site-footer .site-footer-wrap .site-footer-section .footer-social-wrap .footer-social-inner-wrap .social-button' );
 		if ( ! in_array( kadence()->option( 'footer_social_brand' ), array( 'always', 'untilhover' ), true ) ) {
 			$css->add_property( 'color', $this->render_color( kadence()->sub_option( 'footer_social_color', 'color' ) ) );
 			$css->add_property( 'background', $this->render_color( kadence()->sub_option( 'footer_social_background', 'color' ) ) );

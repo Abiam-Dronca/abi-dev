@@ -115,7 +115,7 @@ class Kadence_Dashboard_Settings {
 			}
 		}
 		wp_enqueue_style( 'kadence-dashboard', get_template_directory_uri() . '/inc/dashboard/react/dash-controls.min.css', array( 'wp-components' ), KADENCE_VERSION );
-		wp_enqueue_script( 'kadence-dashboard', get_template_directory_uri() . '/assets/js/dashboard.js', array( 'wp-i18n', 'wp-element', 'wp-plugins', 'wp-components', 'wp-api', 'wp-hooks', 'wp-edit-post', 'lodash', 'wp-block-library', 'wp-block-editor', 'wp-editor', 'jquery' ), KADENCE_VERSION, true );
+		wp_enqueue_script( 'kadence-dashboard', get_template_directory_uri() . '/assets/js/admin/dashboard.js', array( 'wp-i18n', 'wp-element', 'wp-plugins', 'wp-components', 'wp-api', 'wp-hooks', 'wp-edit-post', 'lodash', 'wp-block-library', 'wp-block-editor', 'wp-editor', 'jquery' ), KADENCE_VERSION, true );
 		wp_localize_script(
 			'kadence-dashboard',
 			'kadenceDashboardParams',

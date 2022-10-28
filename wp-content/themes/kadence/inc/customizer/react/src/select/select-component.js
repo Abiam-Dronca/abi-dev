@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { SelectControl, Dashicon, Tooltip, Button } = wp.components;
 

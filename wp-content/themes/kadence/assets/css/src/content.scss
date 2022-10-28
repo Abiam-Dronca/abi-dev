@@ -133,6 +133,12 @@ article.sticky {
 			display: block;
 		}
 	}
+	li > img {
+		display: inline-block;
+		&.aligncenter {
+			display: block;
+		}
+	}
 	// This removes the extra space when adding a spacer below the paragraph.
 	p:not(.wp-block-kadence-advancedheading) + .wp-block-kadence-spacer {
 		margin-top: calc( 0rem - var(--global-md-spacing) );
@@ -660,10 +666,10 @@ a.post-more-link {
 }
 
 .alignfull, .alignwide, .entry-content .alignwide, .entry-content .alignfull {
-	margin-left: calc(50% - 50vw);
-	margin-right: calc(50% - 50vw);
+	margin-left: calc( 50% - ( var(--global-vw, 100vw) / 2 ));
+	margin-right: calc( 50% - ( var(--global-vw, 100vw) / 2 ));
 	max-width: 100vw;
-	width: 100vw;
+	width: var(--global-vw, 100vw );
 	padding-left: 0;
     padding-right: 0;
 	clear:both;

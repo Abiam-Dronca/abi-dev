@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Icons from './icons.js';
 import capitalizeFirstLetter from './capitalize-first.js';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
-const { ButtonGroup, Dashicon, Tooltip, Button } = wp.components;
+import { ButtonGroup, Dashicon, Tooltip, Button } from '@wordpress/components';
 
 const { Component, Fragment } = wp.element;
 class RadioIconComponent extends Component {

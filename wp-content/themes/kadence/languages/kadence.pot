@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0 (or later).
 msgid ""
 msgstr ""
-"Project-Id-Version: Kadence 1.1.20\n"
+"Project-Id-Version: Kadence 1.1.27\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/kadence\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-21T22:20:09+00:00\n"
+"POT-Creation-Date: 2022-09-12T22:45:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: kadence\n"
@@ -211,7 +211,7 @@ msgid "in: %1$s"
 msgstr ""
 
 #: bbpress/loop-single-topic.php:83
-#: inc/components/bbpress/component.php:153
+#: inc/components/bbpress/component.php:156
 msgid "Replies"
 msgstr ""
 
@@ -282,75 +282,76 @@ msgstr ""
 msgid "Year: %s"
 msgstr ""
 
-#: inc/components/base_support/component.php:125
+#: inc/components/base_support/component.php:126
 #: inc/dashboard/class-theme-dashboard.php:110
 msgid "Install Kadence Starter Templates"
 msgstr ""
 
-#: inc/components/base_support/component.php:128
+#: inc/components/base_support/component.php:129
 #: inc/dashboard/class-theme-dashboard.php:113
 msgid "Activate Kadence Starter Templates"
 msgstr ""
 
-#: inc/components/base_support/component.php:135
+#: inc/components/base_support/component.php:136
 msgid "Thanks for choosing the Kadence Theme!"
 msgstr ""
 
 #. translators: %s: <strong> <a>
-#: inc/components/base_support/component.php:136
+#: inc/components/base_support/component.php:137
 msgid "Want to get started with a beautiful %1$sstarter template%2$s? Install the Kadence Starter Templates plugin to launch an optimized design in minutes."
 msgstr ""
 
-#: inc/components/base_support/component.php:138
+#: inc/components/base_support/component.php:139
 msgid "Activating..."
 msgstr ""
 
-#: inc/components/base_support/component.php:138
+#: inc/components/base_support/component.php:139
 msgid "Activated"
 msgstr ""
 
-#: inc/components/base_support/component.php:138
+#: inc/components/base_support/component.php:139
 msgid "Installing..."
 msgstr ""
 
-#: inc/components/base_support/component.php:138
+#: inc/components/base_support/component.php:139
 msgid "Installed"
 msgstr ""
 
-#: inc/components/base_support/component.php:162
+#: inc/components/base_support/component.php:163
 msgid "Gutenberg Plugin Detected"
 msgstr ""
 
 #. translators: %s: <a>
-#: inc/components/base_support/component.php:163
+#: inc/components/base_support/component.php:164
 msgid "The %1$sGutenberg plugin%2$s is not recommended for use in a production site. Many things may be broken by using this plugin. Please deactivate."
 msgstr ""
 
-#: inc/components/base_support/component.php:252
+#: inc/components/base_support/component.php:253
 msgid "Security Error, Please reload the page."
 msgstr ""
 
-#: inc/components/base_support/component.php:255
+#: inc/components/base_support/component.php:256
 msgid "Security Error, Need higher Permissions to install plugin."
 msgstr ""
 
-#: inc/components/base_support/component.php:313
+#: inc/components/base_support/component.php:314
 msgid "Error, plugin could not be installed, please install manually."
 msgstr ""
 
-#: inc/components/base_support/component.php:412
+#: inc/components/base_support/component.php:413
 #: template-parts/footer/footer-row.php:24
 msgid "Click to edit this element."
 msgstr ""
 
-#: inc/components/bbpress/component.php:68
+#: inc/components/bbpress/component.php:71
 #: inc/components/icons/component.php:115
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:202
 #: inc/meta/react/src/layout.js:208
 msgid "Settings"
 msgstr ""
 
-#: inc/components/bbpress/component.php:152
+#: inc/components/bbpress/component.php:155
 msgid "Back to:"
 msgstr ""
 
@@ -399,51 +400,51 @@ msgid "Accent - alt"
 msgstr ""
 
 #: inc/components/color_palette/component.php:95
-#: inc/components/elementor/component.php:266
-#: inc/components/elementor/component.php:313
-#: inc/components/elementor/component.php:516
+#: inc/components/elementor/component.php:220
+#: inc/components/elementor/component.php:267
+#: inc/components/elementor/component.php:470
 msgid "Strongest text"
 msgstr ""
 
 #: inc/components/color_palette/component.php:100
-#: inc/components/elementor/component.php:271
-#: inc/components/elementor/component.php:318
-#: inc/components/elementor/component.php:521
+#: inc/components/elementor/component.php:225
+#: inc/components/elementor/component.php:272
+#: inc/components/elementor/component.php:475
 msgid "Strong Text"
 msgstr ""
 
 #: inc/components/color_palette/component.php:105
-#: inc/components/elementor/component.php:276
-#: inc/components/elementor/component.php:323
-#: inc/components/elementor/component.php:526
+#: inc/components/elementor/component.php:230
+#: inc/components/elementor/component.php:277
+#: inc/components/elementor/component.php:480
 msgid "Medium text"
 msgstr ""
 
 #: inc/components/color_palette/component.php:110
-#: inc/components/elementor/component.php:281
-#: inc/components/elementor/component.php:328
-#: inc/components/elementor/component.php:531
+#: inc/components/elementor/component.php:235
+#: inc/components/elementor/component.php:282
+#: inc/components/elementor/component.php:485
 msgid "Subtle Text"
 msgstr ""
 
 #: inc/components/color_palette/component.php:115
-#: inc/components/elementor/component.php:286
-#: inc/components/elementor/component.php:333
-#: inc/components/elementor/component.php:536
+#: inc/components/elementor/component.php:240
+#: inc/components/elementor/component.php:287
+#: inc/components/elementor/component.php:490
 msgid "Subtle Background"
 msgstr ""
 
 #: inc/components/color_palette/component.php:120
-#: inc/components/elementor/component.php:291
-#: inc/components/elementor/component.php:338
-#: inc/components/elementor/component.php:541
+#: inc/components/elementor/component.php:245
+#: inc/components/elementor/component.php:292
+#: inc/components/elementor/component.php:495
 msgid "Lighter Background"
 msgstr ""
 
 #: inc/components/color_palette/component.php:125
-#: inc/components/elementor/component.php:296
-#: inc/components/elementor/component.php:343
-#: inc/components/elementor/component.php:546
+#: inc/components/elementor/component.php:250
+#: inc/components/elementor/component.php:297
+#: inc/components/elementor/component.php:500
 msgid "White or offwhite"
 msgstr ""
 
@@ -464,8 +465,7 @@ msgstr ""
 #: inc/components/icons/component.php:421
 #: inc/components/icons/component.php:429
 #: inc/customizer/options/general-social-options.php:269
-#: inc/customizer/react/src/contact/contact-component.js:74
-#: inc/customizer/react/src/social/social-component.js:90
+#: assets/js/admin/customizer.js:5
 msgid "Email"
 msgstr ""
 
@@ -486,9 +486,9 @@ msgid "Leave a comment..."
 msgstr ""
 
 #: inc/components/comments/component.php:175
-#: template-parts/content/entry_loop_meta.php:315
-#: template-parts/content/entry_meta.php:287
-#: template-parts/title/meta.php:288
+#: template-parts/content/entry_loop_meta.php:317
+#: template-parts/content/entry_meta.php:289
+#: template-parts/title/meta.php:290
 msgid "Comment"
 msgstr ""
 
@@ -504,8 +504,7 @@ msgstr ""
 #: inc/components/editor/component.php:208
 #: inc/components/icons/component.php:373
 #: inc/customizer/options/header-mobile-button-options.php:96
-#: inc/customizer/react/src/social/social-component.js:80
-#: inc/customizer/react/src/sorter/setting-sorter-component.js:53
+#: assets/js/admin/customizer.js:5
 msgid "Medium"
 msgstr ""
 
@@ -515,7 +514,7 @@ msgstr ""
 
 #: inc/components/editor/component.php:214
 #: inc/customizer/options/header-mobile-button-options.php:100
-#: inc/customizer/react/src/sorter/setting-sorter-component.js:59
+#: assets/js/admin/customizer.js:5
 msgid "Large"
 msgstr ""
 
@@ -531,19 +530,19 @@ msgstr ""
 msgid "XL"
 msgstr ""
 
-#: inc/components/elementor/component.php:256
-#: inc/components/elementor/component.php:303
-#: inc/components/elementor/component.php:506
+#: inc/components/elementor/component.php:210
+#: inc/components/elementor/component.php:257
+#: inc/components/elementor/component.php:460
 msgid "Theme Accent"
 msgstr ""
 
-#: inc/components/elementor/component.php:261
-#: inc/components/elementor/component.php:308
-#: inc/components/elementor/component.php:511
+#: inc/components/elementor/component.php:215
+#: inc/components/elementor/component.php:262
+#: inc/components/elementor/component.php:465
 msgid "Theme Accent - alt"
 msgstr ""
 
-#: inc/components/elementor/component.php:471
+#: inc/components/elementor/component.php:425
 msgid "Theme Global Colors"
 msgstr ""
 
@@ -552,47 +551,47 @@ msgid "Kadence Color Palette"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:94
-#: inc/customizer/react/src/palette/palette-component.js:31
+#: assets/js/admin/customizer.js:1
 msgid "1 - Accent"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:95
-#: inc/customizer/react/src/palette/palette-component.js:35
+#: assets/js/admin/customizer.js:1
 msgid "2 - Accent - alt"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:96
-#: inc/customizer/react/src/palette/palette-component.js:39
+#: assets/js/admin/customizer.js:1
 msgid "3 - Strongest text"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:97
-#: inc/customizer/react/src/palette/palette-component.js:43
+#: assets/js/admin/customizer.js:1
 msgid "4 - Strong Text"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:98
-#: inc/customizer/react/src/palette/palette-component.js:47
+#: assets/js/admin/customizer.js:1
 msgid "5 - Medium text"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:99
-#: inc/customizer/react/src/palette/palette-component.js:51
+#: assets/js/admin/customizer.js:1
 msgid "6 - Subtle Text"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:100
-#: inc/customizer/react/src/palette/palette-component.js:55
+#: assets/js/admin/customizer.js:1
 msgid "7 - Subtle Background"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:101
-#: inc/customizer/react/src/palette/palette-component.js:59
+#: assets/js/admin/customizer.js:1
 msgid "8 - Lighter Background"
 msgstr ""
 
 #: inc/components/elementor_pro/class-elementor-dynamic-colors.php:102
-#: inc/customizer/react/src/palette/palette-component.js:63
+#: assets/js/admin/customizer.js:1
 msgid "9 - White or offwhite"
 msgstr ""
 
@@ -616,10 +615,8 @@ msgstr ""
 #: inc/customizer/options/transparent-header-options.php:760
 #: inc/customizer/options/transparent-header-options.php:816
 #: inc/customizer/options/tutor-course-archive-layout-options.php:269
-#: inc/customizer/react/src/background/background-component.js:494
-#: inc/customizer/react/src/background/background-component.js:512
-#: inc/customizer/react/src/color/color-component.js:29
-#: inc/customizer/react/src/common/color.js:100
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
 msgid "Color"
 msgstr ""
 
@@ -651,45 +648,45 @@ msgstr ""
 #: inc/components/icons/component.php:171
 #: inc/components/icons/component.php:179
 #: inc/customizer/options/general-social-options.php:31
-#: inc/customizer/react/src/social/social-component.js:72
+#: assets/js/admin/customizer.js:5
 msgid "Facebook"
 msgstr ""
 
 #: inc/components/icons/component.php:187
 #: inc/components/icons/component.php:195
 #: inc/customizer/options/general-social-options.php:38
-#: inc/customizer/react/src/social/social-component.js:73
+#: assets/js/admin/customizer.js:5
 msgid "Twitter"
 msgstr ""
 
 #: inc/components/icons/component.php:203
-#: inc/customizer/react/src/social/social-component.js:101
+#: assets/js/admin/customizer.js:5
 msgid "TikTok"
 msgstr ""
 
 #: inc/components/icons/component.php:211
 #: inc/customizer/options/general-social-options.php:220
-#: inc/customizer/react/src/social/social-component.js:100
+#: assets/js/admin/customizer.js:5
 msgid "Discord"
 msgstr ""
 
 #: inc/components/icons/component.php:220
 #: inc/components/icons/component.php:228
 #: inc/customizer/options/general-social-options.php:45
-#: inc/customizer/react/src/social/social-component.js:74
+#: assets/js/admin/customizer.js:5
 msgid "Instagram"
 msgstr ""
 
 #: inc/components/icons/component.php:236
 #: inc/customizer/options/general-social-options.php:59
-#: inc/customizer/react/src/social/social-component.js:77
+#: assets/js/admin/customizer.js:5
 msgid "Vimeo"
 msgstr ""
 
 #: inc/components/icons/component.php:244
 #: inc/components/icons/component.php:252
 #: inc/customizer/options/general-social-options.php:52
-#: inc/customizer/react/src/social/social-component.js:75
+#: assets/js/admin/customizer.js:5
 msgid "YouTube"
 msgstr ""
 
@@ -702,81 +699,81 @@ msgstr ""
 #: inc/components/icons/component.php:284
 #: inc/components/icons/component.php:581
 #: inc/customizer/options/general-social-options.php:150
-#: inc/customizer/react/src/social/social-component.js:89
+#: assets/js/admin/customizer.js:5
 msgid "RSS"
 msgstr ""
 
 #: inc/components/icons/component.php:292
 #: inc/customizer/options/general-social-options.php:66
-#: inc/customizer/react/src/social/social-component.js:76
+#: assets/js/admin/customizer.js:5
 msgid "Facebook Group"
 msgstr ""
 
 #: inc/components/icons/component.php:300
 #: inc/customizer/options/general-social-options.php:87
-#: inc/customizer/react/src/social/social-component.js:85
+#: assets/js/admin/customizer.js:5
 msgid "Dribbble"
 msgstr ""
 
 #: inc/components/icons/component.php:308
 #: inc/customizer/options/general-social-options.php:143
-#: inc/customizer/react/src/social/social-component.js:88
+#: assets/js/admin/customizer.js:5
 msgid "Xing"
 msgstr ""
 
 #: inc/components/icons/component.php:316
 #: inc/customizer/options/general-social-options.php:122
-#: inc/customizer/react/src/social/social-component.js:81
+#: assets/js/admin/customizer.js:5
 msgid "WordPress"
 msgstr ""
 
 #: inc/components/icons/component.php:324
 #: inc/customizer/options/general-social-options.php:185
-#: inc/customizer/react/src/social/social-component.js:92
+#: assets/js/admin/customizer.js:5
 msgid "WhatsApp"
 msgstr ""
 
 #: inc/components/icons/component.php:332
 #: inc/customizer/options/general-social-options.php:136
-#: inc/customizer/react/src/social/social-component.js:87
+#: assets/js/admin/customizer.js:5
 msgid "VK"
 msgstr ""
 
 #: inc/components/icons/component.php:340
 #: inc/customizer/options/general-social-options.php:206
-#: inc/customizer/react/src/social/social-component.js:99
+#: assets/js/admin/customizer.js:5
 msgid "Tumblr"
 msgstr ""
 
 #: inc/components/icons/component.php:348
 #: inc/components/icons/component.php:356
 #: inc/customizer/options/general-social-options.php:108
-#: inc/customizer/react/src/social/social-component.js:82
+#: assets/js/admin/customizer.js:5
 msgid "Reddit"
 msgstr ""
 
 #: inc/components/icons/component.php:364
 #: inc/customizer/options/general-social-options.php:101
-#: inc/customizer/react/src/social/social-component.js:83
+#: assets/js/admin/customizer.js:5
 msgid "Patreon"
 msgstr ""
 
 #: inc/components/icons/component.php:381
 #: inc/customizer/options/general-social-options.php:94
-#: inc/customizer/react/src/social/social-component.js:86
+#: assets/js/admin/customizer.js:5
 msgid "Behance"
 msgstr ""
 
 #: inc/components/icons/component.php:389
 #: inc/customizer/options/general-social-options.php:262
-#: inc/customizer/react/src/social/social-component.js:107
+#: assets/js/admin/customizer.js:5
 msgid "Anchor"
 msgstr ""
 
 #: inc/components/icons/component.php:397
 #: inc/components/icons/component.php:405
 #: inc/customizer/options/general-social-options.php:199
-#: inc/customizer/react/src/social/social-component.js:98
+#: assets/js/admin/customizer.js:5
 msgid "SoundCloud"
 msgstr ""
 
@@ -784,33 +781,32 @@ msgstr ""
 #: inc/components/icons/component.php:445
 #: inc/components/icons/component.php:453
 #: inc/customizer/options/general-social-options.php:276
-#: inc/customizer/react/src/contact/contact-component.js:72
-#: inc/customizer/react/src/social/social-component.js:91
+#: assets/js/admin/customizer.js:5
 msgid "Phone"
 msgstr ""
 
 #: inc/components/icons/component.php:461
 #: inc/customizer/options/general-social-options.php:157
-#: inc/customizer/react/src/social/social-component.js:93
+#: assets/js/admin/customizer.js:5
 msgid "Google Reviews"
 msgstr ""
 
 #: inc/components/icons/component.php:469
 #: inc/components/icons/component.php:477
 #: inc/customizer/options/general-social-options.php:192
-#: inc/customizer/react/src/social/social-component.js:94
+#: assets/js/admin/customizer.js:5
 msgid "Telegram"
 msgstr ""
 
 #: inc/components/icons/component.php:485
 #: inc/customizer/options/general-social-options.php:171
-#: inc/customizer/react/src/social/social-component.js:96
+#: assets/js/admin/customizer.js:5
 msgid "Trip Advisor"
 msgstr ""
 
 #: inc/components/icons/component.php:493
 #: inc/customizer/options/general-social-options.php:164
-#: inc/customizer/react/src/social/social-component.js:95
+#: assets/js/admin/customizer.js:5
 msgid "Yelp"
 msgstr ""
 
@@ -821,9 +817,9 @@ msgstr ""
 #: inc/components/icons/component.php:509
 #: inc/components/icons/component.php:517
 #: inc/customizer/class-theme-customizer.php:672
-#: template-parts/content/entry_loop_meta.php:317
-#: template-parts/content/entry_meta.php:289
-#: template-parts/title/meta.php:290
+#: template-parts/content/entry_loop_meta.php:319
+#: template-parts/content/entry_meta.php:291
+#: template-parts/title/meta.php:292
 msgid "Comments"
 msgstr ""
 
@@ -851,7 +847,7 @@ msgstr ""
 #: inc/components/icons/component.php:589
 #: inc/components/icons/component.php:597
 #: inc/customizer/options/general-social-options.php:73
-#: inc/customizer/react/src/social/social-component.js:78
+#: assets/js/admin/customizer.js:5
 msgid "Pinterest"
 msgstr ""
 
@@ -860,15 +856,15 @@ msgstr ""
 #: inc/customizer/options/general-scroll-to-top-options.php:284
 #: inc/customizer/options/header-search-options.php:87
 #: inc/customizer/options/transparent-header-options.php:126
-#: inc/customizer/react/src/check-icon/check-icon-component.js:27
-#: inc/customizer/react/src/common/responsive.js:37
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
 msgid "Mobile"
 msgstr ""
 
 #: inc/components/icons/component.php:613
 #: inc/components/icons/component.php:621
 #: inc/components/icons/component.php:629
-#: inc/customizer/react/src/contact/contact-component.js:73
+#: assets/js/admin/customizer.js:5
 msgid "Hours"
 msgstr ""
 
@@ -885,7 +881,7 @@ msgstr ""
 #: inc/components/icons/component.php:669
 #: inc/components/icons/component.php:677
 #: inc/customizer/options/general-social-options.php:80
-#: inc/customizer/react/src/social/social-component.js:79
+#: assets/js/admin/customizer.js:5
 msgid "Linkedin"
 msgstr ""
 
@@ -968,7 +964,7 @@ msgstr ""
 
 #: inc/components/icons/component.php:879
 #: inc/customizer/options/general-social-options.php:227
-#: inc/customizer/react/src/social/social-component.js:102
+#: assets/js/admin/customizer.js:5
 msgid "Spotify"
 msgstr ""
 
@@ -978,19 +974,19 @@ msgstr ""
 
 #: inc/components/icons/component.php:895
 #: inc/customizer/options/general-social-options.php:248
-#: inc/customizer/react/src/social/social-component.js:105
+#: assets/js/admin/customizer.js:5
 msgid "500PX"
 msgstr ""
 
 #: inc/components/icons/component.php:903
 #: inc/customizer/options/general-social-options.php:255
-#: inc/customizer/react/src/social/social-component.js:106
+#: assets/js/admin/customizer.js:5
 msgid "Bandcamp"
 msgstr ""
 
 #: inc/components/icons/component.php:911
 #: inc/customizer/options/general-social-options.php:178
-#: inc/customizer/react/src/social/social-component.js:97
+#: assets/js/admin/customizer.js:5
 msgid "IMDB"
 msgstr ""
 
@@ -1136,27 +1132,27 @@ msgstr ""
 msgid "Button"
 msgstr ""
 
-#: inc/components/options/component.php:3035
+#: inc/components/options/component.php:3036
 msgid "& Free Shipping"
 msgstr ""
 
-#: inc/components/options/component.php:3046
+#: inc/components/options/component.php:3047
 msgid "Free shipping on orders over $50!"
 msgstr ""
 
-#: inc/components/options/component.php:3047
+#: inc/components/options/component.php:3048
 msgid "Satisfaction Guaranteed"
 msgstr ""
 
-#: inc/components/options/component.php:3048
+#: inc/components/options/component.php:3049
 msgid "No Hassle Refunds"
 msgstr ""
 
-#: inc/components/options/component.php:3049
+#: inc/components/options/component.php:3050
 msgid "Secure Payments"
 msgstr ""
 
-#: inc/components/options/component.php:3060
+#: inc/components/options/component.php:3061
 msgid "GUARANTEED SAFE CHECKOUT"
 msgstr ""
 
@@ -1178,7 +1174,7 @@ msgid "Collapse child menu"
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: inc/components/styles/component.php:4825
+#: inc/components/styles/component.php:4834
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
@@ -1228,7 +1224,7 @@ msgstr ""
 #: inc/customizer/class-theme-customizer.php:437
 #: inc/customizer/options/header-builder-options.php:64
 #: inc/customizer/options/header-builder-options.php:165
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:42
+#: assets/js/admin/customizer.js:1
 msgid "Logo"
 msgstr ""
 
@@ -1395,6 +1391,7 @@ msgstr ""
 #: inc/customizer/options/header-top-options.php:37
 #: inc/meta/class-theme-meta.php:220
 #: inc/meta/class-theme-meta.php:362
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:240
 msgid "Layout"
 msgstr ""
@@ -1422,7 +1419,7 @@ msgid "Buttons"
 msgstr ""
 
 #: inc/customizer/class-theme-customizer.php:652
-#: inc/dashboard/react/src/customizer.js:26
+#: assets/js/admin/dashboard.js:1
 msgid "Typography"
 msgstr ""
 
@@ -1445,7 +1442,7 @@ msgid "404 Page Layout"
 msgstr ""
 
 #: inc/customizer/class-theme-customizer.php:697
-#: inc/dashboard/react/src/customizer.js:33
+#: assets/js/admin/dashboard.js:1
 msgid "Header Layout"
 msgstr ""
 
@@ -1556,7 +1553,7 @@ msgid "Sticky Header"
 msgstr ""
 
 #: inc/customizer/class-theme-customizer.php:872
-#: inc/dashboard/react/src/customizer.js:47
+#: assets/js/admin/dashboard.js:1
 msgid "Footer Layout"
 msgstr ""
 
@@ -1596,7 +1593,7 @@ msgid "Footer Navigation"
 msgstr ""
 
 #: inc/customizer/class-theme-customizer.php:932
-#: inc/dashboard/react/src/customizer.js:40
+#: assets/js/admin/dashboard.js:1
 msgid "Page Layout"
 msgstr ""
 
@@ -1833,7 +1830,7 @@ msgstr ""
 
 #: inc/customizer/custom-controls/class-kadence-control-import-export.php:31
 #: inc/customizer/custom-controls/class-kadence-control-import-export.php:36
-#: inc/customizer/react/src/palette/palette-component.js:335
+#: assets/js/admin/customizer.js:1
 msgid "Export"
 msgstr ""
 
@@ -1843,8 +1840,7 @@ msgstr ""
 
 #: inc/customizer/custom-controls/class-kadence-control-import-export.php:41
 #: inc/customizer/custom-controls/class-kadence-control-import-export.php:51
-#: inc/customizer/react/src/palette/palette-component.js:342
-#: inc/customizer/react/src/palette/palette-component.js:358
+#: assets/js/admin/customizer.js:1
 msgid "Import"
 msgstr ""
 
@@ -2000,7 +1996,7 @@ msgstr ""
 #: inc/customizer/options/page-layout-options.php:600
 #: inc/customizer/options/post-archive-layout-options.php:476
 #: inc/customizer/options/post-layout-options.php:673
-#: inc/customizer/options/post-layout-options.php:936
+#: inc/customizer/options/post-layout-options.php:957
 #: inc/customizer/options/product-archive-layout-options.php:494
 #: inc/customizer/options/product-layout-options.php:527
 #: inc/customizer/options/product-layout-options.php:701
@@ -2011,6 +2007,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-archive-layout-options.php:441
 #: inc/meta/class-theme-meta.php:225
 #: inc/meta/class-theme-meta.php:367
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:35
 msgid "Normal"
 msgstr ""
@@ -2045,6 +2042,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-archive-layout-options.php:445
 #: inc/meta/class-theme-meta.php:226
 #: inc/meta/class-theme-meta.php:368
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:39
 msgid "Narrow"
 msgstr ""
@@ -2113,8 +2111,9 @@ msgstr ""
 #: inc/customizer/options/tutor-course-layout-options.php:114
 #: inc/meta/class-theme-meta.php:227
 #: inc/meta/class-theme-meta.php:369
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:27
-#: inc/customizer/react/src/select/select-component.js:21
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:43
 msgid "Fullwidth"
 msgstr ""
@@ -2148,6 +2147,7 @@ msgstr ""
 #: inc/customizer/options/topic-layout-options.php:735
 #: inc/customizer/options/tutor-course-archive-layout-options.php:453
 #: inc/customizer/options/tutor-course-layout-options.php:460
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:47
 msgid "Left Sidebar"
 msgstr ""
@@ -2181,6 +2181,7 @@ msgstr ""
 #: inc/customizer/options/topic-layout-options.php:739
 #: inc/customizer/options/tutor-course-archive-layout-options.php:457
 #: inc/customizer/options/tutor-course-layout-options.php:464
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:51
 msgid "Right Sidebar"
 msgstr ""
@@ -2219,6 +2220,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-layout-options.php:475
 #: inc/meta/class-theme-meta.php:246
 #: inc/meta/class-theme-meta.php:389
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:281
 msgid "Content Style"
 msgstr ""
@@ -2256,6 +2258,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-layout-options.php:489
 #: inc/meta/class-theme-meta.php:251
 #: inc/meta/class-theme-meta.php:394
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:89
 msgid "Boxed"
 msgstr ""
@@ -2293,6 +2296,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-layout-options.php:493
 #: inc/meta/class-theme-meta.php:252
 #: inc/meta/class-theme-meta.php:395
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:92
 msgid "Unboxed"
 msgstr ""
@@ -2319,6 +2323,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-layout-options.php:504
 #: inc/meta/class-theme-meta.php:270
 #: inc/meta/class-theme-meta.php:413
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:300
 msgid "Content Vertical Padding"
 msgstr ""
@@ -2348,6 +2353,7 @@ msgstr ""
 #: inc/meta/class-theme-meta.php:320
 #: inc/meta/class-theme-meta.php:343
 #: inc/meta/class-theme-meta.php:418
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:78
 #: inc/meta/react/src/layout.js:100
 #: inc/meta/react/src/layout.js:117
@@ -2380,6 +2386,7 @@ msgstr ""
 #: inc/meta/class-theme-meta.php:321
 #: inc/meta/class-theme-meta.php:344
 #: inc/meta/class-theme-meta.php:419
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:81
 #: inc/meta/react/src/layout.js:103
 #: inc/meta/react/src/layout.js:120
@@ -2409,6 +2416,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-layout-options.php:524
 #: inc/meta/class-theme-meta.php:277
 #: inc/meta/class-theme-meta.php:420
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:106
 msgid "Top Only"
 msgstr ""
@@ -2435,6 +2443,7 @@ msgstr ""
 #: inc/customizer/options/tutor-course-layout-options.php:527
 #: inc/meta/class-theme-meta.php:278
 #: inc/meta/class-theme-meta.php:421
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:109
 msgid "Bottom Only"
 msgstr ""
@@ -2459,7 +2468,7 @@ msgstr ""
 #: inc/customizer/options/lifter-member-archive-layout-options.php:566
 #: inc/customizer/options/page-layout-options.php:831
 #: inc/customizer/options/post-archive-layout-options.php:836
-#: inc/customizer/options/post-layout-options.php:1052
+#: inc/customizer/options/post-layout-options.php:1073
 #: inc/customizer/options/product-archive-layout-options.php:992
 #: inc/customizer/options/product-layout-options.php:769
 #: inc/customizer/options/search-layout-options.php:710
@@ -2495,7 +2504,7 @@ msgstr ""
 #: inc/customizer/options/lifter-member-archive-layout-options.php:584
 #: inc/customizer/options/page-layout-options.php:855
 #: inc/customizer/options/post-archive-layout-options.php:854
-#: inc/customizer/options/post-layout-options.php:1070
+#: inc/customizer/options/post-layout-options.php:1091
 #: inc/customizer/options/product-archive-layout-options.php:1010
 #: inc/customizer/options/product-layout-options.php:787
 #: inc/customizer/options/search-layout-options.php:728
@@ -2513,7 +2522,8 @@ msgstr ""
 #: inc/customizer/options/custom-layout-options.php:68
 #: inc/customizer/options/custom-layout-options.php:75
 #: inc/customizer/options/footer-social-options.php:53
-#: inc/customizer/react/src/sorter/setting-item-component.js:327
+#: assets/js/admin/customizer.js:5
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:221
 msgid "Title"
 msgstr ""
@@ -2634,7 +2644,7 @@ msgstr ""
 #: inc/customizer/options/topic-layout-options.php:130
 #: inc/customizer/options/tutor-course-archive-layout-options.php:129
 #: inc/customizer/options/tutor-course-layout-options.php:108
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:21
+#: assets/js/admin/customizer.js:1
 msgid "Background Fullwidth, Content Contained"
 msgstr ""
 
@@ -2676,8 +2686,8 @@ msgstr ""
 #: inc/customizer/options/topic-layout-options.php:131
 #: inc/customizer/options/tutor-course-archive-layout-options.php:130
 #: inc/customizer/options/tutor-course-layout-options.php:109
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:22
-#: inc/customizer/react/src/select/select-component.js:18
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
 msgid "Standard"
 msgstr ""
 
@@ -2714,7 +2724,7 @@ msgstr ""
 #: inc/customizer/options/topic-layout-options.php:135
 #: inc/customizer/options/tutor-course-archive-layout-options.php:134
 #: inc/customizer/options/tutor-course-layout-options.php:113
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:26
+#: assets/js/admin/customizer.js:1
 msgid "Background & Content Fullwidth"
 msgstr ""
 
@@ -2751,7 +2761,7 @@ msgstr ""
 #: inc/customizer/options/topic-layout-options.php:140
 #: inc/customizer/options/tutor-course-archive-layout-options.php:139
 #: inc/customizer/options/tutor-course-layout-options.php:118
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:31
+#: assets/js/admin/customizer.js:1
 msgid "Background & Content Contained"
 msgstr ""
 
@@ -2788,8 +2798,8 @@ msgstr ""
 #: inc/customizer/options/topic-layout-options.php:141
 #: inc/customizer/options/tutor-course-archive-layout-options.php:140
 #: inc/customizer/options/tutor-course-layout-options.php:119
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:32
-#: inc/customizer/react/src/select/select-component.js:24
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
 msgid "Contained"
 msgstr ""
 
@@ -3276,6 +3286,7 @@ msgstr ""
 #: inc/customizer/options/lifter-lesson-layout-options.php:600
 #: inc/customizer/options/page-layout-options.php:733
 #: inc/customizer/options/post-layout-options.php:782
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:330
 msgid "Featured Image Position"
 msgstr ""
@@ -3297,6 +3308,7 @@ msgstr ""
 #: inc/customizer/options/post-layout-options.php:796
 #: inc/customizer/options/search-layout-options.php:512
 #: inc/customizer/options/woo-store-notice-options.php:63
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:128
 msgid "Above"
 msgstr ""
@@ -3312,6 +3324,7 @@ msgstr ""
 #: inc/customizer/options/lifter-lesson-layout-options.php:617
 #: inc/customizer/options/page-layout-options.php:754
 #: inc/customizer/options/post-layout-options.php:799
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:131
 msgid "Behind"
 msgstr ""
@@ -3327,6 +3340,7 @@ msgstr ""
 #: inc/customizer/options/lifter-lesson-layout-options.php:620
 #: inc/customizer/options/page-layout-options.php:757
 #: inc/customizer/options/post-layout-options.php:802
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:134
 msgid "Below"
 msgstr ""
@@ -3341,7 +3355,7 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:629
 #: inc/customizer/options/lifter-lesson-layout-options.php:629
 #: inc/customizer/options/page-layout-options.php:766
-#: inc/customizer/options/post-layout-options.php:842
+#: inc/customizer/options/post-layout-options.php:863
 msgid "Featured Image Ratio"
 msgstr ""
 
@@ -3356,8 +3370,8 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:764
 #: inc/customizer/options/lifter-lesson-layout-options.php:650
 #: inc/customizer/options/page-layout-options.php:791
-#: inc/customizer/options/post-layout-options.php:863
-#: inc/customizer/react/src/sorter/setting-sorter-component.js:67
+#: inc/customizer/options/post-layout-options.php:884
+#: assets/js/admin/customizer.js:5
 msgid "Inherit"
 msgstr ""
 
@@ -3372,7 +3386,7 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:767
 #: inc/customizer/options/lifter-lesson-layout-options.php:653
 #: inc/customizer/options/page-layout-options.php:794
-#: inc/customizer/options/post-layout-options.php:866
+#: inc/customizer/options/post-layout-options.php:887
 msgid "1:1"
 msgstr ""
 
@@ -3387,7 +3401,7 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:770
 #: inc/customizer/options/lifter-lesson-layout-options.php:656
 #: inc/customizer/options/page-layout-options.php:797
-#: inc/customizer/options/post-layout-options.php:869
+#: inc/customizer/options/post-layout-options.php:890
 msgid "4:3"
 msgstr ""
 
@@ -3402,7 +3416,7 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:773
 #: inc/customizer/options/lifter-lesson-layout-options.php:659
 #: inc/customizer/options/page-layout-options.php:800
-#: inc/customizer/options/post-layout-options.php:872
+#: inc/customizer/options/post-layout-options.php:893
 msgid "3:2"
 msgstr ""
 
@@ -3417,7 +3431,7 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:776
 #: inc/customizer/options/lifter-lesson-layout-options.php:662
 #: inc/customizer/options/page-layout-options.php:803
-#: inc/customizer/options/post-layout-options.php:875
+#: inc/customizer/options/post-layout-options.php:896
 msgid "16:9"
 msgstr ""
 
@@ -3430,9 +3444,8 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:792
 #: inc/customizer/options/lifter-lesson-layout-options.php:678
 #: inc/customizer/options/page-layout-options.php:819
-#: inc/customizer/options/post-layout-options.php:1030
-#: inc/customizer/react/src/sorter/item-component.js:250
-#: inc/customizer/react/src/sorter/setting-item-component.js:721
+#: inc/customizer/options/post-layout-options.php:1051
+#: assets/js/admin/customizer.js:5
 msgid "Show Comments?"
 msgstr ""
 
@@ -3591,7 +3604,7 @@ msgstr ""
 #: inc/customizer/options/lifter-dashboard-layout-options.php:59
 #: inc/customizer/options/lifter-member-archive-layout-options.php:551
 #: inc/customizer/options/post-archive-layout-options.php:561
-#: inc/customizer/options/post-layout-options.php:996
+#: inc/customizer/options/post-layout-options.php:1017
 #: inc/customizer/options/product-layout-options.php:754
 #: inc/customizer/options/search-layout-options.php:473
 msgid "2"
@@ -3607,7 +3620,7 @@ msgstr ""
 #: inc/customizer/options/lifter-dashboard-layout-options.php:62
 #: inc/customizer/options/lifter-member-archive-layout-options.php:554
 #: inc/customizer/options/post-archive-layout-options.php:564
-#: inc/customizer/options/post-layout-options.php:999
+#: inc/customizer/options/post-layout-options.php:1020
 #: inc/customizer/options/product-layout-options.php:757
 #: inc/customizer/options/search-layout-options.php:476
 msgid "3"
@@ -3622,7 +3635,7 @@ msgstr ""
 #: inc/customizer/options/lifter-dashboard-layout-options.php:65
 #: inc/customizer/options/lifter-member-archive-layout-options.php:557
 #: inc/customizer/options/post-archive-layout-options.php:567
-#: inc/customizer/options/post-layout-options.php:1002
+#: inc/customizer/options/post-layout-options.php:1023
 #: inc/customizer/options/product-layout-options.php:760
 #: inc/customizer/options/search-layout-options.php:479
 msgid "4"
@@ -3723,9 +3736,7 @@ msgstr ""
 #: inc/customizer/options/footer-bottom-options.php:220
 #: inc/customizer/options/footer-middle-options.php:214
 #: inc/customizer/options/footer-top-options.php:214
-#: inc/customizer/react/src/layout-builder/row-component.js:34
-#: inc/customizer/react/src/layout-builder/row-component.js:41
-#: inc/customizer/react/src/layout-builder/row-component.js:44
+#: assets/js/admin/customizer.js:1
 msgid "Row"
 msgstr ""
 
@@ -3855,7 +3866,7 @@ msgstr ""
 #: inc/customizer/options/transparent-header-options.php:571
 #: inc/customizer/options/transparent-header-options.php:764
 #: inc/customizer/options/transparent-header-options.php:820
-#: inc/customizer/react/src/color/color-component.js:33
+#: assets/js/admin/customizer.js:1
 msgid "Hover Color"
 msgstr ""
 
@@ -3866,7 +3877,7 @@ msgstr ""
 #: inc/customizer/options/general-sidebar-options.php:200
 #: inc/customizer/options/header-html-options.php:101
 #: inc/customizer/options/header-mobile-html-options.php:143
-#: inc/customizer/react/src/color-link/color-link-component.js:91
+#: assets/js/admin/customizer.js:5
 msgid "Link Style"
 msgstr ""
 
@@ -3896,7 +3907,7 @@ msgstr ""
 #: inc/customizer/options/general-sidebar-options.php:210
 #: inc/customizer/options/header-html-options.php:108
 #: inc/customizer/options/header-mobile-html-options.php:156
-#: inc/customizer/react/src/color-link/color-link-component.js:50
+#: assets/js/admin/customizer.js:5
 msgid "No Underline"
 msgstr ""
 
@@ -3917,8 +3928,8 @@ msgstr ""
 #: inc/customizer/options/header-builder-options.php:17
 #: inc/customizer/options/header-search-options.php:79
 #: inc/customizer/options/transparent-header-options.php:122
-#: inc/customizer/react/src/check-icon/check-icon-component.js:19
-#: inc/customizer/react/src/common/responsive.js:29
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
 msgid "Desktop"
 msgstr ""
 
@@ -4156,7 +4167,7 @@ msgstr ""
 #: inc/customizer/options/header-mobile-social-options.php:358
 #: inc/customizer/options/header-social-options.php:358
 #: inc/customizer/options/topic-layout-options.php:449
-#: inc/customizer/react/src/typography/typography-component.js:737
+#: assets/js/admin/customizer.js:5
 msgid "Font"
 msgstr ""
 
@@ -4568,6 +4579,7 @@ msgstr ""
 #: inc/meta/class-theme-meta.php:393
 #: inc/meta/class-theme-meta.php:417
 #: inc/meta/class-theme-meta.php:659
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:31
 #: inc/meta/react/src/layout.js:75
 #: inc/meta/react/src/layout.js:86
@@ -4748,8 +4760,7 @@ msgstr ""
 #: inc/customizer/options/header-popup-options.php:105
 #: inc/customizer/options/lifter-dashboard-layout-options.php:32
 #: inc/customizer/options/my-account-layout-options.php:41
-#: inc/customizer/react/src/measure/measure-component.js:208
-#: inc/customizer/react/src/measure/measure-component.js:375
+#: assets/js/admin/customizer.js:5
 msgid "Left"
 msgstr ""
 
@@ -4759,8 +4770,7 @@ msgstr ""
 #: inc/customizer/options/header-popup-options.php:110
 #: inc/customizer/options/lifter-dashboard-layout-options.php:42
 #: inc/customizer/options/my-account-layout-options.php:51
-#: inc/customizer/react/src/measure/measure-component.js:170
-#: inc/customizer/react/src/measure/measure-component.js:317
+#: assets/js/admin/customizer.js:5
 msgid "Right"
 msgstr ""
 
@@ -4778,8 +4788,8 @@ msgstr ""
 
 #: inc/customizer/options/general-scroll-to-top-options.php:280
 #: inc/customizer/options/header-search-options.php:83
-#: inc/customizer/react/src/check-icon/check-icon-component.js:23
-#: inc/customizer/react/src/common/responsive.js:33
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
 msgid "Tablet"
 msgstr ""
 
@@ -4825,7 +4835,7 @@ msgid "medium"
 msgstr ""
 
 #: inc/customizer/options/general-social-options.php:129
-#: inc/customizer/react/src/social/social-component.js:84
+#: assets/js/admin/customizer.js:5
 msgid "GitHub"
 msgstr ""
 
@@ -4834,27 +4844,27 @@ msgid "Tiktok"
 msgstr ""
 
 #: inc/customizer/options/general-social-options.php:234
-#: inc/customizer/react/src/social/social-component.js:103
+#: assets/js/admin/customizer.js:5
 msgid "Apple Podcast"
 msgstr ""
 
 #: inc/customizer/options/general-social-options.php:241
-#: inc/customizer/react/src/social/social-component.js:104
+#: assets/js/admin/customizer.js:5
 msgid "Flickr"
 msgstr ""
 
 #: inc/customizer/options/general-social-options.php:283
-#: inc/customizer/react/src/social/social-component.js:108
+#: assets/js/admin/customizer.js:5
 msgid "Custom 1"
 msgstr ""
 
 #: inc/customizer/options/general-social-options.php:290
-#: inc/customizer/react/src/social/social-component.js:109
+#: assets/js/admin/customizer.js:5
 msgid "Custom 2"
 msgstr ""
 
 #: inc/customizer/options/general-social-options.php:297
-#: inc/customizer/react/src/social/social-component.js:110
+#: assets/js/admin/customizer.js:5
 msgid "Custom 3"
 msgstr ""
 
@@ -5111,7 +5121,7 @@ msgstr ""
 
 #: inc/customizer/options/header-button-options.php:54
 #: inc/customizer/options/header-mobile-button-options.php:112
-#: inc/customizer/react/src/sorter/setting-item-component.js:336
+#: assets/js/admin/customizer.js:5
 msgid "Label"
 msgstr ""
 
@@ -5800,7 +5810,7 @@ msgstr ""
 #: inc/customizer/options/lifter-course-layout-options.php:779
 #: inc/customizer/options/lifter-lesson-layout-options.php:665
 #: inc/customizer/options/page-layout-options.php:806
-#: inc/customizer/options/post-layout-options.php:878
+#: inc/customizer/options/post-layout-options.php:899
 msgid "2:1"
 msgstr ""
 
@@ -6238,13 +6248,12 @@ msgid "Content Vertical Alignment"
 msgstr ""
 
 #: inc/customizer/options/post-archive-layout-options.php:635
-#: inc/customizer/react/src/measure/measure-component.js:151
-#: inc/customizer/react/src/measure/measure-component.js:288
+#: assets/js/admin/customizer.js:5
 msgid "Top"
 msgstr ""
 
 #: inc/customizer/options/post-archive-layout-options.php:638
-#: inc/customizer/options/post-layout-options.php:939
+#: inc/customizer/options/post-layout-options.php:960
 #: inc/customizer/options/product-layout-options.php:704
 msgid "Center"
 msgstr ""
@@ -6264,7 +6273,7 @@ msgid "Item Category Font"
 msgstr ""
 
 #: inc/customizer/options/post-archive-layout-options.php:848
-#: inc/customizer/options/post-layout-options.php:1064
+#: inc/customizer/options/post-layout-options.php:1085
 msgid "Post Background"
 msgstr ""
 
@@ -6319,63 +6328,67 @@ msgstr ""
 msgid "Stretch Full"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:891
+#: inc/customizer/options/post-layout-options.php:845
+msgid "Show Featured Image Caption?"
+msgstr ""
+
+#: inc/customizer/options/post-layout-options.php:912
 msgid "Show Post Tags?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:901
+#: inc/customizer/options/post-layout-options.php:922
 msgid "Show Footer Area in Boxed Mode?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:916
+#: inc/customizer/options/post-layout-options.php:937
 msgid "Show Post Author Box?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:922
+#: inc/customizer/options/post-layout-options.php:943
 msgid "Author Box Style"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:952
+#: inc/customizer/options/post-layout-options.php:973
 msgid "Use Author Archive Link?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:967
+#: inc/customizer/options/post-layout-options.php:988
 msgid "Show Post Navigation?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:976
+#: inc/customizer/options/post-layout-options.php:997
 msgid "Show Related Posts?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:983
+#: inc/customizer/options/post-layout-options.php:1004
 msgid "Related Posts Columns"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:1014
+#: inc/customizer/options/post-layout-options.php:1035
 msgid "Endlessly Loop Related Carousel?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:1040
+#: inc/customizer/options/post-layout-options.php:1061
 msgid "Show Comment Date?"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:1082
+#: inc/customizer/options/post-layout-options.php:1103
 msgid "Post Content Background"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:1088
+#: inc/customizer/options/post-layout-options.php:1109
 msgid "Related Posts Section"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:1101
+#: inc/customizer/options/post-layout-options.php:1122
 msgid "Related Posts Section Title Font"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:1126
+#: inc/customizer/options/post-layout-options.php:1147
 msgid "Related Posts Section Background"
 msgstr ""
 
-#: inc/customizer/options/post-layout-options.php:1145
+#: inc/customizer/options/post-layout-options.php:1166
 msgid "Related Posts Background"
 msgstr ""
 
@@ -6821,8 +6834,7 @@ msgid "Stuck to the Bottom of the screen"
 msgstr ""
 
 #: inc/customizer/options/woo-store-notice-options.php:68
-#: inc/customizer/react/src/measure/measure-component.js:189
-#: inc/customizer/react/src/measure/measure-component.js:346
+#: assets/js/admin/customizer.js:5
 msgid "Bottom"
 msgstr ""
 
@@ -6851,22 +6863,22 @@ msgid "Config Kadence Modules"
 msgstr ""
 
 #: inc/dashboard/class-theme-dashboard.php:297
-#: inc/dashboard/react/src/sidebar.js:14
+#: assets/js/admin/dashboard.js:1
 msgid "Web Creators Community"
 msgstr ""
 
 #: inc/dashboard/class-theme-dashboard.php:298
-#: inc/dashboard/react/src/sidebar.js:15
+#: assets/js/admin/dashboard.js:1
 msgid "Join our community of fellow kadence users creating effective websites! Share your site, ask a question and help others."
 msgstr ""
 
 #: inc/dashboard/class-theme-dashboard.php:299
-#: inc/dashboard/react/src/sidebar.js:16
+#: assets/js/admin/dashboard.js:1
 msgid "Join our Facebook Group"
 msgstr ""
 
 #: inc/dashboard/class-theme-dashboard.php:304
-#: inc/dashboard/react/src/help.js:16
+#: assets/js/admin/dashboard.js:1
 msgid "Video Tutorials"
 msgstr ""
 
@@ -6891,17 +6903,17 @@ msgid "Browse Docs"
 msgstr ""
 
 #: inc/dashboard/class-theme-dashboard.php:318
-#: inc/dashboard/react/src/sidebar.js:23
+#: assets/js/admin/dashboard.js:1
 msgid "Support"
 msgstr ""
 
 #: inc/dashboard/class-theme-dashboard.php:319
-#: inc/dashboard/react/src/sidebar.js:24
+#: assets/js/admin/dashboard.js:1
 msgid "Have a question, we are happy to help! Get in touch with our support team."
 msgstr ""
 
 #: inc/dashboard/class-theme-dashboard.php:320
-#: inc/dashboard/react/src/sidebar.js:25
+#: assets/js/admin/dashboard.js:1
 msgid "Submit a Ticket"
 msgstr ""
 
@@ -7048,39 +7060,44 @@ msgstr ""
 #: template-parts/content/entry_loop_meta.php:55
 #: template-parts/content/entry_meta.php:27
 #: template-parts/title/meta.php:27
-#: inc/customizer/react/src/sorter/item-component.js:117
-#: inc/customizer/react/src/sorter/setting-item-component.js:570
+#: assets/js/admin/customizer.js:5
 msgid "By"
 msgstr ""
 
 #: template-parts/content/entry_loop_meta.php:74
 #: template-parts/content/entry_meta.php:46
 #: template-parts/title/meta.php:46
-#: inc/customizer/react/src/sorter/item-component.js:164
-#: inc/customizer/react/src/sorter/setting-item-component.js:617
+#: assets/js/admin/customizer.js:5
 msgid "Posted on"
 msgstr ""
 
 #: template-parts/content/entry_loop_meta.php:84
 #: template-parts/content/entry_meta.php:56
 #: template-parts/title/meta.php:56
-#: inc/customizer/react/src/sorter/item-component.js:200
-#: inc/customizer/react/src/sorter/setting-item-component.js:671
+#: assets/js/admin/customizer.js:5
 msgid "Updated on"
 msgstr ""
 
 #: template-parts/content/entry_loop_meta.php:90
 #: template-parts/content/entry_meta.php:62
 #: template-parts/title/meta.php:62
-#: inc/customizer/react/src/sorter/item-component.js:236
-#: inc/customizer/react/src/sorter/setting-item-component.js:707
+#: assets/js/admin/customizer.js:5
 msgid "Posted in"
 msgstr ""
 
+#: template-parts/content/entry_loop_meta.php:144
+#: template-parts/content/entry_loop_meta.php:151
+#: template-parts/content/entry_meta.php:116
+#: template-parts/content/entry_meta.php:123
+#: template-parts/title/meta.php:116
+#: template-parts/title/meta.php:123
+msgid "Author image"
+msgstr ""
+
 #. translators: separator between taxonomy terms
-#: template-parts/content/entry_loop_meta.php:287
-#: template-parts/content/entry_meta.php:259
-#: template-parts/title/meta.php:259
+#: template-parts/content/entry_loop_meta.php:289
+#: template-parts/content/entry_meta.php:261
+#: template-parts/title/meta.php:261
 msgctxt "list item separator"
 msgid ", "
 msgstr ""
@@ -7213,885 +7230,784 @@ msgstr ""
 msgid "About Course"
 msgstr ""
 
-#: inc/customizer/react/src/available/available-component.js:119
-msgid "Available Items"
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
+msgid "Gradient"
 msgstr ""
 
-#: inc/customizer/react/src/background/background-component.js:74
-msgid "No Repeat"
+#: assets/js/admin/customizer.js:1
+msgid "Select Color"
 msgstr ""
 
-#: inc/customizer/react/src/background/background-component.js:77
-msgid "Repeat"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:80
-msgid "Repeat-X"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:83
-msgid "Repeat-y"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:88
-msgid "Auto"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:91
-msgid "Cover"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:94
-msgid "Contain"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:99
-msgid "Scroll"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:102
-msgid "Fixed"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:447
-#: inc/customizer/react/src/border/border-component.js:200
-#: inc/customizer/react/src/boxshadow/boxshadow-component.js:129
-#: inc/customizer/react/src/measure/measure-component.js:76
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:116
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:76
-#: inc/customizer/react/src/range/range-component.js:80
-#: inc/customizer/react/src/row-layout/row-layout-component.js:214
-msgid "Reset Device Values"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:462
-#: inc/customizer/react/src/border/border-component.js:221
-#: inc/customizer/react/src/borders/border-component.js:220
-#: inc/customizer/react/src/boxshadow/boxshadow-component.js:150
-#: inc/customizer/react/src/check-icon/check-icon-component.js:53
-#: inc/customizer/react/src/color/color-component.js:69
-#: inc/customizer/react/src/measure/measure-component.js:103
-#: inc/customizer/react/src/palette/palette-component.js:177
-#: inc/customizer/react/src/radio-icon/radio-icon-component.js:98
-#: inc/customizer/react/src/range/range-component.js:121
-#: inc/customizer/react/src/row-layout/row-layout-component.js:236
-#: inc/customizer/react/src/typography/typography-component.js:608
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/radio-icon.js:23
 msgid "Reset Values"
 msgstr ""
 
-#: inc/customizer/react/src/background/background-component.js:499
-#: inc/customizer/react/src/common/color.js:105
-msgid "Gradient"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:504
-#: inc/customizer/react/src/background/background-component.js:517
-#: inc/customizer/react/src/contact/item-component.js:61
-#: inc/customizer/react/src/social/item-component.js:27
-#: inc/customizer/react/src/social/item-component.js:40
-msgid "Image"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:608
-msgid "Background Repeat"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:637
-msgid "Background Size"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:666
-msgid "Background Attachment"
-msgstr ""
-
-#: inc/customizer/react/src/background/background-component.js:754
-msgid "Select Background"
-msgstr ""
-
-#: inc/customizer/react/src/border/border-component.js:365
-#: inc/customizer/react/src/border/border-component.js:403
-#: inc/customizer/react/src/borders/border-component.js:345
-#: inc/customizer/react/src/borders/border-component.js:383
-#: inc/customizer/react/src/typography/typography-component.js:742
-msgid "Style"
-msgstr ""
-
-#: inc/customizer/react/src/border/border-component.js:475
-#: inc/customizer/react/src/border/border-component.js:505
-#: inc/customizer/react/src/borders/border-component.js:455
-#: inc/customizer/react/src/borders/border-component.js:485
-#: inc/customizer/react/src/measure/measure-component.js:431
-#: inc/customizer/react/src/measure/measure-component.js:498
-#: inc/customizer/react/src/range/range-component.js:229
-#: inc/customizer/react/src/range/range-component.js:287
-msgid "Unit"
-msgstr ""
-
-#: inc/customizer/react/src/color-link/color-link-component.js:30
-msgid "Initial"
-msgstr ""
-
-#: inc/customizer/react/src/color-link/color-link-component.js:34
-msgid "Hover"
-msgstr ""
-
-#: inc/customizer/react/src/color-link/color-link-component.js:38
-msgid "Text Alt"
-msgstr ""
-
-#: inc/customizer/react/src/color-link/color-link-component.js:44
-msgid "Standard (underline)"
-msgstr ""
-
-#: inc/customizer/react/src/color-link/color-link-component.js:47
-msgid "Highlight Underline"
-msgstr ""
-
-#: inc/customizer/react/src/color-link/color-link-component.js:53
-msgid "Background on Hover"
-msgstr ""
-
-#: inc/customizer/react/src/color-link/color-link-component.js:56
-msgid "Offset Background"
-msgstr ""
-
-#: inc/customizer/react/src/common/color.js:211
-msgid "Select Color"
-msgstr ""
-
-#: inc/customizer/react/src/contact/contact-component.js:72
-msgid "444-546-8765"
-msgstr ""
-
-#: inc/customizer/react/src/contact/contact-component.js:73
-msgid "Mon - Fri: 8AM - 5PM"
-msgstr ""
-
-#: inc/customizer/react/src/contact/contact-component.js:74
-msgid "example@example.com"
-msgstr ""
-
-#: inc/customizer/react/src/contact/contact-component.js:75
-msgid "Address"
-msgstr ""
-
-#: inc/customizer/react/src/contact/contact-component.js:75
-msgid "4560 example street"
-msgstr ""
-
-#: inc/customizer/react/src/contact/contact-component.js:292
-msgid "Add Contact"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:23
-#: inc/customizer/react/src/social/item-component.js:47
-#: inc/customizer/react/src/sorter/item-component.js:22
-#: inc/customizer/react/src/sorter/setting-item-component.js:85
-msgid "Toggle Item Visibility"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:35
-msgid "Contact Item"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:37
-#: inc/customizer/react/src/social/item-component.js:61
-#: inc/customizer/react/src/sorter/item-component.js:36
-#: inc/customizer/react/src/sorter/setting-item-component.js:99
-msgid "Expand Item Controls"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:57
-#: inc/customizer/react/src/social/item-component.js:32
-msgid "Icon"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:81
-#: inc/customizer/react/src/social/item-component.js:96
-#: inc/customizer/react/src/sorter/setting-item-component.js:845
-#: inc/customizer/react/src/sorter/setting-item-component.js:892
-#: inc/customizer/react/src/sorter/setting-item-component.js:939
-#: inc/customizer/react/src/sorter/setting-item-component.js:986
-#: inc/customizer/react/src/sorter/setting-item-component.js:1033
-msgid "Add Image"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:100
-#: inc/customizer/react/src/social/item-component.js:115
-#: inc/customizer/react/src/sorter/setting-item-component.js:863
-#: inc/customizer/react/src/sorter/setting-item-component.js:910
-#: inc/customizer/react/src/sorter/setting-item-component.js:957
-#: inc/customizer/react/src/sorter/setting-item-component.js:1004
-#: inc/customizer/react/src/sorter/setting-item-component.js:1051
-msgid "Remove Image"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:106
-#: inc/customizer/react/src/social/item-component.js:121
-#: inc/customizer/react/src/social/item-component.js:144
-msgid "Max Width (px)"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:174
-#: inc/customizer/react/src/social/item-component.js:212
-msgid "Item Label"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:181
-msgid "Item Link"
-msgstr ""
-
-#: inc/customizer/react/src/contact/item-component.js:194
-#: inc/customizer/react/src/social/item-component.js:225
-msgid "Remove Item"
-msgstr ""
-
-#: inc/customizer/react/src/layout-builder/item-component.js:32
-#: inc/customizer/react/src/layout-builder/item-component.js:42
-#: inc/customizer/react/src/layout-builder/item-component.js:53
-msgid "Setting settings for"
-msgstr ""
-
-#: inc/customizer/react/src/layout-builder/item-component.js:63
-msgid "Remove"
-msgstr ""
-
-#: inc/customizer/react/src/layout-builder/row-component.js:34
-#: inc/customizer/react/src/layout-builder/row-component.js:41
-msgid "Edit Settings for"
-msgstr ""
-
-#: inc/customizer/react/src/layout-builder/row-component.js:34
-#: inc/customizer/react/src/layout-builder/row-component.js:41
-#: inc/customizer/react/src/layout-builder/row-component.js:44
-msgid "Off Canvas"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:41
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:56
-msgid "Logo Only"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:45
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:46
-msgid "Logo & Title"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:49
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:50
-msgid "Logo, Title & Tagline"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:62
-msgid "Logo - Title"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:66
-msgid "Title - Logo"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:70
-msgid "Top Logo - Title"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:74
-msgid "Top Title - Logo"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:80
-msgid "Logo - Title - Tagline"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:84
-msgid "Title - Tagline - Logo"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:88
-msgid "Top Logo - Title - Tagline"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:92
-msgid "Top Title - Tagline - Logo"
-msgstr ""
-
-#: inc/customizer/react/src/multi-radio-icon/multi-radio-icon-component.js:96
-msgid "Top Title - Logo - Tagline"
-msgstr ""
-
-#: inc/customizer/react/src/palette/palette-component.js:69
+#: assets/js/admin/customizer.js:1
 msgid "Palette 1"
 msgstr ""
 
-#: inc/customizer/react/src/palette/palette-component.js:72
+#: assets/js/admin/customizer.js:1
 msgid "Palette 2"
 msgstr ""
 
-#: inc/customizer/react/src/palette/palette-component.js:75
+#: assets/js/admin/customizer.js:1
 msgid "Palette 3"
 msgstr ""
 
-#: inc/customizer/react/src/palette/palette-component.js:274
+#: assets/js/admin/customizer.js:1
 msgid "Select a Color Set"
 msgstr ""
 
-#: inc/customizer/react/src/palette/palette-component.js:279
+#: assets/js/admin/customizer.js:1
 msgid "Export/Import"
 msgstr ""
 
-#: inc/customizer/react/src/palette/palette-component.js:350
+#: assets/js/admin/customizer.js:1
 msgid "Error with Import data"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:24
-#: inc/customizer/react/src/row-layout/row-layout-component.js:30
-#: inc/customizer/react/src/row-layout/row-layout-component.js:44
-#: inc/customizer/react/src/row-layout/row-layout-component.js:66
-#: inc/customizer/react/src/row-layout/row-layout-component.js:80
-#: inc/customizer/react/src/row-layout/row-layout-component.js:88
-#: inc/customizer/react/src/row-layout/row-layout-component.js:98
-#: inc/customizer/react/src/row-layout/row-layout-component.js:112
-#: inc/customizer/react/src/row-layout/row-layout-component.js:146
-msgid "Equal Width Columns"
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
+msgid "Reset Device Values"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:34
-msgid "Left Heavy 40/20/20/20"
+#: assets/js/admin/customizer.js:1
+#: assets/js/admin/customizer.js:5
+msgid "Unit"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:38
-msgid "Right Heavy 20/20/20/40"
+#: assets/js/admin/customizer.js:1
+msgid "Logo Only"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:48
-#: inc/customizer/react/src/row-layout/row-layout-component.js:116
-msgid "Left Heavy 50/25/25"
+#: assets/js/admin/customizer.js:1
+msgid "Logo & Title"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:52
-#: inc/customizer/react/src/row-layout/row-layout-component.js:120
-msgid "Right Heavy 25/25/50"
+#: assets/js/admin/customizer.js:1
+msgid "Logo, Title & Tagline"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:56
-#: inc/customizer/react/src/row-layout/row-layout-component.js:124
-msgid "Center Heavy 25/50/25"
+#: assets/js/admin/customizer.js:1
+msgid "Logo - Title"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:60
-#: inc/customizer/react/src/row-layout/row-layout-component.js:128
-msgid "Wide Center 20/60/20"
+#: assets/js/admin/customizer.js:1
+msgid "Title - Logo"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:70
-#: inc/customizer/react/src/row-layout/row-layout-component.js:150
-msgid "Left Heavy 66/33"
+#: assets/js/admin/customizer.js:1
+msgid "Top Logo - Title"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:74
-#: inc/customizer/react/src/row-layout/row-layout-component.js:154
-msgid "Right Heavy 33/66"
+#: assets/js/admin/customizer.js:1
+msgid "Top Title - Logo"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:92
-#: inc/customizer/react/src/row-layout/row-layout-component.js:106
-#: inc/customizer/react/src/row-layout/row-layout-component.js:140
-#: inc/customizer/react/src/row-layout/row-layout-component.js:158
-msgid "Collapse to Rows"
+#: assets/js/admin/customizer.js:1
+msgid "Logo - Title - Tagline"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:102
-msgid "Two Column Grid"
+#: assets/js/admin/customizer.js:1
+msgid "Title - Tagline - Logo"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:132
-msgid "First Row, Next Columns 100 - 50/50"
+#: assets/js/admin/customizer.js:1
+msgid "Top Logo - Title - Tagline"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:136
-msgid "Last Row, Previous Columns 50/50 - 100"
+#: assets/js/admin/customizer.js:1
+msgid "Top Title - Tagline - Logo"
 msgstr ""
 
-#: inc/customizer/react/src/row-layout/row-layout-component.js:164
-msgid "Single Row"
+#: assets/js/admin/customizer.js:1
+msgid "Top Title - Logo - Tagline"
 msgstr ""
 
-#: inc/customizer/react/src/select/select-component.js:42
-#: inc/customizer/react/src/sorter/sorter-component.js:165
-msgid "Reset Value"
+#: assets/js/admin/customizer.js:1
+msgid "Setting settings for"
 msgstr ""
 
-#: inc/customizer/react/src/social/item-component.js:23
-#: inc/customizer/react/src/social/item-component.js:36
-msgid "SVG"
+#: assets/js/admin/customizer.js:1
+msgid "Remove"
 msgstr ""
 
-#: inc/customizer/react/src/social/item-component.js:59
-msgid "Social Item"
+#: assets/js/admin/customizer.js:1
+msgid "Edit Settings for"
 msgstr ""
 
-#: inc/customizer/react/src/social/item-component.js:136
-msgid "SVG HTML"
+#: assets/js/admin/customizer.js:1
+msgid "Off Canvas"
 msgstr ""
 
-#: inc/customizer/react/src/social/social-component.js:334
-msgid "Add Social"
+#: assets/js/admin/customizer.js:1
+msgid "Available Items"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:52
-#: inc/customizer/react/src/sorter/setting-item-component.js:204
-msgid "Choose a Divider"
+#. translators: %s: gradient code e.g: "linear-gradient(90deg, rgba(98,16,153,1) 0%, rgba(172,110,22,1) 100%);".
+#: assets/js/admin/customizer.js:5
+msgid "No Repeat"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:84
-#: inc/customizer/react/src/sorter/setting-item-component.js:511
-msgid "Show Author?"
+#: assets/js/admin/customizer.js:5
+msgid "Repeat"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:94
-#: inc/customizer/react/src/sorter/setting-item-component.js:533
-msgid "Show Author Image?"
+#: assets/js/admin/customizer.js:5
+msgid "Repeat-X"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:103
-#: inc/customizer/react/src/sorter/setting-item-component.js:556
-msgid "Author Label"
+#: assets/js/admin/customizer.js:5
+msgid "Repeat-y"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:105
-#: inc/customizer/react/src/sorter/item-component.js:152
-#: inc/customizer/react/src/sorter/item-component.js:188
-#: inc/customizer/react/src/sorter/item-component.js:224
-#: inc/customizer/react/src/sorter/setting-item-component.js:558
-#: inc/customizer/react/src/sorter/setting-item-component.js:605
-#: inc/customizer/react/src/sorter/setting-item-component.js:659
-#: inc/customizer/react/src/sorter/setting-item-component.js:695
-msgid "Toggle Label Visibility"
+#: assets/js/admin/customizer.js:5
+msgid "Auto"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:133
-#: inc/customizer/react/src/sorter/setting-item-component.js:586
-msgid "Show Date?"
+#: assets/js/admin/customizer.js:5
+msgid "Cover"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:141
-#: inc/customizer/react/src/sorter/setting-item-component.js:594
-#: inc/customizer/react/src/sorter/setting-item-component.js:648
-msgid "Show Time?"
+#: assets/js/admin/customizer.js:5
+msgid "Contain"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:150
-#: inc/customizer/react/src/sorter/setting-item-component.js:603
-msgid "Date Label"
+#: assets/js/admin/customizer.js:5
+msgid "Scroll"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:178
-#: inc/customizer/react/src/sorter/setting-item-component.js:631
-msgid "Show Last Updated Date?"
+#: assets/js/admin/customizer.js:5
+msgid "Fixed"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:186
-#: inc/customizer/react/src/sorter/setting-item-component.js:657
-msgid "Updated Date Label"
+#: assets/js/admin/customizer.js:5
+msgid "Image"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:214
-#: inc/customizer/react/src/sorter/setting-item-component.js:685
-msgid "Show Categories?"
+#: assets/js/admin/customizer.js:5
+msgid "Background Repeat"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/item-component.js:222
-#: inc/customizer/react/src/sorter/setting-item-component.js:693
-msgid "Categories Label"
+#: assets/js/admin/customizer.js:5
+msgid "Background Size"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/setting-item-component.js:73
-msgid "Select"
+#: assets/js/admin/customizer.js:5
+msgid "Background Attachment"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/setting-item-component.js:115
-msgid "Set Image Ratio"
+#: assets/js/admin/customizer.js:5
+msgid "Select Background"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/setting-item-component.js:147
-msgid "Image is link to post"
+#: assets/js/admin/customizer.js:5
+msgid "Style"
 msgstr ""
 
-#: inc/customizer/react/src/sorter/setting-item-component.js:158
-msgid "Show Post Title in Breadcrumb?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:169
-msgid "Show Full Content?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:185
-msgid "Excerpt Word Count"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:192
-msgid "Set Image Size"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:238
-msgid "Choose Button Size"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:262
-msgid "Choose a Style"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:286
-msgid "Choose a Taxonomy"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:299
-msgid "Show Shipping Statement?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:309
-msgid "Shipping Excerpt"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:346
-msgid "First Feature"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:352
-#: inc/customizer/react/src/sorter/setting-item-component.js:385
-#: inc/customizer/react/src/sorter/setting-item-component.js:418
-#: inc/customizer/react/src/sorter/setting-item-component.js:451
-#: inc/customizer/react/src/sorter/setting-item-component.js:484
-msgid "Choose a Icon"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:379
-msgid "Second Feature"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:412
-msgid "Third Feature"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:445
-msgid "Fourth Feature"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:478
-msgid "Fifth Feature"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:522
-msgid "Enable Author Link?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:549
-msgid "Author Image Size (px)"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:639
-msgid "Show only if different from publish date?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:729
-msgid "Show only if post has at least one comment"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:740
-msgid "Choose Icon Colors"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:764
-msgid "Show Stripe?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:773
-msgid "Show Visa?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:782
-msgid "Show Mastercard?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:791
-msgid "Show Amex?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:800
-msgid "Show Discover?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:809
-msgid "Show Paypal?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:818
-msgid "Show Apple Pay?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:828
-msgid "Show Custom 01?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-item-component.js:875
-#: inc/customizer/react/src/sorter/setting-item-component.js:922
-#: inc/customizer/react/src/sorter/setting-item-component.js:969
-#: inc/customizer/react/src/sorter/setting-item-component.js:1016
-msgid "Show Custom 02?"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-sorter-component.js:50
-msgid "Thumbnail"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-sorter-component.js:56
-msgid "Medium Large"
-msgstr ""
-
-#: inc/customizer/react/src/sorter/setting-sorter-component.js:62
-msgid "Full"
-msgstr ""
-
-#: inc/customizer/react/src/typography/font-pair.js:34
+#: assets/js/admin/customizer.js:5
 msgid "Choose a font"
 msgstr ""
 
-#: inc/customizer/react/src/typography/font-pair.js:39
+#: assets/js/admin/customizer.js:5
 msgid "Select a Font Pairing"
 msgstr ""
 
-#: inc/customizer/react/src/typography/font-pair.js:40
+#: assets/js/admin/customizer.js:5
 msgid "Select a Font Pair"
 msgstr ""
 
-#: inc/customizer/react/src/typography/font-pair.js:50
+#: assets/js/admin/customizer.js:5
 msgid "Confirm Change Settings?"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:480
+#: assets/js/admin/customizer.js:5
 msgid "Font Size"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:512
+#: assets/js/admin/customizer.js:5
 msgid "Line Height"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:544
+#: assets/js/admin/customizer.js:5
 msgid "Letter Spacing"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:747
+#: assets/js/admin/customizer.js:5
 msgid "Size"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:779
+#: assets/js/admin/customizer.js:5
 msgid "Select Font"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:788
+#: assets/js/admin/customizer.js:5
 msgid "Select Style"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:791
-#: inc/customizer/react/src/typography/typography-component.js:800
+#: assets/js/admin/customizer.js:5
 msgid "inherit"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:797
+#: assets/js/admin/customizer.js:5
 msgid "Select Size"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:806
+#: assets/js/admin/customizer.js:5
 msgid "Show Preview Text"
 msgstr ""
 
-#: inc/customizer/react/src/typography/typography-component.js:831
+#: assets/js/admin/customizer.js:5
 msgid "Design is not just what it looks like and feels like. Design is how it works."
 msgstr ""
 
-#: inc/dashboard/react/src/changelog.js:14
-#: inc/dashboard/react/src/index.js:37
-msgid "Changelog"
+#: assets/js/admin/customizer.js:5
+msgid "Initial"
 msgstr ""
 
-#: inc/dashboard/react/src/changelog.js:19
-msgid "Pro Changelog"
+#: assets/js/admin/customizer.js:5
+msgid "Hover"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:12
-msgid "Global Colors"
+#: assets/js/admin/customizer.js:5
+msgid "Text Alt"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:13
-msgid "Setup the base color scheme for your site."
+#: assets/js/admin/customizer.js:5
+msgid "Standard (underline)"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:19
-msgid "Branding"
+#: assets/js/admin/customizer.js:5
+msgid "Highlight Underline"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:20
-msgid "Upload your logo and favicon."
+#: assets/js/admin/customizer.js:5
+msgid "Background on Hover"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:27
-msgid "Choose the perfect font family, style and sizes."
+#: assets/js/admin/customizer.js:5
+msgid "Offset Background"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:34
-msgid "Add elements and arrange them how you want."
+#: assets/js/admin/customizer.js:5
+msgid "SVG"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:41
-msgid "Define your sites general page look and feel for page title, and content style."
+#: assets/js/admin/customizer.js:5
+msgid "Icon"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:48
-msgid "Customize the columns and place widget areas in unlimited configurations"
+#: assets/js/admin/customizer.js:5
+msgid "Toggle Item Visibility"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:56
-msgid "Customize Your Site"
+#: assets/js/admin/customizer.js:5
+msgid "Social Item"
 msgstr ""
 
-#: inc/dashboard/react/src/customizer.js:66
-msgid "Customize"
+#: assets/js/admin/customizer.js:5
+msgid "Expand Item Controls"
 msgstr ""
 
-#: inc/dashboard/react/src/help.js:11
+#: assets/js/admin/customizer.js:5
+msgid "Add Image"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Remove Image"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Max Width (px)"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "SVG HTML"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Item Label"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Remove Item"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Add Social"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Contact Item"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Item Link"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "444-546-8765"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Mon - Fri: 8AM - 5PM"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "example@example.com"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Address"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "4560 example street"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Add Contact"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Reset Value"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Select"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Set Image Ratio"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Image is link to post"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Post Title in Breadcrumb?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Full Content?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Excerpt Word Count"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Set Image Size"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Choose a Divider"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Choose Button Size"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Choose a Style"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Choose a Taxonomy"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Shipping Statement?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Shipping Excerpt"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "First Feature"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Choose a Icon"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Second Feature"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Third Feature"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Fourth Feature"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Fifth Feature"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Author?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Enable Author Link?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Author Image?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Author Image Size (px)"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Author Label"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Toggle Label Visibility"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Date?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Time?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Date Label"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Last Updated Date?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show only if different from publish date?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Updated Date Label"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Categories?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Categories Label"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show only if post has at least one comment"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Choose Icon Colors"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Stripe?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Visa?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Mastercard?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Amex?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Discover?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Paypal?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Apple Pay?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Custom 01?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Show Custom 02?"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Thumbnail"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Medium Large"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Full"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Equal Width Columns"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Left Heavy 40/20/20/20"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Right Heavy 20/20/20/40"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Left Heavy 50/25/25"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Right Heavy 25/25/50"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Center Heavy 25/50/25"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Wide Center 20/60/20"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Left Heavy 66/33"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Right Heavy 33/66"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Collapse to Rows"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Two Column Grid"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "First Row, Next Columns 100 - 50/50"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Last Row, Previous Columns 50/50 - 100"
+msgstr ""
+
+#: assets/js/admin/customizer.js:5
+msgid "Single Row"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
 msgid "Welcome to Kadence!"
 msgstr ""
 
-#: inc/dashboard/react/src/help.js:12
+#: assets/js/admin/dashboard.js:1
 msgid "You are going to love working with this theme! View the video below to get started with our video tutorials or click the view knowledge base button below to see all the documentation."
 msgstr ""
 
-#: inc/dashboard/react/src/help.js:14
+#: assets/js/admin/dashboard.js:1
 msgid "Kadence Theme Getting Started Tutorial - 10 Minute Quick Start Guide"
 msgstr ""
 
-#: inc/dashboard/react/src/help.js:16
+#: assets/js/admin/dashboard.js:1
 msgid "View Knowledge Base"
 msgstr ""
 
-#: inc/dashboard/react/src/index.js:27
-msgid "Dashboard"
+#: assets/js/admin/dashboard.js:1
+msgid "Changelog"
 msgstr ""
 
-#: inc/dashboard/react/src/index.js:32
-msgid "Getting Started"
+#: assets/js/admin/dashboard.js:1
+msgid "Pro Changelog"
 msgstr ""
 
-#: inc/dashboard/react/src/index.js:47
-#: inc/dashboard/react/src/starter.js:42
-#: inc/dashboard/react/src/starter.js:45
-msgid "Starter Templates"
-msgstr ""
-
-#: inc/dashboard/react/src/pro-extension.js:21
+#: assets/js/admin/dashboard.js:1
 msgid "Header Addons"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:22
+#: assets/js/admin/dashboard.js:1
 msgid "Adds 19 elements to the header builder."
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:26
+#: assets/js/admin/dashboard.js:1
 msgid "Ultimate Menu"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:27
+#: assets/js/admin/dashboard.js:1
 msgid "Adds menu options for mega menus, highlight tags, icons and more."
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:31
+#: assets/js/admin/dashboard.js:1
 msgid "Header/Footer Scripts"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:32
+#: assets/js/admin/dashboard.js:1
 msgid "Adds Options into the customizer to add header and footer scripts"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:36
+#: assets/js/admin/dashboard.js:1
 msgid "Hooked Elements"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:37
+#: assets/js/admin/dashboard.js:1
 msgid "Add content anywhere into your site conditionally."
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:41
+#: assets/js/admin/dashboard.js:1
 msgid "WooCommerce Addons"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:42
+#: assets/js/admin/dashboard.js:1
 msgid "Adds new options into the customizer for WooCommerce stores."
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:46
+#: assets/js/admin/dashboard.js:1
 msgid "Infinite Scroll"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:47
+#: assets/js/admin/dashboard.js:1
 msgid "Adds Infinite Scroll for archives."
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:51
+#: assets/js/admin/dashboard.js:1
 msgid "Local Gravatars"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:52
+#: assets/js/admin/dashboard.js:1
 msgid "Loads Gravatars from your servers to improve site performance."
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:56
+#: assets/js/admin/dashboard.js:1
 msgid "Archive Custom Page Title Backgrounds"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:57
+#: assets/js/admin/dashboard.js:1
 msgid "Allows you to assign a custom image for a taxonomy background."
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:63
+#: assets/js/admin/dashboard.js:1
 msgid "Do more with the Kadence Pro Addon"
 msgstr ""
 
-#: inc/dashboard/react/src/pro-extension.js:73
+#: assets/js/admin/dashboard.js:1
 msgid "Learn More"
 msgstr ""
 
-#: inc/dashboard/react/src/recomended.js:10
+#: assets/js/admin/dashboard.js:1
 msgid "This area is for Recommended Plugins."
 msgstr ""
 
-#: inc/dashboard/react/src/starter.js:43
+#: assets/js/admin/dashboard.js:1
+msgid "Starter Templates"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
 msgid "Create and customize professionally designed websites in minutes. Simply choose your template, choose your colors, and import. Done!"
 msgstr ""
 
+#: assets/js/admin/dashboard.js:1
+msgid "Global Colors"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Setup the base color scheme for your site."
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Branding"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Upload your logo and favicon."
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Choose the perfect font family, style and sizes."
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Add elements and arrange them how you want."
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Define your sites general page look and feel for page title, and content style."
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Customize the columns and place widget areas in unlimited configurations"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Customize Your Site"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Customize"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Dashboard"
+msgstr ""
+
+#: assets/js/admin/dashboard.js:1
+msgid "Getting Started"
+msgstr ""
+
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:57
 msgid "Inherited Default"
 msgstr ""
 
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:61
 msgid "Hide Title"
 msgstr ""
 
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:65
 msgid "Show In Content"
 msgstr ""
 
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:69
 msgid "Show Above Content"
 msgstr ""
 
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:320
 msgid "Show Featured Image"
 msgstr ""
 
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:343
 msgid "Disable Header"
 msgstr ""
 
+#: assets/js/admin/meta.js:1
 #: inc/meta/react/src/layout.js:350
 msgid "Disable Footer"
 msgstr ""

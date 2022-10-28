@@ -7,7 +7,7 @@ import ColorControl from '../common/color.js';
 import Icons from '../common/icons.js';
 import SingleBorderComponent from './border-component';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { ButtonGroup, Dashicon, Toolbar, Tooltip, Button } = wp.components;
 

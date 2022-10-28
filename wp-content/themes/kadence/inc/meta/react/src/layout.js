@@ -4,17 +4,17 @@
 import RadioIconComponent from './radio-icon.js';
 import capitalizeFirstLetter from './capitalize-first.js';
 import { PluginSidebar, PluginSidebarMoreMenuItem } from '@wordpress/edit-post';
-const { __ } = wp.i18n;
-const {
+import { __ } from '@wordpress/i18n';
+import {
 	Component,
 	Fragment,
-} = wp.element;
-const {
+} from '@wordpress/element';
+import {
 	ToggleControl,
 	SelectControl,
-} = wp.components;
-const { withSelect, withDispatch } = wp.data;
-const { compose } = wp.compose;
+} from '@wordpress/components';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 class KadenceThemeLayout extends Component {
 	constructor() {

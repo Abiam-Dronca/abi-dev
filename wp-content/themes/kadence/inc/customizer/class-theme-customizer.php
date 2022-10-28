@@ -1928,7 +1928,7 @@ class Theme_Customizer {
 		);
 		// Overide Core Text scripts because of naming issues.
 		wp_enqueue_script( 'customizer-text-widgets', get_template_directory_uri() . '/assets/js/text-widgets.min.js', array( 'jquery', 'backbone', 'editor', 'wp-util', 'wp-a11y', 'text-widgets' ), KADENCE_VERSION, false );
-		wp_enqueue_script( 'kadence-customizer-controls', get_template_directory_uri() . '/assets/js/customizer.js', $editor_dependencies, KADENCE_VERSION, true );
+		wp_enqueue_script( 'kadence-customizer-controls', get_template_directory_uri() . '/assets/js/admin/customizer.js', $editor_dependencies, KADENCE_VERSION, true );
 		wp_enqueue_style( 'kadence-customizer-controls', $path . 'react/build/controls.css', array( 'wp-components' ), KADENCE_VERSION );
 		wp_localize_script(
 			'kadence-customizer-controls',

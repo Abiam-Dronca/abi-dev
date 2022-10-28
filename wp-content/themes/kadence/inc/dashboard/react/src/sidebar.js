@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { Fragment } = wp.element;
 const { withFilters, TabPanel, Panel, PanelBody, PanelRow, Button } = wp.components;
 export const Sidebar = () => {

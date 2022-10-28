@@ -5,7 +5,7 @@ import ResponsiveControl from '../common/responsive.js';
 import Icons from '../common/icons.js';
 import DropComponent from './drop-component';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { ButtonGroup, Dashicon, Tooltip, Button } = wp.components;
 

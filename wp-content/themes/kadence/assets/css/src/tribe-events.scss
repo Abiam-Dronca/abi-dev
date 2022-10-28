@@ -27,7 +27,7 @@
 	#primary .tribe-events {
 		.tribe-events-header .tribe-events-header__events-bar {
 			background-color: var(--global-palette9);
-			border-color: var(--global-gray-400);
+			border-color: var(--tec-color-border-default);
 		}
 		.tribe-events-c-view-selector--tabs .tribe-events-c-view-selector__list-item--active .tribe-events-c-view-selector__list-item-link:after {
 			background-color: var(--global-palette3);
@@ -91,11 +91,11 @@
 		}
 	}
 	.tribe-events-calendar-list__month-separator:after {
-		background-color: var(--global-gray-400);
+		background-color: var(--tec-color-border-default);
 	}
 	&.tribe-common {
 		.tribe-common-c-btn-border-small, a.tribe-common-c-btn-border-small {
-			border-color: var(--global-gray-400);
+			border-color: var(--tec-color-border-default);
 			color: var(--global-palette5);
 			background-color: var(--global-palette9);
 			&:hover, &:focus, &:active {
@@ -105,16 +105,16 @@
 			}
 		}
 		.tribe-events-calendar-list-nav, .tribe-events-c-nav {
-			border-color:var(--global-gray-400);
+			border-color:var(--tec-color-border-default);
 		}
 		.tribe-events-calendar-month__day {
-			border-color:var(--global-gray-400);
+			border-color:var(--tec-color-border-default);
 		}
 		.tribe-events-calendar-month__week {
-			border-left-color:var(--global-gray-400);
+			border-left-color:var(--tec-color-border-default);
 		}
 		.tribe-events-calendar-month__body {
-			border-top-color:var(--global-gray-400);
+			border-top-color:var(--tec-color-border-default);
 		}
 		.tribe-common-anchor-thin-alt {
 			border-bottom-color: var(--global-palette-highlight);
@@ -194,7 +194,7 @@
 }
 #primary #tribe-events-footer {
     padding-bottom: 0;
-	border-color:var(--global-gray-400);
+	border-color:var(--tec-color-border-default);
 }
 .single-tribe_events #primary .tribe-blocks-editor .tribe-events-event-meta {
 	background: var( --global-palette8 );

@@ -232,6 +232,7 @@ body.rtl .woocommerce-product-search input[type="search"] {
             line-height: 1.5em;
             list-style: none outside;
             display: flex;
+			flex-wrap: wrap;
             align-items: center;
 
             input {

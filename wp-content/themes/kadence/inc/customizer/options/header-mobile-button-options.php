@@ -392,7 +392,7 @@ Theme_Customizer::add_settings(
 			'live_method'     => array(
 				array(
 					'type'     => 'css',
-					'selector' => '.mobile-header-button-wrap .mobile-header-button-wrap',
+					'selector' => '.mobile-header-button-wrap .mobile-header-button',
 					'property' => 'margin',
 					'pattern'  => '$',
 					'key'      => 'measure',

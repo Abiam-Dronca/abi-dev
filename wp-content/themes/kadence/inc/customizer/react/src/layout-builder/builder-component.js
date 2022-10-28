@@ -6,7 +6,7 @@ import Icons from '../common/icons.js';
 
 import RowComponent from './row-component';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { ButtonGroup, Dashicon, Tooltip, Button } = wp.components;
 

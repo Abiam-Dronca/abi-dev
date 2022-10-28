@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { Fragment } = wp.element;
 const { withFilters } = wp.components;
 const lockIcon = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">

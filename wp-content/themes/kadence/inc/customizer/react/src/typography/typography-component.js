@@ -8,10 +8,10 @@ import capitalizeFirstLetter from '../common/capitalize-first.js';
 import KadenceWebfontLoader from '../common/font-loader.js';
 import FontPairModal from './font-pair';
 import map from 'lodash/map';
-const { __ } = wp.i18n;
-const { ButtonGroup, Popover, Dashicon, Toolbar, Tooltip, Button, TextControl, TabPanel, RangeControl, SelectControl } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { ButtonGroup, Popover, Dashicon, Toolbar, Tooltip, Button, TextControl, TabPanel, RangeControl, SelectControl } from '@wordpress/components';
 
-const { Component, Fragment } = wp.element;
+import { Component, Fragment } from '@wordpress/element';
 class TypographyComponent extends Component {
 	constructor() {
 		super( ...arguments );

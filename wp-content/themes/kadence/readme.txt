@@ -4,7 +4,7 @@ Tags: translation-ready, two-columns, right-sidebar, left-sidebar, footer-widget
 Requires at least: 5.4
 Tested up to: 6.0
 Requires PHP: 7.2
-Stable tag: 1.1.22
+Stable tag: 1.1.30
 License: GNU General Public License v3.0 (or later)
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,6 +18,45 @@ Kadence is released under GNU General Public License v3.0 (or later)
 
 
 = Changelog =
+
+== 1.1.30 | 21th September 2022 ==
+* Update: TEC styles.
+* Fix: Issue with css specificity in footer widgets.
+
+== 1.1.29 | 14th September 2022 ==
+* Update: Tweak sticky header reveal on scroll js.
+* Fix: Issue with custom link color styles in widget areas.
+
+== 1.1.28 | 13th September 2022 ==
+* Update: Language files and fix translation issues.
+* Fix: Issue with button styles in widget areas.
+* Fix: Possible issue with anchor smooth scroll offset.
+* Fix: Possible issue importing elementor style kit.
+* Fix: Possible css issue with woocommerce shipping order review.
+
+== 1.1.27 | 24th August 2022 ==
+* Fix: Shift issue popups and transparent header.
+* Fix: Issue with dropdown navigation behind sticky.
+
+== 1.1.26 | 18th August 2022 ==
+* Update: Sticky header reveal on scroll js.
+* Update: Aria Label for author image.
+* Fix: Issue with core button block styling in widget areas.
+* Fix: Possible issue where you can't use 4 column with CPT archive settings.
+* Fix: Possible issue where google fonts loading through Google instead of local.
+* Fix: Issue with header search icon size.
+* Fix: Possible alignment issue with align full.
+* Fix: Issue with mobile header button margin preview.
+
+== 1.1.25 | 15th July 2022 ==
+* Fix: Possible JS issue.
+
+== 1.1.24 | 15th July 2022 ==
+* Fix: Fullwidth issue.
+
+== 1.1.23 | 14th July 2022 ==
+* Fix: Safari overflow issue.
+* Fix: RTL footer social.
 
 == 1.1.22 | 22nd June 2022 ==
 * Add: Option to show caption with featured image.

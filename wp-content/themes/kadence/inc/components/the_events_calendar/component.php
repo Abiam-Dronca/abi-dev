@@ -105,6 +105,7 @@ class Component implements Component_Interface {
 		$css->add_property( '--tec-color-day-marker-month', 'var(--global-palette4)' );
 		$css->add_property( '--tec-color-border-active-month-grid-hover', 'var(--global-palette5)' );
 		$css->add_property( '--tec-color-accent-primary', 'var(--global-palette1)' );
+		$css->add_property( '--tec-color-border-default', 'var(--global-gray-400)' );
 		// Events Hero Title Area.
 		$css->set_selector( '.tribe_events-hero-section .entry-hero-container-inner' );
 		$css->render_background( kadence()->sub_option( 'tribe_events_title_background', 'desktop' ), $css );
@@ -131,16 +132,16 @@ class Component implements Component_Interface {
 		$css->add_property( 'min-height', $css->render_range( kadence()->option( 'tribe_events_title_height' ), 'mobile' ) );
 		$css->stop_media_query();
 		// Events Title Font.
-		$css->set_selector( '.tribe_events-title h1' );
+		$css->set_selector( '.single-tribe_events #inner-wrap .tribe_events-title h1' );
 		$css->render_font( kadence()->option( 'tribe_events_title_font' ), $css, 'heading' );
 		$css->start_media_query( $media_query['tablet'] );
-		$css->set_selector( '.tribe_events-title h1' );
+		$css->set_selector( '.single-tribe_events #inner-wrap .tribe_events-title h1' );
 		$css->add_property( 'font-size', $css->render_font_size( kadence()->option( 'tribe_events_title_font' ), 'tablet' ) );
 		$css->add_property( 'line-height', $css->render_font_height( kadence()->option( 'tribe_events_title_font' ), 'tablet' ) );
 		$css->add_property( 'letter-spacing', $css->render_font_spacing( kadence()->option( 'tribe_events_title_font' ), 'tablet' ) );
 		$css->stop_media_query();
 		$css->start_media_query( $media_query['mobile'] );
-		$css->set_selector( '.tribe_events-title h1' );
+		$css->set_selector( '.single-tribe_events #inner-wrap .tribe_events-title h1' );
 		$css->add_property( 'font-size', $css->render_font_size( kadence()->option( 'tribe_events_title_font' ), 'mobile' ) );
 		$css->add_property( 'line-height', $css->render_font_height( kadence()->option( 'tribe_events_title_font' ), 'mobile' ) );
 		$css->add_property( 'letter-spacing', $css->render_font_spacing( kadence()->option( 'tribe_events_title_font' ), 'mobile' ) );
@@ -182,20 +183,20 @@ class Component implements Component_Interface {
 		$css->add_property( 'letter-spacing', $css->render_font_spacing( kadence()->option( 'tribe_events_title_back_link_font' ), 'mobile' ) );
 		$css->stop_media_query();
 		// Single Event Backgrounds.
-		$css->set_selector( 'body.tribe_events-single' );
+		$css->set_selector( 'body.single-tribe_events' );
 		$css->render_background( kadence()->sub_option( 'tribe_events_background', 'desktop' ), $css );
-		$css->set_selector( 'body.tribe_events-single .content-bg, body.content-style-unboxed.tribe_events-single .site' );
+		$css->set_selector( 'body.single-tribe_events .content-bg, body.content-style-unboxed.single-tribe_events .site' );
 		$css->render_background( kadence()->sub_option( 'tribe_events_content_background', 'desktop' ), $css );
 		$css->start_media_query( $media_query['tablet'] );
-		$css->set_selector( 'body.tribe_events-single' );
+		$css->set_selector( 'body.single-tribe_events' );
 		$css->render_background( kadence()->sub_option( 'tribe_events_background', 'tablet' ), $css );
-		$css->set_selector( 'body.tribe_events-single .content-bg, body.content-style-unboxed.tribe_events-single .site' );
+		$css->set_selector( 'body.single-tribe_events .content-bg, body.content-style-unboxed.single-tribe_events .site' );
 		$css->render_background( kadence()->sub_option( 'tribe_events_content_background', 'tablet' ), $css );
 		$css->stop_media_query();
 		$css->start_media_query( $media_query['mobile'] );
-		$css->set_selector( 'body.tribe_events-single' );
+		$css->set_selector( 'body.single-tribe_events' );
 		$css->render_background( kadence()->sub_option( 'tribe_events_background', 'mobile' ), $css );
-		$css->set_selector( 'body.tribe_events-single .content-bg, body.content-style-unboxed.tribe_events-single .site' );
+		$css->set_selector( 'body.single-tribe_events .content-bg, body.content-style-unboxed.single-tribe_events .site' );
 		$css->render_background( kadence()->sub_option( 'tribe_events_content_background', 'mobile' ), $css );
 		$css->stop_media_query();
 		// Events Backgrounds.

@@ -305,6 +305,10 @@ a.social-button.has-custom-image {
 // .kadence-sticky-header[data-shrink="true"] .site-main-header-inner-wrap.site-header-row {
 //     transition: all .1s ease-in-out;
 // }
+.kadence-sticky-header {
+	position: relative;
+	z-index: 1;
+}
 .item-is-fixed {
     position: fixed;
     left: 0;

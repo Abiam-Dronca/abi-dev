@@ -6,7 +6,7 @@ import { get, omit } from 'lodash';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies

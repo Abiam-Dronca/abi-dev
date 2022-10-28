@@ -11,6 +11,9 @@ use Kadence\Kadence_CSS;
 use Kadence\Component_Interface;
 use Kadence_Blocks_Frontend;
 use function Kadence\kadence;
+use function bbp_is_single_user_profile;
+use function is_bbpress;
+use function bbp_is_search;
 use function add_action;
 use function add_filter;
 use function have_posts;
@@ -47,7 +50,7 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'bbpress_styles' ), 60 );
 		add_action( 'bbpress_end_form_search', array( $this, 'add_search_icon' ) );
-		//add_filter( 'kadence_post_layout', array( $this, 'bbpress_layout' ), 99 );
+		add_filter( 'kadence_post_layout', array( $this, 'bbpress_user_layout' ), 99 );
 		add_action( 'wp_head', array( $this, 'frontend_gfonts' ), 80 );
 		add_filter( 'post_class', array( $this, 'post_class' ), 10, 3 );
 		add_filter( 'kadence_dynamic_css', array( $this, 'dynamic_css' ), 20 );
@@ -120,14 +123,14 @@ class Component implements Component_Interface {
 	 *
 	 * @param array $layout the layout array.
 	 */
-	public function bbpress_layout( $layout ) {
-		if ( is_bbpress() ) {
+	public function bbpress_user_layout( $layout ) {
+		if ( is_bbpress() && bbp_is_single_user() ) {
 			$layout = wp_parse_args(
 				array(
 					'feature'          => 'hide',
 					'comments'         => 'hide',
 					'navigation'       => 'hide',
-					'content'          => 'enable',
+					'transparent'      => 'disable',
 				),
 				$layout
 			);

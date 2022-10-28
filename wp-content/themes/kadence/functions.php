@@ -9,7 +9,7 @@
  * @package kadence
  */
 
-define( 'KADENCE_VERSION', '1.1.21' );
+define( 'KADENCE_VERSION', '1.1.30' );
 define( 'KADENCE_MINIMUM_WP_VERSION', '5.4' );
 define( 'KADENCE_MINIMUM_PHP_VERSION', '7.2' );
 

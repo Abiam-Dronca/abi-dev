@@ -17,7 +17,7 @@
 .widget-area ul {
     padding-left: 0.5em;
 }
-.widget-area a:not(.button) {
+.widget-area a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button)) {
 	color: var(--global-palette3);
 	text-decoration: none;
 	&:hover {
@@ -25,10 +25,10 @@
 		text-decoration: underline;
 	}
 }
-.sidebar-link-style-underline.widget-area a:not(.button) {
+.sidebar-link-style-underline.widget-area a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button)) {
     text-decoration: underline;
 }
-.sidebar-link-style-plain.widget-area a:not(.button) {
+.sidebar-link-style-plain.widget-area a:where(:not(.button):not(.wp-block-button__link):not(.wp-element-button)) {
 	text-decoration: none;
 	&:hover {
 		text-decoration: none;

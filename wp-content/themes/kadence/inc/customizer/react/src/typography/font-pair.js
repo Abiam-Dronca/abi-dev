@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import capitalizeFirstLetter from '../common/capitalize-first.js';
 import map from 'lodash/map';
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 import Icons from '../common/icons.js';
 const { ButtonGroup, Dashicon, Tooltip, TextControl, Button, SelectControl, Popover, TabPanel, ToggleControl, RangeControl, Placeholder } = wp.components;
 
 const { Component, Fragment } = wp.element;
 class FontPairModal extends Component {
 	constructor() {
-		super( ...arguments );
 		super( ...arguments );
 		this.updateValues = this.updateValues.bind( this );
 		this.updateSettings = this.updateSettings.bind( this );

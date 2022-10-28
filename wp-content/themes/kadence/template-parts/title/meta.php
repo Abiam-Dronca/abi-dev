@@ -111,14 +111,16 @@ $post_type_obj = get_post_type_object( get_post_type() );
 						if ( $author_link ) {
 							if ( get_the_author_meta( 'url' ) && apply_filters( 'kadence_author_use_profile_link', true ) ) {
 								$author_output .= sprintf(
-									'<a class="author-image" href="%1$s">%2$s</a>',
+									'<a class="author-image" href="%1$s" aria-label="%2$s">%3$s</a>',
 									esc_url( get_the_author_meta( 'url', $author_id ) ),
+									esc_attr__( 'Author image', 'kadence' ),
 									get_avatar( $author_id, ( 2 * $author_image_size ) )
 								);
 							} else {
 								$author_output .= sprintf(
-									'<a class="author-image" href="%1$s">%2$s</a>',
+									'<a class="author-image" href="%1$s" aria-label="%2$s">%3$s</a>',
 									esc_url( get_author_posts_url( $author_id ) ),
+									esc_attr__( 'Author image', 'kadence' ),
 									get_avatar( $author_id, $author_image_size )
 								);
 							}

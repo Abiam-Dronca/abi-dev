@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { Component, Fragment } = wp.element;
 const { Tooltip, Button, Dashicon } = wp.components;
 import ColorControl from '../common/color.js';

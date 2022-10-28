@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 import PropTypes from 'prop-types';
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { ButtonGroup, Dashicon, Tooltip, Button } = wp.components;
 

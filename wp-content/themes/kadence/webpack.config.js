@@ -8,7 +8,6 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: __dirname + '/assets/js'
+		path: __dirname + '/assets/js/admin'
 	},
-	devtool: 'none',
 };

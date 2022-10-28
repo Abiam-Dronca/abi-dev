@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import capitalizeFirstLetter from '../common/capitalize-first.js';
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 import Icons from '../common/icons.js';
 const { MediaUpload } = wp.blockEditor;
 const { ButtonGroup, Dashicon, Tooltip, TextControl, Button, SelectControl, TabPanel, ToggleControl, RangeControl, Placeholder } = wp.components;

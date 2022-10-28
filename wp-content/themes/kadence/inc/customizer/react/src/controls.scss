@@ -1495,6 +1495,11 @@ p.kt-box-shadow-title {
     left: 0;
     transform: none;
 }
+.kadence-color-picker-wrap .kadence-background-tabs .components-popover.components-custom-gradient-picker__color-picker-popover .components-popover__content {
+    left: 0;
+    transform: none;
+	min-width: 240px;
+}
 .kadence-radio-icon-control.kadence-two-grid .kadence-radio-container-control {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr) );

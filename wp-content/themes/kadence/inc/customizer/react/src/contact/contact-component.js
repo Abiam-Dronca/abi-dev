@@ -8,7 +8,7 @@ import uniqueId from 'lodash/uniqueId';
 
 import ItemComponent from './item-component';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { ButtonGroup, Dashicon, Tooltip, Popover, Button, SelectControl } = wp.components;
 

@@ -5,7 +5,7 @@
 	"main": "inc/customizer/react/src/index.js",
 	"dependencies": {
 		"@fonticonpicker/react-fonticonpicker": "^1.2.0",
-		"@wordpress/icons": "^2.8.0",
+		"@wordpress/icons": "^9.7.0",
 		"classnames": "^2.2.6",
 		"dompurify": "^2.3.4",
 		"gradient-parser": "^0.1.5",
@@ -20,13 +20,12 @@
 	},
 	"devDependencies": {
 		"@babel/preset-env": "^7.10.2",
-		"@wordpress/scripts": "^6.2.0",
+		"@wordpress/scripts": "^23.3.0",
 		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.3"
 	},
 	"scripts": {
 		"build": "wp-scripts build",
-		"build:custom": "wp-scripts build inc/customizer/react/src/index.js inc/meta/react/src/index.js --output-path=assets/js",
 		"start": "wp-scripts start"
 	}
 }

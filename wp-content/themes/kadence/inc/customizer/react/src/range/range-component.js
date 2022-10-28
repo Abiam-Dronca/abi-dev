@@ -6,7 +6,7 @@ import ResponsiveControl from '../common/responsive.js';
 import KadenceRange from '../common/range.js';
 import Icons from '../common/icons.js';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { RangeControl, Dashicon, Tooltip, Button, ToolbarGroup } = wp.components;
 

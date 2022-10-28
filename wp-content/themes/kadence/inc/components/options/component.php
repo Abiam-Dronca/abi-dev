@@ -808,7 +808,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						),
 					),
 					// Logo.
-					'logo_width'                     => array(
+					'logo_width' => array(
 						'size' => array(
 							'mobile'  => '',
 							'tablet'  => '',

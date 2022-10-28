@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import SocialIcons from './icons.js';
 import DOMPurify from 'dompurify';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 const { MediaUpload } = wp.blockEditor;
 const { ButtonGroup, Dashicon, Tooltip, TextControl, Button, TabPanel, RangeControl, Placeholder } = wp.components;
 
