@@ -43,6 +43,16 @@ class REST_Controller {
 	public function register_rest_routes() {
 		register_rest_route(
 			'jetpack/v4',
+			'/publicize/connection-test-results',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_publicize_connection_test_results' ),
+				'permission_callback' => array( $this, 'require_admin_privilege_callback' ),
+			)
+		);
+
+		register_rest_route(
+			'jetpack/v4',
 			'/publicize/connections',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
@@ -81,6 +91,18 @@ class REST_Controller {
 	}
 
 	/**
+	 * Gets the current Publicize connections, with the resolt of testing them, for the site.
+	 *
+	 * GET `jetpack/v4/publicize/connection-test-results`
+	 */
+	public function get_publicize_connection_test_results() {
+		$blog_id  = $this->get_blog_id();
+		$path     = sprintf( '/sites/%d/publicize/connection-test-results', absint( $blog_id ) );
+		$response = Client::wpcom_json_api_request_as_user( $path, '2', array(), null, 'wpcom' );
+		return rest_ensure_response( $this->make_proper_response( $response ) );
+	}
+
+	/**
 	 * Gets the current Publicize connections for the site.
 	 *
 	 * GET `jetpack/v4/publicize/connections`
@@ -98,19 +120,9 @@ class REST_Controller {
 	 * GET `jetpack/v4/publicize/shares-count`
 	 */
 	public function get_publicize_shares_count() {
-		$blog_id  = $this->get_blog_id();
-		$response = Client::wpcom_json_api_request_as_blog(
-			sprintf( 'sites/%d/shares-count', absint( $blog_id ) ),
-			'2',
-			array(
-				'headers' => array( 'content-type' => 'application/json' ),
-				'method'  => 'GET',
-			),
-			null,
-			'wpcom'
-		);
-
-		return rest_ensure_response( $this->make_proper_response( $response ) );
+		global $publicize;
+		$response = $publicize->get_publicize_shares_count( $this->get_blog_id() );
+		return rest_ensure_response( $response );
 	}
 
 	/**
@@ -118,7 +130,7 @@ class REST_Controller {
 	 *
 	 * @param array|WP_Error $response - Response from WPCOM.
 	 */
-	protected function make_proper_response( $response ) {
+	public function make_proper_response( $response ) {
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}

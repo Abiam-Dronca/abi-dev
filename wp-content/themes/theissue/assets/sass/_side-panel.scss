@@ -1,0 +1,45 @@
+.side-panel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+	top: 0;
+	height: 100%;
+	z-index: 110;
+	width: 320px;
+	max-width: 100%;
+	overflow: hidden;
+	left: 0;
+	background: #fff;
+	will-change: transform;
+	@extend .admin-style;
+  @include translate3d(-100%, 0, 0);
+
+  .rtl & {
+    left: auto;
+    right: 0;
+    @include translate3d(100%, 0, 0);
+  }
+	.admin-bar & {
+		height: calc(100% - 46px);
+
+		@media screen and (min-width: 783px){
+		  height: calc(100% - 32px);
+		}
+	}
+  .side-panel-inner {
+    padding: 35px;
+  }
+	@include min-break($break-medium) {
+		width: 390px;
+    .side-panel-inner {
+      padding: 45px;
+    }
+	}
+  .custom_scroll {
+		display: flex;
+		flex-direction: column;
+	}
+  .ps__rail-x {
+		display: none;
+	}
+}

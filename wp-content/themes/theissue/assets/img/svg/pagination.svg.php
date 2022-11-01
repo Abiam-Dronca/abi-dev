@@ -1,0 +1,1 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" class="thb-pagination-svg" width="14px" height="14px" viewBox="0 0 16 16" preserveAspectRatio="none"><circle cx="8" cy="8" r="5.5"></circle></svg>

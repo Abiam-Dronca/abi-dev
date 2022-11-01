@@ -1,0 +1,34 @@
+/* Freescroll */
+.thb-freescroll {
+	@extend .quick-transition;
+	opacity: 0;
+	max-height: 200px;
+
+	&.flickity-enabled {
+		max-height: none;
+		opacity: 1;
+	}
+	.columns {
+		width: 100%;
+
+		img {
+			@extend .general-shadow-styles;
+		}
+	}
+	&.instagram-row {
+		figure {
+			margin-bottom: 35px;
+		}
+		figcaption {
+			font-size: 14px;
+		}
+	}
+	.thb-lightbox-link {
+    display: block;
+  }
+
+  .text-content {
+		white-space: nowrap;
+	}
+	@extend .thb-padding-sizes;
+}

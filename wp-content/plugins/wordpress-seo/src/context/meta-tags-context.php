@@ -31,9 +31,11 @@ use Yoast\WP\SEO\Repositories\Indexable_Repository;
  * @property string       $description
  * @property string       $id
  * @property string       $site_name
+ * @property string       $alternate_site_name
  * @property string       $wordpress_site_name
  * @property string       $site_url
  * @property string       $company_name
+ * @property string       $company_alternate_name
  * @property int          $company_logo_id
  * @property array        $company_logo_meta
  * @property int          $person_logo_id
@@ -262,6 +264,15 @@ class Meta_Tags_Context extends Abstract_Presentation {
 	}
 
 	/**
+	 * Generates the alternate site name.
+	 *
+	 * @return string The alternate site name.
+	 */
+	public function generate_alternate_site_name() {
+		return (string) $this->options->get( 'alternate_website_name', '' );
+	}
+
+	/**
 	 * Generates the site name from the WordPress options.
 	 *
 	 * @return string The site name from the WordPress options.
@@ -303,6 +314,15 @@ class Meta_Tags_Context extends Abstract_Presentation {
 		}
 
 		return $company_name;
+	}
+
+	/**
+	 * Generates the alternate company name.
+	 *
+	 * @return string
+	 */
+	public function generate_company_alternate_name() {
+		return (string) $this->options->get( 'company_alternate_name' );
 	}
 
 	/**
@@ -472,7 +492,7 @@ class Meta_Tags_Context extends Abstract_Presentation {
 	 * @return string The twitter card type.
 	 */
 	public function generate_twitter_card() {
-		return $this->options->get( 'twitter_card_type' );
+		return 'summary_large_image';
 	}
 
 	/**
@@ -593,6 +613,10 @@ class Meta_Tags_Context extends Abstract_Presentation {
 			return $this->image->get_attachment_image_url( $this->main_image_id, 'full' );
 		}
 
+		if ( ! \is_singular() ) {
+			return null;
+		}
+
 		$url = $this->image->get_post_content_image( $this->id );
 		if ( $url === '' ) {
 			return null;
@@ -604,14 +628,30 @@ class Meta_Tags_Context extends Abstract_Presentation {
 	/**
 	 * Gets the main image ID.
 	 *
-	 * @return int|false|null The main image ID.
+	 * @return int|null The main image ID.
 	 */
 	public function generate_main_image_id() {
-		if ( ! \has_post_thumbnail( $this->id ) ) {
-			return null;
-		}
+		switch ( true ) {
+			case \is_singular():
+				return $this->get_singular_post_image( $this->id );
+			case \is_author():
+			case \is_tax():
+			case \is_tag():
+			case \is_category():
+			case \is_search():
+			case \is_date():
+			case \is_post_type_archive():
+				if ( ! empty( $GLOBALS['wp_query']->posts ) ) {
+					if ( $GLOBALS['wp_query']->get( 'fields', 'all' ) === 'ids' ) {
+						return $this->get_singular_post_image( $GLOBALS['wp_query']->posts[0] );
+					}
 
-		return \get_post_thumbnail_id( $this->id );
+					return $this->get_singular_post_image( $GLOBALS['wp_query']->posts[0]->ID );
+				}
+				return null;
+			default:
+				return null;
+		}
 	}
 
 	/**
@@ -640,13 +680,36 @@ class Meta_Tags_Context extends Abstract_Presentation {
 	 *
 	 * @return false|int
 	 */
-	private function fallback_to_site_logo() {
+	public function fallback_to_site_logo() {
 		$logo_id = \get_option( 'site_logo' );
 		if ( ! $logo_id ) {
 			$logo_id = \get_theme_mod( 'custom_logo', false );
 		}
 
 		return $logo_id;
+	}
+
+	/**
+	 * Get the ID for a post's featured image.
+	 *
+	 * @param int $id Post ID.
+	 *
+	 * @return int|null
+	 */
+	private function get_singular_post_image( $id ) {
+		if ( \has_post_thumbnail( $id ) ) {
+			$thumbnail_id = \get_post_thumbnail_id( $id );
+			// Prevent returning something else than an int or null.
+			if ( \is_int( $thumbnail_id ) && $thumbnail_id > 0 ) {
+				return $thumbnail_id;
+			}
+		}
+
+		if ( \is_singular( 'attachment' ) ) {
+			return \get_query_var( 'attachment_id' );
+		}
+
+		return null;
 	}
 
 	/* ********************* DEPRECATED METHODS ********************* */
