@@ -115,7 +115,7 @@ class Customizer {
 		$wp_customize->add_setting(
 			$id,
 			array(
-				'default'   => Options::DEFAULT_OVERLAY_TRIGGER,
+				'default'   => Options::OVERLAY_TRIGGER_IMMEDIATE,
 				'transport' => 'postMessage',
 				'type'      => 'option',
 			)
@@ -128,8 +128,9 @@ class Customizer {
 				'section'     => $section_id,
 				'type'        => 'select',
 				'choices'     => array(
-					Options::OVERLAY_TRIGGER_SUBMIT    => __( 'Open when user submits the form (recommended)', 'jetpack-search-pkg' ),
 					Options::OVERLAY_TRIGGER_IMMEDIATE => __( 'Open when user starts typing', 'jetpack-search-pkg' ),
+					Options::OVERLAY_TRIGGER_RESULTS   => __( 'Open when results are available', 'jetpack-search-pkg' ),
+					Options::OVERLAY_TRIGGER_SUBMIT    => __( 'Open when user submits the form', 'jetpack-search-pkg' ),
 				),
 			)
 		);

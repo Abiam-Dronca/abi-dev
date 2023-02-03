@@ -208,17 +208,6 @@ class Jetpack_Site extends Abstract_Jetpack_Site {
 	}
 
 	/**
-	 * Returns VideoPress storage used, in MB.
-	 *
-	 * @see class.json-api-site-jetpack-shadow.php on WordPress.com for implementation. Only applicable on WordPress.com.
-	 *
-	 * @return float
-	 */
-	public function get_videopress_storage_used() {
-		return 0;
-	}
-
-	/**
 	 * Sets the upgraded_filetypes_enabled Jetpack option to true as a default.
 	 *
 	 * Only relevant for WordPress.com sites:
@@ -631,14 +620,4 @@ class Jetpack_Site extends Abstract_Jetpack_Site {
 		return $this->get_atomic_cloud_site_option( 'anchor_podcast' );
 	}
 
-	/**
-	 * Get user interactions with a site. Not used in Jetpack.
-	 *
-	 * @see /wpcom/public.api/rest/sal/trait.json-api-site-wpcom.php.
-	 *
-	 * @return null
-	 */
-	public function get_user_interactions() {
-		return null;
-	}
 }

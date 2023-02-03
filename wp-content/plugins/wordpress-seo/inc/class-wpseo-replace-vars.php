@@ -395,9 +395,7 @@ class WPSEO_Replace_Vars {
 	private function retrieve_excerpt() {
 		$replacement = null;
 		$locale      = \get_locale();
-
-		// Japanese doesn't have a jp_JP variant in WP.
-		$limit = ( $locale === 'ja' ) ? 80 : 156;
+		$limit       = ( $locale === 'ja' ) ? 80 : 156;
 
 		// The check `post_password_required` is because excerpt must be hidden for a post with a password.
 		if ( ! empty( $this->args->ID ) && ! post_password_required( $this->args->ID ) ) {
@@ -408,7 +406,7 @@ class WPSEO_Replace_Vars {
 				$content = strip_shortcodes( $this->args->post_content );
 				$content = wp_strip_all_tags( $content );
 
-				if ( mb_strlen( $content ) <= $limit ) {
+				if ( strlen( utf8_decode( $content ) ) <= $limit ) {
 					return $content;
 				}
 
@@ -416,7 +414,7 @@ class WPSEO_Replace_Vars {
 
 				// Check if the description has space and trim the auto-generated string to a word boundary.
 				if ( strrpos( $replacement, ' ' ) ) {
-					$replacement = substr( $replacement, 0, strrpos( $replacement, ' ' ) );
+						$replacement = substr( $replacement, 0, strrpos( $replacement, ' ' ) );
 				}
 			}
 		}
@@ -1289,44 +1287,6 @@ class WPSEO_Replace_Vars {
 		) {
 			self::$help_texts[ $type ][ $identifier ] = $replacement_variable;
 		}
-	}
-
-	/**
-	 * Generates a list of replacement variables based on the help texts.
-	 *
-	 * @return array List of replace vars.
-	 */
-	public function get_replacement_variables_with_labels() {
-		self::setup_statics_once();
-
-		$custom_variables = [];
-		foreach ( array_merge( WPSEO_Custom_Fields::get_custom_fields(), WPSEO_Custom_Taxonomies::get_custom_taxonomies() ) as $custom_variable ) {
-			$custom_variables[ $custom_variable ] = new WPSEO_Replacement_Variable( $custom_variable, $this->get_label( $custom_variable ), '' );
-		}
-
-		$replacement_variables = array_filter(
-			array_merge( self::$help_texts['basic'], self::$help_texts['advanced'] ),
-			[ $this, 'is_not_prefixed' ],
-			ARRAY_FILTER_USE_KEY
-		);
-
-		$hidden = $this->get_hidden_replace_vars();
-
-		return array_values(
-			array_map(
-				static function ( WPSEO_Replacement_Variable $replacement_variable ) use ( $hidden ) {
-					$name = $replacement_variable->get_variable();
-
-					return [
-						'name'   => $name,
-						'value'  => '',
-						'label'  => $replacement_variable->get_label(),
-						'hidden' => in_array( $name, $hidden, true ),
-					];
-				},
-				array_merge( $replacement_variables, $custom_variables )
-			)
-		);
 	}
 
 	/**

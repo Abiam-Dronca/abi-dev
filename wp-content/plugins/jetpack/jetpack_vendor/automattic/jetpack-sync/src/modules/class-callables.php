@@ -8,7 +8,6 @@
 namespace Automattic\Jetpack\Sync\Modules;
 
 use Automattic\Jetpack\Constants as Jetpack_Constants;
-use Automattic\Jetpack\Sync\Dedicated_Sender;
 use Automattic\Jetpack\Sync\Defaults;
 use Automattic\Jetpack\Sync\Functions;
 use Automattic\Jetpack\Sync\Settings;
@@ -455,12 +454,7 @@ class Callables extends Module {
 	public function maybe_sync_callables() {
 		$callables = $this->get_all_callables();
 		if ( ! apply_filters( 'jetpack_check_and_send_callables', false ) ) {
-			/**
-			 * Treating Dedicated Sync requests a bit differently from normal. We want to send callables
-			 * normally with all Sync actions, no matter if they were with admin action origin or not,
-			 * since Dedicated Sync runs out of bound and the requests are never coming from an admin.
-			 */
-			if ( ! is_admin() && ! Dedicated_Sender::is_dedicated_sync_request() ) {
+			if ( ! is_admin() ) {
 				// If we're not an admin and we're not doing cron and this isn't WP_CLI, don't sync anything.
 				if ( ! Settings::is_doing_cron() && ! Jetpack_Constants::get_constant( 'WP_CLI' ) ) {
 					return;

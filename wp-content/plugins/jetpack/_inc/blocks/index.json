@@ -40,16 +40,9 @@
 		"videopress",
 		"wordads",
 		"payments-intro",
-		"post-publish-qr-post-panel",
-		"payment-buttons"
+		"post-publish-qr-post-panel"
 	],
-	"beta": [
-		"amazon",
-		"google-docs-embed",
-		"recipe",
-		"videopress/video",
-		"videopress/video-chapters"
-	],
+	"beta": [ "amazon", "recipe", "videopress-block" ],
 	"experimental": [ "anchor-fm", "premium-content", "conversation", "dialogue" ],
 	"no-post-editor": [
 		"business-hours",

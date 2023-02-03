@@ -70,11 +70,8 @@ class Jetpack_Google_Analytics_Legacy {
 			return;
 		}
 
-		// If we're in the admin_area or DNT is honored and enabled, return without inserting code.
-		if (
-			is_admin()
-			|| Jetpack_Google_Analytics_Utils::is_dnt_enabled()
-		) {
+		// If we're in the admin_area, return without inserting code.
+		if ( is_admin() ) {
 			return;
 		}
 

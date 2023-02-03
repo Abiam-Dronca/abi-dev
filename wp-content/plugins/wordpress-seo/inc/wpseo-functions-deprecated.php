@@ -5,16 +5,14 @@
  * @package WPSEO\Deprecated
  */
 
-if ( ! function_exists( 'wpseo_cli_init' ) ) {
-
-	// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
+if ( ! function_exists( 'initialize_wpseo_front' ) ) {
 	/**
-	 * Initialize the WP-CLI integration.
+	 * Wraps frontend class.
 	 *
-	 * @deprecated 19.6.1
+	 * @deprecated 14.0
 	 * @codeCoverageIgnore
 	 */
-	function wpseo_cli_init() {
-		_deprecated_function( __FUNCTION__, 'WPSEO 19.6.1' );
+	function initialize_wpseo_front() {
+		_deprecated_function( __FUNCTION__, 'WPSEO 14.0' );
 	}
 }

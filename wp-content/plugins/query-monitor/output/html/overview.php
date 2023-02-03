@@ -57,13 +57,11 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 		$this->before_non_tabular_output();
 
 		echo '<section id="qm-broken">';
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<p class="qm-warn">' . QueryMonitor::init()->icon( 'warning' ) . esc_html( $qm_broken ) . '</p>';
+		echo '<p class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>' . esc_html( $qm_broken ) . '</p>';
 		echo '</section>';
 
 		echo '<section id="qm-ajax-errors">';
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<p class="qm-warn">' . QueryMonitor::init()->icon( 'warning' ) . esc_html( $ajax_errors ) . '</p>';
+		echo '<p class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>' . esc_html( $ajax_errors ) . '</p>';
 		echo '</section>';
 
 		if ( $raw_request ) {
@@ -101,8 +99,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 
 		if ( $data['time_limit'] > 0 ) {
 			if ( $data['display_time_usage_warning'] ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+				echo '<br><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 			} else {
 				echo '<br><span class="qm-info">';
 			}
@@ -114,8 +111,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 			) );
 			echo '</span>';
 		} else {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+			echo '<br><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 			printf(
 				/* translators: 1: Name of the PHP directive, 2: Value of the PHP directive */
 				esc_html__( 'No execution time limit. The %1$s PHP configuration directive is set to %2$s.', 'query-monitor' ),
@@ -143,10 +139,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 
 			if ( $data['wp_memory_limit'] > 0 ) {
 				if ( $data['display_memory_usage_warning'] ) {
-					echo '<br><span class="qm-warn">';
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo QueryMonitor::init()->icon( 'warning' );
-					echo '</span>';
+					echo '<br><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 				} else {
 					echo '<br><span class="qm-info">';
 				}
@@ -161,8 +154,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 
 			if ( $data['memory_limit'] > 0 ) {
 				if ( $data['display_memory_usage_warning'] ) {
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+					echo '<br><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 				} else {
 					echo '<br><span class="qm-info">';
 				}
@@ -174,8 +166,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 				) );
 				echo '</span>';
 			} else {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+				echo '<br><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 				printf(
 					/* translators: 1: Name of the PHP directive, 2: Value of the PHP directive */
 					esc_html__( 'No memory limit. The %1$s PHP configuration directive is set to %2$s.', 'query-monitor' ),
@@ -207,22 +198,20 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 
 			if ( ! isset( $db_query_num['SELECT'] ) || count( $db_query_num ) > 1 ) {
 				foreach ( $db_query_num as $type_name => $type_count ) {
-					$label = sprintf(
-						'%1$s: %2$s',
+					printf(
+						'<button class="qm-filter-trigger" data-qm-target="db_queries-wpdb" data-qm-filter="type" data-qm-value="%1$s">%2$s: %3$s</button><br>',
+						esc_attr( $type_name ),
 						esc_html( $type_name ),
 						esc_html( number_format_i18n( $type_count ) )
 					);
-					echo self::build_filter_trigger( 'db_queries-wpdb', 'type', $type_name, esc_html( $label ) ); // WPCS: XSS ok;
-					echo '<br>';
 				}
 			}
 
-			$label = sprintf(
-				'%1$s: %2$s',
+			printf(
+				'<button class="qm-filter-trigger" data-qm-target="db_queries-wpdb" data-qm-filter="type" data-qm-value="">%1$s: %2$s</button>',
 				esc_html( _x( 'Total', 'database queries', 'query-monitor' ) ),
 				esc_html( number_format_i18n( $db_queries_data['total_qs'] ) )
 			);
-			echo self::build_filter_trigger( 'db_queries-wpdb', 'type', '', esc_html( $label ) ); // WPCS: XSS ok;
 
 			echo '</p>';
 			echo '</section>';
@@ -245,12 +234,11 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 				);
 				echo '</p>';
 
-				$label = sprintf(
-					'%1$s: %2$s',
+				printf(
+					'<button class="qm-filter-trigger" data-qm-target="http" data-qm-filter="type" data-qm-value="">%1$s: %2$s</button>',
 					esc_html( _x( 'Total', 'HTTP API calls', 'query-monitor' ) ),
 					esc_html( number_format_i18n( count( $http_data['http'] ) ) )
 				);
-				echo self::build_filter_trigger( 'http', 'type', '', esc_html( $label ) ); // WPCS: XSS ok;
 			} else {
 				printf(
 					'<p><em>%s</em></p>',
@@ -284,16 +272,14 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 
 			if ( $cache_data['has_object_cache'] ) {
 				echo '<p><span class="qm-info">';
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo self::build_link(
-					network_admin_url( 'plugins.php?plugin_status=dropins' ),
+				printf(
+					'<a href="%s" class="qm-link">%s</a>',
+					esc_url( network_admin_url( 'plugins.php?plugin_status=dropins' ) ),
 					esc_html__( 'Persistent object cache plugin in use', 'query-monitor' )
 				);
 				echo '</span></p>';
 			} else {
-				echo '<p><span class="qm-warn">';
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo QueryMonitor::init()->icon( 'warning' );
+				echo '<p><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 				echo esc_html__( 'Persistent object cache plugin not in use', 'query-monitor' );
 				echo '</span></p>';
 
@@ -354,9 +340,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 					echo '</p>';
 				}
 			} else {
-				echo '<p><span class="qm-warn">';
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo QueryMonitor::init()->icon( 'warning' );
+				echo '<p><span class="qm-warn"><span class="dashicons dashicons-warning" aria-hidden="true"></span>';
 				echo esc_html__( 'Opcode cache not in use', 'query-monitor' );
 				echo '</span></p>';
 				echo '<p>';

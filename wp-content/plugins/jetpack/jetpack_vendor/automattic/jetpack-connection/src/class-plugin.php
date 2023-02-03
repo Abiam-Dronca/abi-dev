@@ -83,7 +83,7 @@ class Plugin {
 	 * @return bool
 	 */
 	public function is_only() {
-		$plugins = Plugin_Storage::get_all();
+		$plugins = Plugin_Storage::get_all( true );
 
 		return ! $plugins || ( array_key_exists( $this->slug, $plugins ) && 1 === count( $plugins ) );
 	}
@@ -113,7 +113,7 @@ class Plugin {
 	/**
 	 * Whether this plugin is allowed to use the connection.
 	 *
-	 * @deprecated since 11.0
+	 * @deprecated since $next-version$$
 	 * @return bool
 	 */
 	public function is_enabled() {

@@ -14,7 +14,8 @@ use Automattic\Jetpack\Constants;
  */
 class Host {
 	/**
-	 * Determine if this site is an WordPress.com on Atomic site or not by looking for presence of the wpcomsh plugin.
+	 * Determine if this site is an WordPress.com on Atomic site or not looking first at the 'at_options' option.
+	 * As a fallback, check for presence of wpcomsh plugin to determine if a current site has undergone AT.
 	 *
 	 * @since 1.9.0
 	 *
@@ -23,7 +24,8 @@ class Host {
 	public function is_woa_site() {
 		$ret = Cache::get( 'is_woa_site' );
 		if ( null === $ret ) {
-			$ret = $this->is_atomic_platform() && Constants::is_true( 'WPCOMSH__PLUGIN_FILE' );
+			$at_options = get_option( 'at_options', array() );
+			$ret        = $this->is_atomic_platform() && ( ! empty( $at_options ) || Constants::is_true( 'WPCOMSH__PLUGIN_FILE' ) );
 			Cache::set( 'is_woa_site', $ret );
 		}
 		return $ret;
