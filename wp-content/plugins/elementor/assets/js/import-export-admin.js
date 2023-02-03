@@ -1,4 +1,4 @@
-/*! elementor - v3.8.0 - 30-10-2022 */
+/*! elementor - v3.10.2 - 29-01-2023 */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -50,7 +50,6 @@ var __webpack_exports__ = {};
 
 
 var revertButton = document.getElementById('elementor-import-export__revert_kit');
-
 if (revertButton) {
   revertButton.addEventListener('click', function (event) {
     event.preventDefault();
