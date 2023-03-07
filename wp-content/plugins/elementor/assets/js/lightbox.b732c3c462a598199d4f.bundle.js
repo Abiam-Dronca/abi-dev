@@ -1,4 +1,4 @@
-/*! elementor - v3.11.2 - 22-02-2023 */
+/*! elementor - v3.11.3 - 07-03-2023 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["lightbox"],{
 
 /***/ "../assets/dev/js/frontend/utils/icons/e-icons.js":
@@ -905,8 +905,8 @@ module.exports = elementorModules.ViewModule.extend({
       };
       if (!isSingleSlide) {
         swiperOptions.navigation = {
-          prevEl: $prevButton,
-          nextEl: $nextButton
+          prevEl: $prevButton[0],
+          nextEl: $nextButton[0]
         };
       }
       if (options.swiper) {
@@ -1363,4 +1363,4 @@ module.exports = _typeof, module.exports.__esModule = true, module.exports["defa
 /***/ })
 
 }]);
-//# sourceMappingURL=lightbox.f78a835da5a5c5ca6d5b.bundle.js.map
+//# sourceMappingURL=lightbox.b732c3c462a598199d4f.bundle.js.map
