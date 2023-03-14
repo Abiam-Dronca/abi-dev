@@ -1,4 +1,4 @@
-/*! elementor - v3.11.4 - 12-03-2023 */
+/*! elementor - v3.11.5 - 14-03-2023 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["frontend-modules"],{
 
 /***/ "../assets/dev/js/editor/utils/is-instanceof.js":

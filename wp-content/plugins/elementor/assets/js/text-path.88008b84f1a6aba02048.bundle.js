@@ -1,4 +1,4 @@
-/*! elementor - v3.11.4 - 12-03-2023 */
+/*! elementor - v3.11.5 - 14-03-2023 */
 "use strict";
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["text-path"],{
 
@@ -167,10 +167,12 @@ class TextPathHandler extends elementorModules.frontend.handlers.Base {
    */
   setText(newText) {
     const {
-      url,
       is_external: isExternal,
       nofollow
     } = this.getElementSettings().link;
+    const {
+      linkUrl: url
+    } = this.elements.pathContainer.dataset;
     const target = isExternal ? '_blank' : '',
       rel = nofollow ? 'nofollow' : '';
 
@@ -275,4 +277,4 @@ exports["default"] = TextPathHandler;
 /***/ })
 
 }]);
-//# sourceMappingURL=text-path.2d22c4c6bb5b646b2a49.bundle.js.map
+//# sourceMappingURL=text-path.88008b84f1a6aba02048.bundle.js.map
