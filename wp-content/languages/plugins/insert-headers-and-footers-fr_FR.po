@@ -1,0 +1,41 @@
+# Translation of Plugins - Insert Headers and Footers &#8211; Code Snippets by WPCode &#8211; Easy WordPress Code Manager - Stable (latest release) in French (France)
+# This file is distributed under the same license as the Plugins - Insert Headers and Footers &#8211; Code Snippets by WPCode &#8211; Easy WordPress Code Manager - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2022-01-23 17:56:09+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/4.0.0-alpha.1\n"
+"Language: fr\n"
+"Project-Id-Version: Plugins - Insert Headers and Footers &#8211; Code Snippets by WPCode &#8211; Easy WordPress Code Manager - Stable (latest release)\n"
+
+#: includes/admin/pages/class-wpcode-admin-page-headers-footers.php:110
+msgid "Sorry, only have read-only access to this page. Ask your administrator for assistance editing."
+msgstr "Désolé, vous n’avez qu’un accès en lecture seule à cette page. Demandez à votre administrateur ou administratrice de l’aide."
+
+#. translators: %s: The `<head>` tag
+#: includes/admin/pages/class-wpcode-admin-page-headers-footers.php:132
+msgid "These scripts will be printed in the %s section."
+msgstr "Ces scripts seront imprimés dans la section %s."
+
+#. translators: %s: The `</body>` tag
+#: includes/admin/pages/class-wpcode-admin-page-headers-footers.php:142
+msgid "These scripts will be printed above the closing %s tag."
+msgstr "Ces scripts seront imprimés au-dessus de la balise de fermeture %s."
+
+#. translators: %s: The `<head>` tag
+#: includes/admin/pages/class-wpcode-admin-page-headers-footers.php:137
+msgid "These scripts will be printed just below the opening %s tag."
+msgstr "Ces scripts seront imprimés juste au-dessous de la balise d’ouverture %s."
+
+#: includes/admin/pages/class-wpcode-admin-page-settings.php:38
+#: includes/admin/pages/class-wpcode-admin-page-settings.php:104
+msgid "Settings"
+msgstr "Réglages"
+
+#: includes/admin/pages/class-wpcode-admin-page-headers-footers.php:268
+#: includes/admin/pages/class-wpcode-admin-page-settings.php:144
+msgid "Settings Saved."
+msgstr "Réglages enregistrés."

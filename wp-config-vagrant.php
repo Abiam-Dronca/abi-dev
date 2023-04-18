@@ -75,6 +75,9 @@ define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
 define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
 define( 'NONCE_SALT',       'put your unique phrase here' );
 
+define( 'FLUENTMAIL_AWS_ACCESS_KEY_ID', '782f810f-0432-411d-94bd-d002b6c8a0ec' );
+define( 'FLUENTMAIL_AWS_SECRET_ACCESS_KEY', '4CR8Q~LL00U127fN32K_1K9XDQWXhULvg3Ox6cPn' );
+
 /**#@-*/
 
 /* That's all, stop editing! Happy blogging. */

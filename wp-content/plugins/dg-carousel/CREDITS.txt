@@ -1,0 +1,12 @@
+Development Credits And Associated Licenses
+===========================================
+
+Third Party Code Credits
+========================
+
+Swiper
+---------------
+- File Location: /scripts/swiper.min.js
+- Source: https://swiperjs.com/
+- License: MIT
+- License URI: https://opensource.org/licenses/MIT

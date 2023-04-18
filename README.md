@@ -1,14 +1,14 @@
-abi-dev
+fleurdemets
 ===
 
 ## Clone and go!
 
-    git clone https://git.presslabs.net/abi-d/abi-dev.git
-    cd abi-dev
+    git clone https://git.presslabs.net/gdabischwebel/fleurdemets.git
+    cd fleurdemets
     git submodule update --init
     vagrant up
 
-Point your browser at [http://abi-dev.local](http://abi-dev.local).
+Point your browser at [http://fleurdemets.local](http://fleurdemets.local).
 
 ## Requirements
 
