@@ -6,9 +6,9 @@ Requires at least: 3.3
 Author URI: https://www.zoho.com/crm/
 Author: Zoho CRM
 Tested up to: 6.1
-Stable tag:1.7.7.2
+Stable tag:1.7.7.3
 License: GPLv2 or later
-Version: 1.7.7.2
+Version: 1.7.7.3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
@@ -257,6 +257,8 @@ Jappense mapping issue fixed
 Removed unused javascript
 1.7.7.2
 Directorist plugin image loading issue fixed 
+1.7.7.3
+Exclude html rendering issue fixed
 
 == Upgrade notice ==
 
