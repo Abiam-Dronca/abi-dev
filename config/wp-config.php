@@ -1,5 +1,6 @@
 <?php
-define( 'FLUENTMAIL_OUTLOOK_CLIENT_ID', '782f810f-0432-411d-94bd-d002b6c8a0ec' );
-define( 'FLUENTMAIL_OUTLOOK_CLIENT_SECRET', '4CR8Q~LL00U127fN32K_1K9XDQWXhULvg3Ox6cPn' );
-
-?>
+/** This file can be used to define custom constants that will be appended to the wp-config.php file of the site
+ *  Examples (need to be uncommented):
+ *  define( 'THIS_IS_A_CUSTOM_CONSTANT', true );
+ *  define( 'THIS_IS_ANOTHER_CONSTANT', 'value' );
+ */
