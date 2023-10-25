@@ -1,0 +1,24 @@
+/* custom-style.css */
+
+/* Style the header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+/* Style the primary navigation menu */
+nav.primary-menu {
+    background-color: #0074d9;
+}
+
+/* Style links in the menu */
+nav.primary-menu a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Style links on hover */
+nav.primary-menu a:hover {
+    color: #ff4136;
+}

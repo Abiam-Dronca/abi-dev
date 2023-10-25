@@ -65,3 +65,14 @@ add_action( 'wp_enqueue_scripts', 'twentytwentytwo_styles' );
 
 // Add block patterns
 require get_template_directory() . '/inc/block-patterns.php';
+
+
+function enqueue_custom_assets() {
+    // Enqueue custom CSS
+    wp_enqueue_style('custom-style', get_template_directory_uri() . '/custom-style.css');
+
+    // Enqueue custom JavaScript
+    wp_enqueue_script('custom-script', get_template_directory_uri() . '/custom-script.js', array('jquery'), null, true);
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_custom_assets');
