@@ -4,3 +4,4 @@
  *  define( 'THIS_IS_A_CUSTOM_CONSTANT', true );
  *  define( 'THIS_IS_ANOTHER_CONSTANT', 'value' );
  */
+define( 'WP_DEBUG', false);

@@ -1,0 +1,28 @@
+/*
+Theme Name: C-Theme
+Author: Abmd
+Version: 1.0
+Description: A custom theme.
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 2rem;
+    background-color: #f7f7f7;
+}
+
+h1 {
+    color: rebeccapurple;
+}
+
+h2 {
+    color:blue;
+}
+
+h3 {
+    color:chartreuse;
+}
+
+a {
+    color:aqua;
+}
