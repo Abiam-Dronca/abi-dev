@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase -- underscore is for valid function name.
 /**
  * Accessibility Checker pluign file.
  *
@@ -15,16 +15,17 @@
  * checks all gif images that are animated
  * checks for giphy and tenor gif embeds
  */
-function edac_rule_img_animated_gif( $content, $post ) {
-	$dom = $content['html'];
-	$errors = array();
+function edac_rule_img_animated_gif( $content, $post ) { // phpcs:ignore -- $post is reserved for future use or for compliance with a specific interface.
+
+	$dom    = $content['html'];
+	$errors = [];
 
 	// check for image gifs.
 	$gifs = $dom->find( 'img[src$=.gif],img[src*=.gif?],img[src*=.gif#]' );
 	if ( $gifs ) {
 		foreach ( $gifs as $gif ) {
 
-			if ( edac_img_gif_is_animated( $gif->getAttribute( 'src' ) ) == false ) {
+			if ( edac_img_gif_is_animated( $gif->getAttribute( 'src' ) ) === false ) {
 				continue;
 			}
 
@@ -37,7 +38,7 @@ function edac_rule_img_animated_gif( $content, $post ) {
 	if ( $webps ) {
 		foreach ( $webps as $webp ) {
 
-			if ( edac_img_webp_is_animated( $webp->getAttribute( 'src' ) ) == false ) {
+			if ( edac_img_webp_is_animated( $webp->getAttribute( 'src' ) ) === false ) {
 				continue;
 			}
 
@@ -68,15 +69,21 @@ function edac_rule_img_animated_gif( $content, $post ) {
 }
 
 /**
- * Checks if a gif image is anaimated
+ * Checks if a gif image is animated
  *
  * @param  string $filename The filename.
  * @return bool
  */
-function edac_img_gif_is_animated( $filename ) {
-	if ( ! ( $fh = @fopen( $filename, 'rb' ) ) ) {
+function edac_img_gif_is_animated( string $filename ): bool {
+
+	$fh = edac_get_file_opened_as_binary( $filename );
+
+	// Then, check if the file handle is false, indicating an error.
+	if ( false === $fh ) {
+		// Handle the error, for example, by logging it or returning false.
 		return false;
 	}
+
 	$count = 0;
 
 	/*
@@ -91,10 +98,12 @@ function edac_img_gif_is_animated( $filename ) {
 	$chunk = false;
 	while ( ! feof( $fh ) && $count < 2 ) {
 		// add the last 20 characters from the previous string, to make sure the searched pattern is not split.
-		$chunk = ( $chunk ? substr( $chunk, -20 ) : '' ) . fread( $fh, 1024 * 100 ); // read 100kb at a time.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fread, WordPress.WP.AlternativeFunctions.file_system_operations_fread -- WP_Filesystem is not available here.
+		$chunk  = ( $chunk ? substr( $chunk, -20 ) : '' ) . fread( $fh, 1024 * 100 ); // read 100kb at a time.
 		$count += preg_match_all( '#\x00\x21\xF9\x04.{4}\x00(\x2C|\x21)#s', $chunk, $matches );
 	}
 
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 	fclose( $fh );
 	return $count > 1;
 }
@@ -106,19 +115,27 @@ function edac_img_gif_is_animated( $filename ) {
  * @return bool
  */
 function edac_img_webp_is_animated( $filename ) {
-	if ( ! ( $fh = @fopen( $filename, 'rb' ) ) ) {
+
+	$fh = edac_get_file_opened_as_binary( $filename );
+
+	// Then, check if the file handle is false, indicating an error.
+	if ( false === $fh ) {
+		// Handle the error, for example, by logging it or returning false.
 		return false;
 	}
-	
+
 	// See: https://stackoverflow.com/questions/45190469/how-to-identify-whether-webp-image-is-static-or-animated.
 	$result = false;
 	fseek( $fh, 12 );
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fread, WordPress.WP.AlternativeFunctions.file_system_operations_fread -- WP_Filesystem is not available here.
 	if ( 'VP8X' === fread( $fh, 4 ) ) {
 		fseek( $fh, 20 );
-		$byte = fread( $fh, 1 );
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fread, WordPress.WP.AlternativeFunctions.file_system_operations_fread -- WP_Filesystem is not available here.
+		$byte   = fread( $fh, 1 );
 		$result = ( ( ord( $byte ) >> 1 ) & 1 ) ? true : false;
 	}
+
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 	fclose( $fh );
 	return $result;
-
 }

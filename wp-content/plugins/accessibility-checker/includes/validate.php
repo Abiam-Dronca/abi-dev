@@ -5,6 +5,10 @@
  * @package Accessibility_Checker
  */
 
+use EDAC\Admin\Helpers;
+use EDAC\Admin\Insert_Rule_Data;
+use EDAC\Admin\Purge_Post_Data;
+
 /**
  * Oxygen Builder on save
  *
@@ -17,7 +21,7 @@
  *
  * @return void
  */
-function edac_oxygen_builder_save_post( $meta_id, $post_id, $meta_key, $meta_value ) {
+function edac_oxygen_builder_save_post( $meta_id, $post_id, $meta_key, $meta_value ) { // phpcs:ignore -- This function is a hook and the parameters are required.
 	if ( 'ct_builder_shortcodes' === $meta_key ) {
 
 		$post = get_post( $post_id, OBJECT );
@@ -32,11 +36,11 @@ function edac_oxygen_builder_save_post( $meta_id, $post_id, $meta_key, $meta_val
  * @return void
  */
 function edac_post_on_load() {
-	global $pagenow, $typenow;
+	global $pagenow;
 	if ( 'post.php' === $pagenow ) {
 		global $post;
 		$checked = get_post_meta( $post->ID, '_edac_post_checked', true );
-		if ( false === boolval( $checked ) ) {
+		if ( false === (bool) $checked ) {
 			edac_validate( $post->ID, $post, $action = 'load' );
 		}
 	}
@@ -48,6 +52,8 @@ function edac_post_on_load() {
  * @param int    $post_ID The ID of the post being saved.
  * @param object $post    The post object being saved.
  * @param bool   $update  Whether this is an existing post being updated.
+ *
+ * @modified 1.10.0 to add a return when post_status is trash.
  *
  * @return void
  */
@@ -79,7 +85,20 @@ function edac_save_post( $post_ID, $post, $update ) {
 	}
 
 	// handle the case when the custom post is quick edited.
-	if ( isset( $_POST['_inline_edit'] ) && wp_verify_nonce( $_POST['_inline_edit'], 'inlineeditnonce' ) ) {
+	if ( isset( $_POST['_inline_edit'] ) ) {
+		$inline_edit = sanitize_text_field( $_POST['_inline_edit'] );
+		if ( wp_verify_nonce( $inline_edit, 'inlineeditnonce' ) ) {
+			return;
+		}
+	}
+
+	// Post in, or going to, trash.
+	if ( 'trash' === $post->post_status ) {
+		// Gutenberg does not fire the `wp_trash_post` action when moving posts to the
+		// trash. Instead it uses `rest_delete_{$post_type}` which passes a different shape
+		// so instead of hooking in there for every post type supported the data gets
+		// purged here instead which produces the same result.
+		Purge_Post_Data::delete_post( $post_ID );
 		return;
 	}
 
@@ -102,26 +121,60 @@ function edac_validate( $post_ID, $post, $action ) {
 		return;
 	}
 
+	// Make a new post object to avoid changing the original (which could come from global $post).
+	$block_parsed_post = new \WP_Post( (object) $post );
+
+	/**
+	 * Allows to hook in before the validation process starts for a post.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param int    $post_ID The ID of the post being saved.
+	 * @param string $action  The action being performed.
+	 */
 	do_action( 'edac_before_validate', $post_ID, $action );
 
+	// Ensure dynamic blocks and oEmbeds are processed before validation.
+	// Use the_content filter to ensure do_block allows wpautop to be handled correctly for custom blocks. See https://github.com/equalizedigital/accessibility-checker/pull/862.
+	$block_parsed_post->post_content = apply_filters( 'the_content', $block_parsed_post->post_content );
+
 	// apply filters to content.
-	$content = edac_get_content( $post );
+	$content = edac_get_content( $block_parsed_post );
+
+	/**
+	 * Allows to hook in after the content has been retrieved for a post.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param int    $post_ID The ID of the post being saved.
+	 * @param array  $content The content being retrieved.
+	 * @param string $action  The action being performed.
+	 */
 	do_action( 'edac_after_get_content', $post_ID, $content, $action );
 
 	if ( ! $content['html'] ) {
-		add_option( 'edac_password_protected', true );
+		// The woocommerce checkout page will always be a redirect when it has no items. The redirect
+		// will cause the content to be empty.
+		// TEMPORARY FIX: Just return without setting this as a password protected page. In future we
+		// will need to fix this properly by adding a product to the cart before checking.
+		if ( edac_check_if_post_id_is_woocommerce_checkout_page( $post_ID ) ) {
+			return;
+		}
+
+		update_option( 'edac_password_protected', true );
 		return;
 	} else {
-		delete_option( 'edac_password_protected' );
+		update_option( 'edac_password_protected', false );
 	}
+	delete_option( 'edac_password_protected' );
 
 	// set record check flag on previous error records.
-	edac_remove_corrected_posts( $post_ID, $post->post_type, $pre = 1, 'php' );
+	edac_remove_corrected_posts( $post_ID, $block_parsed_post->post_type, $pre = 1, 'php' );
 
 	// check and validate content.
 	$rules = edac_register_rules();
 	if ( EDAC_DEBUG === true ) {
-		$rule_performance_results = array();
+		$rule_performance_results = [];
 		$all_rules_process_time   = microtime( true );
 	}
 	if ( $rules ) {
@@ -129,42 +182,79 @@ function edac_validate( $post_ID, $post, $action ) {
 
 			// Run php-base rules.
 			if ( ( array_key_exists( 'ruleset', $rule ) && 'php' === $rule['ruleset'] ) ||
-				( ! array_key_exists( 'ruleset', $rule ) && $rule['slug'] ) 
+				( ! array_key_exists( 'ruleset', $rule ) && $rule['slug'] )
 			) {
+				/**
+				 * Allows to hook in before the rule has been run on the content.
+				 *
+				 * @since 1.4.0
+				 *
+				 * @param int    $post_ID The ID of the post being saved.
+				 * @param array  $rule    The rule being validated against the content.
+				 * @param string $action  The action being performed.
+				 */
 				do_action( 'edac_before_rule', $post_ID, $rule, $action );
 				if ( EDAC_DEBUG === true ) {
 					$rule_process_time = microtime( true );
 				}
-				$errors = call_user_func( 'edac_rule_' . $rule['slug'], $content, $post );
+				$errors = call_user_func( 'edac_rule_' . $rule['slug'], $content, $block_parsed_post );
 
 				if ( $errors && is_array( $errors ) ) {
+					/**
+					 * Allows to hook in after the rule has been and get the errors list.
+					 *
+					 * @since 1.4.0
+					 *
+					 * @param int    $post_ID The ID of the post being saved.
+					 * @param array  $rule    The rule being validated against the content.
+					 * @param array  $errors  The errors list generated by this rule from the content.
+					 * @param string $action  The action being performed.
+					 */
 					do_action( 'edac_rule_errors', $post_ID, $rule, $errors, $action );
 					foreach ( $errors as $error ) {
-						edac_insert_rule_data( $post, $rule['slug'], $rule['rule_type'], $object = $error );
+						( new Insert_Rule_Data() )->insert( $block_parsed_post, $rule['slug'], $rule['rule_type'], $object = $error );
 					}
 				}
 				if ( EDAC_DEBUG === true ) {
 					$time_elapsed_secs                         = microtime( true ) - $rule_process_time;
 					$rule_performance_results[ $rule['slug'] ] = $time_elapsed_secs;
 				}
+
+				/**
+				 * Allows to hook in after the rule has been run on the content.
+				 *
+				 * @since 1.4.0
+				 *
+				 * @param int    $post_ID The ID of the post being saved.
+				 * @param array  $rule    The rule being validated against the content.
+				 * @param string $action  The action being performed.
+				 */
 				do_action( 'edac_after_rule', $post_ID, $rule, $action );
 			}
 		}
 		if ( EDAC_DEBUG === true ) {
-			edac_log( $rule_performance_results );
+			edacp_log( $rule_performance_results );
 		}
 	}
 	if ( EDAC_DEBUG === true ) {
 		$time_elapsed_secs = microtime( true ) - $all_rules_process_time;
-		edac_log( 'rules validate time: ' . $time_elapsed_secs );
+		edacp_log( 'rules validate time: ' . $time_elapsed_secs );
 	}
 
 	// remove corrected records.
-	edac_remove_corrected_posts( $post_ID, $post->post_type, $pre = 2, 'php' );
+	edac_remove_corrected_posts( $post_ID, $block_parsed_post->post_type, $pre = 2, 'php' );
 
 	// set post meta checked.
-	add_post_meta( $post_ID, '_edac_post_checked', true, true );
+	update_post_meta( $post_ID, '_edac_post_checked', true );
 
+	/**
+	 * Allows to hook in after the validation process has completed for a post.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param int    $post_ID The ID of the post being saved.
+	 * @param string $action  The action being performed.
+	 */
 	do_action( 'edac_after_validate', $post_ID, $action );
 }
 
@@ -174,69 +264,61 @@ function edac_validate( $post_ID, $post, $action ) {
  * @param int    $post_ID The ID of the post.
  * @param string $type    The type of the post.
  * @param int    $pre     The flag indicating the removal stage (1 for before validation php based rules, 2 for after validation).
- * @param string $type    The type of the ruleset to correct (php or js).
+ * @param string $ruleset    The type of the ruleset to correct (php or js).
  *
  * @return void
  */
 function edac_remove_corrected_posts( $post_ID, $type, $pre = 1, $ruleset = 'php' ) {
 	global $wpdb;
 
-	// TODO: setup a rules class for loading/filtering rules.
-	$rules = edac_register_rules();
-	$js_rule_ids = array();
-	$php_rule_ids = array();
+	$rules          = edac_register_rules();
+	$js_rule_slugs  = [];
+	$php_rule_slugs = [];
+	// Separate the JS rules and the PHP rules.
 	foreach ( $rules as $rule ) {
-		if ( array_key_exists( 'ruleset', $rule ) && 'js' === $rule['ruleset'] ) {
-			$js_rule_ids[] = $rule['slug'];
+		if ( isset( $rule['ruleset'] ) && 'js' === $rule['ruleset'] ) {
+			$js_rule_slugs[] = $rule['slug'];
 		} else {
-			$php_rule_ids[] = $rule['slug'];
+			$php_rule_slugs[] = $rule['slug'];
 		}
 	}
-	
-	// Build a sql sanitized list from an array
-	// See: https://stackoverflow.com/questions/10634058/wordpress-prepared-statement-with-in-condition .
-	$js_rule_ids = array_map(
-		function( $v ) {
-			return "'" . esc_sql( $v ) . "'";
-		},
-		$js_rule_ids
-	);
-	$js_rule_ids = implode( ',', $js_rule_ids );
-
-	// Build a sql sanitized list from an array
-	// See: https://stackoverflow.com/questions/10634058/wordpress-prepared-statement-with-in-condition .
-	$php_rule_ids = array_map(
-		function( $v ) {
-			return "'" . esc_sql( $v ) . "'";
-		},
-		$php_rule_ids
-	);
-	$php_rule_ids = implode( ',', $php_rule_ids );
-
+	// Operate only on the slugs for the ruleset we are checking in this call.
+	$rule_slugs = 'js' === $ruleset ? $js_rule_slugs : $php_rule_slugs;
+	if ( 0 === count( $rule_slugs ) ) {
+		return;
+	}
 
 	if ( 1 === $pre ) {
 
-		// set record flag before validating content.
-		$sql = $wpdb->prepare( 'UPDATE ' . $wpdb->prefix . 'accessibility_checker SET recordcheck = %d WHERE siteid = %d and postid = %d and type = %s', 0, get_current_blog_id(), $post_ID, $type );
-		
-		if ( 'js' === $ruleset ) {
-			$sql = $sql . ' AND rule IN(' . $js_rule_ids . ')';
-		} else {
-			$sql = $sql . ' AND rule IN(' . $php_rule_ids . ')';
-		}
-		$wpdb->query( $sql );
+		// Set record flag before validating content.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Using direct query for adding data to database, caching not required for one time operation.
+		$wpdb->query(
+			$wpdb->prepare(
+				sprintf(
+					"UPDATE {$wpdb->prefix}accessibility_checker SET recordcheck = %%d WHERE siteid = %%d and postid = %%d and type = %%s AND rule IN (%s)",
+					implode( ',', array_fill( 0, count( $rule_slugs ), '%s' ) )
+				),
+				array_merge(
+					[ 0, get_current_blog_id(), $post_ID, $type ],
+					$rule_slugs
+				)
+			)
+		);
 
 	} elseif ( 2 === $pre ) {
-		// after validation is complete remove previous errors that were not found.
-		$sql = $wpdb->prepare( 'DELETE FROM ' . $wpdb->prefix . 'accessibility_checker WHERE siteid = %d and postid = %d and type = %s and recordcheck = %d', get_current_blog_id(), $post_ID, $type, 0 );
-
-		if ( 'js' === $ruleset ) {
-			$sql = $sql . ' AND rule IN(' . $js_rule_ids . ')';
-		} else {
-			$sql = $sql . ' AND rule IN(' . $php_rule_ids . ')';
-		}
-		$wpdb->query( $sql );
-	
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Using direct query for adding data to database, caching not required for one time operation.
+		$wpdb->query(
+			$wpdb->prepare(
+				sprintf(
+					"DELETE FROM {$wpdb->prefix}accessibility_checker WHERE siteid = %%d and postid = %%d and type = %%s and recordcheck = %%d AND rule IN (%s)",
+					implode( ',', array_fill( 0, count( $rule_slugs ), '%s' ) )
+				),
+				array_merge(
+					[ get_current_blog_id(), $post_ID, $type, 0 ],
+					$rule_slugs
+				)
+			)
+		);
 	}
 }
 
@@ -247,41 +329,64 @@ function edac_remove_corrected_posts( $post_ID, $type, $pre = 1, $ruleset = 'php
  * @return simple_html_dom|bool Returns the parsed HTML content or false on failure.
  */
 function edac_get_content( $post ) {
-	$content         = array();
+	$content         = [];
 	$content['html'] = false;
 
 	$context              = '';
-	$context_opts         = array();
-	$default_context_opts = array(
+	$context_opts         = [];
+	$default_context_opts = [
 		// See: https://www.php.net/manual/en/context.http.php.
-		'http' => array(
+		'http' => [
 			'user_agent'      => 'PHP Accessibility Checker',
 			'follow_location' => false,
-		),
-	);
+		],
+	];
 
 	$username = get_option( 'edacp_authorization_username' );
 	$password = get_option( 'edacp_authorization_password' );
+
+	// Check if server returns that the domain IP is a local/loopback address.
+	// If so then file_get_contents calls from this server to this domain will
+	// likely not be able to verify ssl. So we need to use a context that
+	// does not try to validate the ssl, otherwise file_get_contents will fail.
+	// See: https://www.php.net/manual/en/context.ssl.php .
+
+	$no_verify_ssl = false; // Verify by default.
+
+	$is_local_loopback = get_option( 'edac_local_loopback', null );
+
+	if ( null === $is_local_loopback ) {
+
+		$parsed_url = wp_parse_url( home_url() );
+
+		if ( isset( $parsed_url['host'] ) ) {
+			$is_local_loopback = Helpers::is_domain_loopback( $parsed_url['host'] );
+			// can only be bool.
+			update_option( 'edac_local_loopback', $is_local_loopback );
+		}
+	}
 
 	/**
 	 * Indicates file_get_html should not verify SSL.
 	 *
 	 * For site security it is not recommended to use this filter in production.
 	 *
-	 * @param bool $no_verify_ssl The boolean to check.
+	 * @since 1.4.0
+	 *
+	 * @param bool $no_verify_ssl True if verify SSL should be disabled (as it must be in loopback connections), false if not.
 	 */
-	$no_verify_ssl = apply_filters( 'edac_no_verify_ssl', false );
+	$no_verify_ssl = apply_filters( 'edac_no_verify_ssl', $is_local_loopback );
 
 	if ( $no_verify_ssl ) {
-		$context_opts['ssl'] = array(
+		$context_opts['ssl'] = [
 			'verify_peer'      => false,
 			'verify_peer_name' => false,
-		);
+		];
 	}
 
-	
 	// http authorization.
-	if ( edac_check_plugin_active( 'accessibility-checker-pro/accessibility-checker-pro.php' ) && EDAC_KEY_VALID === true && $username && $password ) {
+	if ( is_plugin_active( 'accessibility-checker-pro/accessibility-checker-pro.php' ) && EDAC_KEY_VALID === true && $username && $password ) {
+		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- This is a valid use case for base64_encode.
 		$context_opts['http']['header'] = 'Authorization: Basic ' . base64_encode( "$username:$password" );
 	}
 
@@ -291,44 +396,69 @@ function edac_get_content( $post ) {
 	// sanity check: confirm the permalink url is on this site.
 	if ( $parsed_url['host'] === $parsed_site_url['host'] ) {
 
-		if ( array_key_exists( 'query', $parsed_url ) && $parsed_url['query'] ) {
-			// the permalink structure is using a querystring.
-			$url = get_the_permalink( $post->ID ) . '&edac_cache=' . time();
-		} else {
-			// the permalink structure is not using a querystring.
-			$url = get_the_permalink( $post->ID ) . '?edac_cache=' . time();
-		}
+		$url = ( array_key_exists( 'query', $parsed_url ) && $parsed_url['query'] )
+			? get_the_permalink( $post->ID ) . '&edac_cache=' . time()  // Permalink structure using a querystring.
+			: get_the_permalink( $post->ID ) . '?edac_cache=' . time(); // Permalink structure not using a querystring.
 
 		// set token if post status is 'draft' or 'pending'.
-		if ( in_array( $post->post_status, array( 'draft', 'pending' ) ) ) {
-	
+		if ( 'draft' === $post->post_status || 'pending' === $post->post_status ) {
+
 			// Generate a token that is valid for a short period of time.
 			$token = edac_generate_nonce( 'draft-or-pending-status', 120 );
-		
+
 			// Add the token to the URL.
 			$url = add_query_arg( 'edac_token', $token, $url );
 
 		}
-	
 
 		try {
+
 			// setup the context for the request.
 			// note - if follow_location => false, permalinks that redirect (both offsite and on).
 			// will not be followed, so $content['html] will be false.
-			$merged_context_opts = array_merge( $default_context_opts, $context_opts );
+			$merged_context_opts = array_merge_recursive( $default_context_opts, $context_opts );
 			$context             = stream_context_create( $merged_context_opts );
 
-			$content['html'] = file_get_html( $url, false, $context );
+			$dom             = file_get_html( $url, false, $context );
+			$content['html'] = edac_remove_elements(
+				$dom,
+				[
+					'#wpadminbar',            // wp admin bar.
+					'.edac-highlight-panel',  // frontend highlighter.
+					'#query-monitor-main',    // query-monitor.
+					'#qm-icon-container',     // query-monitor.
+				]
+			);
 
+			// Write density data to post meta.
+			if ( $content['html'] ) {
+
+				$page_html         = $content['html']->save();
+				$body_density_data = edac_get_body_density_data( $page_html );
+
+				if ( false !== $body_density_data ) {
+					update_post_meta(
+						$post->ID,
+						'_edac_density_data',
+						array_map( 'intval', $body_density_data )
+					);
+				} else {
+					delete_post_meta( $post->ID, '_edac_density_data' );
+				}
+			}
 		} catch ( Exception $e ) {
+			update_post_meta( $post->ID, '_edac_density_data', [ 0, 0 ] );
+
 			$content['html'] = false;
 		}
 	} else {
+		update_post_meta( $post->ID, '_edac_density_data', [ 0, 0 ] );
+
 		$content['html'] = false;
 	}
 
 	// check for restricted access plugin.
-	if ( ! edac_check_plugin_active( 'accessibility-checker-pro/accessibility-checker-pro.php' ) && edac_check_plugin_active( 'restricted-site-access/restricted_site_access.php' ) ) {
+	if ( ! is_plugin_active( 'accessibility-checker-pro/accessibility-checker-pro.php' ) && is_plugin_active( 'restricted-site-access/restricted_site_access.php' ) ) {
 		$content['html'] = false;
 	}
 
@@ -351,19 +481,19 @@ function edac_get_content( $post ) {
 			$stylesheet_url = $stylesheet->href;
 
 			$css_args['edac_cache'] = time();
-		
+
 			if ( isset( $token ) ) {
 				$css_args['edac_token'] = $token;
-		
+
 			}
-			
+
 			// Add the query vars to the URL.
-			$stylesheet_url = add_query_arg( 
+			$stylesheet_url = add_query_arg(
 				$css_args,
 				$stylesheet_url
 			);
-			
-			$response = wp_remote_get( $stylesheet_url );
+
+			$response = wp_remote_get( $stylesheet_url ); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.wp_remote_get_wp_remote_get -- This is a valid use case for wp_remote_get as plugin can be used on environments other than WPVIP.
 
 			if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
 				$styles          = wp_remote_retrieve_body( $response );
@@ -388,8 +518,6 @@ function edac_get_content( $post ) {
  */
 function edac_show_draft_posts( $query ) {
 
-	//$headers = getallheaders();
-
 	// Do not run if it's not the main query.
 	if ( ! $query->is_main_query() ) {
 		return;
@@ -399,7 +527,7 @@ function edac_show_draft_posts( $query ) {
 	if ( is_admin() || is_feed() || wp_doing_ajax() || ( function_exists( 'rest_doing_request' ) && rest_doing_request() ) ) {
 		return;
 	}
-	
+
 	// Do not run if the query variable 'edac_cache' is not set.
 	// phpcs:ignore WordPress.Security.NonceVerification
 	$url_cache = isset( $_GET['edac_cache'] ) ? sanitize_text_field( $_GET['edac_cache'] ) : '';
@@ -410,9 +538,9 @@ function edac_show_draft_posts( $query ) {
 	// Retrieve the token from the URL.
 	// phpcs:ignore WordPress.Security.NonceVerification
 	$url_token = isset( $_GET['edac_token'] ) ? sanitize_text_field( $_GET['edac_token'] ) : false;
-	
+
 	// If the token is not set we do nothing and return early.
-	if( false === $url_token ){
+	if ( false === $url_token ) {
 		return;
 	}
 
@@ -422,5 +550,5 @@ function edac_show_draft_posts( $query ) {
 	}
 
 	// If we've reached this point, alter the query to include 'publish', 'draft', and 'pending' posts.
-	$query->set( 'post_status', array( 'publish', 'draft', 'pending' ) );
+	$query->set( 'post_status', [ 'publish', 'draft', 'pending' ] );
 }

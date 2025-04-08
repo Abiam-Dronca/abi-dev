@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkaccessibility_checker=self.webpackChunkaccessibility_checker||[]).push([[214],{821:(e,t,a)=>{a.r(t),a.d(t,{default:()=>c});const c=()=>{document.querySelectorAll('a[target="_blank"]:not(.edac-allow-new-tab)').forEach((e=>{e.closest(".edac-allow-new-tab")||(e.removeAttribute("target"),e.classList.add("edac-removed-target-blank"))}))}}}]);

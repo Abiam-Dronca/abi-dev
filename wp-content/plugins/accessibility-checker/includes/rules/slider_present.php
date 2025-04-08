@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase -- underscore is for valid function name.
 /**
  * Accessibility Checker pluign file.
  *
@@ -35,11 +35,11 @@
  * bxSlider: .bxslider, .bx-wrapper - https://bxslider.com/
  * Glidejs: .glide--slider - https://glidejs.com/
  */
-function edac_rule_slider_present( $content, $post ) {
-	$dom = $content['html'];
-	$errors = array();
+function edac_rule_slider_present( $content, $post ) { // phpcs:ignore -- $post is reserved for future use or for compliance with a specific interface.
 
-	$elements = $dom->find( '.slider, .carousel, .owl-carousel, .soliloquy-container, .n2-section-smartslider, .metaslider, .master-slider, [data-layerslider-uid], .rev_slider, .royalSlider, .wonderpluginslider, .meteor-slides, .flexslider, .slick-slider, .swiper-container, .flickity-slider, .spacegallery, .blueimp-gallery, .seq-active, .siema, .keen-slider, [data-jssor-slider], .bxslider, .glide--slider' );
+	$dom      = $content['html'];
+	$errors   = [];
+	$elements = $dom->find( '.slider, .carousel, .owl-carousel, .soliloquy-container, .n2-section-smartslider, .metaslider, .master-slider, [data-layerslider-uid], .rev_slider, .royalSlider, .wonderpluginslider, .meteor-slides, .flexslider, .slick-slider, .uagb-slick-carousel, .swiper-container, .flickity-slider, .spacegallery, .blueimp-gallery, .seq-active, .siema, .keen-slider, [data-jssor-slider], .bxslider, .glide--slider' );
 
 	if ( $elements ) {
 		foreach ( $elements as $element ) {

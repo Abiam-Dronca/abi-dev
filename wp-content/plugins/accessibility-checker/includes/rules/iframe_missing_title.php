@@ -1,6 +1,6 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase -- underscore is for valid function name.
 /**
- * Accessibility Checker pluign file.
+ * Accessibility Checker plugin file.
  *
  * @package Accessibility_Checker
  */
@@ -12,14 +12,26 @@
  * @param object $post Object to check.
  * @return array
  */
-function edac_rule_iframe_missing_title( $content, $post ) {
+function edac_rule_iframe_missing_title( $content, $post ) { // phpcs:ignore -- $post is reserved for future use or for compliance with a specific interface.
 
-	$dom = $content['html'];
+	$dom         = $content['html'];
 	$iframe_tags = $dom->find( 'iframe' );
-	$errors = array();
+	$errors      = [];
 
 	foreach ( $iframe_tags as $iframe ) {
-		if ( isset( $iframe ) && $iframe->getAttribute( 'title' ) == '' && $iframe->getAttribute( 'aria-label' ) == '' ) {
+		if ( isset( $iframe ) && empty( $iframe->getAttribute( 'title' ) ) && empty( $iframe->getAttribute( 'aria-label' ) ) ) {
+
+			$display_none_and_visibility_hidden = preg_match( '/(?=.*display\s*:\s*none);?(?=.*visibility\s*:\s*hidden)/is', $iframe->getAttribute( 'style' ) );
+			if ( $display_none_and_visibility_hidden ) {
+				continue;
+			}
+
+			// GTM iframes should be skipped by the detection above, but just in case some plugin modifies the markup
+			// expectations let's double check the src attribute.
+			$gtm = preg_match( '/^https:\/\/www.googletagmanager.com\//', $iframe->getAttribute( 'src' ) );
+			if ( $gtm ) {
+				continue;
+			}
 
 			$iframecode = htmlspecialchars( $iframe->outertext );
 

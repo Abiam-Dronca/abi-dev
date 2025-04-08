@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase -- underscore is for valid function name.
 /**
  * Accessibility Checker pluign file.
  *
@@ -12,24 +12,24 @@
  * @param object $post Object to check.
  * @return array
  */
-function edac_rule_img_linked_alt_empty( $content, $post ) {
+function edac_rule_img_linked_alt_empty( $content, $post ) { // phpcs:ignore -- $post is reserved for future use or for compliance with a specific interface.
 
-	$dom = $content['html'];
-	$errors = array();
+	$dom    = $content['html'];
+	$errors = [];
+	$as     = $dom->find( 'a' );
 
-	$as = $dom->find( 'a' );
 	foreach ( $as as $a ) {
 
 		// anchors with aria-label or title or valid node text.
-		if ( $a->getAttribute( 'aria-label' ) == '' && $a->getAttribute( 'title' ) == '' && strlen( $a->plaintext ) <= 5 ) {
+		if ( empty( $a->getAttribute( 'aria-label' ) ) && empty( $a->getAttribute( 'title' ) ) && strlen( $a->plaintext ) <= 5 ) {
 
 			$images = $a->find( 'img' );
 			foreach ( $images as $image ) {
 
 				if ( isset( $image )
 					&& $image->hasAttribute( 'alt' )
-					&& $image->getAttribute( 'alt' ) == ''
-					&& $image->getAttribute( 'role' ) != 'presentation' ) {
+					&& (string) $image->getAttribute( 'alt' ) === ''
+					&& $image->getAttribute( 'role' ) !== 'presentation' ) {
 
 					$image_code = $a;
 
