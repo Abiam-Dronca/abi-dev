@@ -6,23 +6,17 @@ Description: A custom theme.
 */
 
 body {
-    font-family: Arial, sans-serif;
-    padding: 2rem;
-    background-color: #f7f7f7;
+    font-family: sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
-
-h1 {
-    color: rebeccapurple;
+header, footer {
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    padding: 10px 0;
 }
-
-h2 {
-    color:blue;
-}
-
-h3 {
-    color:chartreuse;
-}
-
-a {
-    color:aqua;
+h1, h2 {
+    color: #2c3e50;
 }

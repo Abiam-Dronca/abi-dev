@@ -1,10 +1,13 @@
-<?php
-get_header();
-?>
+<?php get_header(); ?>
 <main>
-    <h2>Hello from my custom theme</h2>
+    <?php if (have_posts()) : while(have_posts()): the_post(); ?>
+    <article>
+        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <div><?php the_excerpt(); ?></div>
+    </article>
+<?php endwhile; else: ?>
+    <p>No posts found</p>
+<?php endif; ?>
 </main>
-    <h1> Hello from my custom theme</h1>
-<?php
-get_footer();
-?>
+
+<?php get_footer(); ?>
