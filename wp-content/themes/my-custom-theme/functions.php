@@ -13,3 +13,24 @@ function mytheme_register_menus() {
 }
 
 add_action('after_setup_theme','mytheme_register_menus');
+
+function abi_register_portfolio_post_type() {
+    register_post_type('portfolio', array(
+        'labels' => array(
+            'name'=>'Portfolio',
+            'singular_name' => 'Portfolio Item',
+            'add_new_item' => 'Add new Portfolio Item',
+            'edit_item' => 'Edit Portfolio Item',
+        ),
+        'public' => true,
+        'has_archive' => true, 
+        'rewrite' => array('slug' => 'portfolio'),
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'thumbnail'),
+        'menu_icon' => 'dashicons-portfolio',
+    ));
+}
+
+add_action('init', 'abi_register_portfolio_post_type');
+
+add_theme_support('post-thumbnails');
